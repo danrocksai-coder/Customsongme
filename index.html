@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <!-- Required meta -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- SEO -->
   <title>CustomSongMe | Personalized Songs in 24–48 Hours</title>
@@ -34,22 +34,46 @@
   <!-- Styles -->
   <style>
     :root{--deep:#0D0A17;--nightTop:#181233;--text:#F6F6F9;--muted:#C9CCF8;--purple:#6C2CF3;--blue:#1FB6FF;--rose:#FF5CC8;--card:#1D1436;--ok:#15d1a6}
+
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{margin:0;background:var(--deep);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Inter,Arial,sans-serif;line-height:1.5;padding-bottom:64px}
-    a{color:inherit}
+
+    a{color:inherit;text-decoration:none}
     .wrap{max-width:1080px;margin:auto;padding:clamp(18px,4vw,48px)}
-    .nav{position:sticky;top:0;z-index:20;backdrop-filter:saturate(140%) blur(6px);background:rgba(13,10,23,.6);border-bottom:1px solid rgba(255,255,255,.08)}
-    .nav-inner{display:flex;gap:16px;align-items:center;justify-content:space-between}
-    .brand{font-weight:900;letter-spacing:.2px}
-    .nav a.btn{background:linear-gradient(90deg,var(--blue),var(--rose));color:#0b0620;font-weight:800;border-radius:10px;padding:10px 14px;text-decoration:none}
-    header.hero{background:radial-gradient(900px 500px at 80% -10%, rgba(255,92,200,.18),transparent 60%),linear-gradient(180deg,var(--purple),var(--blue));color:var(--text)}
-    h1{font-size:clamp(30px,5.5vw,54px);line-height:1.05;margin:0 0 10px}
+
+    /* ===== NAV (cleaner + mobile-safe) ===== */
+    .nav{position:sticky;top:0;z-index:20;backdrop-filter:saturate(140%) blur(6px);background:rgba(13,10,23,.7);border-bottom:1px solid rgba(255,255,255,.08)}
+    .nav-inner{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-block:10px}
+    .brand{font-weight:900;letter-spacing:.2px;margin-right:auto}
+    .nav-links{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+    .nav-ctas{display:flex;gap:10px;align-items:center;margin-left:auto}
+    .btn{background:linear-gradient(90deg,var(--blue),var(--rose));color:#0b0620;font-weight:800;border-radius:10px;padding:10px 14px}
+    .btn.outline{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.25)}
+
+    /* stack links neatly on small screens */
+    @media(max-width:720px){
+      .nav-inner{gap:8px}
+      .nav-links{order:3;width:100%;justify-content:space-between;padding-top:6px}
+      .nav-ctas{order:2}
+      .btn{padding:9px 12px;border-radius:9px;font-weight:800}
+    }
+
+    header.hero{background:
+      radial-gradient(900px 500px at 80% -10%, rgba(255,92,200,.18),transparent 60%),
+      linear-gradient(180deg,var(--purple),var(--blue));
+      color:var(--text)}
+    /* extra breathing room below sticky nav */
+    header.hero .wrap{padding-top:clamp(18px,4vw,36px)}
+
+    h1{font-size:clamp(30px,5.5vw,54px);line-height:1.05;margin:0 0 12px}
     h2{font-size:clamp(22px,3.6vw,32px);margin:0 0 10px}
     p.sub{color:var(--muted);margin:0 0 18px}
+
     .grid{display:grid;gap:18px}
     @media(min-width:768px){.grid.cols-3{grid-template-columns:repeat(3,1fr)} .row.cols-2{grid-template-columns:repeat(2,1fr)}}
     .row{display:grid;gap:12px}
+
     .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:22px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
     .highlight{border-color:rgba(255,92,200,.55);box-shadow:0 12px 34px rgba(255,92,200,.2)}
     .price{display:flex;align-items:baseline;gap:6px;margin:6px 0 12px}
@@ -58,23 +82,32 @@
     .list{list-style:none;padding:0;margin:0;display:grid;gap:10px}
     .list li{display:flex;gap:10px}
     .tick{flex:0 0 18px;height:18px;border-radius:50%;margin-top:2px;background:conic-gradient(from 0deg,var(--ok),var(--blue));box-shadow:0 0 0 2px rgba(255,255,255,.10) inset}
-    .cta{display:inline-block;margin-top:12px;text-decoration:none;background:linear-gradient(90deg,var(--blue),var(--rose));color:#0b0620;font-weight:900;border-radius:12px;padding:12px 16px;box-shadow:0 10px 24px rgba(31,182,255,.25)}
+
+    .cta{display:inline-block;margin-top:12px;background:linear-gradient(90deg,var(--blue),var(--rose));color:#0b0620;font-weight:900;border-radius:12px;padding:12px 16px;box-shadow:0 10px 24px rgba(31,182,255,.25)}
     .cta:hover{filter:brightness(1.05)}
     .sep{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);margin:22px 0}
     .muted{color:var(--muted)}
+
     label{display:block;margin:12px 0 6px;font-weight:700}
     input[type="text"],input[type="email"],input[type="date"],select,textarea{width:100%;background:#100a23;color:var(--text);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:12px 14px;font-size:16px}
     textarea{min-height:120px;resize:vertical}
+
     .addons{display:grid;gap:8px;margin:8px 0 6px}
     .addons label{font-weight:600;display:flex;gap:10px;align-items:center;margin:0}
+
     .success{background:#07261b;border:1px solid #0c8a63;color:#b6ffe6;border-radius:10px;padding:12px;display:none;margin-top:10px}
     .order-summary{background:#0f0920;border:1px dashed rgba(255,255,255,.3);border-radius:12px;padding:14px;margin:10px 0 16px}
-    .sticky-cta{display:none;position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:30;background:var(--blue);color:#0b0620;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:900}
-    @media(max-width:767px){.sticky-cta{display:block}}
+
+    /* Sticky CTA now appears only AFTER scroll */
+    .sticky-cta{display:none;position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:30;background:var(--blue);color:#0b0620;padding:10px 18px;border-radius:10px;font-weight:900}
+    .sticky-cta.show{display:block}
+
     footer.site{padding:28px;text-align:center;color:var(--muted)}
     footer.site a{color:var(--blue);text-decoration:underline;margin:0 8px}
+
     :focus-visible{outline:2px solid var(--blue);outline-offset:2px}
     section{scroll-margin-top:90px}
+
     .legal h2{margin:0 0 8px}
     .legal p{margin:0 0 12px}
   </style>
@@ -127,19 +160,24 @@
 </head>
 
 <body>
-  <!-- Mobile persistent CTA -->
-  <a class="sticky-cta" href="#order-form">Create Your Song</a>
+  <!-- Sticky CTA (shows after scroll) -->
+  <a class="sticky-cta" href="#order-form" aria-label="Start your custom song now">🎵 Start My Song</a>
 
-  <!-- Top nav -->
-  <div class="nav">
+  <!-- NAV -->
+  <div class="nav" role="navigation" aria-label="Primary">
     <div class="wrap nav-inner">
       <div class="brand">CustomSongMe</div>
-      <nav style="display:flex;gap:14px;align-items:center">
+      <div class="nav-ctas">
+        <a class="btn outline" href="#how">How it works</a>
+        <a class="btn outline" href="#pricing">Pricing</a>
+        <a class="btn outline" href="#faq">FAQ</a>
+      </div>
+      <div class="nav-links">
         <a href="#how">How it works</a>
         <a href="#pricing">Pricing</a>
         <a href="#faq">FAQ</a>
         <a class="btn" href="#order-form">Start my song</a>
-      </nav>
+      </div>
     </div>
   </div>
 
@@ -148,7 +186,7 @@
     <div class="wrap">
       <h1>Custom Songs for Every Occasion</h1>
       <p class="sub">Your Story, Your Song. Turn your words, memories, and inside jokes into a personalized song — crafted with AI and delivered in just <strong>24–48 hours</strong>. Donations are optional and based on your happiness.</p>
-      <a class="cta" href="#order-form" aria-label="Start your custom song now">🎵 Start My Song</a>
+      <a class="cta" href="#order-form">🎵 Start My Song</a>
     </div>
   </header>
 
@@ -156,13 +194,11 @@
   <section id="how">
     <div class="wrap">
       <h2>How It Works</h2>
-      <div class="grid">
-        <ol class="list" style="gap:14px">
-          <li><span class="tick" aria-hidden="true"></span><div><strong>Share your story.</strong> Tell me who it’s for, favorite memories, names, and vibe.</div></li>
-          <li><span class="tick" aria-hidden="true"></span><div><strong>Pick a package.</strong> From a quick one-minute song to a full production with lyric video.</div></li>
-          <li><span class="tick" aria-hidden="true"></span><div><strong>Get your track fast.</strong> I’ll deliver your MP3 within 24–48 hours (rush available).</div></li>
-        </ol>
-      </div>
+      <ol class="list" style="gap:14px">
+        <li><span class="tick" aria-hidden="true"></span><div><strong>Share your story.</strong> Tell me who it’s for, favorite memories, names, and vibe.</div></li>
+        <li><span class="tick" aria-hidden="true"></span><div><strong>Pick a package.</strong> From a quick one-minute song to a full production with lyric video.</div></li>
+        <li><span class="tick" aria-hidden="true"></span><div><strong>Get your track fast.</strong> I’ll deliver your MP3 within 24–48 hours (rush available).</div></li>
+      </ol>
       <div class="sep" role="presentation"></div>
       <p class="muted">Great for <strong>birthdays</strong>, <strong>weddings</strong>, <strong>anniversaries</strong>, <strong>roasts</strong>, <strong>graduations</strong>, and <strong>business jingles</strong>.</p>
     </div>
@@ -225,7 +261,7 @@
       <div id="faq" class="card" style="margin-top:18px">
         <h2>Frequently Asked Questions</h2>
         <details><summary><strong>How fast will I get my song?</strong></summary><p>Most songs are delivered within 24–48 hours. Longer packages list their typical timelines above. Rush is available.</p></details>
-        <details><summary><strong>Can I pick the genre?</strong></summary><p>Yes! Choose a style (pop, acoustic, country, hip-hop, R&B, rock, jazz, folk, electronic, classical) or select “surprise me.”</p></details>
+        <details><summary><strong>Can I pick the genre?</strong></summary><p>Yes! Choose a style (pop, acoustic, country, hip-hop, R&amp;B, rock, jazz, folk, electronic, classical) or select “surprise me.”</p></details>
         <details><summary><strong>What do I receive?</strong></summary><p>MP3 by default; WAV available upon request. Deluxe includes lyric video and custom cover art.</p></details>
         <details><summary><strong>Do I own the song?</strong></summary><p>You receive a personal-use license to share and play your song forever. For commercial use (ads, streaming releases), contact us for licensing.</p></details>
       </div>
@@ -284,7 +320,7 @@
             <label for="genre">Preferred genre (optional)</label>
             <select id="genre" name="Genre">
               <option value="">Surprise me</option>
-              <option>Pop</option><option>Country</option><option>Hip-Hop</option><option>R&B</option>
+              <option>Pop</option><option>Country</option><option>Hip-Hop</option><option>R&amp;B</option>
               <option>Rock</option><option>Reggae</option><option>Acoustic</option><option>Jazz</option>
               <option>Folk</option><option>Electronic</option><option>Classical</option><option>Other</option>
             </select>
@@ -372,6 +408,21 @@
   <script>
     const ADDON_LABELS = { rush:'Rush', video:'Lyric Video', art:'Cover Art' };
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Show sticky CTA only after scrolling a bit
+    (function(){
+      const sticky = document.querySelector('.sticky-cta');
+      let shown = false;
+      function onScroll(){
+        const shouldShow = window.scrollY > 180;
+        if(shouldShow !== shown){
+          shown = shouldShow;
+          sticky.classList.toggle('show', shouldShow);
+        }
+      }
+      window.addEventListener('scroll', onScroll, {passive:true});
+      onScroll();
+    })();
 
     // Prefill from pricing cards
     (function(){
