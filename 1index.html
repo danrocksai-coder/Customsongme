@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🎵 THE Custom Songman 🎵</title>
+  <meta name="description" content="Get your own AI-powered custom song from THE Custom Songman – made with ❤️, delivered with style."/>
+  <meta name="keywords" content="custom song, AI song, birthday song, personalized music, Dan the Song Man"/>
+  <meta property="og:title" content="🎵 THE Custom Songman 🎵"/>
+  <meta property="og:description" content="Order your own AI-powered custom song – free until September 1st!"/>
+  <meta property="og:image" content="favicon.ico"/>
+  <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #ff9800, #ec407a 25%, #8e24aa 50%, #3949ab 75%, #1a237e);
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    h1, h2, h3 {
+      margin: 20px 0 10px;
+    }
+    .promo {
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 1.2em;
+    }
+    .slogan {
+      font-size: 1.4em;
+      margin-top: 0;
+      font-weight: bold;
+    }
+    form {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      margin: 30px auto;
+      max-width: 500px;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+    }
+    button {
+      background-color: #ff4081;
+      color: white;
+      cursor: pointer;
+    }
+    audio {
+      margin: 15px auto;
+      display: block;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+    }
+    .donate-section {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎵 THE Custom Songman 🎵</h1>
+  <p class="slogan">Your life. Your vibe. Your song.</p>
+
+  <div class="promo">
+    🎉 August is FREE. September’s got a fee.<br>
+    💸 Donations accepted but not required. One song per customer.
+  </div>
+
+  <h2>How It Works</h2>
+  <p>📝 Submit your request<br>🎶 We craft your custom song<br>📩 Get your track delivered</p>
+
+  <h2>Start My Song</h2>
+  <form action="https://formspree.io/f/xwpqlypv" method="POST">
+    <input type="text" name="name" placeholder="First Name" required />
+    <select name="occasion" required>
+      <option value="">Select Occasion</option>
+      <option>Birthday</option>
+      <option>Love Song</option>
+      <option>Roast</option>
+      <option>Anniversary</option>
+      <option>Pet Song</option>
+      <option>Other</option>
+    </select>
+    <select name="genre" required>
+      <option value="">Select Genre</option>
+      <option>Hip Hop</option>
+      <option>Pop</option>
+      <option>R&B</option>
+      <option>Country</option>
+      <option>Other</option>
+    </select>
+    <textarea name="details" rows="5" placeholder="What should the song be about?" required></textarea>
+    <input type="email" name="email" placeholder="Your Email" required />
+    <button type="submit">Submit My Song Request</button>
+  </form>
+
+  <h2>What People Are Saying</h2>
+  <p>“Blew my mind – sounded just like my story!” — A Happy Listener</p>
+  <audio controls>
+    <source src="audio-sample.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="donate-section">
+    <h2>Support the Mission</h2>
+    <p>PayPal | Venmo | Zelle | Cash App</p>
+    <!-- Future QR or buttons go here -->
+  </div>
+
+  <footer>
+    <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a>
+  </footer>
+
+</body>
+</html>
