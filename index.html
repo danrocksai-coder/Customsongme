@@ -9,7 +9,7 @@
   <meta name="keywords" content="custom song, AI song, birthday song, personalized music, Dan the Song Man, Ventura County" />
   <meta property="og:title" content="🎵 Custom Songman Dan — Get Your Song for $25" />
   <meta property="og:description" content="Personalized AI songs in 24–48 hours. Flat $25." />
-  <meta property="og:image" content="logo.png" />
+  <meta property="og:image" content="favicon-512.png" />
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
   <style>
@@ -47,7 +47,7 @@
 <body>
 
   <!-- Header -->
-  <img src="logo.png" alt="CustomSongMe Logo" class="logo" />
+  <img src="favicon-512.png" alt="CustomSongMe Logo" class="logo" />
   <h1>🎵 Custom Songman Dan 🎵</h1>
   <p class="slogan">Your life. Your vibe. Your song. — Flat <strong>$25</strong></p>
 
@@ -129,8 +129,31 @@
       return s;
     }
     const id = makeId();
+    window.id = id; // expose globally for the email subject
     document.getElementById('order_id').value = id;
     document.getElementById('orderIdDisplay').textContent = id;
+
+    // Help Formspree deliver: set _replyto and subject using the customer's email + order id
+    document.getElementById('songForm').addEventListener('submit', function () {
+      const email = this.querySelector('input[name="email"]')?.value || '';
+      let reply = this.querySelector('input[name="_replyto"]');
+      if (!reply) {
+        reply = document.createElement('input');
+        reply.type = 'hidden';
+        reply.name = '_replyto';
+        this.appendChild(reply);
+      }
+      reply.value = email;
+
+      let subj = this.querySelector('input[name="_subject"]');
+      if (!subj) {
+        subj = document.createElement('input');
+        subj.type = 'hidden';
+        subj.name = '_subject';
+        this.appendChild(subj);
+      }
+      subj.value = 'New Song Request — Order ' + (window.id || '');
+    });
   </script>
 </body>
 </html>
