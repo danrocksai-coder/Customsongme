@@ -2,310 +2,229 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CustomSongMe | Personalized AI-Powered Songs in 24–48 Hours</title>
-
-  <!-- SEO (best from new: canonical, robots, keywords; enhanced with competitor-inspired elements like "custom song" focus) -->
-  <meta name="description" content="Create personalized AI-powered custom songs for birthdays, anniversaries, love, roasts, pets, and more. Fast 24–48 hour delivery, professional quality, suggested donations from $20. As unique as your story." />
-  <meta name="keywords" content="custom song, AI song, personalized song, birthday song, love song, roast song, anniversary song, pet song, business jingle, Songlorious alternative, Songfinch alternative" />
-  <link rel="canonical" href="https://customsongme.com/" />
-  <meta name="robots" content="index, follow, max-image-preview:large" />
-
-  <!-- Open Graph / Twitter (from new, for social sharing) -->
-  <meta property="og:title" content="CustomSongMe | Personalized AI-Powered Songs in 24–48 Hours" />
-  <meta property="og:description" content="Turn your stories into professional custom songs. Fast delivery, real artist polish, starting at $20 suggested donation." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://customsongme.com/" />
-  <meta property="og:image" content="/images/og-cover.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="CustomSongMe | Personalized AI-Powered Songs in 24–48 Hours" />
-  <meta name="twitter:description" content="Turn your stories into professional custom songs. Fast delivery, real artist polish, starting at $20 suggested donation." />
-  <meta name="twitter:image" content="/images/og-cover.jpg" />
-  <meta name="theme-color" content="#7b4dff" />
-
-  <!-- Icons (from new) -->
-  <link rel="icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
-  <!-- Fonts (from new, for consistency across devices) -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
-
-  <!-- Inline CSS (blend: new dark radial gradient for modern vibe, previous high contrast fixes; responsive media queries) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CustomSongMe | Personalized AI-Powered Songs in 24-48 Hours</title>
+  <meta name="description" content="Create personalized AI-powered custom songs for birthdays, anniversaries, love, and more. Fast 24-48 hour delivery with professional quality. Suggested donations from $20 – unique as your story!"/>
+  <meta name="keywords" content="custom song, AI song, birthday song, personalized music, Dan the Song Man"/>
+  <meta property="og:title" content="🎵 Custom Songman Dan 🎵"/>
+  <meta property="og:description" content="Order your own AI-powered custom song for $25.00 – fast delivery!"/>
+  <meta property="og:image" content="favicon.ico"/>
+  <link rel="icon" href="favicon.ico" type="image/x-icon"/>
   <style>
-    :root {
-      --primary-color: #7b4dff; /* Purple from previous new */
-      --secondary-color: #333;
-      --background-color: #f7f7fb;
-      --card-bg: #fff;
-      --border-radius: 12px;
-      --box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-      --bg: #0b0e14; /* Dark from latest new */
-      --fg: #e8ebf0;
-      --muted: #aeb6c1;
-      --pink: #ff5cc8;
-      --blue: #1fb6ff;
-      --card: rgba(255,255,255,0.06);
-      --border: rgba(255,255,255,0.1);
-    }
-    * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: radial-gradient(1200px 800px at 70% -10%, rgba(255,92,200,.18), transparent 40%), radial-gradient(900px 700px at -10% 20%, rgba(31,182,255,.2), transparent 40%), var(--bg);
-      color: var(--fg);
-      line-height: 1.5;
-      padding-bottom: 80px; /* Safe space for sticky CTA on mobile */
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #ff9800, #ec407a 25%, #8e24aa 50%, #3949ab 75%, #1a237e);
+      background-attachment: fixed;
+      color: white;
+      text-align: center;
+      padding: 20px;
     }
-    a { color: inherit; text-decoration: none; }
-    header {
-      background: linear-gradient(to bottom, rgba(11,14,20,.95), rgba(11,14,20,.7) 60%, transparent);
-      backdrop-filter: saturate(140%) blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 10;
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 0.3em;
     }
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 1rem 1.25rem;
+    h2 {
+      font-size: 1.4em;
+      margin-top: 0;
+      font-weight: normal;
     }
-    nav h1 { margin: 0; font-size: 1.1rem; }
-    nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1rem; }
-    .hero, .section { padding: 3rem 1.25rem; }
-    .hero { text-align: center; }
-    h2 { font-size: 1.8rem; margin-bottom: 20px; }
-    .steps, .reviews { display: flex; flex-direction: column; gap: 20px; max-width: 600px; margin: 0 auto; }
-    form { display: flex; flex-direction: column; gap: 12px; max-width: 400px; margin: 0 auto; }
-    input, select, textarea { padding: 12px; border-radius: 8px; border: none; background-color: #f0f0f0; color: #333; }
-    button[type="submit"] { padding: 12px; background-color: #ff1493; color: white; border: none; border-radius: 30px; cursor: pointer; }
-    .tip-jar { margin-top: 50px; }
-    .faq { max-width: 600px; margin: 0 auto; text-align: left; }
-    .faq details { margin-bottom: 15px; background: rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 8px; }
-    footer { margin-top: 60px; padding: 30px 20px; background: linear-gradient(to top, #330066, #6600cc); font-size: 0.9em; }
-    /* Focus styles and media queries from previous for a11y/responsiveness */
-    a:focus, button:focus, input:focus, select:focus, textarea:focus, details summary:focus { outline: 2px solid #ffffff; outline-offset: 2px; }
-    @media (max-width: 600px) { form, .steps, .reviews, .faq { max-width: 100%; padding: 0 10px; } .tip-buttons { flex-direction: column; } }
-    /* Char count from previous */
-    #char-count { font-size: 0.9em; color: #ffffff; background: rgba(0, 0, 0, 0.5); padding: 5px; border-radius: 5px; }
-    /* Sticky CTA from new */
-    .sticky-cta { position: fixed; left: 50%; transform: translateX(-50%); bottom: 18px; z-index: 9999; }
+    h3 {
+      margin-top: 40px;
+      font-size: 1.6em;
+      border-bottom: 2px solid #fff;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    .promo {
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 1.2em;
+    }
+    .slogan {
+      font-size: 1.4em;
+      margin-top: 0;
+      font-weight: bold;
+    }
+    form {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 500px;
+      margin: 30px auto;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      margin-top: 5px;
+      font-size: 1em;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 1em;
+      background-color: #ff4081;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e91e63;
+    }
+    .donate-buttons img {
+      width: 120px;
+      margin: 10px;
+    }
+    .testimonial {
+      background: rgba(255, 255, 255, 0.1);
+      margin: 20px auto;
+      padding: 15px;
+      border-radius: 10px;
+      max-width: 500px;
+    }
+    .testimonial p {
+      margin: 0;
+      font-style: italic;
+    }
+    .testimonial span {
+      display: block;
+      margin-top: 5px;
+      font-weight: bold;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+    }
+    a {
+      color: #fff;
+    }
+    img.logo {
+      width: 160px;
+      margin-bottom: 20px;
+    }
+    audio {
+      margin: 15px auto;
+      display: block;
+    }
+    .video-button {
+      display: inline-block;
+      background-color: #ff4081;
+      color: white;
+      padding: 12px 25px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1em;
+      margin: 20px 0;
+      transition: background-color 0.3s;
+    }
+    .video-button:hover {
+      background-color: #e91e63;
+    }
+    .legal-section {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 800px;
+      margin: 20px auto;
+      text-align: left;
+      font-size: 0.9em;
+    }
+    .legal-section h4 {
+      margin-top: 15px;
+      margin-bottom: 10px;
+      color: #fff;
+      font-size: 1.1em;
+    }
   </style>
 </head>
 <body>
 
-  <header>
-    <nav>
-      <h1><a href="/">🎵 THE Custom Songman 🎵</a></h1>
-      <ul>
-        <li><a href="#how-it-works">How It Works</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#reviews">Reviews</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#form">Start My Song</a></li>
-      </ul>
-    </nav>
-  </header>
+  <!-- Logo added here -->
+  <img src="logo.png" alt="Custom Songman Dan Logo" class="logo" />
 
-  <main>
-    <section class="hero">
-      <h1>Your Life. Your Vibe. Your Song.</h1>
-      <p class="lead">Turn your stories into professional AI-powered custom songs. Fast 24–48 hour delivery, personalized lyrics, and real artist polish. Suggested donations from $20 – pay what feels right.</p>
-      <div class="badges">
-        <div class="badge">24–48 Hour Turnaround</div>
-        <div class="badge">Unlimited Genres</div>
-        <div class="badge">Revisions Included</div>
-        <div class="badge">MP3 + Lyrics</div>
-      </div>
-      <a href="#form" class="cta">🎵 Start My Song</a>
-    </section>
+  <h1>🎵 Custom Songman Dan 🎵</h1>
+  <p class="slogan">Your life. Your vibe. Your song.</p>
 
-    <section id="how-it-works">
-      <h2>How It Works</h2>
-      <div class="steps">
-        <div>1️⃣ Share your story, occasion, and vibe in the form below.</div>
-        <div>2️⃣ Choose a package and optional add-ons for rush or extras.</div>
-        <div>3️⃣ Receive your MP3 track, lyrics, and revisions via email in 24–48 hours.</div>
-      </div>
-    </section>
+  <div class="promo">
+    🎉 August is FREE. September’s got a fee.<br>
+    💸 $25.00 flat rate. One song per customer.
+  </div>
 
-    <section id="pricing">
-      <h2>Simple, Flexible Pricing</h2>
-      <p class="muted">Suggested donations – pay based on your happiness after delivery.</p>
-      <div class="grid cols-3">
-        <div class="card">
-          <h3>Quick Song</h3>
-          <div class="price">$20 <span>~60 sec</span></div>
-          <ul class="list">
-            <li>1 genre</li>
-            <li>1 revision</li>
-            <li>MP3 delivery</li>
-          </ul>
-          <a href="#form" class="btn blue">Choose Quick</a>
-        </div>
-        <div class="card highlight">
-          <h3>Story Song</h3>
-          <div class="price">$50 <span>2–3 min</span></div>
-          <ul class="list">
-            <li>Personalized lyrics</li>
-            <li>2 revisions</li>
-            <li>Lyric sheet</li>
-          </ul>
-          <a href="#form" class="btn pink">Choose Story</a>
-        </div>
-        <div class="card">
-          <h3>Deluxe Song</h3>
-          <div class="price">$100 <span>3–4 min</span></div>
-          <ul class="list">
-            <li>Lyrics approval</li>
-            <li>3 revisions</li>
-            <li>Lyric video + cover art</li>
-          </ul>
-          <a href="#form" class="btn blue">Choose Deluxe</a>
-        </div>
-      </div>
-    </section>
+  <h2>How It Works</h2>
+  <p>📝 Submit your request<br>🎶 We craft your custom song<br>📩 Get your track delivered for $25.00</p>
 
-    <section id="reviews">
-      <h2>What People Are Saying</h2>
-      <div class="reviews">
-        <div class="review">"The Quick Song was perfect for my sister’s birthday! It captured her personality so well." – Sarah M.
-          <div class="audio-sample"><audio controls src="/samples/quick-song.mp3"><p>Sample audio loading...</p></audio></div>
-        </div>
-        <div class="review">"The Story Song brought tears to my wife’s eyes on our anniversary. So emotional!" – James T.
-          <div class="audio-sample"><audio controls src="/samples/story-song.mp3"><p>Sample audio loading...</p></audio></div>
-        </div>
-        <div class="review">"The Deluxe Song was a hit at our wedding. Everyone loved the lyric video!" – Emily & Raj
-          <div class="audio-sample"><audio controls src="/samples/deluxe-song.mp3"><p>Sample audio loading...</p></audio></div>
-        </div>
-      </div>
-    </section>
+  <h2>Start My Song</h2>
+  <form action="https://formspree.io/f/xwpqlypv" method="POST">
+    <input type="text" name="name" placeholder="First Name" required />
+    <select name="occasion" required>
+      <option value="">Select Occasion</option>
+      <option>Birthday</option>
+      <option>Love Song</option>
+      <option>Roast</option>
+      <option>Anniversary</option>
+      <option>Pet Song</option>
+      <option>Other</option>
+    </select>
+    <select name="genre" required>
+      <option value="">Select Genre</option>
+      <option>Hip Hop</option>
+      <option>Pop</option>
+      <option>R&B</option>
+      <option>Country</option>
+      <option>Other</option>
+    </select>
+    <textarea name="details" rows="5" placeholder="What should the song be about?" required></textarea>
+    <input type="email" name="email" placeholder="Your Email" required />
+    <button type="submit">Submit My Song Request ($25.00)</button>
+  </form>
 
-    <section id="faq" class="faq">
-      <h2>Frequently Asked Questions</h2>
-      <details>
-        <summary>How fast will I get my song?</summary>
-        <p>Most songs are delivered within 24–48 hours. Add rush for faster turnaround (+$20).</p>
-      </details>
-      <details>
-        <summary>What genres can I choose?</summary>
-        <p>Pop, Hip-Hop, Country, Reggae, Rock, Acoustic, R&B, Jazz, Folk, Electronic, Classical, or Surprise Me!</p>
-      </details>
-      <details>
-        <summary>What do I receive?</summary>
-        <p>MP3 file via email, with lyrics. Deluxe includes video and art. Personal use license; contact for commercial.</p>
-      </details>
-      <details>
-        <summary>Can I request revisions?</summary>
-        <p>Yes, included based on package (1–3 free revisions).</p>
-      </details>
-    </section>
+  <h3>💖 Pay $25.00 (Required)</h3>
+  <p>Complete your $25.00 payment to support the mission and get your song.</p>
+  <div class="donate-buttons">
+    <a href="https://paypal.me/customsongman" target="_blank"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" alt="PayPal"></a>
+    <a href="https://cash.app/$customsongman" target="_blank"><img src="https://cash.app/images/cash-app-download-button.svg" alt="Cash App"></a>
+    <a href="https://venmo.com/u/customsongman" target="_blank"><img src="https://venmo.com/images/venmo-blue.svg" alt="Venmo"></a>
+    <a href="https://zellepay.com" target="_blank"><img src="https://www.zellepay.com/sites/default/files/2021-04/zelle-logo.png" alt="Zelle"></a>
+  </div>
 
-    <section id="form">
-      <h2>Order Your Custom Song</h2>
-      <form action="https://formspree.io/f/xwpqlypv" method="POST">
-        <input type="text" name="First Name" placeholder="Your First Name" required>
-        <select name="Occasion" required>
-          <option value="">Choose Occasion</option>
-          <option>Birthday</option>
-          <option>Anniversary</option>
-          <option>Love Song</option>
-          <option>Pet Song</option>
-          <option>Roast/Funny</option>
-          <option>Business Jingle</option>
-          <option>Other</option>
-        </select>
-        <select name="Genre" required>
-          <option value="">Choose Genre</option>
-          <option>Pop</option>
-          <option>Hip-Hop</option>
-          <option>Country</option>
-          <option>Reggae</option>
-          <option>Rock</option>
-          <option>Acoustic</option>
-          <option>R&B</option>
-          <option>Jazz</option>
-          <option>Folk</option>
-          <option>Electronic</option>
-          <option>Classical</option>
-          <option>Surprise Me</option>
-          <option>Other</option>
-        </select>
-        <select name="Mood">
-          <option value="">Song Mood (optional)</option>
-          <option>Uplifting</option>
-          <option>Funny</option>
-          <option>Romantic</option>
-          <option>Chill</option>
-          <option>Emotional</option>
-        </select>
-        <textarea name="Details" id="story" placeholder="Tell me your story... (min 30 characters)" minlength="30" required oninput="updateCharCount()"></textarea>
-        <div id="char-count">0 characters (min 30 non-whitespace)</div>
-        <input type="email" name="Email" placeholder="Your Email" required>
+  <h3>⭐ Leave a Review</h3>
+  <form action="https://formspree.io/f/xjvnebrp" method="POST">
+    <label for="name">First Name (only):</label>
+    <input type="text" name="name" required />
 
-        <!-- Add-ons from new -->
-        <fieldset>
-          <legend>Optional Add-ons</legend>
-          <label><input type="checkbox" name="rush"> Rush Delivery (+$20)</label>
-          <label><input type="checkbox" name="lyric_video"> Lyric Video (+$25)</label>
-          <label><input type="checkbox" name="cover_art"> Custom Cover Art (+$25)</label>
-        </fieldset>
+    <label for="review">What did you think of your song?</label>
+    <textarea name="review" required></textarea>
 
-        <!-- reCAPTCHA from new (update sitekey) -->
-        <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+    <button type="submit">Submit Review</button>
+  </form>
 
-        <button type="submit">Submit Request</button>
-      </form>
-      <p>If JS is off, email danrocksai@gmail.com with your details.</p>
-
-      <!-- Tip Jar (from previous, with updated links) -->
-      <div class="tip-jar">
-        <h3>💰 Tip Jar (Optional)</h3>
-        <div class="tip-buttons">
-          <a href="https://paypal.me/customsongman">PayPal</a>
-          <a href="https://venmo.com/u/Dan-Rock-5">Venmo</a>
-          <a href="https://cash.app/$optimistic01">Cash App</a>
-          <a href="mailto:danrocksai@gmail.com">Zelle</a>
-        </div>
-      </div>
-    </section>
-  </main>
+  <div class="testimonial">
+    <p>"This made my wife cry happy tears. I couldn’t believe it was made with AI!"</p>
+    <span>– Miguel</span>
+  </div>
+  <div class="testimonial">
+    <p>"Our business jingle had people singing along after one day. Unreal!"</p>
+    <span>– Trina from 805 Bites</span>
+  </div>
 
   <footer>
-    <a href="#">Privacy</a> | <a href="#">Terms</a> | <a href="https://youtube.com/@customsongman" target="_blank">YouTube</a>
-    <div>© 2025 THE Custom Songman. All rights reserved.</div>
+    <p>🎧 Created with ❤️ by Custom Songman Dan – Custom songs for birthdays, love, pets, businesses & more</p>
+    <p>
+      🔗 <a href="https://www.youtube.com/@customsongman" target="_blank">Follow on YouTube</a> |
+      💖 <a href="https://paypal.me/customsongman" target="_blank">Pay $25.00</a>
+    </p>
+    <p style="font-size: 0.8em;">SEO: AI birthday songs, custom songs, Ventura County music gifts, personal music gifts</p>
   </footer>
-
-  <!-- Scripts (char count from previous, reCAPTCHA from new) -->
-  <script>
-    function updateCharCount() {
-      const textarea = document.getElementById('story');
-      const count = textarea.value.replace(/\s/g, '').length;
-      document.getElementById('char-count').textContent = `${count} characters (min 30 non-whitespace)`;
-    }
-  </script>
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
-  <!-- JSON-LD Schema (from previous new, for SEO/product visibility) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Custom AI-Powered Song",
-    "brand": {"@type": "Brand", "name": "CustomSongMe"},
-    "description": "Personalized song delivered as MP3 in 24–48 hours, starting at $20 suggested donation.",
-    "offers": {
-      "@type": "Offer",
-      "priceCurrency": "USD",
-      "price": "20",
-      "availability": "https://schema.org/InStock",
-      "url": "https://customsongme.com/"
-    }
-  }
-  </script>
 
 </body>
 </html>
