@@ -1,0 +1,67 @@
+<!-- thanks.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Thanks — CustomSongMe</title>
+  <meta name="description" content="Thanks for your request! We'll start your custom song." />
+  <style>
+    :root {
+      --bg:#0e0f12;
+      --fg:#fff;
+      --mut:#b8bdc9;
+      --acc:#ff4081;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      background:var(--bg);
+      color:var(--fg);
+      font:16px/1.5 system-ui,Arial,Helvetica,sans-serif;
+      text-align:center;
+    }
+    main {
+      max-width:720px;
+      margin:0 auto;
+      padding:48px 18px;
+    }
+    .card {
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:16px;
+      padding:24px;
+    }
+    a {
+      color:var(--acc);
+      text-decoration:none;
+      font-weight:700;
+    }
+    code {
+      background:#000;
+      padding:4px 8px;
+      border-radius:6px;
+    }
+    .mut {
+      color:var(--mut);
+      margin-top:.5rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>🎶 Thank You!</h1>
+    <p>Your song request has been received.</p>
+    <p>Your Order ID: <code id="oid">—</code></p>
+    <p class="mut">Include this Order ID in your PayPal, Cash App, or Venmo payment note.</p>
+    <p style="margin-top:18px"><a href="/">⬅ Back to homepage</a></p>
+  </main>
+  <script>
+    // Show the same Order ID the user saw on the homepage.
+    try {
+      const id = localStorage.getItem('csm_order_id') || '—';
+      document.getElementById('oid').textContent = id;
+    } catch {}
+  </script>
+</body>
+</html>
