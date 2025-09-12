@@ -59,29 +59,19 @@
   <p class="slogan">🎵 Personalized AI Songs Delivered in 24–48 Hours 🎵</p>
 
   <main class="card">
-    <form id="songForm" name="song-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks.html"></form>
-      <input type="hidden" name="form-name" value="song-request">
-      <input type="hidden" name="orderId" id="orderId">
+<form id="songForm" action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
+  <input type="hidden" name="form-name" value="song-request">
+  <input type="hidden" name="orderId" id="orderId">
 
-      <p><label>Your Name <input type="text" name="name" required></label></p>
-      <p><label>Email <input type="email" name="email" required></label></p>
-      <p><label>Recipient’s Name <input type="text" name="recipient" required></label></p>
-      <p><label>Occasion
-        <select name="occasion" required>
-          <option value="">Choose one</option>
-          <option>Birthday</option>
-          <option>Anniversary</option>
-          <option>Wedding</option>
-          <option>Business Jingle</option>
-          <option>Other</option>
-        </select>
-      </label></p>
-      <p><label>Details for Song <textarea name="details" required></textarea></label></p>
+  <p><label>Your Name <input type="text" name="name" required></label></p>
+  <p><label>Email <input type="email" name="email" required></label></p>
+  <p><label>Recipient’s Name <input type="text" name="recipient" required></label></p>
+  <p><label>Occasion <input type="text" name="occasion" required></label></p>
+  <p><label>Song Details <textarea name="details" required></textarea></label></p>
 
-      <p class="mut">Your Order ID: <code id="orderIdDisplay"></code> (use this in your payment note)</p>
-
-      <button type="submit" id="submitBtn" disabled>Submit Request</button>
-    </form>
+  <p><button type="submit">Submit Request</button></p>
+</form>
+     
 
     <h3>💳 Payment Options</h3>
     <div class="paybtns">
