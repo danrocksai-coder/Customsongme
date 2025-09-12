@@ -3,166 +3,166 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CustomSongMe | Personalized AI-Powered Songs in 24–48 Hours</title>
+  <title>CustomSongMe | Personalized AI-Powered Songs</title>
+  <meta name="description" content="Order a personalized AI song for someone special. Delivered in 24–48 hours." />
+  <meta name="keywords" content="custom song, AI music, personalized song" />
 
-  <meta name="description" content="Order a personalized AI-powered custom song by Custom Songman Dan. Fast 24–48 hour delivery. Flat $25 per song." />
-  <meta name="keywords" content="custom song, AI song, birthday song, personalized music, Dan the Song Man, Ventura County" />
-  <meta property="og:title" content="🎵 Custom Songman Dan — Get Your Song for $25" />
-  <meta property="og:description" content="Personalized AI songs in 24–48 hours. Flat $25." />
-  <meta property="og:image" content="favicon-512.png" />
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="CustomSongMe | Personalized AI Songs" />
+  <meta property="og:description" content="Personalized AI-powered songs for gifts, businesses, or fun." />
+  <meta property="og:image" content="logo.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://customsongme.com" />
+
+  <link rel="icon" href="logo.png" type="image/png">
 
   <style>
-    body{
-      margin:0;
+    body {
+      margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(to bottom,#ff9800,#ec407a 25%,#8e24aa 50%,#3949ab 75%,#1a237e);
-      background-attachment:fixed;
-      color:#fff; text-align:center; padding:20px;
+      background: linear-gradient(to bottom,#0e0f12,#1a1d25);
+      background-attachment: fixed;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
     }
-    img.logo{ width:170px; margin:10px auto 18px; display:block }
-    h1{ font-size:2.2em; margin:.2em 0 .1em }
-    .slogan{ font-weight:700; margin:0 0 12px; font-size:1.2em }
-    .card{ background:rgba(255,255,255,.12); border-radius:12px; padding:18px; max-width:720px; margin:14px auto }
-    .two-col{ display:grid; gap:14px; grid-template-columns:1fr }
-    @media (min-width:760px){ .two-col{ grid-template-columns:1fr 1fr } }
-
-    label{ display:block; text-align:left; font-weight:700; margin-top:12px }
-    input,select,textarea,button{
-      width:100%; padding:10px; border-radius:8px; border:0; font-size:1em; box-sizing:border-box
+    img.logo { width:170px; margin:10px auto 18px; display:block; }
+    h1 { font-size: 2.2em; margin: .2em 0 .1em; }
+    .slogan { font-weight:700; margin: 0 0 12px; }
+    .card { background: rgba(255,255,255,.12); border:1px solid #242837; border-radius:16px; padding:24px; max-width:640px; margin:20px auto; text-align:left; }
+    label { display:block; text-align:left; font-weight:bold; margin-top:14px; }
+    input,select,textarea,button { width:100%; padding:10px; border-radius:8px; border:none; font-size:1em; margin-top:6px; }
+    textarea{ min-height:110px; }
+    button { background:#ff4081; color:#fff; font-weight:bold; cursor:pointer; }
+    button:hover{ background:#e91e63; }
+    code { background:#000; padding:3px 6px; border-radius:4px; }
+    .mut { color:#bbb; font-size:.9em; }
+    .paybtns a, .paybtns button {
+      display:block;
+      background:#242837;
+      color:#fff;
+      text-align:center;
+      padding:10px;
+      margin:8px 0;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:bold;
     }
-    textarea{ min-height:110px }
-    button{ background:#ff4081; color:#fff; cursor:pointer; margin-top:14px }
-    button:hover{ background:#e91e63 }
-
-    .pay-grid{ display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:10px }
-    .pay-btn{ display:inline-block; padding:12px 16px; border-radius:10px; background:#00000022; color:#fff; text-decoration:none; min-width:160px }
-    .note{ font-size:.95em; opacity:.95 }
-    .id-pill{ display:inline-block; font-weight:700; padding:6px 10px; border:1px solid #fff; border-radius:999px; margin:6px 0 }
-    .small{ font-size:.85em }
-    iframe{ width:100%; max-width:720px; aspect-ratio:16/9; border:0; border-radius:12px }
-    footer{ margin:26px auto 6px; font-size:.9em; opacity:.95 }
-    footer{ margin:26px auto 6px; font-size:.9em; opacity:.95 }
-
-.logo {
-  display: block;
-  margin: 0 auto;       /* centers the logo */
-  max-width: 180px;     /* keeps it from getting too big */
-  width: 100%;          /* lets it shrink on small screens */
-  height: auto;         /* keeps the aspect ratio */
-}
-</style>
+    footer { margin-top:40px; font-size:0.8em; color:#aaa; }
+    .testimonial { margin:12px 0; font-style:italic; }
+    .legal-section { margin:20px 0; }
   </style>
 </head>
 <body>
+  <img src="logo.png" alt="CustomSongMe Logo" class="logo">
+  <h1>CustomSongMe</h1>
+  <p class="slogan">🎵 Personalized AI Songs Delivered in 24–48 Hours 🎵</p>
 
-  <!-- Header -->
-<img src="logo.png" alt="CustomSongMe Logo" class="logo">
-  <h1>🎵 Custom Songman Dan 🎵</h1>
-  <p class="slogan">Your life. Your vibe. Your song. — Flat <strong>$25</strong></p>
+  <main class="card">
+    <form id="songForm" name="song-request" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="song-request">
+      <input type="hidden" name="orderId" id="orderId">
 
-  <!-- Featured video -->
-  <div class="card">
-    <iframe
-      src="https://www.youtube.com/embed/gh7s8C3AA6A?rel=0&modestbranding=1"
-      title="Custom Song Example" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen>
-    </iframe>
-  </div>
+      <p><label>Your Name <input type="text" name="name" required></label></p>
+      <p><label>Email <input type="email" name="email" required></label></p>
+      <p><label>Recipient’s Name <input type="text" name="recipient" required></label></p>
+      <p><label>Occasion
+        <select name="occasion" required>
+          <option value="">Choose one</option>
+          <option>Birthday</option>
+          <option>Anniversary</option>
+          <option>Wedding</option>
+          <option>Business Jingle</option>
+          <option>Other</option>
+        </select>
+      </label></p>
+      <p><label>Details for Song <textarea name="details" required></textarea></label></p>
 
-  <!-- Order form -->
-  <div class="card">
-    <div class="two-col">
-      <div>
-        <h2>How It Works</h2>
-        <p>📝 Submit your request<br>🎶 I craft your custom song<br>📩 Delivered in 24–48 hours</p>
-        <p class="note small">After you submit, you’ll see an <b>Order ID</b>. Please include this same ID in your PayPal/Venmo/Cash App <b>payment note</b> so I can instantly match payment to your request. Using the same <b>email</b> also helps.</p>
-      </div>
+      <p class="mut">Your Order ID: <code id="orderIdDisplay"></code> (use this in your payment note)</p>
 
-      <div>
-        <h2>Start My Song</h2>
-        <form action="https://formspree.io/f/xwpqlypv" method="POST" id="songForm">
-          <input type="hidden" name="order_id" id="order_id" />
+      <button type="submit" id="submitBtn" disabled>Submit Request</button>
+    </form>
 
-          <label>First Name</label>
-          <input type="text" name="name" placeholder="First Name" required />
-
-          <label>Occasion</label>
-          <select name="occasion" required>
-            <option value="">Select Occasion</option>
-            <option>Birthday</option><option>Love Song</option><option>Roast</option>
-            <option>Anniversary</option><option>Pet Song</option><option>Other</option>
-          </select>
-
-          <label>Genre</label>
-          <select name="genre" required>
-            <option value="">Select Genre</option>
-            <option>Hip Hop</option><option>Pop</option><option>R&B</option>
-            <option>Country</option><option>Other</option>
-          </select>
-
-          <label>What should the song be about?</label>
-          <textarea name="details" placeholder="Key names, story, inside jokes, vibe…" required></textarea>
-
-          <label>Email (delivery)</label>
-          <input type="email" name="email" placeholder="you@example.com" required />
-
-          <button type="submit">Submit My Song Request ($25)</button>
-          <p class="small">Your Order ID: <span class="id-pill" id="orderIdDisplay">—</span></p>
-        </form>
-      </div>
+    <h3>💳 Payment Options</h3>
+    <div class="paybtns">
+      <button id="stripeBtn" type="button">Stripe — $25 (Credit/Debit)</button>
+      <a href="https://paypal.me/YOUR_HANDLE/25" rel="nofollow noopener">PayPal — $25</a>
+      <a href="https://cash.app/$YOUR_CASHTAG/25" rel="nofollow noopener">Cash App — $25</a>
+      <a href="https://venmo.com/u/YOUR_VENMO" rel="nofollow noopener">Venmo — $25</a>
     </div>
-  </div>
+  </main>
 
-  <!-- Payment (prefilled $25) -->
-  <div class="card">
-    <h2>Step 2 — Pay $25</h2>
-    <p class="note">Tap a button below. Please include your <b>Order ID</b> in the payment note.</p>
-    <div class="pay-grid">
-      <a class="pay-btn" href="https://paypal.me/customsongman/25" target="_blank" rel="noopener">PayPal — $25</a>
-      <a class="pay-btn" href="https://cash.app/$optimistic01/25" target="_blank" rel="noopener">Cash App — $25</a>
-      <a class="pay-btn" href="https://venmo.com/u/Dan-Rock-5?txn=pay&amount=25" target="_blank" rel="noopener">Venmo — $25</a>
-    </div>
-    <p class="small note">If a link shows an in-app error, open the app first and try again—amount will still be prefilled.</p>
-  </div>
+  <section class="card">
+    <h3>Testimonials</h3>
+    <div class="testimonial">“This made my wife cry happy tears. I couldn't be more grateful!” <span>— Miguel</span></div>
+    <div class="testimonial">“Our business jingle had people singing along instantly!” <span>— Trina from 805 Bites</span></div>
+  </section>
+
+  <section class="card legal-section">
+    <h3>📜 Legal Information</h3>
+    <h4>Privacy Policy</h4>
+    <p>We collect minimal personal info (name, email, song request) only to deliver your song.</p>
+    <h4>Terms of Use</h4>
+    <p>By using this service, you agree songs are created for personal use unless otherwise agreed.</p>
+    <h4>Copyright & Licensing</h4>
+    <p>All custom songs created are original compositions. AI tools may be used alongside human editing.</p>
+    <h4>Disclaimer</h4>
+    <p>Songs are generated with AI and refined by humans. Delivery within 24–48 hours is typical but not guaranteed.</p>
+  </section>
 
   <footer>
-    <p>🎧 Created with ❤️ by Custom Songman Dan — custom songs for birthdays, love, pets, businesses & more.</p>
-    <p>🔗 <a href="https://www.youtube.com/@customsongman" target="_blank" rel="noopener">YouTube</a> | 💖 <a href="https://paypal.me/customsongman/25" target="_blank" rel="noopener">Pay $25</a></p>
+    <p>🎤 Created with ❤️ by Dan the Song Man</p>
+    <p>
+      📺 <a href="https://www.youtube.com/@customsongman" target="_blank">YouTube</a> |
+      💖 <a href="https://paypal.me/customsongman" target="_blank">Support</a> |
+      📧 Contact: dan@customsongme.com
+    </p>
+    <p>&copy; 2025 CustomSongMe</p>
   </footer>
 
   <script>
-    // Simple Order ID so you can match payment ↔ request
-    function makeId(len=6){
-      const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-      let s=''; for(let i=0;i<len;i++) s+=chars[Math.floor(Math.random()*chars.length)];
+    // Robust order ID generator
+    function randBase32(len=10){
+      if (window.crypto && crypto.getRandomValues) {
+        const bytes = new Uint8Array(len);
+        crypto.getRandomValues(bytes);
+        return Array.from(bytes, b => 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[b % 32]).join('');
+      }
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      let s=''; for (let i=0;i<len;i++) s+=chars[Math.floor(Math.random()*chars.length)];
       return s;
     }
-    const id = makeId();
-    window.id = id; // expose globally for the email subject
-    document.getElementById('order_id').value = id;
-    document.getElementById('orderIdDisplay').textContent = id;
+    function createOrderId(){
+      const d = new Date();
+      const ymd = d.toISOString().slice(0,10).replace(/-/g,'');
+      return `CSM-${ymd}-${randBase32(6)}`;
+    }
 
-    // Help Formspree deliver: set _replyto and subject using the customer's email + order id
-    document.getElementById('songForm').addEventListener('submit', function () {
-      const email = this.querySelector('input[name="email"]')?.value || '';
-      let reply = this.querySelector('input[name="_replyto"]');
-      if (!reply) {
-        reply = document.createElement('input');
-        reply.type = 'hidden';
-        reply.name = '_replyto';
-        this.appendChild(reply);
-      }
-      reply.value = email;
+    const orderId = createOrderId();
+    document.getElementById('orderId').value = orderId;
+    document.getElementById('orderIdDisplay').textContent = orderId;
+    try { localStorage.setItem('csm_order_id', orderId); } catch {}
 
-      let subj = this.querySelector('input[name="_subject"]');
-      if (!subj) {
-        subj = document.createElement('input');
-        subj.type = 'hidden';
-        subj.name = '_subject';
-        this.appendChild(subj);
+    const form = document.getElementById('songForm');
+    const btn = document.getElementById('submitBtn');
+    form.addEventListener('input', () => { btn.disabled = !form.checkValidity(); });
+    form.addEventListener('submit', () => { try { localStorage.setItem('csm_order_id', orderId); } catch {} });
+
+    // Stripe Checkout
+    document.getElementById('stripeBtn').addEventListener('click', async () => {
+      try {
+        try { localStorage.setItem('csm_order_id', orderId); } catch {}
+        const res = await fetch('/.netlify/functions/create-checkout-session', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ orderId })
+        });
+        if (!res.ok) throw new Error('bad');
+        const { url } = await res.json();
+        location.href = url;
+      } catch {
+        alert('Could not start checkout. Try again or use another method.');
       }
-      subj.value = 'New Song Request — Order ' + (window.id || '');
     });
   </script>
 </body>
