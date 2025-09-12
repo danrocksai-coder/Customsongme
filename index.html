@@ -1,15 +1,12 @@
-<!-- /index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CustomSongMe | Personalized Songs in 24–48 Hours</title>
 
-  <meta name="description"
-        content="Order a personalized song delivered in 24–48 hours. Perfect for birthdays, weddings, anniversaries, roasts, and business jingles." />
-  <meta name="keywords"
-        content="custom song, personalized music, gift song, AI music" />
+  <title>CustomSongMe | Personalized Songs in 24–48 Hours</title>
+  <meta name="description" content="Order a personalized song delivered in 24–48 hours. Perfect for birthdays, weddings, anniversaries, roasts, and business jingles." />
+  <meta name="keywords" content="custom song, personalized music, gift song, AI music" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="CustomSongMe | Personalized Songs" />
@@ -21,199 +18,157 @@
   <link rel="icon" href="logo.png" type="image/png" />
 
   <style>
-    /* restore original look + small cleanups */
-    :root { --card:#242837; --brand:#ff4081; }
-    * { box-sizing: border-box; }
-    body{
-      margin:0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(to bottom,#0e0f12,#1a1d25);
-      background-attachment:fixed;
-      color:#fff;
-      text-align:center;
-      padding:20px;
+    body {
+      font-family: Arial, sans-serif;
+      background: #222;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
     }
-    img.logo{ width:170px; margin:10px auto 18px; display:block; }
-    h1{ font-size:2.2em; margin:.2em 0 .1em; }
-    .slogan{ font-weight:700; margin:0 0 12px; }
-    .card{
-      background:rgba(255,255,255,.12);
-      border:1px solid var(--card);
-      border-radius:10px;
-      max-width:640px;
-      margin:20px auto;
-      padding:20px;
-      text-align:left;
+    header {
+      padding: 1em;
     }
-    label{ display:block; font-weight:600; margin:10px 0 6px; }
-    input,select,textarea,button{
-      width:100%;
-      padding:10px;
-      border-radius:6px;
-      border:1px solid #3a3f52;
-      background:#0f121b;
-      color:#fff;
+    main.card {
+      background: #333;
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 500px;
+      border-radius: 10px;
     }
-    textarea{ min-height:110px; resize:vertical; }
-    button{
-      background:var(--brand);
-      color:#fff; border:none; font-weight:700; cursor:pointer; margin-top:10px;
+    input, textarea, select, button {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
     }
-    button:hover{ opacity:.92; }
-    .mut{ color:#bbb; font-size:.9em; }
-    .paybtns a, .paybtns button{
-      display:block;
-      background:#242837;
-      color:#fff;
-      text-align:center;
-      padding:10px;
-      margin:8px 0;
-      border-radius:8px;
-      text-decoration:none;
-      font-weight:bold;
-      border:none;
-      width:100%;
-      cursor:pointer;
+    button {
+      background: hotpink;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
     }
-    .testimonial{ margin:12px 0; font-style:italic; }
-    .legal-section{ margin:20px 0; }
-    code { background:#000; padding:3px 6px; border-radius:4px; }
-    footer { margin-top:40px; font-size:.8em; color:#aaa; }
-    .two-col{ display:grid; gap:14px; grid-template-columns:1fr; }
-    @media (min-width:768px){ .two-col{ grid-template-columns:1fr 1fr; } }
+    button:hover {
+      opacity: 0.9;
+    }
+    .paybtns a, .paybtns button {
+      display: block;
+      background: #242837;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      width: 100%;
+      cursor: pointer;
+    }
+    .testimonial {
+      margin: 12px;
+      font-style: italic;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 0.8em;
+      color: #aaa;
+    }
+    .legal-section {
+      margin: 20px 0;
+    }
   </style>
 </head>
 <body>
+  <header>
+    <img src="logo.png" alt="CustomSongMe Logo" class="logo" width="170" />
+    <h1>🎵 CustomSongMe 🎵</h1>
+    <p class="slogan">Personalized AI Songs Delivered in 24–48 Hours</p>
+  </header>
 
-  <!-- Header (logo restored) -->
-  <img src="logo.png" alt="CustomSongMe Logo" class="logo" />
-  <h1>CustomSongMe</h1>
-  <p class="slogan">🎵 Personalized AI Songs Delivered in 24–48 Hours</p>
-
-  <!-- Main Form Card -->
   <main class="card">
     <h2>Start My Song</h2>
 
-    <!-- ✅ Formspree form (your endpoint) -->
+    <!-- ✅ Correct Formspree integration -->
     <form id="songForm" action="https://formspree.io/f/xwpqlypv" method="POST">
-      <!-- hidden meta for delivery + routing -->
-      <input type="hidden" name="orderId" id="orderId" />
-      <input type="hidden" name="_replyto" id="replyTo" />      <!-- why: makes email replies go to customer -->
-      <input type="hidden" name="_subject" id="subjectLine" /> <!-- why: clearer inbox subject -->
-      <input type="hidden" name="_redirect" value="https://customsongme.com/thanks.html" /> <!-- after submit -->
+      <!-- hidden fields -->
+      <input type="hidden" name="_subject" value="New Song Request">
+      <input type="hidden" name="_replyto" id="replyTo">
+      <input type="hidden" name="orderId" id="orderId">
+      <input type="hidden" name="_redirect" value="https://customsongme.com/thanks.html">
 
-      <div class="two-col">
-        <div>
-          <label>Your Name</label>
-          <input type="text" name="name" required placeholder="Your full name" />
-        </div>
-        <div>
-          <label>Email</label>
-          <input type="email" name="email" required placeholder="you@email.com" />
-        </div>
-      </div>
+      <p><label>Your Name
+        <input type="text" name="name" required>
+      </label></p>
 
-      <div class="two-col">
-        <div>
-          <label>Recipient’s Name</label>
-          <input type="text" name="recipient" required placeholder="Who is this for?" />
-        </div>
-        <div>
-          <label>Occasion</label>
-          <input type="text" name="occasion" required placeholder="Birthday, wedding, roast…" />
-        </div>
-      </div>
+      <p><label>Email
+        <input type="email" name="email" id="email" required>
+      </label></p>
 
-      <label>Song Details</label>
-      <textarea name="details" required placeholder="Vibe, story highlights, inside jokes, genre, tempo…"></textarea>
+      <p><label>Recipient’s Name
+        <input type="text" name="recipient" required>
+      </label></p>
 
-      <p class="mut">Submitting will generate an Order ID and send your request. You’ll see the ID on the next page.</p>
+      <p><label>Occasion
+        <input type="text" name="occasion" required>
+      </label></p>
 
-      <button type="submit">Submit Song Request</button>
+      <p><label>Song Details
+        <textarea name="details" required></textarea>
+      </label></p>
+
+      <p><button type="submit">Submit</button></p>
     </form>
-  </main>
 
-  <!-- Payment Options (restored) -->
-  <section class="card">
     <h3>💳 Payment Options</h3>
     <div class="paybtns">
-      <!-- Optional Stripe button placeholder (not wired) -->
-      <button id="stripeBtn" type="button">Pay $25 with Stripe (coming soon)</button>
-
-      <!-- Your existing links (replace with your handles as needed) -->
-      <a href="https://paypal.me/customsongman" target="_blank" rel="noopener">PayPal</a>
-      <a href="https://cash.app/$customsongme" target="_blank" rel="noopener">Cash App</a>
-      <a href="https://venmo.com/u/customsongme" target="_blank" rel="noopener">Venmo</a>
+      <a href="https://paypal.me/yourlink">Pay with PayPal</a>
+      <a href="https://cash.app/$yourlink">Pay with CashApp</a>
+      <a href="https://venmo.com/yourlink">Pay with Venmo</a>
     </div>
-  </section>
+  </main>
 
-  <!-- Testimonials (restored) -->
   <section class="card">
     <h3>Testimonials</h3>
-    <div class="testimonial">
-      “This made my wife cry happy tears. I couldn't believe it!” — <span>Miguel</span>
-    </div>
-    <div class="testimonial">
-      “Our business jingle had people singing along.” — <span>Trina from 805 Bites</span>
-    </div>
+    <div class="testimonial">“This was the best gift ever!”</div>
+    <div class="testimonial">“Our business jingle came out amazing!”</div>
   </section>
 
-  <!-- Legal / Footer (restored) -->
   <section class="card legal-section">
-    <h3>🛡️ Legal Information</h3>
-
-    <h4>Privacy Policy</h4>
-    <p>We collect minimal personal information (name, email) to deliver your song.</p>
-
-    <h4>Terms of Use</h4>
-    <p>By using this service, you agree that (1) Songs are for personal use unless a license is purchased.</p>
-
-    <h4>Copyright & Licensing</h4>
-    <p>All custom songs created are original compositions.</p>
-
-    <h4>Disclaimer</h4>
-    <p>Songs are created using AI technology and human editing.</p>
+    <h3>📜 Legal Information</h3>
+    <p>Privacy Policy and Terms of Service apply.</p>
   </section>
 
   <footer>
-    🎙️ Created with ❤️ by Dan the Song Man — Professional custom songs<br/>
-    📺 <a href="https://www.youtube.com/@customsongme" target="_blank" rel="noopener">YouTube</a> &nbsp; | &nbsp;
-    💌 Contact: dan@customsongme.com
+    <p>&copy; 2025 CustomSongMe. All rights reserved.</p>
   </footer>
 
   <script>
-    // why: generate a compact, human-friendly order ID and carry it through the flow
-    function makeId(len = 6) {
-      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-      let s = '';
-      for (let i = 0; i < len; i++) s += chars[Math.floor(Math.random() * chars.length)];
-      return s;
+    // Get form and hidden fields
+    const orderIdEl = document.getElementById("orderId");
+    const emailInput = document.getElementById("email");
+    const replyToEl = document.getElementById("replyTo");
+
+    // Generate unique order ID
+    const today = new Date().toISOString().slice(0,10).replace(/-/g,"");
+    const id = `CSM-${today}-${Math.floor(Math.random()*10000)}`;
+    if (orderIdEl) orderIdEl.value = id;
+
+    // Sync reply-to email
+    if (emailInput && replyToEl) {
+      const syncEmail = () => { replyToEl.value = emailInput.value; };
+      syncEmail();
+      emailInput.addEventListener("input", syncEmail);
     }
 
-    // Build order id: CSM–YYYYMMDD–XXXXXX
-    function buildOrderId() {
-      const d = new Date();
-      const pad = n => String(n).padStart(2, '0');
-      const stamp = `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}`;
-      return `CSM–${stamp}–${makeId(6)}`;
+    // Store order ID for thanks.html
+    const form = document.getElementById("songForm");
+    if (form) {
+      form.addEventListener("submit", () => {
+        localStorage.setItem("lastOrderId", id);
+      });
     }
-
-    const orderId = buildOrderId();
-    localStorage.setItem('lastOrderId', orderId);           // for thanks.html display
-    document.getElementById('orderId').value = orderId;     // include in Formspree payload
-
-    // Set up email + subject right before submit
-    const form = document.getElementById('songForm');
-    form.addEventListener('submit', function () {
-      const email = form.querySelector('input[name="email"]')?.value || '';
-      document.getElementById('replyTo').value = email;
-      document.getElementById('subjectLine').value = `New Song Request — Order ${orderId}`;
-    });
-
-    // Stripe placeholder tap (optional)
-    document.getElementById('stripeBtn')?.addEventListener('click', () => {
-      alert('Stripe checkout is coming soon. You can use PayPal, Cash App, or Venmo for now.');
-    });
   </script>
 </body>
 </html>
