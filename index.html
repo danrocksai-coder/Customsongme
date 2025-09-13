@@ -2,297 +2,331 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CustomSongMe | Personalized Songs in 24–48 Hours</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <meta name="description" content="Order a personalized song delivered in 24–48 hours. Perfect for birthdays, weddings, anniversaries, roasts, and business jingles." />
-  <meta name="keywords" content="custom song, personalized music, gift song, AI music" />
+  <title>CustomSongMe | Personalized AI-Powered Custom Songs in 24–48 Hours</title>
+  <meta name="description" content="Order a personalized AI-powered song for birthdays, weddings, anniversaries, roasts, and business jingles. Flat $25, 24–48 hour delivery, up to 3 revisions, and a 100% satisfaction guarantee." />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="CustomSongMe | Personalized Songs" />
-  <meta property="og:description" content="Order a custom song in 24–48 hours." />
+  <link rel="canonical" href="https://customsongme.com/" />
+
+  <meta property="og:title" content="CustomSongMe | Personalized Songs in 24–48 Hours" />
+  <meta property="og:description" content="Turn your story into a custom song. Flat $25, delivery in 24–48 hours." />
   <meta property="og:image" content="logo.png" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://customsongme.com" />
+  <meta property="og:url" content="https://customsongme.com/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CustomSongMe | Personalized Songs in 24–48 Hours" />
+  <meta name="twitter:description" content="Order a custom AI-powered song for any occasion. Flat $25. Delivered in 24–48 hours." />
+  <meta name="twitter:image" content="logo.png" />
 
   <link rel="icon" href="logo.png" type="image/png" />
 
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebSite","name":"CustomSongMe","url":"https://customsongme.com/","description":"Personalized AI-powered custom songs for any occasion, delivered in 24–48 hours.","potentialAction":{"@type":"SearchAction","target":"https://customsongme.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Service","serviceType":"Custom Song Creation","provider":{"@type":"Organization","name":"CustomSongMe","email":"danrocksai@gmail.com"},"areaServed":"Worldwide","hasOfferCatalog":{"@type":"OfferCatalog","name":"Custom Song Package","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Custom Song"},"price":"25","priceCurrency":"USD"}]}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+    {"@type":"Question","name":"How fast will I get my song?","acceptedAnswer":{"@type":"Answer","text":"Most songs are delivered within 24–48 hours. Rush is available."}},
+    {"@type":"Question","name":"Can I pick the genre?","acceptedAnswer":{"@type":"Answer","text":"Yes! Choose a style (pop, acoustic, country, hip-hop, R&B, rock, jazz, folk, electronic, classical) or select “surprise me.”"}},
+    {"@type":"Question","name":"What do I receive?","acceptedAnswer":{"@type":"Answer","text":"MP3 by default; WAV available on request."}},
+    {"@type":"Question","name":"Do I own the song?","acceptedAnswer":{"@type":"Answer","text":"You receive a personal-use license to share and play your song forever. For commercial use (ads, streaming releases), contact us for licensing."}},
+    {"@type":"Question","name":"What if I'm not satisfied with the song?","acceptedAnswer":{"@type":"Answer","text":"We offer a 100% satisfaction guarantee. You'll get up to 3 free revisions. If you're still not happy after the third revision, we'll provide a full refund."}}
+  ]}
+  </script>
+
   <style>
-    :root {
-      --bg: #222;
-      --card: #333;
-      --text: #fff;
-      --muted:#bbb;
-      --accent: hotpink;
-      --accent2:#242837;
-      --border:#444;
-      --good:#34c759;
+    :root{
+      --bg:#0e0f12; --text:#fff; --muted:#b8bdc9; --card:#1a1d25; --border:#2a2f3d;
+      --accent:#ff4081; --accent2:#242837; --input:#0f1117; --good:#34c759;
     }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);text-align:center;line-height:1.5}
+    a{color:#9ecbff}
+    header{padding:22px 16px 10px}
+    img.logo{width:170px;height:auto;display:block;margin:8px auto 10px}
+    h1{margin:0 0 6px;font-size:2rem}
+    .slogan{margin:0 0 14px;font-weight:700}
 
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      text-align: center;
-    }
+    main,section{padding:0 16px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:12px;max-width:920px;margin:18px auto;padding:18px;text-align:left}
+    .card h2,.card h3{text-align:center;margin:4px 0 12px}
 
-    header { padding: 1.25rem 1rem 0.25rem; }
-    img.logo { width: 170px; display:block; margin: 10px auto 8px; }
-    h1 { font-size: 2rem; margin: .2rem 0 .1rem; }
-    .slogan { font-weight: 700; margin: 0 0 12px; }
+    .btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;border:none;border-radius:8px;padding:10px 14px;font-weight:700;cursor:pointer}
+    .btn:hover{opacity:.92}
 
-    main.card, section.card {
-      background: var(--card);
-      margin: 20px auto;
-      padding: 20px;
-      max-width: 900px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      text-align: left;
-    }
-    main.card h2, section.card h2, section.card h3 { text-align: center; }
+    label{display:block;font-weight:600;margin:10px 0 4px}
+    input,select,textarea,button{width:100%;padding:10px;border-radius:8px;border:1px solid var(--border);background:var(--input);color:#fff;font-size:16px}
+    textarea{min-height:120px;resize:vertical}
+    .muted-text{color:var(--muted);font-size:.92rem}
+    code{background:#000;padding:2px 6px;border-radius:6px}
 
-    /* form */
-    form p { margin: 0 0 12px; }
-    label { display: inline-block; min-width: 150px; }
-    input, textarea, select, button {
-      width: 100%;
-      padding: 10px;
-      margin: 6px 0 0;
-      border: 1px solid var(--border);
-      background: #1c1c1c;
-      color: var(--text);
-      border-radius: 6px;
-      font-size: 16px;
-    }
-    textarea { min-height: 100px; resize: vertical; }
-    button {
-      background: var(--accent);
-      color: #fff;
-      cursor: pointer;
-      border: none;
-      font-weight: 700;
-    }
-    button:hover { opacity: .92; }
+    .video-wrap{position:relative;width:100%;max-width:920px;margin:0 auto 18px;padding-top:56.25%;border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+    .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
-    .mut { color: var(--muted); font-size: .9rem; }
-    code { background:#000; padding:2px 6px; border-radius:4px; }
-    .inline { display:inline; }
-
-    /* payment */
-    .paybtns a, .paybtns button {
-      display:block;
-      background: var(--accent2);
-      color:#fff;
-      text-align:center;
-      padding:10px;
-      margin:8px 0;
-      border-radius:8px;
-      text-decoration:none;
-      font-weight:bold;
-      border:none;
-      width:100%;
-      cursor:pointer;
-    }
-
-    /* youtube */
-    .video-wrap {
-      position: relative;
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto 20px;
-      padding-top: 56.25%; /* 16:9 */
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-    .video-wrap iframe {
-      position:absolute; inset:0; width:100%; height:100%; border:0;
-    }
-
-    /* testimonials & legal */
-    .testimonial { margin: 12px 0; font-style: italic; }
-    .legal-section { margin: 20px 0; font-size:.95rem; line-height:1.5; }
-    footer { margin: 30px 0 40px; font-size: .85rem; color: var(--muted); }
+    .paybtns a,.paybtns button{display:block;background:var(--accent2);color:#fff;text-align:center;padding:10px;margin:8px 0;border-radius:8px;text-decoration:none;font-weight:700;border:none;width:100%;cursor:pointer}
+    .pay-note {margin: 0 0 12px;}
+    .testimonial{margin:10px 0;font-style:italic}
+    footer{color:var(--muted);margin:26px 0 40px}
+    .center{text-align:center}
+    .qr{max-width:200px;width:100%;height:auto;display:block;margin:10px auto 0;border-radius:8px;border:1px solid var(--border)}
   </style>
 </head>
 <body>
-  <header> 
-    
-    <img src="logo.png" alt="CustomSongMe Logo" class="logo" />
-    <h1>🎵 CustomSongMe 🎵</h1>
-    <p class="slogan">Personalized AI Songs Delivered in 24–48 Hours</p>
+  <header>
+    <img src="logo.png" alt="CustomSongMe Logo" class="logo" loading="lazy" />
+    <h1>CustomSongMe — Personalized AI Custom Songs (24–48 Hours)</h1>
+    <p class="slogan">Flat $25 • Up to 3 revisions • 100% satisfaction guarantee</p>
+    <p><a class="btn" href="#order" aria-label="Start your custom song order">Start My Song</a></p>
   </header>
 
-  <!-- YouTube video embedded (privacy-enhanced domain) -->
   <div class="video-wrap" aria-label="CustomSongMe Sample Video">
     <iframe
       src="https://www.youtube-nocookie.com/embed/YOUR_VIDEO_ID?rel=0"
-     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen
-      ; -write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      title="CustomSongMe — Sample"
+      loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
       allowfullscreen
     ></iframe>
   </div>
 
-  <main class="card" id="order">
-    <h2>Start My Song</h2>
+  <section class="card" id="intro">
+    <h2>Custom Songs for Every Occasion</h2>
+    <p>Turn your words, memories, and inside jokes into a personalized song — crafted with AI and delivered in just 24–48 hours.</p>
+    <p>Perfect for birthdays, weddings, anniversaries, roasts, graduations, and business jingles. Flat fee of $25, up to 3 revisions, and a 100% satisfaction guarantee.</p>
+  </section>
 
-    <!-- Order ID display so the user can copy it -->
-    <p class="mut inline">Your Order ID:&nbsp;<code id="orderIdDisplay">—</code></p>
-
-    <!-- ✅ Formspree form -->
-    <form id="songForm" action="https://formspree.io/f/xwpqlypv" method="POST">
-      <!-- hidden fields -->
-      <input type="hidden" name="_subject" value="New Song Request" />
-      <input type="hidden" name="_replyto" id="replyTo" />
-      <input type="hidden" name="orderId" id="orderId" />
-      <input type="hidden" name="_redirect" value="https://customsongme.com/thanks.html" />
-
-      <p><label>Your Name
-        <input type="text" name="name" required />
-      </label></p>
-
-      <p><label>Email
-        <input type="email" name="email" id="email" required />
-      </label></p>
-
-      <p><label>Recipient’s Name
-        <input type="text" name="recipient" required />
-      </label></p>
-
-      <p><label>Occasion
-        <input type="text" name="occasion" required />
-      </label></p>
-
-      <p><label>Song Details
-        <textarea name="details" placeholder="Tell me about them, inside jokes, favorite style or artists, the vibe you want…" required></textarea>
-      </label></p>
-
-      <p><button type="submit">Submit Song Request</button></p>
-
-      <p class="mut">
-        Tip: If you prefer PayPal, Cash App, or Venmo, include your
-        <strong>Order ID</strong> <code id="orderIdDisplay2">—</code> in your payment note so I can match your payment to this request.
-      </p>
-    </form>
-  </main>
-
-  <section class="card" id="how">
+  <section class="card" id="how-it-works">
     <h2>How It Works</h2>
     <ol>
-      <li><strong>Tell me about the person</strong>—names, stories, details, favorite artists, vibe.</li>
-      <li><strong>Choose how to pay</strong>—Stripe (button below) or PayPal / Cash App / Venmo.</li>
-      <li><strong>Get your song in 24–48 hours</strong>—delivered as an MP3 + lyrics.</li>
+      <li><strong>Share Your Story</strong> — who it’s for, favorite memories, names, and vibe.</li>
+      <li><strong>Pick Options</strong> — choose genre, add rush if needed.</li>
+      <li><strong>Get Your Track</strong> — MP3 delivered in 24–48 hours (+ lyrics).</li>
     </ol>
   </section>
 
-  <section class="card" id="pay">
-    <h3>💳 Payment Options</h3>
-    <div class="paybtns">
-      <!-- Placeholder Stripe button – wire this to your Stripe Checkout when ready -->
-      <button id="stripeBtn" type="button">Pay with Stripe (Coming Soon)</button>
-
-      <!-- Your external payment links -->
-      <a href="https://paypal.me/YOUR_PAYPAL" target="_blank" rel="noopener">Pay with PayPal</a>
-      <a href="https://cash.app/$YOUR_CASHAPP" target="_blank" rel="noopener">Pay with Cash App</a>
-      <a href="https://venmo.com/u/YOUR_VENMO" target="_blank" rel="noopener">Pay with Venmo</a>
-    </div>
+  <section class="card" id="pricing">
+    <h2>Simple Flat Fee Pricing</h2>
+    <h3>🎶 Custom Song — $25</h3>
+    <ul>
+      <li>Personalized lyrics from your story</li>
+      <li>One genre of your choice</li>
+      <li>Up to 3 free revisions</li>
+      <li>MP3 delivery (+ lyric sheet)</li>
+    </ul>
+    <p class="muted-text">Rush delivery (+$20) available on request.</p>
   </section>
 
   <section class="card" id="testimonials">
-    <h3>Testimonials</h3>
-    <div class="testimonial">“This was the best birthday gift—everyone cried and laughed. Perfect!” — K.M.</div>
-    <div class="testimonial">“Fast turnaround and nailed the vibe. Will order again!” — R.B.</div>
+    <h2>What People Are Saying</h2>
+    <figure class="testimonial">
+      <blockquote>“The custom song was perfect for my sister’s birthday!”</blockquote>
+      <figcaption>— Sarah M.</figcaption>
+    </figure>
+    <figure class="testimonial">
+      <blockquote>“This brought tears to my wife’s eyes on our anniversary.”</blockquote>
+      <figcaption>— James T.</figcaption>
+    </figure>
+    <figure class="testimonial">
+      <blockquote>“A total hit at our wedding. Amazing work!”</blockquote>
+      <figcaption>— Emily & Raj</figcaption>
+    </figure>
   </section>
 
-  <section class="card legal-section" id="legal">
-    <h3>Legal Information</h3>
+  <section class="card" id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <h3>How fast will I get my song?</h3><p>Most songs are delivered within 24–48 hours. Rush is available.</p>
+    <h3>Can I pick the genre?</h3><p>Yes—pop, acoustic, country, hip-hop, R&amp;B, rock, jazz, folk, electronic, classical, or “surprise me.”</p>
+    <h3>What do I receive?</h3><p>MP3 by default; WAV available on request.</p>
+    <h3>Do I own the song?</h3><p>Personal-use license. For commercial use (ads, releases), contact for licensing.</p>
+    <h3>What if I'm not satisfied?</h3><p>100% satisfaction guarantee. Up to 3 free revisions or a full refund.</p>
+  </section>
+
+  <section class="card" id="order" aria-labelledby="order-title">
+    <h2 id="order-title">Order Your Custom Song</h2>
+    <p>Share your story below. You’ll see your Order ID and get a confirmation after submitting.</p>
+
+    <form id="songForm" action="https://formspree.io/f/xwpqlypv" method="POST" novalidate>
+      <input type="hidden" name="_subject" value="New Song Request" />
+      <input type="hidden" name="_replyto" id="replyTo" />
+      <input type="hidden" name="order_id" id="order_id" />
+      <input type="hidden" name="_redirect" value="https://customsongme.com/thanks.html" />
+
+      <label for="first_name">First Name</label>
+      <input id="first_name" name="first_name" autocomplete="given-name" required />
+
+      <label for="occasion">Occasion</label>
+      <select id="occasion" name="occasion" required>
+        <option value="">Select Occasion</option>
+        <option>Birthday</option><option>Wedding</option><option>Anniversary</option>
+        <option>Roast</option><option>Graduation</option><option>Business Jingle</option><option>Other</option>
+      </select>
+
+      <label for="genre">Genre</label>
+      <select id="genre" name="genre" required>
+        <option value="">Select Genre</option>
+        <option>Pop</option><option>Acoustic</option><option>Country</option><option>Hip-Hop</option>
+        <option>R&amp;B</option><option>Rock</option><option>Jazz</option><option>Folk</option>
+        <option>Electronic</option><option>Classical</option><option>Surprise me</option>
+      </select>
+
+      <label for="details">Details / Story</label>
+      <textarea id="details" name="details" minlength="30" required placeholder="At least 30 characters; names, inside jokes, favorite artists, vibe…"></textarea>
+      <p class="muted-text">Characters: <span id="charCount">0</span> (minimum 30 non-whitespace)</p>
+
+      <label for="email">Email (delivery)</label>
+      <input id="email" type="email" name="email" autocomplete="email" required />
+
+      <h3 class="center">Optional Add-ons</h3>
+      <label class="muted-text"><input type="checkbox" id="rush" name="rush" /> Rush Delivery (+$20)</label>
+
+      <button class="btn" type="submit">Submit</button>
+    </form>
+
+    <h3 class="center" style="margin-top:16px">Payment Options</h3>
+    <p class="muted-text center pay-note">
+      Your Order ID is <code id="orderIdDisplay">—</code>. Please include it in your payment note.
+    </p>
+    <div class="paybtns">
+      <button id="stripeBtn" type="button" aria-disabled="true">Pay with Stripe ($25) — Coming Soon</button>
+      <a id="paypalLink" href="https://paypal.me/YOUR_PAYPAL?amount=25" target="_blank" rel="noopener">Pay with PayPal ($25)</a>
+      <a id="cashLink" href="https://cash.app/$YOUR_CASHAPP/25" target="_blank" rel="noopener">Pay with Cash App ($25)</a>
+      <a id="venmoLink" href="venmo://paycharge?txn=pay&recipients=YOUR_VENMO&amount=25" target="_blank" rel="noopener">Pay with Venmo ($25)</a>
+    </div>
+
+    <img src="venmo-qr.png" alt="Venmo QR Code for CustomSongMe" class="qr" loading="lazy" />
+
+    <p class="muted-text center" style="margin-top:6px">
+      Venmo link opens the app on mobile. On desktop, scan the QR code or pay from your phone.
+    </p>
+
+    <noscript>
+      <p>Thanks! Your request was sent. If you don’t hear back, email <a href="mailto:danrocksai@gmail.com">danrocksai@gmail.com</a>.</p>
+      <p>JavaScript is disabled. Please ensure your story has at least 30 non-whitespace characters.</p>
+    </noscript>
+  </section>
+
+  <section class="card" id="legal">
+    <h2>Legal Information</h2>
     <p><strong>Usage:</strong> Songs are for personal use unless otherwise agreed. For commercial usage, please request a license.</p>
     <p><strong>Refunds:</strong> Because this is a custom creative service, refunds are handled on a case-by-case basis.</p>
-    <p><strong>Privacy:</strong> I only use your details to complete your order. No selling or sharing of personal data.</p>
+    <p><strong>Privacy:</strong> Your details are only used to complete your order. No selling or sharing of personal data.</p>
   </section>
 
   <footer>
-    © <span id="yr"></span> CustomSongMe • <a href="#order" style="color:#9ecbff">Start a song</a>
+    <address>
+      © <span id="yr"></span> CustomSongMe
+      <span aria-hidden="true">•</span> <a href="#order">Start a song</a>
+      <span aria-hidden="true">•</span> <a href="https://www.youtube.com/@customsongme" target="_blank" rel="noopener">YouTube</a>
+    </address>
   </footer>
 
   <script>
     // --- Helpers ---
-    function makeId(len = 6) {
+    function randToken(len = 6){
       const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-      let s = '';
-      for (let i = 0; i < len; i++) s += chars[Math.floor(Math.random() * chars.length)];
+      let s = ''; for(let i=0;i<len;i++) s += chars[Math.floor(Math.random()*chars.length)];
       return s;
     }
 
-    // --- Order ID generation & display ---
-    const orderIdEl = document.getElementById('orderId');
+    // --- DOM Elements ---
+    const orderIdHidden = document.getElementById('order_id');
+    const orderIdDisplay = document.getElementById('orderIdDisplay');
     const emailInput = document.getElementById('email');
-    const replyToEl = document.getElementById('replyTo');
-    const show1 = document.getElementById('orderIdDisplay');
-    const show2 = document.getElementById('orderIdDisplay2');
+    const replyToHidden = document.getElementById('replyTo');
+    const detailsTextarea = document.getElementById('details');
+    const charCountSpan = document.getElementById('charCount');
+    const songForm = document.getElementById('songForm');
+    const rushCheckbox = document.getElementById('rush');
 
-    const today = new Date().toISOString().slice(0,10).replace(/-/g,''); // YYYYMMDD
-    const id = `CSM-${today}-${makeId(6)}`;
+    // Payment link elements
+    const paymentLinks = {
+      paypal: document.getElementById('paypalLink'),
+      cash: document.getElementById('cashLink'),
+      venmo: document.getElementById('venmoLink'),
+      stripe: document.getElementById('stripeBtn')
+    };
 
-    if (orderIdEl) orderIdEl.value = id;
-    if (show1) show1.textContent = id;
-    if (show2) show2.textContent = id;
+    // --- Order ID build & show ---
+    const ymd = new Date().toISOString().slice(0,10).replace(/-/g,'');
+    const ORDER_ID = `CSM-${ymd}-${randToken(6)}`;
+    if (orderIdHidden) orderIdHidden.value = ORDER_ID;
+    if (orderIdDisplay) orderIdDisplay.textContent = ORDER_ID;
 
-    // Keep _replyto synced with the visible email field
-    if (emailInput && replyToEl) {
-      const syncEmail = () => (replyToEl.value = emailInput.value.trim());
+    // --- Update payment links based on rush checkbox ---
+    function updatePaymentLinks() {
+      const baseAmount = 25;
+      const amount = rushCheckbox?.checked ? baseAmount + 20 : baseAmount;
+      const note = `Order ID ${ORDER_ID}`;
+
+      if (paymentLinks.paypal) {
+        paymentLinks.paypal.href = `https://paypal.me/YOUR_PAYPAL?amount=${amount}`;
+        paymentLinks.paypal.textContent = `Pay with PayPal ($${amount})`;
+      }
+      if (paymentLinks.cash) {
+        paymentLinks.cash.href = `https://cash.app/$YOUR_CASHAPP/${amount}`;
+        paymentLinks.cash.textContent = `Pay with Cash App ($${amount})`;
+      }
+      if (paymentLinks.venmo) {
+        const encodedNote = encodeURIComponent(note);
+        paymentLinks.venmo.href = `venmo://paycharge?txn=pay&recipients=YOUR_VENMO&amount=${amount}&note=${encodedNote}`;
+        paymentLinks.venmo.textContent = `Pay with Venmo ($${amount})`;
+      }
+      if (paymentLinks.stripe) {
+        paymentLinks.stripe.textContent = `Pay with Stripe ($${amount}) — Coming Soon`;
+      }
+    }
+    // Initial call and add listener
+    updatePaymentLinks();
+    if (rushCheckbox) rushCheckbox.addEventListener('change', updatePaymentLinks);
+
+    // --- Keep _replyto synced for Formspree ---
+    if (emailInput && replyToHidden){
+      const syncEmail = ()=> replyToHidden.value = emailInput.value.trim();
       syncEmail();
       emailInput.addEventListener('input', syncEmail);
     }
 
-    // Optional: remember last submitted email
-    const form = document.getElementById('songForm');
-    if (form && emailInput) {
-      const last = localStorage.getItem('csm_email');
-      if (last && !emailInput.value) emailInput.value = last;
-      form.addEventListener('submit', () => {
-        localStorage.setItem('csm_email', emailInput.value.trim());
+    // --- Live char counter (non-whitespace) ---
+    if (detailsTextarea && charCountSpan){
+      const updateCount = ()=>{
+        const count = (detailsTextarea.value || '').replace(/\s+/g,'').length;
+        charCountSpan.textContent = count;
+      };
+      detailsTextarea.addEventListener('input', updateCount);
+      updateCount();
+    }
+
+    // --- Submit guard: enforce >=30 non-whitespace chars ---
+    if (songForm && detailsTextarea){
+      songForm.addEventListener('submit', (e)=> {
+        const nonWs = (detailsTextarea.value || '').replace(/\s+/g,'').length;
+        if (nonWs < 30) {
+          e.preventDefault();
+          alert('Please add at least 30 non-whitespace characters to your story.');
+          detailsTextarea.focus();
+          return;
+        }
+        try { localStorage.setItem('lastOrderId', ORDER_ID); } catch (err) {
+          console.error('Could not save Order ID to localStorage.', err);
+        }
       });
     }
 
-    // Footer year
-    document.getElementById('yr').textContent = new Date().getFullYear();
+    // --- Footer year ---
+    const yrEl = document.getElementById('yr');
+    if (yrEl) yrEl.textContent = new Date().getFullYear();
 
-<script>
-  // --- Helpers ---
-  function makeId(len = 6) {
-    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-    let s = '';
-    for (let i = 0; i < len; i++) s += chars[Math.floor(Math.random() * chars.length)];
-    return s;
-  }
-
-  // --- Order ID generation & display ---
-  const orderIdEl = document.getElementById('orderId');
-  const emailInput = document.getElementById('email');
-  const replyToEl = document.getElementById('replyTo');
-  const show1 = document.getElementById('orderIdDisplay');
-  const show2 = document.getElementById('orderIdDisplay2');
-
-  const today = new Date(); //
-  const currentYear = today.getFullYear(); //
-
-  // Set the current year in the footer
-  document.getElementById('yr').textContent = currentYear; //
-
-  // Generate and display the order ID
-  const orderId = makeId();
-  orderIdEl.value = orderId; // Set the hidden input field's value
-  show1.textContent = orderId; // Display the ID in the main card
-  show2.textContent = orderId; // Display the ID in the payment tip
-
-  // Sync email input with hidden reply-to field for Formspree
-  emailInput.addEventListener('input', function() { //
-    replyToEl.value = emailInput.value; //
-  });
-</script>
+    // --- Stripe placeholder ---
+    if (paymentLinks.stripe){
+      paymentLinks.stripe.addEventListener('click', ()=>{
+        alert('Stripe Checkout is coming soon. Use PayPal, Cash App, or Venmo for now.');
+      });
+    }
+  </script>
+  <script src="https://js.stripe.com/v3" async></script>
 </body>
 </html>
