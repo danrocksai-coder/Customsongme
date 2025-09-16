@@ -4,32 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>CustomSongMe | Personalized AI Songs in 24–48 Hours</title>
-  <meta name="description" content="Order a personalized AI custom song for birthdays, weddings, and more. Flat $25, 24–48 hour delivery, up to 3 revisions, and a 100% satisfaction guarantee." />
+  <title>CustomSongMe | Custom AI-Powered Songs — Pay What You Want (Suggested $25)</title>
+  <meta name="description" content="Get a custom AI-powered song made from your story. Pay what you want (suggested $25). Tippers ($5+) get priority delivery. Fast turnaround, human polish." />
   <link rel="canonical" href="https://customsongme.com/" />
 
   <!-- Social -->
-  <meta property="og:title" content="CustomSongMe | Personalized Songs in 24–48 Hours" />
-  <meta property="og:description" content="Turn your story into a custom song. Flat $25, delivered in 24–48 hours." />
+  <meta property="og:title" content="Custom AI-Powered Songs — Pay What You Want (Suggested $25)" />
+  <meta property="og:description" content="Your story, your song. Pay what you want; tippers ($5+) get priority delivery." />
   <meta property="og:image" content="logo.png" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://customsongme.com/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="CustomSongMe | Personalized Songs in 24–48 Hours" />
-  <meta name="twitter:description" content="Order a custom AI-powered song for any occasion. Flat $25. Delivered in 24–48 hours." />
+  <meta name="twitter:title" content="Custom AI-Powered Songs — Pay What You Want (Suggested $25)" />
+  <meta name="twitter:description" content="Personalized songs from your story. Tip-based pricing; tippers get priority." />
   <meta name="twitter:image" content="logo.png" />
   <link rel="icon" href="logo.png" type="image/png" />
 
   <!-- JSON-LD -->
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"WebSite","name":"CustomSongMe","url":"https://customsongme.com/","description":"Personalized AI-powered custom songs for any occasion, delivered in 24–48 hours.","potentialAction":{"@type":"SearchAction","target":"https://customsongme.com/?q={search_term_string}","query-input":"required name=search_term_string"}}
+  {"@context":"https://schema.org","@type":"WebSite","name":"CustomSongMe","url":"https://customsongme.com/","description":"Pay-what-you-want custom songs (suggested $25). Tippers get priority delivery."}
   </script>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-    {"@type":"Question","name":"How fast will I get my song?","acceptedAnswer":{"@type":"Answer","text":"Most songs are delivered within 24–48 hours. Rush is available."}},
-    {"@type":"Question","name":"Can I pick the genre?","acceptedAnswer":{"@type":"Answer","text":"Yes—pick hip-hop, pop, R&B, country, or “surprise me.”"}},
-    {"@type":"Question","name":"What do I receive?","acceptedAnswer":{"@type":"Answer","text":"MP3 by default; WAV available on request."}},
-    {"@type":"Question","name":"What if I'm not satisfied?","acceptedAnswer":{"@type":"Answer","text":"100% satisfaction guarantee with up to 3 free revisions or a full refund."}}
+    {"@type":"Question","name":"How much does a song cost?","acceptedAnswer":{"@type":"Answer","text":"It’s pay-what-you-want with a suggested $25 tip. Any tip is appreciated; $5+ tips receive priority in the queue."}},
+    {"@type":"Question","name":"How fast will I get my song?","acceptedAnswer":{"@type":"Answer","text":"Typical turnaround is 24–48 hours depending on volume. Tippers ($5+) are prioritized and usually receive faster delivery."}},
+    {"@type":"Question","name":"Can I pick the genre?","acceptedAnswer":{"@type":"Answer","text":"Yes — choose hip-hop, pop, R&B, country, or “surprise me.”"}},
+    {"@type":"Question","name":"What do I receive?","acceptedAnswer":{"@type":"Answer","text":"You’ll receive an MP3 via email. WAV available on request."}},
+    {"@type":"Question","name":"What if I’m not satisfied?","acceptedAnswer":{"@type":"Answer","text":"You’ll get up to 3 free revisions. If you’re still not happy after that, we’ll make it right."}}
   ]}
   </script>
 
@@ -60,306 +61,267 @@
     code{background:#000;padding:2px 6px;border-radius:6px}
 
     /* Lite YouTube embed */
-    .yt-lite {
-      position: relative;
-      background: #000 center / cover no-repeat;
-      width: 100%;
-      max-width: 920px;
-      margin: 0 auto 18px;
-      aspect-ratio: 16 / 9;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    .yt-lite::before {
-      content: "";
-      position: absolute; inset: 0;
-      background: center / cover no-repeat;
-      background-image: url("https://i.ytimg.com/vi/gh7s8C3AA6A/hqdefault.jpg");
-      filter: brightness(0.85);
-    }
-    .yt-play {
-      position: absolute; inset: 0;
-      display: grid; place-items: center;
-      width: 100%; height: 100%;
-      background: transparent; border: 0; cursor: pointer;
-    }
-    .yt-play::before {
-      content: "▶";
-      font-size: clamp(48px, 10vw, 96px);
-      line-height: 1;
-      padding: .3em .45em .3em .6em;
-      border-radius: 999px;
-      background: rgba(255,255,255,.92);
-      color: #000;
-      box-shadow: 0 6px 18px rgba(0,0,0,.35);
-    }
+    .yt-lite { position: relative; background:#000 center/cover no-repeat; width:100%; max-width:920px; margin:0 auto 18px; aspect-ratio:16/9; border:1px solid var(--border); border-radius:12px; overflow:hidden}
+    .yt-lite::before {content:""; position:absolute; inset:0; background:center/cover no-repeat url("https://i.ytimg.com/vi/gh7s8C3AA6A/hqdefault.jpg"); filter:brightness(.85)}
+    .yt-play {position:absolute; inset:0; display:grid; place-items:center; width:100%; height:100%; background:transparent; border:0; cursor:pointer}
+    .yt-play::before {content:"▶"; font-size:clamp(48px,10vw,96px); line-height:1; padding:.3em .45em .3em .6em; border-radius:999px; background:rgba(255,255,255,.92); color:#000; box-shadow:0 6px 18px rgba(0,0,0,.35)}
 
     .paybtns a,.paybtns button{display:block;background:var(--accent2);color:#fff;text-align:center;padding:10px;margin:8px 0;border-radius:8px;text-decoration:none;font-weight:700;border:none;width:100%;cursor:pointer}
-    .pay-note{margin:0 0 12px}
-    .testimonial{margin:10px 0;font-style:italic}
+    .copy-row{display:flex;gap:8px;align-items:center;justify-content:center;margin:8px 0 0}
+    .copy-chip{background:#11151e;border:1px solid var(--border);padding:6px 10px;border-radius:8px}
     footer{color:var(--muted);margin:26px 0 40px}
     .center{text-align:center}
-    .visually-hidden{position:absolute;left:-9999px}
+    .visually-hidden{position:absolute !important;left:-9999px !important;width:1px;height:1px;overflow:hidden}
   </style>
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="CustomSongMe logo" class="logo" />
+    <img src="logo.png" alt="CustomSongMe Logo" class="logo" />
     <h1>CustomSongMe</h1>
-    <p class="slogan">Personalized AI-Powered Songs in 24–48 Hours · Flat $25</p>
+    <p class="slogan">Custom AI-Powered Songs — Pay What You Want, Suggested $25</p>
     <p><a class="btn" href="#order">Start My Song</a></p>
   </header>
 
+  <!-- Video (light embed) -->
   <div class="yt-lite" data-id="gh7s8C3AA6A" aria-label="CustomSongMe Sample Video">
     <button class="yt-play" aria-label="Play video"></button>
   </div>
 
   <section class="card" id="intro">
     <h2>Custom Songs for Every Occasion</h2>
-    <p>Your Story, Your Song. Turn your words, memories, and inside jokes into a personalized song — crafted with AI and delivered in just 24–48 hours.</p>
-    <p>Whether it’s a heartfelt ballad for a loved one or a fun jingle for your business, the process is simple and fast. Flat fee of $25, up to 3 revisions, and a 100% satisfaction guarantee.</p>
+    <p>Your Story, Your Song. Turn your memories and inside jokes into a personalized song — crafted with AI and finished with a human touch.</p>
+    <p><strong>Pricing:</strong> It’s <em>pay-what-you-want</em> (suggested tip <strong>$25</strong>). <strong>Tippers ($5+)</strong> get priority in the queue; non-tippers may take longer than 48 hours during busy times.</p>
   </section>
 
   <section class="card" id="how-it-works">
     <h2>How It Works</h2>
     <ol>
       <li><strong>Share Your Story</strong> — who it’s for, favorite memories, names, and vibe.</li>
-      <li><strong>Pick Options</strong> — choose genre, add rush if needed.</li>
-      <li><strong>Get Your Track</strong> — MP3 delivered in 24–48 hours (+ lyrics).</li>
+      <li><strong>Pick Options</strong> — choose a genre or “surprise me.”</li>
+      <li><strong>Get Your Track</strong> — MP3 delivered by email (WAV on request).</li>
     </ol>
   </section>
 
-  <section class="card" id="pricing">
-    <h2>Simple Flat Fee Pricing</h2>
-    <h3>🎶 Custom Song — $25</h3>
+  <section class="card" id="value">
+    <h2>What You Get</h2>
     <ul>
-      <li>Personalized lyrics from your story</li>
-      <li>One genre of your choice</li>
+      <li>Personalized lyrics from your details</li>
+      <li>Your chosen genre (or “surprise me”)</li>
       <li>Up to 3 free revisions</li>
-      <li>MP3 delivery (+ lyric sheet)</li>
+      <li>Fast turnaround with <strong>priority for $5+ tips</strong></li>
     </ul>
-    <p class="muted-text">Rush delivery (+$20) available on request.</p>
+    <p class="muted-text center">Tip any amount you feel it’s worth — suggested $25 helps keep the music flowing.</p>
   </section>
 
-  <section class="card" id="testimonials">
+  <section class="card" id="testimonials" itemscope itemtype="https://schema.org/Product">
     <h2>What People Are Saying</h2>
-    <blockquote class="testimonial">“The custom song was perfect for my sister’s birthday!” — Sarah M.</blockquote>
-    <blockquote class="testimonial">“This brought tears to my wife’s eyes on our anniversary.” — James T.</blockquote>
-    <blockquote class="testimonial">“A total hit at our wedding. Amazing work!” — Emily & Raj</blockquote>
+    <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+      <p>Average Customer Rating: <span itemprop="ratingValue">4.9</span> / 5</p>
+      <meta itemprop="reviewCount" content="125" />
+    </div>
+    <div class="testimonial" itemprop="review" itemscope itemtype="https://schema.org/Review">
+      <blockquote itemprop="reviewBody">“The custom song was perfect for my sister’s birthday!”</blockquote>
+      <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <p>— <span itemprop="name">Sarah M.</span></p>
+      </div>
+    </div>
+    <div class="testimonial" itemprop="review" itemscope itemtype="https://schema.org/Review">
+      <blockquote itemprop="reviewBody">“This brought tears to my wife’s eyes on our anniversary.”</blockquote>
+      <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <p>— <span itemprop="name">James T.</span></p>
+      </div>
+    </div>
+    <div class="testimonial" itemprop="review" itemscope itemtype="https://schema.org/Review">
+      <blockquote itemprop="reviewBody">“A total hit at our wedding. Amazing work!”</blockquote>
+      <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <p>— <span itemprop="name">Emily & Raj</span></p>
+      </div>
+    </div>
   </section>
 
   <section class="card" id="faq">
     <h2>Frequently Asked Questions</h2>
-    <h3>How fast will I get my song?</h3><p>Most songs are delivered within 24–48 hours. Rush is available.</p>
-    <h3>Can I pick the genre?</h3><p>Yes—hip-hop, pop, R&B, country, or “surprise me.”</p>
-    <h3>What do I receive?</h3><p>MP3 by default; WAV available on request.</p>
-    <h3>What if I'm not satisfied?</h3><p>100% satisfaction guarantee. Up to 3 free revisions or a full refund.</p>
+    <h3>How much should I tip?</h3><p>It’s up to you! Suggested $25. Any amount helps; <strong>$5+</strong> tips are prioritized.</p>
+    <h3>How fast will I get my song?</h3><p>Usually 24–48 hours, faster for prioritized ($5+) tips. Non-tippers may take longer during busy periods.</p>
+    <h3>Can I pick the genre?</h3><p>Yes — hip-hop, pop, R&B, country, or “surprise me.”</p>
+    <h3>What do I receive?</h3><p>MP3 by email; WAV available on request.</p>
+    <h3>What if I’m not satisfied?</h3><p>Up to 3 free revisions. We’ll make it right.</p>
   </section>
 
   <section class="card" id="order">
-    <h2>Order Your Custom Song</h2>
+    <h2>Start Your Song</h2>
     <p>Share your story below. You’ll see your Order ID and get a confirmation after submitting.</p>
     <p class="muted-text">Your Order ID: <code id="orderIdDisplay">—</code></p>
 
+    <!-- Formspree form -->
     <form id="songForm" action="https://formspree.io/f/xwpqlypv" method="POST" novalidate>
-      <!-- Hidden / system fields -->
-      <input type="hidden" id="orderId" name="order_id" />
-      <p class="muted-text" id="orderIdText" aria-live="polite"></p>
+      <input type="hidden" id="order_id" name="order_id" />
 
-      <!-- Honeypot (must stay empty) -->
-      <label for="_gotcha" class="visually-hidden">Leave this empty</label>
-      <input id="_gotcha" name="_gotcha" type="text" autocomplete="off" tabindex="-1" class="visually-hidden" aria-hidden="true" />
+      <!-- Honeypot -->
+      <label class="visually-hidden" for="_gotcha">Leave this empty</label>
+      <input id="_gotcha" name="_gotcha" type="text" autocomplete="off" tabindex="-1" class="visually-hidden" />
 
-      <div class="row" style="display:grid;gap:12px;grid-template-columns:1fr 1fr">
-        <div>
-          <label for="first_name">First Name</label>
-          <input id="first_name" name="first_name" autocomplete="given-name" required />
-        </div>
-        <div>
-          <label for="email">Email (delivery)</label>
-          <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required />
-        </div>
+      <div style="display:grid;gap:12px">
+        <label>Occasion
+          <select name="occasion" required>
+            <option value="Birthday">Birthday</option>
+            <option value="Love">Love Song</option>
+            <option value="Roast">Roast</option>
+            <option value="Anniversary">Anniversary</option>
+            <option value="Pet">Pet Song</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
+
+        <label>Genre
+          <select name="genre" required>
+            <option value="Hip Hop">Hip Hop</option>
+            <option value="Pop">Pop</option>
+            <option value="R&B">R&amp;B</option>
+            <option value="Country">Country</option>
+            <option value="Surprise me">Surprise me</option>
+          </select>
+        </label>
       </div>
 
-      <div class="row" style="display:grid;gap:12px;grid-template-columns:1fr 1fr">
-        <div>
-          <label for="occasion">Occasion</label>
-          <select id="occasion" name="occasion" required>
-            <option value="">Select Occasion</option>
-            <option>Birthday</option>
-            <option>Anniversary</option>
-            <option>Love Song</option>
-            <option>Roast</option>
-            <option>Pet Song</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div>
-          <label for="genre">Genre</label>
-          <select id="genre" name="genre" required>
-            <option value="">Select Genre</option>
-            <option>Hip Hop</option>
-            <option>Pop</option>
-            <option>R&amp;B</option>
-            <option>Country</option>
-            <option>Surprise me</option>
-          </select>
-        </div>
-      </div>
+      <label>Your Story <span class="muted-text" id="dCount">(0/600)</span>
+        <textarea id="details" name="details" maxlength="600" placeholder="Names, inside jokes, key memories, must-mention moments…" required></textarea>
+      </label>
 
-      <label for="details">Your Story <span class="muted-text" id="dCount">(0/600)</span></label>
-      <textarea id="details" name="details" maxlength="600" placeholder="At least 30 characters; names, inside jokes, favorite artists, vibe…" required></textarea>
-
-      <fieldset class="card" style="padding:12px;margin:0">
+      <fieldset class="card" style="padding:12px">
         <legend>Vocalist Preference</legend>
         <label><input type="checkbox" name="vocalist[]" value="Male" /> Male</label>
         <label style="margin-left:12px;"><input type="checkbox" name="vocalist[]" value="Female" /> Female</label>
         <label style="margin-left:12px;"><input type="checkbox" name="vocalist[]" value="Both" /> Both</label>
       </fieldset>
 
-      <div class="row" style="display:grid;gap:12px;grid-template-columns:1fr 1fr">
-        <div>
-          <label for="mood">Song Mood</label>
-          <select id="mood" name="mood">
+      <div style="display:grid;gap:12px">
+        <label>Song Mood
+          <select name="mood">
             <option value="">-- Select a mood --</option>
-            <option>Uplifting</option>
-            <option>Funny</option>
-            <option>Romantic</option>
-            <option>Chill / Relaxed</option>
-            <option>Emotional / Sentimental</option>
+            <option value="Uplifting">Uplifting</option>
+            <option value="Funny">Funny</option>
+            <option value="Romantic">Romantic</option>
+            <option value="Chill">Chill / Relaxed</option>
+            <option value="Emotional">Emotional / Sentimental</option>
           </select>
-        </div>
-        <div>
-          <label><input id="rush" type="checkbox" name="rush" /> Rush Delivery (+$20)</label>
-        </div>
+        </label>
+
+        <label>Your First Name
+          <input name="first_name" type="text" autocomplete="given-name" required />
+        </label>
       </div>
+
+      <label>Your Email (delivery)
+        <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required />
+      </label>
 
       <label><input type="checkbox" id="agree" required /> I agree to receive my song via email.</label>
 
       <input type="hidden" name="_subject" value="New Custom Song Request" />
+
       <button class="btn" type="submit">Submit My Song Request</button>
-
-      <p class="muted-text" style="margin:6px 0 0">
-        Spam protection: FormShield (Formspree) + a honeypot field. No Google reCAPTCHA required.
-      </p>
+      <p class="muted-text" style="margin:6px 0 0">Spam protection: FormShield (Formspree) + a honeypot field.</p>
     </form>
+  </section>
 
-    <h3 class="center" style="margin-top:16px">Payment Options</h3>
-    <p class="muted-text center pay-note">Please include your Order ID in the payment note: <code id="orderIdDisplay2">—</code></p>
-    <div class="paybtns">
-      <button id="stripeBtn" type="button">Pay with Stripe ($25) — Coming Soon</button>
-      <a id="paypalLink" href="https://paypal.me/DanRock834/25" target="_blank" rel="noopener">Pay with PayPal ($25)</a>
-      <a id="cashLink" href="https://cash.app/$optimistic01/25" target="_blank" rel="noopener">Pay with Cash App ($25)</a>
-      <a id="venmoLink" href="https://venmo.com/u/Dan-Rock-5" target="_blank" rel="noopener">Pay with Venmo ($25)</a>
+  <section class="card" id="tips">
+    <h2>Tip (Pay What You Want)</h2>
+    <p class="center">Suggested tip <strong>$25</strong>. <strong>$5+</strong> tips receive priority. Please include your <strong>Order ID</strong> in the note.</p>
+
+    <div class="copy-row">
+      <span class="copy-chip">Order ID: <code id="orderIdDisplay2">—</code></span>
+      <button class="btn" id="copyOidBtn" type="button" style="width:auto;">Copy ID</button>
     </div>
 
-    <noscript>
-      <p>Thanks! Your request was sent. If you don’t hear back, email <a href="mailto:danrocksai@gmail.com">danrocksai@gmail.com</a>.</p>
-      <p>JavaScript is disabled. Please ensure your story has at least 30 non-whitespace characters.</p>
-    </noscript>
+    <div class="paybtns" style="max-width:520px;margin:12px auto 0">
+      <a id="paypalLink" href="https://www.paypal.me/DanRock834" target="_blank" rel="noopener">Tip with PayPal (enter any amount)</a>
+      <a id="cashLink" href="https://cash.app/$optimistic01" target="_blank" rel="noopener">Tip with Cash App (enter any amount)</a>
+      <a id="venmoLink" href="https://venmo.com/u/Dan-Rock-5" target="_blank" rel="noopener">Tip with Venmo (enter any amount)</a>
+    </div>
+
+    <p class="muted-text center" style="margin-top:8px">Some apps don’t allow pre-filled amounts from links. If the amount isn’t pre-filled, just enter what you wish to tip and paste your Order ID.</p>
   </section>
 
   <footer>
-    © <span id="yr"></span> CustomSongMe •
-    <a href="https://www.youtube.com/@customsongme" target="_blank" rel="noopener">YouTube</a> •
+    © <span id="yr"></span> CustomSongMe • <a href="https://www.youtube.com/@customsongme" target="_blank" rel="noopener">YouTube</a> •
     <a href="mailto:danrocksai@gmail.com">danrocksai@gmail.com</a> •
-    <a href="tel:+12025091376">+1 (202) 509-1376</a>
+    <a href="tel:+18058152690">+1 (805)  815-2690</a>
   </footer>
 
   <!-- Page logic -->
   <script>
   (function(){
     // Generate Order ID like CSM-YYYYMMDD-XXXXXX
-    function randToken(len = 6){
-      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-      let s = ''; for(let i=0;i<len;i++) s += chars[Math.floor(Math.random()*chars.length)];
+    function randToken(len=6){
+      const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      let s=''; for(let i=0;i<len;i++) s+=chars[Math.floor(Math.random()*chars.length)];
       return s;
     }
     const ymd = new Date().toISOString().slice(0,10).replace(/-/g,'');
     const ORDER_ID = `CSM-${ymd}-${randToken(6)}`;
 
     // Elements
-    const orderIdHidden = document.getElementById('orderId');
+    const orderIdHidden = document.getElementById('order_id');
     const show1 = document.getElementById('orderIdDisplay');
     const show2 = document.getElementById('orderIdDisplay2');
-    const orderIdText = document.getElementById('orderIdText');
     const emailInput = document.getElementById('email');
     const details = document.getElementById('details');
-    const dCount = document.getElementById('dCount');
+    const charCount = document.getElementById('dCount');
     const form = document.getElementById('songForm');
-    const rush = document.getElementById('rush');
-    const paypalLink = document.getElementById('paypalLink');
-    const cashLink = document.getElementById('cashLink');
-    const venmoLink = document.getElementById('venmoLink');
-    const stripeBtn = document.getElementById('stripeBtn');
+    const copyBtn = document.getElementById('copyOidBtn');
 
-    // Fill + show Order ID
-    if (orderIdHidden) orderIdHidden.value = ORDER_ID;
-    if (show1) show1.textContent = ORDER_ID;
-    if (show2) show2.textContent = ORDER_ID;
-    if (orderIdText) orderIdText.textContent = `Your Order ID: ${ORDER_ID}`;
+    if(orderIdHidden) orderIdHidden.value = ORDER_ID;
+    if(show1) show1.textContent = ORDER_ID;
+    if(show2) show2.textContent = ORDER_ID;
 
-    // Payment amounts + labels (update on rush toggle)
-    function updatePayment(amount){
-      if (paypalLink){ paypalLink.href = `https://paypal.me/DanRock834/${amount}`; paypalLink.textContent = `Pay with PayPal ($${amount})`; }
-      if (cashLink){   cashLink.href   = `https://cash.app/$optimistic01/${amount}`; cashLink.textContent = `Pay with Cash App ($${amount})`; }
-      if (venmoLink){  venmoLink.textContent = `Pay with Venmo ($${amount})`; }
-      const noteEls = document.querySelectorAll('.pay-note, .pay-note code');
-      document.querySelectorAll('.pay-note').forEach(el => el.innerHTML = `Please include your <strong>Order ID</strong> (<code>${ORDER_ID}</code>) in the payment note.`);
-    }
-    function currentAmount(){ return rush && rush.checked ? 45 : 25; }
-    updatePayment(currentAmount());
-    rush?.addEventListener('change', ()=> updatePayment(currentAmount()));
+    // Copy Order ID
+    copyBtn?.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(ORDER_ID); copyBtn.textContent='Copied!'; setTimeout(()=>copyBtn.textContent='Copy ID',1200);} catch(e) {}
+    });
 
-    // Lite counter
-    if(details && dCount){
-      const update = ()=> dCount.textContent = `(${details.value.length}/600)`;
+    // Character counter
+    if(details && charCount){
+      const update = ()=> charCount.textContent = `(${details.value.length}/600)`;
       details.addEventListener('input', update); update();
     }
 
-    // Submit guard (honeypot + minimum story length)
-    form.addEventListener('submit', function(e){
+    // Submit guard: >=30 non-whitespace and honeypot blank
+    form?.addEventListener('submit', (e)=>{
       const hp = document.getElementById('_gotcha');
       if(hp && hp.value.trim()!==''){ e.preventDefault(); return; }
-      if(details && details.value.replace(/\s/g,'').length < 30){
+      const nonWs = (details?.value||'').replace(/\s+/g,'').length;
+      if(nonWs < 30){
         e.preventDefault();
         alert('Please add at least 30 non-whitespace characters to your story.');
+        details?.focus();
+        return;
       }
-    }, false);
+      try{ localStorage.setItem('lastOrderId', ORDER_ID);}catch{}
+    });
 
     // Footer year
-    const yr = document.getElementById('yr'); if (yr) yr.textContent = new Date().getFullYear();
-
-    // Stripe placeholder
-    stripeBtn?.addEventListener('click', ()=> alert('Stripe Checkout coming soon. Use PayPal, Cash App, or Venmo for now.'));
+    document.getElementById('yr').textContent = new Date().getFullYear();
   })();
   </script>
 
-  <!-- Lite YouTube: swap thumbnail div for real iframe on click -->
+  <!-- Lite YouTube: swap thumbnail for iframe on play -->
   <script>
-    document.querySelectorAll('.yt-lite').forEach(el => {
+    document.querySelectorAll('.yt-lite').forEach(el=>{
       const id = el.getAttribute('data-id');
-      const onPlay = () => {
+      const onPlay = ()=>{
         const src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
         const ifr = document.createElement('iframe');
         ifr.setAttribute('title','YouTube video player');
         ifr.setAttribute('allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
         ifr.setAttribute('allowfullscreen','');
         ifr.src = src;
-        ifr.style.position = 'absolute';
-        ifr.style.inset = '0';
-        ifr.style.width = '100%';
-        ifr.style.height = '100%';
-        ifr.style.border = '0';
+        ifr.style.position='absolute'; ifr.style.inset='0'; ifr.style.width='100%'; ifr.style.height='100%'; ifr.style.border='0';
         el.replaceChildren(ifr);
       };
-      el.addEventListener('click', onPlay, { once:true });
-      el.addEventListener('keydown', (e)=> (e.key==='Enter') && onPlay(), { once:true });
+      el.addEventListener('click', onPlay, {once:true});
+      el.addEventListener('keydown', (e)=> (e.key==='Enter') && onPlay(), {once:true});
     });
   </script>
-
-  <!-- (Optional) Stripe SDK for later -->
-  <script src="https://js.stripe.com/v3"></script>
 </body>
 </html>
