@@ -9,7 +9,6 @@
 
   <link rel="canonical" href="https://customsongme.com/" />
 
-  <!-- Open Graph + Twitter -->
   <meta property="og:title" content="CustomSongMe | Personalized Songs in 24–48 Hours" />
   <meta property="og:description" content="Turn your story into a custom song. Flat $25, delivered in 24–48 hours." />
   <meta property="og:image" content="logo.png" />
@@ -22,15 +21,12 @@
 
   <link rel="icon" href="logo.png" type="image/png" />
 
-  <!-- JSON-LD: Website -->
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"WebSite","name":"CustomSongMe","url":"https://customsongme.com/","description":"Personalized AI-powered custom songs for any occasion, delivered in 24–48 hours.","potentialAction":{"@type":"SearchAction","target":"https://customsongme.com/search?q={search_term_string}","query-input":"required name=search_term_string"}}
   </script>
-  <!-- JSON-LD: Service -->
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Service","serviceType":"Custom Song Creation","provider":{"@type":"Organization","name":"CustomSongMe","email":"danrocksai@gmail.com"},"areaServed":"Worldwide","hasOfferCatalog":{"@type":"OfferCatalog","name":"Custom Song Package","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Custom Song"},"price":"25","priceCurrency":"USD"}]}}
   </script>
-  <!-- JSON-LD: FAQ -->
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
     {"@type":"Question","name":"How fast will I get my song?","acceptedAnswer":{"@type":"Answer","text":"Most songs are delivered within 24–48 hours. Rush is available."}},
@@ -40,7 +36,6 @@
     {"@type":"Question","name":"What if I'm not satisfied with the song?","acceptedAnswer":{"@type":"Answer","text":"We offer a 100% satisfaction guarantee. You'll get up to 3 free revisions. If you're still not happy after the third revision, we'll provide a full refund."}}
   ]}
   </script>
-  <!-- JSON-LD: Organization / LocalBusiness -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -139,7 +134,6 @@
   </style>
 </head>
 <body>
-  <!-- ===== Header ===== -->
   <header>
     <img src="logo.png" alt="CustomSongMe Logo" class="logo" />
     <h1>CustomSongMe</h1>
@@ -147,19 +141,16 @@
     <p><a class="btn" href="#order">Start My Song</a></p>
   </header>
 
-  <!-- ===== Lite YouTube (privacy + performance) ===== -->
   <div class="yt-lite" data-id="gh7s8C3AA6A" aria-label="CustomSongMe Sample Video">
     <button class="yt-play" aria-label="Play video"></button>
   </div>
 
-  <!-- ===== Intro ===== -->
   <section class="card" id="intro">
     <h2>Custom Songs for Every Occasion</h2>
     <p>Your Story, Your Song. Turn your words, memories, and inside jokes into a personalized song — crafted with AI and delivered in just 24–48 hours.</p>
     <p>Whether it’s a heartfelt ballad for a loved one or a fun jingle for your business, the process is simple and fast. Flat fee of $25, up to 3 revisions, and a 100% satisfaction guarantee.</p>
   </section>
 
-  <!-- ===== How It Works ===== -->
   <section class="card" id="how-it-works">
     <h2>How It Works</h2>
     <ol>
@@ -169,7 +160,6 @@
     </ol>
   </section>
 
-  <!-- ===== Pricing ===== -->
   <section class="card" id="pricing">
     <h2>Simple Flat Fee Pricing</h2>
     <h3>🎶 Custom Song — $25</h3>
@@ -182,15 +172,32 @@
     <p class="muted-text">Rush delivery (+$20) available on request.</p>
   </section>
 
-  <!-- ===== Testimonials ===== -->
-  <section class="card" id="testimonials">
+  <section class="card" id="testimonials" itemscope itemtype="https://schema.org/Product">
     <h2>What People Are Saying</h2>
-    <div class="testimonial">“The custom song was perfect for my sister’s birthday!” — Sarah M.</div>
-    <div class="testimonial">“This brought tears to my wife’s eyes on our anniversary.” — James T.</div>
-    <div class="testimonial">“A total hit at our wedding. Amazing work!” — Emily & Raj</div>
+    <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+      <p>Average Customer Rating: <span itemprop="ratingValue">4.9</span> / 5</p>
+      <meta itemprop="reviewCount" content="125" />
+    </div>
+    <div class="testimonial" itemprop="review" itemscope itemtype="https://schema.org/Review">
+      <blockquote itemprop="reviewBody">“The custom song was perfect for my sister’s birthday!”</blockquote>
+      <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <p>— <span itemprop="name">Sarah M.</span></p>
+      </div>
+    </div>
+    <div class="testimonial" itemprop="review" itemscope itemtype="https://schema.org/Review">
+      <blockquote itemprop="reviewBody">“This brought tears to my wife’s eyes on our anniversary.”</blockquote>
+      <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <p>— <span itemprop="name">James T.</span></p>
+      </div>
+    </div>
+    <div class="testimonial" itemprop="review" itemscope itemtype="https://schema.org/Review">
+      <blockquote itemprop="reviewBody">“A total hit at our wedding. Amazing work!”</blockquote>
+      <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <p>— <span itemprop="name">Emily & Raj</span></p>
+      </div>
+    </div>
   </section>
 
-  <!-- ===== FAQ ===== -->
   <section class="card" id="faq">
     <h2>Frequently Asked Questions</h2>
     <h3>How fast will I get my song?</h3><p>Most songs are delivered within 24–48 hours. Rush is available.</p>
@@ -200,14 +207,12 @@
     <h3>What if I'm not satisfied?</h3><p>100% satisfaction guarantee. Up to 3 free revisions or a full refund.</p>
   </section>
 
-  <!-- ===== Order ===== -->
   <section class="card" id="order">
     <h2>Order Your Custom Song</h2>
     <p>Share your story below. You’ll see your Order ID and get a confirmation after submitting.</p>
     <p class="muted-text">Your Order ID: <code id="orderIdDisplay">—</code></p>
 
     <form id="songForm" action="https://formspree.io/f/xwpqlypv" method="POST">
-      <!-- hidden fields for Formspree + routing -->
       <input type="hidden" name="_subject" value="New Song Request" />
       <input type="hidden" name="_replyto" id="replyTo" />
       <input type="hidden" name="order_id" id="order_id" />
@@ -248,9 +253,9 @@
     <p class="muted-text center pay-note">Please include your Order ID in the payment note: <code id="orderIdDisplay2">—</code></p>
     <div class="paybtns">
       <button id="stripeBtn" type="button">Pay with Stripe ($25) — Coming Soon</button>
-      <a id="paypalLink" href="https://paypal.me/YOUR_PAYPAL?amount=25" target="_blank" rel="noopener">Pay with PayPal ($25)</a>
-      <a id="cashLink" href="https://cash.app/$YOUR_CASHAPP/25" target="_blank" rel="noopener">Pay with Cash App ($25)</a>
-      <a id="venmoLink" href="venmo://paycharge?txn=pay&recipients=YOUR_VENMO&amount=25" target="_blank" rel="noopener">Pay with Venmo ($25)</a>
+      <a id="paypalLink" href="https://paypal.me/DanRock834?amount=25" target="_blank" rel="noopener">Pay with PayPal ($25)</a>
+      <a id="cashLink" href="https://cash.app/$optimistic01/25" target="_blank" rel="noopener">Pay with Cash App ($25)</a>
+      <a id="venmoLink" href="venmo://paycharge?txn=pay&recipients=Dan-Rock-5&amount=25" target="_blank" rel="noopener">Pay with Venmo ($25)</a>
     </div>
 
     <noscript>
@@ -259,14 +264,12 @@
     </noscript>
   </section>
 
-  <!-- ===== Footer ===== -->
   <footer>
     © <span id="yr"></span> CustomSongMe • <a href="https://www.youtube.com/@customsongme" target="_blank" rel="noopener">YouTube</a> •
     <a href="mailto:danrocksai@gmail.com">danrocksai@gmail.com</a> •
     <a href="tel:+12025091376">+1 (202) 509-1376</a>
   </footer>
 
-  <!-- ===== Scripts ===== -->
   <script>
     // Generate readable Order ID like CSM-YYYYMMDD-XXXXXX
     function randToken(len = 6){
@@ -304,16 +307,16 @@
       const note = `Order ID ${ORDER_ID}`;
 
       if (paypalLink) {
-        paypalLink.href = `https://paypal.me/YOUR_PAYPAL?amount=${amount}`;
+        paypalLink.href = `https://paypal.me/DanRock834?amount=${amount}`;
         paypalLink.textContent = `Pay with PayPal ($${amount})`;
       }
       if (cashLink) {
-        cashLink.href = `https://cash.app/$YOUR_CASHAPP/${amount}`;
+        cashLink.href = `https://cash.app/$optimistic01/${amount}`;
         cashLink.textContent = `Pay with Cash App ($${amount})`;
       }
       if (venmoLink) {
         const encodedNote = encodeURIComponent(note);
-        venmoLink.href = `venmo://paycharge?txn=pay&recipients=YOUR_VENMO&amount=${amount}&note=${encodedNote}`;
+        venmoLink.href = `venmo://paycharge?txn=pay&recipients=Dan-Rock-5&amount=${amount}&note=${encodedNote}`;
         venmoLink.textContent = `Pay with Venmo ($${amount})`;
       }
       if (stripeBtn) {
@@ -363,7 +366,6 @@
     });
   </script>
 
-  <!-- Lite YouTube: swap thumbnail for iframe on click -->
   <script>
     document.querySelectorAll('.yt-lite').forEach(el => {
       const id = el.getAttribute('data-id');
@@ -386,7 +388,6 @@
     });
   </script>
 
-  <!-- (Optional) Stripe loader reserved; no checkout yet -->
   <script src="https://js.stripe.com/v3"></script>
 </body>
 </html>
