@@ -4,16 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Title: 59 characters -->
+  <!-- Title -->
   <title>CustomSongMe | Personalized AI Songs in 24–48 Hours</title>
 
-  <!-- Meta description: 157 characters -->
+  <!-- Meta description -->
   <meta name="description" content="Order a personalized AI song for birthdays, weddings, anniversaries, or business jingles. Delivered in 24–48 hours, crafted to make you laugh, cry, or head nod!" />
 
   <link rel="canonical" href="https://customsongme.com/" />
 
   <!-- Social (Open Graph) -->
-  <meta property="og:title" content="CustomSongMe | Personalized Songs in 24–48 Hours" />
+  <meta property="og:title" content="CustomSongMe | Personalized AI Songs in 24–48 Hours" />
   <meta property="og:description" content="Order a personalized AI song for birthdays, weddings, anniversaries, or business jingles. Delivered in 24–48 hours, crafted to make you laugh, cry, or head nod!" />
   <meta property="og:image" content="logo.png" />
   <meta property="og:type" content="website" />
@@ -21,42 +21,42 @@
 
   <!-- Social (Twitter) -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="CustomSongMe | Personalized Songs in 24–48 Hours" />
+  <meta name="twitter:title" content="CustomSongMe | Personalized AI Songs in 24–48 Hours" />
   <meta name="twitter:description" content="Order a personalized AI song for birthdays, weddings, anniversaries, or business jingles. Delivered in 24–48 hours, crafted to make you laugh, cry, or head nod!" />
   <meta name="twitter:image" content="logo.png" />
 
   <link rel="icon" href="logo.png" type="image/png" />
-<script type="application/ld+json">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "CustomSongMe",
-  "sku": "custom-song-001",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "5",
-    "reviewCount": "12"
-  }
-}
-</script>
-}
-</script>
-,
-"aggregateRating": {
-  "@type": "AggregateRating",
-  "ratingValue": "5",
-  "reviewCount": "12"
-}
-</script>
+
+  <!-- JSON-LD: Product + FAQ -->
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-    {"@type":"Question","name":"How much does a song cost?","acceptedAnswer":{"@type":"Answer","text":"It's Pay What You Feel It's Worth. You choose the amount. Supporters who tip are prioritized in the queue."}},
-    {"@type":"Question","name":"How fast will I get my song?","acceptedAnswer":{"@type":"Answer","text":"Typical turnaround is 24–48 hours depending on volume. Tipped orders are usually delivered sooner."}},
-    {"@type":"Question","name":"Can I pick the genre?","acceptedAnswer":{"@type":"Answer","text":"Yes — choose hip-hop, pop, R&B, country, or select “surprise me.”"}},
-    {"@type":"Question","name":"What do I receive?","acceptedAnswer":{"@type":"Answer","text":"You'll receive an MP3 via email. WAV is available on request."}},
-    {"@type":"Question","name":"What if I’m not satisfied?","acceptedAnswer":{"@type":"Answer","text":"You’ll get up to 3 free revisions so your song feels just right."}}
-  ]}
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "CustomSongMe",
+      "sku": "custom-song-001",
+      "image": "https://customsongme.com/logo.png",
+      "description": "Personalized & Custom AI Songs for Every Occasion.",
+      "brand": { "@type": "Brand", "name": "CustomSongMe" },
+      "aggregateRating": { "@type": "AggregateRating", "ratingValue": 4.9, "reviewCount": 125 },
+      "review": [
+        { "@type": "Review", "author": { "@type": "Person", "name": "Sarah M." }, "reviewBody": "The custom song was perfect for my sister’s birthday!" },
+        { "@type": "Review", "author": { "@type": "Person", "name": "James T." }, "reviewBody": "This brought tears to my wife’s eyes on our anniversary." },
+        { "@type": "Review", "author": { "@type": "Person", "name": "Jane D." }, "reviewBody": "A total hit at our wedding. Amazing work!" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "How much does a song cost?", "acceptedAnswer": { "@type": "Answer", "text": "It's Pay What You Feel It's Worth. You choose the amount. Supporters who tip are prioritized in the queue." } },
+        { "@type": "Question", "name": "How fast will I get my song?", "acceptedAnswer": { "@type": "Answer", "text": "Typical turnaround is 24–48 hours depending on volume. Tipped orders are usually delivered sooner." } },
+        { "@type": "Question", "name": "Can I pick the genre?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — choose hip-hop, pop, R&B, country, or select “surprise me.”" } },
+        { "@type": "Question", "name": "What do I receive?", "acceptedAnswer": { "@type": "Answer", "text": "You'll receive an MP3 via email. WAV is available on request." } },
+        { "@type": "Question", "name": "What if I’m not satisfied?", "acceptedAnswer": { "@type": "Answer", "text": "You’ll get up to 3 free revisions so your song feels just right." } }
+      ]
+    }
+  ]
   </script>
 
   <style>
@@ -107,7 +107,7 @@
     <p><a class="btn" href="#order">Start My Song</a></p>
   </header>
 
-  <!-- Video (light embed) -->
+  <!-- Video -->
   <div class="yt-lite" data-id="gh7s8C3AA6A" aria-label="CustomSongMe Sample Video">
     <button class="yt-play" aria-label="Play video"></button>
   </div>
@@ -138,33 +138,37 @@
     <p class="muted-text center">Tip any amount you feel it’s worth and include your Order ID in the note.</p>
   </section>
 
- <section class="card" id="testimonials">
-  <h2>What People Are Saying</h2>
-  <p>Average Customer Rating: <span>4.9</span> / 5 • <span>125</span> reviews</p>
+  <section class="card" id="testimonials" itemscope itemtype="https://schema.org/Product">
+    <h2>What People Are Saying</h2>
+    <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+      <p>Average Customer Rating: <span itemprop="ratingValue">4.9</span> / 5</p>
+      <meta itemprop="reviewCount" content="125" />
+    </div>
+    <div class="testimonial" itemprop="review" itemscope itemtype="https://schema.org/Review">
+      <blockquote itemprop="reviewBody">“The custom song was perfect for my sister’s birthday!”</blockquote>
+      <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <p>— <span itemprop="name">Sarah M.</span></p>
+      </div>
+    </div>
+    <div class="testimonial" itemprop="review" itemscope itemtype="https://schema.org/Review">
+      <blockquote itemprop="reviewBody">“This brought tears to my wife’s eyes on our anniversary.”</blockquote>
+      <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <p>— <span itemprop="name">James T.</span></p>
+      </div>
+    </div>
+    <div class="testimonial" itemprop="review" itemscope itemtype="https://schema.org/Review">
+      <blockquote itemprop="reviewBody">“A total hit at our wedding. Amazing work!”</blockquote>
+      <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <p>— <span itemprop="name">Emily & Raj</span></p>
+      </div>
+    </div>
+  </section>
 
-  <div class="testimonial">
-    <blockquote>“The custom song was perfect for my sister’s birthday!”</blockquote>
-    <p>— Sarah M.</p>
-  </div>
-
-  <div class="testimonial">
-    <blockquote>“This brought tears to my wife’s eyes on our anniversary.”</blockquote>
-    <p>— James T.</p>
-  </div>
-
-  <div class="testimonial">
-    <blockquote>“A total hit at our wedding. Amazing work!”</blockquote>
-    <p>— Emily &amp; Raj</p>
-  </div>
-</section>
   <section class="card" id="faq">
     <h2>Frequently Asked Questions</h2>
-
     <h3>How much should I tip for personal songs?</h3>
     <p>It’s up to you! We use a <em>Pay What You Feel It’s Worth</em> model for personal songs (birthdays, love songs, pets, anniversaries, etc.). Most people give $20–$30, but any amount helps. <strong>$5+</strong> tips get priority delivery.</p>
-
     <hr />
-
     <h3>Do business jingles cost the same as personal songs?</h3>
     <p>No — business jingles are separate because they require more work and deliver real value for your brand.</p>
     <ul>
@@ -173,20 +177,14 @@
       <li><strong>Rights:</strong> You’ll receive a professional MP3 you can use for ads, social media, or branding.</li>
     </ul>
     <p>If you have questions about jingles, email me directly at <a href="mailto:danrocksai@gmail.com">danrocksai@gmail.com</a>.</p>
-
     <hr />
-
     <h3>How fast will I get my personal song?</h3>
     <p>Most songs are delivered within 24–48 hours. Tippers (<strong>$5+</strong>) usually get theirs faster. If the queue is busy, non-tippers may wait longer.</p>
-
     <hr />
-
     <h3>Can I pick the genre?</h3>
     <p>Yes — you can choose from hip-hop, pop, R&amp;B, country, acoustic, or “surprise me.”</p>
-    <p>➡️ And if you don’t see the genre you want, select <strong>Other</strong> and write it in (e.g. reggae, metal, lo-fi, jazz). This way, your custom song always matches the vibe you’re looking for.</p>
-
+    <p>➡️ And if you don’t see the genre you want, select <strong>Other</strong> and write it in.</p>
     <hr />
-
     <h3>What do I receive?</h3>
     <ul>
       <li>MP3 delivered by email (WAV available on request).</li>
@@ -194,9 +192,7 @@
       <li>Up to 3 free revisions.</li>
       <li>For jingles: professional-grade output optimized for your business.</li>
     </ul>
-
     <hr />
-
     <h3>What if I’m not satisfied?</h3>
     <p>You get up to 3 free revisions. If it’s not right, I’ll make changes until it feels like your story — or your brand — is captured in the music. For <strong>business jingles only</strong>: after the 3 revisions, if you’re still not completely satisfied, there’s a <strong>100% money-back guarantee</strong>.</p>
   </section>
@@ -204,20 +200,18 @@
   <section class="card" id="order">
     <h2>Start Your Song</h2>
     <p>Share your story below. You’ll see your Order ID and get a confirmation after submitting.</p>
-    <p class="muted-text">Your Order ID: <code id="orderIdDisplay">—</code></p>
+    <p class="muted-text">Your Order ID: <code id="orderIdDisplay">CSM-20250920-WVCN8N</code></p>
 
-    <!-- Formspree form -->
+    <!-- Formspree -->
     <form id="songForm" action="https://formspree.io/f/xwpqlypv" method="POST" novalidate>
-      <input type="hidden" id="order_id" name="order_id" />
-
-      <!-- Honeypot -->
+      <input type="hidden" id="order_id" name="order_id" value="CSM-20250920-WVCN8N" />
       <label class="visually-hidden" for="_gotcha">Leave this empty</label>
       <input id="_gotcha" name="_gotcha" type="text" autocomplete="off" tabindex="-1" class="visually-hidden" />
 
       <div style="display:grid;gap:12px">
         <label>Occasion
           <select name="occasion" required>
-            <option value="Birthday">Birthday</option>
+            <option value="Birthday" selected>Birthday</option>
             <option value="Love">Love Song</option>
             <option value="Roast">Roast</option>
             <option value="Anniversary">Anniversary</option>
@@ -228,32 +222,32 @@
 
         <label>Genre
           <select name="genre" required>
-            <option value="Hip Hop">Hip Hop</option>
+            <option value="Hip Hop" selected>Hip Hop</option>
             <option value="Pop">Pop</option>
             <option value="R&B">R&amp;B</option>
             <option value="Country">Country</option>
             <option value="Acoustic">Acoustic</option>
             <option value="Surprise me">Surprise me</option>
-            <option value="Other">Other (please specify in your story)</option>
+            <option value="Other">Other (please specify in story)</option>
           </select>
         </label>
       </div>
 
       <label>Your Story <span class="muted-text" id="dCount">(0/600)</span>
-        <textarea id="details" name="details" maxlength="600" placeholder="Names, inside jokes, key memories, must-mention moments… If you chose 'Other' for genre, write your style here (e.g. reggae, lo-fi, metal)." required></textarea>
+        <textarea id="details" name="details" maxlength="600" required></textarea>
       </label>
 
       <fieldset class="card" style="padding:12px">
         <legend>Vocalist Preference</legend>
         <label><input type="checkbox" name="vocalist[]" value="Male" /> Male</label>
-        <label style="margin-left:12px;"><input type="checkbox" name="vocalist[]" value="Female" /> Female</label>
-        <label style="margin-left:12px;"><input type="checkbox" name="vocalist[]" value="Both" /> Both</label>
+        <label><input type="checkbox" name="vocalist[]" value="Female" /> Female</label>
+        <label><input type="checkbox" name="vocalist[]" value="Both" /> Both</label>
       </fieldset>
 
       <div style="display:grid;gap:12px">
         <label>Song Mood
           <select name="mood">
-            <option value="">-- Select a mood --</option>
+            <option value="" selected>-- Select a mood --</option>
             <option value="Uplifting">Uplifting</option>
             <option value="Funny">Funny</option>
             <option value="Romantic">Romantic</option>
@@ -285,7 +279,7 @@
     <p class="center">Please include your <strong>Order ID</strong> in the note so we can match your tip to your request.</p>
 
     <div class="copy-row">
-      <span class="copy-chip">Order ID: <code id="orderIdDisplay2">—</code></span>
+      <span class="copy-chip">Order ID: <code id="orderIdDisplay2">CSM-20250920-WVCN8N</code></span>
       <button class="btn" id="copyOidBtn" type="button" style="width:auto;">Copy ID</button>
     </div>
 
@@ -298,26 +292,27 @@
     <p class="muted-text center" style="margin-top:8px">Some apps don’t allow pre-filled amounts from links. If the amount isn’t pre-filled, just enter what you wish to tip and paste your Order ID.</p>
   </section>
 
- <section class="card" id="occasions">
-  <h2>Occasions & Special Songs</h2>
-  <p>Explore our dedicated pages for each type of personalized song or jingle:</p>
-  <ul>
-    <li><a href="/birthday-songs.html">🎂 Birthday Songs</a></li>
-    <li><a href="/wedding-songs.html">💍 Wedding Songs</a></li>
-    <li><a href="/love-songs.html">❤️ Love Songs</a></li>
-    <li><a href="/anniversary-songs.html">🎉 Anniversary Songs</a></li>
-    <li><a href="/pet-songs.html">🐾 Pet Songs</a></li>
-    <li><a href="/roast-songs.html">🔥 Roast Songs</a></li>
-    <li><a href="/business-jingles.html">📢 Business Jingles</a></li>
-  </ul>
-</section>
-   <footer>
-    © <span id="yr"></span> CustomSongMe • <a href="https://www.youtube.com/@customsongme" target="_blank" rel="noopener">YouTube</a> •
+  <section class="card" id="occasions">
+    <h2>Occasions & Special Songs</h2>
+    <p>Explore our dedicated pages for each type of personalized song or jingle:</p>
+    <ul>
+      <li><a href="/birthday-songs">🎂 Birthday Songs</a></li>
+      <li><a href="/wedding-songs">💍 Wedding Songs</a></li>
+      <li><a href="/love-songs">❤️ Love Songs</a></li>
+      <li><a href="/anniversary-songs">🎉 Anniversary Songs</a></li>
+      <li><a href="/pet-songs">🐾 Pet Songs</a></li>
+      <li><a href="/roast-songs">🔥 Roast Songs</a></li>
+      <li><a href="/business-jingles">📢 Business Jingles</a></li>
+    </ul>
+  </section>
+
+  <footer>
+    © <span id="yr">2025</span> CustomSongMe • <a href="https://www.youtube.com/@customsongme" target="_blank" rel="noopener">YouTube</a> •
     <a href="mailto:danrocksai@gmail.com">danrocksai@gmail.com</a> •
     <a href="tel:+18058152690">+1 (805) 815-2690</a>
   </footer>
 
-  <!-- Page logic (unchanged) -->
+  <!-- Page logic -->
   <script>
   (function(){
     // Generate Order ID like CSM-YYYYMMDD-XXXXXX
@@ -390,6 +385,15 @@
       el.addEventListener('click', onPlay, {once:true});
       el.addEventListener('keydown', (e)=> (e.key==='Enter') && onPlay(), {once:true});
     });
+  </script>
+
+  <!-- Google tag (replace with your real ID) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
   </script>
 </body>
 </html>
