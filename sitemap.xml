@@ -1,13 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Home -->
   <url>
     <loc>https://customsongme.com/</loc>
     <priority>1.0</priority>
     <changefreq>daily</changefreq>
   </url>
+
+  <!-- Thank You Page -->
   <url>
     <loc>https://customsongme.com/thanks.html</loc>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
-</urlset
+
+  <!-- Song Category Pages -->
+  <url>
+    <loc>https://customsongme.com/birthday-songs.html</loc>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://customsongme.com/wedding-songs.html</loc>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://customsongme.com/love-songs.html</loc>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://customsongme.com/anniversary-songs.html</loc>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://customsongme.com/pet-songs.html</loc>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://customsongme.com/roast-songs.html</loc>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://customsongme.com/business-jingles.html</loc>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+</urlset>
