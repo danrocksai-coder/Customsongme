@@ -7,7 +7,8 @@
   <!-- ✅ SEO -->
   <title>CustomSongMe — Personalized Songs & Business Jingles</title>
   <meta name="description" content="Order a personalized song or catchy business jingle. Fast turnaround, free revisions, and 100% custom lyrics for birthdays, weddings, and more." />
-<link rel="canonical" href="https://customsongme.com/" />
+  <link rel="canonical" href="https://customsongme.com/" />
+
   <!-- ✅ Open Graph / Facebook -->
   <meta property="og:title" content="CustomSongMe — Personalized Songs & Business Jingles" />
   <meta property="og:description" content="Order a personalized song or catchy business jingle. Fast turnaround, free revisions, and 100% custom lyrics." />
@@ -24,63 +25,41 @@
   <!-- ✅ Favicon -->
   <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
-  <!-- ✅ LocalBusiness Schema with ContactPoint -->
+  <!-- ✅ FAQPage Schema -->
   <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How much should I tip for personal songs?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "We use a Pay What You Feel It’s Worth model for personal songs. Most people give $20–$30, but any amount helps. $5+ tips get priority delivery."
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much should I tip for personal songs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We use a Pay What You Feel It’s Worth model. Most people give $20–$30, but any amount helps. $5+ tips get priority delivery."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do business jingles cost the same as personal songs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Business jingles have a $50 minimum (paid upfront). Delivery is usually within 12–24 hours, and you’ll receive a professional MP3 for ads and branding."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if I’m not satisfied?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You get up to 3 free revisions. For business jingles, there’s a 100% money-back guarantee if you’re not happy."
+        }
       }
-    },
-    {
-      "@type": "Question",
-      "name": "Do business jingles cost the same as personal songs?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Business jingles have a $50 minimum (paid upfront). Typical delivery is 12–24 hours after payment and order ID confirmation. You’ll receive a professional MP3 suitable for ads and branding."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How fast will I get my personal song?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Most songs are delivered within 24–48 hours. Tippers ($5+) usually get theirs faster. Non-tipped orders may wait longer during busy times."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I pick the genre?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes — you can choose from hip-hop, pop, R&B, country, acoustic, or “surprise me.” If you want another style, pick Other and write it in."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What do I receive?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "You’ll receive an MP3 via email (WAV available on request), personalized lyrics and vocals, and up to 3 free revisions. Business jingles are delivered at professional quality."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What if I’m not satisfied?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "You get up to 3 free revisions. For business jingles only: if you’re still not satisfied after the revisions, there’s a 100% money-back guarantee."
-      }
-    }
-  ]
-}
-</script>
+    ]
+  }
+  </script>
+
+  <!-- ✅ LocalBusiness Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -97,10 +76,6 @@
       "postalCode": "93030",
       "addressCountry": "US"
     },
-    "areaServed": {
-      "@type": "Place",
-      "name": "United States"
-    },
     "sameAs": [
       "https://www.facebook.com/customsongme",
       "https://x.com/customsongme",
@@ -111,14 +86,14 @@
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "customer support",
-      "email": "info@customsongme.com",
+      "email": "dan@customsongme.com",
       "availableLanguage": "English",
       "description": "Customer support is available via email. Please allow up to 24 hours for a response."
     }
   }
   </script>
 
-  <!-- ✅ WebSite Schema (no search page) -->
+  <!-- ✅ WebSite Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -135,7 +110,7 @@
   }
   </script>
 
-  <!-- ✅ Your CSS/JS includes (keep these as they are in your site) -->
+  <!-- ✅ Your CSS/JS -->
   <link rel="stylesheet" href="/assets/styles.css">
   <script src="/assets/app.js" defer></script>
 </head>
