@@ -1,0 +1,5 @@
+# Force HTTPS
+http://*  https://:splat 301!
+
+# Canonical host (change to your preferred host)
+https://www.example.com/*  https://example.com/:splat  301!
