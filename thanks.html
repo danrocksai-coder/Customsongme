@@ -3,63 +3,79 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Order Received | CustomSongMe</title>
+  <meta name="robots" content="index, follow" />
+
+  <title>Thank You for Your Order | CustomSongMe</title>
+
+  <meta name="description" content="Thank you for your custom song request. Your order has been received and is being processed by CustomSongMe." />
+
+  <link rel="canonical" href="https://customsongme.com/thanks.html" />
+  <link rel="icon" type="image/png" href="/logo.png" />
+
   <style>
-    :root { --bg:#0b0b12; --card:#151525; --text:#e9e9f1; --muted:#b0b5c0; --brand:#7a5cff; --success:#00d632; }
-    * { box-sizing:border-box; }
-    body { margin:0; padding:0; background:var(--bg); color:var(--text); font:16px/1.6 system-ui, sans-serif; text-align:center; display:flex; align-items:center; justify-content:center; min-height:100vh; }
-    .container { width:min(500px, 92vw); padding:40px; background:var(--card); border-radius:24px; border:1px solid #222233; box-shadow:0 20px 40px rgba(0,0,0,0.4); }
-    .icon { font-size:60px; color:var(--success); margin-bottom:20px; }
-    h1 { margin:0 0 10px; font-size:2rem; }
-    p { color:var(--muted); margin-bottom:30px; }
-    .order-id-display { background:#000; padding:15px; border-radius:12px; border:1px dashed var(--brand); margin-bottom:30px; }
-    .order-id-display code { color:var(--brand); font-size:1.2rem; font-weight:bold; }
-    .pay-grid { display:grid; grid-template-columns:1fr; gap:12px; margin-bottom:30px; }
-    .btn { display:block; padding:16px; border-radius:12px; text-decoration:none; font-weight:bold; color:#fff; transition:0.3s; }
-    .btn-paypal { background:#003087; }
-    .btn-cash { background:#00d632; }
-    .btn-venmo { background:#3d95ce; }
-    .btn-home { background:transparent; border:1px solid #333; color:var(--muted); margin-top:10px; }
-    .btn:hover { opacity:0.9; transform:translateY(-2px); }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0b0b12;
+      color: #e9e9f1;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #b0b5c0;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 30px;
+      background: #7a5cff;
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
   </style>
 </head>
+
 <body>
 
   <div class="container">
-    <div class="icon">✓</div>
-    <h1>Order Received!</h1>
-    <p>Dan the Song Man is ready to start crafting your track. Check your email for a confirmation shortly.</p>
 
-    <div class="order-id-display">
-      <span style="font-size:0.8rem; display:block; margin-bottom:5px; color:var(--muted);">YOUR ORDER REFERENCE:</span>
-      <code id="display-id">CSM-PROCESSING...</code>
-    </div>
+    <img src="/logo.png" alt="CustomSongMe Logo" width="160" style="margin-bottom:20px;" />
 
-    <h3 style="margin-bottom:15px;">Complete Your Contribution</h3>
-    <p style="font-size:0.9rem; margin-top:-10px;">Tips of $5+ move you to the front of the queue!</p>
-    
-    <div class="pay-grid">
-      <a href="https://www.paypal.me/DanRock834" target="_blank" class="btn btn-paypal">Pay with PayPal</a>
-      <a href="https://cash.app/$optimistic01" target="_blank" class="btn btn-cash">Pay with Cash App</a>
-      <a href="https://venmo.com/u/Dan-Rock-5" target="_blank" class="btn btn-venmo">Pay with Venmo</a>
-    </div>
+    <h1>Thank You — Your Request Was Received 🎵</h1>
 
-    <a href="/" class="btn btn-home">Back to Homepage</a>
-    
-    <p style="font-size:0.8rem; margin-top:30px;">Standard delivery: 7 Days<br>Priority delivery: 24-48 Hours</p>
+    <p>Your custom song request has been successfully submitted.</p>
+
+    <p>We carefully review every order to make sure your song is personal, meaningful, and high quality.</p>
+
+    <p><strong>Delivery is completed within 7 days.</strong><br>
+    Many songs are finished sooner depending on current volume.</p>
+
+    <p>If you included a tip, your request will be prioritized in the queue.</p>
+
+    <p>If you need to add details or make changes, simply reply to your confirmation email.</p>
+
+    <a href="/" class="btn">Back to Home</a>
+
   </div>
-
-  <script>
-    // This script tries to grab the Order ID from the URL or local storage
-    // If you pass the ID in the URL like /thank-you?id=CSM123, it will show it!
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get('id');
-    if(id) {
-      document.getElementById('display-id').innerText = id;
-    } else {
-      document.getElementById('display-id').innerText = "THANK YOU!";
-    }
-  </script>
 
 </body>
 </html>
