@@ -6,7 +6,7 @@
   <meta name="robots" content="index, follow" />
 
   <title>Custom Songs – AI Songs, Personalized Lyrics & Business Jingles</title>
-  <meta name="description" content="Get a custom AI song or business jingle. Personalized lyrics for birthdays, weddings, anniversaries, or your brand. 24-48hr typical delivery. Pay what you want!">
+  <meta name="description" content="Get a custom AI song or business jingle. Personalized lyrics for birthdays, weddings, anniversaries, or your brand. 24-48hr typical delivery. Pay what you feel it's worth!">
   <meta name="keywords" content="personalized songs, custom AI music, business jingles, birthday songs, anniversary gift, custom lyrics, AI generated songs" />
   <link rel="canonical" href="https://customsongme.com/" />
   <link rel="icon" type="image/png" href="/logo.png">
@@ -16,7 +16,6 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://customsongme.com/" />
   <meta property="og:image" content="https://customsongme.com/og-cover.jpg" />
-
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="CustomSongMe | Personalized AI Songs & Custom Business Jingles" />
   <meta name="twitter:image" content="https://customsongme.com/og-cover.jpg" />
@@ -25,16 +24,13 @@
   [
     {
       "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "CustomSongMe",
-      "url": "https://customsongme.com"
-    },
-    {
-      "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "CustomSongMe",
-      "image": "https://customsongme.com/logo.png",
+      "url": "https://customsongme.com",
+      "logo": "https://customsongme.com/logo.png",
+      "image": "https://customsongme.com/og-cover.jpg",
       "telephone": "+1-661-714-0903",
+      "priceRange": "$5 - $150",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Oxnard",
@@ -42,11 +38,23 @@
         "postalCode": "93030",
         "addressCountry": "US"
       },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 34.1975,
+        "longitude": -119.1771
+      },
+      "areaServed": ["Oxnard", "Ventura", "Camarillo", "Port Hueneme"],
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "5",
         "reviewCount": "48"
       }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Personalized Custom Songs & Business Jingles",
+      "description": "100% custom AI-generated songs with personalized lyrics for birthdays, weddings, anniversaries, and commercial business jingles."
     },
     {
       "@context": "https://schema.org",
@@ -57,7 +65,15 @@
           "name": "How fast is delivery?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Most songs are delivered within 24-48 hours. However, please allow up to 7 days for full production and mixing. Tips of $5+ get priority queuing."
+            "text": "Most songs are delivered within 24-48 hours. However, please allow up to 7 days for full production. Tips of $5+ get priority queuing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it really 'Pay What You Want'?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes for personal songs (birthdays, pets, love songs). Business jingles have a $50 minimum due to commercial licensing."
           }
         }
       ]
@@ -67,7 +83,7 @@
 
   <style>
     :root { 
-      --bg:#0b0b12; --card:#151525; --text:#e9e9f1; --muted:#b0b5c0; --brand:#7a5cff; --error:#ff5c5c;
+      --bg:#0b0b12; --card:#151525; --text:#e9e9f1; --muted:#b0b5c0; --brand:#7a5cff;
     }
     
     @keyframes pulse {
@@ -83,7 +99,7 @@
     .container { width: min(1000px, 92vw); margin: 0 auto; }
     .card { background:var(--card); margin:30px auto; padding:30px; border-radius:16px; border: 1px solid #222233; }
     
-    h1 { font-size: clamp(2rem, 5vw, 3rem); margin:0; line-height: 1.1; }
+    h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); margin:0; line-height: 1.1; }
     h2 { color: var(--brand); font-size: 1.8rem; margin-top: 0; }
     h3 { border-bottom: 1px solid #2a2a44; padding-bottom: 8px; margin-top: 25px; }
     
@@ -94,8 +110,11 @@
     .btn-pulse { animation: pulse 2s infinite; }
     .full-width { width: 100%; font-size: 1.1rem; }
     
-    .yt-lite { position:relative; background:#000; margin:30px auto; aspect-ratio:16/9; border-radius:16px; overflow:hidden; cursor:pointer; }
-    
+    .yt-lite { 
+      position:relative; background:#000; margin:30px auto; aspect-ratio:16/9; 
+      border-radius:16px; overflow:hidden; cursor:pointer; border: 1px solid #222;
+    }
+
     input, select, textarea { 
       width:100%; background:#0f0f1c; color:#fff; border:1px solid #2a2a44; 
       border-radius:8px; padding:14px; margin-bottom: 15px; font-size: 16px;
@@ -116,16 +135,16 @@
 
   <header>
     <div class="container">
-      <img src="/logo.png" alt="CustomSongMe Logo" width="170" height="60" style="margin-bottom:20px" />
+      <img src="/logo.png" alt="CustomSongMe Logo" width="170" height="60" style="display: block; margin: 0 auto 20px;" />
       <h1>Custom Songs Created From Your Story</h1>
-      <p style="font-size:1.2rem; color:var(--muted); margin: 20px 0 30px;">Turn your story into a custom song. 100% personalized lyrics. Delivery within 7 days. Pay what you feel it’s worth.</p>
-      <a href="#order" class="btn btn-pulse">Create My Custom Song Now</a>
+      <p style="font-size:1.2rem; color:var(--muted); margin: 20px 0 30px;">Your Story, Set to Music by Dan the Song Man. 100% custom lyrics. Standard delivery within 7 days. Pay what you feel it's worth!</p>
+      <a href="#order" class="btn btn-pulse" aria-label="Create My Custom Song Now">Create My Custom Song Now</a>
     </div>
   </header>
 
   <main class="container">
     
-    <section class="yt-lite" data-id="gh7s8C3AA6A" aria-label="Play CustomSongMe Sample Video">
+    <section class="yt-lite" aria-label="Play CustomSongMe Sample Video">
       <div style="height:100%; display:flex; align-items:center; justify-content:center; background:url('https://i.ytimg.com/vi/gh7s8C3AA6A/maxresdefault.jpg') center/cover">
         <span style="font-size: 80px; color: white; text-shadow: 0 0 20px rgba(0,0,0,0.5);">▶</span>
       </div>
@@ -133,19 +152,19 @@
 
     <section class="card" id="how-it-works">
       <h2>How CustomSongMe Works</h2>
-      <p>At CustomSongMe we combine advanced AI tools with professional mixing by Dan the Song Man to create truly personalized songs and catchy business jingles that sound radio-ready.</p>
+      <p>At CustomSongMe we combine creative tools with professional mixing by Dan the Song Man to create personalized songs and catchy business jingles that sound radio-ready.</p>
       <div class="grid-2">
         <div>
           <h3>1. Share Your Details</h3>
-          <p>Tell us who the song is for, favorite memories, inside jokes, or brand messaging. The more details you give, the better the lyrics!</p>
+          <p>Tell us who the song is for, favorite memories, or brand messaging. The more details you give, the better the lyrics!</p>
         </div>
         <div>
           <h3>2. We Craft the Track</h3>
-          <p>Dan the Song Man uses cutting-edge AI + human creativity to turn your story into a high-quality custom song.</p>
+          <p>Dan the Song Man uses cutting-edge tools + human creativity to turn your story into a high-quality custom song.</p>
         </div>
         <div>
           <h3>3. Delivered to Your Inbox</h3>
-          <p>Your personalized AI song typically arrives in 24-48 hours (max 7 days). Tips of $5+ get priority queuing.</p>
+          <p>Standard delivery is within 7 days (usually 24-48 hours). Tips of $5+ get priority queuing.</p>
         </div>
         <div>
           <h3>4. Perfect Revisions</h3>
@@ -204,15 +223,15 @@
           </label>
         </div>
 
-        <button type="submit" class="btn full-width">Submit My Request →</button>
+        <button type="submit" class="btn full-width" aria-label="Submit My Request">Submit My Request →</button>
       </form>
     </section>
 
     <section class="card">
       <h2>What Is a Custom Song?</h2>
-      <p>A custom song is a personalized piece of music written specifically for a person, event, or business. CustomSongMe creates AI-assisted songs for birthdays, weddings, anniversaries, business promotions, and special life moments.</p>
+      <p>A custom song is a personalized piece of music written specifically for a person, event, or business. CustomSongMe creates songs for birthdays, weddings, anniversaries, and special life moments.</p>
       <h3>Custom Songs for Any Occasion</h3>
-      <p>People order custom songs for birthdays, weddings, anniversaries, walk-up songs, and even business jingles. Each song is personalized using the details you submit in the request form.</p>
+      <p>People order custom songs for birthdays, weddings, anniversaries, walk-up songs, and even business jingles. Each track is written with custom lyrics and produced to match your style.</p>
     </section>
 
     <section class="card" id="tips">
@@ -221,7 +240,7 @@
       
       <div class="copy-box">
         <code>Order ID: <span id="oid2">CSM-GENERATING...</span></code>
-        <button class="btn" id="copyBtn" style="padding: 8px 15px; font-size: 12px;">Copy ID</button>
+        <button class="btn" id="copyBtn" style="padding: 8px 15px; font-size: 12px;" aria-label="Copy Order ID to clipboard">Copy ID</button>
       </div>
 
       <div class="grid-2" style="margin-top:20px;">
@@ -231,13 +250,19 @@
       </div>
     </section>
 
+    <section class="card">
+      <h2>What People Are Saying</h2>
+      <div class="testimonial">"This brought tears to my wife’s eyes on our anniversary. Amazing quality!" — <strong>James T.</strong></div>
+      <div class="testimonial">"The business jingle Dan made for my shop is so catchy, customers actually hum it!" — <strong>Sarah M.</strong></div>
+    </section>
+
     <section class="card" id="faq">
       <h2>Frequently Asked Questions</h2>
       <h3>How fast is delivery?</h3>
-      <p>Standard delivery is usually 24-48 hours. However, to ensure every song gets the care it deserves, please allow <strong>up to 7 days</strong> for delivery. Priority orders (tips of $5+) are typically delivered within 12-24 hours.</p>
+      <p>Standard delivery is usually 24-48 hours, however, please allow <strong>up to 7 days</strong> during high volume. Priority orders (tips of $5+) are typically delivered within 12-24 hours.</p>
       
       <h3>Is it really 'Pay What You Want'?</h3>
-      <p>For personal songs (birthdays, pets, love songs), yes! Business jingles have a $50 minimum due to commercial licensing and professional branding requirements.</p>
+      <p>For personal songs (birthdays, pets, love songs), yes! Business jingles have a $50 minimum due to commercial licensing.</p>
       
       <h3>What file format will I receive?</h3>
       <p>You will receive a high-quality MP3 file via email. WAV files are available upon request.</p>
@@ -256,12 +281,12 @@
   </footer>
 
   <script>
-    // Safe Email Injection (Fixes Audit usability warning)
+    // Safe Email Injection
     const user = "danrocksai";
     const domain = "gmail.com";
     document.getElementById('safe-email').innerHTML = `<a href="mailto:${user}@${domain}">${user}@${domain}</a>`;
 
-    // Generate Order ID
+    // Generate SEO-Friendly Order ID
     const genID = () => {
       const token = Math.random().toString(36).substr(2, 6).toUpperCase();
       const date = new Date().toISOString().slice(0,10).replace(/-/g,'');
@@ -289,7 +314,7 @@
       setTimeout(() => this.innerText = "Copy ID", 2000);
     });
 
-    // YouTube Loader
+    // Lite YouTube Placeholder
     document.querySelector('.yt-lite').addEventListener('click', function() {
       this.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/gh7s8C3AA6A?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
     });
