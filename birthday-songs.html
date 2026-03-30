@@ -2,70 +2,168 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
- <title>Custom Birthday Songs | Personalized Music Gift | CustomSongMe</title>
-<meta name="description" content="Surprise someone special with a custom birthday song! Unique, heartfelt, and funny personalized music gifts created just for them." />
-  <meta property="og:title" content="Custom Birthday Songs | Personalized AI Music" />
-  <meta property="og:description" content="Celebrate birthdays with a personalized song made just for them. Funny, heartfelt, or hype — delivered fast." />
-  <meta property="og:image" content="logo.png" />
-  <meta property="og:type" content="website" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+  <title>Personalized Birthday Songs & Custom Lyrics | CustomSongMe</title>
+  <meta name="description" content="The ultimate birthday gift. Get a custom song with personalized lyrics about your loved one. Funny, sentimental, or a full-on roast! Delivery in 7 days. Pay what you want.">
+  <meta name="keywords" content="custom birthday song, personalized birthday gift, song for daughter birthday, 50th birthday surprise, custom lyrics for birthday, CustomSongMe" />
+  <link rel="canonical" href="https://customsongme.com/birthday-songs" />
+  <link rel="icon" type="image/png" href="/logo.png">
+
+  <meta property="og:title" content="A Birthday Gift They Will Never Forget – CustomSongMe" />
+  <meta property="og:description" content="Turn their life story into a custom song. Funny stories, inside jokes, and heartfelt messages. Standard delivery within 7 days. Pay what you feel it's worth!" />
   <meta property="og:url" content="https://customsongme.com/birthday-songs" />
-  <style>
-    body{font-family:Arial,Helvetica,sans-serif;background:#0e0f12;color:#fff;margin:0;line-height:1.6;text-align:center}
-    .wrap{max-width:920px;margin:0 auto;padding:20px}
-    a{color:#9ecbff}
-    h1,h2{color:#ff4081;margin:0 0 10px}
-    p{margin:0 0 14px}
-    .btn{display:inline-block;background:#ff4081;color:#fff;text-decoration:none;border-radius:8px;padding:10px 16px;font-weight:700}
-    .card{background:#1a1d25;border:1px solid #2a2f3d;border-radius:12px;padding:18px;margin:18px 0;text-align:left}
-    ul{margin:0 0 0 18px}
-    footer{color:#b8bdc9;margin:26px 0 10px}
-  </style>
+  <meta property="og:image" content="https://customsongme.com/og-cover.jpg" />
+
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-    {"@type":"Question","name":"How much does a birthday song cost?","acceptedAnswer":{"@type":"Answer","text":"We use a Pay What You Feel It’s Worth model for personal songs. Many people give $20–$30, but any amount helps. Tips of $5+ are prioritized."}},
-    {"@type":"Question","name":"How fast is delivery?","acceptedAnswer":{"@type":"Answer","text":"Most birthday songs are delivered within 24–48 hours. Tipped orders are usually completed sooner."}},
-    {"@type":"Question","name":"Can I choose any style or genre?","acceptedAnswer":{"@type":"Answer","text":"Yes — hip-hop, pop, R&B, country, acoustic, or “surprise me.” If you don’t see your genre, choose Other and specify it in your story."}}
-  ]}
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Personalized Birthday Song Production",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "CustomSongMe",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Oxnard",
+        "addressRegion": "CA"
+      }
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "5.00",
+      "priceCurrency": "USD",
+      "description": "Customized birthday song based on personal details and stories."
+    }
+  }
   </script>
+
+  <style>
+    :root { --bg:#0b0b12; --card:#151525; --text:#e9e9f1; --muted:#b0b5c0; --brand:#7a5cff; --accent:#ff4d8d; }
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 77, 141, 0.4); }
+      70% { transform: scale(1.03); box-shadow: 0 0 0 10px rgba(255, 77, 141, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 77, 141, 0); }
+    }
+    * { box-sizing:border-box; }
+    html,body { margin:0; padding:0; background:var(--bg); color:var(--text); font:16px/1.6 system-ui, -apple-system, sans-serif; scroll-behavior: smooth; }
+    header { text-align:center; padding:60px 16px; border-bottom:1px solid #222; }
+    .container { width: min(1000px, 92vw); margin: 0 auto; }
+    .card { background:var(--card); margin:30px auto; padding:30px; border-radius:16px; border: 1px solid #222233; }
+    h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); margin:0; line-height: 1.1; }
+    .bday-badge { display: inline-block; background: var(--accent); color: #fff; padding: 4px 12px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; margin-bottom: 10px; }
+    h2 { color: var(--accent); font-size: 1.8rem; margin-top: 0; }
+    h3 { border-bottom: 1px solid #2a2a44; padding-bottom: 8px; margin-top: 25px; }
+    .btn { display:inline-block; background:var(--accent); color:#fff; padding:16px 32px; border-radius:50px; font-weight:700; text-decoration:none; transition: 0.3s; border: none; cursor: pointer; }
+    .btn-pulse { animation: pulse 2s infinite; }
+    .yt-lite { position:relative; background:#000; margin:30px auto; aspect-ratio:16/9; border-radius:16px; overflow:hidden; cursor:pointer; border: 1px solid #222; }
+    input, select, textarea { width:100%; background:#0f0f1c; color:#fff; border:1px solid #2a2a44; border-radius:8px; padding:14px; margin-bottom: 15px; font-size: 16px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    footer { text-align:center; padding:60px 20px; opacity: 0.7; font-size: 14px; }
+    .nav-links a { margin: 0 10px; color: var(--muted); text-decoration: none; }
+    .gift-box { border: 2px dashed var(--accent); padding: 20px; border-radius: 12px; text-align: center; margin-top: 20px; background: rgba(255, 77, 141, 0.05); }
+  </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>Custom Birthday Songs</h1>
-    <p>Make their birthday unforgettable with a <strong>personalized song</strong> from your memories, inside jokes, and favorite vibes — AI-crafted and finished with care for maximum smiles.</p>
-    <p><a class="btn" href="/#order">Order a Birthday Song</a></p>
 
-    <div class="card">
-      <h2>Why a Birthday Song Works</h2>
-      <ul>
-        <li>🎶 Lyrics built from your details (names, stories, jokes)</li>
-        <li>🎤 Any genre: pop, hip-hop, country, R&B — or “surprise me”</li>
-        <li>⚡ Fast turnaround (24–48 hours; tips $5+ prioritized)</li>
-        <li>💌 MP3 via email + up to 3 free revisions</li>
-      </ul>
+  <header>
+    <div class="container">
+      <div class="bday-badge">MOST POPULAR GIFT</div>
+      <h1>Personalized Birthday Songs</h1>
+      <p style="font-size:1.2rem; color:var(--muted); margin: 20px 0 30px;">Stop giving boring cards. Give them a custom song about their life, jokes, and milestones.</p>
+      <a href="#order" class="btn btn-pulse">Surprise Them With a Song</a>
     </div>
+  </header>
 
-    <div class="card">
-      <h2>Fun Ideas</h2>
-      <ul>
-        <li>🎂 Funny roast for a best friend</li>
-        <li>❤️ Emotional dedication for a partner or parent</li>
-        <li>🎉 Upbeat hype track for a party entrance</li>
-      </ul>
+  <main class="container">
+    
+    <section class="yt-lite">
+      <div style="height:100%; display:flex; align-items:center; justify-content:center; background:url('https://i.ytimg.com/vi/gh7s8C3AA6A/maxresdefault.jpg') center/cover">
+        <span style="font-size: 80px; color: white;">▶</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>The Gift That Outlasts the Cake</h2>
+      <p>Whether it's a sentimental tribute for a 50th birthday or a hilarious roast song for a best friend, we help you win the "best gift" award.</p>
+      <div class="grid-2">
+        <div>
+          <h3>100% Custom Lyrics</h3>
+          <p>We use the names, dates, and funny memories you provide to craft a song that is unique to them.</p>
+        </div>
+        <div>
+          <h3>Any Genre</h3>
+          <p>Choose from Country, Pop, Hip-Hop, R&B, or even a nursery rhyme style for the little ones.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="order">
+      <h2>Start the Birthday Surprise</h2>
+      <form id="songForm" action="https://formspree.io/f/xwpqlypv" method="POST">
+        <input type="hidden" name="order_type" value="Birthday Song">
+        
+        <label for="bday_person">Who is the birthday for?
+          <input type="text" name="bday_person" required placeholder="e.g. My daughter Sarah, My Best Friend Mike">
+        </label>
+        
+        <label for="genre">Style
+          <select name="genre" required>
+            <option value="Sentimental Pop">Sentimental & Sweet</option>
+            <option value="Funny/Roast">Funny / Roast</option>
+            <option value="Upbeat/Dance">Upbeat & Fun</option>
+            <option value="Country/Story">Country Storytelling</option>
+          </select>
+        </label>
+
+        <label for="details">Funny Stories & Milestones
+          <textarea name="details" maxlength="600" placeholder="Where were they born? Favorite food? Funny quirks? Mention a specific memory you want in the song..." required></textarea>
+        </label>
+
+        <div class="grid-2">
+          <label for="name">Your Name
+            <input type="text" name="name" required>
+          </label>
+          <label for="email">Your Email
+            <input type="email" name="email" required>
+          </label>
+        </div>
+
+        <button type="submit" class="btn" style="width:100%;">Submit Birthday Request →</button>
+      </form>
+      
+      <div class="gift-box">
+        <p style="margin:0;"><strong>Pay What You Feel It's Worth</strong></p>
+        <p class="muted-text">Standard delivery is within 7 days. Tips of $5+ get priority queuing!</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Perfect for Major Milestones</h2>
+      <p>Make a big splash for the big ones: 1st Birthdays, Sweet 16s, 21st Birthdays, 40th "Over the Hill" roasts, and 80th birthday tributes. We handle all styles with professional care.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="nav-links">
+        <a href="/">Home</a> | <a href="/business-jingles">Business Jingles</a> | <a href="#order">Order</a>
+      </div>
+      <p style="margin:20px 0;">© <span id="year"></span> CustomSongMe. All Rights Reserved.</p>
+      <p>Contact: <span id="safe-email"></span> | +1 (661) 714-0903</p>
     </div>
+  </footer>
 
-    <div class="card">
-      <h2>FAQ — Birthday Songs</h2>
-      <h3>How much should I pay?</h3>
-      <p>It’s Pay What You Feel It’s Worth. Tips help prioritize your song if the queue is busy.</p>
-      <h3>How quickly will I receive it?</h3>
-      <p>Typically 24–48 hours; faster for tipped orders.</p>
-      <h3>Can I pick the style?</h3>
-      <p>Yes. Pick a listed genre or choose “Other” and write in your style (reggae, lo-fi, jazz, metal, etc.).</p>
-    </div>
-
-    <footer>© <span id="yr"></span> CustomSongMe • <a href="/">Home</a></footer>
-  </div>
-  <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+  <script>
+    const user = "danrocksai";
+    const domain = "gmail.com";
+    document.getElementById('safe-email').innerHTML = `<a href="mailto:${user}@${domain}">${user}@${domain}</a>`;
+    document.getElementById('year').innerText = new Date().getFullYear();
+    
+    document.querySelector('.yt-lite').addEventListener('click', function() {
+      this.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/gh7s8C3AA6A?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+    });
+  </script>
 </body>
 </html>
