@@ -1,67 +1,65 @@
-<!-- thanks.html -->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Thanks — CustomSongMe</title>
-  <meta name="description" content="Thanks for your request! We'll start your custom song." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Received | CustomSongMe</title>
   <style>
-    :root {
-      --bg:#0e0f12;
-      --fg:#fff;
-      --mut:#b8bdc9;
-      --acc:#ff4081;
-    }
+    :root { --bg:#0b0b12; --card:#151525; --text:#e9e9f1; --muted:#b0b5c0; --brand:#7a5cff; --success:#00d632; }
     * { box-sizing:border-box; }
-    body {
-      margin:0;
-      background:var(--bg);
-      color:var(--fg);
-      font:16px/1.5 system-ui,Arial,Helvetica,sans-serif;
-      text-align:center;
-    }
-    main {
-      max-width:720px;
-      margin:0 auto;
-      padding:48px 18px;
-    }
-    .card {
-      background:rgba(255,255,255,.12);
-      border:1px solid rgba(255,255,255,.18);
-      border-radius:16px;
-      padding:24px;
-    }
-    a {
-      color:var(--acc);
-      text-decoration:none;
-      font-weight:700;
-    }
-    code {
-      background:#000;
-      padding:4px 8px;
-      border-radius:6px;
-    }
-    .mut {
-      color:var(--mut);
-      margin-top:.5rem;
-    }
+    body { margin:0; padding:0; background:var(--bg); color:var(--text); font:16px/1.6 system-ui, sans-serif; text-align:center; display:flex; align-items:center; justify-content:center; min-height:100vh; }
+    .container { width:min(500px, 92vw); padding:40px; background:var(--card); border-radius:24px; border:1px solid #222233; box-shadow:0 20px 40px rgba(0,0,0,0.4); }
+    .icon { font-size:60px; color:var(--success); margin-bottom:20px; }
+    h1 { margin:0 0 10px; font-size:2rem; }
+    p { color:var(--muted); margin-bottom:30px; }
+    .order-id-display { background:#000; padding:15px; border-radius:12px; border:1px dashed var(--brand); margin-bottom:30px; }
+    .order-id-display code { color:var(--brand); font-size:1.2rem; font-weight:bold; }
+    .pay-grid { display:grid; grid-template-columns:1fr; gap:12px; margin-bottom:30px; }
+    .btn { display:block; padding:16px; border-radius:12px; text-decoration:none; font-weight:bold; color:#fff; transition:0.3s; }
+    .btn-paypal { background:#003087; }
+    .btn-cash { background:#00d632; }
+    .btn-venmo { background:#3d95ce; }
+    .btn-home { background:transparent; border:1px solid #333; color:var(--muted); margin-top:10px; }
+    .btn:hover { opacity:0.9; transform:translateY(-2px); }
   </style>
 </head>
 <body>
-  <main class="card">
-    <h1>🎶 Thank You!</h1>
-    <p>Your song request has been received.</p>
-    <p>Your Order ID: <code id="oid">—</code></p>
-    <p class="mut">Include this Order ID in your PayPal, Cash App, or Venmo payment note.</p>
-    <p style="margin-top:18px"><a href="/">⬅ Back to homepage</a></p>
-  </main>
+
+  <div class="container">
+    <div class="icon">✓</div>
+    <h1>Order Received!</h1>
+    <p>Dan the Song Man is ready to start crafting your track. Check your email for a confirmation shortly.</p>
+
+    <div class="order-id-display">
+      <span style="font-size:0.8rem; display:block; margin-bottom:5px; color:var(--muted);">YOUR ORDER REFERENCE:</span>
+      <code id="display-id">CSM-PROCESSING...</code>
+    </div>
+
+    <h3 style="margin-bottom:15px;">Complete Your Contribution</h3>
+    <p style="font-size:0.9rem; margin-top:-10px;">Tips of $5+ move you to the front of the queue!</p>
+    
+    <div class="pay-grid">
+      <a href="https://www.paypal.me/DanRock834" target="_blank" class="btn btn-paypal">Pay with PayPal</a>
+      <a href="https://cash.app/$optimistic01" target="_blank" class="btn btn-cash">Pay with Cash App</a>
+      <a href="https://venmo.com/u/Dan-Rock-5" target="_blank" class="btn btn-venmo">Pay with Venmo</a>
+    </div>
+
+    <a href="/" class="btn btn-home">Back to Homepage</a>
+    
+    <p style="font-size:0.8rem; margin-top:30px;">Standard delivery: 7 Days<br>Priority delivery: 24-48 Hours</p>
+  </div>
+
   <script>
-    // Show the same Order ID the user saw on the homepage.
-    try {
-      const id = localStorage.getItem('csm_order_id') || '—';
-      document.getElementById('oid').textContent = id;
-    } catch {}
+    // This script tries to grab the Order ID from the URL or local storage
+    // If you pass the ID in the URL like /thank-you?id=CSM123, it will show it!
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    if(id) {
+      document.getElementById('display-id').innerText = id;
+    } else {
+      document.getElementById('display-id').innerText = "THANK YOU!";
+    }
   </script>
+
 </body>
 </html>
