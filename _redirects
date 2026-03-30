@@ -1,5 +1,8 @@
-# Force HTTPS
-http://*  https://:splat 301!
+# Redirect old, redundant pages to the new Master SEO pages
+/love-songs.html          /wedding-songs.html       301
+/anniversary-songs.html   /wedding-songs.html       301
+/roast-songs.html         /birthday-songs.html      301
+/pet-songs.html           /birthday-songs.html      301
 
-# Canonical host (change to your preferred host)
-https://www.example.com/*  https://example.com/:splat  301!
+# Ensure the thank you redirect is consistent
+/thank-you.html           /thanks.html             301
