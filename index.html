@@ -178,68 +178,87 @@
     </section>
 
     <section class="card" id="order">
-      <h2>1. Request Your Personalized Song</h2>
-      <p class="muted-text">Your Unique Order ID: <code id="oid1">CSM-GENERATING...</code></p>
-      
-      <form id="songForm" action="https://formspree.io/f/xwpqlypv" method="POST">
-        <input type="hidden" name="order_id" id="order_id_hidden">
-        
-        <div class="grid-2">
-          <label for="occasion">Occasion
-            <select name="occasion" id="occasion" required>
-              <option value="Birthday">Birthday</option>
-              <option value="Wedding">Wedding</option>
-              <option value="Anniversary">Anniversary</option>
-              <option value="Business Jingle">Business Jingle ($50 Min)</option>
-              <option value="Roast">Roast Song</option>
-              <option value="Other">Other (Special Request)</option>
-            </select>
-          </label>
-          <label for="genre">Genre
-            <select name="genre" id="genreSelect" required>
-              <option value="Pop">Modern Pop</option>
-              <option value="Hip Hop">Hip Hop / Rap</option>
-              <option value="Country">Country</option>
-              <option value="Acoustic">Acoustic / Folk</option>
-              <option value="R&B">R&B / Soul</option>
-              <option value="Surprise">Surprise Me!</option>
-              <option value="Other">Other...</option>
-            </select>
-          </label>
- </div>
+  <h2>1. Request Your Personalized Song</h2>
+  <p class="muted-text">Your Unique Order ID: <code id="oid1">CSM-GENERATING...</code></p>
+  
+  <form id="songForm" action="https://formspree.io/f/xwpqlypv" method="POST">
+    <input type="hidden" name="order_id" id="order_id_hidden">
+    
+    <div class="grid-2">
+      <label for="occasion">Occasion
+        <select name="occasion" id="occasion" required>
+          <option value="Birthday">Birthday</option>
+          <option value="Wedding">Wedding</option>
+          <option value="Anniversary">Anniversary</option>
+          <option value="Business Jingle">Business Jingle ($50 Min)</option>
+          <option value="Roast">Roast Song</option>
+          <option value="Other">Other (Special Request)</option>
+        </select>
+      </label>
+      <label for="genre">Genre
+        <select name="genre" id="genreSelect" required>
+          <option value="Pop">Modern Pop</option>
+          <option value="Hip Hop">Hip Hop / Rap</option>
+          <option value="Country">Country</option>
+          <option value="Acoustic">Acoustic / Folk</option>
+          <option value="R&B">R&B / Soul</option>
+          <option value="Surprise">Surprise Me!</option>
+          <option value="Other">Other...</option>
+        </select>
+      </label>
+    </div>
 
- <section class="card">
-   <h2>Why People Order Custom Songs</h2>
+    <div id="customGenreDiv" class="hidden">
+      <label for="custom_genre">Describe your custom style:
+        <input type="text" name="custom_genre" id="custom_genre" placeholder="e.g. 80s Disco, Heavy Metal, Jazz">
+      </label>
+    </div>
 
-   <p>Custom songs are one of the most unique and memorable gifts you can give. Instead of something temporary, a personalized song captures a real story, emotion, or moment and turns it into something that can be listened to forever.</p>
+    <label for="details">The Story (Lyrics Details) <span id="charCount" class="muted-text">(0/600)</span>
+      <textarea name="details" id="details" maxlength="600" placeholder="Names, dates, funny stories, or specific things you want mentioned..." required></textarea>
+    </label>
 
-   <p>At CustomSongMe, people order songs for birthdays, weddings, anniversaries, and even inside jokes or funny roast songs. Each song is written based on real details you provide, making every track feel personal and meaningful.</p>
+    <div class="grid-2">
+      <label for="name">Your Name
+        <input type="text" name="name" id="name" required placeholder="First Name">
+      </label>
+      <label for="email">Your Email
+        <input type="email" name="email" id="email" required placeholder="delivery@email.com">
+      </label>
+    </div>
 
-   <h3>Personalized Songs That Actually Mean Something</h3>
+    <button type="submit" class="btn full-width" aria-label="Submit My Request">Submit My Request →</button>
+  </form>
+</section>
 
-   <p>Most gifts are forgotten. A custom song is different because it connects emotionally. Whether it’s a love song, a tribute, or a celebration, the goal is to create something that feels real when they hear it.</p>
+<section class="card">
+  <h2>Why People Order Custom Songs</h2>
 
-   <p>That’s why details matter. Names, memories, milestones, and personality all shape how the final song comes together.</p>
+  <p>Custom songs are one of the most unique and memorable gifts you can give. Instead of something temporary, a personalized song captures a real story, emotion, or moment and turns it into something that can be listened to forever.</p>
 
-   <h3>Custom Songs for Gifts, Events, and Business</h3>
+  <p>At CustomSongMe, people order songs for birthdays, weddings, anniversaries, and even inside jokes or funny roast songs. Each song is written based on real details you provide, making every track feel personal and meaningful.</p>
 
-   <p>CustomSongMe creates songs for:</p>
+  <h3>Personalized Songs That Actually Mean Something</h3>
 
-   <ul>
-     <li>Birthday gifts</li>
-     <li>Wedding songs</li>
-     <li>Anniversary surprises</li
-     <li>Funny roast songs</li>
-     <li>Walk-up or theme songs</li>
-     <li>Business jingles and promotions</li>
-   </ul>
+  <p>Most gifts are forgotten. A custom song is different because it connects emotionally. Whether it’s a love song, a tribute, or a celebration, the goal is to create something that feels real when they hear it.</p>
 
-   <p>Each one is built to match the tone and style you choose, from emotional acoustic songs to high-energy hip hop or pop tracks.</p>
- </section>
-        <button type="submit" class="btn full-width" aria-label="Submit My Request">Submit My Request →</button>
-      </form>
-    </section>
+  <p>That’s why details matter. Names, memories, milestones, and personality all shape how the final song comes together.</p>
 
+  <h3>Custom Songs for Gifts, Events, and Business</h3>
+
+  <p>CustomSongMe creates songs for:</p>
+
+  <ul>
+    <li>Birthday gifts</li>
+    <li>Wedding songs</li>
+    <li>Anniversary surprises</li>
+    <li>Funny roast songs</li>
+    <li>Walk-up or theme songs</li>
+    <li>Business jingles and promotions</li>
+  </ul>
+
+  <p>Each one is built to match the tone and style you choose, from emotional acoustic songs to high-energy hip hop or pop tracks.</p>
+</section>
     <section class="card">
       <h2>What Is a Custom Song?</h2>
       <p>A custom song is a personalized piece of music written specifically for a person, event, or business. CustomSongMe creates songs for birthdays, weddings, anniversaries, and special life moments.</p>
