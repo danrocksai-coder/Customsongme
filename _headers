@@ -1,10 +1,34 @@
 /*
   X-Robots-Tag: all
 
+/*.html
+  Cache-Control: no-cache
+
 /index.html
   Cache-Control: no-cache
 
-/thanks.html
+/thanks
+  Cache-Control: no-cache
+
+/birthday-songs
+  Cache-Control: no-cache
+
+/anniversary-songs
+  Cache-Control: no-cache
+
+/wedding-songs
+  Cache-Control: no-cache
+
+/love-songs
+  Cache-Control: no-cache
+
+/pet-songs
+  Cache-Control: no-cache
+
+/roast-songs
+  Cache-Control: no-cache
+
+/business-jingles
   Cache-Control: no-cache
 
 /robots.txt
