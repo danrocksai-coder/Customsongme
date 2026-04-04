@@ -1,8 +1,15 @@
-# Redirect old, redundant pages to the new Master SEO pages
-/love-songs.html          /wedding-songs.html       301
-/anniversary-songs.html   /wedding-songs.html       301
-/roast-songs.html         /birthday-songs.html      301
-/pet-songs.html           /birthday-songs.html      301
+# Redirect .html extension URLs to clean URLs
+/love-songs.html          /love-songs               301
+/anniversary-songs.html   /anniversary-songs        301
+/roast-songs.html         /roast-songs              301
+/pet-songs.html           /pet-songs                301
+/birthday-songs.html      /birthday-songs           301
+/wedding-songs.html       /wedding-songs            301
+/business-jingles.html    /business-jingles         301
+/thanks.html              /thanks                   301
+/thank-you.html           /thanks                   301
 
-# Ensure the thank you redirect is consistent
-/thank-you.html           /thanks.html             301
+# Redirect non-www to www
+http://customsongme.com/*    https://www.customsongme.com/:splat    301
+http://www.customsongme.com/*    https://www.customsongme.com/:splat    301
+https://customsongme.com/*    https://www.customsongme.com/:splat    301
