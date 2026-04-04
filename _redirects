@@ -1,3 +1,6 @@
+# Redirect old, redundant pages to the new Master SEO pages
+/free-custom-song-guide    /    301
+
 # Redirect .html extension URLs to clean URLs
 /love-songs.html          /love-songs               301
 /anniversary-songs.html   /anniversary-songs        301
