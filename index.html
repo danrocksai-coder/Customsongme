@@ -405,7 +405,9 @@
       <h2>1. Request Your Personalized Song</h2>
       <p class="muted-text">Your Unique Order ID: <code id="oid1">CSM-GENERATING...</code></p>
 
-      <form id="songForm" action="https://formspree.io/f/xwpqlypv" method="POST">
+      <form id="songForm" action="https://formspree.io/f/xwpqlypv" method="POST"> 
+        <input type="hidden" name="_next" value="https://www.customsongme.com/thanks">
+
         <input type="hidden" name="order_id" id="order_id_hidden">
 
         <div class="grid-2">
