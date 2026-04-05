@@ -7,22 +7,20 @@
   <meta name="robots" content="index, follow" />
 
   <title>Custom Songs & Personalized Business Jingles | CustomSongMe</title>
-
   <meta name="description" content="Order personalized custom songs and business jingles from CustomSongMe. Built from your story, 7-day delivery, pay what you feel.">
-
   <meta name="keywords" content="custom songs, personalized songs, business jingles, birthday songs, wedding songs, anniversary songs, custom lyrics" />
 
-<link rel="canonical" href="https://www.customsongme.com/" />
+  <link rel="canonical" href="https://www.customsongme.com/" />
   <link rel="icon" type="image/png" href="/logo.png">
 
-  <meta property="og:title" content="Custom Songs & Business Jingles | CustomSongMe" />
+  <meta property="og:title" content="Custom Songs & Personalized Business Jingles | CustomSongMe" />
   <meta property="og:description" content="Personalized custom songs and business jingles built from your story. Standard delivery within 7 days. Personal songs are pay what you feel." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.customsongme.com/" />
   <meta property="og:image" content="https://www.customsongme.com/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Custom Songs & Business Jingles | CustomSongMe" />
+  <meta name="twitter:title" content="Custom Songs & Personalized Business Jingles | CustomSongMe" />
   <meta name="twitter:description" content="Personalized custom songs and business jingles with 7-day standard delivery. Pay what you feel for personal songs." />
   <meta name="twitter:image" content="https://www.customsongme.com/og-cover.jpg" />
 
@@ -33,7 +31,7 @@
       "@type": "LocalBusiness",
       "name": "CustomSongMe",
       "url": "https://www.customsongme.com",
-      "logo": "https://www.customsongme.com/logo.png",
+      "logo": "https://www.customsongme.com/logo.webp",
       "image": "https://www.customsongme.com/og-cover.jpg",
       "telephone": "+1-661-714-0903",
       "priceRange": "$5 - $150",
@@ -114,6 +112,56 @@
       color: var(--text);
       font: 16px/1.6 system-ui, -apple-system, sans-serif;
       scroll-behavior: smooth;
+    }
+
+    nav {
+      background: #0f0f1e;
+      border-bottom: 1px solid #222233;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-inner {
+      width: min(1000px, 92vw);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .nav-brand {
+      font-weight: 700;
+      color: var(--brand);
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    .nav-pages {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .nav-pages a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: 0.2s;
+    }
+
+    .nav-pages a:hover {
+      color: var(--text);
+      background: #1a1a2e;
+    }
+
+    .nav-pages a.active {
+      color: var(--brand);
     }
 
     header {
@@ -235,18 +283,54 @@
       font-size: 14px;
     }
 
-    .nav-links a {
-      margin: 0 10px;
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .footer-links a {
+      margin: 0 6px;
       color: var(--muted);
       text-decoration: none;
+      font-size: 0.85rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 8px;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
 
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">🎵 CustomSongMe</a>
+      <div class="nav-pages">
+        <a href="/" class="active">Home</a>
+        <a href="/birthday-songs">Birthdays</a>
+        <a href="/wedding-songs">Weddings</a>
+        <a href="/anniversary-songs">Anniversaries</a>
+        <a href="/love-songs">Love Songs</a>
+        <a href="/pet-songs">Pet Songs</a>
+        <a href="/roast-songs">Roast Songs</a>
+        <a href="/business-jingles">Business Jingles</a>
+        <a href="#order" style="color:var(--brand); font-weight:700;">Order Now</a>
+      </div>
+    </div>
+  </nav>
+
   <header>
     <div class="container">
-      <img src="/logo.png" alt="CustomSongMe Logo" width="170" height="60" style="display: block; margin: 0 auto 20px;" />
+      <img src="/logo.webp" alt="CustomSongMe — Personalized Custom Songs and Business Jingles" width="220" height="220" style="display: block; margin: 0 auto 20px; border-radius: 50%;" />
       <h1>Custom Songs Created From Your Story</h1>
       <p style="font-size:1.2rem; color:var(--muted); margin: 20px 0 30px;">Personalized custom songs and business jingles built from your story, your memories, or your message. Standard delivery within 7 days. Personal songs are pay what you feel.</p>
       <a href="#order" class="btn btn-pulse" aria-label="Create My Custom Song Now">Create My Custom Song Now</a>
@@ -281,6 +365,32 @@
           <h3>4. Revisions Available</h3>
           <p>If something needs adjustment, revisions are available so the final song feels right for your occasion.</p>
         </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🎧 Hear Real Custom Songs</h2>
+      <p class="muted-text">These are real songs created for real people.</p>
+
+      <div style="margin-top:20px;">
+        <p><strong>🎵 Birthday Song Example</strong></p>
+        <audio controls>
+          <source src="/sample1.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
+      <div style="margin-top:20px;">
+        <p><strong>💖 Love Song Example</strong></p>
+        <audio controls>
+          <source src="/sample2.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
+      <div style="margin-top:20px;">
+        <p><strong>🔥 Funny Roast Song Example</strong></p>
+        <audio controls>
+          <source src="/sample3.mp3" type="audio/mpeg">
+        </audio>
       </div>
     </section>
 
@@ -348,18 +458,19 @@
       <h3>Personalized Songs That Feel Real</h3>
       <p>The best custom songs use real names, real memories, and real moments. That is what makes a birthday song, wedding song, or anniversary song feel special when someone hears it.</p>
       <p>The more specific your details are, the stronger and more personal the final lyrics will be.</p>
-<h3>Custom Songs for Gifts, Events, and Business</h3>
+
+      <h3>Custom Songs for Gifts, Events, and Business</h3>
       <p>People order personalized songs for:</p>
       <ul>
-        <li>Birthday songs</li>
-        <li>Wedding songs</li>
-        <li>Anniversary songs</li>
-        <li>Love songs</li>
-        <li>Funny roast songs</li>
-        <li>Business jingles</li>
+        <li><a href="/birthday-songs" style="color:var(--brand);">Birthday songs</a></li>
+        <li><a href="/wedding-songs" style="color:var(--brand);">Wedding songs</a></li>
+        <li><a href="/anniversary-songs" style="color:var(--brand);">Anniversary songs</a></li>
+        <li><a href="/love-songs" style="color:var(--brand);">Love songs</a></li>
+        <li><a href="/pet-songs" style="color:var(--brand);">Pet songs</a></li>
+        <li><a href="/roast-songs" style="color:var(--brand);">Funny roast songs</a></li>
+        <li><a href="/business-jingles" style="color:var(--brand);">Business jingles</a></li>
       </ul>
       <p>Each custom song is shaped around your message, your style, and the occasion you want to celebrate.</p>
-      
     </section>
 
     <section class="card">
@@ -387,7 +498,7 @@
 
     <section class="card">
       <h2>What People Are Saying</h2>
-      <div class="testimonial">"This brought tears to my wife’s eyes on our anniversary. Amazing quality!" — <strong>James T.</strong></div>
+      <div class="testimonial">"This brought tears to my wife's eyes on our anniversary. Amazing quality!" — <strong>James T.</strong></div>
       <div class="testimonial">"The business jingle Dan made for my shop is so catchy, customers actually hum it!" — <strong>Sarah M.</strong></div>
     </section>
 
@@ -408,18 +519,28 @@
 
   <footer>
     <div class="container">
-      <div class="nav-links">
-        <a href="#how-it-works">How it Works</a> | <a href="#order">Order</a> | <a href="#faq">FAQ</a>
+      <div class="footer-links">
+        <a href="/">Home</a> |
+        <a href="/birthday-songs">Birthday Songs</a> |
+        <a href="/wedding-songs">Wedding Songs</a> |
+        <a href="/anniversary-songs">Anniversary Songs</a> |
+        <a href="/love-songs">Love Songs</a> |
+        <a href="/pet-songs">Pet Songs</a> |
+        <a href="/roast-songs">Roast Songs</a> |
+        <a href="/business-jingles">Business Jingles</a> |
+        <a href="#order">Order</a> |
+        <a href="#faq">FAQ</a>
       </div>
       <p style="margin:20px 0;">© <span id="year"></span> CustomSongMe. All Rights Reserved.</p>
-      <p>Contact: <span id="safe-email"></span> | <a href="tel:+16617140903">+1 (661) 714-0903</a></p>
+      <p>Oxnard, CA 93030 | <a href="tel:+16617140903" style="color:var(--muted);">+1 (661) 714-0903</a></p>
+      <p>Contact: <span id="safe-email"></span></p>
     </div>
   </footer>
 
   <script>
     const user = "danrocksai";
     const domain = "gmail.com";
-    document.getElementById('safe-email').innerHTML = `<a href="mailto:${user}@${domain}">${user}@${domain}</a>`;
+    document.getElementById('safe-email').innerHTML = `<a href="mailto:${user}@${domain}" style="color:var(--muted);">${user}@${domain}</a>`;
 
     const genID = () => {
       const token = Math.random().toString(36).substr(2, 6).toUpperCase();
