@@ -2,113 +2,337 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="google-site-verification" content="r_RHeWV7hY8Y1WFvKTWpQhKyqeyJOAgTMyWjWpYD9v0" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex, follow" />
+  <meta name="robots" content="noindex, nofollow" />
 
-  <title>Thank You for Your Custom Song Request | CustomSongMe</title>
-  <meta name="description" content="Your CustomSongMe request has been received. Here is what happens next, delivery timing, and payment options for your custom song or business jingle.">
+  <title>Request Received | CustomSongMe</title>
+  <meta name="description" content="Your custom song request has been received. Dan the Song Man will review your details and send your sample preview soon.">
 
   <link rel="canonical" href="https://www.customsongme.com/thanks" />
   <link rel="icon" type="image/png" href="/logo.png">
 
-  <meta property="og:title" content="Thank You for Your Custom Song Request | CustomSongMe" />
-  <meta property="og:description" content="Your request is in. Standard delivery is within 7 days. Here is what happens next." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.customsongme.com/thanks" />
-  <meta property="og:image" content="https://www.customsongme.com/og-cover.jpg" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Thank You for Your Custom Song Request | CustomSongMe" />
-  <meta name="twitter:description" content="Your request is in. Standard delivery is within 7 days. Here is what happens next." />
-  <meta name="twitter:image" content="https://www.customsongme.com/og-cover.jpg" />
-
   <style>
-    :root { --bg:#0b0b12; --card:#151525; --text:#e9e9f1; --muted:#b0b5c0; --brand:#7a5cff; }
+    :root { --bg:#0b0b12; --card:#151525; --text:#e9e9f1; --muted:#b0b5c0; --brand:#7a5cff; --accent:#ff4d8d; }
+
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(122, 92, 255, 0.4); }
+      70% { transform: scale(1.03); box-shadow: 0 0 0 10px rgba(122, 92, 255, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(122, 92, 255, 0); }
+    }
+
+    @keyframes checkmark {
+      0% { transform: scale(0); opacity: 0; }
+      60% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 16px/1.6 system-ui, -apple-system, sans-serif; scroll-behavior: smooth; }
-    header { text-align: center; padding: 60px 16px; border-bottom: 1px solid #222; }
-    .container { width: min(700px, 92vw); margin: 0 auto; }
-    .card { background: var(--card); margin: 30px auto; padding: 30px; border-radius: 16px; border: 1px solid #222233; }
-    h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); margin: 0; line-height: 1.2; }
-    h2 { color: var(--brand); font-size: 1.3rem; margin-top: 28px; margin-bottom: 10px; }
-    p, li { font-size: 1rem; }
-    ul { padding-left: 22px; }
-    .highlight { background: rgba(122, 92, 255, 0.08); border-left: 4px solid var(--brand); padding: 14px 16px; margin: 20px 0; border-radius: 0 8px 8px 0; }
-    .btn { display: inline-block; margin-top: 24px; padding: 16px 32px; background: var(--brand); color: #fff; text-decoration: none; border-radius: 50px; font-weight: 700; transition: 0.3s; }
+
+    nav { background: #0f0f1e; border-bottom: 1px solid #222233; position: sticky; top: 0; z-index: 100; }
+    .nav-inner { width: min(1000px, 92vw); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
+    .nav-brand { font-weight: 700; color: var(--brand); text-decoration: none; font-size: 1rem; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--muted); border-radius: 2px; transition: 0.3s; }
+    .nav-menu { display: flex; flex-wrap: wrap; gap: 4px; }
+    .nav-menu a { color: var(--muted); text-decoration: none; font-size: 0.85rem; padding: 6px 10px; border-radius: 6px; transition: 0.2s; }
+    .nav-menu a:hover { color: var(--text); background: #1a1a2e; }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-menu { display: none; flex-direction: column; width: 100%; background: #0f0f1e; position: absolute; top: 100%; left: 0; right: 0; padding: 10px 4vw; border-bottom: 1px solid #222233; gap: 0; }
+      .nav-menu.open { display: flex; }
+      .nav-menu a { padding: 12px 0; border-bottom: 1px solid #1a1a2e; font-size: 0.95rem; }
+    }
+
+    .container { width: min(1000px, 92vw); margin: 0 auto; }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px 40px;
+    }
+
+    .checkmark {
+      width: 80px;
+      height: 80px;
+      background: var(--brand);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 2.5rem;
+      animation: checkmark 0.6s ease forwards;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin: 0 0 16px;
+      line-height: 1.1;
+    }
+
+    .card { background: var(--card); margin: 20px auto; padding: 30px; border-radius: 16px; border: 1px solid #222233; }
+
+    h2 { color: var(--brand); font-size: 1.5rem; margin-top: 0; }
+    h3 { border-bottom: 1px solid #2a2a44; padding-bottom: 8px; margin-top: 20px; }
+
+    .btn { display: inline-block; background: var(--brand); color: #fff; padding: 14px 28px; border-radius: 50px; font-weight: 700; text-decoration: none; transition: 0.3s; border: none; cursor: pointer; }
+    .btn:hover { opacity: 0.9; }
+    .btn-outline { background: transparent; border: 2px solid var(--brand); color: var(--brand); }
+
+    .steps { counter-reset: steps; }
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #1a1a2e;
+    }
+    .step:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .step-num {
+      min-width: 36px;
+      height: 36px;
+      background: var(--brand);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .step-content h3 { border: none; margin: 0 0 6px; font-size: 1rem; }
+    .step-content p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+
     .muted-text { color: var(--muted); font-size: 0.9rem; }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 16px; }
+
+    .payment-btn {
+      display: block;
+      padding: 14px 20px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 700;
+      text-decoration: none;
+      color: #fff;
+      transition: 0.2s;
+    }
+    .payment-btn:hover { opacity: 0.9; }
+
+    .rush-box {
+      background: #0f0f1e;
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .rush-box h3 { border: none; margin-top: 0; color: var(--accent); }
+
+    .refund-box {
+      background: #0f0f1e;
+      border: 1px solid #2a2a44;
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 16px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .refund-box strong { color: var(--text); }
+
+    .social-share {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+      justify-content: center;
+    }
+
+    .disclaimer { background: #0f0f1e; border: 1px solid #2a2a44; border-radius: 8px; padding: 16px; margin-top: 20px; font-size: 0.85rem; color: var(--muted); }
+    .disclaimer strong { color: var(--text); }
+
+    .payment-apps { background: #0f0f1e; border: 1px solid #2a2a44; border-radius: 12px; padding: 20px; margin-top: 20px; }
+    .payment-apps h3 { border: none; margin-top: 0; font-size: 1rem; color: var(--muted); }
+    .payment-apps a { color: var(--brand); text-decoration: none; }
+    .payment-apps a:hover { text-decoration: underline; }
+
     footer { text-align: center; padding: 60px 20px; opacity: 0.7; font-size: 14px; }
-    .nav-links a { margin: 0 10px; color: var(--muted); text-decoration: none; }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 12px; }
+    .footer-links a { margin: 0 6px; color: var(--muted); text-decoration: none; font-size: 0.85rem; }
+    .footer-links a:hover { color: var(--text); }
+    .social-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-bottom: 16px; }
+    .social-links a { color: var(--brand); text-decoration: none; font-size: 0.85rem; font-weight: 600; }
+    .social-links a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="container">
-      <h1>Your Song Request Is In</h1>
-      <p style="font-size:1.2rem; color:var(--muted); margin: 20px 0 0;">Your story has been received and is now in the creation process.</p>
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">🎵 CustomSongMe</a>
+      <button class="hamburger" id="menuBtn" aria-label="Open navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="/">Home</a>
+        <a href="/birthday-songs">Birthdays</a>
+        <a href="/wedding-songs">Weddings</a>
+        <a href="/anniversary-songs">Anniversaries</a>
+        <a href="/love-songs">Love Songs</a>
+        <a href="/pet-songs">Pet Songs</a>
+        <a href="/roast-songs">Roast Songs</a>
+        <a href="/memorial-songs">Memorials</a>
+        <a href="/business-jingles">Business Jingles</a>
+        <a href="/#order" style="color:var(--brand); font-weight:700;">Order Now</a>
+      </div>
     </div>
-  </header>
+  </nav>
+
+  <div class="hero container">
+    <div class="checkmark">✓</div>
+    <h1>Your Request Is In</h1>
+    <p style="font-size:1.1rem; color:var(--muted); max-width:600px; margin:0 auto;">Dan the Song Man has received your details and is getting to work. You will hear your sample preview before you pay anything.</p>
+  </div>
 
   <main class="container">
 
-    <div class="card">
+    <section class="card">
       <h2>What Happens Next</h2>
-      <p>Your song will be carefully written and produced based on the details you submitted. Every custom song is made to feel personal, meaningful, and specific to you.</p>
-      <p><strong>Standard delivery is within 7 days.</strong> Priority requests may be completed sooner depending on current volume.</p>
-    </div>
+      <div class="steps">
 
-    <div class="card">
-      <h2>A Note on Details</h2>
-      <p>Because each song is custom-made, real time is spent making sure it reflects your story rather than a generic template. That is what makes it special.</p>
-      <p>If you included strong details like names, memories, inside jokes, tone, or specific moments, your final song will feel more personal and accurate to what you had in mind.</p>
-    </div>
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3>We Review Your Details</h3>
+            <p>Dan the Song Man reads through everything you submitted. If anything is unclear or if we need more details we will reach out by email before starting.</p>
+          </div>
+        </div>
 
-    <div class="card">
-      <h2>Payment for Personal Songs</h2>
-      <p>Your custom personal song is created under a <strong>pay what you feel</strong> model. There is no upfront requirement for personal song requests.</p>
-      <p>If you enjoy the final result and feel it was worth something to you, you can support through:</p>
-      <ul>
-        <li>PayPal</li>
-        <li>Cash App</li>
-        <li>Venmo</li>
-      </ul>
-      <p class="muted-text">Payment is never required for personal songs, but it directly supports the ability to keep creating for others.</p>
-    </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3>Your Sample Is Created</h3>
+            <p>We craft your custom song from your story and send you a preview. Personal songs get approximately 1 minute. Business jingles get 15 to 30 seconds.</p>
+          </div>
+        </div>
 
-    <div class="card">
-      <h2>Business Jingles</h2>
-      <p>If your request is for a business, brand, promotion, or commercial use, those projects start at a <strong>$50 minimum</strong> because they carry added business value and commercial licensing.</p>
-    </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h3>You Approve It — Then Pay</h3>
+            <p>You only pay after you hear the sample and decide it is worth it. Once you send payment your full song is delivered within 24 hours.</p>
+          </div>
+        </div>
 
-    <div class="card">
-      <h2>Need to Add or Fix Something?</h2>
-      <p>If you forgot something important or want to update your request, reply to your confirmation email as soon as possible before your song is finalized.</p>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h3>Full Delivery Within 24 Hours</h3>
+            <p>Your complete song or jingle is delivered to your email within 24 hours of payment. Premium and Music Video packages include additional deliverables.</p>
+          </div>
+        </div>
 
-      <div class="highlight">
-        <strong>Keep an eye on your inbox.</strong> Your custom song will be delivered by email within 7 days. Check your spam folder if you do not see it.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Pay After You Approve Your Sample</h2>
+      <p class="muted-text">Once you hear your sample and love it send payment using any of the options below. Always include your Order ID in the payment note.</p>
+
+      <div class="grid-2">
+        <a href="https://www.paypal.me/DanRock834" target="_blank" rel="noopener" class="payment-btn" style="background:#003087;">PayPal</a>
+        <a href="https://cash.app/$optimistic01" target="_blank" rel="noopener" class="payment-btn" style="background:#00d632;">Cash App</a>
+        <a href="https://venmo.com/u/Dan-Rock-5" target="_blank" rel="noopener" class="payment-btn" style="background:#3d95ce;">Venmo</a>
+        <div class="payment-btn" style="background:#6d1ed4; cursor:default;">Zelle — +1 (661) 714-0903</div>
       </div>
 
-      <a href="/" class="btn">Back to Home</a>
+      <div class="payment-apps">
+        <h3>💳 Don't have a payment app yet?</h3>
+        <ul style="padding-left:18px; margin:10px 0;">
+          <li><a href="https://cash.app/app/QDQLKWT" target="_blank" rel="noopener">📱 Cash App — Get $5 free</a> when you send $5 or more within 14 days. Code: QDQLKWT</li>
+          <li><a href="https://py.pl/1qH5ua" target="_blank" rel="noopener">📱 PayPal — Fast and secure.</a> <a href="https://payp.al/ref" target="_blank" rel="noopener" style="color:var(--muted); font-size:0.85rem;">Terms apply</a></li>
+          <li><a href="https://get.venmo.com/mELOoQBSe2b" target="_blank" rel="noopener">📱 Venmo — Easy mobile payments.</a></li>
+          <li>📱 <strong>Zelle</strong> — Send to <strong>+1 (661) 714-0903</strong> through your bank app. No app download needed.</li>
+        </ul>
+      </div>
+
+      <div class="rush-box">
+        <h3>⚡ Need It Faster?</h3>
+        <p class="muted-text">Standard delivery is within 24 hours of payment. For 2 hour rush delivery text us at <a href="tel:+16617140903" style="color:var(--accent);">+1 (661) 714-0903</a> with your Order ID. Rush fee is $10 and must be sent before production begins.</p>
+      </div>
+
+      <div class="refund-box">
+        <strong>Refund Policy:</strong> There are no refunds after payment is made. The only exception is if CustomSongMe fails to deliver your song within the guaranteed timeframe. If we miss your standard 24 hour delivery window or your 2 hour rush delivery window you are entitled to a full refund. We stand behind every promise we make.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>While You Wait</h2>
+      <p>Follow CustomSongMe on social media to see samples, behind the scenes content, and new songs as they drop.</p>
+      <div class="social-share">
+        <a href="https://www.facebook.com/customsongme" target="_blank" rel="noopener" class="btn">Facebook</a>
+        <a href="https://www.instagram.com/customsongme" target="_blank" rel="noopener" class="btn">Instagram</a>
+        <a href="https://www.tiktok.com/@customsongme" target="_blank" rel="noopener" class="btn">TikTok</a>
+        <a href="https://www.youtube.com/@customsongme" target="_blank" rel="noopener" class="btn">YouTube</a>
+      </div>
+      <p class="muted-text" style="margin-top:20px; text-align:center;">Have a question? Text or email us directly.</p>
+      <div style="text-align:center; margin-top:10px;">
+        <a href="tel:+16617140903" class="btn btn-outline" style="margin:6px;">+1 (661) 714-0903</a>
+        <a href="mailto:danrocksai@gmail.com" class="btn btn-outline" style="margin:6px;">danrocksai@gmail.com</a>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Hear More Samples</h2>
+      <p>Check out more custom song samples on the CustomSongMe YouTube channel while you wait for yours.</p>
+      <div style="text-align:center; margin-top:16px;">
+        <a href="https://www.youtube.com/@customsongme" target="_blank" rel="noopener" class="btn">Visit Our YouTube Channel</a>
+      </div>
+    </section>
+
+    <div class="disclaimer">
+      <strong>⚠️ Copyright Notice:</strong> Songs and jingles created through CustomSongMe are produced using AI-assisted music generation tools. Copyright ownership of AI-generated music is currently subject to evolving laws and regulations in the United States and internationally. CustomSongMe does not guarantee exclusive copyright ownership or full commercial rights to any delivered song or jingle. By placing an order you acknowledge and accept this limitation. For questions about usage rights we recommend consulting a qualified legal professional.
     </div>
 
   </main>
 
   <footer>
     <div class="container">
-      <div class="nav-links">
-        <a href="/">Home</a> | <a href="/birthday-songs">Birthday Songs</a> | <a href="/anniversary-songs">Anniversary Songs</a> | <a href="/wedding-songs">Wedding Songs</a> | <a href="/love-songs">Love Songs</a> | <a href="/pet-songs">Pet Songs</a> | <a href="/roast-songs">Roast Songs</a> | <a href="/business-jingles">Business Jingles</a>
+      <div class="social-links">
+        <a href="https://www.facebook.com/customsongme" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.instagram.com/customsongme" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@customsongme" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.youtube.com/@customsongme" target="_blank" rel="noopener">YouTube</a>
+      </div>
+      <div class="footer-links">
+        <a href="/">Home</a> |
+        <a href="/birthday-songs">Birthday Songs</a> |
+        <a href="/wedding-songs">Wedding Songs</a> |
+        <a href="/anniversary-songs">Anniversary Songs</a> |
+        <a href="/love-songs">Love Songs</a> |
+        <a href="/pet-songs">Pet Songs</a> |
+        <a href="/roast-songs">Roast Songs</a> |
+        <a href="/memorial-songs">Memorial Songs</a> |
+        <a href="/business-jingles">Business Jingles</a> |
+        <a href="/#order">Order</a>
       </div>
       <p style="margin:20px 0;">© <span id="year"></span> CustomSongMe. All Rights Reserved.</p>
-      <p>Contact: <span id="safe-email"></span> | <a href="tel:+16617140903">+1 (661) 714-0903</a></p>
+      <p>Oxnard, CA 93030 | <a href="tel:+16617140903" style="color:var(--muted);">+1 (661) 714-0903</a></p>
+      <p>Contact: <span id="safe-email"></span></p>
     </div>
   </footer>
 
   <script>
     const user = "danrocksai";
     const domain = "gmail.com";
-    document.getElementById('safe-email').innerHTML = `<a href="mailto:${user}@${domain}">${user}@${domain}</a>`;
+    document.getElementById('safe-email').innerHTML = `<a href="mailto:${user}@${domain}" style="color:var(--muted);">${user}@${domain}</a>`;
     document.getElementById('year').innerText = new Date().getFullYear();
+    document.getElementById('menuBtn').addEventListener('click', function() {
+      document.getElementById('navMenu').classList.toggle('open');
+    });
   </script>
 </body>
 </html>
