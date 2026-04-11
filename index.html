@@ -7,15 +7,15 @@
   <meta name="robots" content="index, follow" />
 
   <title>Custom Songs & Personalized Business Jingles | CustomSongMe</title>
-  <meta name="description" content="Order personalized custom songs and business jingles from CustomSongMe. Built from your story, 7-day delivery, pay what you feel.">
-  <meta name="keywords" content="custom songs, personalized songs, business jingles, birthday songs, wedding songs, anniversary songs, memorial songs, custom lyrics" />
+  <meta name="description" content="Order personalized custom songs and business jingles from CustomSongMe. Built from your story, delivered within 24 hours of payment. Personal songs start at $20.">
+  <meta name="keywords" content="custom songs, personalized songs, business jingles, birthday songs, wedding songs, anniversary songs, memorial songs, custom lyrics, personalized song gift" />
 
   <link rel="canonical" href="https://www.customsongme.com/" />
   <link rel="icon" type="image/png" href="/logo.png">
   <link rel="preconnect" href="https://www.youtube-nocookie.com">
 
   <meta property="og:title" content="Custom Songs & Personalized Business Jingles | CustomSongMe" />
-  <meta property="og:description" content="Personalized custom songs and business jingles built from your story. Standard delivery within 24 hours of payment. Personal songs start at $20." />
+  <meta property="og:description" content="Personalized custom songs and business jingles built from your story. Delivered within 24 hours of payment. Personal songs start at $20." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.customsongme.com/" />
   <meta property="og:image" content="https://www.customsongme.com/og-cover.jpg" />
@@ -59,8 +59,8 @@
     {
       "@context": "https://schema.org",
       "@type": "Service",
-      "name": "Custom Songs & Business Jingles",
-      "description": "Personalized custom songs and business jingles created from your story, memories, or brand message. Personal songs start at $20. Business jingles start at $100."
+      "name": "Personalized Custom Songs & Business Jingles",
+      "description": "Personalized custom songs and business jingles created from your story, memories, or brand message. Personal songs start at $20. Business jingles start at $100. Delivered within 24 hours of payment."
     },
     {
       "@context": "https://schema.org",
@@ -71,15 +71,15 @@
           "name": "How fast is delivery?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Standard delivery is within 24 hours of payment. Rush delivery is available within 2 hours for an additional $10. Text +1 (661) 714-0903 with your Order ID to request rush delivery."
+            "text": "You receive a sample preview first. Once you approve it and send payment your full song is delivered within 24 hours. Rush delivery is available within 2 hours for an additional $10. Text +1 (661) 714-0903 with your Order ID to request rush delivery."
           }
         },
         {
           "@type": "Question",
-          "name": "How does the sample preview work?",
+          "name": "How does the preview work?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "After you submit your request Dan the Song Man reviews your details and creates your song. We send you approximately 1 minute of your finished custom song as a preview before you pay anything. For business jingles the preview is 15 to 30 seconds. You only pay after you hear it and decide it is worth it."
+            "text": "After you submit your request Dan the Song Man reviews your details and creates your song. We send you approximately 1 minute of your finished custom song as a preview. You only pay after you hear it and approve it. For business jingles the preview is 15 to 30 seconds."
           }
         },
         {
@@ -377,6 +377,7 @@
       border: 1px solid #2a2a44;
       border-radius: 12px;
       padding: 24px;
+      position: relative;
     }
 
     .pricing-card.featured {
@@ -410,8 +411,20 @@
       color: var(--muted);
     }
 
-    .pricing-card ul li {
-      margin-bottom: 6px;
+    .pricing-card ul li { margin-bottom: 6px; }
+
+    .popular-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--brand);
+      color: #fff;
+      padding: 3px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      white-space: nowrap;
     }
 
     .testimonial {
@@ -436,9 +449,7 @@
       color: var(--muted);
     }
 
-    .disclaimer strong {
-      color: var(--text);
-    }
+    .disclaimer strong { color: var(--text); }
 
     .payment-apps {
       background: #0f0f1e;
@@ -460,8 +471,34 @@
       text-decoration: none;
     }
 
-    .payment-apps a:hover {
-      text-decoration: underline;
+    .payment-apps a:hover { text-decoration: underline; }
+
+    .quick-cta {
+      margin-top: 12px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .quick-cta a {
+      color: var(--brand);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .text-order-box {
+      background: #0f0f1e;
+      border: 1px solid #2a2a44;
+      border-radius: 10px;
+      padding: 14px 20px;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .text-order-box a {
+      color: var(--brand);
+      font-weight: 600;
+      text-decoration: none;
     }
 
     footer {
@@ -511,7 +548,7 @@
   <nav>
     <div class="nav-inner">
       <a href="/" class="nav-brand">🎵 CustomSongMe</a>
-      <button class="hamburger" id="menuBtn" aria-label="Open navigation menu">
+      <button class="hamburger" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
@@ -536,19 +573,25 @@
       <div class="header-inner">
         <img src="/logo.webp" alt="CustomSongMe — Personalized Custom Songs and Business Jingles" width="100" height="100" style="border-radius:50%; flex-shrink:0;" loading="lazy" />
         <div>
-          <h1>Custom Songs Created<br>From Your Story</h1>
+          <h1>Personalized Custom Songs Created From Your Story</h1>
         </div>
       </div>
-      <p style="font-size:1.1rem; color:var(--muted); margin: 0 0 30px; text-align:center;">Personalized custom songs and business jingles built from your story, your memories, or your message. Delivery within 24 hours of payment. Personal songs start at $20.</p>
+      <p style="font-size:1.1rem; color:var(--muted); margin: 0 0 8px; text-align:center;">Your story becomes a song. Delivered within 24 hours of payment. Personal songs start at $20.</p>
+      <p style="font-size:1rem; color:var(--muted); margin: 0 0 24px; text-align:center;">You receive a sample preview first. You only pay after you approve it.</p>
       <a href="#order" class="btn btn-pulse" aria-label="Create My Custom Song Now">Create My Custom Song Now</a>
+      <p class="quick-cta">Or <a href="#order">start your request in under 30 seconds ↓</a></p>
     </div>
   </header>
 
   <main class="container">
 
-    <section class="yt-lite" aria-label="Play CustomSongMe Sample Video">
-      <div style="height:100%; display:flex; align-items:center; justify-content:center; background:url('https://i.ytimg.com/vi/gh7s8C3AA6A/maxresdefault.jpg') center/cover">
-        <span style="font-size:80px; color:white; text-shadow:0 0 20px rgba(0,0,0,0.5);">▶</span>
+    <section style="margin: 30px 0;">
+      <h2 style="text-align:center; color:var(--brand);">See What Happens When Someone Hears Their Custom Song</h2>
+      <p style="text-align:center; color:var(--muted); margin-bottom:16px;">Real songs created for real people. This is what you are ordering.</p>
+      <div class="yt-lite" aria-label="Play CustomSongMe Sample Video">
+        <div style="height:100%; display:flex; align-items:center; justify-content:center; background:url('https://i.ytimg.com/vi/gh7s8C3AA6A/maxresdefault.jpg') center/cover">
+          <span style="font-size:80px; color:white; text-shadow:0 0 20px rgba(0,0,0,0.5);">▶</span>
+        </div>
       </div>
     </section>
 
@@ -570,37 +613,37 @@
         </div>
         <div>
           <h3>4. Delivered Within 24 Hours</h3>
-          <p>Once payment is received your full song is delivered within 24 hours. Need it faster? Text us for 2 hour rush delivery for an additional $10.</p>
+          <p>Once you approve and send payment your full song is delivered within 24 hours. Need it faster? Text us for 2 hour rush delivery for an additional $10.</p>
         </div>
       </div>
     </section>
 
     <section class="card" id="samples">
-      <h2>🎧 Hear Real Custom Songs</h2>
+      <h2>🎧 Hear Real Personalized Custom Songs</h2>
       <p class="muted-text">Real songs created for real people. More samples added every week.</p>
 
-      <div>
+      <div style="margin-top:20px;">
         <p><strong>🎵 Custom Birthday Song Sample</strong></p>
         <div class="yt-embed">
           <iframe src="https://www.youtube-nocookie.com/embed/Y7zDvdhqcg8" title="Custom Birthday Song Sample | CustomSongMe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
 
-      <div>
+      <div style="margin-top:20px;">
         <p><strong>💑 Custom Anniversary Song Sample</strong></p>
         <div class="yt-embed">
           <iframe src="https://www.youtube-nocookie.com/embed/brQUNcYioRs" title="Custom Anniversary Song Sample | CustomSongMe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
 
-      <div>
+      <div style="margin-top:20px;">
         <p><strong>💖 Custom Love Song Sample</strong></p>
         <div class="yt-embed">
           <iframe src="https://www.youtube-nocookie.com/embed/DaArMGHFbl8" title="Custom Love Song Sample | CustomSongMe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
 
-      <div>
+      <div style="margin-top:20px;">
         <p><strong>🏢 Custom Business Jingle Sample</strong></p>
         <div class="yt-embed">
           <iframe src="https://www.youtube-nocookie.com/embed/GQgM76AiL6A" title="Custom Business Jingle Sample | CustomSongMe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
@@ -610,7 +653,8 @@
 
     <section class="card" id="pricing">
       <h2>Choose Your Package</h2>
-      <p>Every song starts with a free sample preview. You only pay after you approve what you hear.</p>
+      <p>Every personalized custom song starts with a free sample preview. You receive a sample first — you only pay after you approve what you hear.</p>
+      <p class="muted-text">Most customers start with the $20 Standard option and upgrade after hearing their sample.</p>
 
       <div class="grid-3">
         <div class="pricing-card">
@@ -620,12 +664,13 @@
             <li>Full custom song</li>
             <li>High quality MP3 by email</li>
             <li>Built from your story</li>
-            <li>1 minute sample preview first</li>
+            <li>Sample preview first</li>
             <li>Delivery within 24 hours of payment</li>
           </ul>
         </div>
 
         <div class="pricing-card featured">
+          <div class="popular-badge">⭐ Most Popular</div>
           <h3>🎶 Premium</h3>
           <div class="price-tag">$30 <span>per song</span></div>
           <ul>
@@ -669,7 +714,7 @@
           </ul>
         </div>
 
-        <div class="pricing-card">
+        <div class="pricing-card featured">
           <h3>📞 Option 2 — Discovery Call</h3>
           <div class="price-tag">Free</div>
           <ul>
@@ -685,38 +730,42 @@
     </section>
 
     <section class="card" id="order">
-      <h2>1. Request Your Custom Song</h2>
+      <h2>1. Request Your Personalized Custom Song</h2>
       <p class="muted-text">Your Unique Order ID: <code id="oid1">CSM-GENERATING...</code></p>
+
+      <div class="text-order-box">
+        📱 Prefer to text your order? Text <strong>SONG</strong> to <a href="sms:+16617140903">+1 (661) 714-0903</a> and we will take it from there.
+      </div>
 
       <form id="songForm" action="https://formspree.io/f/xwpqlypv" method="POST">
         <input type="hidden" name="_next" value="https://www.customsongme.com/thanks">
         <input type="hidden" name="order_id" id="order_id_hidden">
 
+        <label for="occasion">Occasion
+          <select name="occasion" id="occasion" required>
+            <option value="Birthday Song">Birthday Song</option>
+            <option value="Wedding Song">Wedding Song</option>
+            <option value="Anniversary Song">Anniversary Song</option>
+            <option value="Love Song">Love Song</option>
+            <option value="Pet Song">Pet Song</option>
+            <option value="Roast Song">Roast Song</option>
+            <option value="Memorial / Funeral Song">Memorial / Funeral Song</option>
+            <option value="Business Jingle">Business Jingle</option>
+            <option value="Other">Other (Special Request)</option>
+          </select>
+        </label>
+
+        <label for="details">The Story (Lyrics Details) <span id="charCount" class="muted-text">(0/600)</span>
+          <textarea name="details" id="details" maxlength="600" placeholder="Names, dates, funny stories, or specific things you want mentioned..." required></textarea>
+        </label>
+
         <div class="grid-2">
-          <label for="occasion">Occasion
-            <select name="occasion" id="occasion" required>
-              <option value="Birthday Song">Birthday Song</option>
-              <option value="Wedding Song">Wedding Song</option>
-              <option value="Anniversary Song">Anniversary Song</option>
-              <option value="Love Song">Love Song</option>
-              <option value="Pet Song">Pet Song</option>
-              <option value="Roast Song">Roast Song</option>
-              <option value="Memorial / Funeral Song">Memorial / Funeral Song</option>
-              <option value="Business Jingle Option 1">Business Jingle — Option 1 ($100)</option>
-              <option value="Business Jingle Option 2">Business Jingle — Option 2 (Free Call)</option>
-              <option value="Other">Other (Special Request)</option>
-            </select>
+          <label for="name">Your Name
+            <input type="text" name="name" id="name" required placeholder="First Name">
           </label>
 
-          <label for="package">Package
-            <select name="package" id="package" required>
-              <option value="Standard $20">Standard — $20 (MP3)</option>
-              <option value="Premium $30">Premium — $30 (MP3 + SoundCloud + Lyric Sheet)</option>
-              <option value="Music Video $50 Public">Music Video — $50 (Public)</option>
-              <option value="Music Video $60 Private">Music Video — $60 (Private)</option>
-              <option value="Business Jingle $100">Business Jingle Option 1 — $100</option>
-              <option value="Business Jingle Free Call">Business Jingle Option 2 — Free Call</option>
-            </select>
+          <label for="email">Your Email
+            <input type="email" name="email" id="email" required placeholder="delivery@email.com">
           </label>
         </div>
 
@@ -752,22 +801,21 @@
           </label>
         </div>
 
-        <label for="details">The Story (Lyrics Details) <span id="charCount" class="muted-text">(0/600)</span>
-          <textarea name="details" id="details" maxlength="600" placeholder="Names, dates, funny stories, or specific things you want mentioned..." required></textarea>
+        <label for="package" id="packageLabel">Package
+          <select name="package" id="package" required>
+            <option value="Standard $20">Standard — $20 (MP3)</option>
+            <option value="Premium $30">Premium — $30 (MP3 + SoundCloud + Lyric Sheet)</option>
+            <option value="Music Video $50 Public">Music Video — $50 (Public)</option>
+            <option value="Music Video $60 Private">Music Video — $60 (Private)</option>
+          </select>
         </label>
-
-        <div class="grid-2">
-          <label for="name">Your Name
-            <input type="text" name="name" id="name" required placeholder="First Name">
-          </label>
-
-          <label for="email">Your Email
-            <input type="email" name="email" id="email" required placeholder="delivery@email.com">
-          </label>
-        </div>
 
         <button type="submit" class="btn full-width" aria-label="Submit My Request">Submit My Request →</button>
       </form>
+
+      <p class="muted-text" style="text-align:center; margin-top:16px;">
+        After you submit: we review your details → send your sample preview → you approve → pay → full song delivered within 24 hours.
+      </p>
     </section>
 
     <section class="card" id="payment">
@@ -783,7 +831,7 @@
         <a href="https://www.paypal.me/DanRock834" target="_blank" rel="noopener" class="btn" style="background:#003087; text-align:center;">PayPal</a>
         <a href="https://cash.app/$optimistic01" target="_blank" rel="noopener" class="btn" style="background:#00d632; text-align:center;">Cash App</a>
         <a href="https://venmo.com/u/Dan-Rock-5" target="_blank" rel="noopener" class="btn" style="background:#3d95ce; text-align:center;">Venmo</a>
-        <div class="btn" style="background:#6d1ed4; text-align:center; cursor:default;">Zelle — +1 (661) 714-0903</div>
+        <a href="tel:+16617140903" class="btn" style="background:#6d1ed4; text-align:center;">Zelle — +1 (661) 714-0903</a>
       </div>
 
       <div class="payment-apps">
@@ -799,15 +847,15 @@
     </section>
 
     <section class="card">
-      <h2>Why People Order Custom Songs</h2>
-      <p>Custom songs are one of the most personal gifts you can give. A personalized song can turn a real memory, milestone, or inside joke into something meaningful that people can listen to again and again.</p>
-      <p>CustomSongMe creates custom songs for birthdays, weddings, anniversaries, love stories, memorials, funny roast songs, and business jingles. Each song is built from the details you provide so it feels personal instead of generic.</p>
+      <h2>Why People Order Personalized Custom Songs</h2>
+      <p>Personalized custom songs are one of the most meaningful gifts you can give. A custom song can turn a real memory, milestone, or inside joke into something people listen to again and again.</p>
+      <p>CustomSongMe creates personalized custom songs for birthdays, weddings, anniversaries, love stories, memorials, funny roast songs, and business jingles. Each song is built from the details you provide so it feels personal instead of generic.</p>
 
       <h3>Personalized Songs That Feel Real</h3>
-      <p>The best custom songs use real names, real memories, and real moments. That is what makes a birthday song, wedding song, or anniversary song feel special when someone hears it.</p>
+      <p>The best personalized custom songs use real names, real memories, and real moments. That is what makes a birthday song, wedding song, or anniversary song feel special when someone hears it for the first time.</p>
       <p>The more specific your details are, the stronger and more personal the final lyrics will be.</p>
 
-      <h3>Custom Songs for Gifts, Events, and Business</h3>
+      <h3>Personalized Custom Songs for Gifts, Events, and Business</h3>
       <p>People order personalized songs for:</p>
       <ul>
         <li><a href="/birthday-songs" style="color:var(--brand);">Birthday songs</a></li>
@@ -819,20 +867,21 @@
         <li><a href="/memorial-songs" style="color:var(--brand);">Memorial and funeral songs</a></li>
         <li><a href="/business-jingles" style="color:var(--brand);">Business jingles</a></li>
       </ul>
-      <p>Each custom song is shaped around your message, your style, and the occasion you want to celebrate.</p>
+      <p>Each personalized custom song is shaped around your message, your style, and the occasion you want to celebrate.</p>
     </section>
 
     <section class="card">
-      <h2>What Is a Custom Song?</h2>
-      <p>A custom song is a personalized piece of music created for a person, event, relationship, or business. CustomSongMe creates custom songs with personalized lyrics for birthdays, weddings, anniversaries, memorials, gifts, and promotions.</p>
-      <h3>Custom Songs for Any Occasion</h3>
-      <p>People order personalized songs for birthday gifts, wedding surprises, anniversary gifts, love songs, memorial tributes, walk-up songs, and business jingles. Each one is written to match your story and the tone you want.</p>
+      <h2>What Is a Personalized Custom Song?</h2>
+      <p>A personalized custom song is a piece of music created specifically for a person, event, relationship, or business. CustomSongMe creates personalized custom songs with original lyrics for birthdays, weddings, anniversaries, memorials, gifts, and business promotions.</p>
+      <h3>Personalized Custom Songs for Any Occasion</h3>
+      <p>People order personalized custom songs for birthday gifts, wedding surprises, anniversary gifts, love songs, memorial tributes, walk-up songs, and business jingles. Each one is written to match your story and the tone you want to create.</p>
     </section>
 
     <section class="card">
       <h2>What People Are Saying</h2>
       <div class="testimonial">"This brought tears to my wife's eyes on our anniversary. Amazing quality!" — <strong>James T.</strong></div>
       <div class="testimonial">"The business jingle Dan made for my shop is so catchy, customers actually hum it!" — <strong>Sarah M.</strong></div>
+      <p class="muted-text" style="text-align:center; margin-top:16px;">Custom songs created for real people across birthdays, weddings, anniversaries, love songs, and more.</p>
     </section>
 
     <section class="card" id="faq">
@@ -841,11 +890,11 @@
       <h3>How much does a custom song cost?</h3>
       <p>Personal songs start at $20 for a standard MP3. Premium package is $30 and includes SoundCloud hosting with cover art and a lyric sheet. Music video package is $50 public or $60 private. Business jingles start at $100 and include up to 3 full revisions.</p>
 
-      <h3>How does the sample preview work?</h3>
-      <p>After you submit your request Dan the Song Man reviews your details and creates your song. We send you approximately 1 minute of your finished song as a preview before you pay anything. For business jingles the preview is 15 to 30 seconds. You only pay after you hear it and decide it is worth it.</p>
+      <h3>How does the preview work?</h3>
+      <p>After you submit your request Dan the Song Man reviews your details and creates your song. We send you approximately 1 minute of your finished song as a preview before you pay anything. For business jingles the preview is 15 to 30 seconds. You only pay after you hear it and approve it.</p>
 
       <h3>How fast is delivery?</h3>
-      <p>Standard delivery is within <strong>24 hours of payment</strong>. Need it faster? Text us at <a href="tel:+16617140903" style="color:var(--brand);">+1 (661) 714-0903</a> with your Order ID for 2 hour rush delivery. Rush fee is $10 and must be sent before production begins.</p>
+      <p>You receive a sample preview first. Once you approve it and send payment your full song is delivered within <strong>24 hours</strong>. Need it faster? Text us at <a href="tel:+16617140903" style="color:var(--brand);">+1 (661) 714-0903</a> with your Order ID for 2 hour rush delivery. Rush fee is $10 and must be sent before production begins.</p>
 
       <h3>What is your refund policy?</h3>
       <p>There are no refunds after payment is made. The only exception is if CustomSongMe fails to deliver your song within the guaranteed timeframe. If we miss your standard 24 hour delivery window or your 2 hour rush delivery window you are entitled to a full refund. We stand behind every promise we make.</p>
@@ -911,11 +960,34 @@
 
     const details = document.getElementById('details');
     details.addEventListener('input', () => {
-      document.getElementById('charCount').innerText = `(${details.value.length}/600)`;
+      const count = details.value.length;
+      const counter = document.getElementById('charCount');
+      counter.innerText = `(${count}/600)`;
+      counter.style.color = count < 100 ? '#ff4d8d' : count > 500 ? '#ffaa00' : 'var(--muted)';
     });
 
     document.getElementById('genreSelect').addEventListener('change', function() {
       document.getElementById('customGenreDiv').className = this.value === 'Other' ? '' : 'hidden';
+    });
+
+    const occasionSelect = document.getElementById('occasion');
+    const packageSelect = document.getElementById('package');
+
+    const personalPackages = `
+      <option value="Standard $20">Standard — $20 (MP3)</option>
+      <option value="Premium $30">Premium — $30 (MP3 + SoundCloud + Lyric Sheet)</option>
+      <option value="Music Video $50 Public">Music Video — $50 (Public)</option>
+      <option value="Music Video $60 Private">Music Video — $60 (Private)</option>
+    `;
+
+    const businessPackages = `
+      <option value="Business Jingle $100">Business Jingle Option 1 — $100</option>
+      <option value="Business Jingle Free Call">Business Jingle Option 2 — Free Call</option>
+    `;
+
+    occasionSelect.addEventListener('change', function() {
+      const isJingle = this.value === 'Business Jingle';
+      packageSelect.innerHTML = isJingle ? businessPackages : personalPackages;
     });
 
     document.getElementById('copyBtn').addEventListener('click', function() {
@@ -928,8 +1000,11 @@
       this.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/gh7s8C3AA6A?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
     });
 
-    document.getElementById('menuBtn').addEventListener('click', function() {
-      document.getElementById('navMenu').classList.toggle('open');
+    const menuBtn = document.getElementById('menuBtn');
+    const navMenu = document.getElementById('navMenu');
+    menuBtn.addEventListener('click', function() {
+      const isOpen = navMenu.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
 
     document.getElementById('year').innerText = new Date().getFullYear();
