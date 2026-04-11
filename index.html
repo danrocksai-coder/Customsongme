@@ -7,7 +7,7 @@
   <meta name="robots" content="index, follow" />
 
   <title>Custom Songs & Personalized Business Jingles | CustomSongMe</title>
-  <meta name="description" content="Order personalized custom songs and business jingles from CustomSongMe. Built from your story, delivered within 24 hours of payment. Personal songs start at $20.">
+  <meta name="description" content="Personalized custom songs and business jingles built from your story. Sample preview first. Pay only after you approve it. Personal songs start at $20.">
   <meta name="keywords" content="custom songs, personalized songs, business jingles, birthday songs, wedding songs, anniversary songs, memorial songs, custom lyrics, personalized song gift" />
 
   <link rel="canonical" href="https://www.customsongme.com/" />
@@ -299,7 +299,8 @@
     .btn-pulse { animation: pulse 2s infinite; }
     .full-width { width: 100%; font-size: 1.1rem; }
 
-    .yt-embed {
+    /* yt-facade — lightweight thumbnail that loads iframe only on click */
+    .yt-facade {
       position: relative;
       padding-bottom: 56.25%;
       height: 0;
@@ -307,15 +308,53 @@
       border-radius: 16px;
       margin: 20px 0;
       border: 1px solid #222233;
+      cursor: pointer;
+      background: #000;
     }
 
-    .yt-embed iframe {
+    .yt-facade img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+
+    .yt-facade .play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 68px;
+      height: 48px;
+      background: #ff0000;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .yt-facade:hover .play-btn { background: #cc0000; }
+
+    .yt-facade .play-btn::after {
+      content: '';
+      border-style: solid;
+      border-width: 10px 0 10px 20px;
+      border-color: transparent transparent transparent #fff;
+      margin-left: 4px;
+    }
+
+    .yt-facade iframe {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       border: 0;
+      border-radius: 16px;
     }
 
     .yt-lite {
@@ -620,33 +659,37 @@
 
     <section class="card" id="samples">
       <h2>🎧 Hear Real Personalized Custom Songs</h2>
-      <p class="muted-text">Real songs created for real people. More samples added every week.</p>
+      <p class="muted-text">Real songs created for real people. Tap any thumbnail to play. More samples added every week.</p>
 
       <div style="margin-top:20px;">
         <p><strong>🎵 Custom Birthday Song Sample</strong></p>
-        <div class="yt-embed">
-          <iframe src="https://www.youtube-nocookie.com/embed/Y7zDvdhqcg8" title="Custom Birthday Song Sample | CustomSongMe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <div class="yt-facade" data-videoid="Y7zDvdhqcg8" role="button" aria-label="Play Custom Birthday Song Sample">
+          <img src="https://i.ytimg.com/vi/Y7zDvdhqcg8/hqdefault.jpg" alt="Custom Birthday Song Sample — CustomSongMe" loading="lazy">
+          <div class="play-btn"></div>
         </div>
       </div>
 
       <div style="margin-top:20px;">
         <p><strong>💑 Custom Anniversary Song Sample</strong></p>
-        <div class="yt-embed">
-          <iframe src="https://www.youtube-nocookie.com/embed/brQUNcYioRs" title="Custom Anniversary Song Sample | CustomSongMe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <div class="yt-facade" data-videoid="brQUNcYioRs" role="button" aria-label="Play Custom Anniversary Song Sample">
+          <img src="https://i.ytimg.com/vi/brQUNcYioRs/hqdefault.jpg" alt="Custom Anniversary Song Sample — CustomSongMe" loading="lazy">
+          <div class="play-btn"></div>
         </div>
       </div>
 
       <div style="margin-top:20px;">
         <p><strong>💖 Custom Love Song Sample</strong></p>
-        <div class="yt-embed">
-          <iframe src="https://www.youtube-nocookie.com/embed/DaArMGHFbl8" title="Custom Love Song Sample | CustomSongMe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <div class="yt-facade" data-videoid="DaArMGHFbl8" role="button" aria-label="Play Custom Love Song Sample">
+          <img src="https://i.ytimg.com/vi/DaArMGHFbl8/hqdefault.jpg" alt="Custom Love Song Sample — CustomSongMe" loading="lazy">
+          <div class="play-btn"></div>
         </div>
       </div>
 
       <div style="margin-top:20px;">
         <p><strong>🏢 Custom Business Jingle Sample</strong></p>
-        <div class="yt-embed">
-          <iframe src="https://www.youtube-nocookie.com/embed/GQgM76AiL6A" title="Custom Business Jingle Sample | CustomSongMe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <div class="yt-facade" data-videoid="GQgM76AiL6A" role="button" aria-label="Play Custom Business Jingle Sample">
+          <img src="https://i.ytimg.com/vi/GQgM76AiL6A/hqdefault.jpg" alt="Custom Business Jingle Sample — CustomSongMe" loading="lazy">
+          <div class="play-btn"></div>
         </div>
       </div>
     </section>
@@ -763,14 +806,13 @@
           <label for="name">Your Name
             <input type="text" name="name" id="name" required placeholder="First Name">
           </label>
-
           <label for="email">Your Email
             <input type="email" name="email" id="email" required placeholder="delivery@email.com">
           </label>
         </div>
 
         <div class="grid-2">
-          <label for="genre">Genre
+          <label for="genreSelect">Genre
             <select name="genre" id="genreSelect" required>
               <option value="Pop">Modern Pop</option>
               <option value="Hip Hop">Hip Hop / Rap</option>
@@ -801,7 +843,7 @@
           </label>
         </div>
 
-        <label for="package" id="packageLabel">Package
+        <label for="package">Package
           <select name="package" id="package" required>
             <option value="Standard $20">Standard — $20 (MP3)</option>
             <option value="Premium $30">Premium — $30 (MP3 + SoundCloud + Lyric Sheet)</option>
@@ -986,8 +1028,7 @@
     `;
 
     occasionSelect.addEventListener('change', function() {
-      const isJingle = this.value === 'Business Jingle';
-      packageSelect.innerHTML = isJingle ? businessPackages : personalPackages;
+      packageSelect.innerHTML = this.value === 'Business Jingle' ? businessPackages : personalPackages;
     });
 
     document.getElementById('copyBtn').addEventListener('click', function() {
@@ -998,6 +1039,13 @@
 
     document.querySelector('.yt-lite').addEventListener('click', function() {
       this.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/gh7s8C3AA6A?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+    });
+
+    document.querySelectorAll('.yt-facade').forEach(facade => {
+      facade.addEventListener('click', function() {
+        const videoId = this.dataset.videoid;
+        this.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      });
     });
 
     const menuBtn = document.getElementById('menuBtn');
