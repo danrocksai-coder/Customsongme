@@ -183,13 +183,13 @@
   <main class="container">
 
     <section class="card">
-  <h2>🐾 Custom Pet Anthem Sample</h2>
-  <p class="muted-text">A real custom pet anthem created by Dan the Song Man.</p>
-  <div class="yt-facade" data-videoid="C-e0SvUqImA" role="button" aria-label="Play Custom Pet Anthem Sample">
-    <img src="https://i.ytimg.com/vi/C-e0SvUqImA/hqdefault.jpg" alt="Custom Pet Anthem Sample — CustomSongMe" loading="lazy">
-    <div class="play-btn"></div>
-  </div>
-</section>
+      <h2>🐾 Custom Pet Anthem Sample</h2>
+      <p class="muted-text">A real custom pet anthem created by Dan the Song Man.</p>
+      <div class="yt-facade" data-videoid="C-e0SvUqImA" role="button" aria-label="Play Custom Pet Anthem Sample">
+        <img src="https://i.ytimg.com/vi/C-e0SvUqImA/hqdefault.jpg" alt="Custom Pet Anthem Sample — CustomSongMe" loading="lazy">
+        <div class="play-btn"></div>
+      </div>
+    </section>
 
     <section class="card">
       <h2>Every Pet Deserves Their Own Anthem</h2>
@@ -404,11 +404,19 @@
     const domain = "gmail.com";
     document.getElementById('safe-email').innerHTML = `<a href="mailto:${user}@${domain}" style="color:var(--muted);">${user}@${domain}</a>`;
     document.getElementById('year').innerText = new Date().getFullYear();
+
     const menuBtn = document.getElementById('menuBtn');
     const navMenu = document.getElementById('navMenu');
     menuBtn.addEventListener('click', function() {
       const isOpen = navMenu.classList.toggle('open');
       menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    document.querySelectorAll('.yt-facade').forEach(facade => {
+      facade.addEventListener('click', function() {
+        const videoId = this.dataset.videoid;
+        this.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      });
     });
   </script>
 </body>
