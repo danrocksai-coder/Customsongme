@@ -1,18 +1,13 @@
-# Redirect old, redundant pages to the new Master SEO pages
+# Force HTTPS + WWW (PRIMARY DOMAIN)
+http://customsongme.com/*      https://www.customsongme.com/:splat    301!
+https://customsongme.com/*     https://www.customsongme.com/:splat    301!
+http://www.customsongme.com/*  https://www.customsongme.com/:splat    301!
+
+# Remove .html extensions (clean URLs)
+/*.html   /:splat   301
+
+# Redirect old or unused pages
 /free-custom-song-guide    /    301
 
-# Redirect .html extension URLs to clean URLs
-/love-songs.html          /love-songs               301
-/anniversary-songs.html   /anniversary-songs        301
-/roast-songs.html         /roast-songs              301
-/pet-songs.html           /pet-songs                301
-/birthday-songs.html      /birthday-songs           301
-/wedding-songs.html       /wedding-songs            301
-/business-jingles.html    /business-jingles         301
-/thanks.html              /thanks                   301
-/thank-you.html           /thanks                   301
-
-# Redirect non-www to www
-http://customsongme.com/*             https://www.customsongme.com/:splat    301!
-http://www.customsongme.com/*         https://www.customsongme.com/:splat    301!
-https://customsongme.com/*            https://www.customsongme.com/:splat    301!
+# Normalize thank you page
+/thank-you.html    /thanks    301
