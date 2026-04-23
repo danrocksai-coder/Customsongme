@@ -3,155 +3,416 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Custom Mother's Day Songs | $20 Special | CustomSongMe</title>
-  <meta name="description" content="Give Mom a personalized Mother's Day song built from your real memories. $20 Mother's Day special. Delivered within 24 hours of payment." />
+  <meta name="robots" content="index, follow" />
 
+  <title>Custom Mother's Day Songs | Personalized Gift for Mom | CustomSongMe</title>
+  <meta name="description" content="Give Mom a personalized Mother's Day song built from your real memories, real details, and real moments. $20 Mother's Day special. Delivered within 24 hours of payment." />
+
+  <link rel="canonical" href="https://www.customsongme.com/mothers-day-songs" />
   <link rel="icon" type="image/png" href="/logo.png" />
+
+  <meta property="og:title" content="Custom Mother's Day Songs | Personalized Gift for Mom | CustomSongMe" />
+  <meta property="og:description" content="A personalized Mother's Day song built from your real memories, real details, and real moments. $20 Mother's Day special." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.customsongme.com/mothers-day-songs" />
+  <meta property="og:image" content="https://www.customsongme.com/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Custom Mother's Day Songs | CustomSongMe" />
+  <meta name="twitter:description" content="A personalized Mother's Day song built from your real memories. $20 Mother's Day special." />
+  <meta name="twitter:image" content="https://www.customsongme.com/og-cover.jpg" />
+
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <link rel="preconnect" href="https://www.youtube-nocookie.com" />
+  <link rel="preconnect" href="https://buy.stripe.com" />
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HGQ54E69BZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HGQ54E69BZ');
+  </script>
+
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Custom Mother's Day Songs",
+      "url": "https://www.customsongme.com/mothers-day-songs",
+      "description": "A personalized Mother's Day song built from your real memories. $20 special. Delivered within 24 hours of payment.",
+      "provider": {
+        "@type": "OnlineBusiness",
+        "name": "CustomSongMe",
+        "url": "https://www.customsongme.com",
+        "telephone": "+1-661-714-0903"
+      },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "20",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.customsongme.com/mothers-day-songs"
+      }
+    }
+  ]
+  </script>
 
   <style>
     :root {
       --bg: #0b0b12;
       --bg-soft: #10101b;
       --card: #151525;
+      --card-2: #1a1a2d;
       --text: #ececf5;
       --muted: #b6bbca;
       --brand: #7a5cff;
       --brand-2: #9d8cff;
       --accent: #ff4d8d;
+      --accent-2: #ff79a9;
       --green: #4ade80;
       --border: #27273c;
+      --shadow: 0 12px 30px rgba(0,0,0,0.28);
       --radius: 18px;
     }
 
     * { box-sizing: border-box; }
-    body {
+
+    html, body {
       margin: 0;
-      background: radial-gradient(circle at top, rgba(122,92,255,0.12), transparent 30%), #0b0b12;
+      padding: 0;
+      background:
+        radial-gradient(circle at top, rgba(122,92,255,0.12), transparent 30%),
+        linear-gradient(180deg, #0a0a12 0%, #0e0e18 40%, #0b0b12 100%);
       color: var(--text);
-      font: 16px/1.6 system-ui, -apple-system, sans-serif;
+      font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      scroll-behavior: smooth;
     }
+
+    body {
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    #progressBar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--brand), var(--accent));
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    a { color: inherit; }
+
     .container { width: min(1000px, 92vw); margin: 0 auto; }
 
-    nav { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); background: rgba(11,11,18,0.88); border-bottom: 1px solid var(--border); padding: 12px 0; }
-    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
-    .nav-brand { text-decoration: none; color: var(--brand-2); font-weight: 800; }
+    nav {
+      position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px);
+      background: rgba(11,11,18,0.88); border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
 
-    header { text-align: center; padding: 56px 16px; }
-    .badge { display: inline-block; background: var(--accent); color: white; padding: 6px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 800; margin-bottom: 14px; }
+    .nav-inner {
+      width: min(1000px, 92vw); margin: 0 auto; display: flex;
+      align-items: center; justify-content: space-between; padding: 12px 0;
+      position: relative;
+    }
+
+    .nav-brand { text-decoration: none; color: var(--brand-2); font-weight: 800; font-size: 1rem; letter-spacing: -0.2px; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
+    .hamburger span { width: 24px; height: 2px; border-radius: 2px; background: var(--muted); display: block; }
+
+    .nav-menu { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+    .nav-menu a { color: var(--muted); text-decoration: none; font-size: 0.86rem; padding: 7px 10px; border-radius: 8px; transition: 0.2s; }
+    .nav-menu a:hover { background: #19192a; color: var(--text); }
+    .nav-menu a.active { color: var(--brand-2); font-weight: 700; }
+
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; background: rgba(15,15,30,0.98); border-bottom: 1px solid var(--border); padding: 10px 4vw; }
+      .nav-menu.open { display: flex; }
+      .nav-menu a { padding: 12px 0; border-bottom: 1px solid #1f1f34; border-radius: 0; font-size: 0.95rem; }
+    }
+
+    header { text-align: center; padding: 56px 16px 42px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+
+    .badge {
+      display: inline-block; background: linear-gradient(90deg, var(--accent), #ff6ba1);
+      color: white; padding: 6px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 800; margin-bottom: 14px;
+    }
+
     h1 { font-size: clamp(2.3rem, 6vw, 4rem); line-height: 1.05; margin: 0 0 14px; letter-spacing: -1.2px; }
-    
-    .btn { display: inline-flex; align-items: center; justify-content: center; background: var(--brand); color: white; padding: 15px 28px; border-radius: 999px; font-weight: 800; text-decoration: none; border: none; cursor: pointer; }
-    
-    .card { background: var(--card); border: 1px solid var(--border); margin: 26px auto; padding: 28px; border-radius: var(--radius); }
-    
-    /* AUDIO FIX SECTION */
-    .grid-3 { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-    .sample-card { background: #111120; border: 1px solid var(--border); border-radius: 16px; padding: 18px; text-align: center; }
-    audio { width: 100%; margin-top: 10px; }
+    h2 { color: var(--brand-2); font-size: clamp(1.55rem, 4vw, 2rem); line-height: 1.15; margin: 0 0 14px; letter-spacing: -0.4px; }
+    h3 { margin: 0 0 10px; font-size: 1.08rem; }
 
-    .price-tag { font-size: 3rem; font-weight: 900; color: white; margin: 10px 0; }
-    .stripe-btn { display: block; background: #635bff; color: white; padding: 14px; border-radius: 12px; font-weight: 800; text-decoration: none; margin-top: 20px; }
+    .hero-sub { max-width: 760px; margin: 0 auto 14px; font-size: 1.15rem; color: var(--muted); }
+    .hero-emphasis { max-width: 700px; margin: 0 auto 26px; color: #ffd7ea; font-weight: 800; font-size: 1.02rem; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      background: linear-gradient(90deg, var(--brand), var(--brand-2));
+      color: white; padding: 15px 28px; border-radius: 999px; font-weight: 800;
+      text-decoration: none; border: none; cursor: pointer; box-shadow: 0 8px 25px rgba(122,92,255,0.28);
+      transition: transform 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-secondary { background: #18182a; color: var(--text); box-shadow: none; border: 1px solid var(--border); }
+
+    .btn-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 18px; }
+
+    .trust-bar {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 18px; margin: 24px auto 0;
+      padding: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; max-width: 900px;
+    }
+    .trust-item { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 0.92rem; white-space: nowrap; }
+    .trust-item span { color: var(--green); font-size: 1rem; }
+
+    .card { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015)); border: 1px solid rgba(255,255,255,0.07); box-shadow: var(--shadow); margin: 26px auto; padding: 28px; border-radius: var(--radius); }
+
+    .grid-2, .grid-3 { display: grid; gap: 18px; }
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+
+    .mini-card { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 14px; padding: 18px; }
+    .sample-card { background: linear-gradient(180deg, #111120, #161629); border: 1px solid var(--border); border-radius: 16px; padding: 18px; text-align: center; }
+    audio { width: 100%; border-radius: 12px; margin-top: 10px; }
+
+    .pricing-card {
+      background: linear-gradient(180deg, #10101d, #17172a);
+      border: 1px solid rgba(122,92,255,0.35); border-radius: 18px; padding: 26px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .price-tag { font-size: 3rem; font-weight: 900; color: white; margin: 10px 0 12px; letter-spacing: -1px; }
+    .stripe-btn { display: block; background: #635bff; color: white; padding: 14px 18px; border-radius: 12px; font-weight: 800; text-decoration: none; margin-top: 8px; }
+
+    .step-indicator { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 0; margin: 0 0 24px; }
+    .step { padding: 10px 16px; background: #19192a; color: var(--muted); border: 1px solid var(--border); font-size: 0.9rem; font-weight: 700; }
+    .step.active { background: var(--brand); color: white; border-color: var(--brand); }
+
+    .copy-box { display: flex; align-items: center; gap: 10px; background: #09090f; border: 1px solid rgba(122,92,255,0.4); border-radius: 12px; padding: 12px; margin: 16px 0 20px; flex-wrap: wrap; }
+    .copy-box code { color: #d8d0ff; font-weight: 800; flex: 1; }
 
     input, select, textarea { width: 100%; background: #0f0f1c; color: white; border: 1px solid #303052; border-radius: 12px; padding: 14px; margin-top: 8px; margin-bottom: 14px; font-size: 16px; }
-    label { font-weight: 700; }
+
+    footer { text-align: center; padding: 48px 20px 60px; opacity: 0.85; font-size: 14px; border-top: 1px solid var(--border); }
+    .footer-links, .social-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-bottom: 14px; }
+    .footer-links a, .social-links a { color: var(--muted); text-decoration: none; }
+    .footer-links a:hover, .social-links a:hover { color: white; text-decoration: underline; }
   </style>
 </head>
 <body>
 
+  <div id="progressBar"></div>
+
   <nav>
-    <div class="container nav-inner">
+    <div class="nav-inner">
       <a href="/" class="nav-brand">🎵 CustomSongMe</a>
-      <a href="#order" style="color:var(--brand-2); text-decoration:none; font-weight:800;">Order Now</a>
+      <button class="hamburger" id="menuBtn"><span></span><span></span><span></span></button>
+      <div class="nav-menu" id="navMenu">
+        <a href="/">Home</a>
+        <a href="/birthday-songs">Birthdays</a>
+        <a href="/wedding-songs">Weddings</a>
+        <a href="/anniversary-songs">Anniversaries</a>
+        <a href="/love-songs">Love Songs</a>
+        <a href="/mothers-day-songs" class="active">Mother's Day</a>
+        <a href="/pet-songs">Pet Songs</a>
+        <a href="/roast-songs">Roast Songs</a>
+        <a href="/memorial-songs">Celebration of Life</a>
+        <a href="/business-jingles">Business Jingles</a>
+        <a href="#order" style="color:var(--brand-2); font-weight:800;">Order Now</a>
+      </div>
     </div>
   </nav>
 
-  <header class="container">
-    <div class="badge">MOTHER'S DAY SPECIAL</div>
-    <h1>Give Her a Gift She'll Never Forget</h1>
-    <p>A custom song built from your real memories. Delivered within 24 hours of payment.</p>
-    <a href="#order" class="btn">🎵 Create Her Song Now</a>
+  <header>
+    <div class="container">
+      <div class="badge">MOTHER'S DAY SPECIAL</div>
+      <h1>Give Her a Gift She'll Never Forget</h1>
+      <p class="hero-sub">A personalized Mother's Day song built from your real memories. Delivered within 24 hours of payment.</p>
+      <p class="hero-emphasis">Her life in a song she can actually feel.</p>
+
+      <div class="btn-row">
+        <a href="#order" class="btn">🎵 Create Her Song Now</a>
+        <a href="#samples" class="btn btn-secondary">▶ Hear Samples</a>
+      </div>
+
+      <div class="trust-bar">
+        <div class="trust-item"><span>✓</span> $20 Mother's Day Special</div>
+        <div class="trust-item"><span>✓</span> 3 Free Revisions</div>
+        <div class="trust-item"><span>✓</span> Delivered within 24 Hours of Payment</div>
+      </div>
+    </div>
   </header>
 
   <main class="container">
 
     <section class="card" id="samples">
-      <h2 style="text-align:center;">Hear Real Mother's Day Samples</h2>
+      <h2>Hear Real Mother's Day Samples</h2>
       <div class="grid-3">
         <div class="sample-card">
-          <div style="color:#ffd7ea; font-weight:800; font-size:0.8rem;">SAMPLE #1</div>
-          <p>Heartfelt Ballad</p>
+          <div style="color:#ffd7ea; font-weight:800; font-size:0.8rem; margin-bottom:10px;">SAMPLE #1</div>
           <audio controls preload="metadata">
             <source src="mothers-day-1.mp3" type="audio/mpeg">
           </audio>
+          <p style="color:var(--muted); font-size:0.9rem; margin-top:10px;">Emotional and heartfelt style.</p>
         </div>
-
         <div class="sample-card">
-          <div style="color:#ffd7ea; font-weight:800; font-size:0.8rem;">SAMPLE #2</div>
-          <p>Appreciation</p>
+          <div style="color:#ffd7ea; font-weight:800; font-size:0.8rem; margin-bottom:10px;">SAMPLE #2</div>
           <audio controls preload="metadata">
             <source src="mothers-day-2.mp3" type="audio/mpeg">
           </audio>
+          <p style="color:var(--muted); font-size:0.9rem; margin-top:10px;">Appreciation and gratitude style.</p>
         </div>
-
         <div class="sample-card">
-          <div style="color:#ffd7ea; font-weight:800; font-size:0.8rem;">SAMPLE #3</div>
-          <p>Uplifting</p>
+          <div style="color:#ffd7ea; font-weight:800; font-size:0.8rem; margin-bottom:10px;">SAMPLE #3</div>
           <audio controls preload="metadata">
             <source src="mothers-day-3.mp3" type="audio/mpeg">
           </audio>
+          <p style="color:var(--muted); font-size:0.9rem; margin-top:10px;">Uplifting and personal style.</p>
         </div>
       </div>
     </section>
 
-    <section class="card" style="text-align:center;">
-      <h2>Mother's Day Special</h2>
-      <div class="price-tag">$20</div>
-      <p>Fully personalized song. Delivered within 24 hours of payment.</p>
-      <a href="https://buy.stripe.com/3cIfZg1326JTaJZ7K69Ve05" class="stripe-btn">Pay $20 by Card</a>
+    <section class="card">
+      <h2 style="text-align:center;">Mother's Day Special Offer</h2>
+      <div style="max-width:470px; margin:0 auto;">
+        <div class="pricing-card">
+          <div style="position:absolute; top:12px; right:12px; background:var(--accent); color:white; border-radius:999px; padding:6px 10px; font-size:0.74rem; font-weight:800;">Limited Time</div>
+          <h3>🎵 Custom Mother's Day Song</h3>
+          <div class="price-tag">$20</div>
+          <p style="color:var(--muted); font-size:0.95rem;">High quality MP3 delivered by email within 24 hours of payment.</p>
+          <a href="https://buy.stripe.com/3cIfZg1326JTaJZ7K69Ve05" class="stripe-btn">Pay $20 by Card</a>
+        </div>
+      </div>
     </section>
 
     <section class="card" id="order">
-      <h2>Request Your Custom Song</h2>
-      <p style="font-family:monospace; color:var(--brand-2);">Order ID: <span id="oid">GENERATING...</span></p>
+      <h2>Request Your Custom Mother's Day Song</h2>
+      <div class="step-indicator">
+        <div class="step active">1. Submit Details</div>
+        <div class="step">2. Payment</div>
+        <div class="step">3. Song Delivered</div>
+      </div>
 
-      <form action="https://formspree.io/f/xwpqlypv" method="POST">
+      <p class="muted-text">Order ID: <code id="oid1">GENERATING...</code></p>
+
+      <form id="songForm" action="https://formspree.io/f/xwpqlypv" method="POST">
         <input type="hidden" name="order_id" id="order_id_hidden">
+        <input type="hidden" name="type" value="Mother's Day Special">
         
-        <label>Who is this for?</label>
-        <input type="text" name="person" required placeholder="e.g. My mom Linda">
+        <label>Who is this for? (Mom's Name)</label>
+        <input type="text" name="mom_name" required placeholder="e.g. My mom Linda">
 
-        <label>Style</label>
-        <select name="style">
-          <option value="Heartfelt Ballad">Heartfelt Ballad</option>
-          <option value="Upbeat Pop">Upbeat Pop</option>
-          <option value="Country">Country</option>
-          <option value="Surprise">Surprise Me</option>
-        </select>
+        <label>The Story (Tell it in continuous prose style)</label>
+        <textarea name="story" id="details" maxlength="600" required placeholder="Describe her legacy, your favorite memories, her quirks, and what she means to you..."></textarea>
+        <p id="charCount" style="font-size:0.8rem; color:var(--muted); margin-top:-10px;">(0/600)</p>
 
-        <label>Your memories and story (Prose Style)</label>
-        <textarea name="details" rows="5" placeholder="Tell us about her quirks, her favorite things, and why she's special..." required></textarea>
+        <div class="grid-2">
+          <label>Vocal Style
+            <select name="vocalist">
+              <option>Female Vocalist</option>
+              <option>Male Vocalist</option>
+              <option>Either works</option>
+            </select>
+          </label>
+          <label>Musical Genre
+            <select name="genre">
+              <option>Heartfelt Ballad</option>
+              <option>Country</option>
+              <option>Upbeat Pop</option>
+              <option>Acoustic Folk</option>
+            </select>
+          </label>
+        </div>
 
-        <label>Your Email</label>
-        <input type="email" name="email" required>
+        <div class="grid-2">
+          <label>Your Name <input type="text" name="name" required></label>
+          <label>Your Email <input type="email" name="email" required></label>
+        </div>
 
-        <button type="submit" class="btn" style="width:100%;">Submit Request →</button>
+        <button type="submit" class="btn" style="width:100%;">Submit Story & Enter Studio Queue →</button>
       </form>
+    </section>
+
+    <section class="card" id="faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="grid-2">
+        <div class="mini-card">
+          <h3>How much does it cost?</h3>
+          <p>For the Mother's Day season, we offer one simple option: a fully personalized song for $20.</p>
+        </div>
+        <div class="mini-card">
+          <h3>How fast is delivery?</h3>
+          <p>You will receive your song via email within 24 hours of your payment being confirmed.</p>
+        </div>
+        <div class="mini-card">
+          <h3>Are revisions included?</h3>
+          <p>Yes. Every order includes up to 3 free revisions to make sure we get the story exactly right.</p>
+        </div>
+        <div class="mini-card">
+          <h3>What file format do I get?</h3>
+          <p>You'll receive a high-quality MP3 file that you can play on any phone, computer, or smart speaker.</p>
+        </div>
+      </div>
     </section>
 
   </main>
 
-  <footer style="text-align:center; padding:40px 0; color:var(--muted);">
-    <p>© 2026 CustomSongMe | Delivery within 24 hours of payment</p>
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/birthday-songs">Birthdays</a>
+        <a href="/wedding-songs">Weddings</a>
+        <a href="/anniversary-songs">Anniversaries</a>
+        <a href="/love-songs">Love Songs</a>
+        <a href="/pet-songs">Pet Songs</a>
+        <a href="/roast-songs">Roast Songs</a>
+        <a href="/memorial-songs">Celebration of Life</a>
+        <a href="/business-jingles">Business Jingles</a>
+      </div>
+      <div class="social-links">
+        <a href="https://facebook.com/customsongme">Facebook</a>
+        <a href="https://instagram.com/customsongme">Instagram</a>
+        <a href="https://tiktok.com/@customsongme">TikTok</a>
+        <a href="https://youtube.com/@customsongme">YouTube</a>
+      </div>
+      <p style="margin: 16px 0;">© <span id="year"></span> CustomSongMe | Managed on iPhone | Oxnard, CA</p>
+      <p>Contact: <a href="mailto:danrocksai@gmail.com">danrocksai@gmail.com</a> | +1 (661) 714-0903</p>
+    </div>
   </footer>
 
   <script>
+    document.getElementById('year').innerText = new Date().getFullYear();
+
     const genID = () => {
       const token = Math.random().toString(36).slice(2, 8).toUpperCase();
       return `CSM-MD-${token}`;
     };
-    const id = genID();
-    document.getElementById('oid').innerText = id;
-    document.getElementById('order_id_hidden').value = id;
+    const OID = genID();
+    document.getElementById('oid1').innerText = OID;
+    document.getElementById('order_id_hidden').value = OID;
+
+    const menuBtn = document.getElementById('menuBtn');
+    const navMenu = document.getElementById('navMenu');
+    menuBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
+
+    const detailsEl = document.getElementById('details');
+    const charCount = document.getElementById('charCount');
+    detailsEl.addEventListener('input', function() {
+      charCount.innerText = `(${this.value.length}/600)`;
+    });
+
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progressBar').style.width = scrolled + "%";
+    });
   </script>
 
 </body>
