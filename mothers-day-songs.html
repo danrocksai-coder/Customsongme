@@ -3,77 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="index, follow" />
+  <title>Custom Mother's Day Songs | $20 Special | CustomSongMe</title>
+  <meta name="description" content="Give Mom a personalized Mother's Day song built from your real memories. $20 Mother's Day special. Delivered within 24 hours of payment." />
 
-  <title>Premium Mother's Day Songs | Custom Music Boutique | CustomSongMe</title>
-  <meta name="description" content="Turn your favorite memories into a studio-grade song. Guaranteed 24-hour delivery after payment." />
-
-  <link rel="canonical" href="https://www.customsongme.com/mothers-day-songs" />
-  <link rel="icon" type="image/png" href="/logo-new.png" />
-
-  <link rel="preconnect" href="https://www.googletagmanager.com" />
-  <link rel="preconnect" href="https://buy.stripe.com" />
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HGQ54E69BZ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-HGQ54E69BZ');
-  </script>
+  <link rel="icon" type="image/png" href="/logo.png" />
 
   <style>
     :root {
-      --bg: #050508;
-      --bg-soft: #0c0c14;
-      --card: #12121f;
-      --text: #f0f0f5;
-      --muted: #a1a1b5;
+      --bg: #0b0b12;
+      --bg-soft: #10101b;
+      --card: #151525;
+      --text: #ececf5;
+      --muted: #b6bbca;
       --brand: #7a5cff;
       --brand-2: #9d8cff;
       --accent: #ff4d8d;
       --green: #4ade80;
-      --border: rgba(255,255,255,0.08);
-      --radius: 16px;
+      --border: #27273c;
+      --radius: 18px;
     }
 
     * { box-sizing: border-box; }
     body {
-      margin: 0; background: var(--bg); color: var(--text);
-      font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      -webkit-font-smoothing: antialiased;
+      margin: 0;
+      background: radial-gradient(circle at top, rgba(122,92,255,0.12), transparent 30%), #0b0b12;
+      color: var(--text);
+      font: 16px/1.6 system-ui, -apple-system, sans-serif;
     }
     .container { width: min(1000px, 92vw); margin: 0 auto; }
 
-    nav { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); background: rgba(5,5,8,0.85); border-bottom: 1px solid var(--border); padding: 15px 0; }
-    .nav-inner { display: flex; justify-content: space-between; align-items: center; }
-    .nav-brand { text-decoration: none; font-weight: 900; color: var(--brand-2); font-size: 1.2rem; }
+    nav { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); background: rgba(11,11,18,0.88); border-bottom: 1px solid var(--border); padding: 12px 0; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-brand { text-decoration: none; color: var(--brand-2); font-weight: 800; }
+
+    header { text-align: center; padding: 56px 16px; }
+    .badge { display: inline-block; background: var(--accent); color: white; padding: 6px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 800; margin-bottom: 14px; }
+    h1 { font-size: clamp(2.3rem, 6vw, 4rem); line-height: 1.05; margin: 0 0 14px; letter-spacing: -1.2px; }
     
-    header { text-align: center; padding: 60px 0; border-bottom: 1px solid var(--border); }
-    .badge { display: inline-block; background: var(--accent); color: white; padding: 4px 14px; border-radius: 99px; font-size: 0.8rem; font-weight: 800; margin-bottom: 20px; }
-    h1 { font-size: clamp(2.2rem, 7vw, 4rem); line-height: 1.1; margin: 0 0 15px; letter-spacing: -1.5px; }
-    .hero-sub { font-size: 1.1rem; color: var(--muted); max-width: 750px; margin: 0 auto 25px; }
-
-    .btn { display: inline-block; padding: 16px 30px; border-radius: 12px; font-weight: 800; text-decoration: none; transition: 0.2s; cursor: pointer; border: none; text-align: center; }
-    .btn-primary { background: var(--brand); color: white; box-shadow: 0 10px 20px rgba(122,92,255,0.2); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; background: var(--brand); color: white; padding: 15px 28px; border-radius: 999px; font-weight: 800; text-decoration: none; border: none; cursor: pointer; }
     
-    .samples-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 40px 0; }
-    .sample-card { background: var(--card); border: 1px solid var(--border); padding: 25px; border-radius: var(--radius); text-align: center; }
-    .sample-label { color: var(--accent); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; display: block; }
-    audio { width: 100%; margin-top: 15px; height: 40px; border-radius: 8px; }
+    .card { background: var(--card); border: 1px solid var(--border); margin: 26px auto; padding: 28px; border-radius: var(--radius); }
+    
+    /* AUDIO FIX SECTION */
+    .grid-3 { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    .sample-card { background: #111120; border: 1px solid var(--border); border-radius: 16px; padding: 18px; text-align: center; }
+    audio { width: 100%; margin-top: 10px; }
 
-    .pricing-wrap { max-width: 500px; margin: 40px auto; background: linear-gradient(180deg, #161625, #0c0c14); border: 1px solid var(--brand); border-radius: var(--radius); padding: 40px; text-align: center; }
-    .price-tag { font-size: 3.5rem; font-weight: 900; margin: 10px 0; }
-    .features { list-style: none; padding: 0; margin: 25px 0; text-align: left; }
-    .features li { margin-bottom: 12px; display: flex; gap: 10px; color: var(--muted); }
-    .features li::before { content: "✓"; color: var(--green); font-weight: 900; }
+    .price-tag { font-size: 3rem; font-weight: 900; color: white; margin: 10px 0; }
+    .stripe-btn { display: block; background: #635bff; color: white; padding: 14px; border-radius: 12px; font-weight: 800; text-decoration: none; margin-top: 20px; }
 
-    .form-card { background: var(--card); border: 1px solid var(--border); padding: 35px; border-radius: var(--radius); margin: 50px 0; }
-    label { display: block; font-weight: 700; margin-bottom: 8px; color: var(--brand-2); }
-    input, textarea, select { width: 100%; background: #080810; border: 1px solid var(--border); color: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; font-size: 1rem; }
-    .order-id-bar { background: #1a1a2e; padding: 15px; border-radius: 10px; border: 1px dashed var(--brand); text-align: center; margin-bottom: 30px; font-family: monospace; font-size: 1.1rem; }
-
-    footer { padding: 40px 0; text-align: center; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); }
+    input, select, textarea { width: 100%; background: #0f0f1c; color: white; border: 1px solid #303052; border-radius: 12px; padding: 14px; margin-top: 8px; margin-bottom: 14px; font-size: 16px; }
+    label { font-weight: 700; }
   </style>
 </head>
 <body>
@@ -81,40 +61,41 @@
   <nav>
     <div class="container nav-inner">
       <a href="/" class="nav-brand">🎵 CustomSongMe</a>
-      <a href="#order" style="color:var(--brand-2); text-decoration:none; font-weight:700;">Order Now</a>
+      <a href="#order" style="color:var(--brand-2); text-decoration:none; font-weight:800;">Order Now</a>
     </div>
   </nav>
 
   <header class="container">
-    <div class="badge">MOTHER'S DAY BOUTIQUE</div>
-    <h1>A Masterpiece for Mom</h1>
-    <p class="hero-sub">Standard gifts fade. A professional custom song is a family heirloom. <br><strong>Guaranteed delivery within 24 hours of payment confirmation.</strong></p>
-    <a href="#order" class="btn btn-primary">Create Her Song Now</a>
+    <div class="badge">MOTHER'S DAY SPECIAL</div>
+    <h1>Give Her a Gift She'll Never Forget</h1>
+    <p>A custom song built from your real memories. Delivered within 24 hours of payment.</p>
+    <a href="#order" class="btn">🎵 Create Her Song Now</a>
   </header>
 
   <main class="container">
-    
-    <section id="samples">
-      <h2 style="text-align:center; margin-top:50px;">Hear the Quality</h2>
-      <div class="samples-grid">
+
+    <section class="card" id="samples">
+      <h2 style="text-align:center;">Hear Real Mother's Day Samples</h2>
+      <div class="grid-3">
         <div class="sample-card">
-          <span class="sample-label">Emotional Storytelling</span>
-          <p style="margin:0; font-weight:700;">Sample #1</p>
+          <div style="color:#ffd7ea; font-weight:800; font-size:0.8rem;">SAMPLE #1</div>
+          <p>Heartfelt Ballad</p>
           <audio controls preload="metadata">
             <source src="mothers-day-1.mp3" type="audio/mpeg">
-            Your browser does not support audio.
           </audio>
         </div>
+
         <div class="sample-card">
-          <span class="sample-label">Acoustic Appreciation</span>
-          <p style="margin:0; font-weight:700;">Sample #2</p>
+          <div style="color:#ffd7ea; font-weight:800; font-size:0.8rem;">SAMPLE #2</div>
+          <p>Appreciation</p>
           <audio controls preload="metadata">
             <source src="mothers-day-2.mp3" type="audio/mpeg">
           </audio>
         </div>
+
         <div class="sample-card">
-          <span class="sample-label">Upbeat & Fun</span>
-          <p style="margin:0; font-weight:700;">Sample #3</p>
+          <div style="color:#ffd7ea; font-weight:800; font-size:0.8rem;">SAMPLE #3</div>
+          <p>Uplifting</p>
           <audio controls preload="metadata">
             <source src="mothers-day-3.mp3" type="audio/mpeg">
           </audio>
@@ -122,72 +103,55 @@
       </div>
     </section>
 
-    <section class="pricing-wrap">
-      <span class="sample-label" style="color:var(--brand-2)">Boutique Studio Tier</span>
-      <h3>Professional Custom Song</h3>
-      <div class="price-tag">$199</div>
-      <p style="color:var(--muted)">One premium standard. No shortcuts.</p>
-      <ul class="features">
-        <li>Fully personalized (Real names/memories)</li>
-        <li>Studio-grade vocal & production</li>
-        <li><strong>Prose-Style Lyrics (Natural storytelling)</strong></li>
-        <li>24-Hour Delivery (Post-Payment)</li>
-      </ul>
-      <a href="https://buy.stripe.com/YOUR_STRIPE_LINK" class="btn btn-primary" style="width:100%;">Pay Upfront & Start Production</a>
-      <p style="font-size:0.75rem; margin-top:15px; color:var(--muted);">Clicking above secures your spot in the studio queue.</p>
+    <section class="card" style="text-align:center;">
+      <h2>Mother's Day Special</h2>
+      <div class="price-tag">$20</div>
+      <p>Fully personalized song. Delivered within 24 hours of payment.</p>
+      <a href="https://buy.stripe.com/3cIfZg1326JTaJZ7K69Ve05" class="stripe-btn">Pay $20 by Card</a>
     </section>
 
-    <section class="form-card" id="order">
-      <h2 style="margin-top:0;">1. Share Your Story</h2>
-      <p style="color:var(--muted); margin-bottom: 25px;">Provide her details in <strong>continuous prose</strong> (no verse/chorus labels). Tell the story like you're talking to a friend.</p>
-      
-      <div class="order-id-bar">
-        ORDER ID: <span id="displayID">GENERATING...</span>
-      </div>
+    <section class="card" id="order">
+      <h2>Request Your Custom Song</h2>
+      <p style="font-family:monospace; color:var(--brand-2);">Order ID: <span id="oid">GENERATING...</span></p>
 
       <form action="https://formspree.io/f/xwpqlypv" method="POST">
-        <input type="hidden" name="order_id" id="hiddenID">
-        <input type="hidden" name="_next" value="https://www.customsongme.com/thanks">
+        <input type="hidden" name="order_id" id="order_id_hidden">
         
+        <label>Who is this for?</label>
+        <input type="text" name="person" required placeholder="e.g. My mom Linda">
+
+        <label>Style</label>
+        <select name="style">
+          <option value="Heartfelt Ballad">Heartfelt Ballad</option>
+          <option value="Upbeat Pop">Upbeat Pop</option>
+          <option value="Country">Country</option>
+          <option value="Surprise">Surprise Me</option>
+        </select>
+
+        <label>Your memories and story (Prose Style)</label>
+        <textarea name="details" rows="5" placeholder="Tell us about her quirks, her favorite things, and why she's special..." required></textarea>
+
         <label>Your Email</label>
         <input type="email" name="email" required>
 
-        <label>Mom's Name</label>
-        <input type="text" name="mom_name" required>
-
-        <label>The Story (Tell it in Prose)</label>
-        <textarea name="memories" rows="6" placeholder="Example: My mom Linda is incredible. She raised us in Oxnard and worked so hard to give us everything. I love her laugh and the way she always knows what to say..." required></textarea>
-
-        <label>Vocal Preference</label>
-        <select name="vocal_style">
-          <option value="Male-Acoustic">Male Vocal / Acoustic</option>
-          <option value="Female-Acoustic">Female Vocal / Acoustic</option>
-          <option value="Male-Pop">Male Vocal / Modern</option>
-          <option value="Female-Pop">Female Vocal / Modern</option>
-        </select>
-
-        <button type="submit" class="btn btn-primary" style="width:100%;">Submit Details to Studio</button>
+        <button type="submit" class="btn" style="width:100%;">Submit Request →</button>
       </form>
     </section>
 
   </main>
 
-  <footer>
-    <div class="container">
-      <p>© 2026 CustomSongMe | Online Boutique | Oxnard, CA</p>
-      <p>All production begins after payment confirmation. 24-hour guarantee applies to studio hours.</p>
-    </div>
+  <footer style="text-align:center; padding:40px 0; color:var(--muted);">
+    <p>© 2026 CustomSongMe | Delivery within 24 hours of payment</p>
   </footer>
 
   <script>
     const genID = () => {
       const token = Math.random().toString(36).slice(2, 8).toUpperCase();
-      const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-      return `CSM-${date}-${token}`;
+      return `CSM-MD-${token}`;
     };
-    const oid = genID();
-    document.getElementById('displayID').innerText = oid;
-    document.getElementById('hiddenID').value = oid;
+    const id = genID();
+    document.getElementById('oid').innerText = id;
+    document.getElementById('order_id_hidden').value = id;
   </script>
 
 </body>
