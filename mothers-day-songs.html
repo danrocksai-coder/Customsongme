@@ -41,7 +41,7 @@
       "@type": "Service",
       "name": "Custom Mother's Day Songs",
       "url": "https://www.customsongme.com/mothers-day-songs",
-      "description": "A personalized Mother's Day song built from your real memories. $20 special. Delivered within 24 hours of payment.",
+      "description": "A personalized Mother's Day song built from your real memories, real details, and real moments. $20 Mother's Day special. Delivered within 24 hours of payment.",
       "provider": {
         "@type": "OnlineBusiness",
         "name": "CustomSongMe",
@@ -55,6 +55,52 @@
         "availability": "https://schema.org/InStock",
         "url": "https://www.customsongme.com/mothers-day-songs"
       }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much does a custom Mother's Day song cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For Mother's Day, we offer one simple option: a fully personalized custom song for $20."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are revisions included?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Every Mother's Day order includes up to 3 free revisions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How fast is delivery?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Delivery is within 24 hours of payment. Rush requests may be possible depending on workload."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What file format will I receive?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You will receive a high quality MP3 by email."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I request something extra like a video or upgrade?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Possibly. For Mother's Day, the standard $20 song is the main offer. If you want something extra, text Dan and availability will depend on workload and timing."
+          }
+        }
+      ]
     }
   ]
   </script>
@@ -108,100 +154,547 @@
 
     a { color: inherit; }
 
-    .container { width: min(1000px, 92vw); margin: 0 auto; }
+    .container {
+      width: min(1000px, 92vw);
+      margin: 0 auto;
+    }
 
     nav {
-      position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px);
-      background: rgba(11,11,18,0.88); border-bottom: 1px solid rgba(255,255,255,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(11,11,18,0.88);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
     .nav-inner {
-      width: min(1000px, 92vw); margin: 0 auto; display: flex;
-      align-items: center; justify-content: space-between; padding: 12px 0;
+      width: min(1000px, 92vw);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
       position: relative;
     }
 
-    .nav-brand { text-decoration: none; color: var(--brand-2); font-weight: 800; font-size: 1rem; letter-spacing: -0.2px; }
+    .nav-brand {
+      text-decoration: none;
+      color: var(--brand-2);
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: -0.2px;
+    }
 
-    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
-    .hamburger span { width: 24px; height: 2px; border-radius: 2px; background: var(--muted); display: block; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
 
-    .nav-menu { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
-    .nav-menu a { color: var(--muted); text-decoration: none; font-size: 0.86rem; padding: 7px 10px; border-radius: 8px; transition: 0.2s; }
-    .nav-menu a:hover { background: #19192a; color: var(--text); }
-    .nav-menu a.active { color: var(--brand-2); font-weight: 700; }
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--muted);
+      display: block;
+    }
+
+    .nav-menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .nav-menu a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.86rem;
+      padding: 7px 10px;
+      border-radius: 8px;
+      transition: 0.2s;
+    }
+
+    .nav-menu a:hover {
+      background: #19192a;
+      color: var(--text);
+    }
+
+    .nav-menu a.active {
+      color: var(--brand-2);
+      font-weight: 700;
+    }
 
     @media (max-width: 768px) {
       .hamburger { display: flex; }
-      .nav-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; background: rgba(15,15,30,0.98); border-bottom: 1px solid var(--border); padding: 10px 4vw; }
+
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        background: rgba(15,15,30,0.98);
+        border-bottom: 1px solid var(--border);
+        padding: 10px 4vw;
+      }
+
       .nav-menu.open { display: flex; }
-      .nav-menu a { padding: 12px 0; border-bottom: 1px solid #1f1f34; border-radius: 0; font-size: 0.95rem; }
+
+      .nav-menu a {
+        padding: 12px 0;
+        border-bottom: 1px solid #1f1f34;
+        border-radius: 0;
+        font-size: 0.95rem;
+      }
     }
 
-    header { text-align: center; padding: 56px 16px 42px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    header {
+      text-align: center;
+      padding: 56px 16px 42px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
 
     .badge {
-      display: inline-block; background: linear-gradient(90deg, var(--accent), #ff6ba1);
-      color: white; padding: 6px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 800; margin-bottom: 14px;
+      display: inline-block;
+      background: linear-gradient(90deg, var(--accent), #ff6ba1);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      margin-bottom: 14px;
     }
 
-    h1 { font-size: clamp(2.3rem, 6vw, 4rem); line-height: 1.05; margin: 0 0 14px; letter-spacing: -1.2px; }
-    h2 { color: var(--brand-2); font-size: clamp(1.55rem, 4vw, 2rem); line-height: 1.15; margin: 0 0 14px; letter-spacing: -0.4px; }
-    h3 { margin: 0 0 10px; font-size: 1.08rem; }
+    h1 {
+      font-size: clamp(2.3rem, 6vw, 4rem);
+      line-height: 1.05;
+      margin: 0 0 14px;
+      letter-spacing: -1.2px;
+    }
 
-    .hero-sub { max-width: 760px; margin: 0 auto 14px; font-size: 1.15rem; color: var(--muted); }
-    .hero-emphasis { max-width: 700px; margin: 0 auto 26px; color: #ffd7ea; font-weight: 800; font-size: 1.02rem; }
+    h2 {
+      color: var(--brand-2);
+      font-size: clamp(1.55rem, 4vw, 2rem);
+      line-height: 1.15;
+      margin: 0 0 14px;
+      letter-spacing: -0.4px;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 1.08rem;
+    }
+
+    p { margin: 0 0 14px; }
+
+    .hero-sub {
+      max-width: 760px;
+      margin: 0 auto 14px;
+      font-size: 1.15rem;
+      color: var(--muted);
+    }
+
+    .hero-emphasis {
+      max-width: 700px;
+      margin: 0 auto 26px;
+      color: #ffd7ea;
+      font-weight: 800;
+      font-size: 1.02rem;
+    }
 
     .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       background: linear-gradient(90deg, var(--brand), var(--brand-2));
-      color: white; padding: 15px 28px; border-radius: 999px; font-weight: 800;
-      text-decoration: none; border: none; cursor: pointer; box-shadow: 0 8px 25px rgba(122,92,255,0.28);
-      transition: transform 0.15s ease;
+      color: white;
+      padding: 15px 28px;
+      border-radius: 999px;
+      font-weight: 800;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(122,92,255,0.28);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    .btn:hover { transform: translateY(-1px); }
-    .btn-secondary { background: #18182a; color: var(--text); box-shadow: none; border: 1px solid var(--border); }
 
-    .btn-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 18px; }
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 28px rgba(122,92,255,0.34);
+    }
+
+    .btn-secondary {
+      background: #18182a;
+      color: var(--text);
+      box-shadow: none;
+      border: 1px solid var(--border);
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
 
     .trust-bar {
-      display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 18px; margin: 24px auto 0;
-      padding: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; max-width: 900px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px 18px;
+      margin: 24px auto 0;
+      padding: 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      max-width: 900px;
     }
-    .trust-item { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 0.92rem; white-space: nowrap; }
-    .trust-item span { color: var(--green); font-size: 1rem; }
 
-    .card { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015)); border: 1px solid rgba(255,255,255,0.07); box-shadow: var(--shadow); margin: 26px auto; padding: 28px; border-radius: var(--radius); }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      white-space: nowrap;
+    }
 
-    .grid-2, .grid-3 { display: grid; gap: 18px; }
-    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    .trust-item span {
+      color: var(--green);
+      font-size: 1rem;
+    }
 
-    .mini-card { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 14px; padding: 18px; }
-    .sample-card { background: linear-gradient(180deg, #111120, #161629); border: 1px solid var(--border); border-radius: 16px; padding: 18px; text-align: center; }
-    audio { width: 100%; border-radius: 12px; margin-top: 10px; }
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border: 1px solid rgba(255,255,255,0.07);
+      box-shadow: var(--shadow);
+      margin: 26px auto;
+      padding: 28px;
+      border-radius: var(--radius);
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .grid-2, .grid-3 {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .mini-card {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .sample-card {
+      background: linear-gradient(180deg, #111120, #161629);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .sample-label {
+      color: #ffd7ea;
+      font-weight: 800;
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+    }
+
+    .sample-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .sample-desc {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 10px;
+    }
+
+    audio {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 10px;
+    }
+
+    .confidence-box {
+      background: linear-gradient(135deg, rgba(122,92,255,0.12), rgba(255,77,141,0.08));
+      border: 1px solid rgba(122,92,255,0.3);
+      border-left: 4px solid var(--brand);
+      border-radius: 16px;
+      padding: 22px;
+      margin: 28px 0;
+    }
+
+    .special-price-wrap {
+      max-width: 470px;
+      margin: 20px auto 0;
+    }
 
     .pricing-card {
       background: linear-gradient(180deg, #10101d, #17172a);
-      border: 1px solid rgba(122,92,255,0.35); border-radius: 18px; padding: 26px; text-align: center;
-      position: relative; overflow: hidden;
+      border: 1px solid rgba(122,92,255,0.35);
+      border-radius: 18px;
+      padding: 26px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-    .price-tag { font-size: 3rem; font-weight: 900; color: white; margin: 10px 0 12px; letter-spacing: -1px; }
-    .stripe-btn { display: block; background: #635bff; color: white; padding: 14px 18px; border-radius: 12px; font-weight: 800; text-decoration: none; margin-top: 8px; }
 
-    .step-indicator { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 0; margin: 0 0 24px; }
-    .step { padding: 10px 16px; background: #19192a; color: var(--muted); border: 1px solid var(--border); font-size: 0.9rem; font-weight: 700; }
-    .step.active { background: var(--brand); color: white; border-color: var(--brand); }
+    .popular-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--accent);
+      color: white;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.74rem;
+      font-weight: 800;
+    }
 
-    .copy-box { display: flex; align-items: center; gap: 10px; background: #09090f; border: 1px solid rgba(122,92,255,0.4); border-radius: 12px; padding: 12px; margin: 16px 0 20px; flex-wrap: wrap; }
-    .copy-box code { color: #d8d0ff; font-weight: 800; flex: 1; }
+    .price-tag {
+      font-size: 3rem;
+      font-weight: 900;
+      color: white;
+      margin: 10px 0 12px;
+      letter-spacing: -1px;
+    }
 
-    input, select, textarea { width: 100%; background: #0f0f1c; color: white; border: 1px solid #303052; border-radius: 12px; padding: 14px; margin-top: 8px; margin-bottom: 14px; font-size: 16px; }
+    .price-note {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 14px;
+    }
 
-    footer { text-align: center; padding: 48px 20px 60px; opacity: 0.85; font-size: 14px; border-top: 1px solid var(--border); }
-    .footer-links, .social-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-bottom: 14px; }
-    .footer-links a, .social-links a { color: var(--muted); text-decoration: none; }
-    .footer-links a:hover, .social-links a:hover { color: white; text-decoration: underline; }
+    .pricing-list {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0 20px;
+      text-align: left;
+    }
+
+    .pricing-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      color: var(--muted);
+    }
+
+    .pricing-list li::before {
+      content: "✓";
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .revision-badge {
+      display: inline-block;
+      background: rgba(122,92,255,0.15);
+      border: 1px solid rgba(122,92,255,0.4);
+      color: #d7d0ff;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .stripe-btn {
+      display: block;
+      background: #635bff;
+      color: white;
+      padding: 14px 18px;
+      border-radius: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .step-indicator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0;
+      margin: 0 0 24px;
+    }
+
+    .step {
+      padding: 10px 16px;
+      background: #19192a;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .step.active {
+      background: var(--brand);
+      color: white;
+      border-color: var(--brand);
+    }
+
+    .copy-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #09090f;
+      border: 1px solid rgba(122,92,255,0.4);
+      border-radius: 12px;
+      padding: 12px;
+      margin: 16px 0 20px;
+      flex-wrap: wrap;
+    }
+
+    .copy-box code {
+      color: #d8d0ff;
+      font-weight: 800;
+      flex: 1;
+    }
+
+    .copy-btn {
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: var(--brand);
+      color: white;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      background: #0f0f1c;
+      color: white;
+      border: 1px solid #303052;
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 8px;
+      margin-bottom: 14px;
+      font-size: 16px;
+    }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .muted-text {
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .text-link {
+      color: var(--brand-2);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .text-link:hover {
+      text-decoration: underline;
+    }
+
+    .extras-note {
+      text-align: center;
+      margin-top: 16px;
+      color: var(--muted);
+    }
+
+    .tip-box {
+      background: #11111d;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      margin-top: 24px;
+      text-align: center;
+    }
+
+    .tip-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .tip-btn {
+      background: #1a1a2a;
+      color: var(--brand-2);
+      border: 1px solid rgba(122,92,255,0.35);
+      padding: 10px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 48px 20px 60px;
+      opacity: 0.85;
+      font-size: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-links, .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .footer-links a, .social-links a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover, .social-links a:hover {
+      color: white;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      .card { padding: 22px 18px; }
+      .btn { width: 100%; }
+      .btn-row { gap: 10px; }
+      .step { width: 100%; }
+      .copy-box { align-items: stretch; }
+      .copy-btn { width: 100%; }
+    }
   </style>
 </head>
 <body>
@@ -211,7 +704,9 @@
   <nav>
     <div class="nav-inner">
       <a href="/" class="nav-brand">🎵 CustomSongMe</a>
-      <button class="hamburger" id="menuBtn"><span></span><span></span><span></span></button>
+      <button class="hamburger" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
       <div class="nav-menu" id="navMenu">
         <a href="/">Home</a>
         <a href="/birthday-songs">Birthdays</a>
@@ -232,18 +727,21 @@
     <div class="container">
       <div class="badge">MOTHER'S DAY SPECIAL</div>
       <h1>Give Her a Gift She'll Never Forget</h1>
-      <p class="hero-sub">A personalized Mother's Day song built from your real memories. Delivered within 24 hours of payment.</p>
+      <p class="hero-sub">Most Mother's Day gifts get opened, appreciated, and set aside. This one gets played again and again.</p>
+      <p class="hero-sub">A personalized Mother's Day song built from your real memories, real details, and real moments.</p>
       <p class="hero-emphasis">Her life in a song she can actually feel.</p>
 
       <div class="btn-row">
-        <a href="#order" class="btn">🎵 Create Her Song Now</a>
-        <a href="#samples" class="btn btn-secondary">▶ Hear Samples</a>
+        <a href="#order" class="btn" id="heroCta">🎵 Create Her Song Now</a>
+        <a href="#samples" class="btn btn-secondary" id="heroSamplesBtn">▶ Hear Samples</a>
       </div>
 
       <div class="trust-bar">
         <div class="trust-item"><span>✓</span> $20 Mother's Day Special</div>
-        <div class="trust-item"><span>✓</span> 3 Free Revisions</div>
-        <div class="trust-item"><span>✓</span> Delivered within 24 Hours of Payment</div>
+        <div class="trust-item"><span>✓</span> Up to 3 Free Revisions</div>
+        <div class="trust-item"><span>✓</span> Delivered Within 24 Hours of Payment</div>
+        <div class="trust-item"><span>✓</span> Credit Cards Accepted</div>
+        <div class="trust-item"><span>✓</span> Seasonal Limited Offer</div>
       </div>
     </div>
   </header>
@@ -251,76 +749,162 @@
   <main class="container">
 
     <section class="card" id="samples">
-      <h2>Hear Real Mother's Day Samples</h2>
+      <h2>Hear Real Mother's Day Song Samples</h2>
+      <p class="lead">Three short sample songs so visitors can hear the style before ordering.</p>
+
       <div class="grid-3">
         <div class="sample-card">
-          <div style="color:#ffd7ea; font-weight:800; font-size:0.8rem; margin-bottom:10px;">SAMPLE #1</div>
+          <div class="sample-label">SAMPLE #1</div>
+          <div class="sample-title">Emotional and heartfelt</div>
           <audio controls preload="metadata">
             <source src="mothers-day-1.mp3" type="audio/mpeg">
           </audio>
-          <p style="color:var(--muted); font-size:0.9rem; margin-top:10px;">Emotional and heartfelt style.</p>
+          <p class="sample-desc">A warm, personal style built to feel heartfelt and real.</p>
         </div>
+
         <div class="sample-card">
-          <div style="color:#ffd7ea; font-weight:800; font-size:0.8rem; margin-bottom:10px;">SAMPLE #2</div>
+          <div class="sample-label">SAMPLE #2</div>
+          <div class="sample-title">Appreciation and gratitude</div>
           <audio controls preload="metadata">
             <source src="mothers-day-2.mp3" type="audio/mpeg">
           </audio>
-          <p style="color:var(--muted); font-size:0.9rem; margin-top:10px;">Appreciation and gratitude style.</p>
+          <p class="sample-desc">A song focused on everything she carried for everyone else.</p>
         </div>
+
         <div class="sample-card">
-          <div style="color:#ffd7ea; font-weight:800; font-size:0.8rem; margin-bottom:10px;">SAMPLE #3</div>
+          <div class="sample-label">SAMPLE #3</div>
+          <div class="sample-title">Personal and uplifting</div>
           <audio controls preload="metadata">
             <source src="mothers-day-3.mp3" type="audio/mpeg">
           </audio>
-          <p style="color:var(--muted); font-size:0.9rem; margin-top:10px;">Uplifting and personal style.</p>
+          <p class="sample-desc">A custom style built to sound meaningful, replayable, and real.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="confidence-box">
+      <h3>🎵 Our Mother's Day Promise</h3>
+      <p class="muted-text" style="margin:0;">
+        Every Mother's Day order includes up to 3 free revisions so we can get it right. If there is an issue with delivery timing, contact us and we will make it right.
+      </p>
+    </div>
+
+    <section class="card">
+      <h2>The Mother's Day Gift She Will Actually Feel</h2>
+      <p>
+        Most gifts get opened, smiled at, and set aside. A personalized song is different. It turns her real story into something she can replay, remember, and feel every time she hears it.
+      </p>
+
+      <div class="grid-2">
+        <div class="mini-card">
+          <h3>Built From Your Story</h3>
+          <p class="lead">
+            Share her name, your favorite memories, what she always says, what she sacrificed, and what makes her who she is.
+          </p>
+        </div>
+        <div class="mini-card">
+          <h3>Simple and Personal</h3>
+          <p class="lead">
+            No generic lyrics. No recycled template. Just one custom song built specifically for your mom.
+          </p>
         </div>
       </div>
     </section>
 
     <section class="card">
-      <h2 style="text-align:center;">Mother's Day Special Offer</h2>
-      <div style="max-width:470px; margin:0 auto;">
-        <div class="pricing-card">
-          <div style="position:absolute; top:12px; right:12px; background:var(--accent); color:white; border-radius:999px; padding:6px 10px; font-size:0.74rem; font-weight:800;">Limited Time</div>
-          <h3>🎵 Custom Mother's Day Song</h3>
-          <div class="price-tag">$20</div>
-          <p style="color:var(--muted); font-size:0.95rem;">High quality MP3 delivered by email within 24 hours of payment.</p>
-          <a href="https://buy.stripe.com/3cIfZg1326JTaJZ7K69Ve05" class="stripe-btn">Pay $20 by Card</a>
+      <h2>Perfect for Every Kind of Mom</h2>
+      <div class="grid-2">
+        <div class="mini-card">
+          <h3>Great for:</h3>
+          <ul style="margin:0; padding-left:18px; color:var(--muted);">
+            <li>First-time moms</li>
+            <li>Grandmas</li>
+            <li>Stepmoms</li>
+            <li>Single moms</li>
+            <li>A surprise from the whole family</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <h3>Perfect moments:</h3>
+          <ul style="margin:0; padding-left:18px; color:var(--muted);">
+            <li>Mother's Day breakfast or brunch</li>
+            <li>Playing it at dinner</li>
+            <li>Sending it by text or email</li>
+            <li>Giving her something personal instead of generic</li>
+            <li>Making her cry happy tears</li>
+          </ul>
         </div>
       </div>
     </section>
 
+    <section class="card">
+      <h2>Mother's Day Special Offer</h2>
+      <p class="lead" style="text-align:center;">
+        For Mother's Day, we are keeping it simple so every order gets full attention.
+      </p>
+
+      <div class="special-price-wrap">
+        <div class="pricing-card">
+          <div class="popular-badge">Limited Time</div>
+          <h3>🎵 Custom Mother's Day Song</h3>
+          <div class="price-tag">$20</div>
+          <p class="price-note">One clear offer. Fast turnaround. No confusion.</p>
+
+          <div class="revision-badge">Up to 3 Free Revisions Included</div>
+
+          <ul class="pricing-list">
+            <li>Fully personalized song built from your story</li>
+            <li>Real names, real memories, real details</li>
+            <li>High quality MP3 delivered by email</li>
+            <li>Delivered within 24 hours of payment</li>
+          </ul>
+
+          <a href="https://buy.stripe.com/3cIfZg1326JTaJZ7K69Ve05" class="stripe-btn" target="_blank" rel="noopener">
+            Pay $20 by Card
+          </a>
+        </div>
+      </div>
+
+      <p class="extras-note">
+        Want something extra like a video or another add-on?
+        <br>
+        Text <a class="text-link" href="sms:+16617140903">+1 (661) 714-0903</a> and we will see what is possible based on current availability.
+      </p>
+    </section>
+
     <section class="card" id="order">
       <h2>Request Your Custom Mother's Day Song</h2>
+
       <div class="step-indicator">
         <div class="step active">1. Submit Details</div>
-        <div class="step">2. Payment</div>
-        <div class="step">3. Song Delivered</div>
+        <div class="step active">2. Payment</div>
+        <div class="step active">3. Song Delivered</div>
       </div>
 
       <p class="muted-text">Order ID: <code id="oid1">GENERATING...</code></p>
 
       <form id="songForm" action="https://formspree.io/f/xwpqlypv" method="POST">
+        <input type="hidden" name="_next" value="https://www.customsongme.com/thanks">
         <input type="hidden" name="order_id" id="order_id_hidden">
         <input type="hidden" name="type" value="Mother's Day Special">
-        
-        <label>Who is this for? (Mom's Name)</label>
-        <input type="text" name="mom_name" required placeholder="e.g. My mom Linda">
 
-        <label>The Story (Tell it in continuous prose style)</label>
+        <label for="mom_name">Who is this for? (Mom's Name)</label>
+        <input type="text" id="mom_name" name="mom_name" required placeholder="e.g. My mom Linda">
+
+        <label for="details">Your memories and story about Mom</label>
         <textarea name="story" id="details" maxlength="600" required placeholder="Describe her legacy, your favorite memories, her quirks, and what she means to you..."></textarea>
-        <p id="charCount" style="font-size:0.8rem; color:var(--muted); margin-top:-10px;">(0/600)</p>
+        <p id="charCount" class="muted-text" style="margin-top:-10px;">(0/600)</p>
 
         <div class="grid-2">
-          <label>Vocal Style
-            <select name="vocalist">
+          <label for="vocalist">Vocal Style
+            <select name="vocalist" id="vocalist">
               <option>Female Vocalist</option>
               <option>Male Vocalist</option>
               <option>Either works</option>
             </select>
           </label>
-          <label>Musical Genre
-            <select name="genre">
+          <label for="genre">Musical Genre
+            <select name="genre" id="genre">
               <option>Heartfelt Ballad</option>
               <option>Country</option>
               <option>Upbeat Pop</option>
@@ -330,32 +914,64 @@
         </div>
 
         <div class="grid-2">
-          <label>Your Name <input type="text" name="name" required></label>
-          <label>Your Email <input type="email" name="email" required></label>
+          <label for="name">Your Name
+            <input type="text" name="name" id="name" required>
+          </label>
+          <label for="email">Your Email
+            <input type="email" name="email" id="email" required>
+          </label>
         </div>
 
-        <button type="submit" class="btn" style="width:100%;">Submit Story & Enter Studio Queue →</button>
+        <button type="submit" class="btn" style="width:100%;" id="submitRequestBtn">Submit Story & Enter Studio Queue →</button>
       </form>
+
+      <p class="muted-text" style="text-align:center; margin-top:16px;">
+        Submit your request → complete payment → receive your song within 24 hours of payment.
+      </p>
     </section>
 
     <section class="card" id="faq">
       <h2>Frequently Asked Questions</h2>
+
       <div class="grid-2">
         <div class="mini-card">
-          <h3>How much does it cost?</h3>
-          <p>For the Mother's Day season, we offer one simple option: a fully personalized song for $20.</p>
+          <h3>How much does a custom Mother's Day song cost?</h3>
+          <p>For Mother's Day, we offer one simple option: a fully personalized song for $20.</p>
         </div>
+
         <div class="mini-card">
           <h3>How fast is delivery?</h3>
-          <p>You will receive your song via email within 24 hours of your payment being confirmed.</p>
+          <p>You will receive your song by email within 24 hours of your payment being confirmed.</p>
         </div>
+
         <div class="mini-card">
           <h3>Are revisions included?</h3>
-          <p>Yes. Every order includes up to 3 free revisions to make sure we get the story exactly right.</p>
+          <p>Yes. Every order includes up to 3 free revisions to make sure the story feels right.</p>
         </div>
+
         <div class="mini-card">
           <h3>What file format do I get?</h3>
-          <p>You'll receive a high-quality MP3 file that you can play on any phone, computer, or smart speaker.</p>
+          <p>You will receive a high-quality MP3 file that plays on phones, computers, and smart speakers.</p>
+        </div>
+
+        <div class="mini-card">
+          <h3>Can I request a rush delivery?</h3>
+          <p>Sometimes. If you need it faster, text <a class="text-link" href="sms:+16617140903">+1 (661) 714-0903</a> after payment and we will let you know what is possible.</p>
+        </div>
+
+        <div class="mini-card">
+          <h3>Can I request something extra like a video?</h3>
+          <p>Possibly. The $20 Mother's Day special is the main offer, but extras may be available depending on workload and timing.</p>
+        </div>
+
+        <div class="mini-card">
+          <h3>Is this better than a generic gift?</h3>
+          <p>Yes. This is built from real memories and real details, which makes it far more personal than something off a shelf.</p>
+        </div>
+
+        <div class="mini-card">
+          <h3>When should I order?</h3>
+          <p>Ordering at least 2 days before Mother's Day is smartest if you want extra room for revisions.</p>
         </div>
       </div>
     </section>
@@ -375,14 +991,16 @@
         <a href="/memorial-songs">Celebration of Life</a>
         <a href="/business-jingles">Business Jingles</a>
       </div>
+
       <div class="social-links">
-        <a href="https://facebook.com/customsongme">Facebook</a>
-        <a href="https://instagram.com/customsongme">Instagram</a>
-        <a href="https://tiktok.com/@customsongme">TikTok</a>
-        <a href="https://youtube.com/@customsongme">YouTube</a>
+        <a href="https://facebook.com/customsongme" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://instagram.com/customsongme" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://tiktok.com/@customsongme" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://youtube.com/@customsongme" target="_blank" rel="noopener">YouTube</a>
       </div>
-      <p style="margin: 16px 0;">© <span id="year"></span> CustomSongMe | Managed on iPhone | Oxnard, CA</p>
-      <p>Contact: <a href="mailto:danrocksai@gmail.com">danrocksai@gmail.com</a> | +1 (661) 714-0903</p>
+
+      <p style="margin:16px 0;">© <span id="year"></span> CustomSongMe. All Rights Reserved.</p>
+      <p>Contact: <a href="mailto:danrocksai@gmail.com">danrocksai@gmail.com</a> | <a href="tel:+16617140903">+1 (661) 714-0903</a></p>
     </div>
   </footer>
 
@@ -393,13 +1011,17 @@
       const token = Math.random().toString(36).slice(2, 8).toUpperCase();
       return `CSM-MD-${token}`;
     };
+
     const OID = genID();
     document.getElementById('oid1').innerText = OID;
     document.getElementById('order_id_hidden').value = OID;
 
     const menuBtn = document.getElementById('menuBtn');
     const navMenu = document.getElementById('navMenu');
-    menuBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
+    menuBtn.addEventListener('click', () => {
+      const isOpen = navMenu.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
 
     const detailsEl = document.getElementById('details');
     const charCount = document.getElementById('charCount');
@@ -410,9 +1032,42 @@
     window.addEventListener('scroll', () => {
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
       document.getElementById('progressBar').style.width = scrolled + "%";
     });
+
+    if (typeof gtag === 'function') {
+      const heroCta = document.getElementById('heroCta');
+      const heroSamplesBtn = document.getElementById('heroSamplesBtn');
+      const songForm = document.getElementById('songForm');
+
+      if (heroCta) {
+        heroCta.addEventListener('click', function() {
+          gtag('event', 'select_content', {
+            content_type: 'cta',
+            content_id: 'hero_create_song'
+          });
+        });
+      }
+
+      if (heroSamplesBtn) {
+        heroSamplesBtn.addEventListener('click', function() {
+          gtag('event', 'select_content', {
+            content_type: 'cta',
+            content_id: 'hero_hear_samples'
+          });
+        });
+      }
+
+      if (songForm) {
+        songForm.addEventListener('submit', function() {
+          gtag('event', 'generate_lead', {
+            event_label: 'mothers_day_song_request',
+            order_id: OID
+          });
+        });
+      }
+    }
   </script>
 
 </body>
