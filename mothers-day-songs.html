@@ -1,1358 +1,914 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
 <head>
-	<meta charset="UTF-8" />
-	<meta name="google-site-verification" content="r_RHeWV7hY8Y1WFvKTWpQhKyqeyJOAgTMyWjWpYD9v0" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="robots" content="index, follow" />
-	<title>Custom Mother's Day Songs | Personalized Gift for Mom | CustomSongMe</title>
-	<meta name="description" content="Give Mom a personalized Mother's Day song built from your real memories, real details, and real moments. $20 Mother's Day special. Production begins after payment is completed." />
-	<link rel="canonical" href="https://www.customsongme.com/mothers-day-songs" />
-	<link rel="icon" type="image/png" href="/logo.png" />
-	<link rel="preconnect" href="https://www.googletagmanager.com" />
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-HGQ54E69BZ"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-
-		function gtag() { dataLayer.push(arguments); }
-		gtag("js", new Date());
-		gtag("config", "G-HGQ54E69BZ");
-	</script>
-	<meta property="og:title" content="Custom Mother's Day Songs | Personalized Gift for Mom | CustomSongMe" />
-	<meta property="og:description" content="A personalized Mother's Day song built from your real memories. $20 Mother's Day special." />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://www.customsongme.com/mothers-day-songs" />
-	<meta property="og:image" content="https://www.customsongme.com/og-cover.jpg" />
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Custom Mother's Day Songs | CustomSongMe" />
-	<meta name="twitter:description" content="A personalized Mother's Day song built from your real memories. $20 Mother's Day special." />
-	<meta name="twitter:image" content="https://www.customsongme.com/og-cover.jpg" />
-	<script type="application/ld+json">
-		[{
-				"@context": "https://schema.org",
-				"@type": "Service",
-				"name": "Custom Mother's Day Songs",
-				"url": "https://www.customsongme.com/mothers-day-songs",
-				"description": "A personalized Mother's Day song built from your real memories, real details, and real moments. $20 Mother's Day special.",
-				"provider": {
-					"@type": "OnlineBusiness",
-					"name": "CustomSongMe",
-					"url": "https://www.customsongme.com",
-					"telephone": "+1-661-714-0903",
-					"sameAs": [
-						"https://www.facebook.com/customsongme",
-						"https://www.instagram.com/customsongme",
-						"https://www.tiktok.com/@customsongme",
-						"https://www.youtube.com/@customsongme",
-						"https://x.com/customsongme",
-						"https://www.linkedin.com/company/customsongme"
-					]
-				},
-				"offers": {
-					"@type": "Offer",
-					"priceCurrency": "USD",
-					"price": "20",
-					"availability": "https://schema.org/InStock",
-					"url": "https://www.customsongme.com/mothers-day-songs"
-				}
-			},
-			{
-				"@context": "https://schema.org",
-				"@type": "FAQPage",
-				"mainEntity": [{
-						"@type": "Question",
-						"name": "How much does a custom Mother's Day song cost?",
-						"acceptedAnswer": {
-							"@type": "Answer",
-							"text": "The Mother's Day special is one simple option: a fully personalized custom song for $20."
-						}
-					},
-					{
-						"@type": "Question",
-						"name": "Is the song guaranteed?",
-						"acceptedAnswer": {
-							"@type": "Answer",
-							"text": "Yes. If the first version isn't what you hoped for, I'll keep working on it until it is. If I still can't get it right, I'll give you a full refund. No hard feelings."
-						}
-					},
-					{
-						"@type": "Question",
-						"name": "When does production begin?",
-						"acceptedAnswer": {
-							"@type": "Answer",
-							"text": "Production begins after payment is completed."
-						}
-					},
-					{
-						"@type": "Question",
-						"name": "What file format will I receive?",
-						"acceptedAnswer": {
-							"@type": "Answer",
-							"text": "You will receive a high quality MP3 by email."
-						}
-					}
-				]
-			}
-		]
-	</script>
-	<style>
-		:root {
-			--bg: #0b0b12;
-			--bg-soft: #10101b;
-			--card: #151525;
-			--text: #ececf5;
-			--muted: #b6bbca;
-			--brand: #7a5cff;
-			--brand-2: #9d8cff;
-			--accent: #ff4d8d;
-			--green: #4ade80;
-			--yellow: #facc15;
-			--red: #fb7185;
-			--border: #27273c;
-			--shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
-			--radius: 18px;
-		}
-
-		* {
-			box-sizing: border-box;
-		}
-
-		html,
-		body {
-			margin: 0;
-			padding: 0;
-			background:
-				radial-gradient(circle at top, rgba(122, 92, 255, 0.12), transparent 30%),
-				linear-gradient(180deg, #0a0a12 0%, #0e0e18 40%, #0b0b12 100%);
-			color: var(--text);
-			font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-			scroll-behavior: smooth;
-		}
-
-		body {
-			-webkit-font-smoothing: antialiased;
-			text-rendering: optimizeLegibility;
-		}
-
-		a {
-			color: inherit;
-		}
-
-		#progressBar {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 0%;
-			height: 3px;
-			background: linear-gradient(90deg, var(--brand), var(--accent));
-			z-index: 9999;
-			transition: width 0.1s linear;
-		}
-
-		.container {
-			width: min(1000px, 92vw);
-			margin: 0 auto;
-		}
-
-		nav {
-			position: sticky;
-			top: 0;
-			z-index: 100;
-			backdrop-filter: blur(12px);
-			background: rgba(11, 11, 18, 0.9);
-			border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-		}
-
-		.nav-inner {
-			width: min(1000px, 92vw);
-			margin: 0 auto;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			padding: 12px 0;
-			position: relative;
-		}
-
-		.nav-brand {
-			text-decoration: none;
-			color: var(--brand-2);
-			font-weight: 800;
-			font-size: 1rem;
-		}
-
-		.hamburger {
-			display: none;
-			flex-direction: column;
-			gap: 5px;
-			background: none;
-			border: none;
-			cursor: pointer;
-			padding: 8px;
-		}
-
-		.hamburger span {
-			width: 24px;
-			height: 2px;
-			border-radius: 2px;
-			background: var(--muted);
-			display: block;
-		}
-
-		.nav-menu {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 4px;
-			align-items: center;
-		}
-
-		.nav-menu a {
-			color: var(--muted);
-			text-decoration: none;
-			font-size: 0.86rem;
-			padding: 7px 10px;
-			border-radius: 8px;
-		}
-
-		.nav-menu a:hover {
-			background: #19192a;
-			color: var(--text);
-		}
-
-		.nav-menu a.active {
-			color: var(--brand-2);
-			font-weight: 700;
-		}
-
-		header {
-			text-align: center;
-			padding: 56px 16px 42px;
-			border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-		}
-
-		.badge {
-			display: inline-block;
-			background: linear-gradient(90deg, var(--accent), #ff6ba1);
-			color: white;
-			padding: 6px 12px;
-			border-radius: 999px;
-			font-size: 0.78rem;
-			font-weight: 800;
-			margin-bottom: 14px;
-		}
-
-		h1 {
-			font-size: clamp(2.3rem, 6vw, 4rem);
-			line-height: 1.05;
-			margin: 0 0 14px;
-			letter-spacing: -1.2px;
-		}
-
-		h2 {
-			color: var(--brand-2);
-			font-size: clamp(1.55rem, 4vw, 2rem);
-			line-height: 1.15;
-			margin: 0 0 14px;
-		}
-
-		h3 {
-			margin: 0 0 10px;
-			font-size: 1.08rem;
-		}
-
-		p {
-			margin: 0 0 14px;
-		}
-
-		.hero-sub {
-			max-width: 760px;
-			margin: 0 auto 14px;
-			font-size: 1.15rem;
-			color: var(--muted);
-		}
-
-		.hero-emphasis {
-			max-width: 700px;
-			margin: 0 auto 26px;
-			color: #ffd7ea;
-			font-weight: 800;
-			font-size: 1.02rem;
-		}
-
-		.btn {
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-			gap: 8px;
-			background: linear-gradient(90deg, var(--brand), var(--brand-2));
-			color: white;
-			padding: 15px 28px;
-			border-radius: 999px;
-			font-weight: 800;
-			text-decoration: none;
-			border: none;
-			cursor: pointer;
-			box-shadow: 0 8px 25px rgba(122, 92, 255, 0.28);
-			transition: transform 0.15s ease, box-shadow 0.15s ease;
-		}
-
-		.btn:hover {
-			transform: translateY(-1px);
-			box-shadow: 0 10px 28px rgba(122, 92, 255, 0.34);
-		}
-
-		.btn-secondary {
-			background: #18182a;
-			color: var(--text);
-			box-shadow: none;
-			border: 1px solid var(--border);
-		}
-
-		.btn-ghost {
-			background: transparent;
-			color: var(--muted);
-			box-shadow: none;
-			border: 1px solid #27273c;
-			font-size: 0.9rem;
-			padding: 12px 20px;
-		}
-
-		.btn-ghost:hover {
-			color: var(--text);
-			border-color: #404060;
-			transform: none;
-			box-shadow: none;
-		}
-
-		.full-width {
-			width: 100%;
-		}
-
-		.btn-row {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: center;
-			gap: 12px;
-			margin-bottom: 18px;
-		}
-
-		.trust-bar {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: center;
-			gap: 14px 18px;
-			margin: 24px auto 0;
-			padding: 16px;
-			background: rgba(255, 255, 255, 0.03);
-			border: 1px solid rgba(255, 255, 255, 0.06);
-			border-radius: 14px;
-			max-width: 900px;
-		}
-
-		.trust-item {
-			display: flex;
-			align-items: center;
-			gap: 8px;
-			color: var(--muted);
-			font-size: 0.92rem;
-			white-space: nowrap;
-		}
-
-		.trust-item span {
-			color: var(--green);
-			font-size: 1rem;
-		}
-
-		.card {
-			background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
-			border: 1px solid rgba(255, 255, 255, 0.07);
-			box-shadow: var(--shadow);
-			margin: 26px auto;
-			padding: 28px;
-			border-radius: var(--radius);
-		}
-
-		.lead,
-		.muted-text {
-			color: var(--muted);
-			font-size: 0.95rem;
-		}
-
-		.grid-2,
-		.grid-3 {
-			display: grid;
-			gap: 18px;
-		}
-
-		.grid-2 {
-			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-		}
-
-		.grid-3 {
-			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-		}
-
-		.sample-card,
-		.mini-card {
-			background: var(--bg-soft);
-			border: 1px solid var(--border);
-			border-radius: 14px;
-			padding: 18px;
-		}
-
-		audio {
-			width: 100%;
-			margin-top: 10px;
-			border-radius: 12px;
-		}
-
-		.delivery-status {
-			background: #0f0f1e;
-			border: 1px solid #2a2a44;
-			border-left: 4px solid var(--green);
-			border-radius: 12px;
-			padding: 16px;
-			margin: 20px auto;
-			text-align: center;
-			max-width: 760px;
-		}
-
-		.delivery-status strong {
-			display: block;
-			font-size: 1.1rem;
-			color: var(--green);
-			margin-bottom: 6px;
-		}
-
-		.delivery-status p {
-			margin: 0;
-			color: var(--muted);
-			font-size: 0.95rem;
-		}
-
-		.price-card {
-			max-width: 500px;
-			margin: 0 auto;
-			background: linear-gradient(180deg, #10101d, #17172a);
-			border: 1px solid rgba(122, 92, 255, 0.35);
-			border-radius: 18px;
-			padding: 26px;
-			text-align: center;
-		}
-
-		.price-tag {
-			font-size: 3rem;
-			line-height: 1;
-			font-weight: 900;
-			color: white;
-			margin: 10px 0 12px;
-		}
-
-		```
-
-		/* --- CHOICE CARDS --- */
-		.choice-layout {
-			display: grid;
-			gap: 16px;
-			margin-top: 25px;
-		}
-
-		.choice-primary {
-			background: linear-gradient(135deg, rgba(122, 92, 255, 0.18), rgba(157, 140, 255, 0.07));
-			border: 2px solid rgba(122, 92, 255, 0.7);
-			border-radius: 18px;
-			padding: 28px;
-			position: relative;
-			overflow: hidden;
-		}
-
-		.choice-primary::before {
-			content: "";
-			position: absolute;
-			inset: 0;
-			pointer-events: none;
-			background: radial-gradient(circle at top left, rgba(122, 92, 255, 0.14), transparent 60%);
-		}
-
-		.choice-primary h3 {
-			font-size: 1.25rem;
-			margin-bottom: 8px;
-		}
-
-		.choice-secondary-row {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-			gap: 14px;
-		}
-
-		.choice-secondary {
-			background: var(--bg-soft);
-			border: 1px solid var(--border);
-			border-radius: 14px;
-			padding: 20px;
-			opacity: 0.82;
-		}
-
-		.choice-secondary h3 {
-			font-size: 0.98rem;
-			color: var(--muted);
-			margin-bottom: 8px;
-		}
-
-		.or-divider {
-			text-align: center;
-			color: var(--muted);
-			font-size: 0.8rem;
-			font-weight: 800;
-			letter-spacing: 1px;
-			text-transform: uppercase;
-			margin: 2px 0;
-		}
-
-		.popular-badge {
-			display: inline-block;
-			background: linear-gradient(90deg, var(--accent), #ff7cad);
-			color: white;
-			border-radius: 999px;
-			padding: 5px 12px;
-			font-size: 0.74rem;
-			font-weight: 800;
-			margin-bottom: 12px;
-		}
-
-		.quality-meter {
-			background: #0f0f1e;
-			border: 1px solid var(--border);
-			border-radius: 14px;
-			padding: 16px;
-			margin: 18px 0 22px;
-		}
-
-		.meter-bar {
-			height: 12px;
-			background: #27273c;
-			border-radius: 999px;
-			overflow: hidden;
-			margin: 10px 0;
-		}
-
-		.meter-fill {
-			width: 0%;
-			height: 100%;
-			background: var(--red);
-			transition: width 0.2s ease, background 0.2s ease;
-		}
-
-		.meter-label {
-			font-weight: 800;
-		}
-
-		.option-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-			gap: 10px;
-			margin: 8px 0 16px;
-		}
-
-		.option-pill {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			min-height: 44px;
-			padding: 10px;
-			border-radius: 12px;
-			border: 1px solid #303052;
-			background: #0f0f1c;
-			color: var(--muted);
-			font-weight: 700;
-			cursor: pointer;
-			text-align: center;
-			user-select: none;
-		}
-
-		.option-pill input {
-			display: none;
-		}
-
-		.option-pill:has(input:checked) {
-			background: rgba(122, 92, 255, 0.22);
-			border-color: var(--brand);
-			color: white;
-		}
-
-		label {
-			display: block;
-			font-weight: 800;
-			margin-bottom: 6px;
-		}
-
-		input,
-		select,
-		textarea {
-			width: 100%;
-			background: #0f0f1c;
-			color: white;
-			border: 1px solid #303052;
-			border-radius: 12px;
-			padding: 14px;
-			margin-bottom: 14px;
-			font-size: 16px;
-		}
-
-		textarea {
-			min-height: 130px;
-			resize: vertical;
-		}
-
-		.sms-box {
-			background: #000;
-			padding: 12px;
-			border-radius: 8px;
-			border: 1px solid var(--brand);
-			margin: 15px 0;
-		}
-
-		.sms-box span {
-			color: var(--brand-2);
-			font-weight: 800;
-		}
-
-		.tip-box {
-			background: #11111d;
-			border: 1px solid var(--border);
-			border-radius: 14px;
-			padding: 18px;
-			margin-top: 24px;
-			text-align: center;
-		}
-
-		.tip-buttons {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: center;
-			gap: 10px;
-			margin-top: 12px;
-		}
-
-		.tip-btn {
-			background: #1a1a2a;
-			color: var(--brand-2);
-			border: 1px solid rgba(122, 92, 255, 0.35);
-			padding: 10px 16px;
-			border-radius: 10px;
-			text-decoration: none;
-			font-weight: 700;
-			font-size: 0.9rem;
-		}
-
-		.disclaimer {
-			background: #10101a;
-			border: 1px solid #2d2d46;
-			border-radius: 12px;
-			padding: 16px;
-			margin: 26px 0 0;
-			font-size: 0.85rem;
-			color: var(--muted);
-		}
-
-		footer {
-			text-align: center;
-			padding: 48px 20px 60px;
-			opacity: 0.85;
-			font-size: 14px;
-		}
-
-		.social-links,
-		.footer-links {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: center;
-			gap: 14px;
-			margin-bottom: 14px;
-		}
-
-		.social-links a,
-		.footer-links a {
-			color: var(--muted);
-			text-decoration: none;
-		}
-
-		.social-links a:hover,
-		.footer-links a:hover {
-			color: white;
-			text-decoration: underline;
-		}
-
-		@keyframes studioPulse {
-
-			0%,
-			100% {
-				opacity: 1;
-				box-shadow: 0 0 8px var(--green);
-			}
-
-			50% {
-				opacity: 0.5;
-				box-shadow: 0 0 16px var(--green);
-			}
-		}
-
-		@media (max-width:768px) {
-			.hamburger {
-				display: flex;
-			}
-
-			.nav-menu {
-				display: none;
-				position: absolute;
-				top: 100%;
-				left: 0;
-				right: 0;
-				flex-direction: column;
-				align-items: stretch;
-				background: rgba(15, 15, 30, 0.98);
-				border-bottom: 1px solid var(--border);
-				padding: 10px 4vw;
-			}
-
-			.nav-menu.open {
-				display: flex;
-			}
-
-			.nav-menu a {
-				padding: 12px 0;
-				border-bottom: 1px solid #1f1f34;
-				border-radius: 0;
-				font-size: 0.95rem;
-			}
-		}
-
-		@media (max-width:640px) {
-			.card {
-				padding: 22px 18px;
-			}
-
-			.btn {
-				width: 100%;
-			}
-
-			.trust-item {
-				white-space: normal;
-			}
-		}
-
-		```
-	</style>
+  <meta charset="UTF-8" />
+  <meta name="google-site-verification" content="r_RHeWV7hY8Y1WFvKTWpQhKyqeyJOAgTMyWjWpYD9v0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <title>Custom Mother's Day Songs | Personalized Gift for Mom | CustomSongMe</title>
+  <meta name="description" content="Give Mom a personalized Mother's Day song built from your real memories, real details, and real moments. $20 Mother's Day special. Production begins after payment is completed." />
+  <link rel="canonical" href="https://www.customsongme.com/mothers-day-songs" />
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HGQ54E69BZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-HGQ54E69BZ");
+  </script>
+  <meta property="og:title" content="Custom Mother's Day Songs | Personalized Gift for Mom | CustomSongMe" />
+  <meta property="og:description" content="A personalized Mother's Day song built from your real memories. $20 Mother's Day special." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.customsongme.com/mothers-day-songs" />
+  <meta property="og:image" content="https://www.customsongme.com/og-cover.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Custom Mother's Day Songs | CustomSongMe" />
+  <meta name="twitter:description" content="A personalized Mother's Day song built from your real memories. $20 Mother's Day special." />
+  <meta name="twitter:image" content="https://www.customsongme.com/og-cover.jpg" />
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Custom Mother's Day Songs",
+      "url": "https://www.customsongme.com/mothers-day-songs",
+      "description": "A personalized Mother's Day song built from your real memories, real details, and real moments. $20 Mother's Day special.",
+      "provider": {
+        "@type": "OnlineBusiness",
+        "name": "CustomSongMe",
+        "url": "https://www.customsongme.com",
+        "telephone": "+1-661-714-0903",
+        "sameAs": [
+          "https://www.facebook.com/customsongme",
+          "https://www.instagram.com/customsongme",
+          "https://www.tiktok.com/@customsongme",
+          "https://www.youtube.com/@customsongme",
+          "https://x.com/customsongme",
+          "https://www.linkedin.com/company/customsongme"
+        ]
+      },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "20",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.customsongme.com/mothers-day-songs"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much does a custom Mother's Day song cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Mother's Day special is one simple option: a fully personalized custom song for $20."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the song guaranteed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. If the first version isn't what you hoped for, I'll keep working on it until it is. If I still can't get it right, I'll give you a full refund. No hard feelings."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When does production begin?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Production begins after payment is completed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What file format will I receive?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You will receive a high quality MP3 by email."
+          }
+        }
+      ]
+    }
+  ]
+  </script>
+  <style>
+    :root {
+      --bg:#0b0b12;
+      --bg-soft:#10101b;
+      --card:#151525;
+      --text:#ececf5;
+      --muted:#b6bbca;
+      --brand:#7a5cff;
+      --brand-2:#9d8cff;
+      --accent:#ff4d8d;
+      --green:#4ade80;
+      --yellow:#facc15;
+      --red:#fb7185;
+      --border:#27273c;
+      --shadow:0 12px 30px rgba(0,0,0,0.28);
+      --radius:18px;
+    }
+    * { box-sizing:border-box; }
+    html, body {
+      margin:0; padding:0;
+      background:
+        radial-gradient(circle at top, rgba(122,92,255,0.12), transparent 30%),
+        linear-gradient(180deg, #0a0a12 0%, #0e0e18 40%, #0b0b12 100%);
+      color:var(--text);
+      font:16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      scroll-behavior:smooth;
+    }
+    body { -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+    a { color:inherit; }
+    #progressBar {
+      position:fixed; top:0; left:0;
+      width:0%; height:3px;
+      background:linear-gradient(90deg, var(--brand), var(--accent));
+      z-index:9999; transition:width 0.1s linear;
+    }
+    .container { width:min(1000px, 92vw); margin:0 auto; }
+    nav {
+      position:sticky; top:0; z-index:100;
+      backdrop-filter:blur(12px);
+      background:rgba(11,11,18,0.9);
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+    .nav-inner {
+      width:min(1000px, 92vw); margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0; position:relative;
+    }
+    .nav-brand { text-decoration:none; color:var(--brand-2); font-weight:800; font-size:1rem; }
+    .hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; }
+    .hamburger span { width:24px; height:2px; border-radius:2px; background:var(--muted); display:block; }
+    .nav-menu { display:flex; flex-wrap:wrap; gap:4px; align-items:center; }
+    .nav-menu a { color:var(--muted); text-decoration:none; font-size:0.86rem; padding:7px 10px; border-radius:8px; }
+    .nav-menu a:hover { background:#19192a; color:var(--text); }
+    .nav-menu a.active { color:var(--brand-2); font-weight:700; }
+    header { text-align:center; padding:56px 16px 42px; border-bottom:1px solid rgba(255,255,255,0.06); }
+    .badge {
+      display:inline-block;
+      background:linear-gradient(90deg, var(--accent), #ff6ba1);
+      color:white; padding:6px 12px; border-radius:999px;
+      font-size:0.78rem; font-weight:800; margin-bottom:14px;
+    }
+    h1 { font-size:clamp(2.3rem, 6vw, 4rem); line-height:1.05; margin:0 0 14px; letter-spacing:-1.2px; }
+    h2 { color:var(--brand-2); font-size:clamp(1.55rem, 4vw, 2rem); line-height:1.15; margin:0 0 14px; }
+    h3 { margin:0 0 10px; font-size:1.08rem; }
+    p { margin:0 0 14px; }
+    .hero-sub { max-width:760px; margin:0 auto 14px; font-size:1.15rem; color:var(--muted); }
+    .hero-emphasis { max-width:700px; margin:0 auto 26px; color:#ffd7ea; font-weight:800; font-size:1.02rem; }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      background:linear-gradient(90deg, var(--brand), var(--brand-2));
+      color:white; padding:15px 28px; border-radius:999px;
+      font-weight:800; text-decoration:none; border:none; cursor:pointer;
+      box-shadow:0 8px 25px rgba(122,92,255,0.28);
+      transition:transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn:hover { transform:translateY(-1px); box-shadow:0 10px 28px rgba(122,92,255,0.34); }
+    .btn-secondary { background:#18182a; color:var(--text); box-shadow:none; border:1px solid var(--border); }
+    .btn-ghost {
+      background:transparent; color:var(--muted); box-shadow:none;
+      border:1px solid #27273c; font-size:0.9rem; padding:12px 20px;
+    }
+    .btn-ghost:hover { color:var(--text); border-color:#404060; transform:none; box-shadow:none; }
+    .full-width { width:100%; }
+    .btn-row { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-bottom:18px; }
+    .trust-bar {
+      display:flex; flex-wrap:wrap; justify-content:center;
+      gap:14px 18px; margin:24px auto 0; padding:16px;
+      background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);
+      border-radius:14px; max-width:900px;
+    }
+    .trust-item { display:flex; align-items:center; gap:8px; color:var(--muted); font-size:0.92rem; white-space:nowrap; }
+    .trust-item span { color:var(--green); font-size:1rem; }
+    .card {
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border:1px solid rgba(255,255,255,0.07);
+      box-shadow:var(--shadow); margin:26px auto; padding:28px; border-radius:var(--radius);
+    }
+    .lead, .muted-text { color:var(--muted); font-size:0.95rem; }
+    .grid-2, .grid-3 { display:grid; gap:18px; }
+    .grid-2 { grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); }
+    .grid-3 { grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); }
+    .sample-card, .mini-card { background:var(--bg-soft); border:1px solid var(--border); border-radius:14px; padding:18px; }
+    audio { width:100%; margin-top:10px; border-radius:12px; }
+    .delivery-status {
+      background:#0f0f1e; border:1px solid #2a2a44;
+      border-left:4px solid var(--green); border-radius:12px;
+      padding:16px; margin:20px auto; text-align:center; max-width:760px;
+    }
+    .delivery-status strong { display:block; font-size:1.1rem; color:var(--green); margin-bottom:6px; }
+    .delivery-status p { margin:0; color:var(--muted); font-size:0.95rem; }
+    .price-card {
+      max-width:500px; margin:0 auto;
+      background:linear-gradient(180deg, #10101d, #17172a);
+      border:1px solid rgba(122,92,255,0.35); border-radius:18px; padding:26px; text-align:center;
+    }
+    .price-tag { font-size:3rem; line-height:1; font-weight:900; color:white; margin:10px 0 12px; }
+
+```
+/* --- CHOICE CARDS --- */
+.choice-layout { display:grid; gap:16px; margin-top:25px; }
+
+.choice-primary {
+  background:linear-gradient(135deg, rgba(122,92,255,0.18), rgba(157,140,255,0.07));
+  border:2px solid rgba(122,92,255,0.7);
+  border-radius:18px; padding:28px; position:relative; overflow:hidden;
+}
+.choice-primary::before {
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(circle at top left, rgba(122,92,255,0.14), transparent 60%);
+}
+.choice-primary h3 { font-size:1.25rem; margin-bottom:8px; }
+
+.choice-secondary-row {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+  gap:14px;
+}
+.choice-secondary {
+  background:var(--bg-soft); border:1px solid var(--border);
+  border-radius:14px; padding:20px; opacity:0.82;
+}
+.choice-secondary h3 { font-size:0.98rem; color:var(--muted); margin-bottom:8px; }
+
+.or-divider {
+  text-align:center; color:var(--muted);
+  font-size:0.8rem; font-weight:800;
+  letter-spacing:1px; text-transform:uppercase; margin:2px 0;
+}
+
+.popular-badge {
+  display:inline-block;
+  background:linear-gradient(90deg, var(--accent), #ff7cad);
+  color:white; border-radius:999px;
+  padding:5px 12px; font-size:0.74rem; font-weight:800; margin-bottom:12px;
+}
+
+.quality-meter { background:#0f0f1e; border:1px solid var(--border); border-radius:14px; padding:16px; margin:18px 0 22px; }
+.meter-bar { height:12px; background:#27273c; border-radius:999px; overflow:hidden; margin:10px 0; }
+.meter-fill { width:0%; height:100%; background:var(--red); transition:width 0.2s ease, background 0.2s ease; }
+.meter-label { font-weight:800; }
+.option-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:10px; margin:8px 0 16px; }
+.option-pill {
+  display:flex; align-items:center; justify-content:center;
+  min-height:44px; padding:10px; border-radius:12px;
+  border:1px solid #303052; background:#0f0f1c;
+  color:var(--muted); font-weight:700; cursor:pointer; text-align:center; user-select:none;
+}
+.option-pill input { display:none; }
+.option-pill:has(input:checked) { background:rgba(122,92,255,0.22); border-color:var(--brand); color:white; }
+label { display:block; font-weight:800; margin-bottom:6px; }
+input, select, textarea {
+  width:100%; background:#0f0f1c; color:white;
+  border:1px solid #303052; border-radius:12px;
+  padding:14px; margin-bottom:14px; font-size:16px;
+}
+textarea { min-height:130px; resize:vertical; }
+.sms-box { background:#000; padding:12px; border-radius:8px; border:1px solid var(--brand); margin:15px 0; }
+.sms-box span { color:var(--brand-2); font-weight:800; }
+.tip-box { background:#11111d; border:1px solid var(--border); border-radius:14px; padding:18px; margin-top:24px; text-align:center; }
+.tip-buttons { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:12px; }
+.tip-btn { background:#1a1a2a; color:var(--brand-2); border:1px solid rgba(122,92,255,0.35); padding:10px 16px; border-radius:10px; text-decoration:none; font-weight:700; font-size:0.9rem; }
+.disclaimer { background:#10101a; border:1px solid #2d2d46; border-radius:12px; padding:16px; margin:26px 0 0; font-size:0.85rem; color:var(--muted); }
+footer { text-align:center; padding:48px 20px 60px; opacity:0.85; font-size:14px; }
+.social-links, .footer-links { display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin-bottom:14px; }
+.social-links a, .footer-links a { color:var(--muted); text-decoration:none; }
+.social-links a:hover, .footer-links a:hover { color:white; text-decoration:underline; }
+@keyframes studioPulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--green); }
+  50% { opacity: 0.5; box-shadow: 0 0 16px var(--green); }
+}
+@media (max-width:768px) {
+  .hamburger { display:flex; }
+  .nav-menu { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:stretch; background:rgba(15,15,30,0.98); border-bottom:1px solid var(--border); padding:10px 4vw; }
+  .nav-menu.open { display:flex; }
+  .nav-menu a { padding:12px 0; border-bottom:1px solid #1f1f34; border-radius:0; font-size:0.95rem; }
+}
+@media (max-width:640px) {
+  .card { padding:22px 18px; }
+  .btn { width:100%; }
+  .trust-item { white-space:normal; }
+}
+```
+
+  </style>
 </head>
-
 <body>
-	<div id="progressBar"></div>
-	<nav>
-		<div class="nav-inner">
-			<a href="/" class="nav-brand">🎵 CustomSongMe</a>
-			<button class="hamburger" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false">
-				<span></span><span></span><span></span>
-			</button>
-			<div class="nav-menu" id="navMenu">
-				<a href="/">Home</a>
-				<a href="/birthday-songs">Birthdays</a>
-				<a href="/wedding-songs">Weddings</a>
-				<a href="/anniversary-songs">Anniversaries</a>
-				<a href="/love-songs">Love Songs</a>
-				<a href="/mothers-day-songs" class="active">Mother's Day</a>
-				<a href="/pet-songs">Pet Songs</a>
-				<a href="/roast-songs">Roast Songs</a>
-				<a href="/memorial-songs">Celebration of Life</a>
-				<a href="/business-jingles">Business Jingles</a>
-				<a href="#start" style="color:var(--brand-2); font-weight:800;">Order Now</a>
-			</div>
-		</div>
-	</nav>
-	<header>
-		<div class="container">
-			<div class="badge">MOTHER'S DAY SPECIAL</div>
-			<h1>Give Her a Gift She'll Never Forget</h1>
-			<p class="hero-sub">A custom Mother's Day song built from your real memories, real details, and real moments.</p>
-			<p class="hero-emphasis">Her life in a song she can actually feel.</p>
-			<div class="btn-row">
-				<a href="#start" class="btn">🎵 Create Her Song Now</a>
-				<a href="#samples" class="btn btn-secondary">▶ Hear Samples</a>
-			</div>
-			<div class="delivery-status">
-				<strong id="deliveryHeadlineTop">🟢 Current Delivery Time: 24 Hours</strong>
-				<p id="deliveryTextTop">Order now and your song will be delivered within 24 hours after payment is completed.</p>
-			</div>
-			<div class="trust-bar">
-				<div class="trust-item"><span>✓</span> $20 Mother's Day Special</div>
-				<div class="trust-item"><span>✓</span> Personal Happiness Guarantee</div>
-				<div class="trust-item"><span>✓</span> Credit Cards Accepted</div>
-				<div class="trust-item"><span>✓</span> Production Begins After Payment</div>
-			</div>
-		</div>
-	</header>
-	<main class="container">
+  <div id="progressBar"></div>
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">🎵 CustomSongMe</a>
+      <button class="hamburger" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="/">Home</a>
+        <a href="/birthday-songs">Birthdays</a>
+        <a href="/wedding-songs">Weddings</a>
+        <a href="/anniversary-songs">Anniversaries</a>
+        <a href="/love-songs">Love Songs</a>
+        <a href="/mothers-day-songs" class="active">Mother's Day</a>
+        <a href="/pet-songs">Pet Songs</a>
+        <a href="/roast-songs">Roast Songs</a>
+        <a href="/memorial-songs">Celebration of Life</a>
+        <a href="/business-jingles">Business Jingles</a>
+        <a href="#start" style="color:var(--brand-2); font-weight:800;">Order Now</a>
+      </div>
+    </div>
+  </nav>
+  <header>
+    <div class="container">
+      <div class="badge">MOTHER'S DAY SPECIAL</div>
+      <h1>Give Her a Gift She'll Never Forget</h1>
+      <p class="hero-sub">A custom Mother's Day song built from your real memories, real details, and real moments.</p>
+      <p class="hero-emphasis">Her life in a song she can actually feel.</p>
+      <div class="btn-row">
+        <a href="#start" class="btn">🎵 Create Her Song Now</a>
+        <a href="#samples" class="btn btn-secondary">▶ Hear Samples</a>
+      </div>
+      <div class="delivery-status">
+        <strong id="deliveryHeadlineTop">🟢 Current Delivery Time: 24 Hours</strong>
+        <p id="deliveryTextTop">Order now and your song will be delivered within 24 hours after payment is completed.</p>
+      </div>
+      <div class="trust-bar">
+        <div class="trust-item"><span>✓</span> $20 Mother's Day Special</div>
+        <div class="trust-item"><span>✓</span> Personal Happiness Guarantee</div>
+        <div class="trust-item"><span>✓</span> Credit Cards Accepted</div>
+        <div class="trust-item"><span>✓</span> Production Begins After Payment</div>
+      </div>
+    </div>
+  </header>
+  <main class="container">
 
-		```
-		<section class="card" id="video-sample">
-			<h2>Watch a Real Mother's Day Song</h2>
-			<p class="lead">This one started with a niece who wanted to do something special for her mom. That's all it takes.</p>
-			<div class="yt-facade" data-vid="EONANNNtxb8" style="position:relative; width:100%; max-width:400px; margin:16px auto 0; cursor:pointer; border-radius:14px; overflow:hidden; aspect-ratio:9/16; background:#000;">
-				<img src="https://i.ytimg.com/vi/EONANNNtxb8/hqdefault.jpg" alt="Watch a real Mother's Day custom song" style="width:100%; height:100%; object-fit:cover; display:block;" />
-				<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.35);">
-					<div style="width:60px; height:60px; background:rgba(255,0,0,0.88); border-radius:50%; display:flex; align-items:center; justify-content:center;">
-						<div style="width:0; height:0; border-top:12px solid transparent; border-bottom:12px solid transparent; border-left:20px solid white; margin-left:4px;"></div>
-					</div>
-				</div>
-			</div>
-		</section>
+```
+<section class="card" id="video-sample">
+  <h2>Watch a Real Mother's Day Song</h2>
+  <p class="lead">This one started with a niece who wanted to do something special for her mom. That's all it takes.</p>
+  <div class="yt-facade" data-vid="EONANNNtxb8" style="position:relative; width:100%; max-width:400px; margin:16px auto 0; cursor:pointer; border-radius:14px; overflow:hidden; padding-bottom:min(177.78%, 710px); height:0; background:#000;">
+    <img
+      src="https://i.ytimg.com/vi/EONANNNtxb8/hqdefault.jpg"
+      alt="Watch a real Mother's Day custom song"
+      style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; display:block;"
+    />
+    <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.35);">
+      <div style="width:60px; height:60px; background:rgba(255,0,0,0.88); border-radius:50%; display:flex; align-items:center; justify-content:center;">
+        <div style="width:0; height:0; border-top:12px solid transparent; border-bottom:12px solid transparent; border-left:20px solid white; margin-left:4px;"></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-		<section class="card">
-			<h2>Mother's Day Special</h2>
-			<p class="lead" style="text-align:center;">One simple offer. No confusing packages. No upsells.</p>
-			<div class="price-card">
-				<h3>🎵 Custom Mother's Day Song</h3>
-				<div class="price-tag">$20</div>
-				<p class="muted-text">High quality MP3 delivered by email. Production begins after payment is completed.</p>
-				<div style="background:linear-gradient(135deg, rgba(122,92,255,0.12), rgba(255,77,141,0.08)); border:1px solid rgba(122,92,255,0.3); border-left:4px solid var(--brand); border-radius:14px; padding:16px; margin:16px 0; text-align:left;">
-					<strong style="color:var(--brand-2); display:block; margin-bottom:6px;">🎵 My Personal Guarantee</strong>
-					<p style="margin:0; color:var(--muted); font-size:0.93rem;">I'm not just making a song — I'm helping you share a memory. If the first version isn't perfect, I'll fix it. If I still can't make it exactly what you dreamed of for Mom, I'll refund every penny. I want this to be the best gift she's ever received.</p>
-				</div>
-				<p class="muted-text">Submit your story first. I'll review it and send you the $20 payment link.</p>
-			</div>
-		</section>
+<section class="card">
+  <h2>Mother's Day Special</h2>
+  <p class="lead" style="text-align:center;">One simple offer. No confusing packages. No upsells.</p>
+  <div class="price-card">
+    <h3>🎵 Custom Mother's Day Song</h3>
+    <div class="price-tag">$20</div>
+    <p class="muted-text">High quality MP3 delivered by email. Production begins after payment is completed.</p>
+    <div style="background:linear-gradient(135deg, rgba(122,92,255,0.12), rgba(255,77,141,0.08)); border:1px solid rgba(122,92,255,0.3); border-left:4px solid var(--brand); border-radius:14px; padding:16px; margin:16px 0; text-align:left;">
+      <strong style="color:var(--brand-2); display:block; margin-bottom:6px;">🎵 My Personal Guarantee</strong>
+      <p style="margin:0; color:var(--muted); font-size:0.93rem;">I'm not just making a song — I'm helping you share a memory. If the first version isn't perfect, I'll fix it. If I still can't make it exactly what you dreamed of for Mom, I'll refund every penny. I want this to be the best gift she's ever received.</p>
+    </div>
+    <p class="muted-text">Submit your story first. I'll review it and send you the $20 payment link.</p>
+  </div>
+</section>
 
-		<section class="card" id="meet-dan">
-			<div style="display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap;">
-				<div style="flex-shrink:0; text-align:center;">
-					<img src="/dan-the-song-man.jpeg" alt="Dan the Song Man" style="width:130px; height:130px; object-fit:cover; object-position:center top; border-radius:50%; border:3px solid rgba(122,92,255,0.6); box-shadow:0 0 20px rgba(122,92,255,0.25);" />
-					<p style="margin:8px 0 0; font-weight:800; font-size:0.9rem; color:var(--brand-2);">Dan the Song Man</p>
-				</div>
-				<div style="flex:1; min-width:220px;">
-					<h2 style="margin-bottom:8px;">Hey, I'm Dan.</h2>
-					<p style="color:var(--muted); font-size:0.95rem; margin-bottom:10px;">
-						I've been building things my whole life — this is just the most personal one yet. CustomSongMe is a one-man operation. That means when you submit a request, I personally read every word, think about your mom, and build something that actually sounds like it was made for her. Because it was.
-					</p>
-					<p style="color:var(--muted); font-size:0.95rem; margin-bottom:14px;">
-						No team. No templates. No assembly line. Just me, your story, and a song worth giving.
-					</p>
+<section class="card" id="meet-dan">
+  <div style="display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap;">
+    <div style="flex-shrink:0; text-align:center;">
+      <img src="/dan-the-song-man.jpg" alt="Dan the Song Man" style="width:130px; height:130px; object-fit:cover; object-position:center top; border-radius:50%; border:3px solid rgba(122,92,255,0.6); box-shadow:0 0 20px rgba(122,92,255,0.25);" />
+      <p style="margin:8px 0 0; font-weight:800; font-size:0.9rem; color:var(--brand-2);">Dan the Song Man</p>
+    </div>
+    <div style="flex:1; min-width:220px;">
+      <h2 style="margin-bottom:8px;">Hey, I'm Dan.</h2>
+      <p style="color:var(--muted); font-size:0.95rem; margin-bottom:10px;">
+        I've been building things my whole life — this is just the most personal one yet. CustomSongMe is a one-man operation. That means when you submit a request, I personally read every word, think about your mom, and build something that actually sounds like it was made for her. Because it was.
+      </p>
+      <p style="color:var(--muted); font-size:0.95rem; margin-bottom:14px;">
+        No team. No templates. No assembly line. Just me, your story, and a song worth giving.
+      </p>
 
-					<div id="studioStatus" style="display:inline-flex; align-items:center; gap:10px; background:#0d0d1a; border:1px solid #2a2a44; border-radius:12px; padding:10px 16px; margin-bottom:4px;">
-						<div id="studioLight" style="width:12px; height:12px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); flex-shrink:0;"></div>
-						<div>
-							<strong id="studioLabel" style="font-size:0.92rem; color:var(--green);">🎙️ Dan's In The Studio</strong>
-							<p id="studioSub" style="margin:2px 0 0; font-size:0.8rem; color:var(--muted);">Responding within 60 minutes</p>
-						</div>
-					</div>
-					<p id="studioHours" style="margin:8px 0 0; font-size:0.8rem; color:var(--muted);">Studio hours: Mon–Fri 8am–8pm · Sat 8am–6pm · Sun closed</p>
-				</div>
-			</div>
-		</section>
+      <div id="studioStatus" style="display:inline-flex; align-items:center; gap:10px; background:#0d0d1a; border:1px solid #2a2a44; border-radius:12px; padding:10px 16px; margin-bottom:4px;">
+        <div id="studioLight" style="width:12px; height:12px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); flex-shrink:0;"></div>
+        <div>
+          <strong id="studioLabel" style="font-size:0.92rem; color:var(--green);">🎙️ Dan's In The Studio</strong>
+          <p id="studioSub" style="margin:2px 0 0; font-size:0.8rem; color:var(--muted);">Responding within 60 minutes</p>
+        </div>
+      </div>
+      <p id="studioHours" style="margin:8px 0 0; font-size:0.8rem; color:var(--muted);">Studio hours: Mon–Fri 8am–8pm · Sat 8am–6pm · Sun closed</p>
+    </div>
+  </div>
+</section>
 
-		<section class="card" id="start">
-			<h2>How Do You Want to Create Her Song?</h2>
-			<p class="muted-text" style="text-align:center;">
-				Most people use the guided form — it's the fastest and easiest way to get started.
-			</p>
-			<div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:14px 18px; margin:16px 0; text-align:center;">
-				<p style="margin:0; color:var(--muted); font-size:0.9rem;">
-					<strong style="color:var(--text);">All three options can produce the same high quality song.</strong> The only difference is how you prefer to share the story. The more detail you give — in any format — the more personal the song. Choose whichever feels easiest for you right now.
-				</p>
-			</div>
+<section class="card" id="start">
+  <h2>How Do You Want to Create Her Song?</h2>
+  <p class="muted-text" style="text-align:center;">
+    Most people use the guided form — it's the fastest and easiest way to get started.
+  </p>
+  <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:14px 18px; margin:16px 0; text-align:center;">
+    <p style="margin:0; color:var(--muted); font-size:0.9rem;">
+      <strong style="color:var(--text);">All three options can produce the same high quality song.</strong> The only difference is how you prefer to share the story. The more detail you give — in any format — the more personal the song. Choose whichever feels easiest for you right now.
+    </p>
+  </div>
 
-			<div class="choice-layout">
+  <div class="choice-layout">
 
-				<div class="choice-primary">
-					<div class="popular-badge">⭐ Most Popular — Start Here</div>
-					<h3>Quick Guided Form</h3>
-					<p style="color:var(--muted); margin-bottom:8px;">
-						Not sure what to say? No problem. Click a few answers, add any details you want, and I'll turn it into a personal Mother's Day song. Takes under 2 minutes.
-					</p>
-					<p style="font-size:0.85rem; color:var(--brand-2); margin-bottom:18px; font-weight:700;">
-						✓ No writing required &nbsp;·&nbsp; ✓ Most personal results &nbsp;·&nbsp; ✓ Best for most people
-					</p>
-					<a href="#guided-form" class="btn full-width" style="font-size:1.05rem; padding:17px 28px;">Start the Guided Form →</a>
-				</div>
+    <div class="choice-primary">
+      <div class="popular-badge">⭐ Most Popular — Start Here</div>
+      <h3>Quick Guided Form</h3>
+      <p style="color:var(--muted); margin-bottom:8px;">
+        Not sure what to say? No problem. Click a few answers, add any details you want, and I'll turn it into a personal Mother's Day song. Takes under 2 minutes.
+      </p>
+      <p style="font-size:0.85rem; color:var(--brand-2); margin-bottom:18px; font-weight:700;">
+        ✓ No writing required &nbsp;·&nbsp; ✓ Most personal results &nbsp;·&nbsp; ✓ Best for most people
+      </p>
+      <a href="#guided-form" class="btn full-width" style="font-size:1.05rem; padding:17px 28px;">Start the Guided Form →</a>
+    </div>
 
-				<div class="or-divider">— or if you prefer —</div>
+    <div class="or-divider">— or if you prefer —</div>
 
-				<div class="choice-secondary-row">
-					<div class="choice-secondary">
-						<h3>📝 Already Know What You Want?</h3>
-						<p class="muted-text" style="font-size:0.9rem;">
-							If you already have the story or message in your head, just write it out your way. No questions, no structure.
-						</p>
-						<a href="#simple-form" class="btn btn-ghost full-width">Write Your Story →</a>
-					</div>
-					<div class="choice-secondary">
-						<h3>📱 On the Go? Text Instead</h3>
-						<p class="muted-text" style="font-size:0.9rem;">Too busy right now? Text me and I'll send the questions. Reply by voice-to-text if you want.</p>
-						<div class="sms-box" style="font-size:0.88rem;">
-							<strong>Text:</strong> <span>SONG – Your Name</span><br>
-							to <span>(661) 714-0903</span>
-						</div>
-						<a href="sms:+16617140903?body=SONG%20-%20Your%20Name" class="btn btn-ghost full-width">Text Me Instead →</a>
-					</div>
-				</div>
+    <div class="choice-secondary-row">
+      <div class="choice-secondary">
+        <h3>📝 Already Know What You Want?</h3>
+        <p class="muted-text" style="font-size:0.9rem;">
+          If you already have the story or message in your head, just write it out your way. No questions, no structure.
+        </p>
+        <a href="#simple-form" class="btn btn-ghost full-width">Write Your Story →</a>
+      </div>
+      <div class="choice-secondary">
+        <h3>📱 On the Go? Text Instead</h3>
+        <p class="muted-text" style="font-size:0.9rem;">Too busy right now? Text me and I'll send the questions. Reply by voice-to-text if you want.</p>
+        <div class="sms-box" style="font-size:0.88rem;">
+          <strong>Text:</strong> <span>SONG – Your Name</span><br>
+          to <span>(661) 714-0903</span>
+        </div>
+        <a href="sms:+16617140903?body=SONG%20-%20Your%20Name" class="btn btn-ghost full-width">Text Me Instead →</a>
+      </div>
+    </div>
 
-			</div>
+  </div>
 
-			<p style="text-align:center; margin-top:20px; font-size:0.9rem; color:var(--muted);">
-				Production begins after payment is completed.
-			</p>
-		</section>
+  <p style="text-align:center; margin-top:20px; font-size:0.9rem; color:var(--muted);">
+    Production begins after payment is completed.
+  </p>
+</section>
 
-		<section class="card" id="guided-form">
-			<h2>Quick Guided Form</h2>
-			<p class="muted-text" style="text-align:center;">
-				Click as many answers as apply. Add extra details only if you want. The more you share, the better the song gets.
-			</p>
-			<div class="quality-meter">
-				<strong>Song Detail Level: <span id="guidedMeterLabel" class="meter-label">Basic</span></strong>
-				<div class="meter-bar">
-					<div class="meter-fill" id="guidedMeterFill"></div>
-				</div>
-				<p class="muted-text" id="guidedMeterText">Answer a few sections to create a more personal song.</p>
-			</div>
-			<form id="guidedMotherForm" action="https://formspree.io/f/xwpqlypv" method="POST">
-				<input type="hidden" name="_next" value="https://www.customsongme.com/thanks" />
-				<input type="hidden" name="form_type" value="Mother's Day Guided Form" />
-				<input type="hidden" name="package" value="Mother's Day Song $20" />
-				<input type="hidden" name="quality_level" id="guided_quality_level" />
-				<h3>1. What do you call her?</h3>
-				<p class="muted-text">Click as many as apply.</p>
-				<div class="option-grid">
-					<label class="option-pill"><input type="checkbox" name="called[]" value="Mom">Mom</label>
-					<label class="option-pill"><input type="checkbox" name="called[]" value="Mama">Mama</label>
-					<label class="option-pill"><input type="checkbox" name="called[]" value="Mommy">Mommy</label>
-					<label class="option-pill"><input type="checkbox" name="called[]" value="Ma">Ma</label>
-					<label class="option-pill"><input type="checkbox" name="called[]" value="Mother">Mother</label>
-					<label class="option-pill"><input type="checkbox" name="called[]" value="Nana">Nana</label>
-					<label class="option-pill"><input type="checkbox" name="called[]" value="Grandma">Grandma</label>
-					<label class="option-pill"><input type="checkbox" name="called[]" value="Mimi">Mimi</label>
-					<label class="option-pill"><input type="checkbox" name="called[]" value="Gigi">Gigi</label>
-					<label class="option-pill"><input type="checkbox" name="called[]" value="Bonus Mom">Bonus Mom</label>
-				</div>
-				<input type="text" name="called_other" placeholder="Other name you call her">
-				<h3>2. Who is she to you?</h3>
-				<div class="option-grid">
-					<label class="option-pill"><input type="checkbox" name="relationship[]" value="My mom">My mom</label>
-					<label class="option-pill"><input type="checkbox" name="relationship[]" value="My grandma">My grandma</label>
-					<label class="option-pill"><input type="checkbox" name="relationship[]" value="My wife">My wife</label>
-					<label class="option-pill"><input type="checkbox" name="relationship[]" value="My daughter">My daughter</label>
-					<label class="option-pill"><input type="checkbox" name="relationship[]" value="My sister">My sister</label>
-					<label class="option-pill"><input type="checkbox" name="relationship[]" value="My aunt">My aunt</label>
-					<label class="option-pill"><input type="checkbox" name="relationship[]" value="My stepmom">My stepmom</label>
-					<label class="option-pill"><input type="checkbox" name="relationship[]" value="Mother of my kids">Mother of my kids</label>
-					<label class="option-pill"><input type="checkbox" name="relationship[]" value="She raised me">She raised me</label>
-				</div>
-				<h3>3. What kind of woman is she?</h3>
-				<div class="option-grid">
-					<label class="option-pill"><input type="checkbox" name="personality[]" value="Strong">Strong</label>
-					<label class="option-pill"><input type="checkbox" name="personality[]" value="Loving">Loving</label>
-					<label class="option-pill"><input type="checkbox" name="personality[]" value="Funny">Funny</label>
-					<label class="option-pill"><input type="checkbox" name="personality[]" value="Selfless">Selfless</label>
-					<label class="option-pill"><input type="checkbox" name="personality[]" value="Tough">Tough</label>
-					<label class="option-pill"><input type="checkbox" name="personality[]" value="Gentle">Gentle</label>
-					<label class="option-pill"><input type="checkbox" name="personality[]" value="Protective">Protective</label>
-					<label class="option-pill"><input type="checkbox" name="personality[]" value="Hardworking">Hardworking</label>
-					<label class="option-pill"><input type="checkbox" name="personality[]" value="Spiritual">Spiritual</label>
-					<label class="option-pill"><input type="checkbox" name="personality[]" value="Patient">Patient</label>
-					<label class="option-pill"><input type="checkbox" name="personality[]" value="Wild and fun">Wild / Fun</label>
-					<label class="option-pill"><input type="checkbox" name="personality[]" value="Always there">Always there</label>
-				</div>
-				<h3>4. What has she done for you or the family?</h3>
-				<div class="option-grid">
-					<label class="option-pill"><input type="checkbox" name="what_she_did[]" value="Raised me">Raised me</label>
-					<label class="option-pill"><input type="checkbox" name="what_she_did[]" value="Sacrificed for us">Sacrificed for us</label>
-					<label class="option-pill"><input type="checkbox" name="what_she_did[]" value="Worked hard">Worked hard</label>
-					<label class="option-pill"><input type="checkbox" name="what_she_did[]" value="Kept the family together">Kept the family together</label>
-					<label class="option-pill"><input type="checkbox" name="what_she_did[]" value="Showed up when it mattered">Showed up when it mattered</label>
-					<label class="option-pill"><input type="checkbox" name="what_she_did[]" value="Loved me unconditionally">Loved me unconditionally</label>
-					<label class="option-pill"><input type="checkbox" name="what_she_did[]" value="Believed in me">Believed in me</label>
-					<label class="option-pill"><input type="checkbox" name="what_she_did[]" value="Forgave me">Forgave me</label>
-					<label class="option-pill"><input type="checkbox" name="what_she_did[]" value="Taught me life lessons">Taught me life lessons</label>
-					<label class="option-pill"><input type="checkbox" name="what_she_did[]" value="Made home feel safe">Made home feel safe</label>
-				</div>
-				<h3>5. What do you want her to feel when she hears this?</h3>
-				<div class="option-grid">
-					<label class="option-pill"><input type="checkbox" name="feelings[]" value="Loved">Loved</label>
-					<label class="option-pill"><input type="checkbox" name="feelings[]" value="Appreciated">Appreciated</label>
-					<label class="option-pill"><input type="checkbox" name="feelings[]" value="Proud">Proud</label>
-					<label class="option-pill"><input type="checkbox" name="feelings[]" value="Seen">Seen</label>
-					<label class="option-pill"><input type="checkbox" name="feelings[]" value="Emotional">Emotional</label>
-					<label class="option-pill"><input type="checkbox" name="feelings[]" value="Happy">Happy</label>
-					<label class="option-pill"><input type="checkbox" name="feelings[]" value="Honored">Honored</label>
-					<label class="option-pill"><input type="checkbox" name="feelings[]" value="Valued">Valued</label>
-					<label class="option-pill"><input type="checkbox" name="feelings[]" value="Surprised">Surprised</label>
-					<label class="option-pill"><input type="checkbox" name="feelings[]" value="Respected">Respected</label>
-				</div>
-				<h3>6. Favorite memory with her?</h3>
-				<p class="muted-text">Optional, but this helps make the song feel real.</p>
-				<textarea name="favorite_memory" placeholder="Example: breakfast together, road trips, phone calls, holidays, something funny, something emotional..."></textarea>
-				<h3>7. Something she always says or does?</h3>
-				<textarea name="always_says_or_does" placeholder="Example: a phrase, habit, laugh, nickname, text, joke, or the way she checks on people..."></textarea>
-				<h3>8. Names, places, or details to include?</h3>
-				<textarea name="specific_details" placeholder="Example: kids, grandkids, hometown, favorite restaurant, family names, pet names, inside jokes..."></textarea>
-				<h3>9. Song style / vibe</h3>
-				<div class="option-grid">
-					<label class="option-pill"><input type="checkbox" name="style[]" value="Emotional">Emotional</label>
-					<label class="option-pill"><input type="checkbox" name="style[]" value="Upbeat">Upbeat</label>
-					<label class="option-pill"><input type="checkbox" name="style[]" value="Country">Country</label>
-					<label class="option-pill"><input type="checkbox" name="style[]" value="Acoustic">Acoustic</label>
-					<label class="option-pill"><input type="checkbox" name="style[]" value="Gospel">Gospel</label>
-					<label class="option-pill"><input type="checkbox" name="style[]" value="Pop">Pop</label>
-					<label class="option-pill"><input type="checkbox" name="style[]" value="Piano Ballad">Piano Ballad</label>
-					<label class="option-pill"><input type="checkbox" name="style[]" value="R&B Soul">R&amp;B / Soul</label>
-					<label class="option-pill"><input type="checkbox" name="style[]" value="Cinematic">Cinematic</label>
-					<label class="option-pill"><input type="checkbox" name="style[]" value="Surprise Me">Surprise Me</label>
-				</div>
-				<h3>10. Vocal and energy preference</h3>
-				<div class="grid-2">
-					<div>
-						<label for="guided_vocal">Vocal</label>
-						<select id="guided_vocal" name="vocal">
-							<option value="">Choose one</option>
-							<option value="Female">Female</option>
-							<option value="Male">Male</option>
-							<option value="Both">Both</option>
-							<option value="Surprise Me">Surprise me</option>
-						</select>
-					</div>
-					<div>
-						<label for="guided_energy">Energy</label>
-						<select id="guided_energy" name="energy">
-							<option value="">Choose one</option>
-							<option value="Slow and emotional">Slow and emotional</option>
-							<option value="Medium and heartfelt">Medium and heartfelt</option>
-							<option value="Upbeat and joyful">Upbeat and joyful</option>
-							<option value="Surprise Me">Surprise me</option>
-						</select>
-					</div>
-				</div>
-				<div class="grid-2">
-					<div>
-						<label for="guided_customer_name">Your Name</label>
-						<input type="text" id="guided_customer_name" name="customer_name" required>
-					</div>
-					<div>
-						<label for="guided_email">Your Email</label>
-						<input type="email" id="guided_email" name="email" required>
-					</div>
-				</div>
-				<div>
-					<label for="guided_phone">Your Phone Number <span style="color:var(--muted); font-size:0.82rem; font-weight:700;">(Optional — text only, no calls)</span></label>
-					<input type="tel" id="guided_phone" name="phone" placeholder="For faster communication if needed">
-				</div>
-				<p class="muted-text" style="text-align:center;">
-					After you submit this, I'll review your answers and send the $20 payment link. Production begins after payment is completed.
-				</p>
-				<button type="submit" class="btn full-width">Submit Guided Request →</button>
-			</form>
-		</section>
+<section class="card" id="guided-form">
+  <h2>Quick Guided Form</h2>
+  <p class="muted-text" style="text-align:center;">
+    Click as many answers as apply. Add extra details only if you want. The more you share, the better the song gets.
+  </p>
+  <div class="quality-meter">
+    <strong>Song Detail Level: <span id="guidedMeterLabel" class="meter-label">Basic</span></strong>
+    <div class="meter-bar">
+      <div class="meter-fill" id="guidedMeterFill"></div>
+    </div>
+    <p class="muted-text" id="guidedMeterText">Answer a few sections to create a more personal song.</p>
+  </div>
+  <form id="guidedMotherForm" action="https://formspree.io/f/xwpqlypv" method="POST">
+    <input type="hidden" name="_next" value="https://www.customsongme.com/thanks" />
+    <input type="hidden" name="form_type" value="Mother's Day Guided Form" />
+    <input type="hidden" name="package" value="Mother's Day Song $20" />
+    <input type="hidden" name="quality_level" id="guided_quality_level" />
+    <h3>1. What do you call her?</h3>
+    <p class="muted-text">Click as many as apply.</p>
+    <div class="option-grid">
+      <label class="option-pill"><input type="checkbox" name="called[]" value="Mom">Mom</label>
+      <label class="option-pill"><input type="checkbox" name="called[]" value="Mama">Mama</label>
+      <label class="option-pill"><input type="checkbox" name="called[]" value="Mommy">Mommy</label>
+      <label class="option-pill"><input type="checkbox" name="called[]" value="Ma">Ma</label>
+      <label class="option-pill"><input type="checkbox" name="called[]" value="Mother">Mother</label>
+      <label class="option-pill"><input type="checkbox" name="called[]" value="Nana">Nana</label>
+      <label class="option-pill"><input type="checkbox" name="called[]" value="Grandma">Grandma</label>
+      <label class="option-pill"><input type="checkbox" name="called[]" value="Mimi">Mimi</label>
+      <label class="option-pill"><input type="checkbox" name="called[]" value="Gigi">Gigi</label>
+      <label class="option-pill"><input type="checkbox" name="called[]" value="Bonus Mom">Bonus Mom</label>
+    </div>
+    <input type="text" name="called_other" placeholder="Other name you call her">
+    <h3>2. Who is she to you?</h3>
+    <div class="option-grid">
+      <label class="option-pill"><input type="checkbox" name="relationship[]" value="My mom">My mom</label>
+      <label class="option-pill"><input type="checkbox" name="relationship[]" value="My grandma">My grandma</label>
+      <label class="option-pill"><input type="checkbox" name="relationship[]" value="My wife">My wife</label>
+      <label class="option-pill"><input type="checkbox" name="relationship[]" value="My daughter">My daughter</label>
+      <label class="option-pill"><input type="checkbox" name="relationship[]" value="My sister">My sister</label>
+      <label class="option-pill"><input type="checkbox" name="relationship[]" value="My aunt">My aunt</label>
+      <label class="option-pill"><input type="checkbox" name="relationship[]" value="My stepmom">My stepmom</label>
+      <label class="option-pill"><input type="checkbox" name="relationship[]" value="Mother of my kids">Mother of my kids</label>
+      <label class="option-pill"><input type="checkbox" name="relationship[]" value="She raised me">She raised me</label>
+    </div>
+    <h3>3. What kind of woman is she?</h3>
+    <div class="option-grid">
+      <label class="option-pill"><input type="checkbox" name="personality[]" value="Strong">Strong</label>
+      <label class="option-pill"><input type="checkbox" name="personality[]" value="Loving">Loving</label>
+      <label class="option-pill"><input type="checkbox" name="personality[]" value="Funny">Funny</label>
+      <label class="option-pill"><input type="checkbox" name="personality[]" value="Selfless">Selfless</label>
+      <label class="option-pill"><input type="checkbox" name="personality[]" value="Tough">Tough</label>
+      <label class="option-pill"><input type="checkbox" name="personality[]" value="Gentle">Gentle</label>
+      <label class="option-pill"><input type="checkbox" name="personality[]" value="Protective">Protective</label>
+      <label class="option-pill"><input type="checkbox" name="personality[]" value="Hardworking">Hardworking</label>
+      <label class="option-pill"><input type="checkbox" name="personality[]" value="Spiritual">Spiritual</label>
+      <label class="option-pill"><input type="checkbox" name="personality[]" value="Patient">Patient</label>
+      <label class="option-pill"><input type="checkbox" name="personality[]" value="Wild and fun">Wild / Fun</label>
+      <label class="option-pill"><input type="checkbox" name="personality[]" value="Always there">Always there</label>
+    </div>
+    <h3>4. What has she done for you or the family?</h3>
+    <div class="option-grid">
+      <label class="option-pill"><input type="checkbox" name="what_she_did[]" value="Raised me">Raised me</label>
+      <label class="option-pill"><input type="checkbox" name="what_she_did[]" value="Sacrificed for us">Sacrificed for us</label>
+      <label class="option-pill"><input type="checkbox" name="what_she_did[]" value="Worked hard">Worked hard</label>
+      <label class="option-pill"><input type="checkbox" name="what_she_did[]" value="Kept the family together">Kept the family together</label>
+      <label class="option-pill"><input type="checkbox" name="what_she_did[]" value="Showed up when it mattered">Showed up when it mattered</label>
+      <label class="option-pill"><input type="checkbox" name="what_she_did[]" value="Loved me unconditionally">Loved me unconditionally</label>
+      <label class="option-pill"><input type="checkbox" name="what_she_did[]" value="Believed in me">Believed in me</label>
+      <label class="option-pill"><input type="checkbox" name="what_she_did[]" value="Forgave me">Forgave me</label>
+      <label class="option-pill"><input type="checkbox" name="what_she_did[]" value="Taught me life lessons">Taught me life lessons</label>
+      <label class="option-pill"><input type="checkbox" name="what_she_did[]" value="Made home feel safe">Made home feel safe</label>
+    </div>
+    <h3>5. What do you want her to feel when she hears this?</h3>
+    <div class="option-grid">
+      <label class="option-pill"><input type="checkbox" name="feelings[]" value="Loved">Loved</label>
+      <label class="option-pill"><input type="checkbox" name="feelings[]" value="Appreciated">Appreciated</label>
+      <label class="option-pill"><input type="checkbox" name="feelings[]" value="Proud">Proud</label>
+      <label class="option-pill"><input type="checkbox" name="feelings[]" value="Seen">Seen</label>
+      <label class="option-pill"><input type="checkbox" name="feelings[]" value="Emotional">Emotional</label>
+      <label class="option-pill"><input type="checkbox" name="feelings[]" value="Happy">Happy</label>
+      <label class="option-pill"><input type="checkbox" name="feelings[]" value="Honored">Honored</label>
+      <label class="option-pill"><input type="checkbox" name="feelings[]" value="Valued">Valued</label>
+      <label class="option-pill"><input type="checkbox" name="feelings[]" value="Surprised">Surprised</label>
+      <label class="option-pill"><input type="checkbox" name="feelings[]" value="Respected">Respected</label>
+    </div>
+    <h3>6. Favorite memory with her?</h3>
+    <p class="muted-text">Optional, but this helps make the song feel real.</p>
+    <textarea name="favorite_memory" placeholder="Example: breakfast together, road trips, phone calls, holidays, something funny, something emotional..."></textarea>
+    <h3>7. Something she always says or does?</h3>
+    <textarea name="always_says_or_does" placeholder="Example: a phrase, habit, laugh, nickname, text, joke, or the way she checks on people..."></textarea>
+    <h3>8. Names, places, or details to include?</h3>
+    <textarea name="specific_details" placeholder="Example: kids, grandkids, hometown, favorite restaurant, family names, pet names, inside jokes..."></textarea>
+    <h3>9. Song style / vibe</h3>
+    <div class="option-grid">
+      <label class="option-pill"><input type="checkbox" name="style[]" value="Emotional">Emotional</label>
+      <label class="option-pill"><input type="checkbox" name="style[]" value="Upbeat">Upbeat</label>
+      <label class="option-pill"><input type="checkbox" name="style[]" value="Country">Country</label>
+      <label class="option-pill"><input type="checkbox" name="style[]" value="Acoustic">Acoustic</label>
+      <label class="option-pill"><input type="checkbox" name="style[]" value="Gospel">Gospel</label>
+      <label class="option-pill"><input type="checkbox" name="style[]" value="Pop">Pop</label>
+      <label class="option-pill"><input type="checkbox" name="style[]" value="Piano Ballad">Piano Ballad</label>
+      <label class="option-pill"><input type="checkbox" name="style[]" value="R&B Soul">R&amp;B / Soul</label>
+      <label class="option-pill"><input type="checkbox" name="style[]" value="Cinematic">Cinematic</label>
+      <label class="option-pill"><input type="checkbox" name="style[]" value="Surprise Me">Surprise Me</label>
+    </div>
+    <h3>10. Vocal and energy preference</h3>
+    <div class="grid-2">
+      <div>
+        <label for="guided_vocal">Vocal</label>
+        <select id="guided_vocal" name="vocal">
+          <option value="">Choose one</option>
+          <option value="Female">Female</option>
+          <option value="Male">Male</option>
+          <option value="Both">Both</option>
+          <option value="Surprise Me">Surprise me</option>
+        </select>
+      </div>
+      <div>
+        <label for="guided_energy">Energy</label>
+        <select id="guided_energy" name="energy">
+          <option value="">Choose one</option>
+          <option value="Slow and emotional">Slow and emotional</option>
+          <option value="Medium and heartfelt">Medium and heartfelt</option>
+          <option value="Upbeat and joyful">Upbeat and joyful</option>
+          <option value="Surprise Me">Surprise me</option>
+        </select>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div>
+        <label for="guided_customer_name">Your Name</label>
+        <input type="text" id="guided_customer_name" name="customer_name" required>
+      </div>
+      <div>
+        <label for="guided_email">Your Email</label>
+        <input type="email" id="guided_email" name="email" required>
+      </div>
+    </div>
+    <div>
+        <label for="guided_phone">Your Phone Number <span style="color:var(--muted); font-size:0.82rem; font-weight:700;">(Optional — text only, no calls)</span></label>
+        <input type="tel" id="guided_phone" name="phone" placeholder="For faster communication if needed">
+      </div>
+    <p class="muted-text" style="text-align:center;">
+      After you submit this, I'll review your answers and send the $20 payment link. Production begins after payment is completed.
+    </p>
+    <button type="submit" class="btn full-width">Submit Guided Request →</button>
+  </form>
+</section>
 
-		<section class="card" id="simple-form">
-			<h2>Already Know What You Want?</h2>
-			<p class="lead">Use this option if you already know the story, message, or details you want in the song.</p>
-			<p class="muted-text">No structure. Just tell me about her in your own words.</p>
-			<form id="simpleMotherForm" action="https://formspree.io/f/xwpqlypv" method="POST">
-				<input type="hidden" name="_next" value="https://www.customsongme.com/thanks" />
-				<input type="hidden" name="form_type" value="Mother's Day Simple Story Form" />
-				<input type="hidden" name="package" value="Mother's Day Song $20" />
-				<label for="simple_story">Tell me about her and what you want the song to say</label>
-				<textarea id="simple_story" name="story" required placeholder="Write anything you want included: her personality, your favorite memories, names, places, inside jokes, what she means to you, and how you want the song to feel."></textarea>
-				<div class="grid-2">
-					<div>
-						<label for="simple_style">Preferred Style</label>
-						<select id="simple_style" name="preferred_style">
-							<option value="">Choose one if you want</option>
-							<option value="Emotional">Emotional</option>
-							<option value="Country">Country</option>
-							<option value="Acoustic">Acoustic</option>
-							<option value="Pop">Pop</option>
-							<option value="Gospel">Gospel</option>
-							<option value="R&B Soul">R&amp;B / Soul</option>
-							<option value="Surprise Me">Surprise me</option>
-						</select>
-					</div>
-					<div>
-						<label for="simple_vocal">Vocal Preference</label>
-						<select id="simple_vocal" name="vocal_preference">
-							<option value="">Choose one if you want</option>
-							<option value="Female">Female</option>
-							<option value="Male">Male</option>
-							<option value="Both">Both</option>
-							<option value="Surprise Me">Surprise me</option>
-						</select>
-					</div>
-				</div>
-				<div class="grid-2">
-					<div>
-						<label for="simple_customer_name">Your Name</label>
-						<input type="text" id="simple_customer_name" name="customer_name" required>
-					</div>
-					<div>
-						<label for="simple_email">Your Email</label>
-						<input type="email" id="simple_email" name="email" required>
-					</div>
-				</div>
-				<div>
-					<label for="simple_phone">Your Phone Number <span style="color:var(--muted); font-size:0.82rem; font-weight:700;">(Optional — text only, no calls)</span></label>
-					<input type="tel" id="simple_phone" name="phone" placeholder="For faster communication if needed">
-				</div>
-				<p class="muted-text" style="text-align:center;">
-					After you submit this, I'll review your story and send the $20 payment link. Production begins after payment is completed.
-				</p>
-				<button type="submit" class="btn full-width">Submit My Story →</button>
-			</form>
-		</section>
+<section class="card" id="simple-form">
+  <h2>Already Know What You Want?</h2>
+  <p class="lead">Use this option if you already know the story, message, or details you want in the song.</p>
+  <p class="muted-text">No structure. Just tell me about her in your own words.</p>
+  <form id="simpleMotherForm" action="https://formspree.io/f/xwpqlypv" method="POST">
+    <input type="hidden" name="_next" value="https://www.customsongme.com/thanks" />
+    <input type="hidden" name="form_type" value="Mother's Day Simple Story Form" />
+    <input type="hidden" name="package" value="Mother's Day Song $20" />
+    <label for="simple_story">Tell me about her and what you want the song to say</label>
+    <textarea id="simple_story" name="story" required placeholder="Write anything you want included: her personality, your favorite memories, names, places, inside jokes, what she means to you, and how you want the song to feel."></textarea>
+    <div class="grid-2">
+      <div>
+        <label for="simple_style">Preferred Style</label>
+        <select id="simple_style" name="preferred_style">
+          <option value="">Choose one if you want</option>
+          <option value="Emotional">Emotional</option>
+          <option value="Country">Country</option>
+          <option value="Acoustic">Acoustic</option>
+          <option value="Pop">Pop</option>
+          <option value="Gospel">Gospel</option>
+          <option value="R&B Soul">R&amp;B / Soul</option>
+          <option value="Surprise Me">Surprise me</option>
+        </select>
+      </div>
+      <div>
+        <label for="simple_vocal">Vocal Preference</label>
+        <select id="simple_vocal" name="vocal_preference">
+          <option value="">Choose one if you want</option>
+          <option value="Female">Female</option>
+          <option value="Male">Male</option>
+          <option value="Both">Both</option>
+          <option value="Surprise Me">Surprise me</option>
+        </select>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div>
+        <label for="simple_customer_name">Your Name</label>
+        <input type="text" id="simple_customer_name" name="customer_name" required>
+      </div>
+      <div>
+        <label for="simple_email">Your Email</label>
+        <input type="email" id="simple_email" name="email" required>
+      </div>
+    </div>
+    <div>
+        <label for="simple_phone">Your Phone Number <span style="color:var(--muted); font-size:0.82rem; font-weight:700;">(Optional — text only, no calls)</span></label>
+        <input type="tel" id="simple_phone" name="phone" placeholder="For faster communication if needed">
+      </div>
+    <p class="muted-text" style="text-align:center;">
+      After you submit this, I'll review your story and send the $20 payment link. Production begins after payment is completed.
+    </p>
+    <button type="submit" class="btn full-width">Submit My Story →</button>
+  </form>
+</section>
 
-		<section class="card" id="text-option">
-			<h2>Rather Text It?</h2>
-			<p class="lead">If you're on the go, text me directly and I'll send you the questions.</p>
-			<div class="sms-box" style="text-align:center;">
-				<strong>Text:</strong><br>
-				<span>SONG – Your Name</span><br>
-				to <span>(661) 714-0903</span>
-			</div>
-			<p class="muted-text" style="text-align:center;">
-				You can reply by typing or using voice-to-text. Usually fast, but please allow up to 3 hours for a reply.
-			</p>
-			<a href="sms:+16617140903?body=SONG%20-%20Your%20Name" class="btn full-width">Text Me the Questions →</a>
-			<p class="muted-text" style="text-align:center; margin-top:14px;">Production begins after payment is completed.</p>
-		</section>
+<section class="card" id="text-option">
+  <h2>Rather Text It?</h2>
+  <p class="lead">If you're on the go, text me directly and I'll send you the questions.</p>
+  <div class="sms-box" style="text-align:center;">
+    <strong>Text:</strong><br>
+    <span>SONG – Your Name</span><br>
+    to <span>(661) 714-0903</span>
+  </div>
+  <p class="muted-text" style="text-align:center;">
+    You can reply by typing or using voice-to-text. Usually fast, but please allow up to 3 hours for a reply.
+  </p>
+  <a href="sms:+16617140903?body=SONG%20-%20Your%20Name" class="btn full-width">Text Me the Questions →</a>
+  <p class="muted-text" style="text-align:center; margin-top:14px;">Production begins after payment is completed.</p>
+</section>
 
-		<section class="card" id="after-submit">
-			<h2>What Happens After You Submit?</h2>
-			<div class="grid-3">
-				<div class="mini-card">
-					<h3>1. You Send the Story</h3>
-					<p class="muted-text">Use the guided form, write your own story, or text me directly.</p>
-				</div>
-				<div class="mini-card">
-					<h3>2. I Send Payment Link</h3>
-					<p class="muted-text">I review your details and send the $20 payment link.</p>
-				</div>
-				<div class="mini-card">
-					<h3>3. I Create the Song</h3>
-					<p class="muted-text">Production begins after payment is completed.</p>
-				</div>
-			</div>
-			<div class="delivery-status" style="margin-top:24px;">
-				<strong id="deliveryHeadlineBottom">🟢 Current Delivery Time: 24 Hours</strong>
-				<p id="deliveryTextBottom">Mother's Day orders are limited. Delivery time may increase as demand grows.</p>
-			</div>
-		</section>
+<section class="card" id="after-submit">
+  <h2>What Happens After You Submit?</h2>
+  <div class="grid-3">
+    <div class="mini-card">
+      <h3>1. You Send the Story</h3>
+      <p class="muted-text">Use the guided form, write your own story, or text me directly.</p>
+    </div>
+    <div class="mini-card">
+      <h3>2. I Send Payment Link</h3>
+      <p class="muted-text">I review your details and send the $20 payment link.</p>
+    </div>
+    <div class="mini-card">
+      <h3>3. I Create the Song</h3>
+      <p class="muted-text">Production begins after payment is completed.</p>
+    </div>
+  </div>
+  <div class="delivery-status" style="margin-top:24px;">
+    <strong id="deliveryHeadlineBottom">🟢 Current Delivery Time: 24 Hours</strong>
+    <p id="deliveryTextBottom">Mother's Day orders are limited. Delivery time may increase as demand grows.</p>
+  </div>
+</section>
 
-		<section class="card" id="samples">
-			<h2>More Song Samples</h2>
-			<p class="lead">Three short audio samples across different styles.</p>
-			<div class="grid-3">
-				<div class="sample-card">
-					<h3>Sample #1</h3>
-					<p class="muted-text">Emotional and heartfelt</p>
-					<audio controls preload="metadata">
-						<source src="/mothers-day-1.mp3" type="audio/mpeg">
-						Your browser does not support the audio element.
-					</audio>
-				</div>
-				<div class="sample-card">
-					<h3>Sample #2</h3>
-					<p class="muted-text">Appreciation and gratitude</p>
-					<audio controls preload="metadata">
-						<source src="/mothers-day-2.mp3" type="audio/mpeg">
-						Your browser does not support the audio element.
-					</audio>
-				</div>
-				<div class="sample-card">
-					<h3>Sample #3</h3>
-					<p class="muted-text">Personal and uplifting</p>
-					<audio controls preload="metadata">
-						<source src="/mothers-day-3.mp3" type="audio/mpeg">
-						Your browser does not support the audio element.
-					</audio>
-				</div>
-			</div>
-		</section>
+<section class="card" id="samples">
+  <h2>More Song Samples</h2>
+  <p class="lead">Three short audio samples across different styles.</p>
+  <div class="grid-3">
+    <div class="sample-card">
+      <h3>Sample #1</h3>
+      <p class="muted-text">Emotional and heartfelt</p>
+      <audio controls preload="metadata">
+        <source src="/mothers-day-1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+    <div class="sample-card">
+      <h3>Sample #2</h3>
+      <p class="muted-text">Appreciation and gratitude</p>
+      <audio controls preload="metadata">
+        <source src="/mothers-day-2.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+    <div class="sample-card">
+      <h3>Sample #3</h3>
+      <p class="muted-text">Personal and uplifting</p>
+      <audio controls preload="metadata">
+        <source src="/mothers-day-3.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+</section>
 
-		<section class="card" id="faq">
-			<h2>Frequently Asked Questions</h2>
-			<h3>How much does a custom Mother's Day song cost?</h3>
-			<p>The Mother's Day special is one simple option: a fully personalized custom song for $20.</p>
-			<h3>Is the song guaranteed?</h3>
-			<p>Yes. If the first version isn't what you hoped for, I'll keep working on it until it is. If I still can't get it exactly right, I'll give you a full refund. No hard feelings. I want this to be the best gift she's ever received.</p>
-			<h3>When does production begin?</h3>
-			<p>Production begins after payment is completed.</p>
-			<h3>How fast is delivery?</h3>
-			<p>Current delivery time is shown on this page. If demand increases, the posted delivery time may change from 24 hours to 48 or 72 hours.</p>
-			<h3>What file format will I receive?</h3>
-			<p>You will receive a high quality MP3 by email.</p>
-			<h3>Who owns the rights to my song?</h3>
-			<p>Songs created through CustomSongMe are produced using AI-assisted music generation tools. Copyright ownership of AI-generated music is currently subject to evolving laws and regulations. CustomSongMe does not guarantee exclusive copyright ownership or full commercial rights. By placing an order you acknowledge this limitation.</p>
-		</section>
+<section class="card" id="faq">
+  <h2>Frequently Asked Questions</h2>
+  <h3>How much does a custom Mother's Day song cost?</h3>
+  <p>The Mother's Day special is one simple option: a fully personalized custom song for $20.</p>
+  <h3>Is the song guaranteed?</h3>
+  <p>Yes. If the first version isn't what you hoped for, I'll keep working on it until it is. If I still can't get it exactly right, I'll give you a full refund. No hard feelings. I want this to be the best gift she's ever received.</p>
+  <h3>When does production begin?</h3>
+  <p>Production begins after payment is completed.</p>
+  <h3>How fast is delivery?</h3>
+  <p>Current delivery time is shown on this page. If demand increases, the posted delivery time may change from 24 hours to 48 or 72 hours.</p>
+  <h3>What file format will I receive?</h3>
+  <p>You will receive a high quality MP3 by email.</p>
+  <h3>Who owns the rights to my song?</h3>
+  <p>Songs created through CustomSongMe are produced using AI-assisted music generation tools. Copyright ownership of AI-generated music is currently subject to evolving laws and regulations. CustomSongMe does not guarantee exclusive copyright ownership or full commercial rights. By placing an order you acknowledge this limitation.</p>
+</section>
 
-		<div class="disclaimer">
-			<strong>⚠️ Copyright Notice:</strong> Songs created through CustomSongMe are produced using AI-assisted music generation tools. Copyright ownership of AI-generated music is currently subject to evolving laws and regulations. CustomSongMe does not guarantee exclusive copyright ownership or full commercial rights to any delivered song. By placing an order you acknowledge and accept this limitation.
-		</div>
-		```
+<div class="disclaimer">
+  <strong>⚠️ Copyright Notice:</strong> Songs created through CustomSongMe are produced using AI-assisted music generation tools. Copyright ownership of AI-generated music is currently subject to evolving laws and regulations. CustomSongMe does not guarantee exclusive copyright ownership or full commercial rights to any delivered song. By placing an order you acknowledge and accept this limitation.
+</div>
+```
 
-	</main>
-	<footer>
-		<div class="container">
-			<div class="footer-links">
-				<a href="/">Home</a>
-				<a href="/birthday-songs">Birthday Songs</a>
-				<a href="/wedding-songs">Wedding Songs</a>
-				<a href="/anniversary-songs">Anniversary Songs</a>
-				<a href="/love-songs">Love Songs</a>
-				<a href="/mothers-day-songs">Mother's Day Songs</a>
-				<a href="/pet-songs">Pet Songs</a>
-				<a href="/roast-songs">Roast Songs</a>
-				<a href="/memorial-songs">Celebration of Life</a>
-				<a href="/business-jingles">Business Jingles</a>
-			</div>
-			<div class="social-links">
-				<a href="https://www.facebook.com/customsongme" target="_blank" rel="noopener">Facebook</a>
-				<a href="https://www.instagram.com/customsongme" target="_blank" rel="noopener">Instagram</a>
-				<a href="https://www.tiktok.com/@customsongme" target="_blank" rel="noopener">TikTok</a>
-				<a href="https://www.youtube.com/@customsongme" target="_blank" rel="noopener">YouTube</a>
-				<a href="https://x.com/customsongme" target="_blank" rel="noopener">X</a>
-				<a href="https://www.linkedin.com/company/customsongme" target="_blank" rel="noopener">LinkedIn</a>
-			</div>
-			<p style="margin:16px 0 8px;">
-				<a href="https://g.page/r/CUJZcUwU_iIFEAE/review" target="_blank" rel="noopener" style="color:var(--brand-2); font-weight:700; text-decoration:none;">⭐ Leave us a Google Review</a>
-			</p>
-			<p style="margin:18px 0 8px;">© <span id="year"></span> CustomSongMe. All Rights Reserved.</p>
-			<p>Serving customers nationwide online | <a href="tel:+16617140903" style="color:var(--muted);">+1 (661) 714-0903</a></p>
-			<p>Contact: <span id="safe-email"></span></p>
-		</div>
-	</footer>
-	<script>
-		/*
+  </main>
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/birthday-songs">Birthday Songs</a>
+        <a href="/wedding-songs">Wedding Songs</a>
+        <a href="/anniversary-songs">Anniversary Songs</a>
+        <a href="/love-songs">Love Songs</a>
+        <a href="/mothers-day-songs">Mother's Day Songs</a>
+        <a href="/pet-songs">Pet Songs</a>
+        <a href="/roast-songs">Roast Songs</a>
+        <a href="/memorial-songs">Celebration of Life</a>
+        <a href="/business-jingles">Business Jingles</a>
+      </div>
+      <div class="social-links">
+        <a href="https://www.facebook.com/customsongme" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.instagram.com/customsongme" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@customsongme" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.youtube.com/@customsongme" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://x.com/customsongme" target="_blank" rel="noopener">X</a>
+        <a href="https://www.linkedin.com/company/customsongme" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <p style="margin:16px 0 8px;">
+        <a href="https://g.page/r/CUJZcUwU_iIFEAE/review" target="_blank" rel="noopener" style="color:var(--brand-2); font-weight:700; text-decoration:none;">⭐ Leave us a Google Review</a>
+      </p>
+      <p style="margin:18px 0 8px;">© <span id="year"></span> CustomSongMe. All Rights Reserved.</p>
+      <p>Serving customers nationwide online | <a href="tel:+16617140903" style="color:var(--muted);">+1 (661) 714-0903</a></p>
+      <p>Contact: <span id="safe-email"></span></p>
+    </div>
+  </footer>
+  <script>
+    /*
       CHANGE ONLY THIS LINE WHEN YOU GET BUSY:
       Options: "24", "48", "72"
     */
-		const DELIVERY_HOURS = "24";
-		const user = "danrocksai";
-		const domain = "gmail.com";
-		document.getElementById("safe-email").innerHTML =
-			`<a href="mailto:${user}@${domain}" style="color:var(--muted);">${user}@${domain}</a>`;
-		document.getElementById("year").innerText = new Date().getFullYear();
+    const DELIVERY_HOURS = "24";
+    const user = "danrocksai";
+    const domain = "gmail.com";
+    document.getElementById("safe-email").innerHTML =
+      `<a href="mailto:${user}@${domain}" style="color:var(--muted);">${user}@${domain}</a>`;
+    document.getElementById("year").innerText = new Date().getFullYear();
+    function applyDeliveryStatus() {
+      const topHeadline = document.getElementById("deliveryHeadlineTop");
+      const topText = document.getElementById("deliveryTextTop");
+      const bottomHeadline = document.getElementById("deliveryHeadlineBottom");
+      const bottomText = document.getElementById("deliveryTextBottom");
+      let headline = "🟢 Current Delivery Time: 24 Hours";
+      let mainText = "Order now and your song will be delivered within 24 hours after payment is completed.";
+      let bottomMessage = "Mother's Day orders are limited. Delivery time may increase as demand grows.";
+      if (DELIVERY_HOURS === "48") {
+        headline = "🟡 High Demand: 48 Hour Delivery";
+        mainText = "We're experiencing high demand. New orders will be delivered within 48 hours after payment is completed.";
+        bottomMessage = "Mother's Day demand is increasing. Submit now to secure your spot.";
+      }
+      if (DELIVERY_HOURS === "72") {
+        headline = "🔴 Limited Availability: 72 Hour Delivery";
+        mainText = "Due to very high demand, delivery is currently 72 hours after payment is completed.";
+        bottomMessage = "Order slots are filling quickly. Delivery is currently 72 hours.";
+      }
+      if (topHeadline) topHeadline.innerText = headline;
+      if (topText) topText.innerText = mainText;
+      if (bottomHeadline) bottomHeadline.innerText = headline;
+      if (bottomText) bottomText.innerText = bottomMessage;
+    }
+    applyDeliveryStatus();
+    const menuBtn = document.getElementById("menuBtn");
+    const navMenu = document.getElementById("navMenu");
+    if (menuBtn && navMenu) {
+      menuBtn.addEventListener("click", function () {
+        const isOpen = navMenu.classList.toggle("open");
+        menuBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+    }
+    const guidedForm = document.getElementById("guidedMotherForm");
+    const guidedMeterFill = document.getElementById("guidedMeterFill");
+    const guidedMeterLabel = document.getElementById("guidedMeterLabel");
+    const guidedMeterText = document.getElementById("guidedMeterText");
+    const guidedQualityLevel = document.getElementById("guided_quality_level");
+    function updateGuidedMeter() {
+      if (!guidedForm || !guidedMeterFill || !guidedMeterLabel || !guidedMeterText || !guidedQualityLevel) return;
+      let sectionsComplete = 0;
+      const checkboxGroups = ["called[]","relationship[]","personality[]","what_she_did[]","feelings[]","style[]"];
+      checkboxGroups.forEach((groupName) => {
+        if (guidedForm.querySelectorAll(`input[name="${groupName}"]:checked`).length > 0) sectionsComplete++;
+      });
+      const optionalFields = ["favorite_memory","always_says_or_does","specific_details","vocal","energy"];
+      optionalFields.forEach((fieldName) => {
+        const field = guidedForm.querySelector(`[name="${fieldName}"]`);
+        if (field && field.value.trim() !== "") sectionsComplete++;
+      });
+      const percent = Math.min((sectionsComplete / 10) * 100, 100);
+      guidedMeterFill.style.width = percent + "%";
+      if (sectionsComplete <= 4) {
+        guidedMeterLabel.innerText = "Basic";
+        guidedMeterFill.style.background = "var(--red)";
+        guidedMeterText.innerText = "Good start. Add a few more details for a better song.";
+        guidedQualityLevel.value = "Basic";
+      } else if (sectionsComplete <= 7) {
+        guidedMeterLabel.innerText = "Good";
+        guidedMeterFill.style.background = "var(--yellow)";
+        guidedMeterText.innerText = "Enough for a solid personalized song.";
+        guidedQualityLevel.value = "Good";
+      } else {
+        guidedMeterLabel.innerText = "Excellent";
+        guidedMeterFill.style.background = "var(--green)";
+        guidedMeterText.innerText = "Strong details. This gives the best chance for a deeply personal song.";
+        guidedQualityLevel.value = "Excellent";
+      }
+    }
+    if (guidedForm) {
+      guidedForm.addEventListener("input", updateGuidedMeter);
+      guidedForm.addEventListener("change", updateGuidedMeter);
+      guidedForm.addEventListener("submit", function () {
+        if (typeof gtag === "function") {
+          gtag("event", "generate_lead", {
+            event_label: "mothers_day_guided_form",
+            quality_level: guidedQualityLevel.value || "Basic"
+          });
+        }
+      });
+      updateGuidedMeter();
+    }
+    const simpleForm = document.getElementById("simpleMotherForm");
+    if (simpleForm) {
+      simpleForm.addEventListener("submit", function () {
+        if (typeof gtag === "function") {
+          gtag("event", "generate_lead", { event_label: "mothers_day_simple_story_form" });
+        }
+      });
+    }
+    document.querySelectorAll(".yt-facade").forEach(function(facade) {
+      facade.addEventListener("click", function() {
+        const vid = this.dataset.vid;
+        const iframe = document.createElement("iframe");
+        iframe.src = "https://www.youtube-nocookie.com/embed/" + vid + "?autoplay=1&rel=0&playsinline=1";
+        iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+        iframe.setAttribute("allowfullscreen", "");
+        iframe.setAttribute("frameborder", "0");
+        iframe.style.cssText = "position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:14px;";
+        this.innerHTML = "";
+        this.appendChild(iframe);
+        if (typeof gtag === "function") {
+          gtag("event", "play_sample", { sample_name: "mothers_day_video_" + vid });
+        }
+      });
+    });
 
-		function applyDeliveryStatus() {
-			const topHeadline = document.getElementById("deliveryHeadlineTop");
-			const topText = document.getElementById("deliveryTextTop");
-			const bottomHeadline = document.getElementById("deliveryHeadlineBottom");
-			const bottomText = document.getElementById("deliveryTextBottom");
-			let headline = "🟢 Current Delivery Time: 24 Hours";
-			let mainText = "Order now and your song will be delivered within 24 hours after payment is completed.";
-			let bottomMessage = "Mother's Day orders are limited. Delivery time may increase as demand grows.";
-			if (DELIVERY_HOURS === "48") {
-				headline = "🟡 High Demand: 48 Hour Delivery";
-				mainText = "We're experiencing high demand. New orders will be delivered within 48 hours after payment is completed.";
-				bottomMessage = "Mother's Day demand is increasing. Submit now to secure your spot.";
-			}
-			if (DELIVERY_HOURS === "72") {
-				headline = "🔴 Limited Availability: 72 Hour Delivery";
-				mainText = "Due to very high demand, delivery is currently 72 hours after payment is completed.";
-				bottomMessage = "Order slots are filling quickly. Delivery is currently 72 hours.";
-			}
-			if (topHeadline) topHeadline.innerText = headline;
-			if (topText) topText.innerText = mainText;
-			if (bottomHeadline) bottomHeadline.innerText = headline;
-			if (bottomText) bottomText.innerText = bottomMessage;
-		}
-		applyDeliveryStatus();
-		const menuBtn = document.getElementById("menuBtn");
-		const navMenu = document.getElementById("navMenu");
-		if (menuBtn && navMenu) {
-			menuBtn.addEventListener("click", function() {
-				const isOpen = navMenu.classList.toggle("open");
-				menuBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
-			});
-		}
-		const guidedForm = document.getElementById("guidedMotherForm");
-		const guidedMeterFill = document.getElementById("guidedMeterFill");
-		const guidedMeterLabel = document.getElementById("guidedMeterLabel");
-		const guidedMeterText = document.getElementById("guidedMeterText");
-		const guidedQualityLevel = document.getElementById("guided_quality_level");
-
-		function updateGuidedMeter() {
-			if (!guidedForm || !guidedMeterFill || !guidedMeterLabel || !guidedMeterText || !guidedQualityLevel) return;
-			let sectionsComplete = 0;
-			const checkboxGroups = ["called[]", "relationship[]", "personality[]", "what_she_did[]", "feelings[]", "style[]"];
-			checkboxGroups.forEach((groupName) => {
-				if (guidedForm.querySelectorAll(`input[name="${groupName}"]:checked`).length > 0) sectionsComplete++;
-			});
-			const optionalFields = ["favorite_memory", "always_says_or_does", "specific_details", "vocal", "energy"];
-			optionalFields.forEach((fieldName) => {
-				const field = guidedForm.querySelector(`[name="${fieldName}"]`);
-				if (field && field.value.trim() !== "") sectionsComplete++;
-			});
-			const percent = Math.min((sectionsComplete / 10) * 100, 100);
-			guidedMeterFill.style.width = percent + "%";
-			if (sectionsComplete <= 4) {
-				guidedMeterLabel.innerText = "Basic";
-				guidedMeterFill.style.background = "var(--red)";
-				guidedMeterText.innerText = "Good start. Add a few more details for a better song.";
-				guidedQualityLevel.value = "Basic";
-			} else if (sectionsComplete <= 7) {
-				guidedMeterLabel.innerText = "Good";
-				guidedMeterFill.style.background = "var(--yellow)";
-				guidedMeterText.innerText = "Enough for a solid personalized song.";
-				guidedQualityLevel.value = "Good";
-			} else {
-				guidedMeterLabel.innerText = "Excellent";
-				guidedMeterFill.style.background = "var(--green)";
-				guidedMeterText.innerText = "Strong details. This gives the best chance for a deeply personal song.";
-				guidedQualityLevel.value = "Excellent";
-			}
-		}
-		if (guidedForm) {
-			guidedForm.addEventListener("input", updateGuidedMeter);
-			guidedForm.addEventListener("change", updateGuidedMeter);
-			guidedForm.addEventListener("submit", function() {
-				if (typeof gtag === "function") {
-					gtag("event", "generate_lead", {
-						event_label: "mothers_day_guided_form",
-						quality_level: guidedQualityLevel.value || "Basic"
-					});
-				}
-			});
-			updateGuidedMeter();
-		}
-		const simpleForm = document.getElementById("simpleMotherForm");
-		if (simpleForm) {
-			simpleForm.addEventListener("submit", function() {
-				if (typeof gtag === "function") {
-					gtag("event", "generate_lead", { event_label: "mothers_day_simple_story_form" });
-				}
-			});
-		}
-		document.querySelectorAll(".yt-facade").forEach(function(facade) {
-			facade.addEventListener("click", function() {
-				const vid = this.dataset.vid;
-				const iframe = document.createElement("iframe");
-				iframe.src = "https://www.youtube-nocookie.com/embed/" + vid + "?autoplay=1&rel=0";
-				iframe.allow = "autoplay; encrypted-media";
-				iframe.allowFullscreen = true;
-				iframe.style.cssText = "position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:14px;";
-				this.innerHTML = "";
-				this.appendChild(iframe);
-				if (typeof gtag === "function") {
-					gtag("event", "play_sample", { sample_name: "mothers_day_video_" + vid });
-				}
-			});
-		});
-
-		``
-		`
+```
 document.querySelectorAll("audio").forEach((audio, index) => {
   audio.addEventListener("play", function () {
     if (typeof gtag === "function") {
-      gtag("event", "play_sample", { sample_name: `
-		mothers_day_sample_$ { index + 1 }
-		` });
+      gtag("event", "play_sample", { sample_name: `mothers_day_sample_${index + 1}` });
     }
   });
 });
@@ -1392,8 +948,7 @@ function updateStudioStatus() {
     label.style.color = "var(--muted)";
     label.innerText = "🎙️ Dan's Out of the Studio";
     const nextOpen = day === 6 ? "Monday at 8am" : day === 0 ? "Monday at 8am" : "tomorrow at 8am";
-    sub.innerText = `
-		Back $ { nextOpen }— submissions always accepted`;
+    sub.innerText = `Back ${nextOpen} — submissions always accepted`;
   }
 }
 
@@ -1406,9 +961,8 @@ window.addEventListener("scroll", () => {
   const percent = height > 0 ? ((winScroll / height) * 100) : 0;
   document.getElementById("progressBar").style.width = percent + "%";
 });
-`
-		``
-	</script>
-</body>
+```
 
+  </script>
+</body>
 </html>
