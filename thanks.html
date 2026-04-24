@@ -1,550 +1,495 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-
   <title>Request Received | CustomSongMe</title>
-  <meta name="description" content="Your custom song request has been received. Complete payment to begin production. Your song will be delivered within 24 hours of payment.">
-
-  <link rel="canonical" href="https://www.customsongme.com/thanks" />
-  <link rel="icon" type="image/png" href="/logo.png">
-
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HGQ54E69BZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-HGQ54E69BZ");
+    gtag("event", "conversion", { event_label: "song_request_submitted" });
+  </script>
   <style>
     :root {
       --bg:#0b0b12;
-      --card:#151525;
-      --text:#e9e9f1;
-      --muted:#b0b5c0;
+      --bg-soft:#10101b;
+      --text:#ececf5;
+      --muted:#b6bbca;
       --brand:#7a5cff;
+      --brand-2:#9d8cff;
       --accent:#ff4d8d;
-      --success:#4ade80;
+      --green:#4ade80;
+      --yellow:#facc15;
+      --border:#27273c;
+      --shadow:0 12px 30px rgba(0,0,0,0.28);
+      --radius:18px;
     }
 
-    @keyframes checkmark {
-      0% { transform: scale(0); opacity: 0; }
-      60% { transform: scale(1.15); opacity: 1; }
-      100% { transform: scale(1); opacity: 1; }
-    }
+```
+* { box-sizing:border-box; }
 
-    * { box-sizing: border-box; }
+html, body {
+  margin:0; padding:0;
+  background:
+    radial-gradient(circle at top, rgba(122,92,255,0.12), transparent 30%),
+    linear-gradient(180deg, #0a0a12 0%, #0e0e18 40%, #0b0b12 100%);
+  color:var(--text);
+  font:16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  min-height:100vh;
+}
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      font: 16px/1.6 system-ui, -apple-system, sans-serif;
-      scroll-behavior: smooth;
-    }
+body { -webkit-font-smoothing:antialiased; }
+a { color:inherit; }
 
-    nav {
-      background: #0f0f1e;
-      border-bottom: 1px solid #222233;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+.container {
+  width:min(680px, 92vw);
+  margin:0 auto;
+  padding:48px 0 80px;
+}
 
-    .nav-inner {
-      width: min(1000px, 92vw);
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 0;
-    }
+.logo-wrap {
+  text-align:center;
+  margin-bottom:32px;
+}
 
-    .nav-brand {
-      font-weight: 700;
-      color: var(--brand);
-      text-decoration: none;
-      font-size: 1.05rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      letter-spacing: -0.3px;
-    }
+.logo-wrap a {
+  text-decoration:none;
+  color:var(--brand-2);
+  font-weight:800;
+  font-size:1.1rem;
+}
 
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 8px;
-      background: none;
-      border: none;
-    }
+.hero {
+  text-align:center;
+  margin-bottom:32px;
+}
 
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--muted);
-      border-radius: 2px;
-      transition: 0.3s;
-    }
+.checkmark {
+  width:64px;
+  height:64px;
+  background:rgba(74,222,128,0.15);
+  border:2px solid rgba(74,222,128,0.4);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.8rem;
+  margin:0 auto 20px;
+}
 
-    .nav-menu {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-    }
+h1 {
+  font-size:clamp(1.8rem, 5vw, 2.6rem);
+  line-height:1.1;
+  margin:0 0 12px;
+  letter-spacing:-0.8px;
+}
 
-    .nav-menu a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.85rem;
-      padding: 6px 10px;
-      border-radius: 6px;
-      transition: 0.2s;
-    }
+h2 {
+  color:var(--brand-2);
+  font-size:1.25rem;
+  margin:0 0 12px;
+}
 
-    .nav-menu a:hover {
-      color: var(--text);
-      background: #1a1a2e;
-    }
+h3 { margin:0 0 8px; font-size:1rem; }
+p { margin:0 0 14px; }
 
-    @media (max-width: 768px) {
-      .hamburger { display: flex; }
-      .nav-menu {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background: #0f0f1e;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        padding: 10px 4vw;
-        border-bottom: 1px solid #222233;
-        gap: 0;
-      }
-      .nav-menu.open { display: flex; }
-      .nav-menu a {
-        padding: 12px 0;
-        border-bottom: 1px solid #1a1a2e;
-        font-size: 0.95rem;
-      }
-    }
+.card {
+  background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+  border:1px solid rgba(255,255,255,0.07);
+  box-shadow:var(--shadow);
+  margin:20px 0;
+  padding:24px;
+  border-radius:var(--radius);
+}
 
-    .container { width: min(1000px, 92vw); margin: 0 auto; }
+.muted-text { color:var(--muted); font-size:0.93rem; }
+.lead { color:var(--muted); font-size:1rem; }
 
-    .hero {
-      text-align: center;
-      padding: 80px 20px 34px;
-    }
+/* Studio Status */
+.studio-card {
+  background:linear-gradient(135deg, rgba(122,92,255,0.1), rgba(255,77,141,0.05));
+  border:1px solid rgba(122,92,255,0.3);
+  border-radius:var(--radius);
+  padding:24px;
+  margin:20px 0;
+}
 
-    .checkmark {
-      width: 84px;
-      height: 84px;
-      background: var(--brand);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 24px;
-      font-size: 2.4rem;
-      animation: checkmark 0.6s ease forwards;
-    }
+.studio-indicator {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:12px;
+}
 
-    h1 { font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 14px; line-height: 1.1; }
-    h2 { color: var(--brand); font-size: 1.5rem; margin-top: 0; }
-    h3 { border-bottom: 1px solid #2a2a44; padding-bottom: 8px; margin-top: 20px; }
+.studio-light {
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 10px var(--green);
+  flex-shrink:0;
+}
 
-    .card {
-      background: var(--card);
-      margin: 20px auto;
-      padding: 30px;
-      border-radius: 16px;
-      border: 1px solid #222233;
-    }
+.studio-light.closed {
+  background:#444;
+  box-shadow:none;
+  animation:none !important;
+}
 
-    .btn {
-      display: inline-block;
-      background: var(--brand);
-      color: #fff;
-      padding: 14px 28px;
-      border-radius: 50px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: 0.3s;
-      border: none;
-      cursor: pointer;
-    }
+@keyframes studioPulse {
+  0%, 100% { opacity:1; box-shadow:0 0 10px var(--green); }
+  50% { opacity:0.45; box-shadow:0 0 20px var(--green); }
+}
 
-    .btn:hover { opacity: 0.92; }
+.studio-label {
+  font-size:1.1rem;
+  font-weight:800;
+}
 
-    .btn-outline {
-      background: transparent;
-      border: 2px solid var(--brand);
-      color: var(--brand);
-    }
+.studio-sub {
+  color:var(--muted);
+  font-size:0.88rem;
+  margin:4px 0 0;
+}
 
-    .muted-text { color: var(--muted); font-size: 0.95rem; }
+.hours-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
+  gap:10px;
+  margin-top:16px;
+}
 
-    .steps .step {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      margin-bottom: 24px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid #1a1a2e;
-    }
+.hours-item {
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:10px;
+  padding:10px 12px;
+  font-size:0.85rem;
+}
 
-    .steps .step:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
+.hours-item strong { display:block; color:var(--text); margin-bottom:2px; }
+.hours-item span { color:var(--muted); }
 
-    .step-num {
-      min-width: 38px;
-      height: 38px;
-      background: var(--brand);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 0.95rem;
-      flex-shrink: 0;
-    }
+/* Steps */
+.steps { display:grid; gap:14px; margin-top:8px; }
 
-    .step-content h3 { border: none; margin: 0 0 6px; font-size: 1rem; }
-    .step-content p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.step-item {
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+}
 
-    .copy-box {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: #000;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid var(--brand);
-      margin: 15px 0 22px;
-    }
+.step-num {
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:linear-gradient(135deg, var(--brand), var(--brand-2));
+  color:white;
+  font-weight:900;
+  font-size:0.9rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  margin-top:2px;
+}
 
-    .copy-box code {
-      flex-grow: 1;
-      color: var(--brand);
-      font-weight: bold;
-      word-break: break-word;
-    }
+.step-content strong { display:block; margin-bottom:3px; }
+.step-content p { margin:0; color:var(--muted); font-size:0.9rem; }
 
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-      margin-top: 16px;
-    }
+/* Meet Dan light */
+.meet-dan-card {
+  display:flex;
+  gap:18px;
+  align-items:center;
+  flex-wrap:wrap;
+}
 
-    .payment-btn {
-      display: block;
-      padding: 14px 20px;
-      border-radius: 10px;
-      text-align: center;
-      font-weight: 700;
-      text-decoration: none;
-      color: #fff;
-      transition: 0.2s;
-    }
+.meet-dan-card img {
+  width:80px;
+  height:80px;
+  object-fit:cover;
+  object-position:center top;
+  border-radius:50%;
+  border:2px solid rgba(122,92,255,0.5);
+  flex-shrink:0;
+}
 
-    .payment-btn:hover { opacity: 0.92; }
+.meet-dan-text { flex:1; min-width:200px; }
+.meet-dan-text p { margin:0 0 10px; color:var(--muted); font-size:0.9rem; }
 
-    .rush-box {
-      background: #0f0f1e;
-      border: 2px solid var(--accent);
-      border-radius: 12px;
-      padding: 20px;
-      margin-top: 22px;
-      text-align: center;
-    }
+/* Buttons */
+.btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  background:linear-gradient(90deg, var(--brand), var(--brand-2));
+  color:white;
+  padding:14px 24px;
+  border-radius:999px;
+  font-weight:800;
+  text-decoration:none;
+  border:none;
+  cursor:pointer;
+  box-shadow:0 6px 20px rgba(122,92,255,0.25);
+}
 
-    .rush-box h3 { border: none; margin-top: 0; color: var(--accent); }
+.btn:hover { transform:translateY(-1px); }
 
-    .tip-box {
-      background: linear-gradient(135deg, #0f0f1e, #151525);
-      border: 1px solid #2a2a44;
-      border-radius: 12px;
-      padding: 20px;
-      margin-top: 22px;
-      text-align: center;
-    }
+.btn-secondary {
+  background:#18182a;
+  color:var(--text);
+  box-shadow:none;
+  border:1px solid var(--border);
+}
 
-    .tip-box p { margin: 0 0 12px; color: var(--muted); font-size: 0.95rem; }
+.btn-ghost {
+  background:transparent;
+  color:var(--muted);
+  box-shadow:none;
+  border:1px solid #27273c;
+  font-size:0.9rem;
+  padding:11px 20px;
+}
 
-    .tip-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-    }
+.btn-ghost:hover { color:var(--text); border-color:#404060; transform:none; }
 
-    .tip-btn {
-      background: #1a1a2e;
-      color: var(--brand);
-      border: 1px solid var(--brand);
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-weight: 700;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: 0.2s;
-    }
+.btn-row {
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  justify-content:center;
+  margin-top:18px;
+}
 
-    .tip-btn:hover { background: var(--brand); color: #fff; }
+.sms-link {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  color:var(--brand-2);
+  font-weight:700;
+  text-decoration:none;
+  font-size:0.95rem;
+}
 
-    .refund-box {
-      background: #0f0f1e;
-      border: 1px solid #2a2a44;
-      border-radius: 8px;
-      padding: 16px;
-      margin-top: 16px;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
+.sms-link:hover { text-decoration:underline; }
 
-    .refund-box strong { color: var(--text); }
+.divider {
+  border:none;
+  border-top:1px solid rgba(255,255,255,0.06);
+  margin:24px 0;
+}
 
-    .social-share {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 16px;
-      justify-content: center;
-    }
+footer {
+  text-align:center;
+  padding:32px 20px 48px;
+  opacity:0.7;
+  font-size:13px;
+}
 
-    .disclaimer {
-      background: #0f0f1e;
-      border: 1px solid #2a2a44;
-      border-radius: 8px;
-      padding: 16px;
-      margin-top: 20px;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
+.footer-links {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:12px;
+}
 
-    .disclaimer strong { color: var(--text); }
+.footer-links a { color:var(--muted); text-decoration:none; }
+.footer-links a:hover { color:white; }
 
-    footer { text-align: center; padding: 60px 20px; opacity: 0.7; font-size: 14px; }
+@media (max-width:520px) {
+  .meet-dan-card { flex-direction:column; text-align:center; }
+  .meet-dan-card img { margin:0 auto; }
+  .btn { width:100%; }
+}
+```
 
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-
-    .footer-links a { margin: 0 6px; color: var(--muted); text-decoration: none; font-size: 0.85rem; }
-    .footer-links a:hover { color: var(--text); }
-
-    .social-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-
-    .social-links a { color: var(--brand); text-decoration: none; font-size: 0.85rem; font-weight: 600; }
-    .social-links a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
-  <nav>
-    <div class="nav-inner">
-      <a href="/" class="nav-brand">🎵 CustomSongMe</a>
-      <button class="hamburger" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <div class="nav-menu" id="navMenu">
-        <a href="/">Home</a>
-        <a href="/birthday-songs">Birthdays</a>
-        <a href="/wedding-songs">Weddings</a>
-        <a href="/anniversary-songs">Anniversaries</a>
-        <a href="/love-songs">Love Songs</a>
-        <a href="/pet-songs">Pet Songs</a>
-        <a href="/roast-songs">Roast Songs</a>
-        <a href="/memorial-songs">Celebration of Life</a>
-        <a href="/business-jingles">Business Jingles</a>
-        <a href="/#order" style="color:var(--brand); font-weight:700;">Order Now</a>
-      </div>
-    </div>
-  </nav>
+  <div class="container">
 
-  <div class="hero container">
-    <div class="checkmark">✓</div>
-    <h1>Your Request Is In</h1>
-    <p style="font-size:1.1rem; color:var(--muted); max-width:700px; margin:0 auto;">Your details have been received. Complete payment below to begin production. Your custom song will be delivered within 24 hours of payment.</p>
+```
+<div class="logo-wrap">
+  <a href="/">🎵 CustomSongMe</a>
+</div>
+
+<div class="hero">
+  <div class="checkmark">✓</div>
+  <h1>Request Received.</h1>
+  <p class="lead">Your story is in good hands. Dan personally reads every submission before anything else happens.</p>
+</div>
+
+<!-- STUDIO STATUS -->
+<div class="studio-card">
+  <div class="studio-indicator">
+    <div class="studio-light" id="studioLight"></div>
+    <div>
+      <div class="studio-label" id="studioLabel">🎙️ Dan's In The Studio</div>
+      <div class="studio-sub" id="studioSub">Responding within 60 minutes</div>
+    </div>
   </div>
 
-  <main class="container">
+  <p id="studioMessage" style="margin:0 0 16px; color:var(--muted); font-size:0.93rem;">
+    Your request just landed. Dan will review your story and reach out shortly.
+  </p>
 
-    <section class="card">
-      <h2>What Happens Next</h2>
-      <div class="steps">
-
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-content">
-            <h3>Your Request Is Already Submitted</h3>
-            <p>Dan the Song Man has your story and details. Your order is ready to move forward as soon as payment is completed.</p>
-          </div>
-        </div>
-
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-content">
-            <h3>Complete Payment Below</h3>
-            <p>Use one of the payment options below and include your Order ID in the payment note so your request can be matched immediately.</p>
-          </div>
-        </div>
-
-        <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-content">
-            <h3>Production Begins After Payment</h3>
-            <p>Once payment is confirmed your song goes into production. Standard delivery is within 24 hours of payment.</p>
-          </div>
-        </div>
-
-        <div class="step">
-          <div class="step-num">4</div>
-          <div class="step-content">
-            <h3>Need It Faster?</h3>
-            <p>After payment text your Order ID to <a href="tel:+16617140903" style="color:var(--brand);">+1 (661) 714-0903</a> to upgrade to 4-hour rush delivery for $10.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>Complete Your Payment</h2>
-      <p class="muted-text">Production begins after payment is confirmed. Include your Order ID in the payment note so we can match your request to your payment quickly.</p>
-
-      <div class="copy-box">
-        <code id="orderIdBox">Use the Order ID from your confirmation email or the previous page</code>
-        <button class="btn" id="copyBtn" type="button" style="padding: 8px 15px; font-size: 12px;">Copy</button>
-      </div>
-
-      <div class="grid-2">
-        <a href="https://buy.stripe.com/3cIfZg1326JTaJZ7K69Ve05" target="_blank" rel="noopener" class="payment-btn" style="background:#635bff;">Pay $20 — Standard</a>
-        <a href="https://buy.stripe.com/cNieVc2767NX3hxd4q9Ve06" target="_blank" rel="noopener" class="payment-btn" style="background:#635bff;">Pay $30 — Premium</a>
-        <a href="https://buy.stripe.com/cNi7sK3ba7NXdWbggC9Ve00" target="_blank" rel="noopener" class="payment-btn" style="background:#635bff;">Pay $50 — Music Video Public</a>
-        <a href="https://buy.stripe.com/8x2eVc6nm8S1bO31lI9Ve03" target="_blank" rel="noopener" class="payment-btn" style="background:#4f46e5;">Pay $60 — Music Video Private</a>
-        <a href="https://buy.stripe.com/fZu4gy4fe2tDcS70hE9Ve01" target="_blank" rel="noopener" class="payment-btn" style="background:#635bff;">Pay $100 — Business Jingle</a>
-        <a href="mailto:danrocksai@gmail.com" class="payment-btn" style="background:#2a2a44;">Business Discovery Call</a>
-      </div>
-
-      <h3 style="margin-top:24px;">📱 Or Pay by App</h3>
-      <div class="grid-2">
-        <a href="https://www.paypal.me/DanRock834" target="_blank" rel="noopener" class="payment-btn" style="background:#003087;">PayPal</a>
-        <a href="https://cash.app/$optimistic01" target="_blank" rel="noopener" class="payment-btn" style="background:#00d632;">Cash App</a>
-        <a href="https://venmo.com/u/Dan-Rock-5" target="_blank" rel="noopener" class="payment-btn" style="background:#3d95ce;">Venmo</a>
-        <a href="tel:+16617140903" class="payment-btn" style="background:#6d1ed4;">Zelle — +1 (661) 714-0903</a>
-      </div>
-
-      <div class="rush-box">
-        <h3>⚡ 4-Hour Rush Delivery</h3>
-        <p class="muted-text">Need your song faster? After payment text your Order ID to <a href="tel:+16617140903" style="color:var(--accent);">+1 (661) 714-0903</a> to add 4-hour rush delivery for $10.</p>
-      </div>
-
-      <div class="tip-box">
-        <p>🎵 If your song exceeds expectations you are always welcome to send a tip. It means the world to a small business.</p>
-        <div class="tip-buttons">
-          <a href="https://www.paypal.me/DanRock834" target="_blank" rel="noopener" class="tip-btn">Tip via PayPal</a>
-          <a href="https://cash.app/$optimistic01" target="_blank" rel="noopener" class="tip-btn">Tip via Cash App</a>
-        </div>
-      </div>
-
-      <div class="refund-box">
-        <strong>Refund Policy:</strong> Refunds are rare because every order includes up to 3 free revisions so we can get it right. The only guaranteed refund is if CustomSongMe misses your promised delivery window.
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>While You Wait</h2>
-      <p>Follow CustomSongMe on social media to hear more song samples, see behind-the-scenes content, and keep up with new releases.</p>
-      <div class="social-share">
-        <a href="https://www.facebook.com/customsongme" target="_blank" rel="noopener" class="btn">Facebook</a>
-        <a href="https://www.instagram.com/customsongme" target="_blank" rel="noopener" class="btn">Instagram</a>
-        <a href="https://www.tiktok.com/@customsongme" target="_blank" rel="noopener" class="btn">TikTok</a>
-        <a href="https://www.youtube.com/@customsongme" target="_blank" rel="noopener" class="btn">YouTube</a>
-      </div>
-      <p class="muted-text" style="margin-top:20px; text-align:center;">Have a question? Text or email us directly.</p>
-      <div style="text-align:center; margin-top:10px;">
-        <a href="tel:+16617140903" class="btn btn-outline" style="margin:6px;">+1 (661) 714-0903</a>
-        <a href="mailto:danrocksai@gmail.com" class="btn btn-outline" style="margin:6px;">danrocksai@gmail.com</a>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>Hear More Samples</h2>
-      <p>Check out more custom song samples on the CustomSongMe YouTube channel while you wait for yours.</p>
-      <div style="text-align:center; margin-top:16px;">
-        <a href="https://www.youtube.com/@customsongme" target="_blank" rel="noopener" class="btn">Visit Our YouTube Channel</a>
-      </div>
-    </section>
-
-    <div class="disclaimer">
-      <strong>⚠️ Copyright Notice:</strong> Songs and jingles created through CustomSongMe are produced using AI-assisted music generation tools. Copyright ownership of AI-generated music is currently subject to evolving laws and regulations in the United States and internationally. CustomSongMe does not guarantee exclusive copyright ownership or full commercial rights to any delivered song or jingle. By placing an order you acknowledge and accept this limitation.
+  <div class="hours-grid">
+    <div class="hours-item">
+      <strong>Mon – Fri</strong>
+      <span>8:00 AM – 8:00 PM</span>
     </div>
+    <div class="hours-item">
+      <strong>Saturday</strong>
+      <span>8:00 AM – 6:00 PM</span>
+    </div>
+    <div class="hours-item">
+      <strong>Sunday</strong>
+      <span>Closed</span>
+    </div>
+  </div>
 
-  </main>
+  <p style="margin:14px 0 0; font-size:0.82rem; color:var(--muted);">
+    Submissions are always welcome — anytime, any day. Dan will get back to you first thing when the studio opens.
+  </p>
+</div>
+
+<!-- WHAT HAPPENS NEXT -->
+<div class="card">
+  <h2>What Happens Next</h2>
+  <div class="steps">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <strong>Dan Reviews Your Story</strong>
+        <p>He reads what you shared and makes sure there's enough to make the song feel truly personal. If he needs a detail or two, he'll reach out before anything else happens.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <strong>You Get the Payment Link</strong>
+        <p>Once your story is ready to go, Dan sends the $20 payment link directly to you. No payment until you hear from him first.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <strong>Production Begins</strong>
+        <p>The moment payment is confirmed, Dan gets to work. Your song will be delivered by email within the current posted delivery window.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <strong>Personal Guarantee</strong>
+        <p>If the song isn't what you hoped for, Dan will make it right. If he can't, you get a full refund. No hard feelings.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SMS LINK -->
+<div class="card" style="text-align:center;">
+  <h3>Have a question about your submission?</h3>
+  <p class="muted-text">Text Dan directly — he'll get back to you during studio hours.</p>
+  <a href="sms:+16617140903" class="sms-link">📱 Text Dan at +1 (661) 714-0903</a>
+  <p class="muted-text" style="margin-top:8px; font-size:0.82rem;">Text only please — no calls.</p>
+</div>
+
+<hr class="divider" />
+
+<!-- MEET DAN LIGHT -->
+<div class="card">
+  <div class="meet-dan-card">
+    <img src="/dan-the-song-man.jpg" alt="Dan the Song Man" />
+    <div class="meet-dan-text">
+      <h3>The person making your mom's song</h3>
+      <p>Dan the Song Man. One-man operation. Every song gets his full personal attention — not a ticket number, not a template. Just your story turned into something real.</p>
+      <a href="/mothers-day-songs#meet-dan" class="sms-link" style="font-size:0.9rem;">Want to meet your Song Man? →</a>
+    </div>
+  </div>
+</div>
+
+<div class="btn-row">
+  <a href="/mothers-day-songs" class="btn btn-secondary">← Back to Mother's Day Songs</a>
+  <a href="/" class="btn btn-ghost">Visit CustomSongMe.com</a>
+</div>
+```
+
+  </div>
 
   <footer>
-    <div class="container">
-      <div class="social-links">
-        <a href="https://www.facebook.com/customsongme" target="_blank" rel="noopener">Facebook</a>
-        <a href="https://www.instagram.com/customsongme" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://www.tiktok.com/@customsongme" target="_blank" rel="noopener">TikTok</a>
-        <a href="https://www.youtube.com/@customsongme" target="_blank" rel="noopener">YouTube</a>
-        <a href="https://x.com/customsongme" target="_blank" rel="noopener">X</a>
-        <a href="https://www.linkedin.com/company/customsongme" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
-      <div class="footer-links">
-        <a href="/">Home</a> |
-        <a href="/birthday-songs">Birthday Songs</a> |
-        <a href="/wedding-songs">Wedding Songs</a> |
-        <a href="/anniversary-songs">Anniversary Songs</a> |
-        <a href="/love-songs">Love Songs</a> |
-        <a href="/pet-songs">Pet Songs</a> |
-        <a href="/roast-songs">Roast Songs</a> |
-        <a href="/memorial-songs">Celebration of Life</a> |
-        <a href="/business-jingles">Business Jingles</a> |
-        <a href="/#order">Order</a>
-      </div>
-      <p style="margin:16px 0 8px;">
-        <a href="https://g.page/r/CUJZcUwU_iIFEBM/review" target="_blank" rel="noopener" style="color:var(--brand); font-weight:600; text-decoration:none;">⭐ Leave us a Google Review</a>
-      </p>
-      <p style="margin:20px 0;">© <span id="year"></span> CustomSongMe. All Rights Reserved.</p>
-      <p>Serving customers nationwide online | <a href="tel:+16617140903" style="color:var(--muted);">+1 (661) 714-0903</a></p>
-      <p>Contact: <span id="safe-email"></span></p>
+    <div class="footer-links">
+      <a href="/birthday-songs">Birthday Songs</a>
+      <a href="/wedding-songs">Wedding Songs</a>
+      <a href="/anniversary-songs">Anniversary Songs</a>
+      <a href="/love-songs">Love Songs</a>
+      <a href="/pet-songs">Pet Songs</a>
+      <a href="/memorial-songs">Celebration of Life</a>
+      <a href="/business-jingles">Business Jingles</a>
     </div>
+    <p style="margin:0;">© <span id="year"></span> CustomSongMe. All Rights Reserved.</p>
+    <p style="margin:4px 0 0;">Serving customers nationwide online</p>
   </footer>
 
   <script>
-    const user = "danrocksai";
-    const domain = "gmail.com";
-    document.getElementById('safe-email').innerHTML = `<a href="mailto:${user}@${domain}" style="color:var(--muted);">${user}@${domain}</a>`;
-    document.getElementById('year').innerText = new Date().getFullYear();
+    document.getElementById("year").innerText = new Date().getFullYear();
 
-    document.getElementById('menuBtn').addEventListener('click', function() {
-      const isOpen = document.getElementById('navMenu').classList.toggle('open');
-      this.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
+    function updateStudioStatus() {
+      const now = new Date();
+      const day = now.getDay();
+      const hour = now.getHours();
+      const min = now.getMinutes();
+      const timeDecimal = hour + min / 60;
 
-    document.getElementById('copyBtn').addEventListener('click', function() {
-      const text = document.getElementById('orderIdBox').innerText;
-      navigator.clipboard.writeText(text);
-      this.innerText = 'Copied!';
-      setTimeout(() => this.innerText = 'Copy', 1800);
-    });
+      let isOpen = false;
+      if (day >= 1 && day <= 5 && timeDecimal >= 8 && timeDecimal < 20) isOpen = true;
+      if (day === 6 && timeDecimal >= 8 && timeDecimal < 18) isOpen = true;
+
+      const light = document.getElementById("studioLight");
+      const label = document.getElementById("studioLabel");
+      const sub = document.getElementById("studioSub");
+      const msg = document.getElementById("studioMessage");
+
+      if (!light || !label || !sub) return;
+
+      if (isOpen) {
+        light.style.background = "var(--green)";
+        light.style.boxShadow = "0 0 10px var(--green)";
+        light.style.animation = "studioPulse 1.4s ease-in-out infinite";
+        light.classList.remove("closed");
+        label.style.color = "var(--green)";
+        label.innerText = "🎙️ Dan's In The Studio";
+        sub.innerText = "Responding within 60 minutes";
+        if (msg) msg.innerText = "Your request just landed. Dan will review your story and reach out shortly.";
+      } else {
+        light.classList.add("closed");
+        label.style.color = "var(--muted)";
+        label.innerText = "🎙️ Dan's Out of the Studio";
+
+        const nextOpen = (day === 0 || day === 6)
+          ? "Monday at 8:00 AM"
+          : "tomorrow at 8:00 AM";
+
+        sub.innerText = `Back ${nextOpen} — your request is saved`;
+        if (msg) msg.innerText = "Your submission came in after studio hours. Dan will review it and reach out within the first hour of the next open day.";
+      }
+    }
+
+    updateStudioStatus();
+    setInterval(updateStudioStatus, 60000);
   </script>
+
 </body>
 </html>
