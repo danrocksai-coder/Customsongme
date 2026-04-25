@@ -1,20 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="google-site-verification" content="r_RHeWV7hY8Y1WFvKTWpQhKyqeyJOAgTMyWjWpYD9v0" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="index, follow" />
-
   <title>Custom Business Jingles & Brand Songs | CustomSongMe</title>
-  <meta name="description" content="Order a custom business jingle built around your brand, your message, and the feeling you want customers to remember. Up to 3 full revisions. Credit cards accepted. Starts at $100.">
-  
-
+  <meta name="description" content="Order a custom business jingle built around your brand, your message, and the feeling you want customers to remember. Personal Happiness Guarantee included. Credit cards accepted. Starts at $100.">
   <link rel="canonical" href="https://www.customsongme.com/business-jingles" />
   <link rel="icon" type="image/png" href="/logo.png">
   <link rel="preconnect" href="https://www.youtube-nocookie.com">
-
-  <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HGQ54E69BZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -22,25 +18,22 @@
     gtag('js', new Date());
     gtag('config', 'G-HGQ54E69BZ');
   </script>
-
   <meta property="og:title" content="Custom Business Jingles & Brand Songs | CustomSongMe" />
-  <meta property="og:description" content="A custom business jingle built around your brand and message. Up to 3 full revisions included. Credit cards accepted. Starts at $100." />
+  <meta property="og:description" content="A custom business jingle built around your brand and message. Personal Happiness Guarantee included. Credit cards accepted. Starts at $100." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.customsongme.com/business-jingles" />
   <meta property="og:image" content="https://www.customsongme.com/og-cover.jpg" />
-
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Custom Business Jingles | CustomSongMe" />
-  <meta name="twitter:description" content="Custom business jingles built around your brand. Up to 3 full revisions included. Starts at $100." />
+  <meta name="twitter:description" content="Custom business jingles built around your brand. Personal Happiness Guarantee included. Starts at $100." />
   <meta name="twitter:image" content="https://www.customsongme.com/og-cover.jpg" />
-
   <script type="application/ld+json">
   [
     {
       "@context": "https://schema.org",
       "@type": "Service",
       "name": "Custom Business Jingles",
-      "description": "Custom business jingles and brand songs built around your business name, message, and target customer. Up to 3 full revisions included. Starts at $100.",
+      "description": "Custom business jingles and brand songs built around your business name, message, and target customer. Personal Happiness Guarantee included. Starts at $100.",
       "provider": {
         "@type": "OnlineBusiness",
         "name": "CustomSongMe",
@@ -78,6 +71,14 @@
         },
         {
           "@type": "Question",
+          "name": "Is the jingle guaranteed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Dan the Song Man personally guarantees your satisfaction. If the jingle isn't right, he will make it right. If he still can't get it exactly what you wanted, you get a full refund. No hard feelings."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "How fast is delivery?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -88,79 +89,75 @@
     }
   ]
   </script>
-
   <style>
     :root { --bg:#0b0b12; --card:#151525; --text:#e9e9f1; --muted:#b0b5c0; --brand:#7a5cff; --accent:#ff4d8d; }
-    @keyframes pulse {
-      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(122,92,255,0.4); }
-      70% { transform: scale(1.03); box-shadow: 0 0 0 10px rgba(122,92,255,0); }
-      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(122,92,255,0); }
+    @keyframes pulse { 0% { transform:scale(1); box-shadow:0 0 0 0 rgba(122,92,255,0.4); } 70% { transform:scale(1.03); box-shadow:0 0 0 10px rgba(122,92,255,0); } 100% { transform:scale(1); box-shadow:0 0 0 0 rgba(122,92,255,0); } }
+    * { box-sizing:border-box; }
+    html,body { margin:0; padding:0; background:var(--bg); color:var(--text); font:16px/1.6 system-ui,-apple-system,sans-serif; scroll-behavior:smooth; }
+    #progressBar { position:fixed; top:0; left:0; width:0%; height:3px; background:linear-gradient(90deg,var(--brand),#a78bff); z-index:9999; transition:width 0.1s linear; }
+    nav { background:#0f0f1e; border-bottom:1px solid #222233; position:sticky; top:0; z-index:100; }
+    .nav-inner { width:min(1000px,92vw); margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:12px 0; }
+    .nav-brand { font-weight:700; color:var(--brand); text-decoration:none; font-size:1rem; letter-spacing:-0.3px; }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:8px; background:none; border:none; }
+    .hamburger span { display:block; width:24px; height:2px; background:var(--muted); border-radius:2px; transition:0.3s; }
+    .nav-menu { display:flex; flex-wrap:wrap; gap:4px; }
+    .nav-menu a { color:var(--muted); text-decoration:none; font-size:0.85rem; padding:6px 10px; border-radius:6px; transition:0.2s; }
+    .nav-menu a:hover { color:var(--text); background:#1a1a2e; }
+    .nav-menu a.active { color:var(--brand); }
+    @media (max-width:768px) {
+      .hamburger { display:flex; }
+      .nav-menu { display:none; flex-direction:column; width:100%; background:#0f0f1e; position:absolute; top:100%; left:0; right:0; padding:10px 4vw; border-bottom:1px solid #222233; gap:0; }
+      .nav-menu.open { display:flex; }
+      .nav-menu a { padding:12px 0; border-bottom:1px solid #1a1a2e; font-size:0.95rem; }
     }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 16px/1.6 system-ui, -apple-system, sans-serif; scroll-behavior: smooth; }
-    nav { background: #0f0f1e; border-bottom: 1px solid #222233; position: sticky; top: 0; z-index: 100; }
-    .nav-inner { width: min(1000px, 92vw); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
-    .nav-brand { font-weight: 700; color: var(--brand); text-decoration: none; font-size: 1rem; letter-spacing: -0.3px; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: var(--muted); border-radius: 2px; transition: 0.3s; }
-    .nav-menu { display: flex; flex-wrap: wrap; gap: 4px; }
-    .nav-menu a { color: var(--muted); text-decoration: none; font-size: 0.85rem; padding: 6px 10px; border-radius: 6px; transition: 0.2s; }
-    .nav-menu a:hover { color: var(--text); background: #1a1a2e; }
-    .nav-menu a.active { color: var(--brand); }
-    @media (max-width: 768px) {
-      .hamburger { display: flex; }
-      .nav-menu { display: none; flex-direction: column; width: 100%; background: #0f0f1e; position: absolute; top: 100%; left: 0; right: 0; padding: 10px 4vw; border-bottom: 1px solid #222233; gap: 0; }
-      .nav-menu.open { display: flex; }
-      .nav-menu a { padding: 12px 0; border-bottom: 1px solid #1a1a2e; font-size: 0.95rem; }
-    }
-    header { text-align: center; padding: 60px 16px; border-bottom: 1px solid #222; }
-    .container { width: min(1000px, 92vw); margin: 0 auto; }
-    .card { background: var(--card); margin: 30px auto; padding: 30px; border-radius: 16px; border: 1px solid #222233; }
-    h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); margin: 0; line-height: 1.1; }
-    .badge { display: inline-block; background: var(--brand); color: #fff; padding: 4px 12px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; margin-bottom: 10px; }
-    h2 { color: var(--brand); font-size: 1.8rem; margin-top: 0; }
-    h3 { border-bottom: 1px solid #2a2a44; padding-bottom: 8px; margin-top: 25px; }
-    .btn { display: inline-block; background: var(--brand); color: #fff; padding: 16px 32px; border-radius: 50px; font-weight: 700; text-decoration: none; transition: 0.3s; border: none; cursor: pointer; }
-    .btn-pulse { animation: pulse 2s infinite; }
-    .full-width { width: 100%; font-size: 1.1rem; }
-    .trust-bar { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin: 20px 0 30px; padding: 16px; background: #0f0f1e; border-radius: 12px; border: 1px solid #222233; }
-    .trust-item { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--muted); }
-    .trust-item span { color: #4ade80; font-size: 1.1rem; }
-    input, select, textarea { width: 100%; background: #0f0f1c; color: #fff; border: 1px solid #2a2a44; border-radius: 8px; padding: 14px; margin-bottom: 15px; font-size: 16px; }
-    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-    .muted-text { color: var(--muted); font-size: 0.9rem; }
-    .option-card { background: #0f0f1e; border: 1px solid #2a2a44; border-radius: 12px; padding: 28px; position: relative; }
-    .option-card.featured { border-color: var(--brand); background: #120f2a; }
-    .option-card h3 { border: none; margin-top: 0; font-size: 1.3rem; color: var(--text); }
-    .price-tag { font-size: 2rem; font-weight: 700; color: var(--brand); margin: 8px 0; }
-    .price-tag span { font-size: 1rem; color: var(--muted); font-weight: 400; }
-    .option-card ul { padding-left: 18px; margin: 12px 0; color: var(--muted); }
-    .option-card ul li { margin-bottom: 6px; }
-    .revision-badge { display: inline-block; background: rgba(122,92,255,0.15); border: 1px solid var(--brand); color: var(--brand); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-top: 8px; }
-    .stripe-btn { display: block; background: #635bff; color: #fff; padding: 14px 20px; border-radius: 10px; font-weight: 700; text-decoration: none; text-align: center; margin-top: 12px; font-size: 0.95rem; transition: background 0.2s; }
-    .stripe-btn:hover { background: #4f46e5; }
-    .stripe-btn small { display: block; font-weight: 400; font-size: 0.78rem; opacity: 0.8; margin-top: 2px; }
-    .confidence-box { background: linear-gradient(135deg, #0f0f1e, #151525); border: 1px solid #2a2a44; border-left: 4px solid var(--brand); border-radius: 12px; padding: 24px; margin: 30px 0; }
-    .confidence-box h3 { border: none; margin-top: 0; color: var(--brand); }
-    .yt-facade { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 16px; margin: 20px 0; border: 1px solid #222233; cursor: pointer; background: #000; }
-    .yt-facade img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 16px; }
-    .yt-facade .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 68px; height: 48px; background: #ff0000; border-radius: 12px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
-    .yt-facade:hover .play-btn { background: #cc0000; }
-    .yt-facade .play-btn::after { content: ''; border-style: solid; border-width: 10px 0 10px 20px; border-color: transparent transparent transparent #fff; margin-left: 4px; }
-    .yt-facade iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; border-radius: 16px; }
-    .disclaimer { background: #0f0f1e; border: 1px solid #2a2a44; border-radius: 8px; padding: 16px; margin-top: 20px; font-size: 0.85rem; color: var(--muted); }
-    .disclaimer strong { color: var(--text); }
-    footer { text-align: center; padding: 60px 20px; opacity: 0.7; font-size: 14px; }
-    .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 12px; }
-    .footer-links a { margin: 0 6px; color: var(--muted); text-decoration: none; font-size: 0.85rem; }
-    .footer-links a:hover { color: var(--text); }
-    .social-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-bottom: 16px; }
-    .social-links a { color: var(--brand); text-decoration: none; font-size: 0.85rem; font-weight: 600; }
-    .social-links a:hover { text-decoration: underline; }
+    header { text-align:center; padding:60px 16px; border-bottom:1px solid #222; }
+    .container { width:min(1000px,92vw); margin:0 auto; }
+    .card { background:var(--card); margin:30px auto; padding:30px; border-radius:16px; border:1px solid #222233; }
+    h1 { font-size:clamp(2.2rem,5vw,3.2rem); margin:0; line-height:1.1; }
+    .badge { display:inline-block; background:var(--brand); color:#fff; padding:4px 12px; border-radius:4px; font-weight:bold; font-size:0.8rem; margin-bottom:10px; }
+    h2 { color:var(--brand); font-size:1.8rem; margin-top:0; }
+    h3 { border-bottom:1px solid #2a2a44; padding-bottom:8px; margin-top:25px; }
+    .btn { display:inline-block; background:var(--brand); color:#fff; padding:16px 32px; border-radius:50px; font-weight:700; text-decoration:none; transition:0.3s; border:none; cursor:pointer; }
+    .btn-pulse { animation:pulse 2s infinite; }
+    .full-width { width:100%; font-size:1.1rem; }
+    .trust-bar { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; margin:20px 0 30px; padding:16px; background:#0f0f1e; border-radius:12px; border:1px solid #222233; }
+    .trust-item { display:flex; align-items:center; gap:8px; font-size:0.9rem; color:var(--muted); }
+    .trust-item span { color:#4ade80; font-size:1.1rem; }
+    input,select,textarea { width:100%; background:#0f0f1c; color:#fff; border:1px solid #2a2a44; border-radius:8px; padding:14px; margin-bottom:15px; font-size:16px; }
+    .grid-2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; }
+    .muted-text { color:var(--muted); font-size:0.9rem; }
+    .option-card { background:#0f0f1e; border:1px solid #2a2a44; border-radius:12px; padding:28px; position:relative; }
+    .option-card.featured { border-color:var(--brand); background:#120f2a; }
+    .option-card h3 { border:none; margin-top:0; font-size:1.3rem; color:var(--text); }
+    .price-tag { font-size:2rem; font-weight:700; color:var(--brand); margin:8px 0; }
+    .price-tag span { font-size:1rem; color:var(--muted); font-weight:400; }
+    .option-card ul { padding-left:18px; margin:12px 0; color:var(--muted); }
+    .option-card ul li { margin-bottom:6px; }
+    .guarantee-badge { display:inline-block; background:rgba(122,92,255,0.15); border:1px solid var(--brand); color:var(--brand); padding:4px 10px; border-radius:20px; font-size:0.8rem; font-weight:600; margin-top:8px; }
+    .stripe-btn { display:block; background:#635bff; color:#fff; padding:14px 20px; border-radius:10px; font-weight:700; text-decoration:none; text-align:center; margin-top:12px; font-size:0.95rem; transition:background 0.2s; }
+    .stripe-btn:hover { background:#4f46e5; }
+    .stripe-btn small { display:block; font-weight:400; font-size:0.78rem; opacity:0.8; margin-top:2px; }
+    .confidence-box { background:linear-gradient(135deg,#0f0f1e,#151525); border:1px solid #2a2a44; border-left:4px solid var(--brand); border-radius:12px; padding:24px; margin:30px 0; }
+    .confidence-box h3 { border:none; margin-top:0; color:var(--brand); }
+    .yt-facade { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:16px; margin:20px 0; border:1px solid #222233; cursor:pointer; background:#000; }
+    .yt-facade img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; border-radius:16px; }
+    .yt-facade .play-btn { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:68px; height:48px; background:#ff0000; border-radius:12px; display:flex; align-items:center; justify-content:center; transition:background 0.2s; }
+    .yt-facade:hover .play-btn { background:#cc0000; }
+    .yt-facade .play-btn::after { content:''; border-style:solid; border-width:10px 0 10px 20px; border-color:transparent transparent transparent #fff; margin-left:4px; }
+    .yt-facade iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius:16px; }
+    .disclaimer { background:#0f0f1e; border:1px solid #2a2a44; border-radius:8px; padding:16px; margin-top:20px; font-size:0.85rem; color:var(--muted); }
+    .disclaimer strong { color:var(--text); }
+    footer { text-align:center; padding:60px 20px; opacity:0.7; font-size:14px; }
+    .footer-links { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-bottom:12px; }
+    .footer-links a { margin:0 6px; color:var(--muted); text-decoration:none; font-size:0.85rem; }
+    .footer-links a:hover { color:var(--text); }
+    .social-links { display:flex; flex-wrap:wrap; justify-content:center; gap:16px; margin-bottom:16px; }
+    .social-links a { color:var(--brand); text-decoration:none; font-size:0.85rem; font-weight:600; }
+    .social-links a:hover { text-decoration:underline; }
   </style>
 </head>
 <body>
-
+  <div id="progressBar"></div>
   <nav>
     <div class="nav-inner">
       <a href="/" class="nav-brand">🎵 CustomSongMe</a>
@@ -173,6 +170,7 @@
         <a href="/wedding-songs">Weddings</a>
         <a href="/anniversary-songs">Anniversaries</a>
         <a href="/love-songs">Love Songs</a>
+        <a href="/mothers-day-songs">Mother's Day</a>
         <a href="/pet-songs">Pet Songs</a>
         <a href="/roast-songs">Roast Songs</a>
         <a href="/memorial-songs">Celebration of Life</a>
@@ -186,10 +184,10 @@
     <div class="container">
       <div class="badge">FOR BUSINESSES AND BRANDS</div>
       <h1>Custom Business Jingles</h1>
-      <p style="font-size:1.2rem; color:var(--muted); margin:20px 0 30px;">A custom business jingle built around your brand, your message, and the feeling you want customers to associate with your business. Pay securely by credit card. Production begins after payment is confirmed.</p>
+      <p style="font-size:1.2rem; color:var(--muted); margin:20px 0 30px;">A custom business jingle built around your brand, your message, and the feeling you want customers to associate with your business. Personal Happiness Guarantee included. Pay securely by credit card. Production begins after payment is confirmed.</p>
       <a href="#order" class="btn btn-pulse">Get Your Business Jingle</a>
       <div class="trust-bar">
-        <div class="trust-item"><span>✓</span> Up to 3 Full Revisions</div>
+        <div class="trust-item"><span>✓</span> Personal Happiness Guarantee</div>
         <div class="trust-item"><span>✓</span> Credit Cards Accepted</div>
         <div class="trust-item"><span>✓</span> Delivered Within 24 Hours of Payment</div>
         <div class="trust-item"><span>✓</span> Built Around Your Brand</div>
@@ -198,7 +196,6 @@
   </header>
 
   <main class="container">
-
     <section class="card">
       <h2>🏢 Custom Business Jingle Sample</h2>
       <p class="muted-text">A real custom business jingle created by Dan the Song Man.</p>
@@ -208,157 +205,144 @@
       </div>
     </section>
 
-    <div class="confidence-box">
-      <h3>🏢 Our Commitment to Your Brand</h3>
-      <p style="margin:0; color:var(--muted);">Every business jingle order includes up to 3 full revisions so we can get it exactly right. Dan the Song Man works directly with you to make sure the final jingle represents your brand the way you want. Production begins after payment is confirmed.</p>
-    </div>
+```
+<div class="confidence-box">
+  <h3>🎵 Personal Happiness Guarantee</h3>
+  <p style="margin:0; color:var(--muted);">Dan the Song Man personally guarantees your satisfaction. If the jingle isn't right, he will make it right. If he still can't get it exactly what you wanted, you get a full refund. No hard feelings. Every business jingle order also includes up to 3 full revisions within 72 hours of payment. Production begins after payment is confirmed.</p>
+</div>
 
-    <section class="card" id="options">
-      <h2>Business Jingle Package</h2>
-      <div class="grid-2">
-        <div class="option-card featured">
-          <h3>🏢 Full Jingle Package</h3>
-          <div class="price-tag">$100</div>
-          <ul>
-            <li>Full custom jingle MP3</li>
-            <li>Up to 3 complete full revisions</li>
-            <li>Each revision delivered as a new full MP3</li>
-            <li>All revision requests expire 72 hours after payment</li>
-            <li>Up to 4 unique jingle versions total</li>
-            <li>Delivered within 24 hours of payment</li>
-          </ul>
-          <div class="revision-badge">3 Full Revisions Included</div>
-          <a href="https://buy.stripe.com/fZu4gy4fe2tDcS70hE9Ve01" target="_blank" rel="noopener" class="stripe-btn">
-            Pay $100 by Card
-            <small>Visa · Mastercard · Amex · Apple Pay</small>
-          </a>
-        </div>
-      </div>
-      <p class="muted-text" style="margin-top:16px;">Need it in 4 hours? After payment text your Order ID to <a href="tel:+16617140903" style="color:var(--brand);">+1 (661) 714-0903</a> to add rush delivery for $10.</p>
-    </section>
-
-    <section class="card">
-      <h2>Why Your Business Needs a Jingle</h2>
-      <p>The businesses people remember are the ones that got into their heads. A custom jingle gives your brand something no logo or tagline alone can do — it makes people feel something and then remember you because of it.</p>
-      <div class="grid-2">
-        <div>
-          <h3>Built Around Your Brand</h3>
-          <p>Your jingle is built from your business name, your message, your audience, and the feeling you want to create. Nothing generic. Nothing recycled.</p>
-        </div>
-        <div>
-          <h3>Any Style or Format</h3>
-          <p>Catchy pop, upbeat hip hop, acoustic, country, or corporate clean. We match the style to your brand and your target customer.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>What a Custom Jingle Can Do for Your Business</h2>
-      <p>A jingle is one of the most cost-effective marketing investments a small business can make. Once it exists it keeps working every time someone hears it. Businesses order custom jingles for:</p>
+<section class="card" id="options">
+  <h2>Business Jingle Package</h2>
+  <div class="grid-2">
+    <div class="option-card featured">
+      <h3>🏢 Full Jingle Package</h3>
+      <div class="price-tag">$100</div>
       <ul>
-        <li>Radio and podcast advertising</li>
-        <li>Social media content and reels</li>
-        <li>YouTube and video ads</li>
-        <li>On-hold phone music</li>
-        <li>In-store or event background music</li>
-        <li>Brand launches and rebrands</li>
-        <li>Local TV and streaming ads</li>
+        <li>Full custom jingle MP3</li>
+        <li>Personal Happiness Guarantee</li>
+        <li>Up to 3 complete full revisions</li>
+        <li>Each revision delivered as a new full MP3</li>
+        <li>All revision requests expire 72 hours after payment</li>
+        <li>Up to 4 unique jingle versions total</li>
+        <li>Delivered within 24 hours of payment</li>
       </ul>
-    </section>
-
-    <section class="card" id="order">
-      <h2>Request Your Business Jingle</h2>
-      <p class="muted-text">Submit your details below. Production begins after payment is confirmed.</p>
-      <form id="songForm" action="https://formspree.io/f/xwpqlypv" method="POST">
-        <input type="hidden" name="_next" value="https://www.customsongme.com/thanks">
-        <input type="hidden" name="order_type" value="Business Jingle">
-
-        <label for="business">Your Business Name and What You Do
-          <input type="text" name="business" required placeholder="e.g. Mike's Auto Repair — fast, honest, local auto service in Dallas TX">
-        </label>
-
-        <div class="grid-2">
-          <label for="style">Jingle Style
-            <select name="style" required>
-              <option value="Catchy Pop">Catchy Pop</option>
-              <option value="Upbeat Hip Hop">Upbeat Hip Hop</option>
-              <option value="Country">Country</option>
-              <option value="Acoustic">Acoustic</option>
-              <option value="Corporate Clean">Corporate Clean</option>
-              <option value="Reggae">Reggae</option>
-              <option value="Latin">Latin</option>
-              <option value="Surprise Me">Surprise Me</option>
-            </select>
-          </label>
-          <label for="vocalist">Vocalist Preference
-            <select name="vocalist" required>
-              <option value="Male">Male vocalist</option>
-              <option value="Female">Female vocalist</option>
-              <option value="Either">Both / Either works</option>
-              <option value="Instrumental">Instrumental only</option>
-            </select>
-          </label>
-        </div>
-
-        <label for="details">Your Brand Message and Target Customer
-          <textarea name="details" maxlength="600" placeholder="What makes your business different, who your customers are, what feeling you want the jingle to create, any specific words or phrases to include..." required></textarea>
-        </label>
-
-        <div class="grid-2">
-          <label for="name">Your Name
-            <input type="text" name="name" required>
-          </label>
-          <label for="email">Your Email
-            <input type="email" name="email" required>
-          </label>
-        </div>
-
-        <button type="submit" class="btn full-width">Submit Jingle Request →</button>
-      </form>
-      <p class="muted-text" style="text-align:center; margin-top:16px;">Submit your request → complete payment → receive your jingle within 24 hours of payment. Up to 3 full revisions included.</p>
-    </section>
-
-    <section class="card">
-      <h2>Complete Your Payment</h2>
-      <p>Pay by credit card via Stripe or your preferred payment app. Include your Order ID in the payment note. Production begins after payment is confirmed.</p>
-
-      <h3>💳 Pay by Credit Card</h3>
-      <p class="muted-text">Secure checkout powered by Stripe.</p>
-      <div class="grid-2">
-        <a href="https://buy.stripe.com/fZu4gy4fe2tDcS70hE9Ve01" target="_blank" rel="noopener" class="stripe-btn">Pay $100 — Business Jingle</a>
-      </div>
-
-      <h3 style="margin-top:24px;">📱 Pay by App</h3>
-      <div class="grid-2">
-        <a href="https://www.paypal.me/DanRock834" target="_blank" rel="noopener" class="btn" style="background:#003087; text-align:center;">PayPal</a>
-        <a href="https://cash.app/$optimistic01" target="_blank" rel="noopener" class="btn" style="background:#00d632; text-align:center;">Cash App</a>
-        <a href="https://venmo.com/u/Dan-Rock-5" target="_blank" rel="noopener" class="btn" style="background:#3d95ce; text-align:center;">Venmo</a>
-        <a href="tel:+16617140903" class="btn" style="background:#6d1ed4; text-align:center;">Zelle — +1 (661) 714-0903</a>
-      </div>
-    </section>
-
-    <section class="card" id="faq">
-      <h2>Frequently Asked Questions</h2>
-
-      <h3>How much does a custom business jingle cost?</h3>
-      <p>Business jingles start at $100 and include up to 3 full revisions. Pay by credit card, PayPal, Cash App, Venmo, or Zelle. Production begins after payment is confirmed.</p>
-
-      <h3>How many revisions are included?</h3>
-      <p>Your business jingle includes up to 3 complete full revisions, each delivered as a brand new full MP3 file. All revision requests must be submitted within 72 hours of payment or they expire. That is up to 4 unique jingle versions in total for $100.</p>
-
-      <h3>How fast is delivery?</h3>
-      <p>Standard delivery is within <strong>24 hours of payment</strong>. Need it in 4 hours? After payment text your Order ID to <a href="tel:+16617140903" style="color:var(--brand);">+1 (661) 714-0903</a> to add rush delivery for $10.</p>
-
-      <h3>What is your refund policy?</h3>
-      <p>Refunds are rare because every order includes up to 3 full revisions and we work with you until it is right. The only guaranteed refund is if we miss your delivery window.</p>
-
-      <h3>Who owns the rights to my jingle?</h3>
-      <p>Jingles created through CustomSongMe are produced using AI-assisted music generation tools. Copyright ownership of AI-generated music is currently subject to evolving laws and regulations. CustomSongMe does not guarantee exclusive copyright ownership or full commercial rights to any delivered jingle. By placing an order you acknowledge this limitation. For questions about usage rights we recommend consulting a qualified legal professional before ordering.</p>
-    </section>
-
-    <div class="disclaimer">
-      <strong>⚠️ Copyright and Usage Rights Notice:</strong> Jingles created through CustomSongMe are produced using AI-assisted music generation tools. Copyright ownership of AI-generated music is currently subject to evolving laws and regulations in the United States and internationally. CustomSongMe does not guarantee exclusive copyright ownership or full commercial rights to any delivered jingle. By placing an order you acknowledge and accept this limitation. For questions about usage rights for your specific project we recommend consulting a qualified legal professional before ordering.
+      <div class="guarantee-badge">Personal Happiness Guarantee</div>
+      <a href="https://buy.stripe.com/fZu4gy4fe2tDcS70hE9Ve01" target="_blank" rel="noopener" class="stripe-btn">
+        Pay $100 by Card
+        <small>Visa · Mastercard · Amex · Apple Pay</small>
+      </a>
     </div>
+  </div>
+  <p class="muted-text" style="margin-top:16px;">Need it in 4 hours? After payment text your Order ID to <a href="tel:+16617140903" style="color:var(--brand);">+1 (661) 714-0903</a> to add rush delivery for $10.</p>
+</section>
+
+<section class="card">
+  <h2>Why Your Business Needs a Jingle</h2>
+  <p>The businesses people remember are the ones that got into their heads. A custom jingle gives your brand something no logo or tagline alone can do — it makes people feel something and then remember you because of it.</p>
+  <div class="grid-2">
+    <div>
+      <h3>Built Around Your Brand</h3>
+      <p>Your jingle is built from your business name, your message, your audience, and the feeling you want to create. Nothing generic. Nothing recycled.</p>
+    </div>
+    <div>
+      <h3>Any Style or Format</h3>
+      <p>Catchy pop, upbeat hip hop, acoustic, country, or corporate clean. We match the style to your brand and your target customer.</p>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>What a Custom Jingle Can Do for Your Business</h2>
+  <p>A jingle is one of the most cost-effective marketing investments a small business can make. Once it exists it keeps working every time someone hears it. Businesses order custom jingles for:</p>
+  <ul>
+    <li>Radio and podcast advertising</li>
+    <li>Social media content and reels</li>
+    <li>YouTube and video ads</li>
+    <li>On-hold phone music</li>
+    <li>In-store or event background music</li>
+    <li>Brand launches and rebrands</li>
+    <li>Local TV and streaming ads</li>
+  </ul>
+</section>
+
+<section class="card" id="order">
+  <h2>Request Your Business Jingle</h2>
+  <p class="muted-text">Submit your details below. Production begins after payment is confirmed.</p>
+  <form id="songForm" action="https://formspree.io/f/xwpqlypv" method="POST">
+    <input type="hidden" name="_next" value="https://www.customsongme.com/thanks">
+    <input type="hidden" name="order_type" value="Business Jingle">
+    <label for="business">Your Business Name and What You Do
+      <input type="text" name="business" required placeholder="e.g. Mike's Auto Repair — fast, honest, local auto service in Dallas TX">
+    </label>
+    <div class="grid-2">
+      <label for="style">Jingle Style
+        <select name="style" required>
+          <option value="Catchy Pop">Catchy Pop</option>
+          <option value="Upbeat Hip Hop">Upbeat Hip Hop</option>
+          <option value="Country">Country</option>
+          <option value="Acoustic">Acoustic</option>
+          <option value="Corporate Clean">Corporate Clean</option>
+          <option value="Reggae">Reggae</option>
+          <option value="Latin">Latin</option>
+          <option value="Surprise Me">Surprise Me</option>
+        </select>
+      </label>
+      <label for="vocalist">Vocalist Preference
+        <select name="vocalist" required>
+          <option value="Male">Male vocalist</option>
+          <option value="Female">Female vocalist</option>
+          <option value="Either">Both / Either works</option>
+          <option value="Instrumental">Instrumental only</option>
+        </select>
+      </label>
+    </div>
+    <label for="details">Your Brand Message and Target Customer
+      <textarea name="details" maxlength="600" placeholder="What makes your business different, who your customers are, what feeling you want the jingle to create, any specific words or phrases to include..." required></textarea>
+    </label>
+    <div class="grid-2">
+      <label for="name">Your Name<input type="text" name="name" required></label>
+      <label for="email">Your Email<input type="email" name="email" required></label>
+    </div>
+    <button type="submit" class="btn full-width">Submit Jingle Request →</button>
+  </form>
+  <p class="muted-text" style="text-align:center; margin-top:16px;">Submit your request → complete payment → receive your jingle within 24 hours of payment. Personal Happiness Guarantee included.</p>
+</section>
+
+<section class="card">
+  <h2>Complete Your Payment</h2>
+  <p>Pay by credit card via Stripe or your preferred payment app. Include your business name in the payment note. Production begins after payment is confirmed.</p>
+  <h3>💳 Pay by Credit Card</h3>
+  <p class="muted-text">Secure checkout powered by Stripe.</p>
+  <div class="grid-2">
+    <a href="https://buy.stripe.com/fZu4gy4fe2tDcS70hE9Ve01" target="_blank" rel="noopener" class="stripe-btn">Pay $100 — Business Jingle</a>
+  </div>
+  <h3 style="margin-top:24px;">📱 Pay by App</h3>
+  <div class="grid-2">
+    <a href="https://www.paypal.me/DanRock834" target="_blank" rel="noopener" class="btn" style="background:#003087; text-align:center;">PayPal</a>
+    <a href="https://cash.app/$optimistic01" target="_blank" rel="noopener" class="btn" style="background:#00d632; text-align:center;">Cash App</a>
+    <a href="https://venmo.com/u/Dan-Rock-5" target="_blank" rel="noopener" class="btn" style="background:#3d95ce; text-align:center;">Venmo</a>
+    <a href="tel:+16617140903" class="btn" style="background:#6d1ed4; text-align:center;">Zelle — +1 (661) 714-0903</a>
+  </div>
+</section>
+
+<section class="card" id="faq">
+  <h2>Frequently Asked Questions</h2>
+  <h3>How much does a custom business jingle cost?</h3>
+  <p>Business jingles start at $100 and include up to 3 full revisions and the Personal Happiness Guarantee. Pay by credit card, PayPal, Cash App, Venmo, or Zelle. Production begins after payment is confirmed.</p>
+  <h3>How many revisions are included?</h3>
+  <p>Your business jingle includes up to 3 complete full revisions, each delivered as a brand new full MP3 file. All revision requests must be submitted within 72 hours of payment or they expire. That is up to 4 unique jingle versions in total for $100.</p>
+  <h3>Is the jingle guaranteed?</h3>
+  <p>Yes. Dan the Song Man personally guarantees your satisfaction. If the jingle isn't right, he will make it right. If he still can't get it exactly what you wanted, you get a full refund. No hard feelings.</p>
+  <h3>How fast is delivery?</h3>
+  <p>Standard delivery is within <strong>24 hours of payment</strong>. Need it in 4 hours? After payment text your Order ID to <a href="tel:+16617140903" style="color:var(--brand);">+1 (661) 714-0903</a> to add rush delivery for $10.</p>
+  <h3>Who owns the rights to my jingle?</h3>
+  <p>Jingles created through CustomSongMe are produced using AI-assisted music generation tools. Copyright ownership of AI-generated music is currently subject to evolving laws and regulations. CustomSongMe does not guarantee exclusive copyright ownership or full commercial rights to any delivered jingle. By placing an order you acknowledge this limitation. For questions about usage rights we recommend consulting a qualified legal professional before ordering.</p>
+</section>
+
+<div class="disclaimer">
+  <strong>⚠️ Copyright and Usage Rights Notice:</strong> Jingles created through CustomSongMe are produced using AI-assisted music generation tools. Copyright ownership of AI-generated music is currently subject to evolving laws and regulations in the United States and internationally. CustomSongMe does not guarantee exclusive copyright ownership or full commercial rights to any delivered jingle. By placing an order you acknowledge and accept this limitation. For questions about usage rights for your specific project we recommend consulting a qualified legal professional before ordering.
+</div>
+```
 
   </main>
 
@@ -373,21 +357,9 @@
         <a href="https://www.linkedin.com/company/customsongme" target="_blank" rel="noopener">LinkedIn</a>
       </div>
       <div class="footer-links">
-        <a href="/">Home</a> |
-        <a href="/birthday-songs">Birthday Songs</a> |
-        <a href="/wedding-songs">Wedding Songs</a> |
-        <a href="/anniversary-songs">Anniversary Songs</a> |
-        <a href="/love-songs">Love Songs</a> |
-        <a href="/pet-songs">Pet Songs</a> |
-        <a href="/roast-songs">Roast Songs</a> |
-        <a href="/memorial-songs">Celebration of Life</a> |
-        <a href="/business-jingles">Business Jingles</a> |
-        <a href="#order">Order</a> |
-        <a href="#faq">FAQ</a>
+        <a href="/">Home</a> | <a href="/birthday-songs">Birthday Songs</a> | <a href="/wedding-songs">Wedding Songs</a> | <a href="/anniversary-songs">Anniversary Songs</a> | <a href="/love-songs">Love Songs</a> | <a href="/mothers-day-songs">Mother's Day Songs</a> | <a href="/pet-songs">Pet Songs</a> | <a href="/roast-songs">Roast Songs</a> | <a href="/memorial-songs">Celebration of Life</a> | <a href="/business-jingles">Business Jingles</a> | <a href="#order">Order</a> | <a href="#faq">FAQ</a>
       </div>
-      <p style="margin:16px 0 8px;">
-        <a href="https://g.page/r/CUJZcUwU_iIFEBM/review" target="_blank" rel="noopener" style="color:var(--brand); font-weight:600; text-decoration:none;">⭐ Leave us a Google Review</a>
-      </p>
+      <p style="margin:16px 0 8px;"><a href="https://g.page/r/CUJZcUwU_iIFEBM/review" target="_blank" rel="noopener" style="color:var(--brand); font-weight:600; text-decoration:none;">⭐ Leave us a Google Review</a></p>
       <p style="margin:20px 0;">© <span id="year"></span> CustomSongMe. All Rights Reserved.</p>
       <p>Serving customers nationwide online | <a href="tel:+16617140903" style="color:var(--muted);">+1 (661) 714-0903</a></p>
       <p>Contact: <span id="safe-email"></span></p>
@@ -395,22 +367,18 @@
   </footer>
 
   <script>
-    const user = "danrocksai";
-    const domain = "gmail.com";
+    const user = "danrocksai", domain = "gmail.com";
     document.getElementById('safe-email').innerHTML = `<a href="mailto:${user}@${domain}" style="color:var(--muted);">${user}@${domain}</a>`;
     document.getElementById('year').innerText = new Date().getFullYear();
-    const menuBtn = document.getElementById('menuBtn');
-    const navMenu = document.getElementById('navMenu');
-    menuBtn.addEventListener('click', function() {
-      const isOpen = navMenu.classList.toggle('open');
-      menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-    document.querySelectorAll('.yt-facade').forEach(facade => {
-      facade.addEventListener('click', function() {
-        const videoId = this.dataset.videoid;
-        this.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-      });
-    });
+    const menuBtn = document.getElementById('menuBtn'), navMenu = document.getElementById('navMenu');
+    menuBtn.addEventListener('click', function() { const isOpen = navMenu.classList.toggle('open'); menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false'); });
+    document.querySelectorAll('.yt-facade').forEach(f => f.addEventListener('click', function() { const v = this.dataset.videoid; this.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${v}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`; }));
+    window.addEventListener('scroll', () => { const w = document.body.scrollTop || document.documentElement.scrollTop, h = document.documentElement.scrollHeight - document.documentElement.clientHeight; document.getElementById('progressBar').style.width = ((w/h)*100)+'%'; });
+    if (typeof gtag === 'function') {
+      document.querySelectorAll('a[href^="https://buy.stripe.com"]').forEach(l => l.addEventListener('click', function() { gtag('event','begin_checkout',{payment_method:'Stripe',button_text:this.textContent.trim()}); }));
+      document.getElementById('songForm').addEventListener('submit', function() { gtag('event','generate_lead',{event_label:'business_jingle_request'}); });
+    }
   </script>
+
 </body>
 </html>
