@@ -1,189 +1,328 @@
-		<
-		const user = "danrocksai";
-		const domain = "gmail.com";
-		document.getElementById('safe-email').innerHTML = `<a href="mailto:${user}@${domain}" style="color:var(--muted);">${user}@${domain}</a>`;
-		document.getElementById('year').innerText = new Date().getFullYear();
+<!DOCTYPE html>
 
-		// 2. Generate and Set Order ID
-		const genID = () => {
-			const token = Math.random().toString(36).slice(2, 8).toUpperCase();
-			const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-			return `CSM-${date}-${token}`;
-		};
-		const ORDER_ID = genID();
-		const idInput = document.getElementById('order_id_hidden');
-		if (idInput) idInput.value = ORDER_ID;
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
 
-		// 3. Analytics & Tracking
-		const trackEvent = (eventName, params = {}) => {
-			if (typeof gtag === 'function') gtag('event', eventName, params);
-		};
+  <title>Thank You — Your Song Is Being Created | CustomSongMe</title>
 
-		// 4. Character Counter for Details
-		const details = document.getElementById('details');
-		details.addEventListener('input', () => {
-			const count = details.value.length;
-			const counter = document.getElementById('charCount');
-			counter.innerText = `(${count}/600)`;
-			counter.style.color = count < 100 ? '#ff4d8d' : count > 500 ? '#ffaa00' : 'var(--muted)';
-		});
+  <link rel="canonical" href="https://www.customsongme.com/thanks" />
+  <link rel="icon" type="image/png" href="/logo.png">
 
-		// 5. Genre dynamic logic with required + reset
-		const customGenre = document.getElementById('custom_genre');
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HGQ54E69BZ"></script>
 
-		document.getElementById('genreSelect').addEventListener('change', function() {
-			const isOther = this.value === 'Other';
-			document.getElementById('customGenreDiv').className = isOther ? '' : 'hidden';
-			customGenre.required = isOther;
-			if (!isOther) customGenre.value = '';
-			trackEvent('select_content', { content_type: 'genre', item_name: this.value });
-		});
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HGQ54E69BZ');
+  </script>
 
-		// 6. Package picker — clickable cards drive hidden input
-		const packageInput = document.getElementById('package');
-		const packageError = document.getElementById('packageError');
-		const occasionSelect = document.getElementById('occasion');
-		const pkgCards = document.querySelectorAll('.pkg-card');
+  <style>
+    :root {
+      --bg: #0b0b12;
+      --card: #151525;
+      --text: #e9e9f1;
+      --muted: #b0b5c0;
+      --brand: #7a5cff;
+      --green: #4ade80;
+    }
 
-		const selectPackage = (card) => {
-			pkgCards.forEach(c => {
-				c.classList.remove('selected');
-				c.setAttribute('aria-checked', 'false');
-			});
-			card.classList.add('selected');
-			card.setAttribute('aria-checked', 'true');
-			packageInput.value = card.dataset.package;
-			packageError.classList.add('hidden');
-			trackEvent('select_item', { item_category: 'package', item_name: card.dataset.package });
-		};
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(20px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
 
-		pkgCards.forEach(card => {
-			card.addEventListener('click', () => selectPackage(card));
-			card.addEventListener('keydown', (e) => {
-				if (e.key === 'Enter' || e.key === ' ') {
-					e.preventDefault();
-					selectPackage(card);
-				}
-			});
-		});
+    @keyframes pulse {
+      0%   { transform:scale(1);    box-shadow:0 0 0 0    rgba(74,222,128,0.4); }
+      70%  { transform:scale(1.03); box-shadow:0 0 0 14px rgba(74,222,128,0);   }
+      100% { transform:scale(1);    box-shadow:0 0 0 0    rgba(74,222,128,0);   }
+    }
 
-		// Auto-suggest Business Jingle package when occasion = Business Jingle
-		occasionSelect.addEventListener('change', function() {
-			trackEvent('select_content', { content_type: 'occasion', item_name: this.value });
-			if (this.value === 'Business Jingle' && packageInput.value !== 'Business Jingle $100') {
-				const jingleCard = document.querySelector('[data-package="Business Jingle $100"]');
-				if (jingleCard) selectPackage(jingleCard);
-			}
-		});
+    @keyframes spin {
+      to { transform:rotate(360deg); }
+    }
 
-		// 7. Hero Video — supports click and keyboard activation
-		const heroVideo = document.getElementById('heroVideo');
+    * { box-sizing:border-box; }
+    html, body { margin:0; padding:0; background:var(--bg); color:var(--text); font:16px/1.6 system-ui,-apple-system,sans-serif; scroll-behavior:smooth; min-height:100vh; }
 
-		const playHeroVideo = function() {
-			heroVideo.removeEventListener('click', playHeroVideo);
-			heroVideo.removeEventListener('keydown', handleHeroVideoKeydown);
+    /* ── NAV ── */
+    nav { background:#0f0f1e; border-bottom:1px solid #222233; position:sticky; top:0; z-index:100; }
+    .nav-inner { width:min(1000px,92vw); margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:12px 0; }
+    .nav-brand { font-weight:700; color:var(--brand); text-decoration:none; font-size:1.05rem; letter-spacing:-0.3px; }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:8px; background:none; border:none; }
+    .hamburger span { display:block; width:24px; height:2px; background:var(--muted); border-radius:2px; transition:0.3s; }
+    .nav-menu { display:flex; flex-wrap:wrap; gap:4px; }
+    .nav-menu a { color:var(--muted); text-decoration:none; font-size:0.85rem; padding:6px 10px; border-radius:6px; transition:0.2s; }
+    .nav-menu a:hover { color:var(--text); background:#1a1a2e; }
+    @media (max-width:768px) {
+      .hamburger { display:flex; }
+      .nav-menu { display:none; flex-direction:column; width:100%; background:#0f0f1e; position:absolute; top:100%; left:0; right:0; padding:10px 4vw; border-bottom:1px solid #222233; gap:0; z-index:200; }
+      .nav-menu.open { display:flex; }
+      .nav-menu a { padding:12px 0; border-bottom:1px solid #1a1a2e; font-size:0.95rem; }
+    }
 
-			trackEvent('play_video', {
-				video_title: 'How It Works Tutorial',
-				video_id: 'LE8mtdIbNG4',
-				placement: 'hero'
-			});
+    /* ── LAYOUT ── */
+    .container { width:min(700px,92vw); margin:0 auto; padding:48px 0 80px; }
+    .card { background:var(--card); margin:24px auto; padding:32px; border-radius:16px; border:1px solid #222233; animation:fadeUp 0.5s ease both; }
+    .card:nth-child(2) { animation-delay:0.1s; }
+    .card:nth-child(3) { animation-delay:0.2s; }
+    .card:nth-child(4) { animation-delay:0.3s; }
 
-			heroVideo.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/LE8mtdIbNG4?autoplay=1" title="CustomSongMe How It Works Tutorial" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen style="border:0; border-radius:16px; width:100%; height:100%; position:absolute; top:0; left:0;"></iframe>`;
-		};
+    h1 { font-size:clamp(1.8rem,5vw,2.6rem); margin:0 0 8px; line-height:1.15; }
+    h2 { color:var(--brand); font-size:1.4rem; margin:0 0 14px; }
+    h3 { font-size:1rem; margin:0 0 8px; color:var(--text); }
+    p { margin:0 0 12px; color:var(--muted); }
+    p:last-child { margin-bottom:0; }
 
-		const handleHeroVideoKeydown = function(e) {
-			if (e.key === 'Enter' || e.key === ' ') {
-				e.preventDefault();
-				playHeroVideo();
-			}
-		};
+    /* ── HERO CONFIRMATION ── */
+    .confirm-hero { text-align:center; padding:40px 32px; }
+    .check-circle {
+      width:80px; height:80px; border-radius:50%;
+      background:rgba(74,222,128,0.12); border:2px solid var(--green);
+      display:flex; align-items:center; justify-content:center;
+      margin:0 auto 24px; font-size:2.2rem;
+      animation:pulse 2.5s ease infinite;
+    }
+    .confirm-hero h1 { color:var(--green); }
+    .confirm-hero .sub { font-size:1.05rem; color:var(--muted); max-width:480px; margin:0 auto; }
 
-		heroVideo.addEventListener('click', playHeroVideo);
-		heroVideo.addEventListener('keydown', handleHeroVideoKeydown);
+    /* ── STATUS STEPS ── */
+    .steps { display:flex; flex-direction:column; gap:14px; }
+    .step-row { display:flex; align-items:flex-start; gap:16px; }
+    .step-icon { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; margin-top:2px; }
+    .step-icon.done  { background:rgba(74,222,128,0.15); border:1px solid var(--green); color:var(--green); }
+    .step-icon.active { background:rgba(122,92,255,0.15); border:1px solid var(--brand); color:var(--brand); }
+    .step-icon.active .spinner { width:16px; height:16px; border:2px solid rgba(122,92,255,0.3); border-top-color:var(--brand); border-radius:50%; animation:spin 0.8s linear infinite; }
+    .step-icon.pending { background:#1a1a2e; border:1px solid #2a2a44; color:var(--muted); }
+    .step-text h3 { color:var(--text); }
+    .step-text p  { color:var(--muted); font-size:0.9rem; }
 
-		// 8. Form submission with package validation, error handling, and package param redirect
-		const songForm = document.getElementById('songForm');
-		const formError = document.getElementById('formError');
+    /* ── WHAT HAPPENS NEXT ── */
+    .timeline { display:flex; flex-direction:column; gap:0; }
+    .tl-item { display:flex; gap:16px; position:relative; }
+    .tl-item:not(:last-child)::before { content:''; position:absolute; left:17px; top:36px; bottom:-14px; width:2px; background:#2a2a44; }
+    .tl-dot { width:36px; height:36px; border-radius:50%; background:#1a1a2e; border:2px solid var(--brand); display:flex; align-items:center; justify-content:center; font-size:0.85rem; font-weight:700; color:var(--brand); flex-shrink:0; }
+    .tl-body { padding-bottom:24px; }
+    .tl-body h3 { margin:6px 0 4px; }
 
-		songForm.addEventListener('submit', async function(e) {
-			e.preventDefault();
-			formError.classList.add('hidden');
+    /* ── BUTTONS ── */
+    .btn { display:inline-flex; align-items:center; justify-content:center; background:var(--brand); color:#fff; padding:15px 28px; border-radius:50px; font-weight:700; text-decoration:none; transition:0.2s; border:none; cursor:pointer; font-size:1rem; gap:8px; }
+    .btn:hover { opacity:0.9; transform:translateY(-1px); }
+    .btn-green { background:#16a34a; }
+    .btn-outline { background:transparent; border:1px solid #2a2a44; color:var(--muted); }
+    .btn-outline:hover { border-color:var(--brand); color:var(--text); }
+    .btn-row { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:24px; }
 
-			// Validate package selection
-			if (!packageInput.value) {
-				packageError.classList.remove('hidden');
-				document.getElementById('packagePicker').scrollIntoView({ behavior: 'smooth', block: 'center' });
-				return;
-			}
+    /* ── DAN CARD ── */
+    .dan-row { display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap; }
+    .dan-img { width:80px; height:80px; border-radius:50%; object-fit:cover; object-position:center top; border:2px solid rgba(122,92,255,0.5); flex-shrink:0; }
+    .dan-text h3 { margin:0 0 6px; font-size:1.05rem; }
 
-			const submitBtn = songForm.querySelector('button[type="submit"]');
-			const originalBtnText = submitBtn.innerHTML;
-			submitBtn.disabled = true;
-			submitBtn.innerHTML = 'Sending...';
+    /* ── CONTACT BOX ── */
+    .contact-box { background:#0f0f1e; border:1px solid #2a2a44; border-radius:12px; padding:20px; text-align:center; }
+    .contact-box a { color:var(--brand); text-decoration:none; font-weight:700; }
 
-			trackEvent('generate_lead', {
-				order_id: ORDER_ID,
-				occasion: occasionSelect.value,
-				package_selected: packageInput.value
-			});
+    /* ── FOOTER ── */
+    footer { text-align:center; padding:40px 20px; opacity:0.6; font-size:13px; color:var(--muted); }
+    .social-links { display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin-bottom:12px; }
+    .social-links a { color:var(--muted); text-decoration:none; font-size:0.85rem; }
+    .social-links a:hover { color:var(--text); }
+  </style>
 
-			try {
-				const formData = new FormData(songForm);
-				const response = await fetch(songForm.action, {
-					method: 'POST',
-					body: formData,
-					headers: { 'Accept': 'application/json' }
-				});
+</head>
+<body>
 
-				if (response.ok) {
-					// Fire conversion event with package details for GA funnel reporting
-					trackEvent('form_submit_success', {
-						order_id: ORDER_ID,
-						package_selected: packageInput.value,
-						occasion: occasionSelect.value
-					});
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">🎵 CustomSongMe</a>
+      <button class="hamburger" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="/">Home</a>
+        <a href="/birthday-songs">Birthdays</a>
+        <a href="/wedding-songs">Weddings</a>
+        <a href="/anniversary-songs">Anniversaries</a>
+        <a href="/love-songs">Love Songs</a>
+        <a href="/mothers-day-songs">Mother's Day</a>
+        <a href="/pet-songs">Pet Songs</a>
+        <a href="/roast-songs">Roast Songs</a>
+        <a href="/memorial-songs">Celebration of Life</a>
+        <a href="/business-jingles">Business Jingles</a>
+      </div>
+    </div>
+  </nav>
 
-					// Pass selected package to thanks page so it can show the correct payment amount
-					const pkgParam = encodeURIComponent(packageInput.value);
-					window.location.href = `https://www.customsongme.com/thanks?pkg=${pkgParam}`;
-				} else {
-					throw new Error('Form submission failed');
-				}
-			} catch (err) {
-				submitBtn.disabled = false;
-				submitBtn.innerHTML = originalBtnText;
-				formError.innerHTML = 'Something went wrong sending your request. Please text it directly to <a href="sms:+16617140903" style="color:#ff4d8d; font-weight:700;">+1 (661) 714-0903</a> and Dan will take care of you.';
-				formError.classList.remove('hidden');
-				trackEvent('form_error', { order_id: ORDER_ID });
-			}
-		});
+  <main>
+    <div class="container">
 
-		// 9. Mobile menu toggle with auto-close on link click
-		const menuBtn = document.getElementById('menuBtn');
-		const navMenu = document.getElementById('navMenu');
+```
+  <!-- CONFIRMATION HERO -->
+  <div class="card confirm-hero">
+    <div class="check-circle">🎵</div>
+    <h1 id="heroHeadline">You're All Set.</h1>
+    <p class="sub" id="heroSub">Your request has been received and your song is on its way. Dan personally reads every submission — you'll hear from him soon.</p>
+    <div class="btn-row">
+      <a href="https://www.customsongme.com" class="btn">← Back to CustomSongMe</a>
+    </div>
+  </div>
 
-		menuBtn.addEventListener('click', function() {
-			const isOpen = navMenu.classList.toggle('open');
-			menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-		});
+  <!-- CURRENT STATUS -->
+  <div class="card">
+    <h2>📋 Current Status</h2>
+    <div class="steps">
+      <div class="step-row">
+        <div class="step-icon done">✓</div>
+        <div class="step-text">
+          <h3>Request Received</h3>
+          <p>Dan has your story and all the details he needs to get started.</p>
+        </div>
+      </div>
+      <div class="step-row" id="paymentStep">
+        <div class="step-icon done">✓</div>
+        <div class="step-text">
+          <h3 id="paymentStepTitle">Payment Confirmed</h3>
+          <p id="paymentStepSub">Production is now underway. Dan is working on your song.</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-icon active">
+          <div class="spinner"></div>
+        </div>
+        <div class="step-text">
+          <h3>Song In Production</h3>
+          <p>Dan is building your song from your story right now.</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-icon pending">✉</div>
+        <div class="step-text">
+          <h3>Delivery to Your Inbox</h3>
+          <p>Your MP3, cover art, and full lyrics will be delivered by email within 24 hours of payment.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-		document.querySelectorAll('#navMenu a').forEach(link => {
-			link.addEventListener('click', () => {
-				navMenu.classList.remove('open');
-				menuBtn.setAttribute('aria-expanded', 'false');
-			});
-		});
+  <!-- WHAT HAPPENS NEXT -->
+  <div class="card">
+    <h2>⏱️ What Happens Next</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot">1</div>
+        <div class="tl-body">
+          <h3>Within 2 Hours</h3>
+          <p>You'll receive a confirmation email letting you know your song is actively being worked on.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">2</div>
+        <div class="tl-body">
+          <h3>Within 24 Hours of Payment</h3>
+          <p>Your completed song arrives in your inbox — MP3, custom cover art, and full lyrics included.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">3</div>
+        <div class="tl-body">
+          <h3>Not What You Expected?</h3>
+          <p>Personal Happiness Guarantee — if it isn't right, Dan will fix it. If he still can't nail it, you get a full refund. No hard feelings.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-		// 10. Scroll progress bar (with division-by-zero guard)
-		window.addEventListener('scroll', () => {
-			const winScroll = document.documentElement.scrollTop;
-			const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-			const percent = height > 0 ? (winScroll / height) * 100 : 0;
-			document.getElementById('progressBar').style.width = percent + '%';
-		});
-	</script>
+  <!-- MEET DAN -->
+  <div class="card">
+    <div class="dan-row">
+      <img src="/dan-the-song-man.jpg" alt="Dan the Song Man" class="dan-img" />
+      <div class="dan-text">
+        <h3>A note from Dan</h3>
+        <p>I personally read every single request. Your story matters — I'm not just filling in a template. I'll take what you shared and build something that actually sounds like it was made for the person you're thinking of. Because it was.</p>
+        <p>Thank you for trusting me with this.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEED SOMETHING -->
+  <div class="card">
+    <div class="contact-box">
+      <p style="font-size:1rem; color:var(--text); font-weight:700; margin-bottom:8px;">Need to add details or have a question?</p>
+      <p>Text Dan directly at <a href="sms:+16617140903">+1 (661) 714-0903</a> — include your Order ID and he'll take care of you.</p>
+      <p style="margin-top:12px;">Need it in 4 hours? Text your Order ID to the same number and add <strong style="color:var(--text);">RUSH</strong> — $10 rush fee applies.</p>
+    </div>
+  </div>
+
+  <!-- BACK HOME -->
+  <div style="text-align:center; margin-top:8px;">
+    <a href="https://www.customsongme.com" class="btn" style="font-size:1.05rem;">← Return to CustomSongMe</a>
+  </div>
+
+</div>
+```
+
+  </main>
+
+  <footer>
+    <div class="social-links">
+      <a href="https://www.facebook.com/customsongme" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.instagram.com/customsongme" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.tiktok.com/@customsongme" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://www.youtube.com/@customsongme" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://x.com/customsongme" target="_blank" rel="noopener">X</a>
+      <a href="https://www.linkedin.com/company/customsongme" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <p>© <span id="year"></span> CustomSongMe. All Rights Reserved.</p>
+    <p>Serving customers nationwide online | <a href="tel:+16617140903" style="color:var(--muted);">+1 (661) 714-0903</a></p>
+    <p>Contact: <span id="safe-email"></span></p>
+  </footer>
+
+  <script>
+    // ── YEAR + EMAIL ──
+    document.getElementById('year').innerText = new Date().getFullYear();
+    const u = "danrocksai", d = "gmail.com";
+    document.getElementById('safe-email').innerHTML = `<a href="mailto:${u}@${d}" style="color:var(--muted);">${u}@${d}</a>`;
+
+    // ── PROMO CODE PATH ──
+    // If customer used promo code they land here without paying.
+    // URL will have ?free=1 appended by the free claim button on index.html.
+    // We detect that and adjust messaging accordingly.
+    const params = new URLSearchParams(window.location.search);
+    const isFree = params.get('free') === '1';
+
+    if (isFree) {
+      document.getElementById('heroHeadline').innerText = '🎁 Your Free Song Is Being Created!';
+      document.getElementById('heroSub').innerText = 'Your promo code was applied successfully. Dan has your request and your song is on its way — no payment needed.';
+      document.getElementById('paymentStepTitle').innerText = 'Promo Code Applied';
+      document.getElementById('paymentStepSub').innerText = 'Your free song promo was accepted. Production is now underway.';
+    }
+
+    // ── GA PURCHASE EVENT ──
+    if (!isFree && typeof gtag === 'function') {
+      gtag('event', 'purchase', {
+        transaction_id: 'CSM-' + Date.now(),
+        value: 30,
+        currency: 'USD'
+      });
+    }
+
+    // ── HAMBURGER ──
+    const menuBtn = document.getElementById('menuBtn');
+    const navMenu = document.getElementById('navMenu');
+    menuBtn.addEventListener('click', function() {
+      const isOpen = navMenu.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    document.querySelectorAll('#navMenu a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
 
 </body>
-
 </html>
