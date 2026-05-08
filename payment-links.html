@@ -1,25 +1,21 @@
-<!DOCTYPE html>
+Replace your entire payment-links.html with this:
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-
   <title>Payment Links | CustomSongMe</title>
-
   <link rel="canonical" href="https://www.customsongme.com/payment-links" />
   <link rel="icon" type="image/png" href="/logo.png">
-
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HGQ54E69BZ"></script>
-
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-HGQ54E69BZ');
   </script>
-
   <style>
     :root {
       --bg: #0b0b12;
@@ -29,185 +25,324 @@
       --brand: #7a5cff;
       --green: #4ade80;
     }
-
     @keyframes fadeUp {
-      from { opacity:0; transform:translateY(16px); }
-      to   { opacity:1; transform:translateY(0); }
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
-    * { box-sizing:border-box; }
-    html, body { margin:0; padding:0; background:var(--bg); color:var(--text); font:16px/1.6 system-ui,-apple-system,sans-serif; min-height:100vh; }
-
-    /* ── NAV ── */
-    nav { background:#0f0f1e; border-bottom:1px solid #222233; position:sticky; top:0; z-index:100; }
-    .nav-inner { width:min(1000px,92vw); margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:12px 0; }
-    .nav-brand { font-weight:700; color:var(--brand); text-decoration:none; font-size:1.05rem; letter-spacing:-0.3px; }
-    .nav-home { color:var(--muted); text-decoration:none; font-size:0.85rem; padding:6px 10px; border-radius:6px; transition:0.2s; }
-    .nav-home:hover { color:var(--text); background:#1a1a2e; }
-
-    /* ── LAYOUT ── */
-    .container { width:min(600px,92vw); margin:0 auto; padding:48px 0 80px; }
-
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.6 system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+    }
+    nav {
+      background: #0f0f1e;
+      border-bottom: 1px solid #222233;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-inner {
+      width: min(1000px, 92vw);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+    }
+    .nav-brand {
+      font-weight: 700;
+      color: var(--brand);
+      text-decoration: none;
+      font-size: 1.05rem;
+      letter-spacing: -0.3px;
+    }
+    .nav-home {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: 0.2s;
+    }
+    .nav-home:hover {
+      color: var(--text);
+      background: #1a1a2e;
+    }
+    .container {
+      width: min(600px, 92vw);
+      margin: 0 auto;
+      padding: 48px 0 80px;
+    }
     .card {
-      background:var(--card);
-      border-radius:16px;
-      border:1px solid #222233;
-      padding:30px;
-      margin-bottom:24px;
-      animation:fadeUp 0.4s ease both;
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px solid #222233;
+      padding: 30px;
+      margin-bottom: 24px;
+      animation: fadeUp 0.4s ease both;
     }
-    .card:nth-child(2) { animation-delay:0.05s; }
-    .card:nth-child(3) { animation-delay:0.1s; }
-    .card:nth-child(4) { animation-delay:0.15s; }
-    .card:nth-child(5) { animation-delay:0.2s; }
-
-    h1 { font-size:clamp(1.7rem,5vw,2.4rem); margin:0 0 6px; line-height:1.15; }
-    h2 { color:var(--brand); font-size:1.2rem; margin:0 0 16px; }
-    p { margin:0 0 12px; color:var(--muted); }
-    p:last-child { margin-bottom:0; }
-
-
-    /* ── STRIPE ── */
-    .stripe-btn { display:block; background:#635bff; color:#fff; padding:18px 20px; border-radius:12px; font-weight:700; text-decoration:none; text-align:center; font-size:1.05rem; transition:background 0.2s; }
-    .stripe-btn:hover { background:#4f46e5; }
-    .stripe-btn small { display:block; font-weight:400; font-size:0.8rem; opacity:0.8; margin-top:4px; }
-
-    /* ── APP BUTTONS ── */
-    .app-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:12px; }
-    .app-btn { display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; padding:16px 12px; border-radius:12px; font-weight:700; text-decoration:none; font-size:0.95rem; gap:6px; transition:opacity 0.2s; min-height:70px; }
-    .app-btn:hover { opacity:0.88; }
-    .app-btn small { font-weight:400; font-size:0.75rem; opacity:0.8; }
-
-    /* ── TIP SECTION ── */
-    .tip-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:12px; }
-    .tip-btn { display:block; color:var(--brand); padding:14px 12px; border-radius:12px; font-weight:700; text-decoration:none; text-align:center; font-size:0.9rem; border:1px solid var(--brand); background:#0f0f1e; transition:0.2s; }
-    .tip-btn:hover { background:var(--brand); color:#fff; }
-    .optional-badge { display:inline-block; background:rgba(122,92,255,0.12); border:1px solid rgba(122,92,255,0.4); color:var(--brand); padding:3px 10px; border-radius:20px; font-size:0.75rem; font-weight:600; margin-bottom:14px; }
-
-    /* ── REVIEW SECTION ── */
-    .review-card { background:linear-gradient(135deg,#120f2a,#0f0f1e); border:2px solid var(--brand); }
-    .stars { font-size:1.6rem; letter-spacing:4px; margin-bottom:12px; display:block; }
-    .review-btn { display:block; background:var(--brand); color:#fff; padding:16px 20px; border-radius:12px; font-weight:700; text-decoration:none; text-align:center; font-size:1rem; margin-top:16px; transition:opacity 0.2s; }
-    .review-btn:hover { opacity:0.9; }
-
-    /* ── DIVIDER ── */
-    .divider { border:none; border-top:1px solid #222233; margin:4px 0 20px; }
-
-    /* ── FOOTER ── */
-    footer { text-align:center; padding:40px 20px; opacity:0.6; font-size:13px; color:var(--muted); }
-    footer a { color:var(--muted); text-decoration:none; }
-    footer a:hover { color:var(--text); }
+    h1 {
+      font-size: clamp(1.7rem, 5vw, 2.4rem);
+      margin: 0 0 6px;
+      line-height: 1.15;
+    }
+    h2 {
+      color: var(--brand);
+      font-size: 1.2rem;
+      margin: 0 0 16px;
+    }
+    p {
+      margin: 0 0 12px;
+      color: var(--muted);
+    }
+    p:last-child {
+      margin-bottom: 0;
+    }
+    .price {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--text);
+      margin: 10px 0 14px;
+      line-height: 1;
+    }
+    .stripe-btn {
+      display: block;
+      background: #635bff;
+      color: #fff;
+      padding: 18px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      text-align: center;
+      font-size: 1.05rem;
+      transition: background 0.2s;
+      margin-top: 18px;
+    }
+    .stripe-btn:hover {
+      background: #4f46e5;
+    }
+    .stripe-btn small {
+      display: block;
+      font-weight: 400;
+      font-size: 0.8rem;
+      opacity: 0.85;
+      margin-top: 4px;
+    }
+    .special-card {
+      background: linear-gradient(135deg, #18122f, #151525);
+      border: 2px solid var(--brand);
+    }
+    .app-grid,
+    .tip-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+    }
+    .app-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      padding: 16px 12px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.95rem;
+      gap: 6px;
+      transition: opacity 0.2s;
+      min-height: 70px;
+      text-align: center;
+    }
+    .app-btn:hover {
+      opacity: 0.88;
+    }
+    .app-btn small {
+      font-weight: 400;
+      font-size: 0.75rem;
+      opacity: 0.85;
+    }
+    .tip-btn {
+      display: block;
+      color: var(--brand);
+      padding: 14px 12px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      text-align: center;
+      font-size: 0.9rem;
+      border: 1px solid var(--brand);
+      background: #0f0f1e;
+      transition: 0.2s;
+    }
+    .tip-btn:hover {
+      background: var(--brand);
+      color: #fff;
+    }
+    .optional-badge {
+      display: inline-block;
+      background: rgba(122,92,255,0.12);
+      border: 1px solid rgba(122,92,255,0.4);
+      color: var(--brand);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .review-card {
+      background: linear-gradient(135deg, #120f2a, #0f0f1e);
+      border: 2px solid var(--brand);
+    }
+    .stars {
+      font-size: 1.6rem;
+      letter-spacing: 4px;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .review-btn {
+      display: block;
+      background: var(--brand);
+      color: #fff;
+      padding: 16px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      text-align: center;
+      font-size: 1rem;
+      margin-top: 16px;
+      transition: opacity 0.2s;
+    }
+    .review-btn:hover {
+      opacity: 0.9;
+    }
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      opacity: 0.6;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+    footer a:hover {
+      color: var(--text);
+    }
   </style>
-
 </head>
 <body>
-
   <nav>
     <div class="nav-inner">
       <a href="/" class="nav-brand">🎵 CustomSongMe</a>
       <a href="/" class="nav-home">← Back to Home</a>
     </div>
   </nav>
-
   <main>
     <div class="container">
-
-  <!-- HEADER -->
-  <div style="text-align:center; padding:0 0 32px; animation:fadeUp 0.3s ease both;">
-    <h1>💳 Payment Links</h1>
-    <p style="font-size:1.05rem; max-width:420px; margin:8px auto 0;">Every custom song is <strong style="color:var(--text);">$30</strong> and includes your MP3, custom cover art, and full lyrics delivered by email.</p>
-  </div>
-
-
-  <!-- STRIPE -->
-  <div class="card">
-    <h2>💳 Pay by Credit Card</h2>
-    <p>Secure checkout powered by Stripe. Tap to pay $30 and complete your order.</p>
-    <a href="https://buy.stripe.com/cNieVc2767NX3hxd4q9Ve06" target="_blank" rel="noopener" class="stripe-btn" id="stripeLink">
-      Pay $30 — Complete My Order
-      <small>Visa · Mastercard · Amex · Apple Pay · Google Pay</small>
-    </a>
-  </div>
-
-  <!-- PAYMENT APPS -->
-  <div class="card">
-    <h2>📱 Pay by App</h2>
-    <p>Tap your preferred app and send $30 to complete your order.</p>
-    <div class="app-grid">
-      <a href="https://www.paypal.me/DanRock834" target="_blank" rel="noopener" class="app-btn" style="background:#003087;">
-        PayPal
-        <small>paypal.me/DanRock834</small>
-      </a>
-      <a href="https://cash.app/$optimistic01" target="_blank" rel="noopener" class="app-btn" style="background:#00a86b;">
-        Cash App
-        <small>$optimistic01</small>
-      </a>
-      <a href="https://venmo.com/u/Dan-Rock-5" target="_blank" rel="noopener" class="app-btn" style="background:#3d95ce;">
-        Venmo
-        <small>@Dan-Rock-5</small>
-      </a>
-      <a href="tel:+16617140903" class="app-btn" style="background:#6d1ed4;">
-        Zelle
-        <small>+1 (661) 714-0903</small>
-      </a>
+      <div style="text-align:center; padding:0 0 32px; animation:fadeUp 0.3s ease both;">
+        <h1>💳 Payment Links</h1>
+        <p style="font-size:1.05rem; max-width:420px; margin:8px auto 0;">
+          Complete your CustomSongMe payment securely below.
+        </p>
+      </div>
+      <div class="card special-card">
+        <h2>🌸 Mother’s Day Special</h2>
+        <p>Personalized Mother’s Day song created from your real memories, stories, and emotions.</p>
+        <div class="price">$20</div>
+        <p>Includes a full custom song, high quality MP3, 24-hour delivery, and the Personal Happiness Guarantee.</p>
+        <a href="https://buy.stripe.com/3cIfZg1326JTaJZ7K69Ve05" target="_blank" rel="noopener" class="stripe-btn" id="mothersDayStripeLink">
+          Pay $20 — Mother’s Day Special
+          <small>Secure checkout powered by Stripe</small>
+        </a>
+      </div>
+      <div class="card">
+        <h2>💳 Standard Custom Song Payment</h2>
+        <p>Every custom song is $30 and includes your MP3, custom cover art, and full lyrics delivered by email.</p>
+        <a href="https://buy.stripe.com/cNieVc2767NX3hxd4q9Ve06" target="_blank" rel="noopener" class="stripe-btn" id="stripeLink">
+          Pay $30 — Complete My Order
+          <small>Visa · Mastercard · Amex · Apple Pay · Google Pay</small>
+        </a>
+      </div>
+      <div class="card">
+        <h2>📱 Pay by App</h2>
+        <p>Tap your preferred app and send payment to complete your order.</p>
+        <div class="app-grid">
+          <a href="https://www.paypal.me/DanRock834" target="_blank" rel="noopener" class="app-btn" style="background:#003087;">
+            PayPal
+            <small>paypal.me/DanRock834</small>
+          </a>
+          <a href="https://cash.app/$optimistic01" target="_blank" rel="noopener" class="app-btn" style="background:#00a86b;">
+            Cash App
+            <small>$optimistic01</small>
+          </a>
+          <a href="https://venmo.com/u/Dan-Rock-5" target="_blank" rel="noopener" class="app-btn" style="background:#3d95ce;">
+            Venmo
+            <small>@Dan-Rock-5</small>
+          </a>
+          <a href="tel:+16617140903" class="app-btn" style="background:#6d1ed4;">
+            Zelle
+            <small>+1 (661) 714-0903</small>
+          </a>
+        </div>
+        <p style="margin-top:14px; font-size:0.85rem;">
+          Need it in 4 hours? After payment text Dan at
+          <a href="sms:+16617140903" style="color:var(--brand); font-weight:600;">+1 (661) 714-0903</a>
+          to add 4-hour rush delivery for $10.
+        </p>
+      </div>
+      <div class="card">
+        <h2>🎵 Leave a Tip</h2>
+        <span class="optional-badge">100% Optional</span>
+        <p>If your song exceeded expectations, a tip means the world to a small business. It goes directly to Dan and helps keep this thing going. Only if you feel it — no pressure at all.</p>
+        <div class="tip-grid">
+          <a href="https://www.paypal.me/DanRock834" target="_blank" rel="noopener" class="tip-btn">Tip via PayPal</a>
+          <a href="https://cash.app/$optimistic01" target="_blank" rel="noopener" class="tip-btn">Tip via Cash App</a>
+          <a href="https://venmo.com/u/Dan-Rock-5" target="_blank" rel="noopener" class="tip-btn">Tip via Venmo</a>
+        </div>
+      </div>
+      <div class="card review-card">
+        <span class="stars">⭐⭐⭐⭐⭐</span>
+        <h2 style="color:var(--text);">Your Opinion Matters to Dan</h2>
+        <p style="color:var(--muted);">Whether your song blew you away or left you with feedback — Dan genuinely wants to hear it. Reviews help real people find CustomSongMe, and honest words from real customers mean more than anything else.</p>
+        <p style="color:var(--muted);">If you enjoyed your song, a quick Google review goes a long way. If something wasn't right, he'd love to know that too — so he can keep getting better.</p>
+        <a href="https://g.page/r/CUJZcUwU_iIFEBM/review" target="_blank" rel="noopener" class="review-btn">
+          ⭐ Leave a Google Review
+        </a>
+      </div>
+      <div style="text-align:center; margin-top:8px;">
+        <a href="https://www.customsongme.com" style="color:var(--brand); font-weight:700; text-decoration:none; font-size:0.95rem;">
+          ← Return to CustomSongMe
+        </a>
+      </div>
     </div>
-    <p style="margin-top:14px; font-size:0.85rem;">Need it in 4 hours? After payment text Dan at <a href="tel:+16617140903" style="color:var(--brand); font-weight:600;">+1 (661) 714-0903</a> to add 4-hour rush delivery for $10.</p>
-  </div>
-
-  <!-- TIPS -->
-  <div class="card">
-    <h2>🎵 Leave a Tip</h2>
-    <span class="optional-badge">100% Optional</span>
-    <p>If your song exceeded expectations, a tip means the world to a small business. It goes directly to Dan and helps keep this thing going. Only if you feel it — no pressure at all.</p>
-    <div class="tip-grid">
-      <a href="https://www.paypal.me/DanRock834" target="_blank" rel="noopener" class="tip-btn">Tip via PayPal</a>
-      <a href="https://cash.app/$optimistic01" target="_blank" rel="noopener" class="tip-btn">Tip via Cash App</a>
-      <a href="https://venmo.com/u/Dan-Rock-5" target="_blank" rel="noopener" class="tip-btn">Tip via Venmo</a>
-    </div>
-  </div>
-
-  <!-- GOOGLE REVIEW -->
-  <div class="card review-card">
-    <span class="stars">⭐⭐⭐⭐⭐</span>
-    <h2 style="color:var(--text);">Your Opinion Matters to Dan</h2>
-    <p style="color:var(--muted);">Whether your song blew you away or left you with feedback — Dan genuinely wants to hear it. Reviews help real people find CustomSongMe, and honest words from real customers mean more than anything else.</p>
-    <p style="color:var(--muted);">If you enjoyed your song, a quick Google review goes a long way. If something wasn't right, he'd love to know that too — so he can keep getting better.</p>
-    <a href="https://g.page/r/CUJZcUwU_iIFEBM/review" target="_blank" rel="noopener" class="review-btn">
-      ⭐ Leave a Google Review
-    </a>
-  </div>
-
-  <!-- BACK HOME -->
-  <div style="text-align:center; margin-top:8px;">
-    <a href="https://www.customsongme.com" style="color:var(--brand); font-weight:700; text-decoration:none; font-size:0.95rem;">← Return to CustomSongMe</a>
-  </div>
-
-</div>
-
   </main>
-
   <footer>
     <p>© <span id="year"></span> CustomSongMe. All Rights Reserved.</p>
     <p><a href="tel:+16617140903">+1 (661) 714-0903</a> · <span id="safe-email"></span></p>
   </footer>
-
   <script>
     document.getElementById('year').innerText = new Date().getFullYear();
-    const u = "danrocksai", d = "gmail.com";
+    const u = "danrocksai";
+    const d = "gmail.com";
     document.getElementById('safe-email').innerHTML = `<a href="mailto:${u}@${d}">${u}@${d}</a>`;
-
-
-    // ── COPY ──
-
-    // ── GA ──
-    const track = (name, params={}) => { if (typeof gtag==='function') gtag('event',name,params); };
+    const track = (name, params = {}) => {
+      if (typeof gtag === 'function') gtag('event', name, params);
+    };
     document.getElementById('stripeLink').addEventListener('click', () => {
-      track('begin_checkout', { payment_method: 'Stripe', page: 'payment-links' });
+      track('begin_checkout', { payment_method: 'Stripe', page: 'payment-links', amount: 30 });
     });
-    document.querySelectorAll('a[href*="g.page"]').forEach(l => {
-      l.addEventListener('click', () => track('leave_review_click', { page: 'payment-links' }));
+    document.getElementById('mothersDayStripeLink').addEventListener('click', () => {
+      track('begin_checkout', { payment_method: 'Stripe', page: 'payment-links', amount: 20, offer: 'mothers_day_special' });
+    });
+    document.querySelectorAll('a[href*="g.page"]').forEach(link => {
+      link.addEventListener('click', () => track('leave_review_click', { page: 'payment-links' }));
     });
   </script>
-
 </body>
 </html>
