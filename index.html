@@ -723,6 +723,12 @@
       const isOpen = navMenu.classList.toggle('open');
       menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
+    document.querySelectorAll('#navMenu a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
 
     // ── HOW IT WORKS VIDEO ──
     document.getElementById('heroVideo').addEventListener('click', function() {
