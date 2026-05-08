@@ -75,7 +75,7 @@
       {
         "@type": "Question",
         "name": "How fast is delivery?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Standard delivery is within 24 hours of payment. Need it in 4 hours? After payment text your Order ID to +1 (661) 714-0903 for rush delivery. Rush fee is $10." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Standard delivery is within 24 hours of payment. Need it in 4 hours? After payment text Dan at +1 (661) 714-0903 to add rush delivery for $10." }
       },
       {
         "@type": "Question",
@@ -169,12 +169,6 @@
     .hidden { display:none; }
     .grid-2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
 
-    /* ── ORDER ID ── */
-    .order-id-bar { display:flex; align-items:center; gap:10px; background:#000; padding:10px 14px; border-radius:8px; border:1px solid var(--brand); margin:0 0 24px; }
-    .order-id-bar code { flex-grow:1; color:var(--brand); font-weight:700; font-size:0.95rem; }
-
-    /* ── PAYMENT SECTION ── */
-    .pay-divider { border:none; border-top:1px solid #222233; margin:32px 0 28px; }
     .stripe-btn { display:block; background:#635bff; color:#fff; padding:16px 20px; border-radius:10px; font-weight:700; text-decoration:none; text-align:center; font-size:1rem; transition:background 0.2s; }
     .stripe-btn:hover { background:#4f46e5; }
     .stripe-btn small { display:block; font-weight:400; font-size:0.78rem; opacity:0.8; margin-top:3px; }
@@ -303,7 +297,7 @@
     </div>
     <div>
       <h3 style="color:var(--brand); border:none; margin-top:0;">2. Complete Payment</h3>
-      <p class="muted-text">Pay $30 securely by credit card via Stripe or your preferred payment app. Your Order ID links your request to your payment.</p>
+      <p class="muted-text">Pay $30 securely by credit card via Stripe or your preferred payment app. Your email links your request to your payment.</p>
     </div>
     <div>
       <h3 style="color:var(--brand); border:none; margin-top:0;">3. Receive Your Song</h3>
@@ -372,16 +366,9 @@
     <div class="step" id="step3">3. Receive Song</div>
   </div>
 
-  <p class="muted-text" style="margin-bottom:6px;">Your Unique Order ID:</p>
-  <div class="order-id-bar">
-    <code id="oid1">CSM-GENERATING...</code>
-    <button class="btn" id="copyBtn" type="button" style="padding:8px 14px; font-size:0.8rem;" aria-label="Copy Order ID">Copy</button>
-  </div>
-
   <!-- FORM SECTION -->
   <div id="formSection">
     <form id="songForm">
-      <input type="hidden" name="order_id" id="order_id_hidden">
 
       <label for="occasion">Occasion</label>
       <select name="occasion" id="occasion" required>
@@ -453,7 +440,6 @@
   <div id="paymentSection" class="hidden">
     <div style="background:linear-gradient(135deg,rgba(74,222,128,0.08),rgba(122,92,255,0.08)); border:1px solid rgba(74,222,128,0.3); border-radius:12px; padding:18px; margin-bottom:24px; text-align:center;">
       <p style="margin:0; color:#4ade80; font-weight:700; font-size:1.05rem;">✅ Request received! Now complete your $30 payment to start production.</p>
-      <p style="margin:6px 0 0; color:var(--muted); font-size:0.88rem;">Include your Order ID in the payment note so I can match your request instantly.</p>
     </div>
 
     <!-- PROMO CODE -->
@@ -472,7 +458,7 @@
       <small>Visa · Mastercard · Amex · Apple Pay · Google Pay — powered by Stripe</small>
     </a>
 
-    <p class="muted-text" style="text-align:center; margin:20px 0 10px;">Or pay by app — include your Order ID in the note:</p>
+    <p class="muted-text" style="text-align:center; margin:20px 0 10px;">Or pay by app — mention it's for a custom song:</p>
     <div class="app-grid">
       <a href="https://www.paypal.me/DanRock834" target="_blank" rel="noopener" class="app-btn" style="background:#003087;">PayPal</a>
       <a href="https://cash.app/$optimistic01" target="_blank" rel="noopener" class="app-btn" style="background:#00d632;">Cash App</a>
@@ -480,7 +466,7 @@
       <a href="tel:+16617140903" class="app-btn" style="background:#6d1ed4;">Zelle</a>
     </div>
 
-    <p class="muted-text" style="text-align:center; margin-top:14px;">Need it in 4 hours? After payment text your Order ID to <a href="tel:+16617140903" style="color:var(--brand);">+1 (661) 714-0903</a> to add rush for $10.</p>
+    <p class="muted-text" style="text-align:center; margin-top:14px;">Need it in 4 hours? After payment text Dan at <a href="tel:+16617140903" style="color:var(--brand);">+1 (661) 714-0903</a> to add rush delivery for $10.</p>
     <p class="support-note">Questions? Text me at <a href="tel:+16617140903">+1 (661) 714-0903</a></p>
   </div>
 
@@ -546,7 +532,7 @@
   <p>Yes. Dan the Song Man personally guarantees your satisfaction. If the song isn't right, he will make it right. If he still can't get it exactly what you wanted, you get a full refund. No hard feelings.</p>
 
   <h3>How fast is delivery?</h3>
-  <p>Your song is delivered within <strong>24 hours of payment</strong>. You'll also receive a confirmation email within 2 hours of payment so you know it's in the works. Need it in 4 hours? After payment text your Order ID to <a href="tel:+16617140903" style="color:var(--brand);">+1 (661) 714-0903</a> to add rush delivery for $10.</p>
+  <p>Your song is delivered within <strong>24 hours of payment</strong>. You'll also receive a confirmation email within 2 hours of payment so you know it's in the works. Need it in 4 hours? After payment text Dan at <a href="tel:+16617140903" style="color:var(--brand);">+1 (661) 714-0903</a> to add rush delivery for $10.</p>
 
   <h3>What exactly do I receive?</h3>
   <p>You'll receive a high quality MP3 delivered by email, custom cover art, and the full song lyrics pasted directly in your delivery email. WAV files are available upon request.</p>
@@ -607,24 +593,8 @@
     document.getElementById('safe-email').innerHTML = `<a href="mailto:${user}@${domain}" style="color:var(--muted);">${user}@${domain}</a>`;
     document.getElementById('year').innerText = new Date().getFullYear();
 
-    // ── ORDER ID ──
-    const genID = () => {
-      const token = Math.random().toString(36).substr(2,6).toUpperCase();
-      const date  = new Date().toISOString().slice(0,10).replace(/-/g,'');
-      return `CSM-${date}-${token}`;
-    };
-    const ORDER_ID = genID();
-    document.getElementById('order_id_hidden').value = ORDER_ID;
-    document.getElementById('oid1').innerText = ORDER_ID;
-
     // ── GA HELPER ──
     const track = (name, params={}) => { if (typeof gtag==='function') gtag('event',name,params); };
-
-    // ── COPY ORDER ID ──
-    document.getElementById('copyBtn').addEventListener('click', function() {
-      navigator.clipboard.writeText(ORDER_ID);
-      this.innerText = "Copied!";
-      track('copy_order_id', { event_label: ORDER_ID });
       setTimeout(() => this.innerText = "Copy", 2000);
     });
 
@@ -663,7 +633,6 @@
         if (res.ok) {
           track('generate_lead', {
             event_label: 'song_request_submitted',
-            order_id: ORDER_ID,
             occasion: document.getElementById('occasion').value
           });
           // Hide form, show payment, update step indicator, scroll to payment
@@ -701,7 +670,7 @@
         if (!document.getElementById('freeClaimBtn')) {
           const freeBtn = document.createElement('a');
           freeBtn.id        = 'freeClaimBtn';
-          freeBtn.href      = 'https://www.customsongme.com/thanks';
+          freeBtn.href      = 'https://www.customsongme.com/thanks?free=1';
           freeBtn.className = 'stripe-btn';
           freeBtn.style.background = '#16a34a';
           freeBtn.innerHTML = '🎁 Claim My Free Song →<small>Your request has been received — no payment needed</small>';
@@ -746,7 +715,6 @@
         track('leave_review_click', { destination: this.href });
       });
     });
-
 
     // ── HAMBURGER NAV ──
     const menuBtn = document.getElementById('menuBtn');
