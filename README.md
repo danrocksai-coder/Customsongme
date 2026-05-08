@@ -1,53 +1,64 @@
+It looks good structurally, but it is outdated and inconsistent with your current branding/site language.
+
+You should update these sections:
+
+* $25 → should now be $30
+* 24–48 hours → should now be within 24 hours of payment
+* Up to 3 free revisions → remove completely
+* 100% satisfaction guarantee → change to Personal Happiness Guarantee
+* Social: (coming soon) → outdated because your socials are live
+
+Your README should match the exact language on the live site for branding consistency and SEO trust.
+
+This version is aligned correctly with your current branding:
+
 # 🎵 CustomSongMe
-
-**Personalized AI-Powered Custom Songs — Delivered in 24–48 Hours**
-
-[👉 Visit CustomSongMe.com](https://customsongme.com)
-
+Personalized Custom Songs Created From Your Story
+https://www.customsongme.com
 ---
-
 ## 🌟 What is CustomSongMe?
-CustomSongMe turns your stories into one-of-a-kind songs. Whether it’s a birthday, wedding, anniversary, roast, or business jingle — you share the details, and we deliver a personalized song fast.
-
-- **Flat Fee:** $25  
-- **Delivery Time:** 24–48 hours (rush delivery available)  
-- **Revisions:** Up to 3 free revisions  
-- **Guarantee:** 100% satisfaction guarantee  
-
+CustomSongMe turns real stories into one-of-a-kind personalized songs. Whether it’s a birthday, wedding, anniversary, love song, memorial tribute, roast, pet anthem, or business jingle — you share the details and Dan the Song Man transforms them into music.
+- Flat Fee: $30
+- Delivery: Within 24 hours of payment
+- Rush Delivery: 4-hour rush available
+- Includes: MP3 + Cover Art + Full Lyrics
+- Guarantee: Personal Happiness Guarantee
 ---
-
 ## 🚀 How It Works
-1. **Tell us about the person or event**  
-   Add names, stories, details, favorite artists, or vibe.
-2. **Submit your payment**  
-   Pay securely via Stripe, PayPal, CashApp, or Venmo.
-3. **Receive your song**  
-   Delivered as an MP3 (WAV available upon request) — complete with lyrics.
-
+1. Tell Your Story  
+Add names, memories, inside jokes, important moments, or your business message.
+2. Complete Payment  
+Pay securely using Stripe, PayPal, Cash App, Venmo, or Zelle.
+3. Receive Your Song  
+Your personalized song is delivered by email with the MP3, cover art, and full lyrics included.
 ---
-
 ## 🛠️ Tech Stack
-- **Frontend:** HTML, CSS, JavaScript  
-- **Hosting:** Netlify  
-- **Forms:** Formspree integration  
-- **Analytics & SEO:** Google Analytics, robots.txt, sitemap.xml, structured data (JSON-LD)
-
+- Frontend: HTML, CSS, JavaScript
+- Hosting: Netlify
+- Forms: Formspree
+- Analytics: Google Analytics 4
+- SEO: robots.txt, sitemap.xml, canonical URLs, structured data (JSON-LD)
 ---
-
-## 📂 Project Files
-- `index.html` → Main website  
-- `thanks.html` → Redirect page after submitting form  
-- `robots.txt` → Tells search engines how to crawl the site  
-- `sitemap.xml` → Helps search engines index pages  
-- `logo.png` → Branding asset  
-
+## 📂 Main Project Files
+- index.html → Homepage
+- thanks.html → Thank you page
+- sitemap.xml → Search engine indexing
+- robots.txt → Crawl instructions
+- _redirects → Netlify redirects
+- _headers → Cache and indexing headers
+- logo.png → Brand logo
 ---
-
 ## 📬 Contact
-- Website: [customsongme.com](https://customsongme.com)  
-- Email: **danrocksai@gmail.com**  
-- Social: (coming soon)  
-
+Website: https://www.customsongme.com
+Email: danrocksai@gmail.com
+Phone/Text: +1 (661) 714-0903
+Facebook:
+https://www.facebook.com/customsongme
+Instagram:
+https://www.instagram.com/customsongme
+TikTok:
+https://www.tiktok.com/@customsongme
+YouTube:
+https://www.youtube.com/@customsongme
 ---
-
-✨ *CustomSongMe — your story, your vibe, your own song.*
+🎵 CustomSongMe — Your Story. Your Song.
