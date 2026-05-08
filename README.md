@@ -1,17 +1,3 @@
-It looks good structurally, but it is outdated and inconsistent with your current branding/site language.
-
-You should update these sections:
-
-* $25 → should now be $30
-* 24–48 hours → should now be within 24 hours of payment
-* Up to 3 free revisions → remove completely
-* 100% satisfaction guarantee → change to Personal Happiness Guarantee
-* Social: (coming soon) → outdated because your socials are live
-
-Your README should match the exact language on the live site for branding consistency and SEO trust.
-
-This version is aligned correctly with your current branding:
-
 # 🎵 CustomSongMe
 Personalized Custom Songs Created From Your Story
 https://www.customsongme.com
