@@ -11,3 +11,6 @@ http://www.customsongme.com/*  https://www.customsongme.com/:splat    301!
 
 # Normalize thank you page
 /thank-you.html    /thanks    301
+
+# Payment page shortcut
+/payment    /payment-links    301
