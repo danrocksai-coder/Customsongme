@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thank You | Rescue Dog Project</title>
 
-<!-- SEO Protection -->
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://www.customsongme.com/thanks" />
 
@@ -81,6 +80,29 @@ p {
   background: #2d2d42;
 }
 
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.social-btn {
+  background: #1d1d2b;
+  color: #fff;
+  padding: 12px 5px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 13px;
+  border: 1px solid #2a2a3a;
+  transition: background 0.2s;
+}
+
+.social-btn:hover {
+  background: #7c3aed;
+}
+
 .tip-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -118,23 +140,22 @@ p {
 <div class="container">
 
   <h1>Submission Received! 🐾</h1>
-  <p>Thank you for looking out for this dog. I will review the listing and start crafting a powerful story to help get them noticed.</p>
+  <p>Thank you for looking out for this dog. I'm reviewing the details now to pull out their story.</p>
   
   <p style="color:#7c3aed; font-weight:bold; margin-top:10px; margin-bottom:5px;">
     Typical turnaround: 4–24 hours depending on volume
   </p>
   <p style="color:#7c3aed; font-weight:bold; margin-top:0;">
-    We’ll send you the finished video as soon as it’s ready so you can share it everywhere.
+    We’ll send you the finished video link as soon as it’s ready so you can save and share it.
   </p>
 
   <hr style="border: 0; border-top: 1px solid #111; margin: 30px 0;">
 
-  <!-- ACTION 1: FAST-TRACK TEXT HOOK -->
+  <!-- ACTION 1: FAST-TRACK TEXT ESCALATION -->
   <div class="action-card">
-    <h3 style="margin-top:0; color: #ff6b6b;">Want to Fast-Track This Video? ⚡</h3>
-    <p style="font-size: 15px; margin-bottom:15px;">I'm often deep in the studio producing tracks and only check email every few hours. If this dog is in urgent danger or you want to skip the line, text me directly right now.</p>
+    <h3 style="margin-top:0; color: #ff6b6b;">1. Is This Dog Urgent? ⚡</h3>
+    <p style="font-size: 15px; margin-bottom:15px;">I check email loops every few hours. If this dog is on an active euthanasia list, in immediate danger, or you want to skip the line, text my setup directly.</p>
     
-    <!-- Priority SMS link with Event Tracking -->
     <a href="sms:+16617140903?&body=Rescue%20dog%20submitted.%20FAST-TRACK%20REQUEST.%20Link:%20" class="btn" onclick="gtag('event','fast_track_click',{event_category:'engagement'});">
       Tap to Text Me for Priority ⚡
     </a>
@@ -144,12 +165,11 @@ p {
     </p>
   </div>
 
-  <!-- ACTION 2: SHARE HOOK (VIRAL LOOP) -->
+  <!-- ACTION 2: VIRAL PAGE SHARE LOOP -->
   <div class="action-card">
-    <h3 style="margin-top:0;">Double Their Chances 🚀</h3>
-    <p style="font-size: 15px;">While I work on the video, you can help right now for free. Share this project link so more people can submit overlooked shelter dogs who need a voice.</p>
+    <h3 style="margin-top:0;">2. Double Their Chances 🚀</h3>
+    <p style="font-size: 15px;">Help other high-risk shelter pets for free. Share our tracking page with local rescue networks so more people can submit dogs that are running out of time.</p>
     
-    <!-- Share button with Event Tracking -->
     <button onclick="copyShareLink(); gtag('event','share_click',{event_category:'engagement'});" class="btn btn-secondary" id="shareBtn">
       📋 Copy Share Link
     </button>
@@ -159,17 +179,28 @@ p {
     </p>
   </div>
 
-  <!-- ACTION 3: OPTIONAL SUPPORT -->
+  <!-- ACTION 3: SOCIAL CONTENT RETENTION POOL -->
+  <div class="action-card">
+    <h3 style="margin-top:0; color: #a78bff;">3. Watch the Rescue Spotlight Videos 🎬</h3>
+    <p style="font-size: 15px;">I post the finished custom rescue stories across social networks to expand the view counts. Follow the profiles to track listings, watch updates, and share videos directly.</p>
+    
+    <div class="social-grid">
+      <a href="https://www.tiktok.com/@customsongme" target="_blank" rel="noopener" class="social-btn" onclick="gtag('event','social_follow_click',{event_label:'tiktok'});">TikTok</a>
+      <a href="https://www.youtube.com/@customsongme" target="_blank" rel="noopener" class="social-btn" onclick="gtag('event','social_follow_click',{event_label:'youtube'});">YouTube</a>
+      <a href="https://www.instagram.com/customsongme" target="_blank" rel="noopener" class="social-btn" onclick="gtag('event','social_follow_click',{event_label:'instagram'});">Instagram</a>
+    </div>
+  </div>
+
+  <!-- ACTION 4: OPTIONAL PROJECT MONETIZATION -->
   <p style="color:#ff6b6b; font-weight:bold; margin-top:40px; margin-bottom:-15px;">
     If this helps even one dog get adopted, it’s worth it.
   </p>
 
   <div class="action-card" style="background: transparent; border: 1px solid #111;">
-    <h3 style="margin-top: 0; font-size: 20px;">Support This Project (Optional)</h3>
-    <p style="font-size: 15px;">I cover the music production, editing, and tool costs out of my own pocket to keep these submissions 100% free. Tips keep the project running.</p>
+    <h3 style="margin-top: 0; font-size: 20px;">4. Support the Project (Optional)</h3>
+    <p style="font-size: 15px;">I cover music licensing, video rendering, and distribution costs out of pocket to ensure the submissions stay completely free. Tips keep the pipeline open.</p>
     <p style="color: #7c3aed; font-weight: bold; margin-bottom: 15px;">Suggested Support: $10 – $20</p>
     
-    <!-- Monetization Tip Buttons with Event Tracking -->
     <div class="tip-grid">
       <a href="https://buy.stripe.com/3cIfZg1326JTaJZ7K69Ve05" target="_blank" class="tip-btn" onclick="gtag('event','tip_click',{event_category:'monetization',event_label:'stripe'});">Credit Card</a>
       <a href="https://www.paypal.me/DanRock834" target="_blank" class="tip-btn" onclick="gtag('event','tip_click',{event_category:'monetization',event_label:'paypal'});">PayPal</a>
@@ -178,9 +209,15 @@ p {
     </div>
   </div>
 
+  <!-- ACTION 5: REPEAT LOOP LINK -->
+  <div style="margin-top: 40px;">
+    <a href="https://www.customsongme.com/adopt-a-rescue-dog" class="btn btn-secondary" style="border-radius: 50px; display: inline-block; padding: 12px 30px; font-size: 15px;" onclick="gtag('event','submit_another_click');">
+      🔄 Submit Another Dog Listing
+    </a>
+  </div>
+
   <div class="footer">
-    <p><a href="https://www.customsongme.com/adopt-a-rescue-dog" style="color: #555; text-decoration: none;">← Back to submission page</a></p>
-    <p style="margin-top: 20px;">&copy; 2026 CustomSongMe.com</p>
+    <p>&copy; 2026 CustomSongMe.com</p>
   </div>
 
 </div>
