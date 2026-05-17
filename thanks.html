@@ -1,138 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex, nofollow" />
-  <title>Thank You for Your Order! | CustomSongMe</title>
-  <link rel="icon" type="image/png" href="/logo.png" />
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HGQ54E69BZ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag("js", new Date());
-    gtag("config", "G-HGQ54E69BZ");
-  </script>
-  
-  <style>
-    :root {
-      --bg: #0b0b12;
-      --card: #151525;
-      --text: #e9e9f1;
-      --muted: #b0b5c0;
-      --brand: #7a5cff;
-      --success: #4ade80;
-    }
-    * { box-sizing: border-box; }
-    html, body {
-      margin: 0; padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      font: 16px/1.6 system-ui, -apple-system, sans-serif;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    nav { background: #0f0f1e; border-bottom: 1px solid #222233; position: sticky; top: 0; z-index: 100; width: 100%; }
-    .nav-inner { width: min(1000px, 92vw); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
-    .nav-brand { font-weight: 700; color: var(--brand); text-decoration: none; font-size: 1.05rem; letter-spacing: -0.3px; }
-    
-    .container { width: min(680px, 92vw); margin: 40px auto; flex: 1; }
-    .card { background: var(--card); padding: 40px 30px; border-radius: 16px; border: 1px solid #222233; text-align: center; }
-    
-    .success-icon { font-size: 4rem; color: var(--success); margin-bottom: 16px; line-height: 1; }
-    h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin: 0 0 12px; line-height: 1.2; }
-    p { margin: 0 0 16px; color: var(--muted); font-size: 1.05rem; }
-    
-    .next-steps { text-align: left; background: #0f0f1e; border: 1px solid #2a2a44; border-radius: 12px; padding: 24px; margin: 30px 0; }
-    .next-steps h2 { color: #fff; font-size: 1.2rem; margin-top: 0; margin-bottom: 16px; border-bottom: 1px solid #2a2a44; padding-bottom: 8px; }
-    .step-item { display: flex; gap: 14px; margin-bottom: 16px; align-items: flex-start; }
-    .step-item:last-child { margin-bottom: 0; }
-    .step-num { background: var(--brand); color: #fff; font-weight: 700; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.9rem; }
-    .step-text { color: var(--text); font-size: 0.95rem; margin: 0; }
-    .step-text strong { color: #fff; }
-    
-    .btn { display: inline-block; background: var(--brand); color: #fff; padding: 14px 28px; border-radius: 50px; font-weight: 700; text-decoration: none; transition: opacity 0.2s; border: none; cursor: pointer; font-size: 0.95rem; }
-    .btn:hover { opacity: 0.9; }
-    
-    footer { text-align: center; padding: 40px 20px; opacity: 0.6; font-size: 14px; border-top: 1px solid #222; width: 100%; }
-    footer a { color: var(--muted); text-decoration: none; }
-    footer a:hover { color: var(--text); }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You | Rescue Dog Project</title>
+
+<!-- SEO Protection -->
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://www.customsongme.com/thanks" />
+
+<!-- Google Analytics Tracking -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HGQ54E69BZ"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-HGQ54E69BZ');
+</script>
+
+<style>
+body {
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#0b0b0f;
+  color:white;
+  text-align:center;
+}
+
+.container {
+  padding:40px 20px;
+  max-width:550px;
+  margin:auto;
+}
+
+h1 {
+  font-size:32px;
+  margin-bottom:15px;
+  font-weight: 700;
+  color: #7c3aed;
+}
+
+p {
+  color:#ccc;
+  line-height:1.6;
+  font-size: 16px;
+}
+
+.action-card {
+  background: #16161f;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 25px;
+  margin-top: 25px;
+  text-align: center;
+}
+
+.btn {
+  display: block;
+  background:#7c3aed;
+  color:white;
+  padding:16px;
+  text-decoration: none;
+  border-radius:8px;
+  font-size:18px;
+  font-weight: bold;
+  margin-top: 15px;
+  transition: background 0.2s;
+}
+
+.btn:hover {
+  background: #6d28d9;
+}
+
+.btn-secondary {
+  background: #222230;
+  border: 1px solid #333;
+}
+
+.btn-secondary:hover {
+  background: #2d2d42;
+}
+
+.tip-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.tip-btn {
+  background: #222230;
+  color: #fff;
+  padding: 12px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.tip-btn:hover {
+  background: #7c3aed;
+  color: white;
+}
+
+.footer {
+  margin-top: 50px;
+  font-size: 14px;
+  color: #555;
+  border-top: 1px solid #111;
+  padding-top: 20px;
+}
+</style>
 </head>
 <body>
 
-  <nav>
-    <div class="nav-inner">
-      <a href="/" class="nav-brand">🎵 CustomSongMe</a>
+<div class="container">
+
+  <h1>Submission Received! 🐾</h1>
+  <p>Thank you for looking out for this dog. I will review the listing and start crafting a powerful story to help get them noticed.</p>
+  
+  <p style="color:#7c3aed; font-weight:bold; margin-top:10px; margin-bottom:5px;">
+    Typical turnaround: 4–24 hours depending on volume
+  </p>
+  <p style="color:#7c3aed; font-weight:bold; margin-top:0;">
+    We’ll send you the finished video as soon as it’s ready so you can share it everywhere.
+  </p>
+
+  <hr style="border: 0; border-top: 1px solid #111; margin: 30px 0;">
+
+  <!-- ACTION 1: FAST-TRACK TEXT HOOK -->
+  <div class="action-card">
+    <h3 style="margin-top:0; color: #ff6b6b;">Want to Fast-Track This Video? ⚡</h3>
+    <p style="font-size: 15px; margin-bottom:15px;">I'm often deep in the studio producing tracks and only check email every few hours. If this dog is in urgent danger or you want to skip the line, text me directly right now.</p>
+    
+    <!-- Priority SMS link with Event Tracking -->
+    <a href="sms:+16617140903?&body=Rescue%20dog%20submitted.%20FAST-TRACK%20REQUEST.%20Link:%20" class="btn" onclick="gtag('event','fast_track_click',{event_category:'engagement'});">
+      Tap to Text Me for Priority ⚡
+    </a>
+    
+    <p style="font-size:12px; color:#777; margin-top:10px; margin-bottom:0;">
+      After tapping, paste the dog’s link into the message before sending.
+    </p>
+  </div>
+
+  <!-- ACTION 2: SHARE HOOK (VIRAL LOOP) -->
+  <div class="action-card">
+    <h3 style="margin-top:0;">Double Their Chances 🚀</h3>
+    <p style="font-size: 15px;">While I work on the video, you can help right now for free. Share this project link so more people can submit overlooked shelter dogs who need a voice.</p>
+    
+    <!-- Share button with Event Tracking -->
+    <button onclick="copyShareLink(); gtag('event','share_click',{event_category:'engagement'});" class="btn btn-secondary" id="shareBtn">
+      📋 Copy Share Link
+    </button>
+    
+    <p style="font-size:12px; color:#777; margin-top:10px; margin-bottom:0;">
+      If copy doesn’t work, manually share this page link.
+    </p>
+  </div>
+
+  <!-- ACTION 3: OPTIONAL SUPPORT -->
+  <p style="color:#ff6b6b; font-weight:bold; margin-top:40px; margin-bottom:-15px;">
+    If this helps even one dog get adopted, it’s worth it.
+  </p>
+
+  <div class="action-card" style="background: transparent; border: 1px solid #111;">
+    <h3 style="margin-top: 0; font-size: 20px;">Support This Project (Optional)</h3>
+    <p style="font-size: 15px;">I cover the music production, editing, and tool costs out of my own pocket to keep these submissions 100% free. Tips keep the project running.</p>
+    <p style="color: #7c3aed; font-weight: bold; margin-bottom: 15px;">Suggested Support: $10 – $20</p>
+    
+    <!-- Monetization Tip Buttons with Event Tracking -->
+    <div class="tip-grid">
+      <a href="https://buy.stripe.com/3cIfZg1326JTaJZ7K69Ve05" target="_blank" class="tip-btn" onclick="gtag('event','tip_click',{event_category:'monetization',event_label:'stripe'});">Credit Card</a>
+      <a href="https://www.paypal.me/DanRock834" target="_blank" class="tip-btn" onclick="gtag('event','tip_click',{event_category:'monetization',event_label:'paypal'});">PayPal</a>
+      <a href="https://cash.app/$optimistic01" target="_blank" class="tip-btn" onclick="gtag('event','tip_click',{event_category:'monetization',event_label:'cashapp'});">Cash App</a>
+      <a href="https://venmo.com/u/Dan-Rock-5" target="_blank" class="tip-btn" onclick="gtag('event','tip_click',{event_category:'monetization',event_label:'venmo'});">Venmo</a>
     </div>
-  </nav>
+  </div>
 
-  <main class="container">
-    <div class="card">
-      <div class="success-icon">✓</div>
-      <h1 id="thanksTitle">Thank You for Your Order!</h1>
-      <p id="thanksDesc">Your payment has processed successfully. Dan is jumping into the studio to create your track.</p>
-      
-      <div class="next-steps">
-        <h2>📋 What Happens Next?</h2>
-        
-        <div class="step-item">
-          <div class="step-num">1</div>
-          <p class="step-text"><strong>Order Confirmation:</strong> I have received your filled-out story details. If I need to clarify a name pronunciation or specific custom line, I'll text your cell number directly.</p>
-        </div>
-        
-        <div class="step-item">
-          <div class="step-num">2</div>
-          <p class="step-text"><strong>Studio Production:</strong> Your song is created from scratch using your true shared details within our ongoing order queue.</p>
-        </div>
-        
-        <div class="step-item">
-          <div class="step-num">3</div>
-          <p class="step-text"><strong>Delivery in 24 Hours:</strong> Keep an eye on your email inbox. Complete packages land as a simple Google Drive link containing your high quality MP3 audio file, custom cover art, and printable lyrics PDF sheet.</p>
-        </div>
-      </div>
-      
-      <p style="font-size: 0.9rem; margin-bottom: 24px;">Need it rushed in under 4 hours? Text Dan immediately at <a href="sms:+16617140903" style="color: var(--brand); font-weight: 600; text-decoration: none;">+1 (661) 714-0903</a> to add emergency studio delivery for +$10.</p>
-      
-      <a href="/" class="btn">← Return to Homepage</a>
-    </div>
-  </main>
+  <div class="footer">
+    <p><a href="https://www.customsongme.com/adopt-a-rescue-dog" style="color: #555; text-decoration: none;">← Back to submission page</a></p>
+    <p style="margin-top: 20px;">&copy; 2026 CustomSongMe.com</p>
+  </div>
 
-  <footer>
-    <div class="container" style="margin: 0 auto;">
-      <p>© <span id="year"></span> CustomSongMe. All Rights Reserved.</p>
-      <p>Oxnard, California | Contact: <a href="tel:+16617140903">+1 (661) 714-0903</a></p>
-    </div>
-  </footer>
+</div>
 
-  <script>
-    document.getElementById("year").innerText = new Date().getFullYear();
+<script>
+function copyShareLink() {
+  const textToCopy = "Know a rescue dog that needs help getting adopted? Submit them here for a free video that helps them get seen: https://www.customsongme.com/adopt-a-rescue-dog";
+  
+  navigator.clipboard.writeText(textToCopy).then(() => {
+    const btn = document.getElementById('shareBtn');
+    btn.innerText = "✓ Copied to Clipboard!";
+    btn.style.background = "#059669"; 
+    
+    setTimeout(() => {
+      btn.innerText = "📋 Copy Share Link";
+      btn.style.background = "#222230";
+    }, 3000);
+  }).catch(err => {
+    console.error('Failed to copy text: ', err);
+  });
+}
+</script>
 
-    // Dynamic Parameter and Analytics Engine
-    const urlParams = new URLSearchParams(window.location.search);
-    const isFreeClaim = urlParams.get("free") === "1";
-    const value = Number(urlParams.get("value")) || 0;
-    const itemName = urlParams.get("item") || "CustomSongMe Order";
-
-    if (isFreeClaim) {
-      document.getElementById("thanksTitle").innerText = "Your Promo Code Has Been Claimed!";
-      document.getElementById("thanksDesc").innerText = "Your complimentary order is confirmed. Dan is headed into the studio to craft your custom track.";
-    }
-
-    // Session-based deduplication protection for GA4 e-commerce events
-    if (typeof gtag === "function") {
-      if (!sessionStorage.getItem("purchase_tracked")) {
-        gtag("event", "purchase", {
-          transaction_id: (isFreeClaim ? "PROMO_" : "ORDER_") + Date.now(),
-          value: isFreeClaim ? 0 : value,
-          currency: "USD",
-          items: [{ item_name: itemName }]
-        });
-        sessionStorage.setItem("purchase_tracked", "true");
-      }
-    }
-  </script>
 </body>
 </html>
