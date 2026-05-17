@@ -1,0 +1,18 @@
+# Force case-insensitive routing adjustments and explicit redirects via Git
+[[redirects]]
+  from = "/Thanks"
+  to = "/thanks.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/Thanks.html"
+  to = "/thanks.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/thanks"
+  to = "/thanks.html"
+  status = 301
+  force = true
