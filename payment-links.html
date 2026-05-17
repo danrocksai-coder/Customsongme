@@ -1,5 +1,3 @@
-Replace your entire payment-links.html with this:
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -166,6 +164,9 @@ Replace your entire payment-links.html with this:
       font-size: 0.75rem;
       opacity: 0.85;
     }
+    .tip-grid {
+      margin-top: 12px;
+    }
     .tip-btn {
       display: block;
       color: var(--brand);
@@ -251,39 +252,65 @@ Replace your entire payment-links.html with this:
           Complete your CustomSongMe payment securely below.
         </p>
       </div>
+
       <div class="card special-card">
-        <h2>🌸 Mother’s Day Special</h2>
-        <p>Personalized Mother’s Day song created from your real memories, stories, and emotions.</p>
+        <h2>👔 Father’s Day Special</h2>
+        <p>Personalized Father’s Day song created from your real family stories, memories, and emotions.</p>
         <div class="price">$20</div>
-        <p>Includes a full custom song, high quality MP3, 24-hour delivery, and the Personal Happiness Guarantee.</p>
-        <a href="https://buy.stripe.com/3cIfZg1326JTaJZ7K69Ve05" target="_blank" rel="noopener" class="stripe-btn" id="mothersDayStripeLink">
-          Pay $20 — Mother’s Day Special
+        <p>Includes a full custom song, high quality MP3, custom cover art, and printable lyrics PDF delivered in 24 hours.</p>
+        <a href="https://buy.stripe.com/3cIfZg1326JTaJZ7K69Ve05" target="_blank" rel="noopener" class="stripe-btn" id="fathersDayStripeLink">
+          Pay $20 — Father’s Day Special
           <small>Secure checkout powered by Stripe</small>
         </a>
       </div>
 
-      <div class="card special-card">
-  <h2>👔 Father’s Day Special</h2>
-  <p>Personalized Father’s Day song created from your real memories, stories, and emotions.</p>
-  <div class="price">$20</div>
-  <p>Includes a full custom song, high quality MP3, 24-hour delivery, and the Personal Happiness Guarantee.</p>
-
-  <a href="https://buy.stripe.com/3cIfZg1326JTaJZ7K69Ve05" target="_blank" rel="noopener" class="stripe-btn">
-    Pay $20 — Father’s Day Special
-    <small>Secure checkout powered by Stripe</small>
-  </a>
-</div>
       <div class="card">
-        <h2>💳 Standard Custom Song Payment</h2>
-        <p>Every custom song is $30 and includes your MP3, custom cover art, and full lyrics delivered by email.</p>
-        <a href="https://buy.stripe.com/cNieVc2767NX3hxd4q9Ve06" target="_blank" rel="noopener" class="stripe-btn" id="stripeLink">
-          Pay $30 — Complete My Order
+        <h2>🎁 The Custom Song Gift Package (Most Popular)</h2>
+        <p>Our complete presentation tier. Perfect for birthdays, weddings, anniversaries, or unique surprises.</p>
+        <div class="price">$40</div>
+        <p>Includes high quality MP3, custom digital cover art, and a beautifully formatted printable lyrics PDF delivered inside a shareable Google Drive folder.</p>
+        <a href="https://buy.stripe.com/8x25kC7rqfgp7xN3tQ9Ve08" target="_blank" rel="noopener" class="stripe-btn" id="giftPackageStripeLink">
+          Pay $40 — Complete Gift Package Order
           <small>Visa · Mastercard · Amex · Apple Pay · Google Pay</small>
         </a>
       </div>
+
+      <div class="card">
+        <h2>🌸 Mother’s Day Gift Package</h2>
+        <p>Personalized custom song bundle honoring Mom's unique life chapters and accomplishments.</p>
+        <div class="price">$40</div>
+        <p>Includes high quality MP3, custom digital cover art, and a beautifully formatted printable lyrics PDF sheet.</p>
+        <a href="https://buy.stripe.com/00w7sK5ji6JT4lB9Se9Ve09" target="_blank" rel="noopener" class="stripe-btn" id="mothersDayStripeLink">
+          Pay $40 — Complete Mother’s Day Order
+          <small>Secure checkout powered by Stripe</small>
+        </a>
+      </div>
+
+      <div class="card">
+        <h2>🎵 Bare Bones Custom Song Package</h2>
+        <p>Simple, clean, and straightforward custom audio tracking based on your raw story notes.</p>
+        <div class="price">$30</div>
+        <p>Includes high quality custom song MP3 file delivered directly to your email inbox within 24 hours.</p>
+        <a href="https://buy.stripe.com/cNieVc2767NX3hxd4q9Ve06" target="_blank" rel="noopener" class="stripe-btn" id="bareBonesStripeLink">
+          Pay $30 — Complete Bare Bones Order
+          <small>Visa · Mastercard · Amex · Apple Pay · Google Pay</small>
+        </a>
+      </div>
+
+      <div class="card">
+        <h2>📣 Complete Business Jingle Production Suite</h2>
+        <p>High-recall commercial sonic identity assets built for small businesses, trade brands, and ad campaigns.</p>
+        <div class="price">$100</div>
+        <p>Includes high quality master audio track files along with full royalty-free commercial usage distribution rights.</p>
+        <a href="https://buy.stripe.com/fZu4gy4fe2tDcS70hE9Ve01" target="_blank" rel="noopener" class="stripe-btn" id="businessJingleStripeLink">
+          Pay $100 — Complete Business Jingle Order
+          <small>Secure business checkout powered by Stripe</small>
+        </a>
+      </div>
+
       <div class="card">
         <h2>📱 Pay by App</h2>
-        <p>Tap your preferred app and send payment to complete your order.</p>
+        <p>Tap your preferred app and send payment directly to complete your custom track order.</p>
         <div class="app-grid">
           <a href="https://www.paypal.me/DanRock834" target="_blank" rel="noopener" class="app-btn" style="background:#003087;">
             PayPal
@@ -308,6 +335,7 @@ Replace your entire payment-links.html with this:
           to add 4-hour rush delivery for $10.
         </p>
       </div>
+
       <div class="card">
         <h2>🎵 Leave a Tip</h2>
         <span class="optional-badge">100% Optional</span>
@@ -318,6 +346,7 @@ Replace your entire payment-links.html with this:
           <a href="https://venmo.com/u/Dan-Rock-5" target="_blank" rel="noopener" class="tip-btn">Tip via Venmo</a>
         </div>
       </div>
+
       <div class="card review-card">
         <span class="stars">⭐⭐⭐⭐⭐</span>
         <h2 style="color:var(--text);">Your Opinion Matters to Dan</h2>
@@ -327,6 +356,7 @@ Replace your entire payment-links.html with this:
           ⭐ Leave a Google Review
         </a>
       </div>
+
       <div style="text-align:center; margin-top:8px;">
         <a href="https://www.customsongme.com" style="color:var(--brand); font-weight:700; text-decoration:none; font-size:0.95rem;">
           ← Return to CustomSongMe
@@ -336,21 +366,32 @@ Replace your entire payment-links.html with this:
   </main>
   <footer>
     <p>© <span id="year"></span> CustomSongMe. All Rights Reserved.</p>
-    <p><a href="tel:+16617140903">+1 (661) 714-0903</a> · <span id="safe-email"></span></p>
+    <p><a href="tel:+16617140903" style="color:var(--muted); text-decoration:none;">+1 (661) 714-0903</a> · <span id="safe-email"></span></p>
   </footer>
   <script>
     document.getElementById('year').innerText = new Date().getFullYear();
     const u = "danrocksai";
     const d = "gmail.com";
-    document.getElementById('safe-email').innerHTML = `<a href="mailto:${u}@${d}">${u}@${d}</a>`;
+    document.getElementById('safe-email').innerHTML = `<a href="mailto:${u}@${d}" style="color:var(--muted); text-decoration:none;">${u}@${d}</a>`;
+    
     const track = (name, params = {}) => {
       if (typeof gtag === 'function') gtag('event', name, params);
     };
-    document.getElementById('stripeLink').addEventListener('click', () => {
-      track('begin_checkout', { payment_method: 'Stripe', page: 'payment-links', amount: 30 });
+    
+    document.getElementById('fathersDayStripeLink').addEventListener('click', () => {
+      track('begin_checkout', { payment_method: 'Stripe', page: 'payment-links', amount: 20, offer: 'fathers_day_special' });
+    });
+    document.getElementById('giftPackageStripeLink').addEventListener('click', () => {
+      track('begin_checkout', { payment_method: 'Stripe', page: 'payment-links', amount: 40, item: 'gift_package' });
     });
     document.getElementById('mothersDayStripeLink').addEventListener('click', () => {
-      track('begin_checkout', { payment_method: 'Stripe', page: 'payment-links', amount: 20, offer: 'mothers_day_special' });
+      track('begin_checkout', { payment_method: 'Stripe', page: 'payment-links', amount: 40, item: 'mothers_day_package' });
+    });
+    document.getElementById('bareBonesStripeLink').addEventListener('click', () => {
+      track('begin_checkout', { payment_method: 'Stripe', page: 'payment-links', amount: 30, item: 'bare_bones' });
+    });
+    document.getElementById('businessJingleStripeLink').addEventListener('click', () => {
+      track('begin_checkout', { payment_method: 'Stripe', page: 'payment-links', amount: 100, item: 'business_jingle' });
     });
     document.querySelectorAll('a[href*="g.page"]').forEach(link => {
       link.addEventListener('click', () => track('leave_review_click', { page: 'payment-links' }));
