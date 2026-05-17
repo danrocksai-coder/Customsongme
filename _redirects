@@ -10,7 +10,7 @@ http://www.customsongme.com/* https://www.customsongme.com/:splat    301!
 # ==========================================
 /free-custom-song-guide    https://www.customsongme.com/    301
 /thank-you                 https://www.customsongme.com/thanks    301
-/payment                   # If you want to point this somewhere specific, update it here
+/payment                   https://www.customsongme.com/payment-links    301
 
 # ==========================================
 # 3. CLEAN SUBPAGE URL MAPS (INTERNAL 200 REWRITES)
@@ -25,4 +25,5 @@ http://www.customsongme.com/* https://www.customsongme.com/:splat    301!
 /roast-songs             /roast-songs.html             200
 /memorial-songs          /memorial-songs.html          200
 /business-jingles        /business-jingles.html        200
+/payment-links           /payment-links.html           200
 /thanks                  /thanks.html                  200
