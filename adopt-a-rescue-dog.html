@@ -151,10 +151,9 @@ button:hover {
 
   <form action="https://formspree.io/f/xwpqlypv" method="POST">
 
-    <input type="hidden" name="_redirect" value="https://www.customsongme.com/thanks">
+    <input type="hidden" name="_next" value="https://www.customsongme.com/thanks-rescue.html">
     <input type="hidden" name="form_type" value="Rescue Dog Submission">
     <input type="hidden" name="source_page" value="adopt-a-rescue-dog">
-    
     <input type="hidden" name="submitted_at" value="">
 
     <label for="name">Your Name</label>
@@ -163,7 +162,6 @@ button:hover {
     <label for="email">Your Email</label>
     <input type="email" id="email" name="email" placeholder="john@example.com" required>
 
-    <!-- Upgraded Mobile-Friendly Required Phone Field -->
     <label for="phone">Your Phone Number</label>
     <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555" inputmode="tel" pattern="^[0-9+\-\s()]{7,}$" title="Enter a valid phone number" required>
 
@@ -190,26 +188,3 @@ button:hover {
     <p style="color: #7c3aed; font-weight: bold; margin-bottom: 15px;">Suggested Support: $10 – $20</p>
     
     <div class="tip-grid">
-      <a href="https://buy.stripe.com/3cIfZg1326JTaJZ7K69Ve05" target="_blank" class="tip-btn">Credit Card</a>
-      <a href="https://www.paypal.me/DanRock834" target="_blank" class="tip-btn">PayPal</a>
-      <a href="https://cash.app/$optimistic01" target="_blank" class="tip-btn">Cash App</a>
-      <a href="https://venmo.com/u/Dan-Rock-5" target="_blank" class="tip-btn">Venmo</a>
-    </div>
-  </div>
-
-  <div class="footer">
-    <p>&copy; 2026 CustomSongMe.com</p>
-  </div>
-
-</div>
-
-<!-- Safe DOM Timestamp Execution Script -->
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  var ts = document.querySelector('input[name="submitted_at"]');
-  if (ts) ts.value = new Date().toISOString();
-});
-</script>
-
-</body>
-</html>
