@@ -1,16 +1,28 @@
-# Force HTTPS + WWW (PRIMARY DOMAIN)
-http://customsongme.com/*      https://www.customsongme.com/:splat    301!
-https://customsongme.com/*     https://www.customsongme.com/:splat    301!
-http://www.customsongme.com/*  https://www.customsongme.com/:splat    301!
+# ==========================================
+# 1. FORCE GLOBAL HTTPS + WWW (PRIMARY DOMAIN)
+# ==========================================
+http://customsongme.com/* https://www.customsongme.com/:splat    301!
+https://customsongme.com/* https://www.customsongme.com/:splat    301!
+http://www.customsongme.com/* https://www.customsongme.com/:splat    301!
 
-# Remove .html extensions (clean URLs)
-/*.html   /:splat   301
+# ==========================================
+# 2. CONTEXTUAL & MARKETING SHORTCUTS
+# ==========================================
+/free-custom-song-guide    https://www.customsongme.com/    301
+/thank-you                 https://www.customsongme.com/thanks    301
+/payment                   # If you want to point this somewhere specific, update it here
 
-# Redirect old or unused pages
-/free-custom-song-guide    /    301
-
-# Normalize thank you page
-/thank-you.html    /thanks    301
-
-# Payment page shortcut
-/payment    /payment-links    301
+# ==========================================
+# 3. CLEAN SUBPAGE URL MAPS (INTERNAL 200 REWRITES)
+# ==========================================
+/birthday-songs          /birthday-songs.html          200
+/wedding-songs           /wedding-songs.html           200
+/anniversary-songs       /anniversary-songs.html       200
+/love-songs              /love-songs.html              200
+/mothers-day-songs       /mothers-day-songs.html       200
+/fathers-day-songs       /fathers-day-songs.html       200
+/pet-songs               /pet-songs.html               200
+/roast-songs             /roast-songs.html             200
+/memorial-songs          /memorial-songs.html          200
+/business-jingles        /business-jingles.html        200
+/thanks                  /thanks.html                  200
