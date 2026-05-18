@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="robots" content="noindex, follow">
+
+<title>Submission Received! | Help This Rescue Dog Get Seen</title>
+<meta name="description" content="Thank you for submitting a shelter dog profile. Let's work together to get them seen, shared, and adopted.">
+
+<link rel="canonical" href="https://www.customsongme.com/thanks-rescue" />
+
+<style>
+body {
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#0b0b0f;
+  color:white;
+  text-align:center;
+}
+
+.container {
+  padding:40px 20px;
+  max-width:550px;
+  margin:auto;
+}
+
+h1 {
+  font-size:32px;
+  margin-bottom:15px;
+  font-weight: 700;
+  color: #7c3aed;
+}
+
+h2 {
+  font-size:22px;
+  margin-top:35px;
+  margin-bottom:15px;
+  color: white;
+}
+
+p {
+  color:#ccc;
+  line-height:1.6;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.highlight-box {
+  background: #11111a;
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid #1c1c24;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.phone-link {
+  display: inline-block;
+  color: #a78bff;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transition: color 0.2s;
+}
+
+.phone-link:hover {
+  color: #6d28d9;
+}
+
+.share-card {
+  background: #16161f;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 15px;
+  text-align: left;
+}
+
+.share-text {
+  font-family: monospace;
+  font-size: 14px;
+  color: #aaa;
+  background: #0b0b0f;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #222;
+  word-break: break-all;
+  margin-bottom: 15px;
+}
+
+.action-btn {
+  background:#7c3aed;
+  color:white;
+  padding:14px;
+  border:none;
+  border-radius:8px;
+  font-size:16px;
+  font-weight: bold;
+  width:100%;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  box-sizing: border-box;
+  transition: background 0.2s;
+  text-align: center;
+}
+
+.action-btn:hover {
+  background: #6d28d9;
+}
+
+.secondary-btn {
+  background: #222230;
+  color: #fff;
+  margin-top: 10px;
+}
+
+.secondary-btn:hover {
+  background: #333345;
+}
+
+.footer {
+  margin-top: 60px;
+  font-size: 14px;
+  color: #555;
+  border-top: 1px solid #111;
+  padding-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>Submission Received! 🐾</h1>
+
+  <p>Thank you for sharing this dog's story. Amazing pups get overlooked every day simply because their profiles aren't reaching the right crowds. Let's change that together.</p>
+
+  <div class="highlight-box">
+    <h2>Want to speed things up?</h2>
+    <p>If this is an incredibly urgent case, or you have extra photos/videos of the dog on your phone, text Dan the Song Man directly right now:</p>
+    <a href="sms:+16617140903" class="phone-link">📱 (661) 714-0903</a>
+    <p style="font-size: 13px; color: #888; margin-bottom: 0;">Drop a text with the dog's name so we can match it to your submission form instantly.</p>
+  </div>
+
+  <h2>Multiply Their Chances 🔗</h2>
+  <p>The more web traffic this project gets, the more videos we can fund, and the more dogs we can save. Share the submission page link with foster networks, shelter volunteers, or your social pages:</p>
+
+  <div class="share-card">
+    <div class="share-text" id="linkToCopy">https://www.customsongme.com/adopt-a-rescue-dog</div>
+    <button class="action-btn" onclick="copyLinkText()">📋 Copy Submission Link</button>
+  </div>
+
+  <a href="https://www.customsongme.com/adopt-a-rescue-dog" class="action-btn secondary-btn">⬅️ Submit Another Dog Profile</a>
+  <a href="https://www.customsongme.com/" class="action-btn secondary-btn">🏠 Return to Homepage</a>
+
+  <div class="footer">
+    <p class="center-text">&copy; 2026 CustomSongMe.com</p>
+  </div>
+
+</div>
+
+<script>
+function copyLinkText() {
+  var textToCopy = document.getElementById("linkToCopy").innerText;
+  navigator.clipboard.writeText(textToCopy).then(function() {
+    var btn = document.querySelector(".share-card .action-btn");
+    var originalText = btn.innerHTML;
+    btn.innerHTML = "✅ Link Copied!";
+    btn.style.background = "#059669";
+    setTimeout(function() {
+      btn.innerHTML = originalText;
+      btn.style.background = "#7c3aed";
+    }, 2000);
+  }).catch(function(err) {
+    console.error('Could not copy link: ', err);
+  });
+}
+</script>
+
+</body>
+</html>
