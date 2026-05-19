@@ -1,0 +1,309 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="robots" content="noindex, nofollow">
+
+	<title>A Street Apart, A Lifetime in My Heart</title>
+
+	<style>
+		body {
+			margin: 0;
+			font-family: Arial, sans-serif;
+			background: #0b0b0f;
+			color: white;
+			text-align: center;
+		}
+
+		.container {
+			max-width: 700px;
+			margin: auto;
+			padding: 30px 20px;
+		}
+
+		h1 {
+			color: #7c3aed;
+			font-size: 28px;
+		}
+
+		p {
+			color: #ccc;
+			line-height: 1.6;
+		}
+
+		img {
+			width: 100%;
+			border-radius: 12px;
+			margin: 20px 0;
+		}
+
+		audio {
+			width: 100%;
+			margin: 20px 0;
+		}
+
+		.lyrics {
+			text-align: left;
+			white-space: pre-line;
+			margin-top: 30px;
+			color: #ddd;
+		}
+
+		.section {
+			margin-top: 50px;
+		}
+
+		.button {
+			display: inline-block;
+			margin-top: 20px;
+			padding: 12px 20px;
+			background: #7c3aed;
+			color: white;
+			border-radius: 8px;
+			text-decoration: none;
+			font-weight: bold;
+			border: none;
+			font-size: 16px;
+			cursor: pointer;
+		}
+
+		footer {
+			margin-top: 60px;
+			font-size: 14px;
+			color: #777;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="container">
+
+		<h1>A Street Apart, A Lifetime in My Heart</h1>
+
+		<p>This song was created from a real story — built from memories, time, and a love that never let go.</p>
+
+		<img src="cover.jpg" alt="Custom Song Cover Art">
+
+		<audio controls>
+			<source src="a-street-apart-a-lifetime-in-my-heart.mp3" type="audio/mpeg">
+		</audio>
+
+		<p><strong>Recommended:</strong> Press play and follow along with the lyrics below.</p>
+
+		<div class="section">
+			<h2>💌 A Note About Your Song</h2>
+			<p>
+				Rhonda — this story is rare.<br><br>
+				Not many people get a second chance that was already written from the beginning.<br><br>
+				This song was built to capture that feeling… that it was always meant to be.<br><br>
+				I hope when you hear it, it brings everything back.
+			</p>
+		</div>
+
+		<div class="section">
+			<h2>🎥 Capture the Moment</h2>
+			<p>
+				Want to save the first time you hear the song together?
+				Tap the button below, allow camera access, and the song will play while your reaction is recorded.
+				When the song ends, the recording will stop automatically.
+			</p>
+			<p>
+				After recording, you can save the video and send it to Dan.
+				If you give permission for CustomSongMe to share it publicly on our YouTube channel, you’ll receive one free future premium package credit.
+				The credit never expires until used.
+			</p>
+			<button class="button" onclick="startMomentCapture()">Start Moment Capture</button>
+			<video id="reactionPreview" autoplay muted playsinline style="width:100%; margin-top:20px; border-radius:12px;"></video>
+			<a id="downloadReaction" class="button" style="display:none;" download="customsongme-reaction.mp4">
+				Download Reaction Video
+			</a>
+			<a id="sendReaction" class="button" style="display:none;" href="mailto:danrocksai@gmail.com?subject=CustomSongMe Reaction Video&body=Hi Dan, I recorded my reaction video. I’ll attach it here.">
+				Email Dan Your Reaction
+			</a>
+			<p id="captureStatus" style="margin-top:15px;"></p>
+		</div>
+
+		<div class="section lyrics">
+			We grew up in Heather Glen just a street apart
+			Two young souls holding quiet sparks in our hearts
+			From my window to yours I could see your light
+			Never knowing heaven was writing us right
+
+			We walked those roads, we laughed those days
+			Then life came in and pulled us different ways
+			Through Eisenhower halls and memories that stayed
+			Somewhere deep inside, you never faded away
+
+			Through the years and through the rain
+			Through love lost and love regained
+			We stayed close through all we knew
+			And somehow I kept holding on to you
+
+			After forty-two years, we finally got it right
+			What we hid in our hearts stepped into the light
+			From a street apart to a life full of dreams
+			We’re living proof love’s stronger than it seems
+
+			Derek, you’re the love of my life, my answered prayer
+			Through every season somehow you were there
+			Now we’ve got love, life, laughter, and a brand-new start
+			After forty-two years, you were still in my heart
+
+			Let’s be honest, baby, you had your ways
+			Running wild through your younger days
+			Acting strong, never letting love stay deep
+			While I was the one you called when it cut too deep
+
+			You never said what your heart already knew
+			Under all that noise, you loved me too
+			I picked up pieces when things fell apart
+			Never knowing I held the key to your heart
+
+			Through other lives and different names
+			Through long goodbyes and shifting flames
+			Something between us never came undone
+			Now all those years have turned into one
+
+			After forty-two years, we finally got it right
+			What we hid in our hearts stepped into the light
+			From a street apart to a home full of dreams
+			We’re living proof love’s more than it seems
+
+			Derek, you’re the love of my life, my answered prayer
+			Through every season somehow you were there
+			Now we’ve got love, life, laughter, and a brand-new start
+			After forty-two years, you were still in my heart
+
+			Then came that moment out on the sea
+			Where truth came sailing back to you and me
+			We opened our hearts, no more running away
+			Everything changed on that beautiful day
+
+			Now our children and grands make this life complete
+			And our sisters still tied from those old streets
+			From Heather Glen days to the home that we share
+			God was building forever when we weren’t aware
+
+			After forty-two years, we finally got it right
+			Two old friends found love in heaven’s light
+			From school day dreams to a life made new
+			Every road I walked led me back to you
+
+			Derek, you’re my laughter, my home, my peace
+			My forever love, my sweet release
+			Till death do us part, this love won’t fade
+			We found the dream time couldn’t erase
+
+			A street apart but never far
+			You were always written in my stars
+			After all these years now I finally see
+			Derek, you were always meant for me
+		</div>
+
+		<div class="section">
+			<h2>🔧 Want a Small Change?</h2>
+			<p>If there’s anything you’d like adjusted, I’ve got you.</p>
+			<a href="mailto:danrocksai@gmail.com?subject=Song Revision Request" class="button">
+				Request a Change
+			</a>
+		</div>
+
+		<div class="section">
+			<h2>🔒 Privacy & Sharing</h2>
+
+			<p><strong>Private (default):</strong> This page is not submitted to search engines. Only people with the direct link are intended to view it.</p>
+
+			<p><strong>Public option:</strong> With your permission, this song could be featured to inspire others.</p>
+
+			<a href="mailto:danrocksai@gmail.com?subject=Privacy Preference - Custom Song Page" class="button">
+				Update Preference
+			</a>
+		</div>
+
+		<footer>
+			Created by <a href="https://www.customsongme.com" style="color:#7c3aed;">CustomSongMe.com</a>
+		</footer>
+
+	</div>
+
+	<script>
+		let mediaRecorder;
+		let recordedChunks = [];
+		let selectedMimeType = "video/webm";
+
+		async function startMomentCapture() {
+			const status = document.getElementById("captureStatus");
+			const preview = document.getElementById("reactionPreview");
+			const downloadLink = document.getElementById("downloadReaction");
+			const sendReaction = document.getElementById("sendReaction");
+			const audio = document.querySelector("audio");
+
+			if (MediaRecorder.isTypeSupported("video/mp4;codecs=h264,aac")) {
+				selectedMimeType = "video/mp4;codecs=h264,aac";
+				downloadLink.setAttribute("download", "customsongme-reaction.mp4");
+			} else if (MediaRecorder.isTypeSupported("video/mp4")) {
+				selectedMimeType = "video/mp4";
+				downloadLink.setAttribute("download", "customsongme-reaction.mp4");
+			} else if (MediaRecorder.isTypeSupported("video/webm;codecs=vp8,opus")) {
+				selectedMimeType = "video/webm;codecs=vp8,opus";
+				downloadLink.setAttribute("download", "customsongme-reaction.webm");
+			} else {
+				selectedMimeType = "video/webm";
+				downloadLink.setAttribute("download", "customsongme-reaction.webm");
+			}
+
+			try {
+				status.textContent = "Opening camera...";
+				const stream = await navigator.mediaDevices.getUserMedia({
+					video: { facingMode: "user" },
+					audio: true
+				});
+
+				preview.srcObject = stream;
+				recordedChunks = [];
+
+				mediaRecorder = new MediaRecorder(stream, { mimeType: selectedMimeType });
+
+				mediaRecorder.ondataavailable = function(event) {
+					if (event.data.size > 0) {
+						recordedChunks.push(event.data);
+					}
+				};
+
+				mediaRecorder.onstop = function() {
+					const blob = new Blob(recordedChunks, { type: selectedMimeType });
+					const videoURL = URL.createObjectURL(blob);
+					downloadLink.href = videoURL;
+					downloadLink.style.display = "inline-block";
+					sendReaction.style.display = "inline-block";
+					status.textContent = "Recording complete. Download your video first, then tap Email Dan Your Reaction and attach the saved video.";
+
+					stream.getTracks().forEach(track => track.stop());
+				};
+
+				mediaRecorder.start();
+				status.textContent = "Recording started. The song is now playing.";
+				audio.currentTime = 0;
+				audio.play();
+
+				audio.onended = function() {
+					if (mediaRecorder && mediaRecorder.state === "recording") {
+						mediaRecorder.stop();
+					}
+				};
+			} catch (error) {
+				status.textContent = "Camera access was not allowed or recording is not supported on this device.";
+				console.error(error);
+			}
+		}
+	</script>
+
+</body>
+
+</html>
+
+```
