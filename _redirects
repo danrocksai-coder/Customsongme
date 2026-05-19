@@ -27,3 +27,4 @@ http://www.customsongme.com/* https://www.customsongme.com/:splat    301!
 /business-jingles        /business-jingles.html        200
 /payment-links           /payment-links.html           200
 /thanks                  /thanks.html                  200
+/songs/*  /songs/:splat/index.html  200
