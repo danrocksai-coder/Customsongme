@@ -1,9 +1,16 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>A Street Apart, A Lifetime in My Heart</title>
+
+  <meta property="og:title" content="A Street Apart, A Lifetime in My Heart" />
+  <meta property="og:description" content="A custom song created from a real love story. Listen to something truly unforgettable." />
+  <meta property="og:image" content="https://www.customsongme.com/songs/rhonda-derek-a-street-apart/cover.jpg" />
+  <meta property="og:type" content="website" />
+
   <style>
     body {
       background-color: #0b0b0b;
@@ -87,6 +94,25 @@
       width: 100%;
       box-sizing: border-box;
       box-shadow: 0 4px 12px rgba(124,58,237,0.3);
+      text-decoration: none;
+      display: inline-block;
+    }
+    .share-btn {
+      background: #222;
+      color: #ddd;
+      border: 1px solid #333;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
     .settings-row {
       display: flex;
@@ -103,6 +129,21 @@
       font-size: 0.85rem;
       color: #555;
       margin-top: 40px;
+    }
+    .toast-msg {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #7c3aed;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      z-index: 1000;
     }
   </style>
 </head>
@@ -162,7 +203,7 @@
         Derek, you’re the love of my life, my answered prayer
         Through every season somehow you were there
         Now we’ve got love, life, laughter, and a brand-new start
-        After forty-two years, you were still in my heart
+        After forty-2 years, you were still in my heart
 
         Let’s be honest, baby, you had your ways
         Running wild through your younger days
@@ -218,15 +259,26 @@
     <p style="margin-top:25px; color:#aaa; font-style:italic;">
       Rhonda & Derek — some stories take time… but the best ones are always worth the wait.
     </p>
-    <p style="margin-top:15px; color:#7c3aed; font-weight:bold;">
-      If this made you feel something… imagine what we could create for your story.
-    </p>
+    
+    <a href="https://www.customsongme.com" target="_blank" style="text-decoration: none;">
+      <p style="margin-top:25px; color:#7c3aed; font-weight:bold; font-size:1.05rem; border: 1px dashed rgba(124,58,237,0.4); padding: 12px; border-radius: 8px; text-align: center; background: rgba(124,58,237,0.05);">
+        ✨ If this made you feel something… imagine what we could create for your story. Tap to create yours.
+      </p>
+    </a>
   </div>
 
   <div class="action-container">
-    <h3 style="margin: 0 0 10px 0;">🎥 Capture the Moment</h3>
-    <p style="color: #aaa; font-size: 0.9rem; margin: 0 0 20px 0; line-height: 1.4;">Want to save the first time you hear the song together? Tap below to record your reaction live as the song plays.</p>
-    <button class="action-btn">Start Moment Capture</button>
+    <h3 style="margin: 0 0 10px 0;">🎥 Capture & Save The Memory</h3>
+    <p style="color: #aaa; font-size: 0.9rem; margin: 0 0 20px 0; line-height: 1.4;">
+      Record a quick phone video when you listen to your song together! Tap below to upload your video clip directly to Dan. If we can feature a 15-second snippet of your smiles to inspire others, your next milestone celebration song package is 100% free!
+    </p>
+    <a href="https://forms.gle/emgaypMgMeWMwpit7" target="_blank" class="action-btn">
+      Upload Your Reaction Video
+    </a>
+    
+    <button class="share-btn" onclick="shareSong()">
+      <span>📲 Share This Song</span>
+    </button>
   </div>
 
   <div style="margin: 40px 0 20px 0;">
@@ -250,6 +302,30 @@
 
 </div>
 
+<div id="toast" class="toast-msg">📋 Link copied! Text it to friends & family.</div>
+
+<script>
+function shareSong() {
+  const pageUrl = window.location.href;
+  if (navigator.share) {
+    navigator.share({
+      title: "A Street Apart, A Lifetime in My Heart",
+      text: "This is one of the most meaningful songs I’ve ever received… you have to hear this.",
+      url: pageUrl
+    }).catch(console.error);
+  } else {
+    navigator.clipboard.writeText(pageUrl).then(() => {
+      const toast = document.getElementById('toast');
+      toast.style.display = 'block';
+      setTimeout(() => { toast.style.display = 'none'; }, 3000);
+    }).catch(err => {
+      alert("Copy link to share: " + pageUrl);
+    });
+  }
+}
+</script>
+
 </body>
 </html>
 
+```
