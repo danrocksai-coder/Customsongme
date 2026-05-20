@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,6 +36,14 @@
       text-align: center;
       font-size: 0.95rem;
       margin-bottom: 25px;
+    }
+    .cover-image {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto 25px;
+      display: block;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
     }
     .media-container {
       text-align: center;
@@ -154,6 +161,8 @@
   <h1>A Street Apart, A Lifetime in My Heart</h1>
   <div class="subtitle">This song was created from a real story — built from memories, time, and a love that never let go.</div>
 
+  <img src="cover.jpg" alt="A Street Apart Cover Art" class="cover-image">
+
   <div class="media-container">
     <div class="video-responsive">
       <iframe 
@@ -168,15 +177,15 @@
 
   <div class="note-box">
     <h3>💌 A Note About Your Song</h3>
-    <p>Rhonda — this story is rare. Not many people get a second chance that was already written from the beginning. This song was built to capture that feeling… that it was always meant to be. I hope when you hear it, it brings everything back.</p>
+    <p>Rhonda — this story is rare. Not many people get a second chance that was already written from the beginning. This song was built to capture that feeling… that it was always meant to be.</p>
   </div>
 
   <div class="lyrics-container" style="margin: 30px 0; font-family: sans-serif;">
     <p style="margin-top:20px; color:#aaa;">
-      This isn’t just a song… it’s your full story brought to life.
+      This isn't just a song… it's your full story brought to life.
     </p>
     <details style="border: 1px solid #ccc; border-radius: 8px; padding: 10px; background-color: #111;">
-      <summary style="font-size: 1.2rem; font-weight: bold; cursor: pointer; padding: 10px; user-select: none; outline: none; color: #ddd; background: linear-gradient(90deg,#7c3aed,#4f46e5); border-radius: 6px; box-shadow: 0 0 12px rgba(124,58,237,0.4);">
+      <summary style="font-size: 1.2rem; font-weight: bold; cursor: pointer; padding: 10px; user-select: none; outline: none; color: #ddd; background: linear-gradient(90deg,#7c3aed,#4f46e5); border-radius: 4px;">
         🎵 Tap to Read the Full Story Behind This Song ⬇️
       </summary>
       <div class="lyrics-content" style="margin-top: 15px; line-height: 1.6; white-space: pre-line; color: #ddd; padding: 0 10px;">
@@ -198,14 +207,14 @@
         After forty-two years, we finally got it right
         What we hid in our hearts stepped into the light
         From a street apart to a life full of dreams
-        We’re living proof love’s stronger than it seems
+        We're living proof love's stronger than it seems
 
-        Derek, you’re the love of my life, my answered prayer
+        Derek, you're the love of my life, my answered prayer
         Through every season somehow you were there
-        Now we’ve got love, life, laughter, and a brand-new start
+        Now we've got love, life, laughter, and a brand-new start
         After forty-2 years, you were still in my heart
 
-        Let’s be honest, baby, you had your ways
+        Let's be honest, baby, you had your ways
         Running wild through your younger days
         Acting strong, never letting love stay deep
         While I was the one you called when it cut too deep
@@ -223,11 +232,11 @@
         After forty-two years, we finally got it right
         What we hid in our hearts stepped into the light
         From a street apart to a home full of dreams
-        We’re living proof love’s more than it seems
+        We're living proof love's more than it seems
 
-        Derek, you’re the love of my life, my answered prayer
+        Derek, you're the love of my life, my answered prayer
         Through every season somehow you were there
-        Now we’ve got love, life, laughter, and a brand-new start
+        Now we've got love, life, laughter, and a brand-new start
         After forty-two years, you were still in my heart
 
         Then came that moment out on the sea
@@ -238,17 +247,17 @@
         Now our children and grands make this life complete
         And our sisters still tied from those old streets
         From Heather Glen days to the home that we share
-        God was building forever when we weren’t aware
+        God was building forever when we weren't aware
 
         After forty-two years, we finally got it right
-        Two old friends found love in heaven’s light
+        Two old friends found love in heaven's light
         From school day dreams to a life made new
         Every road I walked led me back to you
 
-        Derek, you’re my laughter, my home, my peace
+        Derek, you're my laughter, my home, my peace
         Our forever love, my sweet release
-        Till death do us part, this love won’t fade
-        We found the dream time couldn’t erase
+        Till death do us part, this love won't fade
+        We found the dream time couldn't erase
 
         A street apart but never far
         You were always written in my stars
@@ -270,7 +279,7 @@
   <div class="action-container">
     <h3 style="margin: 0 0 10px 0;">🎥 Capture & Save The Memory</h3>
     <p style="color: #aaa; font-size: 0.9rem; margin: 0 0 20px 0; line-height: 1.4;">
-      Record a quick phone video when you listen to your song together! Tap below to upload your video clip directly to Dan. If we can feature a 15-second snippet of your smiles to inspire others, your next milestone celebration song package is 100% free!
+      Record a quick phone video when you listen to your song together! Tap below to upload your video clip directly to Dan. If we can feature a 15-second snippet of your smiles to inspire others, we will!
     </p>
     <a href="https://forms.gle/emgaypMgMeWMwpit7" target="_blank" class="action-btn">
       Upload Your Reaction Video
@@ -286,7 +295,7 @@
       <div>
         <div style="font-weight: bold; font-size: 0.95rem;">🔧 Want a Small Change?</div>
         <div style="color: #aaa; font-size: 0.85rem; margin-top: 5px; line-height: 1.4;">
-          If there’s anything you’d like adjusted, just send me a text or email directly and I’ll get right on it for you!
+          If there's anything you'd like adjusted, just send me a text or email directly and I'll get right on it for you!
         </div>
       </div>
     </div>
@@ -310,7 +319,7 @@ function shareSong() {
   if (navigator.share) {
     navigator.share({
       title: "A Street Apart, A Lifetime in My Heart",
-      text: "This is one of the most meaningful songs I’ve ever received… you have to hear this.",
+      text: "This is one of the most meaningful songs I've ever received… you have to hear this.",
       url: pageUrl
     }).catch(console.error);
   } else {
@@ -327,5 +336,3 @@ function shareSong() {
 
 </body>
 </html>
-
-```
