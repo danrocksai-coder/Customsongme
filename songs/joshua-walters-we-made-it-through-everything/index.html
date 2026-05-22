@@ -33,30 +33,60 @@
 </style>
 
 <script>
-const GUIDED_MESSAGE = "My Love, this was made just for you. Take a breath, turn your volume up, and let the moment unfold. We made it through everything. Not perfect, but we don’t come undone. What we built through all that pain is something real that will remain. With all of my heart, I love you.";
+const introAudio = new Audio("guided-intro.mp3");
+let scrollTriggered = false;
+let backupTimer = null;
+
+function slowScrollTo(element, duration) {
+    if (scrollTriggered) return; // Prevent double execution from race conditions
+    scrollTriggered = true;
+    
+    if (backupTimer) clearTimeout(backupTimer); // Clear backup if primary fires first
+
+    const targetPosition = element.getBoundingClientRect().top + window.pageYOffset;
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    let startTime = null;
+    
+    function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1);
+        const ease = progress < 0.5
+            ? 2 * progress * progress
+            : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+        window.scrollTo(0, startPosition + distance * ease);
+        if (timeElapsed < duration) {
+            requestAnimationFrame(animation);
+        }
+    }
+    requestAnimationFrame(animation);
+}
 
 function beginGuidedExperience() {
     const hookContainer = document.getElementById("lyric-hook");
+    introAudio.currentTime = 0;
+    scrollTriggered = false; // Reset state for current run
     
-    if ("speechSynthesis" in window) {
-        // Cancel any ongoing speech instantly to prime the engine on mobile
-        window.speechSynthesis.cancel();
-        
-        const utterance = new SpeechSynthesisUtterance(GUIDED_MESSAGE);
-        utterance.rate = 0.87;
-        utterance.pitch = 1.02;
-        
-        utterance.onend = () => {
-            hookContainer.style.display = "block";
-            document.getElementById("video-climax").scrollIntoView({behavior:"smooth"});
-        };
-        
-        window.speechSynthesis.speak(utterance);
-    } else {
-        // Fallback if browser doesn't support TTS
-        hookContainer.style.display = "block";
-        document.getElementById("video-climax").scrollIntoView({behavior:"smooth"});
-    }
+    hookContainer.style.display = "block";
+    
+    introAudio.play().then(() => {
+        // Audio started successfully, arms mobile-safe backup timer
+        backupTimer = setTimeout(() => {
+            slowScrollTo(document.getElementById("video-climax"), 2800);
+        }, 28000); // 28-second absolute fail-safe to account for audio runtime + emotional pause
+    }).catch(() => {
+        // Fallback execution if iOS completely blocks hardware autoplay initiation
+        setTimeout(() => {
+            slowScrollTo(document.getElementById("video-climax"), 2800);
+        }, 1200);
+    });
+    
+    introAudio.onended = () => {
+        setTimeout(() => {
+            slowScrollTo(document.getElementById("video-climax"), 2800);
+        }, 1200); // 1.2 second emotional pause
+    };
 }
 
 function copyPageLink() {
@@ -94,11 +124,17 @@ function copyPageLink() {
 
     <!-- Guided Lyric Hook -->
     <div id="lyric-hook" class="hook-lines" style="display:none;">
-        We made it through everything.<br><br>
-        Not perfect, but we don’t come undone.<br><br>
-        What we built through all that pain<br>
-        Is something real that will remain.<br><br>
-        And with all of my heart, I love you.
+        My Love… this was made for you,<br>
+        from your Young Buck.<br><br>
+        Take a breath… turn your volume up…<br>
+        and just be here for a moment.<br><br>
+        This is your story… your scars, your forgiveness,<br>
+        and the love that made it through everything.<br><br>
+        Not perfect… but real.<br>
+        Not easy… but still here.<br><br>
+        What you built through all that pain<br>
+        is something real that will remain.<br><br>
+        And with all of my heart… I love you.
     </div>
 
     <div id="video-climax" class="video-wrap">
@@ -106,6 +142,9 @@ function copyPageLink() {
                 src="https://www.youtube.com/embed/KxMgZ7k8i9E?rel=0&modestbranding=1&playsinline=1" 
                 allow="autoplay; fullscreen" allowfullscreen></iframe>
     </div>
+    <p class="small" style="margin-top:-10px;">
+        Take a breath… then press play when you're ready.
+    </p>
 
     <div class="section">
         <h2>🎥 Capture Your Experience</h2>
@@ -255,6 +294,16 @@ And with all of my heart, I love you
         <h2>⭐ Share Your Experience</h2>
         <p>If this meant something to you, a quick Google review would genuinely help more than you know.</p>
         <a class="button green" href="https://g.page/r/CUJZcUwU_iIFEAE/review" target="_blank">Leave a Google Review</a>
+    </div>
+
+    <div class="section">
+        <h2>👋 About the Creator</h2>
+        <p>CustomSongMe is a one-man show created by Dan.</p>
+        <p>Every song, page, lyric, visual, and detail is built with care to help turn real stories into something people can feel, keep, and share.</p>
+        <p>If this experience meant something to you and you’d like to support the work, tips are appreciated but never expected.</p>
+        <a class="button green" href="https://cash.app/$optimistic01" target="_blank">Tip on Cash App</a>
+        <a class="button" href="https://venmo.com/u/Dan-Rock-5" target="_blank">Tip on Venmo</a>
+        <a class="button gold" href="https://www.paypal.me/DanRock834" target="_blank">Tip on PayPal</a>
     </div>
 
     <div class="section">
