@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>We Made It Through Everything | Custom Song</title>
-<meta name="description" content="A custom love song created for Joshua Walters. A story of resilience, growth, and a love that made it through everything.">
+<meta name="description" content="A custom love song created for Joshua Walters. A powerful story of love, growth, and making it through everything.">
 
 <style>
 body {
   margin:0;
-  font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;
   background:#0b0b0f;
   color:white;
   text-align:center;
@@ -18,7 +18,7 @@ body {
 
 .container {
   padding:30px 20px;
-  max-width:600px;
+  max-width:650px;
   margin:auto;
 }
 
@@ -39,14 +39,21 @@ p {
   font-size:15px;
 }
 
+.section {
+  margin-top:40px;
+}
+
+.audio {
+  margin-top:20px;
+}
+
 audio {
   width:100%;
-  margin-top:20px;
 }
 
 .button {
   display:inline-block;
-  margin-top:25px;
+  margin-top:15px;
   padding:14px 22px;
   background:#7c3aed;
   color:white;
@@ -55,10 +62,42 @@ audio {
   font-weight:600;
 }
 
+.button.secondary {
+  background:#1f2937;
+}
+
 .button:hover {
-  background:#6d28d9;
+  opacity:0.9;
+}
+
+.small {
+  font-size:13px;
+  color:#888;
+}
+
+.toggle {
+  cursor:pointer;
+  color:#a78bfa;
+  margin-top:10px;
+  display:inline-block;
+}
+
+.hidden {
+  display:none;
 }
 </style>
+
+<script>
+function toggleStory() {
+  var x = document.getElementById("story");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+
 </head>
 
 <body>
@@ -70,19 +109,71 @@ audio {
 <h1>We Made It Through Everything</h1>
 
 <p>
-A love that wasn’t easy.<br>
-A story that wasn’t simple.<br><br>
-But somehow… through every storm, every doubt, every moment that could have broken it —<br><br>
-You made it through everything.
+This song was created from a real story — built from memories, time, and a love that refused to give up.
 </p>
 
+<div class="audio">
 <audio controls>
   <source src="joshua-walters-song.mp3" type="audio/mpeg">
 </audio>
+</div>
 
-<a class="button" href="https://www.customsongme.com">
-Create Your Own Song
-</a>
+<p class="small">Recommended: Press play and follow along with the experience below.</p>
+
+<div class="section">
+<h2>💌 A Note About Your Song</h2>
+<p>
+This isn’t just a song… it’s a reflection of everything you’ve been through together.<br><br>
+The ups, the doubts, the moments that could’ve ended it — but didn’t.<br><br>
+This was built to capture something real… something that lasted.
+</p>
+</div>
+
+<div class="section">
+<div class="toggle" onclick="toggleStory()">🎵 Tap to Read the Full Story Behind This Song ⬇️</div>
+
+<div id="story" class="hidden">
+<p>
+Some stories aren’t easy.<br><br>
+They don’t follow a straight line, and they don’t come without scars.<br><br>
+But the ones that survive… the ones that fight through everything…<br><br>
+Those are the ones that matter most.<br><br>
+This is one of those stories.
+</p>
+</div>
+</div>
+
+<div class="section">
+<h2>🎥 Capture Your Experience</h2>
+<p>
+Record a quick video the first time you listen together.<br><br>
+Those real reactions — the smiles, the emotions — that’s the moment this becomes unforgettable.
+</p>
+
+<a class="button" href="mailto:danrocksai@gmail.com">Upload Your Reaction Video</a>
+</div>
+
+<div class="section">
+<h2>📲 Share This Song</h2>
+<p>
+Send this page to someone who needs to hear it — or keep it as a reminder of what you built together.
+</p>
+
+<a class="button secondary" href="#">Copy Link</a>
+</div>
+
+<div class="section">
+<h2>🔧 Want a Small Change?</h2>
+<p>
+If there’s anything you want adjusted, just reach out directly and I’ll take care of it.
+</p>
+
+<a class="button" href="mailto:danrocksai@gmail.com">Request Edit</a>
+</div>
+
+<div class="section">
+<a class="button" href="https://www.customsongme.com">Create Your Own Song</a>
+</div>
 
 </div>
 
