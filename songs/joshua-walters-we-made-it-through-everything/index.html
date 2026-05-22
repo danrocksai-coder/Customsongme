@@ -2,108 +2,135 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <title>We Made It Through Everything | CustomSongMe</title>
 <meta name="robots" content="noindex, follow">
-<meta name="description" content="A private CustomSongMe experience created to bring a personal love story to life through song, video, lyrics, and memories.">
+<meta name="description" content="A private CustomSongMe experience created just for you.">
 
 <style>
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;background:#0b0b0f;color:white;text-align:center}
-.header{padding:16px;font-size:14px;color:#aaa;background:#08080c}
-.container{padding:24px 18px 50px;max-width:760px;margin:auto}
-.hero{padding:30px 18px;text-align:center;background:linear-gradient(180deg,#0b0b0f 0%,#1a1a2e 100%)}
-h1{font-size:31px;margin:12px 0 8px;line-height:1.15}
-h2{font-size:22px;margin-bottom:12px}
-p{color:#ccc;line-height:1.6;font-size:15px}
-.section{margin-top:36px;padding:24px 18px;border-radius:16px;background:#12121a}
-.cover{width:100%;border-radius:16px;margin:20px 0;box-shadow:0 0 40px rgba(124,58,237,.35)}
-.video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:16px;margin-top:24px;box-shadow:0 0 30px rgba(255,180,80,.2)}
-.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
-.button{display:inline-block;margin-top:16px;padding:14px 22px;background:#7c3aed;color:white;text-decoration:none;border-radius:10px;font-weight:700;border:none;font-size:15px}
-.green{background:#39ff88;color:#07140b}
-.dark{background:#1f2937}
-.gold{background:#f5c76b;color:#160f05}
-.small{font-size:13px;color:#999}
-details{margin-top:16px;text-align:left;background:#0d0d14;padding:18px;border-radius:14px}
-summary{cursor:pointer;font-weight:700;color:#c4b5fd;font-size:17px;text-align:center}
-.lyrics{white-space:pre-wrap;color:#ddd;font-size:15px;line-height:1.7;margin-top:20px}
-.footer{margin-top:44px;color:#888;font-size:13px}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;background:#0b0b0f;color:white;text-align:center;line-height:1.6;-webkit-font-smoothing:antialiased}
+    .header{padding:16px;font-size:14px;color:#aaa;background:#08080c;letter-spacing:0.5px}
+    .container{padding:24px 18px 80px;max-width:760px;margin:auto}
+    .hero{padding:40px 18px 30px;background:linear-gradient(180deg,#0b0b0f 0%,#1a1a2e 100%)}
+    h1{font-size:32px;margin:12px 0 10px;line-height:1.1;letter-spacing:-0.5px}
+    h2{font-size:22px;margin:28px 0 12px;letter-spacing:-0.3px}
+    p{color:#ccc;font-size:15.5px}
+    .section{margin-top:40px;padding:28px 20px;border-radius:18px;background:#12121a}
+    .cover{width:100%;max-width:500px;border-radius:16px;margin:20px auto;display:block;box-shadow:0 0 40px rgba(124,58,237,.4)}
+    .video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:16px;margin:32px 0;box-shadow:0 0 35px rgba(255,180,80,.25);transform:translateZ(0)}
+    .video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+    .button{display:inline-block;margin:12px 6px;padding:15px 26px;background:#7c3aed;color:white;text-decoration:none;border-radius:12px;font-weight:700;font-size:15.5px;border:none;cursor:pointer;transition:transform 0.1s ease}
+    .button:active{transform:scale(0.96)}
+    .green{background:#39ff88;color:#07140b}
+    .gold{background:#f5c76b;color:#160f05}
+    .dark{background:#1f2937;color:white}
+    .small{font-size:13.5px;color:#999;margin-top:8px}
+    .hook-lines{font-size:17px;line-height:1.7;font-style:italic;color:#c4b5fd;margin:32px 0;padding:24px;background:#1a1428;border-radius:16px;border-left:4px solid #7c3aed;text-align:left}
+    details{margin-top:20px;text-align:left;background:#0d0d14;padding:20px;border-radius:14px}
+    summary{cursor:pointer;font-weight:700;color:#c4b5fd;font-size:17px;padding:4px 0}
+    .lyrics{white-space:pre-wrap;color:#ddd;font-size:16px;line-height:1.8;margin-top:22px;letter-spacing:0.2px}
+    .footer{margin-top:60px;color:#666;font-size:13px;letter-spacing:0.3px}
 </style>
 
 <script>
-function copyPageLink(){
-  navigator.clipboard.writeText(window.location.href);
-  alert("Page link copied.");
+const GUIDED_MESSAGE = "My Love, this was made just for you. Take a breath, turn your volume up, and let the moment unfold. We made it through everything. Not perfect, but we don’t come undone. What we built through all that pain is something real that will remain. With all of my heart, I love you.";
+
+function beginGuidedExperience() {
+    const hookContainer = document.getElementById("lyric-hook");
+    
+    if ("speechSynthesis" in window) {
+        // Cancel any ongoing speech instantly to prime the engine on mobile
+        window.speechSynthesis.cancel();
+        
+        const utterance = new SpeechSynthesisUtterance(GUIDED_MESSAGE);
+        utterance.rate = 0.87;
+        utterance.pitch = 1.02;
+        
+        utterance.onend = () => {
+            hookContainer.style.display = "block";
+            document.getElementById("video-climax").scrollIntoView({behavior:"smooth"});
+        };
+        
+        window.speechSynthesis.speak(utterance);
+    } else {
+        // Fallback if browser doesn't support TTS
+        hookContainer.style.display = "block";
+        document.getElementById("video-climax").scrollIntoView({behavior:"smooth"});
+    }
+}
+
+function copyPageLink() {
+    navigator.clipboard.writeText(window.location.href);
+    const toast = document.createElement("div");
+    toast.style.cssText = "position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#39ff88;color:#07140b;padding:12px 24px;border-radius:12px;font-weight:600;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,0.3)";
+    toast.textContent = "Link copied ✓";
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 2200);
 }
 </script>
 </head>
 
 <body>
 
-<div class="header">
-CustomSongMe — Your Story, Your Song
-</div>
+<div class="header">CustomSongMe — Your Story, Your Song</div>
 
 <div class="hero">
-<h1>We Made It Through Everything</h1>
-<p style="color:#bbb;margin-bottom:18px;">A CustomSongMe Experience</p>
-<img class="cover" src="cover.jpg" alt="We Made It Through Everything Cover Art">
-<a class="button green" href="#video">▶ Start Your Experience</a>
-<p class="small">Press play and follow the experience below.</p>
+    <h1>We Made It Through Everything</h1>
+    <p style="color:#bbb;font-size:16px">A private experience made just for you two</p>
+    
+    <img class="cover" src="cover.jpg" alt="Cover Art">
+    
+    <button class="button green" onclick="beginGuidedExperience()">
+        ▶ Begin the Guided Experience
+    </button>
+    <p class="small">Or scroll at your own pace</p>
 </div>
 
 <div class="container">
 
-<p>This private page was custom-built to bring your story to life through song, visuals, lyrics, and meaningful moments — all in one place.</p>
+    <p>This private page was custom-built to bring your story to life through song, visuals, lyrics, and meaningful moments — all in one place.</p>
+    <p>The song is just one part of the experience. The real focus is your story.</p>
+    <p class="small">This page is private by default, but you can share it with anyone you feel should experience it.</p>
 
-<p>The song is just one part of the experience. The real focus is your story.</p>
+    <!-- Guided Lyric Hook -->
+    <div id="lyric-hook" class="hook-lines" style="display:none;">
+        We made it through everything.<br><br>
+        Not perfect, but we don’t come undone.<br><br>
+        What we built through all that pain<br>
+        Is something real that will remain.<br><br>
+        And with all of my heart, I love you.
+    </div>
 
-<p class="small">This page is private by default, but you can share it with anyone you feel should experience it.</p>
+    <div id="video-climax" class="video-wrap">
+        <iframe id="youtube-player" 
+                src="https://www.youtube.com/embed/KxMgZ7k8i9E?rel=0&modestbranding=1&playsinline=1" 
+                allow="autoplay; fullscreen" allowfullscreen></iframe>
+    </div>
 
-<div class="section">
-<h2>🎥 Capture Your Experience</h2>
-<p>Before you press play, consider recording your first reaction together. Those real, unfiltered moments often become the most meaningful part of this experience.</p>
-<a class="button green" href="https://docs.google.com/forms/d/e/1FAIpQLSdTE1aWTHx83yyaIfewc0DoHapRTTIKk-8h1JkpC563aaeYRA/viewform" target="_blank">Share Your Reaction</a>
-<p class="small">Upload a video, share your thoughts, or give permission for a short feature clip.</p>
-</div>
+    <div class="section">
+        <h2>🎥 Capture Your Experience</h2>
+        <p>Before or after the song, consider recording your first reaction. Those real moments often become the most meaningful part.</p>
+        <a class="button green" href="https://docs.google.com/forms/d/e/1FAIpQLSdTE1aWTHx83yyaIfewc0DoHapRTTIKk-8h1JkpC563aaeYRA/viewform" target="_blank">Share Your Reaction</a>
+    </div>
 
-<div id="video" class="video-wrap">
-<iframe src="https://www.youtube.com/embed/KxMgZ7k8i9E" allowfullscreen></iframe>
-</div>
+    <div class="section">
+        <h2>🎵 Your Song</h2>
+        <p>Download your personal MP3 copy below.</p>
+        <a class="button gold" href="joshua-walters-song.mp3" download>⬇️ Download Your Song</a>
+        <p class="small">Keep this forever — your personal copy.</p>
+    </div>
 
-<div class="section">
-<h2>🎵 Your Song</h2>
-<p>Download your personal MP3 copy below.</p>
-<a class="button gold" href="joshua-walters-song.mp3" download>⬇️ Download Your Song</a>
-<p class="small">Keep this forever — your personal copy.</p>
-</div>
+    <div class="section">
+        <h2>💌 A Note About Your Song</h2>
+        <p>This isn’t just a song.</p>
+        <p>It’s a reflection of everything you’ve been through — the highs, the doubts, the moments that could have ended it… but didn’t.</p>
+    </div>
 
-<div class="section">
-<h2>💌 A Note About Your Song</h2>
-<p>This isn’t just a song.</p>
-<p>It’s a reflection of everything you’ve been through — the highs, the doubts, the moments that could have ended it… but didn’t.</p>
-<p>This experience was built around your story — not just this moment, but everything that led to it.</p>
-</div>
-
-<div class="section">
-<details>
-<summary>Tap to Read the Story Behind This Song ⬇️</summary>
-<p>
-Some stories don’t come easy.
-
-They’re tested. They’re stretched. They’re pushed to the edge.
-
-But the ones that survive all of it…
-
-Those are the ones that matter most.
-</p>
-</details>
-</div>
-
-<div class="section">
-<details>
-<summary>Tap to Read Full Lyrics ⬇️</summary>
-<div class="lyrics">
+    <div class="section">
+        <h2>📜 Full Lyrics</h2>
+        <details>
+            <summary>Tap to Read Full Lyrics ⬇️</summary>
+            <div class="lyrics">
 YoungBuck
 I remember nights when everything was breaking
 World felt heavy, I was barely holding
@@ -177,7 +204,7 @@ The only place my heart is found
 My Love
 My Youngbuck, you’ve grown into that man
 The one I believed in from the start back then
-Even when you couldn’t see your worth
+Even when you couldn't see your worth
 I held onto you through everything that hurt
 
 My Love & Young Buck
@@ -200,7 +227,7 @@ I finally see it all so clear
 
 My Love & Young Buck
 And if the world tries pulling us apart
-We’ll hold the line with both our hearts
+We'll hold the line with both our hearts
 Cause what we built through all that pain
 Is something real that will remain
 
@@ -213,40 +240,38 @@ My Youngbuck…
 My Love & Young Buck
 We made it through everything
 And with all of my heart, I love you
-</div>
-<a class="button dark" href="https://drive.google.com/drive/folders/1x8Ictdvkk7HulSZhk_bgOtkoD_oq65NC" target="_blank">Download Lyrics PDF</a>
-</details>
-</div>
+            </div>
+            <a class="button dark" href="https://drive.google.com/drive/folders/1x8Ictdvkk7HulSZhk_bgOtkoD_oq65NC" target="_blank" style="margin-top:16px; display:inline-block; width:calc(100% - 12px); box-sizing:border-box; text-align:center;">View Full Package Folder</a>
+        </details>
+    </div>
 
-<div class="section">
-<h2>📲 Share This Song</h2>
-<p>This page was created as a personal experience — but you can share it with anyone you feel should hear it.</p>
-<button class="button green" onclick="copyPageLink()">Copy Page Link</button>
-</div>
+    <div class="section">
+        <h2>📲 Share This Song</h2>
+        <p>This page was created as a personal experience — but you can share it with anyone you feel should hear it.</p>
+        <button class="button green" onclick="copyPageLink()">Copy Page Link</button>
+    </div>
 
-<div class="section">
-<h2>🔧 Want a Small Change?</h2>
-<p>If anything needs to be adjusted, just reach out and I’ll take care of it.</p>
-<a class="button" href="mailto:danrocksai@gmail.com">Request a Change</a>
-</div>
+    <div class="section">
+        <h2>⭐ Share Your Experience</h2>
+        <p>If this meant something to you, a quick Google review would genuinely help more than you know.</p>
+        <a class="button green" href="https://g.page/r/CUJZcUwU_iIFEAE/review" target="_blank">Leave a Google Review</a>
+    </div>
 
-<div class="section">
-<h2>⭐ Share Your Experience</h2>
-<p>If this meant something to you, a quick Google review would genuinely help more than you know.</p>
-<a class="button green" href="https://g.page/r/CUJZcUwU_iIFEAE/review" target="_blank">Leave a Google Review</a>
-</div>
+    <div class="section">
+        <h2>Your Story. Your Song. Your Experience.</h2>
+        <p>This format can grow with you — capturing moments, milestones, and meaningful experiences over time.</p>
+        <p>This is just the beginning of what’s possible.</p>
+    </div>
 
-<div class="section">
-<h2>Your Story. Your Song. Your Experience.</h2>
-<p>This is just one example of what a personal story page can become.</p>
-<p>This format can grow with you — capturing moments, milestones, and meaningful experiences over time.</p>
-<p>This is just the beginning of what’s possible.</p>
-<a class="button dark" href="https://www.customsongme.com">Create Your Own Song</a>
-</div>
+    <div class="section">
+        <h2>🔧 Want a Small Change?</h2>
+        <p>If anything needs to be adjusted, just reach out and I’ll take care of it.</p>
+        <a class="button" href="mailto:danrocksai@gmail.com">Request a Change</a>
+    </div>
 
-<div class="footer">
-Created by Dan — CustomSongMe.com
-</div>
+    <div class="footer">
+        Created by Dan — CustomSongMe.com
+    </div>
 
 </div>
 
