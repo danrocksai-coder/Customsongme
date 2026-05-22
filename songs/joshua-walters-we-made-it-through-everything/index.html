@@ -1,223 +1,208 @@
+Paste this entire block as your index.html.
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>We Made It Through Everything | CustomSongMe</title>
 <meta name="robots" content="noindex, follow">
-
+<meta name="description" content="A private CustomSongMe experience created to bring a personal love story to life through song, video, lyrics, and memories.">
 <style>
-body {
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;
-  background:#0b0b0f;
-  color:white;
-  text-align:center;
-}
-
-.header {
-  padding:15px;
-  font-size:14px;
-  color:#888;
-}
-
-.container {
-  padding:25px 20px;
-  max-width:700px;
-  margin:auto;
-}
-
-iframe {
-  width:100%;
-  height:220px;
-  border-radius:12px;
-  margin-bottom:20px;
-}
-
-img {
-  width:100%;
-  border-radius:12px;
-  margin-bottom:20px;
-}
-
-h1 {
-  font-size:28px;
-  margin-bottom:10px;
-}
-
-p {
-  color:#ccc;
-  line-height:1.6;
-  font-size:15px;
-}
-
-.section {
-  margin-top:40px;
-}
-
-audio {
-  width:100%;
-  margin-top:20px;
-}
-
-.button {
-  display:inline-block;
-  margin-top:15px;
-  padding:14px 22px;
-  background:#7c3aed;
-  color:white;
-  text-decoration:none;
-  border-radius:8px;
-  font-weight:600;
-}
-
-.button.secondary {
-  background:#1f2937;
-}
-
-.small {
-  font-size:13px;
-  color:#888;
-}
-
-.toggle {
-  cursor:pointer;
-  color:#a78bfa;
-  margin-top:15px;
-  display:inline-block;
-}
-
-.hidden {
-  display:none;
-}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;background:#0b0b0f;color:white;text-align:center}
+.header{padding:16px;font-size:14px;color:#aaa;background:#08080c}
+.container{padding:24px 18px 50px;max-width:760px;margin:auto}
+h1{font-size:30px;margin:18px 0 10px}
+h2{font-size:22px;margin-bottom:12px}
+p{color:#ccc;line-height:1.6;font-size:15px}
+.section{margin-top:42px;padding:24px 18px;border-radius:16px;background:#12121a}
+.cover{width:100%;border-radius:16px;margin:20px 0;box-shadow:0 0 30px rgba(124,58,237,.35)}
+.video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:16px;margin-top:24px}
+.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+audio{width:100%;margin-top:14px}
+.button{display:inline-block;margin-top:16px;padding:14px 22px;background:#7c3aed;color:white;text-decoration:none;border-radius:10px;font-weight:700;border:none;font-size:15px}
+.green{background:#39ff88;color:#07140b}
+.dark{background:#1f2937}
+.small{font-size:13px;color:#999}
+details{margin-top:16px;text-align:left;background:#0d0d14;padding:18px;border-radius:14px}
+summary{cursor:pointer;font-weight:700;color:#c4b5fd;font-size:17px;text-align:center}
+.lyrics{white-space:pre-wrap;color:#ddd;font-size:15px;line-height:1.7;margin-top:20px}
+.footer{margin-top:44px;color:#888;font-size:13px}
 </style>
-
 <script>
-function toggleStory() {
-  var x = document.getElementById("story");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
+function copyPageLink(){
+  navigator.clipboard.writeText(window.location.href);
+  alert("Page link copied.");
 }
 </script>
-
 </head>
-
 <body>
-
 <div class="header">
 CustomSongMe — Your Story, Your Song
 </div>
-
 <div class="container">
-
-<!-- VIDEO -->
-<iframe src="https://www.youtube.com/embed/KxMgZ7k8i9E" frameborder="0" allowfullscreen></iframe>
-
-<!-- COVER -->
-<img src="cover.jpg" alt="Cover Art">
-
-<h1>We Made It Through Everything</h1>
-
-<p>
-This song was created from a real story — built from memories, time, and a love that refused to give up.
-</p>
-
-<!-- AUDIO -->
-<audio controls>
-  <source src="joshua-walters-song.mp3" type="audio/mpeg">
-</audio>
-
-<p class="small">
-Recommended: Press play and follow along with the experience below.
-</p>
-
-<!-- NOTE -->
-<div class="section">
-<h2>💌 A Note About Your Song</h2>
-
-<p>
-This isn’t just a song… it’s a reflection of everything you’ve been through together.<br><br>
-
-The ups, the doubts, the moments that could’ve ended it — but didn’t.<br><br>
-
-This was built to capture something real… something that lasted.
-</p>
-</div>
-
-<!-- STORY -->
-<div class="section">
-
-<div class="toggle" onclick="toggleStory()">
-🎵 Tap to Read the Full Story Behind This Song ⬇️
-</div>
-
-<div id="story" class="hidden">
-<p>
-Some stories don’t come easy.<br><br>
-
-They’re tested. They’re stretched. They’re pushed to the edge.<br><br>
-
-But the ones that survive all of it…<br><br>
-
-Those are the ones that mean everything.
-</p>
-</div>
-
-</div>
-
-<!-- EXPERIENCE -->
+<h1>Welcome to Your CustomSongMe Experience</h1>
+<p>This private page was custom-built to bring your story to life through song, visuals, lyrics, and meaningful moments — all in one place.</p>
+<p>The song is just one part of the experience. The real focus is your story.</p>
+<p class="small">Start with the video, then explore everything below at your own pace.</p>
+<p class="small">This page is private by default, but you can share it with anyone you feel should experience it.</p>
 <div class="section">
 <h2>🎥 Capture Your Experience</h2>
-
-<p>
-Record a quick video the first time you listen together.<br><br>
-
-Those real reactions — the smiles, the emotions — that’s the moment this becomes unforgettable.
-</p>
-
-<a class="button" href="mailto:danrocksai@gmail.com">
-Upload Your Reaction Video
-</a>
+<p>Before you press play, consider recording your first reaction together. Those real, unfiltered moments often become the most meaningful part of this experience.</p>
+<a class="button green" href="https://docs.google.com/forms/d/e/1FAIpQLSdTE1aWTHx83yyaIfewc0DoHapRTTIKk-8h1JkpC563aaeYRA/viewform" target="_blank">Share Your Reaction</a>
+<p class="small">Upload a video, share your thoughts, or give permission for a short feature clip.</p>
 </div>
-
-<!-- SHARE -->
+<div class="video-wrap">
+<iframe src="https://www.youtube.com/embed/KxMgZ7k8i9E" allowfullscreen></iframe>
+</div>
+<img class="cover" src="https://drive.google.com/uc?export=view&id=1uxk5S8C1XZr-SGhHU3V87tuWr4lRffqX" alt="We Made It Through Everything Cover Art">
+<div class="section">
+<h2>🎵 Your Song</h2>
+<p>Download or listen anytime.</p>
+<audio controls>
+<source src="https://drive.google.com/uc?export=download&id=1pEyCCpMkEwedU1DQgnLrkvkJ5E0rU_EN" type="audio/mpeg">
+</audio>
+</div>
+<div class="section">
+<h2>💌 A Note About Your Song</h2>
+<p>This isn’t just a song.</p>
+<p>It’s a reflection of everything you’ve been through — the highs, the doubts, the moments that could have ended it… but didn’t.</p>
+<p>This experience was built around your story — not just this moment, but everything that led to it.</p>
+</div>
+<div class="section">
+<details>
+<summary>Tap to Read the Story Behind This Song ⬇️</summary>
+<p>
+Some stories don’t come easy.
+They’re tested. They’re stretched. They’re pushed to the edge.
+But the ones that survive all of it…
+Those are the ones that matter most.
+</p>
+</details>
+</div>
+<div class="section">
+<details>
+<summary>Tap to Read Full Lyrics ⬇️</summary>
+<div class="lyrics">
+YoungBuck
+I remember nights when everything was breaking
+World felt heavy, I was barely holding
+I wasn’t always the man I should be
+But you stood there still believing in me
+My Love
+You came into my life already scarred
+Carrying pain that left its mark
+I’ve been through storms long before you arrived
+So trusting love meant risking my life
+YoungBuck
+I gave you reasons to question it all
+Moments I stumbled, moments I’d fall
+But you stayed when it made no sense
+Held onto hope through the turbulence
+My Love
+I saw the man I knew you could become
+Even when you felt like you were no one
+You held that vision through all the doubt
+Even when fear tried to take us out
+YoungBuck
+My Love, you’re the reason I stand back up
+When I fall short, when I’m not enough
+You see something stronger inside of me
+Even when I struggle to believe
+My Love
+My Youngbuck, I don’t give my heart away easy
+Life before you didn’t treat me kindly
+But something in you never let me run
+Even when the past said love was done
+YoungBuck
+We were tested in ways most never see
+Distance, chaos, uncertainty
+Courtrooms, long nights, fighting alone
+Trying to build something we could call home
+My Love
+There were days I didn’t know if we’d survive
+If love could make it through this life
+But every time I looked in your eyes
+I saw truth I couldn’t deny
+YoungBuck
+You kept showing up through all my fears
+Through broken trust and through the tears
+And slowly I learned to stand my ground
+Because you never stopped sticking around
+My Love
+And slowly I let my walls come down
+You proved to me you’d stay around
+Not just words but what you do
+Showed me something real in you
+My Love & Young Buck
+Now we see what we’ve become
+Not perfect, but we don’t come undone
+YoungBuck
+My Love, you’re the place I run to heal
+Through every doubt, you make it real
+You are my home, my safest ground
+The only place my heart is found
+My Love
+My Youngbuck, you’ve grown into that man
+The one I believed in from the start back then
+Even when you couldn’t see your worth
+I held onto you through everything that hurt
+My Love & Young Buck
+We don’t hide from what we’ve been through
+We wear it honest, we made it through
+Every scar just proves it’s true
+A love that fights will always renew
+YoungBuck
+So here we stand, no turning back
+No more living in what we lacked
+We built this life from broken parts
+Now it beats steady in both our hearts
+My Love
+No more running, no more fear
+I’m right beside you, I’m right here
+Through every doubt, through every year
+I finally see it all so clear
+My Love & Young Buck
+And if the world tries pulling us apart
+We’ll hold the line with both our hearts
+Cause what we built through all that pain
+Is something real that will remain
+YoungBuck
+My Love…
+My Love
+My Youngbuck…
+My Love & Young Buck
+We made it through everything
+And with all of my heart, I love you
+</div>
+<a class="button dark" href="https://drive.google.com/drive/folders/1x8Ictdvkk7HulSZhk_bgOtkoD_oq65NC" target="_blank">Download Lyrics PDF</a>
+</details>
+</div>
 <div class="section">
 <h2>📲 Share This Song</h2>
-
-<p>
-Send this page to someone who needs to hear it — or keep it as a reminder of what you built together.
-</p>
-
-<a class="button secondary" href="#">
-Copy Link
-</a>
+<p>This page was created as a personal experience — but you can share it with anyone you feel should hear it.</p>
+<button class="button green" onclick="copyPageLink()">Copy Page Link</button>
 </div>
-
-<!-- EDIT -->
 <div class="section">
 <h2>🔧 Want a Small Change?</h2>
-
-<p>
-If there’s anything you want adjusted, just reach out directly and I’ll take care of it.
-</p>
-
-<a class="button" href="mailto:danrocksai@gmail.com">
-Request Edit
-</a>
+<p>If anything needs to be adjusted, just reach out and I’ll take care of it.</p>
+<a class="button" href="mailto:danrocksai@gmail.com">Request a Change</a>
 </div>
-
-<!-- CTA -->
 <div class="section">
-<a class="button" href="https://www.customsongme.com">
-Create Your Own Song
-</a>
+<h2>⭐ Share Your Experience</h2>
+<p>If this meant something to you, a quick Google review would genuinely help more than you know.</p>
+<a class="button green" href="https://g.page/r/CUJZcUwU_iIFEAE/review" target="_blank">Leave a Google Review</a>
 </div>
-
+<div class="section">
+<h2>Your Story. Your Song. Your Experience.</h2>
+<p>This is just one example of what a personal story page can become.</p>
+<p>This format can grow with you — capturing moments, milestones, and meaningful experiences over time.</p>
+<p>This is just the beginning of what’s possible.</p>
+<a class="button dark" href="https://www.customsongme.com">Create Your Own Song</a>
 </div>
-
+<div class="footer">
+Created by Dan — CustomSongMe.com
+</div>
+</div>
 </body>
 </html>
