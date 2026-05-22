@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>We Made It Through Everything | Custom Song</title>
-<meta name="description" content="A custom love song created for Joshua Walters. A powerful story of love, growth, and making it through everything.">
+<title>We Made It Through Everything | CustomSongMe</title>
+<meta name="robots" content="noindex, follow">
 
 <style>
 body {
@@ -16,10 +16,23 @@ body {
   text-align:center;
 }
 
+.header {
+  padding:15px;
+  font-size:14px;
+  color:#888;
+}
+
 .container {
-  padding:30px 20px;
-  max-width:650px;
+  padding:25px 20px;
+  max-width:700px;
   margin:auto;
+}
+
+iframe {
+  width:100%;
+  height:220px;
+  border-radius:12px;
+  margin-bottom:20px;
 }
 
 img {
@@ -29,7 +42,7 @@ img {
 }
 
 h1 {
-  font-size:26px;
+  font-size:28px;
   margin-bottom:10px;
 }
 
@@ -43,12 +56,9 @@ p {
   margin-top:40px;
 }
 
-.audio {
-  margin-top:20px;
-}
-
 audio {
   width:100%;
+  margin-top:20px;
 }
 
 .button {
@@ -66,10 +76,6 @@ audio {
   background:#1f2937;
 }
 
-.button:hover {
-  opacity:0.9;
-}
-
 .small {
   font-size:13px;
   color:#888;
@@ -78,7 +84,7 @@ audio {
 .toggle {
   cursor:pointer;
   color:#a78bfa;
-  margin-top:10px;
+  margin-top:15px;
   display:inline-block;
 }
 
@@ -102,9 +108,17 @@ function toggleStory() {
 
 <body>
 
+<div class="header">
+CustomSongMe — Your Story, Your Song
+</div>
+
 <div class="container">
 
-<img src="cover.jpg" alt="Custom Song Cover">
+<!-- VIDEO -->
+<iframe src="https://www.youtube.com/embed/KxMgZ7k8i9E" frameborder="0" allowfullscreen></iframe>
+
+<!-- COVER -->
+<img src="cover.jpg" alt="Cover Art">
 
 <h1>We Made It Through Everything</h1>
 
@@ -112,67 +126,95 @@ function toggleStory() {
 This song was created from a real story — built from memories, time, and a love that refused to give up.
 </p>
 
-<div class="audio">
+<!-- AUDIO -->
 <audio controls>
   <source src="joshua-walters-song.mp3" type="audio/mpeg">
 </audio>
-</div>
 
-<p class="small">Recommended: Press play and follow along with the experience below.</p>
+<p class="small">
+Recommended: Press play and follow along with the experience below.
+</p>
 
+<!-- NOTE -->
 <div class="section">
 <h2>💌 A Note About Your Song</h2>
+
 <p>
 This isn’t just a song… it’s a reflection of everything you’ve been through together.<br><br>
+
 The ups, the doubts, the moments that could’ve ended it — but didn’t.<br><br>
+
 This was built to capture something real… something that lasted.
 </p>
 </div>
 
+<!-- STORY -->
 <div class="section">
-<div class="toggle" onclick="toggleStory()">🎵 Tap to Read the Full Story Behind This Song ⬇️</div>
+
+<div class="toggle" onclick="toggleStory()">
+🎵 Tap to Read the Full Story Behind This Song ⬇️
+</div>
 
 <div id="story" class="hidden">
 <p>
-Some stories aren’t easy.<br><br>
-They don’t follow a straight line, and they don’t come without scars.<br><br>
-But the ones that survive… the ones that fight through everything…<br><br>
-Those are the ones that matter most.<br><br>
-This is one of those stories.
+Some stories don’t come easy.<br><br>
+
+They’re tested. They’re stretched. They’re pushed to the edge.<br><br>
+
+But the ones that survive all of it…<br><br>
+
+Those are the ones that mean everything.
 </p>
 </div>
+
 </div>
 
+<!-- EXPERIENCE -->
 <div class="section">
 <h2>🎥 Capture Your Experience</h2>
+
 <p>
 Record a quick video the first time you listen together.<br><br>
+
 Those real reactions — the smiles, the emotions — that’s the moment this becomes unforgettable.
 </p>
 
-<a class="button" href="mailto:danrocksai@gmail.com">Upload Your Reaction Video</a>
+<a class="button" href="mailto:danrocksai@gmail.com">
+Upload Your Reaction Video
+</a>
 </div>
 
+<!-- SHARE -->
 <div class="section">
 <h2>📲 Share This Song</h2>
+
 <p>
 Send this page to someone who needs to hear it — or keep it as a reminder of what you built together.
 </p>
 
-<a class="button secondary" href="#">Copy Link</a>
+<a class="button secondary" href="#">
+Copy Link
+</a>
 </div>
 
+<!-- EDIT -->
 <div class="section">
 <h2>🔧 Want a Small Change?</h2>
+
 <p>
 If there’s anything you want adjusted, just reach out directly and I’ll take care of it.
 </p>
 
-<a class="button" href="mailto:danrocksai@gmail.com">Request Edit</a>
+<a class="button" href="mailto:danrocksai@gmail.com">
+Request Edit
+</a>
 </div>
 
+<!-- CTA -->
 <div class="section">
-<a class="button" href="https://www.customsongme.com">Create Your Own Song</a>
+<a class="button" href="https://www.customsongme.com">
+Create Your Own Song
+</a>
 </div>
 
 </div>
