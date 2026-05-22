@@ -34,16 +34,11 @@
 
 <script>
 const introAudio = new Audio("guided-intro.mp3");
-let scrollTriggered = false;
 let backupTimer = null;
 
-function slowScrollTo(element, duration) {
-    if (scrollTriggered) return; // Prevent double execution from race conditions
-    scrollTriggered = true;
-    
-    if (backupTimer) clearTimeout(backupTimer); // Clear backup if primary fires first
-
-    const targetPosition = element.getBoundingClientRect().top + window.pageYOffset;
+// Dynamic, reusable slow scrolling engine
+function slowScrollTo(element, duration, callback) {
+    const targetPosition = element.getBoundingClientRect().top + window.pageYOffset - 20; // Slight offset for perfect visual breathing room
     const startPosition = window.pageYOffset;
     const distance = targetPosition - startPosition;
     let startTime = null;
@@ -58,6 +53,8 @@ function slowScrollTo(element, duration) {
         window.scrollTo(0, startPosition + distance * ease);
         if (timeElapsed < duration) {
             requestAnimationFrame(animation);
+        } else if (callback) {
+            callback();
         }
     }
     requestAnimationFrame(animation);
@@ -66,26 +63,31 @@ function slowScrollTo(element, duration) {
 function beginGuidedExperience() {
     const hookContainer = document.getElementById("lyric-hook");
     introAudio.currentTime = 0;
-    scrollTriggered = false; // Reset state for current run
     
+    // Step 1: Instantly unhide the text block
     hookContainer.style.display = "block";
     
+    // Step 2: Smoothly glide down immediately to center on the read-along text
+    slowScrollTo(hookContainer, 1800);
+    
     introAudio.play().then(() => {
-        // Audio started successfully, arms mobile-safe backup timer
+        // Safe backup window in case mobile browsers stall out the track mid-way
         backupTimer = setTimeout(() => {
             slowScrollTo(document.getElementById("video-climax"), 2800);
-        }, 28000); // 28-second absolute fail-safe to account for audio runtime + emotional pause
+        }, 29000);
     }).catch(() => {
-        // Fallback execution if iOS completely blocks hardware autoplay initiation
+        // Instant safety skip if hardware strictly flags or blocks the hardware play initiation
         setTimeout(() => {
             slowScrollTo(document.getElementById("video-climax"), 2800);
         }, 1200);
     });
     
+    // Step 3: Wait for speech completion, capture emotional pause, shift view down to video
     introAudio.onended = () => {
+        if (backupTimer) clearTimeout(backupTimer);
         setTimeout(() => {
             slowScrollTo(document.getElementById("video-climax"), 2800);
-        }, 1200); // 1.2 second emotional pause
+        }, 1200);
     };
 }
 
@@ -155,7 +157,8 @@ function copyPageLink() {
     <div class="section">
         <h2>🎵 Your Song</h2>
         <p>Download your personal MP3 copy below.</p>
-        <a class="button gold" href="joshua-walters-song.mp3" download>⬇️ Download Your Song</a>
+        <!-- Updated to target the dedicated drive mirror file context link for raw file processing stream -->
+        <a class="button gold" href="https://drive.google.com/uc?export=download&id=1x8Ictdvkk7HulSZhk_bgOtkoD_oq65NC" target="_blank">⬇️ Download Your Song</a>
         <p class="small">Keep this forever — your personal copy.</p>
     </div>
 
