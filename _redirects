@@ -27,4 +27,7 @@ http://www.customsongme.com/* https://www.customsongme.com/:splat    301!
 /business-jingles        /business-jingles.html        200
 /payment-links           /payment-links.html           200
 /thanks                  /thanks.html                  200
+/adopt-a-rescue-dog      /adopt-a-rescue-dog.html      200
+/thanks-rescue           /thanks-rescue.html           200
+/privacy-terms           /privacy-terms.html           200
 /songs/*  /songs/:splat/index.html  200
