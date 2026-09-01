@@ -196,6 +196,12 @@
 }
 </script>
 
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -483,7 +489,9 @@
     .video-inner p { color: rgba(255,255,255,0.55); margin-bottom: 36px; }
     .video-wrapper {
       position: relative;
-      padding-bottom: 56.25%;
+      max-width: 380px;
+      margin: 0 auto;
+      padding-bottom: 177.78%;
       background: var(--charcoal);
       border-radius: var(--radius-lg);
       overflow: hidden;
@@ -638,6 +646,50 @@
     }
     @media (max-width: 800px) {
       .package-grid { grid-template-columns: 1fr; max-width: 560px; }
+    }
+
+    /* ═══════════════════════════════════════
+       SECTION 5B — REAL STORIES
+    ═══════════════════════════════════════ */
+    #real-stories {
+      background: var(--white);
+      padding: 80px 24px;
+    }
+    #real-stories h2 { text-align: center; margin-bottom: 12px; }
+    .stories-sub {
+      text-align: center; color: var(--muted); font-size: 1rem;
+      max-width: 520px; margin: 0 auto 48px;
+    }
+    .stories-grid {
+      max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .story-card {
+      background: var(--cream); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 28px 26px; display: flex; flex-direction: column;
+    }
+    .story-tag {
+      display: inline-block; background: var(--gold-pale); color: var(--charcoal);
+      font-size: 0.78rem; font-weight: 700; padding: 5px 14px; border-radius: 50px;
+      margin-bottom: 16px; align-self: flex-start;
+    }
+    .story-context {
+      font-size: 0.88rem; color: var(--muted); line-height: 1.6; margin-bottom: 16px;
+    }
+    .story-quote {
+      font-family: var(--font-display); font-style: italic; font-size: 1.02rem;
+      color: var(--ink); line-height: 1.55; margin-bottom: 14px; flex-grow: 1;
+    }
+    .story-attribution {
+      font-size: 0.82rem; color: var(--muted); font-weight: 600; margin-bottom: 18px;
+    }
+    .story-link {
+      font-size: 0.85rem; font-weight: 700; color: var(--gold); text-decoration: none;
+      border-top: 1px solid var(--border); padding-top: 14px;
+    }
+    .story-link:hover { color: var(--charcoal); }
+    @media (max-width: 800px) {
+      .stories-grid { grid-template-columns: 1fr; max-width: 460px; }
     }
 
     /* ═══════════════════════════════════════
@@ -1122,6 +1174,9 @@
       color: rgba(255,255,255,0.4);
     }
     .form-contact a { color: var(--gold); text-decoration: none; }
+    .gold-link { color: var(--gold); }
+    .textarea-sm { min-height: 90px; }
+    .mt-20 { margin-top: 20px; }
     .form-error-msg {
       background: rgba(220,60,60,0.12);
       border: 1px solid rgba(220,60,60,0.4);
@@ -1685,6 +1740,41 @@
   </div>
 </section>
 
+<!-- ═══════ SECTION 5B — REAL STORIES ═══════ -->
+<section id="real-stories">
+  <div class="container">
+    <h2 class="fade-up">Real Stories From Real Customers</h2>
+    <p class="stories-sub fade-up">Every song starts with someone's real story. Here are a few, in their own words.</p>
+    <div class="stories-grid">
+
+      <div class="story-card fade-up">
+        <div class="story-tag">💑 Anniversary</div>
+        <p class="story-context">She wrote down snippets of their story on a whim, planning to save the song for their upcoming anniversary — but couldn't wait, and gave it to her husband early instead.</p>
+        <p class="story-quote">"Dan quickly made me an awesome song... he first just smiled and then all of a sudden, his lip quivered."</p>
+        <div class="story-attribution">— donna ramey, Verified Google Review</div>
+        <a href="/anniversary-songs" class="story-link">Custom Anniversary Songs →</a>
+      </div>
+
+      <div class="story-card fade-up">
+        <div class="story-tag">👔 Father's Day</div>
+        <p class="story-context">She reached out for a Father's Day song, and worked with Dan through a few rounds of changes to get every detail right.</p>
+        <p class="story-quote">"Best fathers day gift ever. Check out 'The Dad Who Never Gave Up On Me.'"</p>
+        <div class="story-attribution">— Michelle Williams, Verified Google Review</div>
+        <a href="/fathers-day-songs" class="story-link">Custom Father's Day Songs →</a>
+      </div>
+
+      <div class="story-card fade-up">
+        <div class="story-tag">🌸 Mother's Day</div>
+        <p class="story-context">The song was for her mother, built around what she wanted her mom to know but hadn't found the words for.</p>
+        <p class="story-quote">"What he created far surpassed my expectations! ...It made us laugh and cry."</p>
+        <div class="story-attribution">— Vanessa Smith, Verified Google Review</div>
+        <a href="/mothers-day-songs" class="story-link">Custom Mother's Day Songs →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ═══════ SECTION 6 — SAMPLES ═══════ -->
 <section id="samples">
   <div class="container">
@@ -1899,7 +1989,7 @@
 
           <div class="form-group full">
             <label for="extra-details">Anything else Dan should know? <span class="opt">(optional)</span></label>
-            <textarea id="extra-details" name="extra-details" placeholder="Extra details to include, anything to leave out, or the feeling you want the song to capture…" style="min-height:90px;"></textarea>
+            <textarea id="extra-details" name="extra-details" placeholder="Extra details to include, anything to leave out, or the feeling you want the song to capture…" class="textarea-sm"></textarea>
           </div>
 
           <hr class="form-divider" />
@@ -1999,6 +2089,10 @@
     <div class="review-card">
       <p class="review-text">"If you are thinking about getting a personalized song, look no further. Dan absolutely delivered beyond expectations."</p>
       <div class="reviewer">— Jennie Nicholson, Verified Google Review</div>
+    </div>
+    <div class="review-card mt-20">
+      <p class="review-text">"My husband cried like a baby!! What a wonderful anniversary gift!!"</p>
+      <div class="reviewer">— S.H., Verified Google Review</div>
     </div>
     <a href="https://g.page/r/CUJZcUwU_iIFEAE/review" target="_blank" rel="noopener" class="leave-review">⭐ Leave Your Google Review</a>
   </div>
@@ -2119,7 +2213,7 @@
 
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">How do I contact Dan directly? <span class="faq-icon">+</span></button>
-        <div class="faq-a">You can reach Dan the Song Man by text or phone at <a href="sms:+16617140903" style="color:var(--gold);">+1 (661) 714-0903</a>, or by email at <a href="mailto:danrocksai@gmail.com" style="color:var(--gold);">danrocksai@gmail.com</a>. You can also connect on Facebook, Instagram, TikTok, and YouTube by searching @customsongme. For the fastest response, text is recommended.</div>
+        <div class="faq-a">You can reach Dan the Song Man by text or phone at <a href="sms:+16617140903" class="gold-link">+1 (661) 714-0903</a>, or by email at <a href="mailto:danrocksai@gmail.com" class="gold-link">danrocksai@gmail.com</a>. You can also connect on Facebook, Instagram, TikTok, and YouTube by searching @customsongme. For the fastest response, text is recommended.</div>
       </div>
 
     </div>
