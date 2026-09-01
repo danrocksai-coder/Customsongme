@@ -1,245 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background-color:#0a0a0a;">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thank You | Rescue Dog Project</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <title>Thank You | CustomSongMe</title>
+  <meta name="description" content="Your payment is confirmed. Here's what happens next." />
+  <meta name="robots" content="noindex" />
+  <link rel="canonical" href="https://www.customsongme.com/thanks" />
 
-<meta name="robots" content="noindex, follow">
-<link rel="canonical" href="https://www.customsongme.com/thanks" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
-<!-- Google Analytics Tracking -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HGQ54E69BZ"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-HGQ54E69BZ');
-</script>
-
-<style>
-body {
-  margin:0;
-  font-family: Arial, sans-serif;
-  background:#0b0b0f;
-  color:white;
-  text-align:center;
-}
-
-.container {
-  padding:40px 20px;
-  max-width:550px;
-  margin:auto;
-}
-
-h1 {
-  font-size:32px;
-  margin-bottom:15px;
-  font-weight: 700;
-  color: #7c3aed;
-}
-
-p {
-  color:#ccc;
-  line-height:1.6;
-  font-size: 16px;
-}
-
-.action-card {
-  background: #16161f;
-  border: 1px solid #222;
-  border-radius: 12px;
-  padding: 25px;
-  margin-top: 25px;
-  text-align: center;
-}
-
-.btn {
-  display: block;
-  background:#7c3aed;
-  color:white;
-  padding:16px;
-  text-decoration: none;
-  border-radius:8px;
-  font-size:18px;
-  font-weight: bold;
-  margin-top: 15px;
-  transition: background 0.2s;
-}
-
-.btn:hover {
-  background: #6d28d9;
-}
-
-.btn-secondary {
-  background: #222230;
-  border: 1px solid #333;
-}
-
-.btn-secondary:hover {
-  background: #2d2d42;
-}
-
-.social-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-top: 15px;
-}
-
-.social-btn {
-  background: #1d1d2b;
-  color: #fff;
-  padding: 12px 5px;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 13px;
-  border: 1px solid #2a2a3a;
-  transition: background 0.2s;
-}
-
-.social-btn:hover {
-  background: #7c3aed;
-}
-
-.tip-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.tip-btn {
-  background: #222230;
-  color: #fff;
-  padding: 12px;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 14px;
-  transition: background 0.2s, color 0.2s;
-}
-
-.tip-btn:hover {
-  background: #7c3aed;
-  color: white;
-}
-
-.footer {
-  margin-top: 50px;
-  font-size: 14px;
-  color: #555;
-  border-top: 1px solid #111;
-  padding-top: 20px;
-}
-</style>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0a0a0a; --charcoal: #2d2d2d; --gold: #c9a84c; --gold-light: #e8c96a; --gold-pale: #f5e9c8;
+      --cream: #faf7f0; --white: #ffffff; --muted: #6b6b6b; --border: #e8e0d0;
+      --font-display: 'Playfair Display', Georgia, serif; --font-body: 'DM Sans', system-ui, sans-serif;
+      --radius: 4px; --radius-lg: 12px; --shadow-lg: 0 12px 48px rgba(0,0,0,0.14);
+    }
+    html, body { background-color: #0a0a0a !important; }
+    body {
+      font-family: var(--font-body); color: var(--white);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      padding: 40px 20px; line-height: 1.65; -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(ellipse 80% 60% at 60% 30%, rgba(201,168,76,0.12) 0%, transparent 70%);
+    }
+    .card {
+      max-width: 560px; width: 100%; background-color: var(--charcoal);
+      border: 1px solid rgba(201,168,76,0.4); border-radius: var(--radius-lg);
+      padding: 48px 36px; text-align: center; box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+    }
+    .icon { font-size: 2.6rem; margin-bottom: 18px; }
+    h1 { font-family: var(--font-display); font-size: clamp(1.7rem, 5vw, 2.2rem); color: var(--white); margin-bottom: 14px; }
+    h1 em { font-style: italic; color: var(--gold); }
+    p { color: rgba(255,255,255,0.85); font-size: 1rem; margin-bottom: 24px; }
+    .next-box {
+      background-color: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); border-radius: var(--radius-lg);
+      padding: 24px 26px; text-align: left; margin: 28px 0;
+    }
+    .next-box h2 { font-family: var(--font-display); font-size: 1.05rem; color: var(--gold); margin-bottom: 14px; }
+    .next-box ol { list-style: none; display: flex; flex-direction: column; gap: 10px; counter-reset: steps; }
+    .next-box li { display: flex; gap: 12px; align-items: flex-start; font-size: 0.9rem; color: rgba(255,255,255,0.9); counter-increment: steps; }
+    .next-box li::before {
+      content: counter(steps); width: 22px; height: 22px; border-radius: 50%; background: var(--gold); color: var(--black);
+      font-weight: 700; font-size: 0.72rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+    }
+    .guarantee {
+      font-size: 0.85rem; color: rgba(255,255,255,0.7); border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 20px; margin-top: 8px;
+    }
+    .guarantee strong { color: var(--gold); }
+    .btn { display: inline-block; background: var(--gold); color: var(--black); font-weight: 700; font-size: 0.95rem;
+      padding: 14px 32px; border-radius: var(--radius); text-decoration: none; margin-top: 24px; transition: background 0.2s; }
+    .btn:hover { background: var(--gold-light); }
+    .contact { margin-top: 20px; font-size: 0.85rem; color: rgba(255,255,255,0.6); }
+    .contact a { color: var(--gold); text-decoration: none; }
+    .studio-hours { display: inline-block; background: var(--gold-pale); color: var(--charcoal); border-radius: var(--radius);
+      padding: 5px 12px; font-size: 0.78rem; font-weight: 600; margin-top: 10px; }
+  </style>
 </head>
 <body>
 
-<div class="container">
+  <div class="card">
+    <div class="icon">🎵</div>
+    <h1>Payment Confirmed —<br><em>Thank You!</em></h1>
+    <p>Your order is locked in. Dan personally reviews every story before he starts, and your song will be in your inbox within 24 hours of this payment.</p>
 
-  <h1>Submission Received! 🐾</h1>
-  <p>Thank you for looking out for this dog. I'm reviewing the details now to pull out their story.</p>
-  
-  <p style="color:#7c3aed; font-weight:bold; margin-top:10px; margin-bottom:5px;">
-    Typical turnaround: 4–24 hours depending on volume
-  </p>
-  <p style="color:#7c3aed; font-weight:bold; margin-top:0;">
-    We’ll send you the finished video link as soon as it’s ready so you can save and share it.
-  </p>
+    <div class="next-box">
+      <h2>What Happens Next</h2>
+      <ol>
+        <li>Dan personally reviews your story during studio hours.</li>
+        <li>He writes and produces your song, built entirely from what you shared.</li>
+        <li>Your song is delivered within 24 hours of this confirmed payment.</li>
+      </ol>
+    </div>
+    <div class="studio-hours">📅 Studio Hours: Mon–Fri 9am–6pm PT · Sat 10am–2pm PT</div>
 
-  <hr style="border: 0; border-top: 1px solid #111; margin: 30px 0;">
+    <p class="guarantee"><strong>Personal Happiness Guarantee:</strong> if the song isn't right, Dan will work with you to make it right. If he still can't make it right, you get a full refund.</p>
 
-  <!-- ACTION 1: FAST-TRACK TEXT ESCALATION -->
-  <div class="action-card">
-    <h3 style="margin-top:0; color: #ff6b6b;">1. Is This Dog Urgent? ⚡</h3>
-    <p style="font-size: 15px; margin-bottom:15px;">I check email loops every few hours. If this dog is on an active euthanasia list, in immediate danger, or you want to skip the line, text my setup directly.</p>
-    
-    <a href="sms:+16617140903?&body=Rescue%20dog%20submitted.%20FAST-TRACK%20REQUEST.%20Link:%20" class="btn" onclick="gtag('event','fast_track_click',{event_category:'engagement'});">
-      Tap to Text Me for Priority ⚡
-    </a>
-    
-    <p style="font-size:12px; color:#777; margin-top:10px; margin-bottom:0;">
-      After tapping, paste the dog’s link into the message before sending.
-    </p>
-  </div>
+    <a href="https://www.customsongme.com/" class="btn">Back to CustomSongMe</a>
 
-  <!-- ACTION 2: VIRAL PAGE SHARE LOOP -->
-  <div class="action-card">
-    <h3 style="margin-top:0;">2. Double Their Chances 🚀</h3>
-    <p style="font-size: 15px;">Help other high-risk shelter pets for free. Share our tracking page with local rescue networks so more people can submit dogs that are running out of time.</p>
-    
-    <button onclick="copyShareLink(); gtag('event','share_click',{event_category:'engagement'});" class="btn btn-secondary" id="shareBtn">
-      📋 Copy Share Link
-    </button>
-    
-    <p style="font-size:12px; color:#777; margin-top:10px; margin-bottom:0;">
-      If copy doesn’t work, manually share this page link.
-    </p>
-  </div>
-
-  <!-- ACTION 3: SOCIAL CONTENT RETENTION POOL -->
-  <div class="action-card">
-    <h3 style="margin-top:0; color: #a78bff;">3. Watch the Rescue Spotlight Videos 🎬</h3>
-    <p style="font-size: 15px;">I post the finished custom rescue stories across social networks to expand the view counts. Follow the profiles to track listings, watch updates, and share videos directly.</p>
-    
-    <div class="social-grid">
-      <a href="https://www.tiktok.com/@customsongme" target="_blank" rel="noopener" class="social-btn" onclick="gtag('event','social_follow_click',{event_label:'tiktok'});">TikTok</a>
-      <a href="https://www.youtube.com/@customsongme" target="_blank" rel="noopener" class="social-btn" onclick="gtag('event','social_follow_click',{event_label:'youtube'});">YouTube</a>
-      <a href="https://www.instagram.com/customsongme" target="_blank" rel="noopener" class="social-btn" onclick="gtag('event','social_follow_click',{event_label:'instagram'});">Instagram</a>
+    <div class="contact">
+      Questions in the meantime? Text Dan directly at <a href="sms:+16617140903">+1 (661) 714-0903</a>
     </div>
   </div>
-
-  <!-- ACTION 4: OPTIONAL PROJECT MONETIZATION -->
-  <p style="color:#ff6b6b; font-weight:bold; margin-top:40px; margin-bottom:-15px;">
-    If this helps even one dog get adopted, it’s worth it.
-  </p>
-
-  <div class="action-card" style="background: transparent; border: 1px solid #111;">
-    <h3 style="margin-top: 0; font-size: 20px;">4. Support the Project (Optional)</h3>
-    <p style="font-size: 15px;">I cover music licensing, video rendering, and distribution costs out of pocket to ensure the submissions stay completely free. Tips keep the pipeline open.</p>
-    <p style="color: #7c3aed; font-weight: bold; margin-bottom: 15px;">Suggested Support: $10 – $20</p>
-    
-    <div class="tip-grid">
-      <a href="https://buy.stripe.com/3cIfZg1326JTaJZ7K69Ve05" target="_blank" class="tip-btn" onclick="gtag('event','tip_click',{event_category:'monetization',event_label:'stripe'});">Credit Card</a>
-      <a href="https://www.paypal.me/DanRock834" target="_blank" class="tip-btn" onclick="gtag('event','tip_click',{event_category:'monetization',event_label:'paypal'});">PayPal</a>
-      <a href="https://cash.app/$optimistic01" target="_blank" class="tip-btn" onclick="gtag('event','tip_click',{event_category:'monetization',event_label:'cashapp'});">Cash App</a>
-      <a href="https://venmo.com/u/Dan-Rock-5" target="_blank" class="tip-btn" onclick="gtag('event','tip_click',{event_category:'monetization',event_label:'venmo'});">Venmo</a>
-    </div>
-  </div>
-
-  <!-- ACTION 5: REPEAT LOOP LINK -->
-  <div style="margin-top: 40px;">
-    <a href="https://www.customsongme.com/adopt-a-rescue-dog" class="btn btn-secondary" style="border-radius: 50px; display: inline-block; padding: 12px 30px; font-size: 15px;" onclick="gtag('event','submit_another_click');">
-      🔄 Submit Another Dog Listing
-    </a>
-  </div>
-
-  <div class="footer">
-    <p>&copy; 2026 CustomSongMe.com</p>
-  </div>
-
-</div>
-
-<script>
-function copyShareLink() {
-  const textToCopy = "Know a rescue dog that needs help getting adopted? Submit them here for a free video that helps them get seen: https://www.customsongme.com/adopt-a-rescue-dog";
-  
-  navigator.clipboard.writeText(textToCopy).then(() => {
-    const btn = document.getElementById('shareBtn');
-    btn.innerText = "✓ Copied to Clipboard!";
-    btn.style.background = "#059669"; 
-    
-    setTimeout(() => {
-      btn.innerText = "📋 Copy Share Link";
-      btn.style.background = "#222230";
-    }, 3000);
-  }).catch(err => {
-    console.error('Failed to copy text: ', err);
-  });
-}
-</script>
 
 </body>
 </html>
