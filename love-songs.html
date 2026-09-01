@@ -234,6 +234,17 @@
     .form-security { font-size: 0.78rem; color: rgba(255,255,255,0.35); margin-top: 12px; }
     .form-contact { text-align: center; margin-top: 20px; font-size: 0.85rem; color: rgba(255,255,255,0.4); }
     .form-contact a { color: var(--gold); text-decoration: none; }
+    .form-error-msg {
+      background: rgba(220,60,60,0.12);
+      border: 1px solid rgba(220,60,60,0.4);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      font-size: 0.85rem;
+      color: #ffb4b4;
+      text-align: center;
+      margin-top: 14px;
+    }
+    .form-error-msg a { color: #ff9a9a; text-decoration: underline; }
 
     #guarantee { background: var(--gold-pale); border-top: 2px solid var(--gold); border-bottom: 2px solid var(--gold); padding: 56px 24px; text-align: center; }
     #guarantee .g-icon { font-size: 2.2rem; margin-bottom: 16px; }
@@ -578,6 +589,7 @@
         <div class="form-submit-area">
           <button type="submit" class="btn-primary">Submit &amp; Continue to Payment →</button>
           <div class="form-security">🔒 Secure checkout · One-time payment · No subscriptions</div>
+          <div class="form-error-msg" id="form-error-msg" style="display:none;">⚠️ Something went wrong submitting your request. Please try again, or text Dan directly at <a href="sms:+16617140903">(661) 714-0903</a>.</div>
         </div>
 
         <div class="form-contact">
@@ -789,10 +801,38 @@
 
   const orderForm = document.querySelector('.form-wrap form');
   const submitBtn = orderForm ? orderForm.querySelector('button[type="submit"]') : null;
+  const formErrorMsg = document.getElementById('form-error-msg');
+  const submitBtnOriginalText = submitBtn ? submitBtn.textContent : '';
   if (orderForm && submitBtn) {
-    orderForm.addEventListener('submit', () => {
+    orderForm.addEventListener('submit', function(e) {
+      e.preventDefault();
       submitBtn.disabled = true;
       submitBtn.textContent = 'Submitting your request…';
+      if (formErrorMsg) formErrorMsg.style.display = 'none';
+
+      const formData = new FormData(orderForm);
+      fetch(orderForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(response => {
+        if (response.ok) {
+          window.location.href = nextRedirectField.value;
+        } else {
+          throw new Error('Submission failed');
+        }
+      })
+      .catch(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = submitBtnOriginalText;
+        if (formErrorMsg) {
+          formErrorMsg.style.display = 'block';
+          formErrorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          alert('Something went wrong submitting your request. Please try again, or text Dan directly at (661) 714-0903.');
+        }
+      });
     });
   }
 </script>
