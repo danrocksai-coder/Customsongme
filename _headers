@@ -2,8 +2,16 @@
 /*
   Cache-Control: no-cache
 
-# Thank you page (not indexed)
+# Utility pages (not indexed)
 /thanks
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache
+
+/thanks-rescue
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache
+
+/payment-links
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-cache
 
