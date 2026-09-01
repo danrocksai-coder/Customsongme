@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found | CustomSongMe</title>
+  <meta name="robots" content="noindex, follow" />
+
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --ink: #1a1a1a;
+      --charcoal: #2d2d2d;
+      --gold: #c9a84c;
+      --gold-light: #e8c96a;
+      --gold-pale: #f5e9c8;
+      --cream: #faf7f0;
+      --white: #ffffff;
+      --muted: #6b6b6b;
+      --border: #e8e0d0;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      --radius: 4px;
+      --radius-lg: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-body);
+      background: var(--black);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+    .wrap { max-width: 480px; }
+    .mark {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 3.2rem;
+      color: var(--gold);
+      margin-bottom: 8px;
+      line-height: 1;
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    p {
+      color: rgba(255,255,255,0.65);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      margin-bottom: 28px;
+    }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 18px;
+      font-size: 0.85rem;
+    }
+    .links a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+    .links a:hover { color: var(--gold); border-color: var(--gold); }
+    .sep { color: rgba(255,255,255,0.25); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="mark">♪</div>
+    <h1>This page didn't quite find its melody.</h1>
+    <p>The page you're looking for doesn't exist — but your song still can. Let's get you back on track.</p>
+    <a href="/" class="btn-primary">Back to CustomSongMe</a>
+    <div class="links">
+      <a href="/birthday-songs">Birthday Songs</a><span class="sep">·</span>
+      <a href="/anniversary-songs">Anniversary Songs</a><span class="sep">·</span>
+      <a href="/memorial-songs">Memorial Songs</a><span class="sep">·</span>
+      <a href="/pet-songs">Pet Songs</a>
+    </div>
+  </div>
+</body>
+</html>
