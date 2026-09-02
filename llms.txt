@@ -16,19 +16,19 @@ Customers submit their story and preferences through an order form, pay upfront,
 
 ## Pages
 
-- Homepage: https://www.customsongme.com/
-- Birthday Songs: https://www.customsongme.com/birthday-songs
-- Anniversary Songs: https://www.customsongme.com/anniversary-songs
-- Wedding Songs: https://www.customsongme.com/wedding-songs
-- Love Songs: https://www.customsongme.com/love-songs
-- Mother's Day Songs: https://www.customsongme.com/mothers-day-songs
-- Father's Day Songs: https://www.customsongme.com/fathers-day-songs
-- Pet Songs: https://www.customsongme.com/pet-songs
-- Memorial Songs: https://www.customsongme.com/memorial-songs
-- Roast Songs: https://www.customsongme.com/roast-songs
-- Business Jingles: https://www.customsongme.com/business-jingles
-- Adopt a Rescue Dog: https://www.customsongme.com/adopt-a-rescue-dog
-- Privacy, Terms & Refunds: https://www.customsongme.com/privacy-terms
+- [Homepage](https://www.customsongme.com/)
+- [Birthday Songs](https://www.customsongme.com/birthday-songs)
+- [Anniversary Songs](https://www.customsongme.com/anniversary-songs)
+- [Wedding Songs](https://www.customsongme.com/wedding-songs)
+- [Love Songs](https://www.customsongme.com/love-songs)
+- [Mother's Day Songs](https://www.customsongme.com/mothers-day-songs)
+- [Father's Day Songs](https://www.customsongme.com/fathers-day-songs)
+- [Pet Songs](https://www.customsongme.com/pet-songs)
+- [Memorial Songs](https://www.customsongme.com/memorial-songs)
+- [Roast Songs](https://www.customsongme.com/roast-songs)
+- [Business Jingles](https://www.customsongme.com/business-jingles)
+- [Adopt a Rescue Dog](https://www.customsongme.com/adopt-a-rescue-dog)
+- [Privacy, Terms & Refunds](https://www.customsongme.com/privacy-terms)
 
 ## Contact
 
