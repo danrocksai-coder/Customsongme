@@ -141,7 +141,8 @@ var T={
   ridH:'Riddle of the day',showA:'Show the answer',hideA:'Hide the answer',jokeH:'Joke of the day',showP:'Show the punchline',
   dealsH:'Winter 2027 deals',dealsSub:'Local offers from businesses right here in '+ZIP+'. Good all season.',sample:'Sample',valid:'Valid through Mar 31, 2027',showDeal:'Show deal',callB:'Call',showAt:'Show this screen at checkout',done:'Done',
   owner:'<b>Own a business in '+ZIP+'?</b> Put your deal here next season. Call Dan Rock at 661-714-0903.',
-  foot:'A free community page from Oxnard Community Connect. Listed agencies and events do not endorse the sponsor.',csmT:'Birthday or anniversary coming up?',csmS:'I’ll write and sing a one-of-a-kind song for someone you love, delivered in 24 hours.',csmB:'Get a song',made:'Built by Dan Rock of CustomSongMe'},
+  openName:'This Could Be Your Business',openTag:'Open spot',openOffer:'Your logo, your offer and your license number go right here.',openCTA:'Claim this spot',
+  foot:'A free community page from Oxnard Community Connect. Listed agencies and events do not endorse the sponsor.',csmT:'Birthday or anniversary coming up?',csmS:'Personalized songs starting at $30, delivered in 24 hours. Use code 93030 for $10 off any package.',csmB:'Get a song',made:'Built by Dan Rock of CustomSongMe'},
  es:{by:'Patrocinado por',call:'Llame ya',brand:'Tarjeta Comunitaria de Oxnard · '+ZIP,hi:'Algo nuevo cada día',hiSub:'Escoja uno. Cambia cada mañana.',
   back:'Regresar',tomorrow:'Mañana hay uno nuevo. ¡Vuelva a escanear!',
   tiles:[['today','t-red','¿Qué pasa hoy en Oxnard?','Eventos, horarios y direcciones'],['do','t-teal','¿Qué hacemos hoy?','Una idea divertida para toda la familia'],['dinner','t-gold','¿Qué cenamos hoy?','Una receta fácil, nueva cada día'],['riddle','t-blue','¡Adivinanza del día!','Una adivinanza y un chiste para los niños'],['deals','t-plum','Ofertas locales de la temporada','Ofertas de negocios en '+ZIP]],
@@ -150,7 +151,8 @@ var T={
   ridH:'Adivinanza del día',showA:'Ver la respuesta',hideA:'Ocultar la respuesta',jokeH:'Chiste del día',showP:'Ver el final',
   dealsH:'Ofertas de invierno 2027',dealsSub:'Ofertas de negocios aquí mismo en '+ZIP+'. Válidas toda la temporada.',sample:'Ejemplo',valid:'Válido hasta el 31 de marzo de 2027',showDeal:'Ver oferta',callB:'Llamar',showAt:'Muestre esta pantalla al pagar',done:'Listo',
   owner:'<b>¿Tiene un negocio en '+ZIP+'?</b> Ponga su oferta aquí la próxima temporada. Llame a Dan Rock al 661-714-0903.',
-  foot:'Una página comunitaria gratis de Oxnard Community Connect. Las agencias y eventos listados no respaldan al patrocinador.',csmT:'¿Viene un cumpleaños o aniversario?',csmS:'Le escribo y canto una canción única para alguien que usted quiere, lista en 24 horas.',csmB:'Pedir canción',made:'Hecho por Dan Rock de CustomSongMe'}
+  openName:'Este Podría Ser Su Negocio',openTag:'Espacio disponible',openOffer:'Aquí van su logo, su oferta y su número de licencia.',openCTA:'Reservar este espacio',
+  foot:'Una página comunitaria gratis de Oxnard Community Connect. Las agencias y eventos listados no respaldan al patrocinador.',csmT:'¿Viene un cumpleaños o aniversario?',csmS:'Canciones personalizadas desde $30, listas en 24 horas. Use el código 93030 para $10 de descuento en cualquier paquete.',csmB:'Pedir canción',made:'Hecho por Dan Rock de CustomSongMe'}
 };
 
 /* EVENTS: weekly items repeat on their weekday (0=Sun). Dated items show on their date(s). Edit this list weekly. */
@@ -242,7 +244,11 @@ var DEALS=[
  {cat:'beauty',name:'Sample Hair Studio',en:'20% off your first haircut',es:'20% de descuento en su primer corte',addr:'Oxnard 93030'},
  {cat:'auto',name:'Sample Auto Repair',en:'Free brake inspection',es:'Inspección de frenos gratis',addr:'Oxnard 93030'},
  {cat:'shop',name:'Sample Shoe Store',en:'20% off any pair of shoes',es:'20% de descuento en cualquier par de zapatos',addr:'Oxnard 93030'},
- {cat:'family',name:'Sample Martial Arts',en:'First month free for kids',es:'Primer mes gratis para niños',addr:'Oxnard 93030'}
+ {cat:'family',name:'Sample Martial Arts',en:'First month free for kids',es:'Primer mes gratis para niños',addr:'Oxnard 93030'},
+ {cat:'home',open:true},
+ {cat:'home',open:true},
+ {cat:'beauty',open:true},
+ {cat:'shop',open:true}
 ];
 var cat='all';
 
@@ -302,6 +308,10 @@ var views={
   h+='</div>';
   DEALS.forEach(function(d,i){ if(cat!=='all'&&d.cat!==cat) return;
     var cl=CATS.filter(function(c){return c[0]===d.cat;})[0];
+    if(d.open){
+      h+='<div class="box deal" style="border-style:dashed;border-color:var(--brass)"><div class="who"><div class="init" style="background:var(--tint);color:var(--soft);border:2px dashed var(--brass)">+</div><div><div style="font-weight:800">'+esc(T[L].openName)+'</div><div class="tag">'+(L==='es'?cl[2]:cl[1])+' · '+T[L].openTag+'</div></div></div><p class="offer">'+esc(T[L].openOffer)+'</p><div class="row"><a class="btn solid" href="tel:+16617140903">'+T[L].openCTA+'</a></div></div>';
+      return;
+    }
     h+='<div class="box deal"><div class="who"><div class="init">'+esc(d.name.replace('Sample ','').charAt(0))+'</div><div><div style="font-weight:800">'+esc(d.name)+'</div><div class="tag">'+(L==='es'?cl[2]:cl[1])+' · '+T[L].sample+'</div></div></div><p class="offer">'+esc(d[L])+'</p><p class="meta">'+T[L].valid+'</p><div class="row"><a class="btn" href="tel:+18057140903">'+T[L].callB+'</a><a class="btn" target="_blank" rel="noopener" href="'+map(d.addr)+'">'+T[L].directions+'</a><button type="button" class="btn solid" data-deal="'+i+'">'+T[L].showDeal+'</button></div></div>'; });
   return h+'<div class="note">'+T[L].owner+'</div>';
  }
