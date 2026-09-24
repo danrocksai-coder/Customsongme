@@ -271,6 +271,7 @@ footer::before{content:"";display:block;height:12px;margin:0 -16px 16px;backgrou
 var ZIP='93030';
 var L='en';
 try{ var s=localStorage.getItem('occ-lang'); if(s==='en'||s==='es') L=s; }catch(e){}
+try{ var q=new URLSearchParams(location.search).get('lang'); if(q){ q=q.toLowerCase(); if(q==='en'||q==='es') L=q; } }catch(e){}
 var now=new Date();
 var today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
 var dayNum=Math.floor((today-new Date(today.getFullYear(),0,1))/864e5);
