@@ -71,6 +71,8 @@ header.top{position:sticky;top:0;z-index:20;background:rgba(11,31,58,.94);backdr
    url(/oxnard/img/occ-hero.jpg) center top/cover no-repeat,
    linear-gradient(180deg,#F2683C 0%,#B23A5B 35%,#2A2F6B 70%,#0B1F3A 100%)}
 .hero .panel{background:rgba(11,31,58,.72);border:2px solid var(--gold);border-radius:22px;padding:24px 18px}
+.toplinks{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:center;margin:0 0 14px;font-size:15px;font-weight:700}
+.toplinks a{color:var(--gold2);text-underline-offset:3px}
 .eyebrow{font-weight:800;letter-spacing:.2em;font-size:13px;color:var(--gold2);text-transform:uppercase;margin-bottom:10px}
 .hero h1{font-family:var(--display);font-weight:400;font-size:clamp(34px,9vw,58px);color:var(--white);text-shadow:0 2px 0 rgba(0,0,0,.35)}
 .hero h1 em{font-style:normal;color:var(--teal-l)}
@@ -208,6 +210,7 @@ dialog.zoom button{position:sticky;top:0;float:right;min-width:48px;min-height:4
 <section class="hero">
   <div class="wrap">
     <div class="panel">
+      <p class="toplinks"><a data-lang-href="/oxnard/93030" href="/oxnard/93030" data-i18n="hubLink">See the Community Hub</a> <a href="/oxnard/files/sponsor-flyer.pdf" data-i18n="flyer">Download the one-page flyer (PDF)</a></p>
       <p class="eyebrow" data-i18n="eyebrow">Oxnard businesses · ZIP 93030</p>
       <h1><span data-i18n="h1a">GET YOUR BUSINESS JINGLE +</span> <em data-i18n="h1b">FREE OCC WINTER TRIAL</em></h1>
       <p class="price">$100<small data-i18n="priceSub">ONE-TIME FOUNDING BUSINESS OFFER</small></p>
@@ -393,6 +396,7 @@ try{ var q=new URLSearchParams(location.search).get('lang'); if(q){ q=q.toLowerC
 
 var T={
 en:{
+hubLink:'See the Community Hub',flyer:'Download the one-page flyer (PDF)',
 skip:'Skip to content',contact:'Contact',
 eyebrow:'Oxnard businesses · ZIP 93030',
 h1a:'GET YOUR BUSINESS JINGLE +',h1b:'FREE OCC WINTER TRIAL',
@@ -427,6 +431,7 @@ disc:'Oxnard Community Connect provides promotional exposure and community visib
 callText:'Call or text:'
 },
 es:{
+hubLink:'Ver el Community Hub',flyer:'Descargue el volante de una página (PDF)',
 skip:'Saltar al contenido',contact:'Contacto',
 eyebrow:'Negocios de Oxnard · código postal 93030',
 h1a:'OBTENGA EL JINGLE DE SU NEGOCIO +',h1b:'PRUEBA DE INVIERNO GRATIS DE OCC',
@@ -484,6 +489,7 @@ function apply(){
   $$('[data-i18n]').forEach(function(el){ var k=el.getAttribute('data-i18n'); if(d[k]!=null) el.textContent=d[k].replace('{deadlineShort}',deadlineShort()); });
   $$('[data-i18n-ph]').forEach(function(el){ el.setAttribute('placeholder',d[el.getAttribute('data-i18n-ph')]); });
   $$('[data-i18n-alt]').forEach(function(el){ el.setAttribute('alt',d[el.getAttribute('data-i18n-alt')]); });
+  $$('[data-lang-href]').forEach(function(el){ el.setAttribute('href',el.dataset.langHref+(L==='es'?'?lang=es':'')); });
   $$('[data-i18n-aria]').forEach(function(el){ el.setAttribute('aria-label',d[el.getAttribute('data-i18n-aria')]); });
   $$('[data-deadline-text]').forEach(function(el){ el.textContent=deadlineLong(); });
   $$('[data-lang]').forEach(function(b){ b.setAttribute('aria-pressed',String(b.dataset.lang===L)); });

@@ -202,6 +202,7 @@ li{margin:4px 0}
   background:radial-gradient(circle at 62% 38%,#D6CBF4 0 7px,transparent 7.5px),radial-gradient(circle at 36% 64%,#D6CBF4 0 5px,transparent 5.5px),#EDE6FF}
 
 .madeby{display:block;margin-top:6px;font-weight:700;text-underline-offset:3px}
+footer .adv{display:block;margin-top:10px;font-size:12px;opacity:.85;text-underline-offset:3px}
 footer{padding:0 16px 26px;font-size:13px;color:var(--soft);text-align:center}
 footer::before{content:"";display:block;height:12px;margin:0 -16px 16px;background:repeating-conic-gradient(var(--chk1) 0 25%,var(--chk2) 0 50%) 0 0/12px 12px}
 </style>
@@ -290,7 +291,7 @@ var T={
   dealsH:'Winter 2027 deals',dealsSub:'Local offers from businesses right here in '+ZIP+'. Good all season.',sample:'Sample',valid:'Valid through Mar 31, 2027',showDeal:'Show deal',callB:'Call',showAt:'Show this screen at checkout',done:'Done',
   owner:'<b>Own a business in '+ZIP+'?</b> Put your deal here next season. Call Dan Rock at 661-714-0903.',
   openName:'This Could Be Your Business',openTag:'Open spot',openOffer:'Your logo, your offer and your license number go right here.',openCTA:'Claim this spot',
-  foot:'A free community page from Oxnard Community Connect. Listed agencies and events do not endorse the sponsor.',csmT:'Birthday or anniversary coming up?',csmS:'Personalized songs starting at $30, delivered in 24 hours. Use code 93030 for $10 off any package.',csmB:'Get a song',made:'Built by Dan Rock of CustomSongMe'},
+  adv:'Local business? Advertise on this card',foot:'A free community page from Oxnard Community Connect. Listed agencies and events do not endorse the sponsor.',csmT:'Birthday or anniversary coming up?',csmS:'Personalized songs starting at $30, delivered in 24 hours. Use code 93030 for $10 off any package.',csmB:'Get a song',made:'Built by Dan Rock of CustomSongMe'},
  es:{by:'Patrocinado por',call:'Llame ya',brand:'Tarjeta Comunitaria de Oxnard · '+ZIP,hi:'Algo nuevo cada día',hiSub:'Escoja uno. Cambia cada mañana.',
   back:'Regresar',tomorrow:'Mañana hay uno nuevo. ¡Vuelva a escanear!',
   tiles:[['today','t-red','¿Qué pasa hoy en Oxnard?','Eventos, horarios y direcciones'],['do','t-teal','¿Qué hacemos hoy?','Una idea divertida para toda la familia'],['dinner','t-gold','¿Qué cenamos hoy?','Una receta fácil, nueva cada día'],['riddle','t-blue','¡Adivinanza del día!','Una adivinanza y un chiste para los niños'],['deals','t-plum','Ofertas locales de la temporada','Ofertas de negocios en '+ZIP]],
@@ -300,7 +301,7 @@ var T={
   dealsH:'Ofertas de invierno 2027',dealsSub:'Ofertas de negocios aquí mismo en '+ZIP+'. Válidas toda la temporada.',sample:'Ejemplo',valid:'Válido hasta el 31 de marzo de 2027',showDeal:'Ver oferta',callB:'Llamar',showAt:'Muestre esta pantalla al pagar',done:'Listo',
   owner:'<b>¿Tiene un negocio en '+ZIP+'?</b> Ponga su oferta aquí la próxima temporada. Llame a Dan Rock al 661-714-0903.',
   openName:'Este Podría Ser Su Negocio',openTag:'Espacio disponible',openOffer:'Aquí van su logo, su oferta y su número de licencia.',openCTA:'Reservar este espacio',
-  foot:'Una página comunitaria gratis de Oxnard Community Connect. Las agencias y eventos listados no respaldan al patrocinador.',csmT:'¿Viene un cumpleaños o aniversario?',csmS:'Canciones personalizadas desde $30, listas en 24 horas. Use el código 93030 para $10 de descuento en cualquier paquete.',csmB:'Pedir canción',made:'Hecho por Dan Rock de CustomSongMe'}
+  adv:'¿Tiene un negocio local? Anúnciese en esta tarjeta',foot:'Una página comunitaria gratis de Oxnard Community Connect. Las agencias y eventos listados no respaldan al patrocinador.',csmT:'¿Viene un cumpleaños o aniversario?',csmS:'Canciones personalizadas desde $30, listas en 24 horas. Use el código 93030 para $10 de descuento en cualquier paquete.',csmB:'Pedir canción',made:'Hecho por Dan Rock de CustomSongMe'}
 };
 
 /* EVENTS: weekly items repeat on their weekday (0=Sun). Dated items show on their date(s). Edit this list weekly. */
@@ -471,7 +472,7 @@ function render(focus){
   document.getElementById('sp-by').textContent=T[L].by;
   document.getElementById('sp-call').textContent=T[L].call;
   document.getElementById('brand').textContent=T[L].brand;
-  document.getElementById('foot').innerHTML=esc(T[L].foot)+'<a class="madeby" target="_blank" rel="noopener" href="https://www.customsongme.com/?utm_source=oxnard-card&utm_medium=qr&utm_campaign='+ZIP+'">'+esc(T[L].made)+'</a>';
+  document.getElementById('foot').innerHTML=esc(T[L].foot)+'<a class="madeby" target="_blank" rel="noopener" href="https://www.customsongme.com/?utm_source=oxnard-card&utm_medium=qr&utm_campaign='+ZIP+'">'+esc(T[L].made)+'</a><a class="adv" href="/oxnard/93030/advertise'+(L==='es'?'?lang=es':'')+'">'+esc(T[L].adv)+'</a>';
   document.querySelectorAll('[data-lang]').forEach(function(b){ b.setAttribute('aria-pressed',String(b.dataset.lang===L)); });
   app.innerHTML=views[r]();
   if(focus){ window.scrollTo(0,0); app.focus({preventScroll:true}); }
