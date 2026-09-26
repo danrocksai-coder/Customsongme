@@ -19,6 +19,14 @@
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-cache
 
+/oxnard/93030/intake
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache
+
+/oxnard/intake.html
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache
+
 # Sitemap & robots
 /sitemap.xml
   Cache-Control: public, max-age=3600
