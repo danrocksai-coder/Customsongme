@@ -32,4 +32,5 @@ http://www.customsongme.com/* https://www.customsongme.com/:splat    301!
 /privacy-terms           /privacy-terms.html           200
 /oxnard/93030            /oxnard/93030.html            200
 /oxnard/93030/intake     /oxnard/intake.html           200
+/oxnard/93030/advertise   /oxnard/93030/advertise.html  200
 /songs/*  /songs/:splat/index.html  200
