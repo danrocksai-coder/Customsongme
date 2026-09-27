@@ -103,7 +103,8 @@
     #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, var(--gold), var(--gold-light)); z-index: 9999; transition: width 0.1s linear; }
     body > nav { position: sticky; top: 0; background: rgba(10,10,10,0.97); backdrop-filter: blur(12px); z-index: 100; padding: 0 24px; border-bottom: 1px solid rgba(201,168,76,0.2); }
     .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
-    .nav-logo { font-family: var(--font-display); font-size: 1.25rem; color: var(--gold); text-decoration: none; }
+    .nav-logo { font-family: var(--font-display); font-size: 1.25rem; color: var(--gold); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .nav-logo-icon { height: 44px; width: auto; display: block; }
     .nav-cta { background: var(--gold); color: var(--black); font-weight: 600; font-size: 0.85rem; padding: 9px 20px; border-radius: var(--radius); text-decoration: none; transition: background 0.2s; }
     .nav-cta:hover { background: var(--gold-light); }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
@@ -332,7 +333,7 @@
 
 <nav>
   <div class="nav-inner">
-    <a href="/" class="nav-logo">CustomSongMe</a>
+    <a href="/" class="nav-logo"><img src="/img/customsongme-icon.png" alt="" class="nav-logo-icon" />CustomSongMe</a>
     <a href="#order-form" class="nav-cta">🔥 Start Their Roast</a>
   </div>
 </nav>

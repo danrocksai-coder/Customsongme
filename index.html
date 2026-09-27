@@ -11,7 +11,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.customsongme.com" />
   <!-- Reusing the existing dan-the-song-man.jpg already live on the server at site root — confirm it's still there and still an appropriate share image before deploy -->
-  <meta property="og:image" content="https://www.customsongme.com/dan-the-song-man.jpg" />
+  <meta property="og:image" content="https://www.customsongme.com/img/customsongme-icon.png" />
   <link rel="canonical" href="https://www.customsongme.com/" />
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HGQ54E69BZ"></script>
@@ -286,6 +286,14 @@
       color: var(--gold);
       text-decoration: none;
       letter-spacing: 0.01em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-logo-icon {
+      height: 44px;
+      width: auto;
+      display: block;
     }
     .nav-cta {
       background: var(--gold);
@@ -1581,6 +1589,7 @@
     }
     @media (max-width: 480px) {
       .nav-logo { font-size: 1rem; }
+      .nav-logo-icon { height: 36px; }
       .trust-bar-inner { gap: 8px 16px; }
       .trust-item { font-size: 0.76rem; }
       .contact-pref-option span { font-size: 0.76rem; padding: 10px 4px; gap: 4px; }
@@ -1603,7 +1612,7 @@
 <!-- ═══════ NAV ═══════ -->
 <nav>
   <div class="nav-inner">
-    <a href="/" class="nav-logo">CustomSongMe</a>
+    <a href="/" class="nav-logo"><img src="/img/customsongme-icon.png" alt="" class="nav-logo-icon" />CustomSongMe</a>
     <a href="#order-form" class="nav-cta">🎁 Start My Song</a>
   </div>
 </nav>

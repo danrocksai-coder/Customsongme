@@ -27,7 +27,8 @@
       background: var(--black); padding: 0 24px; border-bottom: 1px solid rgba(201,168,76,0.2);
     }
     .nav-inner { max-width: 760px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
-    .nav-logo { font-family: var(--font-display); font-size: 1.25rem; color: var(--gold); text-decoration: none; }
+    .nav-logo { font-family: var(--font-display); font-size: 1.25rem; color: var(--gold); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .nav-logo-icon { height: 44px; width: auto; display: block; }
     .nav-back { color: rgba(255,255,255,0.6); font-size: 0.85rem; text-decoration: none; }
     .wrap { max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; }
     h1 { font-family: var(--font-display); font-size: clamp(1.8rem, 5vw, 2.4rem); margin-bottom: 8px; }
@@ -63,7 +64,7 @@
 
 <nav>
   <div class="nav-inner">
-    <a href="/" class="nav-logo">CustomSongMe</a>
+    <a href="/" class="nav-logo"><img src="/img/customsongme-icon.png" alt="" class="nav-logo-icon" />CustomSongMe</a>
     <a href="/" class="nav-back">← Back to Home</a>
   </div>
 </nav>
