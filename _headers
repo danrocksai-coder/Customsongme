@@ -11,6 +11,14 @@
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-cache
 
+/es/gracias
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache
+
+/es/gracias/
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache
+
 /payment-links
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-cache
