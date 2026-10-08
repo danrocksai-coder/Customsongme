@@ -835,7 +835,13 @@
       })
       .then(response => {
         if (response.ok) {
-          window.location.href = nextRedirectField.value;
+          const _pm = document.querySelector('input[name="payment-method"]:checked');
+          if (_pm && _pm.value !== 'Card (Stripe)' && window.CSMPayConfirm) {
+            const _pkg = document.getElementById('package-hidden-field');
+            window.CSMPayConfirm({ form: orderForm, url: nextRedirectField.value, method: _pm.value, pkg: _pkg ? _pkg.value : '' });
+          } else {
+            window.location.href = nextRedirectField.value;
+          }
         } else {
           throw new Error('Submission failed');
         }
@@ -854,5 +860,6 @@
   }
 </script>
 
+<script src="/js/pay-confirm.js"></script>
 </body>
 </html>
