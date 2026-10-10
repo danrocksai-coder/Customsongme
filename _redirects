@@ -18,6 +18,7 @@ http://www.customsongme.com/* https://www.customsongme.com/:splat    301!
 /birthday-songs          /birthday-songs.html          200
 /wedding-songs           /wedding-songs.html           200
 /anniversary-songs       /anniversary-songs.html       200
+/holiday-songs           /holiday-songs.html           200
 /love-songs              /love-songs.html              200
 /mothers-day-songs       /mothers-day-songs.html       200
 /fathers-day-songs       /fathers-day-songs.html       200
