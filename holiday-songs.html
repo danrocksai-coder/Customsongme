@@ -428,6 +428,11 @@
     a.sp-card:hover, a.sp-card:focus-visible { transform: translateY(-3px); border-color: var(--gold); }
     a.sp-card .sp-em { opacity: 1; }
     .sp-desc { font-size: 0.82rem; color: rgba(255,255,255,0.65); margin: 0 0 12px; line-height: 1.45; }
+    .hv-wrap { max-width: 980px; margin: 44px auto 0; }
+    .hv-title { font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 18px; color: var(--white); }
+    .hv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .hv-frame { width: 100%; aspect-ratio: 9 / 16; border: 1px solid rgba(var(--accent-rgb),0.45); border-radius: var(--radius-lg); background: #000; }
+    @media (max-width: 800px) { .hv-grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; } }
     .sp-soon { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(var(--accent-rgb),0.5); border-radius: 50px; padding: 3px 10px; }
     .ea-box { max-width: 680px; margin: 44px auto 0; background: rgba(var(--accent-rgb),0.1); border: 1px solid rgba(var(--accent-rgb),0.4); border-radius: var(--radius-lg); padding: 30px 26px; }
     .ea-box h3 { font-size: 1.4rem; color: var(--white); margin-bottom: 8px; }
@@ -537,6 +542,14 @@
       <a class="sp-card" href="#order-form" data-special="Couples' Costume Love Song" data-genre="Pop"><div class="sp-num">08</div><div class="sp-em">💀</div><div class="sp-name">Couples' Costume Love Song</div><div class="sp-desc">The two of you in matching costumes, turned into a love song.</div><div class="sp-soon">From $30 · Order</div></a>
     </div>
 
+    <div class="hv-wrap" id="hv-wrap">
+      <h3 class="hv-title">Hear the Halloween Specials</h3>
+      <div class="hv-grid">
+        <iframe class="hv-frame" src="https://www.youtube-nocookie.com/embed/dGH6eZAn8_4" title="Halloween special promo 1" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        <iframe class="hv-frame" src="https://www.youtube-nocookie.com/embed/uzhDvAzLIIA" title="Halloween special promo 2" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        <iframe class="hv-frame" src="https://www.youtube-nocookie.com/embed/ope8Ii8fNbE" title="Halloween special promo 3" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
     <div class="ea-box" id="early-access">
       <h3>Want First Dibs on the Next Holiday Specials?</h3>
       <p>Drop your email and you'll hear about the Thanksgiving and Christmas specials before anyone else, at a lower pre-release price. No spam, just the specials.</p>
@@ -1062,6 +1075,7 @@
       let ph = '';
       for (let i = 1; i <= 8; i++) ph += '<div class="sp-card"><div class="sp-num">0' + i + '</div><div class="sp-em">' + spot.em + '</div><div class="sp-name">' + spot.key + ' Special #' + i + '</div><div class="sp-soon">Coming Soon</div></div>';
       spGrid.innerHTML = ph;
+      const hv = document.getElementById('hv-wrap'); if (hv) hv.style.display = 'none';
       const sps = document.getElementById('sp-sub');
       if (sps) sps.textContent = "I'm putting together 8 ready-made " + spot.key + " song packages. They drop soon.";
     }
