@@ -424,6 +424,10 @@
     .sp-num { position: absolute; top: 10px; left: 12px; font-size: 0.7rem; color: rgba(255,255,255,0.65); font-weight: 700; }
     .sp-em { font-size: 1.9rem; opacity: 0.55; }
     .sp-name { font-family: var(--font-display); font-size: 1rem; margin: 8px 0 10px; color: rgba(255,255,255,0.85); }
+    a.sp-card { display: block; text-decoration: none; color: inherit; border-style: solid; transition: transform 0.15s, border-color 0.15s; }
+    a.sp-card:hover, a.sp-card:focus-visible { transform: translateY(-3px); border-color: var(--gold); }
+    a.sp-card .sp-em { opacity: 1; }
+    .sp-desc { font-size: 0.82rem; color: rgba(255,255,255,0.65); margin: 0 0 12px; line-height: 1.45; }
     .sp-soon { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(var(--accent-rgb),0.5); border-radius: 50px; padding: 3px 10px; }
     .ea-box { max-width: 680px; margin: 44px auto 0; background: rgba(var(--accent-rgb),0.1); border: 1px solid rgba(var(--accent-rgb),0.4); border-radius: var(--radius-lg); padding: 30px 26px; }
     .ea-box h3 { font-size: 1.4rem; color: var(--white); margin-bottom: 8px; }
@@ -521,21 +525,21 @@
   <div class="container fade-up">
     <div class="sp-kicker">New · Limited</div>
     <h2>Check Out the <span class="gold"><span class="js-holiday">Halloween</span> Specials</span></h2>
-    <p class="sp-sub">I'm putting together 8 ready-made <span class="js-holiday">Halloween</span> song packages. They drop soon.</p>
-    <div class="sp-grid">
-      <div class="sp-card"><div class="sp-num">01</div><div class="sp-em js-emoji">🎃</div><div class="sp-name"><span class="js-holiday">Halloween</span> Special #1</div><div class="sp-soon">Coming Soon</div></div>
-      <div class="sp-card"><div class="sp-num">02</div><div class="sp-em js-emoji">🎃</div><div class="sp-name"><span class="js-holiday">Halloween</span> Special #2</div><div class="sp-soon">Coming Soon</div></div>
-      <div class="sp-card"><div class="sp-num">03</div><div class="sp-em js-emoji">🎃</div><div class="sp-name"><span class="js-holiday">Halloween</span> Special #3</div><div class="sp-soon">Coming Soon</div></div>
-      <div class="sp-card"><div class="sp-num">04</div><div class="sp-em js-emoji">🎃</div><div class="sp-name"><span class="js-holiday">Halloween</span> Special #4</div><div class="sp-soon">Coming Soon</div></div>
-      <div class="sp-card"><div class="sp-num">05</div><div class="sp-em js-emoji">🎃</div><div class="sp-name"><span class="js-holiday">Halloween</span> Special #5</div><div class="sp-soon">Coming Soon</div></div>
-      <div class="sp-card"><div class="sp-num">06</div><div class="sp-em js-emoji">🎃</div><div class="sp-name"><span class="js-holiday">Halloween</span> Special #6</div><div class="sp-soon">Coming Soon</div></div>
-      <div class="sp-card"><div class="sp-num">07</div><div class="sp-em js-emoji">🎃</div><div class="sp-name"><span class="js-holiday">Halloween</span> Special #7</div><div class="sp-soon">Coming Soon</div></div>
-      <div class="sp-card"><div class="sp-num">08</div><div class="sp-em js-emoji">🎃</div><div class="sp-name"><span class="js-holiday">Halloween</span> Special #8</div><div class="sp-soon">Coming Soon</div></div>
+    <p class="sp-sub" id="sp-sub">Pick a <span class="js-holiday">Halloween</span> idea, tap it, and tell me the names and details. Your song is delivered within 24 hours. Order by Oct 29 for Halloween.</p>
+    <div class="sp-grid" id="sp-grid">
+      <a class="sp-card" href="#order-form" data-special="Party Anthem" data-genre="Spooky & Fun"><div class="sp-num">01</div><div class="sp-em">🎃</div><div class="sp-name">Party Anthem</div><div class="sp-desc">Your Halloween bash gets its own theme song. Names, costumes, the whole crew.</div><div class="sp-soon">From $30 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Costume Crew Roast" data-genre="Funny / Roast"><div class="sp-num">02</div><div class="sp-em">🤡</div><div class="sp-name">Costume Crew Roast</div><div class="sp-desc">A loving roast of the group costume and everyone in it.</div><div class="sp-soon">From $30 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Trick-or-Treat Family Song" data-genre="Kids' Sing-Along"><div class="sp-num">03</div><div class="sp-em">🍬</div><div class="sp-name">Trick-or-Treat Family Song</div><div class="sp-desc">A sing-along about your kids, the candy haul, and the neighborhood loop.</div><div class="sp-soon">From $30 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Haunted House Anthem" data-genre="Rock"><div class="sp-num">04</div><div class="sp-em">🏚️</div><div class="sp-name">Haunted House Anthem</div><div class="sp-desc">Big, dark and dramatic for your haunt, yard display, or scare crew.</div><div class="sp-soon">From $30 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Pet in Costume" data-genre="Spooky & Fun"><div class="sp-num">05</div><div class="sp-em">🐶</div><div class="sp-name">Pet in Costume</div><div class="sp-desc">Your dog, cat, or whatever in the costume that went viral at home.</div><div class="sp-soon">From $30 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Spooky Bedtime Lullaby" data-genre="Heartfelt Ballad"><div class="sp-num">06</div><div class="sp-em">🌙</div><div class="sp-name">Spooky Bedtime Lullaby</div><div class="sp-desc">A gentle not-too-scary good-night song for little monsters.</div><div class="sp-soon">From $30 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Office or Classroom Party" data-genre="Pop"><div class="sp-num">07</div><div class="sp-em">🏫</div><div class="sp-name">Office or Classroom Party</div><div class="sp-desc">A fun one for the break room, the team, or the whole class.</div><div class="sp-soon">From $30 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Couples' Costume Love Song" data-genre="Pop"><div class="sp-num">08</div><div class="sp-em">💀</div><div class="sp-name">Couples' Costume Love Song</div><div class="sp-desc">The two of you in matching costumes, turned into a love song.</div><div class="sp-soon">From $30 · Order</div></a>
     </div>
 
     <div class="ea-box" id="early-access">
-      <h3>Want First Dibs at a Pre-Release Price?</h3>
-      <p>Drop your email and you'll hear about the <span class="js-holiday">Halloween</span> specials before anyone else, at a lower pre-release price. No spam, just the specials.</p>
+      <h3>Want First Dibs on the Next Holiday Specials?</h3>
+      <p>Drop your email and you'll hear about the Thanksgiving and Christmas specials before anyone else, at a lower pre-release price. No spam, just the specials.</p>
       <form id="ea-form" action="https://formspree.io/f/xwpqlypv" method="POST">
         <input type="hidden" name="_subject" value="Holiday Specials early-access signup" />
         <input type="hidden" name="form-type" value="Holiday Specials Early Access" />
@@ -662,6 +666,7 @@
         <input type="hidden" name="_next" id="next-redirect" value="https://buy.stripe.com/3cIaEWcLKb09cS7fcy9Ve0f" />
         <input type="hidden" name="package" id="package-hidden-field" value="Complete (Public) — $50" />
         <input type="hidden" name="occasion" value="Holiday" />
+        <input type="hidden" name="halloween-special" id="special-field" value="" />
         <input type="hidden" name="source-page" value="Holiday SongMe (/holiday-songs)" />
         <p class="hp-field" aria-hidden="true">
           <label>Don't fill this out if you're human: <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
@@ -1052,6 +1057,14 @@
     document.querySelectorAll('.js-emoji').forEach(el => el.textContent = spot.em);
     document.querySelectorAll('.js-holiday').forEach(el => el.textContent = spot.key);
     const eah = document.getElementById('ea-holiday'); if (eah) eah.value = spot.key;
+    const spGrid = document.getElementById('sp-grid');
+    if (spGrid && spot.key !== 'Halloween') {
+      let ph = '';
+      for (let i = 1; i <= 8; i++) ph += '<div class="sp-card"><div class="sp-num">0' + i + '</div><div class="sp-em">' + spot.em + '</div><div class="sp-name">' + spot.key + ' Special #' + i + '</div><div class="sp-soon">Coming Soon</div></div>';
+      spGrid.innerHTML = ph;
+      const sps = document.getElementById('sp-sub');
+      if (sps) sps.textContent = "I'm putting together 8 ready-made " + spot.key + " song packages. They drop soon.";
+    }
     const decor = Array.from(spot.decor);
     document.querySelectorAll('#hero-decor span').forEach((el, i) => el.textContent = decor[i % decor.length]);
 
@@ -1063,6 +1076,18 @@
     const sel = document.getElementById('holiday');
     if (sel) Array.from(sel.options).forEach(o => { o.selected = (o.text === spot.key); });
   })();
+
+  // ===== HALLOWEEN SPECIALS: tap a card to pre-fill the order form =====
+  document.querySelectorAll('a.sp-card').forEach(function (c) {
+    c.addEventListener('click', function () {
+      const sf = document.getElementById('special-field'); if (sf) sf.value = c.dataset.special;
+      const g = document.getElementById('genre');
+      if (g) Array.from(g.options).forEach(function (o) { if (o.value === c.dataset.genre || o.text === c.dataset.genre) g.value = o.value; });
+      const st = document.getElementById('story');
+      if (st && !st.value) st.placeholder = 'Halloween idea: ' + c.dataset.special + '. Tell me the names, the costumes, and the funny details.';
+      if (window.gtag) gtag('event', 'halloween_special_click', { special: c.dataset.special });
+    });
+  });
 
   // ===== SPECIALS EARLY-ACCESS SIGNUP =====
   (function () {
