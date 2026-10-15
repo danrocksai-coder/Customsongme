@@ -121,12 +121,12 @@
     #hero h1 { color: var(--white); margin-bottom: 22px; }
     #hero h1 em { font-style: italic; color: var(--gold); }
     .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.72); max-width: 600px; margin: 0 auto 20px; font-weight: 300; }
-    .hero-uses { font-size: 0.85rem; color: rgba(255,255,255,0.45); max-width: 560px; margin: 0 auto 32px; }
+    .hero-uses { font-size: 0.85rem; color: rgba(255,255,255,0.65); max-width: 560px; margin: 0 auto 32px; }
     .hero-price-anchor { background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: var(--radius-lg); padding: 18px 28px; display: inline-block; margin-bottom: 32px; }
     .hero-price-anchor .price-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); margin-bottom: 6px; }
     .hero-price-anchor .price-main { font-family: var(--font-display); font-size: 2rem; color: var(--white); font-weight: 900; }
-    .hero-price-anchor .price-includes { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 4px; }
-    .hero-price-anchor .price-alt { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); }
+    .hero-price-anchor .price-includes { font-size: 0.8rem; color: rgba(255,255,255,0.65); margin-top: 4px; }
+    .hero-price-anchor .price-alt { font-size: 0.75rem; color: rgba(255,255,255,0.65); margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); }
     .btn-primary { display: inline-block; background: var(--gold); color: var(--black); font-weight: 700; font-size: 1rem; padding: 16px 40px; border-radius: var(--radius); text-decoration: none; transition: background 0.2s, transform 0.15s; border: none; cursor: pointer; }
     .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
     .btn-secondary { display: inline-block; background: transparent; color: var(--gold); font-weight: 600; font-size: 0.95rem; padding: 14px 32px; border-radius: var(--radius); text-decoration: none; border: 1.5px solid var(--gold); transition: background 0.2s, color 0.2s; cursor: pointer; }
@@ -152,7 +152,7 @@
     .package-header h2 { color: var(--white); font-size: clamp(1.3rem, 3vw, 1.8rem); margin-bottom: 8px; }
     .package-price { font-family: var(--font-display); font-size: 2.8rem; color: var(--gold); font-weight: 900; line-height: 1; }
     .package-price span { font-size: 1.1rem; vertical-align: super; margin-right: 2px; }
-    .package-price-note { color: rgba(255,255,255,0.45); font-size: 0.82rem; margin-top: 6px; }
+    .package-price-note { color: rgba(255,255,255,0.65); font-size: 0.82rem; margin-top: 6px; }
     .package-body { padding: 32px 36px; }
     .feature-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; margin-bottom: 24px; }
     .feature-list.single-col { grid-template-columns: 1fr; }
@@ -179,12 +179,12 @@
     #order-form { background: var(--black); padding: 80px 24px; }
     .form-wrap { max-width: 680px; margin: 0 auto; }
     #order-form h2 { color: var(--white); text-align: center; margin-bottom: 12px; }
-    .form-sub { color: rgba(255,255,255,0.5); text-align: center; margin-bottom: 36px; font-size: 0.93rem; }
+    .form-sub { color: rgba(255,255,255,0.65); text-align: center; margin-bottom: 36px; font-size: 0.93rem; }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .form-group { display: flex; flex-direction: column; gap: 6px; }
     .form-group.full { grid-column: 1 / -1; }
-    .form-group > label { font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.07em; }
-    .form-group > label .opt { font-weight: 400; color: rgba(255,255,255,0.3); text-transform: none; letter-spacing: 0; font-size: 0.75rem; }
+    .form-group > label { font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.65); text-transform: uppercase; letter-spacing: 0.07em; }
+    .form-group > label .opt { font-weight: 400; color: rgba(255,255,255,0.65); text-transform: none; letter-spacing: 0; font-size: 0.75rem; }
     .form-group input, .form-group select, .form-group textarea {
       background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius);
       padding: 12px 14px; color: var(--white); font-family: var(--font-body); font-size: 16px; width: 100%; outline: none;
@@ -201,10 +201,10 @@
     .contact-pref-options { display: flex; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.14); border-radius: 50px; padding: 4px; gap: 4px; flex-wrap: wrap; }
     .contact-pref-option { position: relative; flex: 1; cursor: pointer; }
     .contact-pref-option input[type="radio"] { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; border: none; background: transparent; opacity: 0; appearance: none; -webkit-appearance: none; cursor: pointer; z-index: 2; }
-    .contact-pref-option span { display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 10px 8px; border-radius: 50px; color: rgba(255,255,255,0.55); font-size: 0.85rem; font-weight: 600; transition: background 0.2s, color 0.2s; }
+    .contact-pref-option span { display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 10px 8px; border-radius: 50px; color: rgba(255,255,255,0.65); font-size: 0.85rem; font-weight: 600; transition: background 0.2s, color 0.2s; }
     .contact-pref-option input[type="radio"]:checked + span { background: var(--gold); color: var(--black); }
     .payment-method-options .contact-pref-option { flex: 1 1 40%; }
-    .payment-method-note { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 10px; line-height: 1.5; }
+    .payment-method-note { font-size: 0.78rem; color: rgba(255,255,255,0.65); margin-top: 10px; line-height: 1.5; }
     .payment-method-note strong { color: var(--gold); }
 
     .public-note {
@@ -238,18 +238,18 @@
     }
 
     .what-next { background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.2); border-radius: var(--radius-lg); padding: 24px 28px; margin: 28px 0; }
-    .what-next h4 { font-family: var(--font-display); color: var(--gold); font-size: 1rem; margin-bottom: 16px; }
+    .what-next h3 { font-family: var(--font-display); color: var(--gold); font-size: 1rem; margin-bottom: 16px; }
     .what-next ol { list-style: none; display: flex; flex-direction: column; gap: 10px; counter-reset: steps; }
     .what-next ol li { display: flex; gap: 12px; align-items: flex-start; font-size: 0.88rem; color: rgba(255,255,255,0.7); counter-increment: steps; }
     .what-next ol li::before { content: counter(steps); width: 22px; height: 22px; border-radius: 50%; background: var(--gold); color: var(--black); font-weight: 700; font-size: 0.72rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
-    .lock-note { font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08); }
-    .lock-note strong { color: rgba(255,255,255,0.6); }
+    .lock-note { font-size: 0.78rem; color: rgba(255,255,255,0.65); margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .lock-note strong { color: rgba(255,255,255,0.65); }
     .form-submit-area { text-align: center; margin-top: 8px; }
     .form-submit-area .btn-primary { width: 100%; max-width: 400px; font-size: 1.05rem; padding: 18px; }
-    .form-security { font-size: 0.78rem; color: rgba(255,255,255,0.35); margin-top: 12px; }
-    .form-contact { text-align: center; margin-top: 20px; font-size: 0.85rem; color: rgba(255,255,255,0.4); }
-    .form-contact a { color: var(--gold); text-decoration: none; }
-    .gold-link { color: var(--gold); }
+    .form-security { font-size: 0.78rem; color: rgba(255,255,255,0.65); margin-top: 12px; }
+    .form-contact { text-align: center; margin-top: 20px; font-size: 0.85rem; color: rgba(255,255,255,0.65); }
+    .form-contact a { color: var(--gold); text-decoration: underline; }
+    .gold-link { color: var(--gold); text-decoration: underline; }
     .textarea-sm { min-height: 90px; }
     .form-error-msg {
       background: rgba(220,60,60,0.12);
@@ -308,9 +308,9 @@
     footer { background: var(--black); padding: 40px 24px 28px; }
     .footer-inner { max-width: 1100px; margin: 0 auto; }
     .footer-nav { display: flex; flex-wrap: wrap; gap: 12px 20px; margin-bottom: 24px; justify-content: center; }
-    .footer-nav a { color: rgba(255,255,255,0.45); font-size: 0.8rem; text-decoration: none; }
+    .footer-nav a { color: rgba(255,255,255,0.65); font-size: 0.8rem; text-decoration: none; }
     .footer-bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; }
-    .footer-copy { color: rgba(255,255,255,0.3); font-size: 0.78rem; }
+    .footer-copy { color: rgba(255,255,255,0.65); font-size: 0.78rem; }
 
     @media (max-width: 680px) {
       .feature-list { grid-template-columns: 1fr; }
@@ -337,6 +337,7 @@
   </div>
 </nav>
 
+<main>
 <section id="hero">
   <div class="hero-inner">
     <h1>Give Them Something<br><em>No Store Can Sell</em></h1>
@@ -593,7 +594,7 @@
         </div>
 
         <div class="what-next">
-          <h4>💌 What Happens Next?</h4>
+          <h3>💌 What Happens Next?</h3>
           <ol>
             <li>Submit your request — you'll be taken straight to secure checkout for your chosen package.</li>
             <li>At checkout, use the same email you ordered with — that's how your payment matches your song.</li>
@@ -707,6 +708,7 @@
   </div>
 </section>
 
+</main>
 <footer>
   <div class="footer-inner">
     <nav class="footer-nav" aria-label="Footer navigation">
