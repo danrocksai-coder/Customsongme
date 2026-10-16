@@ -39,3 +39,9 @@ http://www.customsongme.com/* https://www.customsongme.com/:splat    301!
 /oxnard/93030/intake     /oxnard/intake.html           200
 /oxnard/93030/advertise   /oxnard/93030/advertise.html  200
 /songs/*  /songs/:splat/index.html  200
+
+# ==========================================
+# 4. SONG MERCH QR CODES (mugs, shirts)
+# One line per customer: /play/<slug>  <their YouTube link>  302
+# ==========================================
+/play/joe-debra          https://youtu.be/K76ia9z2Gxo  302
