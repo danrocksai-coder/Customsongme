@@ -400,7 +400,7 @@ footer a{color:var(--muted);margin:0 6px}
         <div class="f" style="font-weight:600;font-size:15px;color:var(--green);margin-top:6px">Where should I send your song?</div>
         <label class="f">Your name <input class="inp" name="sender_name" autocomplete="name"><div class="err" data-err="sender">Please add your name.</div></label>
         <label class="f">Your email <input class="inp" type="email" name="email" autocomplete="email"><div class="err" data-err="email">Please enter a valid email.</div></label>
-        <label class="f">Your phone <span class="hint">Optional — in case I have a quick question.</span><input class="inp" type="tel" name="phone" autocomplete="tel"></label>
+        <label class="f">Your phone <span class="hint">Optional — add it if you'd like order updates by text.</span><input class="inp" type="tel" name="phone" autocomplete="tel" placeholder="(555) 555-5555"></label>
       </div>
       <div class="actions">
         <button type="button" class="btn btn-p" data-next>Review My Card</button>
@@ -437,6 +437,7 @@ footer a{color:var(--muted);margin:0 6px}
         <button type="submit" class="btn btn-p" id="submitBtn">Place My Order &amp; Pay</button>
         <div class="err" id="sendErr">Something went wrong sending your order. Please try again, or text me at <a href="sms:+16617140903">661-714-0903</a>.</div>
         <p class="sub">I write your song after payment. Covered by my Personal Happiness Guarantee.</p>
+        <div class="note" style="text-align:center">Questions, or need something for any reason? Text me at <a href="sms:+16617140903"><b>661-714-0903</b></a> for the fastest reply, or email <a href="mailto:danrocksai@gmail.com">danrocksai@gmail.com</a> anytime.</div>
         <p class="sub" style="font-size:12px">I may send occasional offers. Reply STOP anytime to opt out.</p>
         <button type="button" class="btn btn-b" data-back>Back</button>
       </div>
@@ -463,6 +464,7 @@ footer a{color:var(--muted);margin:0 6px}
     <div class="closer">
       <p>Someone you love could use a brighter day.</p>
       <a href="#order" class="btn btn-p" id="startOver">Start Their Card</a>
+      <p style="margin-top:14px;font-size:14px">Rather talk to me directly? Text <a href="sms:+16617140903"><b>661-714-0903</b></a> for the fastest service, or email <a href="mailto:danrocksai@gmail.com">danrocksai@gmail.com</a>.</p>
     </div>
   </div>
 </main>
@@ -618,7 +620,7 @@ form.addEventListener("submit",function(e){e.preventDefault();if(sending)return;
  fd.append("page","/get-well-song-cards");
  fetch(FORMSPREE,{method:"POST",body:fd,headers:{Accept:"application/json"}}).then(function(r){if(!r.ok)throw 0;
   try{gtag("event","getwell_order",{value:price,currency:"USD",package:p,payment:S.pay});}catch(x){}
-  if(!payUrl){var sec=document.querySelector('section[data-step="5"]');sec.innerHTML='<h2>Your order is in!</h2><p class="lead">Thank you, '+esc(val("sender_name"))+'. I\'ll email your secure Stripe card link to <b>'+esc(email)+'</b> shortly. Once payment comes through, I start writing '+esc(S.name)+'\'s song.</p><div class="note">Questions? Text me at <a href="sms:+16617140903">661-714-0903</a>.</div>';sec.scrollIntoView({behavior:"smooth"});return;}
+  if(!payUrl){var sec=document.querySelector('section[data-step="5"]');sec.innerHTML='<h2>Your order is in!</h2><p class="lead">Thank you, '+esc(val("sender_name"))+'. I\'ll email your secure Stripe card link to <b>'+esc(email)+'</b> shortly. Once payment comes through, I start writing '+esc(S.name)+'\'s song.</p><div class="note">Need anything? Text me at <a href="sms:+16617140903"><b>661-714-0903</b></a> for the fastest reply, or email <a href="mailto:danrocksai@gmail.com">danrocksai@gmail.com</a> anytime.</div>';sec.scrollIntoView({behavior:"smooth"});return;}
   btn.textContent="Taking you to payment…";window.location.href=payUrl;
  }).catch(function(){sending=false;btn.disabled=false;btn.textContent="Place My Order & Pay";document.getElementById("sendErr").classList.add("show");});
 });
