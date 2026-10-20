@@ -78,3 +78,7 @@
 
 /*.js
   Cache-Control: public, max-age=31536000, immutable
+
+/landscapers
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache
