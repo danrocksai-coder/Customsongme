@@ -424,12 +424,13 @@ footer a{color:var(--muted);margin:0 6px}
       <div class="fields">
         <div class="f" style="font-weight:600;font-size:15px;color:var(--green)">How would you like to pay?</div>
         <div class="chips" data-group="pay" id="payChips">
-          <button type="button" class="chip" data-val="card" id="payCard" aria-pressed="true">Card</button>
-          <button type="button" class="chip" data-val="paypal">PayPal</button>
-          <button type="button" class="chip" data-val="cashapp">Cash App</button>
+          <button type="button" class="chip" data-val="cashapp" aria-pressed="true">Cash App</button>
           <button type="button" class="chip" data-val="venmo">Venmo</button>
+          <button type="button" class="chip" data-val="paypal">PayPal</button>
+          <button type="button" class="chip" data-val="cardemail">Card</button>
         </div>
-        <div class="note paynote" id="payNote">Please put <b>your name</b> in the payment note so I can match it to your card.</div>
+        <div class="note paynote on" id="payNote">Please put <b>your name</b> in the payment note so I can match it to your card.</div>
+        <div class="note paynote" id="cardNote">Prefer to pay by card? No problem. Place your order and I'll email you a secure Stripe card link.</div>
       </div>
 
       <div class="actions">
@@ -517,8 +518,7 @@ var DESIGNS=[
 ];
 
 /* ===== state ===== */
-var S={design:0,name:"",headline:"",message:"",note:"",from:"With love",edited:false,view:"front",genre:"",vocal:"",pay:"card",step:1};
-if(!STRIPE.digital&&!STRIPE.mailed){S.pay="paypal";}
+var S={design:0,name:"",headline:"",message:"",note:"",from:"With love",edited:false,view:"front",genre:"",vocal:"",pay:"cashapp",step:1};
 function loadDefaults(){var d=DESIGNS[S.design];S.headline=d.headline;S.message=d.message;S.note=d.note;}
 loadDefaults();
 
@@ -560,8 +560,7 @@ document.querySelectorAll("[data-idea]").forEach(function(b){b.onclick=function(
 /* chip groups */
 document.querySelectorAll("[data-group]").forEach(function(g){g.querySelectorAll(".chip").forEach(function(c){c.onclick=function(){g.querySelectorAll(".chip").forEach(function(x){x.setAttribute("aria-pressed","false");});c.setAttribute("aria-pressed","true");S[g.dataset.group]=c.dataset.val;
  if(g.dataset.group==="genre")document.getElementById("genreOther").style.display=c.dataset.val==="Other"?"block":"none";
- if(g.dataset.group==="pay")document.getElementById("payNote").classList.toggle("on",S.pay!=="card");};});});
-if(!STRIPE.digital&&!STRIPE.mailed){document.getElementById("payCard").style.display="none";var pp=document.querySelector('[data-group="pay"] [data-val="paypal"]');pp.setAttribute("aria-pressed","true");document.getElementById("payNote").classList.add("on");}
+ if(g.dataset.group==="pay"){document.getElementById("payNote").classList.toggle("on",S.pay!=="cardemail");document.getElementById("cardNote").classList.toggle("on",S.pay==="cardemail");document.getElementById("submitBtn").textContent=S.pay==="cardemail"?"Place My Order":"Place My Order & Pay";}};});});
 
 /* package + address */
 function pkg(){return form.querySelector('input[name="package"]:checked').value;}
@@ -606,9 +605,8 @@ function buildSummary(){var p=pkg(),d=DESIGNS[S.design];
 var sending=false;
 form.addEventListener("submit",function(e){e.preventDefault();if(sending)return;
  var p=pkg(),price=PRICES[p],email=val("email");
- var payUrl={card:STRIPE[p]?STRIPE[p]+(STRIPE[p].indexOf("?")>-1?"&":"?")+"prefilled_email="+encodeURIComponent(email):"",
+ var payUrl={cardemail:STRIPE[p]?STRIPE[p]+(STRIPE[p].indexOf("?")>-1?"&":"?")+"prefilled_email="+encodeURIComponent(email):"",
   paypal:"https://paypal.me/DanRock834/"+price,cashapp:"https://cash.app/$optimistic01/"+price,venmo:"https://venmo.com/u/Dan-Rock-5"}[S.pay];
- if(!payUrl){S.pay="paypal";payUrl="https://paypal.me/DanRock834/"+price;}
  sending=true;var btn=document.getElementById("submitBtn");btn.disabled=true;btn.textContent="Sending your order…";document.getElementById("sendErr").classList.remove("show");
  var fd=new FormData(form);
  fd.append("_subject","Get Well Song Card order — "+S.name+" ($"+price+")");
@@ -620,6 +618,7 @@ form.addEventListener("submit",function(e){e.preventDefault();if(sending)return;
  fd.append("page","/get-well-song-cards");
  fetch(FORMSPREE,{method:"POST",body:fd,headers:{Accept:"application/json"}}).then(function(r){if(!r.ok)throw 0;
   try{gtag("event","getwell_order",{value:price,currency:"USD",package:p,payment:S.pay});}catch(x){}
+  if(!payUrl){var sec=document.querySelector('section[data-step="5"]');sec.innerHTML='<h2>Your order is in!</h2><p class="lead">Thank you, '+esc(val("sender_name"))+'. I\'ll email your secure Stripe card link to <b>'+esc(email)+'</b> shortly. Once payment comes through, I start writing '+esc(S.name)+'\'s song.</p><div class="note">Questions? Text me at <a href="sms:+16617140903">661-714-0903</a>.</div>';sec.scrollIntoView({behavior:"smooth"});return;}
   btn.textContent="Taking you to payment…";window.location.href=payUrl;
  }).catch(function(){sending=false;btn.disabled=false;btn.textContent="Place My Order & Pay";document.getElementById("sendErr").classList.add("show");});
 });
