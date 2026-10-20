@@ -30,6 +30,7 @@ http://www.customsongme.com/* https://www.customsongme.com/:splat    301!
 /roast-songs             /roast-songs.html             200
 /memorial-songs          /memorial-songs.html          200
 /business-jingles        /business-jingles.html        200
+/get-well-song-cards     /get-well-song-cards.html     200
 /payment-links           /payment-links.html           200
 /thanks                  /thanks.html                  200
 /adopt-a-rescue-dog      /adopt-a-rescue-dog.html      200
