@@ -138,12 +138,12 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --black: #0a0a0a; --ink: #1a1a1a; --charcoal: #2d2d2d;
-      --gold: #c9a84c; --gold-light: #e8c96a; --gold-pale: #f5e9c8;
-      --cream: #faf7f0; --white: #ffffff; --muted: #6b6b6b; --border: #e8e0d0;
+      --black: #001a66; --ink: #00247f; --charcoal: #0a3399;
+      --gold: #fcd42a; --gold-light: #ffe16b; --gold-pale: #fff4c2;
+      --cream: #f3f6ff; --white: #ffffff; --muted: #5b6478; --border: #d5ddf3;
       --font-display: 'Playfair Display', Georgia, serif;
       --font-body: 'DM Sans', system-ui, sans-serif;
-      --radius: 4px; --accent-rgb: 201,168,76; --pop: #c9a84c; --hero-bg: #0a0a0a; --radius-lg: 12px;
+      --radius: 4px; --accent-rgb: 252,212,42; --pop: #fcd42a; --hero-bg: #001a66; --radius-lg: 12px;
       --shadow: 0 4px 24px rgba(0,0,0,0.08);
       --shadow-lg: 0 12px 48px rgba(0,0,0,0.14);
     }
@@ -151,7 +151,7 @@
     section[id] { scroll-margin-top: 72px; }
     body { font-family: var(--font-body); background: var(--cream); color: var(--ink); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
     #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, var(--gold), var(--gold-light)); z-index: 9999; transition: width 0.1s linear; }
-    body > nav { position: sticky; top: 0; background: rgba(10,10,10,0.97); backdrop-filter: blur(12px); z-index: 100; padding: 0 24px; border-bottom: 1px solid rgba(var(--accent-rgb),0.2); }
+    body > nav { position: sticky; top: 0; background: rgba(0,26,102,0.97); backdrop-filter: blur(12px); z-index: 100; padding: 0 24px; border-bottom: 1px solid rgba(var(--accent-rgb),0.2); }
     .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
     .nav-logo { font-family: var(--font-display); font-size: 1.25rem; color: var(--gold); text-decoration: none; display: flex; align-items: center; gap: 10px; }
     .nav-logo-icon { height: 44px; width: auto; display: block; }
@@ -377,13 +377,13 @@
     }
   
     /* ===== HOLIDAY SONGME: brand + seasonal themes ===== */
-    body.theme-halloween { --gold:#ff7a1a; --gold-light:#ff9a4a; --gold-pale:#fde3cf; --accent-rgb:255,122,26; --pop:#a46bff; --hero-bg: linear-gradient(165deg,#1d0d33 0%,#0a0a0a 72%); }
-    body.theme-thanksgiving { --gold:#d98a2b; --gold-light:#f0a94c; --gold-pale:#f7e4c8; --accent-rgb:217,138,43; --pop:#c4552f; --hero-bg: linear-gradient(165deg,#2b1607 0%,#0a0a0a 72%); }
-    body.theme-christmas { --gold:#d4af37; --gold-light:#e8c96a; --gold-pale:#f3ead0; --accent-rgb:212,175,55; --pop:#e04b3c; --hero-bg: linear-gradient(165deg,#0e2a1b 0%,#0a0a0a 72%); }
-    body.theme-newyear { --gold:#d4af37; --gold-light:#ecd27a; --gold-pale:#f3ead0; --accent-rgb:212,175,55; --pop:#9fb4ff; --hero-bg: linear-gradient(165deg,#0d1030 0%,#0a0a0a 72%); }
-    body.theme-valentines { --gold:#e0567a; --gold-light:#f07d9a; --gold-pale:#fbdde5; --accent-rgb:224,86,122; --pop:#ff9ab0; --hero-bg: linear-gradient(165deg,#2e0a17 0%,#0a0a0a 72%); }
-    body.theme-spring { --gold:#7fb069; --gold-light:#9fcb8a; --gold-pale:#e4f1dc; --accent-rgb:127,176,105; --pop:#f2a7c3; --hero-bg: linear-gradient(165deg,#142616 0%,#0a0a0a 72%); }
-    body.theme-july4 { --gold:#e04b3c; --gold-light:#f06d60; --gold-pale:#f9dcd8; --accent-rgb:224,75,60; --pop:#6f9bff; --hero-bg: linear-gradient(165deg,#0b1633 0%,#0a0a0a 72%); }
+    body.theme-halloween { --gold:#ff7a1a; --gold-light:#ff9a4a; --gold-pale:#fde3cf; --accent-rgb:255,122,26; --pop:#a46bff; --hero-bg: linear-gradient(165deg,#1d0d33 0%,#001a66 72%); }
+    body.theme-thanksgiving { --gold:#d98a2b; --gold-light:#f0a94c; --gold-pale:#f7e4c8; --accent-rgb:217,138,43; --pop:#c4552f; --hero-bg: linear-gradient(165deg,#2b1607 0%,#001a66 72%); }
+    body.theme-christmas { --gold:#d4af37; --gold-light:#ffe16b; --gold-pale:#f3ead0; --accent-rgb:212,175,55; --pop:#e04b3c; --hero-bg: linear-gradient(165deg,#0e2a1b 0%,#001a66 72%); }
+    body.theme-newyear { --gold:#d4af37; --gold-light:#ecd27a; --gold-pale:#f3ead0; --accent-rgb:212,175,55; --pop:#9fb4ff; --hero-bg: linear-gradient(165deg,#0d1030 0%,#001a66 72%); }
+    body.theme-valentines { --gold:#e0567a; --gold-light:#f07d9a; --gold-pale:#fbdde5; --accent-rgb:224,86,122; --pop:#ff9ab0; --hero-bg: linear-gradient(165deg,#2e0a17 0%,#001a66 72%); }
+    body.theme-spring { --gold:#7fb069; --gold-light:#9fcb8a; --gold-pale:#e4f1dc; --accent-rgb:127,176,105; --pop:#f2a7c3; --hero-bg: linear-gradient(165deg,#142616 0%,#001a66 72%); }
+    body.theme-july4 { --gold:#e04b3c; --gold-light:#f06d60; --gold-pale:#f9dcd8; --accent-rgb:224,75,60; --pop:#6f9bff; --hero-bg: linear-gradient(165deg,#0b1633 0%,#001a66 72%); }
 
     .nav-brand { display: flex; flex-direction: column; line-height: 1.05; }
     .nav-brand .b-main { font-family: var(--font-display); font-size: 1.2rem; color: var(--gold); font-weight: 700; }
@@ -452,6 +452,12 @@
     .yr-chip { display: inline-flex; align-items: center; gap: 6px; background: var(--white); border: 1px solid var(--border); border-radius: 50px; padding: 7px 14px; font-size: 0.82rem; color: var(--ink); text-decoration: none; }
     .yr-chip small { color: var(--muted); font-size: 0.72rem; }
     a.yr-chip:hover { border-color: var(--gold); }
+    /* Blue & yellow theme: yellow text is hard to read on light sections, so those spots use royal blue */
+    :root { --gold-ink: #0b3fc4; }
+    #pricing-intro .gold, .story-link, #package .btn-secondary, #reviews .leave-review { color: var(--gold-ink); }
+    #package .btn-secondary, #reviews .leave-review { border-color: var(--gold-ink); }
+    #package .btn-secondary:hover, #reviews .leave-review:hover { background: var(--gold-ink); color: var(--white); }
+    #reviews .stars-lg { color: #e0a400; }
   </style>
 </head>
 <body class="theme-halloween">
