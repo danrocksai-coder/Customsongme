@@ -18,16 +18,16 @@
 
   <style>
     :root {
-      --black: #0a0a0a;
-      --ink: #1a1a1a;
-      --charcoal: #2d2d2d;
-      --gold: #c9a84c;
-      --gold-light: #e8c96a;
-      --gold-pale: #f5e9c8;
-      --cream: #faf7f0;
+      --black: #001a66;
+      --ink: #00247f;
+      --charcoal: #0a3399;
+      --gold: #fcd42a;
+      --gold-light: #ffe16b;
+      --gold-pale: #fff4c2;
+      --cream: #f3f6ff;
       --white: #ffffff;
-      --muted: #6b6b6b;
-      --border: #e8e0d0;
+      --muted: #5b6478;
+      --border: #d5ddf3;
       --font-display: 'Playfair Display', Georgia, serif;
       --font-body: 'DM Sans', system-ui, sans-serif;
       --radius: 4px;
@@ -91,6 +91,12 @@
     }
     .links a:hover { color: var(--gold); border-color: var(--gold); }
     .sep { color: rgba(255,255,255,0.25); }
+    /* Blue & yellow theme: yellow text is hard to read on light sections, so those spots use royal blue */
+    :root { --gold-ink: #0b3fc4; }
+    #pricing-intro .gold, .story-link, #package .btn-secondary, #reviews .leave-review { color: var(--gold-ink); }
+    #package .btn-secondary, #reviews .leave-review { border-color: var(--gold-ink); }
+    #package .btn-secondary:hover, #reviews .leave-review:hover { background: var(--gold-ink); color: var(--white); }
+    #reviews .stars-lg { color: #e0a400; }
   </style>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HGQ54E69BZ"></script>
