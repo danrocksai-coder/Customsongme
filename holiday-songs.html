@@ -688,7 +688,7 @@
             <h4>Family Gratitude Song</h4>
             <div class="tg-tier-price">$50</div>
             <ul>
-              <li>Up to 6 family members named, each with their gratitude line</li>
+              <li>Every family member named (up to 15), each with their gratitude line</li>
               <li>Host, location, and shout-outs in the song</li>
               <li>Video with silhouette-style artwork (not your photos)</li>
               <li>MP3, cover art, and lyric sheet</li>
@@ -701,8 +701,7 @@
             <div class="tg-tier-price">$100</div>
             <ul>
               <li>Everything in the $50 song</li>
-              <li>Every family member named (up to 15), each with their gratitude line</li>
-              <li><strong>Up to 10 of your real family photos</strong> in the video</li>
+              <li><strong>Up to 10 of your real family photos</strong> in the video, instead of silhouette artwork</li>
               <li>Public video by default, or private if you ask</li>
             </ul>
             <a href="#order-form" class="btn-primary tg-start" data-tier="ultimate">Start Ultimate for $100 →</a>
@@ -874,7 +873,7 @@
               </label>
             </div>
             <div class="public-note" id="ultimate-note" style="display:none;">
-              <p>🌟 Your video uses up to 10 of your real family photos and names every family member (up to 15). It goes on my public YouTube channel unless you'd like it private.</p>
+              <p>🌟 Your video uses up to 10 of your real family photos. It goes on my public YouTube channel unless you'd like it private.</p>
               <label class="unlisted-toggle">
                 <input type="checkbox" id="ultimate-private" name="ultimate-private-request" value="Yes, keep the video private" />
                 <span>Please keep my video private</span>
@@ -1551,7 +1550,7 @@
 
     const isOn = () => sel.value === 'Thanksgiving';
     const tierValue = () => { const t = document.querySelector('input[name="package-tier"]:checked'); return t ? t.value : 'complete'; };
-    const peopleLimit = () => tierValue() === 'ultimate' ? 15 : 6;
+    const peopleLimit = () => people.length;
 
     function showRows(rows, n) {
       rows.forEach((r, i) => {
@@ -1581,8 +1580,7 @@
       showRows(shouts, shoutsShown);
       addPerson.hidden = n >= limit;
       addShout.hidden = shoutsShown >= shouts.length;
-      count.textContent = n + ' of up to ' + limit + ' people' +
-        (tierValue() !== 'ultimate' && peopleShown >= limit ? '. Want to name more of the family? The Ultimate Family package ($100) includes up to 15.' : '');
+      count.textContent = n + ' of up to ' + limit + ' people';
 
       const t = tierValue();
       photoNote.innerHTML = t === 'ultimate'
