@@ -148,15 +148,8 @@
       --shadow-lg: 0 12px 48px rgba(0,0,0,0.14);
     }
     html { scroll-behavior: smooth; }
-    section[id] { scroll-margin-top: 72px; }
     body { font-family: var(--font-body); background: var(--cream); color: var(--ink); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
     #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, var(--gold), var(--gold-light)); z-index: 9999; transition: width 0.1s linear; }
-    body > nav { position: sticky; top: 0; background: rgba(0,26,102,0.97); backdrop-filter: blur(12px); z-index: 100; padding: 0 24px; border-bottom: 1px solid rgba(var(--accent-rgb),0.2); }
-    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
-    .nav-logo { font-family: var(--font-display); font-size: 1.25rem; color: var(--gold); text-decoration: none; display: flex; align-items: center; gap: 10px; }
-    .nav-logo-icon { height: 44px; width: auto; display: block; }
-    .nav-cta { background: var(--gold); color: var(--black); font-weight: 600; font-size: 0.85rem; padding: 9px 20px; border-radius: var(--radius); text-decoration: none; transition: background 0.2s; }
-    .nav-cta:hover { background: var(--gold-light); }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
     h1, h2, h3 { font-family: var(--font-display); line-height: 1.2; }
     h1 { font-size: clamp(2rem, 4.8vw, 3.3rem); }
@@ -385,10 +378,6 @@
     body.theme-spring { --gold:#7fb069; --gold-light:#9fcb8a; --gold-pale:#e4f1dc; --accent-rgb:127,176,105; --pop:#f2a7c3; --hero-bg: linear-gradient(165deg,#142616 0%,#001a66 72%); }
     body.theme-july4 { --gold:#e04b3c; --gold-light:#f06d60; --gold-pale:#f9dcd8; --accent-rgb:224,75,60; --pop:#6f9bff; --hero-bg: linear-gradient(165deg,#0b1633 0%,#001a66 72%); }
 
-    .nav-brand { display: flex; flex-direction: column; line-height: 1.05; }
-    .nav-brand .b-main { font-family: var(--font-display); font-size: 1.2rem; color: var(--gold); font-weight: 700; }
-    .nav-brand .b-sub { font-family: var(--font-body); font-size: 0.68rem; color: rgba(255,255,255,0.65); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 3px; }
-
     .wordmark { margin-bottom: 26px; }
     .wordmark .w-main { font-family: var(--font-display); font-weight: 900; font-size: clamp(2.6rem, 7vw, 4.6rem); line-height: 1; color: var(--white); letter-spacing: -0.01em; }
     .wordmark .w-main em { font-style: italic; color: var(--gold); }
@@ -467,16 +456,103 @@
     #why-dan { background: linear-gradient(to bottom, var(--white) 0, var(--black) 72px); }
     #faq { background: linear-gradient(to bottom, var(--black) 0, var(--cream) 72px); }
     footer { background: linear-gradient(to bottom, var(--cream) 0, var(--black) 32px); }
+
+    /* NAV — balanced header: English on the left, Start My Song in the middle, Español on the right */
+    body > nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #0b2165;
+      border-bottom: 1px solid rgba(255,214,41,0.25);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0,1fr) auto minmax(0,1fr);
+      align-items: center;
+      gap: 16px;
+      min-height: 92px;
+    }
+    .nav-language {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      line-height: 1.25;
+      text-decoration: none;
+      justify-self: start;
+    }
+    .nav-language:last-child { justify-self: end; align-items: flex-end; text-align: right; }
+    .nav-brand {
+      font-family: var(--font-display, 'Playfair Display', Georgia, serif);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffd629;
+      overflow-wrap: anywhere;
+    }
+    .nav-language-label {
+      font-family: var(--font-body, 'DM Sans', system-ui, sans-serif);
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.7);
+    }
+    .nav-language[aria-current] .nav-language-label { color: #ffffff; font-weight: 600; }
+    .nav-language:hover .nav-brand, .nav-language:hover .nav-language-label { color: #ffe468; }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #ffd629;
+      color: #0b2165;
+      font-family: var(--font-body, 'DM Sans', system-ui, sans-serif);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      text-decoration: none;
+      padding: 8px 22px 8px 10px;
+      border-radius: 999px;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: #ffe468; }
+    .nav-logo-icon { height: 44px; width: auto; display: block; }
+    body > nav a:focus-visible { outline: 2px solid #ffe468; outline-offset: 3px; }
+    /* Jump links land below the taller sticky header */
+    section[id] { scroll-margin-top: 104px; }
+    @media (max-width: 700px) {
+      body > nav { padding: 0 16px; }
+      .nav-inner { grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 8px 12px; min-height: 0; padding: 10px 0; }
+      .nav-cta { grid-column: 1 / -1; grid-row: 1; justify-self: center; font-size: 0.9rem; padding: 6px 18px 6px 8px; }
+      .nav-logo-icon { height: 36px; }
+      .nav-language { grid-row: 2; }
+      .nav-brand { font-size: 0.95rem; }
+      .nav-language-label { font-size: 0.74rem; }
+      section[id] { scroll-margin-top: 128px; }
+    }
+    @media (max-width: 360px) {
+      .nav-brand { font-size: 0.82rem; }
+    }
   </style>
 </head>
 <body class="theme-halloween">
 
 <div id="scroll-progress"></div>
 
-<nav>
+<nav aria-label="Main navigation">
   <div class="nav-inner">
-    <a href="/" class="nav-logo"><img src="/img/customsongme-icon.png" alt="" class="nav-logo-icon" /><span class="nav-brand"><span class="b-main">Holiday SongMe</span><span class="b-sub">by CustomSongMe</span></span></a>
-    <a href="#order-form" class="nav-cta"><span class="js-emoji">🎃</span> Start Your Song</a>
+    <a href="/" class="nav-language" lang="en" aria-current="true">
+      <span class="nav-brand">CustomSongMe.com</span>
+      <span class="nav-language-label">English</span>
+    </a>
+    <a href="#order-form" class="nav-cta">
+      <img src="/img/customsongme-icon.png" alt="" class="nav-logo-icon" />
+      <span>Start My Song</span>
+    </a>
+    <a href="/es/" class="nav-language" lang="es">
+      <span class="nav-brand">CustomSongMe.com</span>
+      <span class="nav-language-label">Español</span>
+    </a>
   </div>
 </nav>
 
