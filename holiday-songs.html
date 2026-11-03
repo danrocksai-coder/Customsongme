@@ -431,7 +431,12 @@
     .ea-row input:focus { border-color: var(--gold); }
     .ea-row .btn-primary { flex: 0 0 auto; padding: 13px 26px; }
     .ea-msg { margin-top: 12px; font-size: 0.9rem; min-height: 1.2em; color: var(--gold-light); }
-    @media (max-width: 800px) { .sp-grid { grid-template-columns: repeat(2, 1fr); } .ea-row .btn-primary { flex: 1 1 100%; } }
+    @media (max-width: 800px) { .sp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ea-row .btn-primary { flex: 1 1 100%; } }
+    /* Very narrow phones: long names like "Thanksgiving" were pushing the cards past the screen edge */
+    @media (max-width: 360px) {
+      .sp-card { padding: 26px 6px 18px; }
+      .sp-name { font-size: 0.85rem; overflow-wrap: break-word; }
+    }
     #reviews .rv-sub { color: var(--muted); max-width: 560px; margin: 12px auto 26px; }
 
     #year-round { background: var(--cream); padding: 56px 24px; text-align: center; border-top: 1px solid var(--border); }
