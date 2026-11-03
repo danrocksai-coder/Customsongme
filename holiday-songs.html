@@ -437,6 +437,45 @@
       .sp-card { padding: 26px 6px 18px; }
       .sp-name { font-size: 0.85rem; overflow-wrap: break-word; }
     }
+
+    /* THANKSGIVING FAMILY SPECIAL: one feature card with two tiers, plus the step-by-step order fields */
+    .tg-feature { max-width: 760px; margin: 0 auto; background: rgba(255,255,255,0.05); border: 1px solid rgba(var(--accent-rgb),0.6); border-radius: var(--radius-lg); padding: 34px 26px 26px; }
+    .tg-em { font-size: 2.6rem; }
+    .tg-tag { display: inline-block; margin: 6px 0 4px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+    .tg-feature h3 { font-size: 1.7rem; color: var(--white); margin-bottom: 10px; }
+    .tg-feature > p { color: rgba(255,255,255,0.75); max-width: 560px; margin: 0 auto 22px; }
+    .tg-tiers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; text-align: left; }
+    .tg-tier { position: relative; display: flex; flex-direction: column; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.16); border-radius: var(--radius-lg); padding: 22px 18px 18px; }
+    .tg-tier.ultimate { border-color: var(--gold); background: rgba(var(--accent-rgb),0.08); }
+    .tg-tier-badge { position: absolute; top: -11px; left: 18px; background: var(--gold); color: var(--black); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 50px; }
+    .tg-tier h4 { font-family: var(--font-display); font-size: 1.15rem; color: var(--white); margin-bottom: 2px; }
+    .tg-tier-price { font-family: var(--font-display); font-size: 1.9rem; color: var(--gold); margin-bottom: 10px; }
+    .tg-tier ul { list-style: none; display: grid; gap: 7px; margin-bottom: 16px; color: rgba(255,255,255,0.85); font-size: 0.88rem; line-height: 1.4; }
+    .tg-tier li { padding-left: 20px; position: relative; }
+    .tg-tier li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+    .tg-tier .tg-start { margin-top: auto; text-align: center; }
+    .tg-deadline { margin-top: 16px; font-size: 0.85rem; color: rgba(255,255,255,0.65); }
+    .tg-block { background: rgba(255,255,255,0.03); border: 1px solid rgba(var(--accent-rgb),0.3); border-radius: var(--radius-lg); padding: 18px 16px; gap: 10px; }
+    .tg-step { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
+    .tg-step .opt { color: rgba(255,255,255,0.55); text-transform: none; letter-spacing: 0; font-weight: 400; }
+    .tg-help, .tg-photos p { font-size: 0.88rem; color: rgba(255,255,255,0.7); margin: 0; }
+    .tg-inner { margin: 0; }
+    .tg-people { display: grid; gap: 10px; }
+    .tg-person { display: grid; grid-template-columns: 26px minmax(0, 0.8fr) minmax(0, 1.6fr); gap: 8px; align-items: center; }
+    .tg-person[hidden] { display: none; }
+    .tg-n { width: 26px; height: 26px; border-radius: 50%; background: rgba(var(--accent-rgb),0.18); color: var(--gold); font-size: 0.75rem; font-weight: 700; display: grid; place-items: center; }
+    .tg-add { align-self: flex-start; background: none; border: 1px dashed rgba(var(--accent-rgb),0.6); color: var(--gold); border-radius: var(--radius); padding: 9px 14px; font: 600 0.88rem var(--font-body); cursor: pointer; }
+    .tg-add[hidden] { display: none; }
+    .tg-count { font-size: 0.78rem; color: rgba(255,255,255,0.55); }
+    #tier-ultimate-wrap[hidden], #tg-fields[hidden], #subject-group[hidden] { display: none; }
+    @media (max-width: 640px) {
+      .contact-pref-options:has(#tier-ultimate-wrap:not([hidden])) { border-radius: 18px; }
+      .contact-pref-options:has(#tier-ultimate-wrap:not([hidden])) .contact-pref-option { flex: 1 1 100%; }
+      .tg-tiers { grid-template-columns: 1fr; gap: 20px; }
+      .tg-feature { padding: 28px 16px 22px; }
+      .tg-person { grid-template-columns: 26px minmax(0, 1fr); }
+      .tg-person input:last-child { grid-column: 2; }
+    }
     #reviews .rv-sub { color: var(--muted); max-width: 560px; margin: 12px auto 26px; }
 
     #year-round { background: var(--cream); padding: 56px 24px; text-align: center; border-top: 1px solid var(--border); }
@@ -638,6 +677,41 @@
       <a class="sp-card" href="#order-form" data-special="Couples' Costume Love Song" data-genre="Pop"><div class="sp-num">08</div><div class="sp-em">💀</div><div class="sp-name">Couples' Costume Love Song</div><div class="sp-desc">The two of you in matching costumes, turned into a love song.</div><div class="sp-soon">From $30 · Order</div></a>
     </div>
 
+    <template id="tg-special-tpl">
+      <div class="tg-feature">
+        <div class="tg-em">🦃</div>
+        <div class="tg-tag">The Thanksgiving Special</div>
+        <h3>The Family Gratitude Song</h3>
+        <p>One song with the names of the people at your table and one line about why you're thankful for each of them. Add a shout-out for the host, a friend, or a family business.</p>
+        <div class="tg-tiers">
+          <div class="tg-tier">
+            <h4>Family Gratitude Song</h4>
+            <div class="tg-tier-price">$50</div>
+            <ul>
+              <li>Up to 6 family members named, each with their gratitude line</li>
+              <li>Host, location, and shout-outs in the song</li>
+              <li>Video with silhouette-style artwork (not your photos)</li>
+              <li>MP3, cover art, and lyric sheet</li>
+            </ul>
+            <a href="#order-form" class="btn-secondary full tg-start" data-tier="complete">Start for $50 →</a>
+          </div>
+          <div class="tg-tier ultimate">
+            <div class="tg-tier-badge">🌟 Ultimate</div>
+            <h4>Ultimate Family Package</h4>
+            <div class="tg-tier-price">$100</div>
+            <ul>
+              <li>Everything in the $50 song</li>
+              <li>Every family member named (up to 15), each with their gratitude line</li>
+              <li><strong>Up to 10 of your real family photos</strong> in the video</li>
+              <li>Public video by default, or private if you ask</li>
+            </ul>
+            <a href="#order-form" class="btn-primary tg-start" data-tier="ultimate">Start Ultimate for $100 →</a>
+          </div>
+        </div>
+        <div class="tg-deadline">Order by Sunday, Nov 22 to have it ready for the table on Thanksgiving Day.</div>
+      </div>
+    </template>
+
     <div class="hv-wrap" id="hv-wrap">
       <h3 class="hv-title">Hear the Halloween Specials</h3>
       <div class="hv-grid">
@@ -794,6 +868,17 @@
                 <input type="radio" name="package-tier" value="mp3" required id="pkg-mp3" />
                 <span>🎵 MP3 Only — $30</span>
               </label>
+              <label class="contact-pref-option" id="tier-ultimate-wrap" hidden>
+                <input type="radio" name="package-tier" value="ultimate" required id="pkg-ultimate" />
+                <span>🌟 Ultimate Family — $100</span>
+              </label>
+            </div>
+            <div class="public-note" id="ultimate-note" style="display:none;">
+              <p>🌟 Your video uses up to 10 of your real family photos and names every family member (up to 15). It goes on my public YouTube channel unless you'd like it private.</p>
+              <label class="unlisted-toggle">
+                <input type="checkbox" id="ultimate-private" name="ultimate-private-request" value="Yes, keep the video private" />
+                <span>Please keep my video private</span>
+              </label>
             </div>
             <div class="public-note" id="public-note">
               <p>💡 I keep the Complete Experience at $50 because your video gets shared publicly on my YouTube channel. That's part of how I keep prices this low. Prefer to keep your video unlisted instead?</p>
@@ -852,13 +937,151 @@
             </select>
           </div>
 
-          <div class="form-group">
+          <div class="form-group" id="subject-group">
             <label for="subject">Who is this song for?</label>
             <input type="text" id="subject" name="subject" placeholder="Names, spelled exactly right" required />
           </div>
 
+          <div class="form-group full" id="tg-fields" hidden>
+            <div class="form-grid tg-inner">
+              <div class="form-group full tg-block">
+                <div class="tg-step">Step 1 of 4 · The table</div>
+                <div class="form-grid tg-inner">
+                  <div class="form-group">
+                    <label for="tg-host">Who's hosting?</label>
+                    <input type="text" id="tg-host" name="host-names" placeholder="e.g. Grandma Rose &amp; Uncle Ray" data-tg-required />
+                  </div>
+                  <div class="form-group">
+                    <label for="tg-where">Where is it?</label>
+                    <input type="text" id="tg-where" name="host-location" placeholder="e.g. Grandma's house in Bakersfield" data-tg-required />
+                  </div>
+                  <div class="form-group full">
+                    <label for="tg-family">Family name(s) <span class="opt">(optional)</span></label>
+                    <input type="text" id="tg-family" name="family-names" placeholder="e.g. the Rock and Garcia families" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group full tg-block">
+                <div class="tg-step">Step 2 of 4 · Everyone at the table</div>
+                <p class="tg-help">Add each person and one sentence about why you're thankful for them. This becomes their line in the song, so a real detail works best ("always saves me the crispy edge of the mac and cheese"). Spell names exactly how you want them sung.</p>
+                <div class="tg-people" id="tg-people">
+                <div class="tg-person">
+                  <span class="tg-n">1</span>
+                  <input type="text" name="person-01-name" placeholder="Their name" aria-label="Person 1 name" />
+                  <input type="text" name="person-01-gratitude" maxlength="140" placeholder="One sentence: why you're grateful for them" aria-label="Person 1 gratitude line" />
+                </div>
+                <div class="tg-person">
+                  <span class="tg-n">2</span>
+                  <input type="text" name="person-02-name" placeholder="Their name" aria-label="Person 2 name" />
+                  <input type="text" name="person-02-gratitude" maxlength="140" placeholder="One sentence: why you're grateful for them" aria-label="Person 2 gratitude line" />
+                </div>
+                <div class="tg-person">
+                  <span class="tg-n">3</span>
+                  <input type="text" name="person-03-name" placeholder="Their name" aria-label="Person 3 name" />
+                  <input type="text" name="person-03-gratitude" maxlength="140" placeholder="One sentence: why you're grateful for them" aria-label="Person 3 gratitude line" />
+                </div>
+                <div class="tg-person">
+                  <span class="tg-n">4</span>
+                  <input type="text" name="person-04-name" placeholder="Their name" aria-label="Person 4 name" />
+                  <input type="text" name="person-04-gratitude" maxlength="140" placeholder="One sentence: why you're grateful for them" aria-label="Person 4 gratitude line" />
+                </div>
+                <div class="tg-person" hidden>
+                  <span class="tg-n">5</span>
+                  <input type="text" name="person-05-name" placeholder="Their name" aria-label="Person 5 name" />
+                  <input type="text" name="person-05-gratitude" maxlength="140" placeholder="One sentence: why you're grateful for them" aria-label="Person 5 gratitude line" />
+                </div>
+                <div class="tg-person" hidden>
+                  <span class="tg-n">6</span>
+                  <input type="text" name="person-06-name" placeholder="Their name" aria-label="Person 6 name" />
+                  <input type="text" name="person-06-gratitude" maxlength="140" placeholder="One sentence: why you're grateful for them" aria-label="Person 6 gratitude line" />
+                </div>
+                <div class="tg-person" hidden>
+                  <span class="tg-n">7</span>
+                  <input type="text" name="person-07-name" placeholder="Their name" aria-label="Person 7 name" />
+                  <input type="text" name="person-07-gratitude" maxlength="140" placeholder="One sentence: why you're grateful for them" aria-label="Person 7 gratitude line" />
+                </div>
+                <div class="tg-person" hidden>
+                  <span class="tg-n">8</span>
+                  <input type="text" name="person-08-name" placeholder="Their name" aria-label="Person 8 name" />
+                  <input type="text" name="person-08-gratitude" maxlength="140" placeholder="One sentence: why you're grateful for them" aria-label="Person 8 gratitude line" />
+                </div>
+                <div class="tg-person" hidden>
+                  <span class="tg-n">9</span>
+                  <input type="text" name="person-09-name" placeholder="Their name" aria-label="Person 9 name" />
+                  <input type="text" name="person-09-gratitude" maxlength="140" placeholder="One sentence: why you're grateful for them" aria-label="Person 9 gratitude line" />
+                </div>
+                <div class="tg-person" hidden>
+                  <span class="tg-n">10</span>
+                  <input type="text" name="person-10-name" placeholder="Their name" aria-label="Person 10 name" />
+                  <input type="text" name="person-10-gratitude" maxlength="140" placeholder="One sentence: why you're grateful for them" aria-label="Person 10 gratitude line" />
+                </div>
+                <div class="tg-person" hidden>
+                  <span class="tg-n">11</span>
+                  <input type="text" name="person-11-name" placeholder="Their name" aria-label="Person 11 name" />
+                  <input type="text" name="person-11-gratitude" maxlength="140" placeholder="One sentence: why you're grateful for them" aria-label="Person 11 gratitude line" />
+                </div>
+                <div class="tg-person" hidden>
+                  <span class="tg-n">12</span>
+                  <input type="text" name="person-12-name" placeholder="Their name" aria-label="Person 12 name" />
+                  <input type="text" name="person-12-gratitude" maxlength="140" placeholder="One sentence: why you're grateful for them" aria-label="Person 12 gratitude line" />
+                </div>
+                <div class="tg-person" hidden>
+                  <span class="tg-n">13</span>
+                  <input type="text" name="person-13-name" placeholder="Their name" aria-label="Person 13 name" />
+                  <input type="text" name="person-13-gratitude" maxlength="140" placeholder="One sentence: why you're grateful for them" aria-label="Person 13 gratitude line" />
+                </div>
+                <div class="tg-person" hidden>
+                  <span class="tg-n">14</span>
+                  <input type="text" name="person-14-name" placeholder="Their name" aria-label="Person 14 name" />
+                  <input type="text" name="person-14-gratitude" maxlength="140" placeholder="One sentence: why you're grateful for them" aria-label="Person 14 gratitude line" />
+                </div>
+                <div class="tg-person" hidden>
+                  <span class="tg-n">15</span>
+                  <input type="text" name="person-15-name" placeholder="Their name" aria-label="Person 15 name" />
+                  <input type="text" name="person-15-gratitude" maxlength="140" placeholder="One sentence: why you're grateful for them" aria-label="Person 15 gratitude line" />
+                </div>
+                </div>
+                <button type="button" class="tg-add" id="tg-add-person">+ Add another person</button>
+                <div class="tg-count" id="tg-count"></div>
+                <div class="form-group">
+                  <label for="tg-say">Any names that are tricky to say? <span class="opt">(optional)</span></label>
+                  <input type="text" id="tg-say" name="name-pronunciation" placeholder="e.g. Siobhan = shi-VAWN" />
+                </div>
+              </div>
+
+              <div class="form-group full tg-block">
+                <div class="tg-step">Step 3 of 4 · Special thanks &amp; shout-outs <span class="opt">(optional)</span></div>
+                <p class="tg-help">Someone who isn't at the table but deserves a thank-you: a friend, a neighbor, a coach, or a family business.</p>
+                <div class="tg-people" id="tg-shouts">
+                <div class="tg-person">
+                  <span class="tg-n">1</span>
+                  <input type="text" name="shoutout-1-who" placeholder="Person or business" aria-label="Shout-out 1 name" />
+                  <input type="text" name="shoutout-1-line" maxlength="140" placeholder="Why they deserve a thank-you" aria-label="Shout-out 1 line" />
+                </div>
+                <div class="tg-person">
+                  <span class="tg-n">2</span>
+                  <input type="text" name="shoutout-2-who" placeholder="Person or business" aria-label="Shout-out 2 name" />
+                  <input type="text" name="shoutout-2-line" maxlength="140" placeholder="Why they deserve a thank-you" aria-label="Shout-out 2 line" />
+                </div>
+                <div class="tg-person" hidden>
+                  <span class="tg-n">3</span>
+                  <input type="text" name="shoutout-3-who" placeholder="Person or business" aria-label="Shout-out 3 name" />
+                  <input type="text" name="shoutout-3-line" maxlength="140" placeholder="Why they deserve a thank-you" aria-label="Shout-out 3 line" />
+                </div>
+                </div>
+                <button type="button" class="tg-add" id="tg-add-shout">+ Add another shout-out</button>
+              </div>
+
+              <div class="form-group full tg-block tg-photos">
+                <div class="tg-step">Step 4 of 4 · Your video</div>
+                <p id="tg-photo-note"></p>
+              </div>
+            </div>
+          </div>
+
           <div class="form-group full">
-            <label for="story">Your story</label>
+            <label for="story" id="story-label">Your story</label>
             <textarea id="story" name="story" placeholder="Who they are, your traditions, the funny moments, the inside jokes, what this holiday means to your family or friends." required></textarea>
           </div>
 
@@ -1172,7 +1395,14 @@
     document.querySelectorAll('.js-holiday').forEach(el => el.textContent = spot.key);
     const eah = document.getElementById('ea-holiday'); if (eah) eah.value = spot.key;
     const spGrid = document.getElementById('sp-grid');
-    if (spGrid && spot.key !== 'Halloween') {
+    const tgTpl = document.getElementById('tg-special-tpl');
+    if (spGrid && spot.key === 'Thanksgiving' && tgTpl) {
+      spGrid.replaceWith(tgTpl.content.cloneNode(true));
+      const hv = document.getElementById('hv-wrap'); if (hv) hv.style.display = 'none';
+      const sph = document.querySelector('#specials h2'); if (sph) sph.innerHTML = 'This Year\'s <span class="gold">Thanksgiving Special</span>';
+      const sps = document.getElementById('sp-sub');
+      if (sps) sps.textContent = 'One song for the whole table, delivered within 24 hours. Play it before the toast.';
+    } else if (spGrid && spot.key !== 'Halloween') {
       let ph = '';
       for (let i = 1; i <= 8; i++) ph += '<div class="sp-card"><div class="sp-num">0' + i + '</div><div class="sp-em">' + spot.em + '</div><div class="sp-name">' + spot.key + ' Special #' + i + '</div><div class="sp-soon">Coming Soon</div></div>';
       spGrid.innerHTML = ph;
@@ -1240,6 +1470,13 @@
       'PayPal': 'https://www.paypal.me/DanRock834/30',
       'Cash App': 'https://cash.app/$optimistic01/30',
       'Venmo': 'https://venmo.com/u/Dan-Rock-5'
+    },
+    // TODO: swap in a dedicated "Ultimate Family Package" Stripe link; this $100 link is the Business Jingle one
+    'Ultimate Family (Thanksgiving) — $100': {
+      'Card (Stripe)': 'https://buy.stripe.com/fZu4gy4fe2tDcS70hE9Ve01',
+      'PayPal': 'https://www.paypal.me/DanRock834/100',
+      'Cash App': 'https://cash.app/$optimistic01/100',
+      'Venmo': 'https://venmo.com/u/Dan-Rock-5'
     }
   };
   const nextRedirectField = document.getElementById('next-redirect');
@@ -1253,6 +1490,7 @@
     const tier = document.querySelector('input[name="package-tier"]:checked');
     if (!tier) return 'Complete (Public) — $50';
     if (tier.value === 'mp3') return 'MP3 Only — $30';
+    if (tier.value === 'ultimate') return 'Ultimate Family (Thanksgiving) — $100';
     return (unlistedCheckbox && unlistedCheckbox.checked) ? 'Complete (Unlisted) — $75' : 'Complete (Public) — $50';
   }
 
@@ -1265,6 +1503,8 @@
 
     const tier = document.querySelector('input[name="package-tier"]:checked');
     if (publicNote) publicNote.style.display = (tier && tier.value === 'complete') ? 'block' : 'none';
+    const ultimateNote = document.getElementById('ultimate-note');
+    if (ultimateNote) ultimateNote.style.display = (tier && tier.value === 'ultimate') ? 'block' : 'none';
 
     const pkgLinks = PAYMENT_LINKS[pkgName];
     if (pkgLinks && pkgLinks[method.value]) {
@@ -1285,6 +1525,92 @@
   if (unlistedCheckbox) unlistedCheckbox.addEventListener('change', syncPaymentRedirect);
   if (emailField) emailField.addEventListener('input', syncPaymentRedirect);
   syncPaymentRedirect();
+
+  // ===== THANKSGIVING FAMILY SPECIAL: step-by-step fields and the $100 Ultimate tier =====
+  (function () {
+    const sel = document.getElementById('holiday');
+    const box = document.getElementById('tg-fields');
+    if (!sel || !box) return;
+    const ultWrap = document.getElementById('tier-ultimate-wrap');
+    const ult = document.getElementById('pkg-ultimate');
+    const complete = document.getElementById('pkg-complete');
+    const subjGroup = document.getElementById('subject-group');
+    const subj = document.getElementById('subject');
+    const story = document.getElementById('story');
+    const storyLabel = document.getElementById('story-label');
+    const special = document.getElementById('special-field');
+    const people = Array.from(document.querySelectorAll('#tg-people .tg-person'));
+    const shouts = Array.from(document.querySelectorAll('#tg-shouts .tg-person'));
+    const addPerson = document.getElementById('tg-add-person');
+    const addShout = document.getElementById('tg-add-shout');
+    const count = document.getElementById('tg-count');
+    const photoNote = document.getElementById('tg-photo-note');
+    const SPECIAL = 'Thanksgiving Family Gratitude Song';
+    const storyDefault = { label: storyLabel.innerHTML, ph: story.placeholder };
+    let peopleShown = 4, shoutsShown = 2;
+
+    const isOn = () => sel.value === 'Thanksgiving';
+    const tierValue = () => { const t = document.querySelector('input[name="package-tier"]:checked'); return t ? t.value : 'complete'; };
+    const peopleLimit = () => tierValue() === 'ultimate' ? 15 : 6;
+
+    function showRows(rows, n) {
+      rows.forEach((r, i) => {
+        r.hidden = i >= n;
+        r.querySelectorAll('input').forEach(inp => { inp.disabled = !isOn() || i >= n; });
+      });
+    }
+
+    function render() {
+      const on = isOn();
+      box.hidden = !on;
+      box.querySelectorAll('input').forEach(inp => { inp.disabled = !on; });
+      box.querySelectorAll('[data-tg-required]').forEach(inp => { inp.required = on; });
+      ultWrap.hidden = !on;
+      if (!on && ult.checked) { complete.checked = true; complete.dispatchEvent(new Event('change')); }
+
+      subjGroup.hidden = on;
+      subj.required = !on; subj.disabled = on;
+      story.required = !on;
+      storyLabel.innerHTML = on ? 'Anything else I should know? <span class="opt">(optional)</span>' : storyDefault.label;
+      story.placeholder = on ? 'Traditions, the dish everyone fights over, inside jokes, someone you\'re missing this year.' : storyDefault.ph;
+      if (on) special.value = SPECIAL; else if (special.value === SPECIAL) special.value = '';
+
+      const limit = peopleLimit();
+      const n = Math.min(peopleShown, limit);
+      showRows(people, n);
+      showRows(shouts, shoutsShown);
+      addPerson.hidden = n >= limit;
+      addShout.hidden = shoutsShown >= shouts.length;
+      count.textContent = n + ' of up to ' + limit + ' people' +
+        (tierValue() !== 'ultimate' && peopleShown >= limit ? '. Want to name more of the family? The Ultimate Family package ($100) includes up to 15.' : '');
+
+      const t = tierValue();
+      photoNote.innerHTML = t === 'ultimate'
+        ? '📸 <strong>Up to 10 of your real family photos go in your video.</strong> No need to upload them now. After you order, I\'ll text you simple directions for sending them.'
+        : t === 'mp3'
+          ? '🎵 <strong>MP3 only:</strong> you\'ll get the song as an audio file, with no video.'
+          : '🎨 <strong>Your video uses silhouette-style artwork</strong>, not your own photos. Want your real family photos (up to 10) in the video? Choose the Ultimate Family package ($100).';
+    }
+
+    addPerson.addEventListener('click', () => { peopleShown = Math.min(peopleShown + 1, people.length); render(); people[Math.min(peopleShown, peopleLimit()) - 1].querySelector('input').focus(); });
+    addShout.addEventListener('click', () => { shoutsShown = Math.min(shoutsShown + 1, shouts.length); render(); shouts[shoutsShown - 1].querySelector('input').focus(); });
+    sel.addEventListener('change', render);
+    document.querySelectorAll('input[name="package-tier"]').forEach(r => r.addEventListener('change', render));
+
+    // The two buttons on the Thanksgiving special card pick the holiday and the package
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('.tg-start');
+      if (!btn) return;
+      sel.value = 'Thanksgiving';
+      const pick = btn.dataset.tier === 'ultimate' ? ult : complete;
+      render();
+      pick.checked = true;
+      pick.dispatchEvent(new Event('change'));
+      if (window.gtag) gtag('event', 'thanksgiving_special_click', { tier: btn.dataset.tier });
+    });
+
+    render();
+  })();
 
   const orderForm = document.querySelector('.form-wrap form');
   const submitBtn = orderForm ? orderForm.querySelector('button[type="submit"]') : null;
