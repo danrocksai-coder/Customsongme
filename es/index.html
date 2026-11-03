@@ -352,7 +352,7 @@
     #hero {
       background: var(--black);
       color: var(--white);
-      padding: 90px 24px 80px;
+      padding: 40px 24px 80px;
       position: relative;
       overflow: hidden;
     }
@@ -368,6 +368,34 @@
       margin: 0 auto;
       text-align: center;
       position: relative;
+    }
+    .hero-tagline {
+      display: block;
+      margin: 0 auto 22px;
+      animation: fadeDown 0.6s ease both;
+    }
+    .hero-tagline .tagline-main {
+      display: block;
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 5.5vw, 2.1rem);
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+    }
+    .hero-tagline .tagline-sub {
+      display: block;
+      margin-top: 8px;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.5;
+    }
+    .hero-tagline .tagline-rule {
+      display: block;
+      width: 64px;
+      height: 2px;
+      margin: 14px auto 0;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
     }
     .hero-review {
       display: inline-flex;
@@ -1611,7 +1639,7 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .fade-up { opacity: 1; transform: none; transition: none; }
-      .hero-review, #hero h1, .hero-sub, .hero-price-anchor, .btn-primary { animation: none; }
+      .hero-tagline, .hero-review, #hero h1, .hero-sub, .hero-price-anchor, .btn-primary { animation: none; }
       *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
     }
     /* Blue & yellow theme: yellow text is hard to read on light sections, so those spots use royal blue */
@@ -1652,6 +1680,11 @@
 <!-- ═══════ SECTION 1 — HERO ═══════ -->
 <section id="hero">
   <div class="hero-inner">
+    <div class="hero-tagline">
+      <span class="tagline-main">Tu Historia. Tu Canción.</span>
+      <span class="tagline-sub">Cuéntame los recuerdos. Los convertiré en una canción que nunca olvidarán.</span>
+      <span class="tagline-rule" aria-hidden="true"></span>
+    </div>
     <div class="hero-review">
       <span class="stars">★★★★★</span>
       <span>"¡Mi esposo lloró como un bebé! ¡Qué regalo de aniversario tan maravilloso!" — S.H., reseña verificada de Google (traducida del inglés)</span>
