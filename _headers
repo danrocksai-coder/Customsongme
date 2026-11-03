@@ -82,3 +82,8 @@
 /landscapers
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-cache
+
+# Private customer song pages (never in search results)
+/songs/*
+  X-Robots-Tag: noindex, follow
+  Cache-Control: no-cache
