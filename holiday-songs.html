@@ -721,8 +721,8 @@
       </div>
     </div>
     <div class="ea-box" id="early-access">
-      <h3>Want First Dibs on the Next Holiday Specials?</h3>
-      <p>Drop your email and you'll hear about the Thanksgiving and Christmas specials before anyone else, at a lower pre-release price. No spam, just the specials.</p>
+      <h3>Want First Dibs on the <span id="ea-next">Next Holiday</span> Special?</h3>
+      <p>Drop your email and you'll hear about the next holiday special before anyone else, at a lower pre-release price. No spam, just the specials.</p>
       <form id="ea-form" action="https://formspree.io/f/xwpqlypv" method="POST">
         <input type="hidden" name="_subject" value="Holiday Specials early-access signup" />
         <input type="hidden" name="form-type" value="Holiday Specials Early Access" />
@@ -1392,7 +1392,9 @@
     document.getElementById('spot-sub').textContent = spot.sub;
     document.querySelectorAll('.js-emoji').forEach(el => el.textContent = spot.em);
     document.querySelectorAll('.js-holiday').forEach(el => el.textContent = spot.key);
-    const eah = document.getElementById('ea-holiday'); if (eah) eah.value = spot.key;
+    // Early-access signups are for the holiday after the one on sale now
+    const eah = document.getElementById('ea-holiday'); if (eah) eah.value = next[0].key;
+    const ean = document.getElementById('ea-next'); if (ean) ean.textContent = next[0].key;
     const spGrid = document.getElementById('sp-grid');
     const tgTpl = document.getElementById('tg-special-tpl');
     if (spGrid && spot.key === 'Thanksgiving' && tgTpl) {
