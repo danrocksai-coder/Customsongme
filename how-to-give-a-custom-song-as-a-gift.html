@@ -83,13 +83,13 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --black: #0a0a0a; --charcoal: #2d2d2d; --gold: #c9a84c; --gold-pale: #f5e9c8; --link: #7a5f14;
-      --cream: #faf7f0; --white: #ffffff; --ink: #1a1a1a; --muted: #5c5c5c; --border: #e8e0d0;
+      --black: #001a66; --charcoal: #0a3399; --gold: #fcd42a; --gold-pale: #fff4c2; --link: #0b3fc4;
+      --cream: #f3f6ff; --white: #ffffff; --ink: #00247f; --muted: #5c5c5c; --border: #d5ddf3;
       --font-display: 'Playfair Display', Georgia, serif; --font-body: 'DM Sans', system-ui, sans-serif;
       --radius: 4px; --radius-lg: 12px;
     }
     body { font-family: var(--font-body); background: var(--cream); color: var(--ink); line-height: 1.7; -webkit-font-smoothing: antialiased; font-size: 16px; }
-    nav { background: var(--black); padding: 0 24px; border-bottom: 1px solid rgba(201,168,76,0.2); }
+    nav { background: var(--black); padding: 0 24px; border-bottom: 1px solid rgba(252,212,42,0.2); }
     .nav-inner { max-width: 760px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
     .nav-logo { font-family: var(--font-display); font-size: 1.25rem; color: var(--gold); text-decoration: none; display: flex; align-items: center; gap: 10px; }
     .nav-logo-icon { height: 44px; width: auto; display: block; }
@@ -109,15 +109,21 @@
     table { width: 100%; border-collapse: collapse; background: var(--white); border: 1px solid var(--border); font-size: 0.92rem; }
     th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
     th { background: var(--gold-pale); font-weight: 600; }
-    tr.us td { font-weight: 600; background: #fffaf0; }
+    tr.us td { font-weight: 600; background: #f7f9ff; }
     .note { color: var(--muted); font-size: 0.85rem; margin-bottom: 20px; }
     .cta { background: var(--black); color: var(--white); border-radius: var(--radius-lg); padding: 28px 24px; margin-top: 40px; text-align: center; }
     .cta h2 { color: var(--white); border: none; margin: 0 0 10px; padding: 0; }
     .cta p { color: rgba(255,255,255,0.85); }
     .btn { display: inline-block; background: var(--gold); color: var(--black); font-weight: 700; padding: 14px 32px; border-radius: var(--radius); text-decoration: none; margin-top: 8px; }
-    .btn:hover { background: #e8c96a; color: var(--black); }
+    .btn:hover { background: #ffe16b; color: var(--black); }
     footer { background: var(--black); padding: 28px 24px; text-align: center; }
     footer a { color: var(--gold); font-size: 0.85rem; text-decoration: none; }
+    /* Blue & yellow theme: yellow text is hard to read on light sections, so those spots use royal blue */
+    :root { --gold-ink: #0b3fc4; }
+    #pricing-intro .gold, .story-link, #package .btn-secondary, #reviews .leave-review { color: var(--gold-ink); }
+    #package .btn-secondary, #reviews .leave-review { border-color: var(--gold-ink); }
+    #package .btn-secondary:hover, #reviews .leave-review:hover { background: var(--gold-ink); color: var(--white); }
+    #reviews .stars-lg { color: #e0a400; }
   </style>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HGQ54E69BZ"></script>
@@ -189,7 +195,7 @@
     <h2>Ready to give someone their song?</h2>
     <p>Tell me about them and your song is delivered within 24 hours.</p>
     <a class="btn" href="/#order-form">Start Your Song</a>
-    <p style="margin-top:16px;font-size:0.9rem;">See also: <a href="/custom-song-cost" style="color:#e8c96a;">what a custom song costs</a> · <a href="/what-to-include-in-an-anniversary-song" style="color:#e8c96a;">what to include in your story</a> · <a href="/birthday-songs" style="color:#e8c96a;">birthday songs</a></p>
+    <p style="margin-top:16px;font-size:0.9rem;">See also: <a href="/custom-song-cost" style="color:#ffe16b;">what a custom song costs</a> · <a href="/what-to-include-in-an-anniversary-song" style="color:#ffe16b;">what to include in your story</a> · <a href="/birthday-songs" style="color:#ffe16b;">birthday songs</a></p>
   </div>
 </div>
 </main>

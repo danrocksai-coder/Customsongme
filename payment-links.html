@@ -15,21 +15,21 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --black: #0a0a0a; --charcoal: #2d2d2d; --gold: #c9a84c; --gold-light: #e8c96a; --gold-pale: #f5e9c8;
-      --cream: #faf7f0; --white: #ffffff; --muted: #6b6b6b; --border: #e8e0d0;
+      --black: #001a66; --charcoal: #0a3399; --gold: #fcd42a; --gold-light: #ffe16b; --gold-pale: #fff4c2;
+      --cream: #f3f6ff; --white: #ffffff; --muted: #5b6478; --border: #d5ddf3;
       --font-display: 'Playfair Display', Georgia, serif; --font-body: 'DM Sans', system-ui, sans-serif;
       --radius: 4px; --radius-lg: 12px; --shadow-lg: 0 12px 48px rgba(0,0,0,0.14);
     }
     body {
       font-family: var(--font-body); background: var(--black); color: var(--white);
       min-height: 100vh; padding: 60px 20px; line-height: 1.65; -webkit-font-smoothing: antialiased;
-      background: radial-gradient(ellipse 80% 60% at 60% 20%, rgba(201,168,76,0.08) 0%, transparent 70%), var(--black);
+      background: radial-gradient(ellipse 80% 60% at 60% 20%, rgba(252,212,42,0.08) 0%, transparent 70%), var(--black);
     }
     .wrap { max-width: 480px; margin: 0 auto; text-align: center; }
     h1 { font-family: var(--font-display); font-size: clamp(1.6rem, 5vw, 2rem); margin-bottom: 12px; }
     .sub { color: rgba(255,255,255,0.6); font-size: 0.92rem; margin-bottom: 40px; }
     .pay-card {
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.2); border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(252,212,42,0.2); border-radius: var(--radius-lg);
       padding: 24px; margin-bottom: 16px; text-align: left;
     }
     .pay-card h2 { font-family: var(--font-display); font-size: 1.15rem; margin-bottom: 4px; }
@@ -41,12 +41,18 @@
     }
     .pay-card .btn:hover { background: var(--gold-light); }
     .note {
-      background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.2); border-radius: var(--radius);
+      background: rgba(252,212,42,0.06); border: 1px solid rgba(252,212,42,0.2); border-radius: var(--radius);
       padding: 14px 18px; font-size: 0.82rem; color: rgba(255,255,255,0.65); margin: 28px 0; text-align: left;
     }
     .note strong { color: var(--gold); }
     .contact { margin-top: 20px; font-size: 0.85rem; color: rgba(255,255,255,0.45); }
     .contact a { color: var(--gold); text-decoration: none; }
+    /* Blue & yellow theme: yellow text is hard to read on light sections, so those spots use royal blue */
+    :root { --gold-ink: #0b3fc4; }
+    #pricing-intro .gold, .story-link, #package .btn-secondary, #reviews .leave-review { color: var(--gold-ink); }
+    #package .btn-secondary, #reviews .leave-review { border-color: var(--gold-ink); }
+    #package .btn-secondary:hover, #reviews .leave-review:hover { background: var(--gold-ink); color: var(--white); }
+    #reviews .stars-lg { color: #e0a400; }
   </style>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HGQ54E69BZ"></script>
