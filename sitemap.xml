@@ -1,108 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- CustomSongMe public pages. A plain-language guide to this site for AI assistants is at https://www.customsongme.com/llms.txt -->
+<!-- Update <lastmod> to the edit date whenever you change a page. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.customsongme.com/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://www.customsongme.com/es/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://www.customsongme.com/es/canciones-de-quinceanera/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://www.customsongme.com/holiday-songs</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://www.customsongme.com/birthday-songs</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://www.customsongme.com/anniversary-songs</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://www.customsongme.com/wedding-songs</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://www.customsongme.com/love-songs</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://www.customsongme.com/mothers-day-songs</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://www.customsongme.com/fathers-day-songs</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://www.customsongme.com/pet-songs</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://www.customsongme.com/roast-songs</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://www.customsongme.com/memorial-songs</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://www.customsongme.com/business-jingles</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://www.customsongme.com/adopt-a-rescue-dog</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://www.customsongme.com/privacy-terms</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://www.customsongme.com/custom-song-cost</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://www.customsongme.com/what-to-include-in-an-anniversary-song</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://www.customsongme.com/how-to-give-a-custom-song-as-a-gift</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://www.customsongme.com/custom-song-vs-personalized-gift</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://www.customsongme.com/get-well-song-cards</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-11-03</lastmod>
   </url>
 </urlset>

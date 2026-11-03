@@ -1,5 +1,6 @@
+# CustomSongMe welcomes search engines and AI assistants.
+# Site guide for AI assistants: https://www.customsongme.com/llms.txt
 User-agent: *
 Allow: /
 
 Sitemap: https://www.customsongme.com/sitemap.xml
-
