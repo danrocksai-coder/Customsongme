@@ -35,6 +35,7 @@ http://www.customsongme.com/* https://www.customsongme.com/:splat    301!
 /thanks                  /thanks.html                  200
 /adopt-a-rescue-dog      /adopt-a-rescue-dog.html      200
 /thanks-rescue           /thanks-rescue.html           200
+/privacy /privacy-terms 301
 /privacy-terms           /privacy-terms.html           200
 /oxnard/93030            /oxnard/93030.html            200
 /oxnard/93030/intake     /oxnard/intake.html           200
