@@ -471,12 +471,13 @@
     }
 
     /* THANKSGIVING FAMILY SPECIAL: one feature card with two tiers, plus the step-by-step order fields */
-    .tg-feature { max-width: 760px; margin: 0 auto; background: rgba(255,255,255,0.05); border: 1px solid rgba(var(--accent-rgb),0.6); border-radius: var(--radius-lg); padding: 34px 26px 26px; }
+    .tg-feature { max-width: 1040px; margin: 0 auto; background: rgba(255,255,255,0.05); border: 1px solid rgba(var(--accent-rgb),0.6); border-radius: var(--radius-lg); padding: 34px 26px 26px; }
     .tg-em { font-size: 2.6rem; }
     .tg-tag { display: inline-block; margin: 6px 0 4px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
     .tg-feature h3 { font-size: 1.7rem; color: var(--white); margin-bottom: 10px; }
     .tg-feature > p { color: rgba(255,255,255,0.75); max-width: 560px; margin: 0 auto 22px; }
-    .tg-tiers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; text-align: left; }
+    .tg-tiers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; text-align: left; }
+    @media (max-width: 960px) { .tg-tiers { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 24px; } }
     .tg-tier { position: relative; display: flex; flex-direction: column; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.16); border-radius: var(--radius-lg); padding: 22px 18px 18px; }
     .tg-tier.ultimate { border-color: var(--gold); background: rgba(var(--accent-rgb),0.08); }
     .tg-tier-badge { position: absolute; top: -11px; left: 18px; background: var(--gold); color: var(--black); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 50px; }
@@ -499,7 +500,10 @@
     .tg-add { align-self: flex-start; background: none; border: 1px dashed rgba(var(--accent-rgb),0.6); color: var(--gold); border-radius: var(--radius); padding: 9px 14px; font: 600 0.88rem var(--font-body); cursor: pointer; }
     .tg-add[hidden] { display: none; }
     .tg-count { font-size: 0.78rem; color: rgba(255,255,255,0.55); }
-    #tier-ultimate-wrap[hidden], #tg-fields[hidden], #subject-group[hidden] { display: none; }
+    #tier-ultimate-wrap[hidden], #tier-ultimate-unlisted-wrap[hidden], #tg-fields[hidden], #subject-group[hidden] { display: none; }
+    .contact-pref-options:has(#tier-ultimate-wrap:not([hidden])) { border-radius: 18px; }
+    .contact-pref-options:has(#tier-ultimate-wrap:not([hidden])) .contact-pref-option { flex: 1 1 45%; }
+    .contact-pref-options:has(#tier-ultimate-wrap:not([hidden])) .contact-pref-option:has(#pkg-mp3) { order: -1; }
     @media (max-width: 640px) {
       .contact-pref-options:has(#tier-ultimate-wrap:not([hidden])) { border-radius: 18px; }
       .contact-pref-options:has(#tier-ultimate-wrap:not([hidden])) .contact-pref-option { flex: 1 1 100%; }
@@ -746,26 +750,46 @@
         <p>One song with the names of the people at your table and one line about why you're thankful for each of them. Add a shout-out for the host, a friend, or a family business.</p>
         <div class="tg-tiers">
           <div class="tg-tier">
-            <h4>Family Gratitude Song</h4>
-            <div class="tg-tier-price">$50</div>
+            <h4>MP3 Only</h4>
+            <div class="tg-tier-price">$25</div>
             <ul>
               <li>Every family member named (up to 15), each with their gratitude line</li>
               <li>Host, location, and shout-outs in the song</li>
-              <li>Video with silhouette-style artwork (not your photos)</li>
-              <li>MP3, cover art, and lyric sheet</li>
+              <li>One downloadable MP3</li>
+            </ul>
+            <a href="#order-form" class="btn-secondary full tg-start" data-tier="mp3">Start for $25 →</a>
+          </div>
+          <div class="tg-tier">
+            <h4>Family Gratitude Song</h4>
+            <div class="tg-tier-price">$50</div>
+            <ul>
+              <li>Everything in the $25 song</li>
+              <li>Public YouTube video with AI-generated artwork (not your photos)</li>
+              <li>Cover art and lyric sheet</li>
             </ul>
             <a href="#order-form" class="btn-secondary full tg-start" data-tier="complete">Start for $50 →</a>
           </div>
           <div class="tg-tier ultimate">
             <div class="tg-tier-badge">🌟 Ultimate</div>
             <h4>Ultimate Family Package</h4>
+            <div class="tg-tier-price">$75</div>
+            <ul>
+              <li>Everything in the $25 song</li>
+              <li><strong>Up to 10 of your real family photos</strong> in the video</li>
+              <li>Public YouTube video, plus the MP4 to download</li>
+              <li>PDF of the lyrics with artwork</li>
+            </ul>
+            <a href="#order-form" class="btn-primary tg-start" data-tier="ultimate">Start Ultimate for $75 →</a>
+          </div>
+          <div class="tg-tier ultimate">
+            <div class="tg-tier-badge">🔒 Unlisted</div>
+            <h4>Ultimate Family, Unlisted</h4>
             <div class="tg-tier-price">$100</div>
             <ul>
-              <li>Everything in the $50 song</li>
-              <li><strong>Up to 10 of your real family photos</strong> in the video, instead of silhouette artwork</li>
-              <li>Public video by default, or private if you ask</li>
+              <li>Everything in the $75 Ultimate package</li>
+              <li>Your YouTube video is <strong>unlisted</strong>: only people with the link can see it</li>
             </ul>
-            <a href="#order-form" class="btn-primary tg-start" data-tier="ultimate">Start Ultimate for $100 →</a>
+            <a href="#order-form" class="btn-primary tg-start" data-tier="ultimate-unlisted">Start Unlisted for $100 →</a>
           </div>
         </div>
         <div class="tg-deadline">Order by Sunday, Nov 22 to have it ready for the table on Thanksgiving Day.</div>
@@ -913,23 +937,23 @@
             <div class="contact-pref-options">
               <label class="contact-pref-option">
                 <input type="radio" name="package-tier" value="complete" checked required id="pkg-complete" />
-                <span>🎁 Complete — $50</span>
+                <span id="pkg-complete-label">🎁 Complete — $50</span>
               </label>
               <label class="contact-pref-option">
                 <input type="radio" name="package-tier" value="mp3" required id="pkg-mp3" />
-                <span>🎵 MP3 Only — $30</span>
+                <span id="pkg-mp3-label">🎵 MP3 Only — $30</span>
               </label>
               <label class="contact-pref-option" id="tier-ultimate-wrap" hidden>
                 <input type="radio" name="package-tier" value="ultimate" required id="pkg-ultimate" />
-                <span>🌟 Ultimate Family — $100</span>
+                <span>🌟 Ultimate Family — $75</span>
+              </label>
+              <label class="contact-pref-option" id="tier-ultimate-unlisted-wrap" hidden>
+                <input type="radio" name="package-tier" value="ultimate-unlisted" required id="pkg-ultimate-unlisted" />
+                <span>🔒 Ultimate Unlisted — $100</span>
               </label>
             </div>
             <div class="public-note" id="ultimate-note" style="display:none;">
-              <p>🌟 Your video uses up to 10 of your real family photos. It goes on my public YouTube channel unless you'd like it private.</p>
-              <label class="unlisted-toggle">
-                <input type="checkbox" id="ultimate-private" name="ultimate-private-request" value="Yes, keep the video private" />
-                <span>Please keep my video private</span>
-              </label>
+              <p id="ultimate-note-text">🌟 Your video uses up to 10 of your real family photos and goes on my public YouTube channel. You also get the MP4 and a PDF of the lyrics with artwork. Want the video unlisted instead? Choose Ultimate Unlisted ($100).</p>
             </div>
             <div class="public-note" id="public-note">
               <p>💡 I keep the Complete Experience at $50 because your video gets shared publicly on my YouTube channel. That's part of how I keep prices this low. Prefer to keep your video unlisted instead?</p>
@@ -1574,7 +1598,11 @@
     });
   })();
 
-  // PACKAGE + PAYMENT METHOD → PAYMENT LINK ROUTING (3-tier: MP3 $30 / Complete Public $50 / Complete Unlisted $75)
+  // PACKAGE + PAYMENT METHOD → PAYMENT LINK ROUTING
+  // Regular: MP3 $30 / Complete Public $50 / Complete Unlisted $75
+  // Thanksgiving Family Gratitude: MP3 $25 / Song $50 / Ultimate Public $75 / Ultimate Unlisted $100
+  const STRIPE_TG_MP3_25 = 'STRIPE_LINK_25_TODO';
+  const STRIPE_TG_ULTIMATE_75 = 'STRIPE_LINK_75_TODO';
   const PAYMENT_LINKS = {
     'Complete (Public) — $50': {
       'Card (Stripe)': 'https://buy.stripe.com/3cIaEWcLKb09cS7fcy9Ve0f',
@@ -1594,7 +1622,25 @@
       'Cash App': 'https://cash.app/$optimistic01/30',
       'Venmo': 'https://venmo.com/u/Dan-Rock-5'
     },
-    'Ultimate Family (Thanksgiving) — $100': {
+    'Family Gratitude MP3 (Thanksgiving) — $25': {
+      'Card (Stripe)': STRIPE_TG_MP3_25,
+      'PayPal': 'https://www.paypal.me/DanRock834/25',
+      'Cash App': 'https://cash.app/$optimistic01/25',
+      'Venmo': 'https://venmo.com/u/Dan-Rock-5'
+    },
+    'Family Gratitude Song (Thanksgiving) — $50': {
+      'Card (Stripe)': 'https://buy.stripe.com/3cIaEWcLKb09cS7fcy9Ve0f',
+      'PayPal': 'https://www.paypal.me/DanRock834/50',
+      'Cash App': 'https://cash.app/$optimistic01/50',
+      'Venmo': 'https://venmo.com/u/Dan-Rock-5'
+    },
+    'Ultimate Family (Thanksgiving, Public) — $75': {
+      'Card (Stripe)': STRIPE_TG_ULTIMATE_75,
+      'PayPal': 'https://www.paypal.me/DanRock834/75',
+      'Cash App': 'https://cash.app/$optimistic01/75',
+      'Venmo': 'https://venmo.com/u/Dan-Rock-5'
+    },
+    'Ultimate Family (Thanksgiving, Unlisted) — $100': {
       'Card (Stripe)': 'https://buy.stripe.com/aFadR8132c4d6tJ6G29Ve0j',
       'PayPal': 'https://www.paypal.me/DanRock834/100',
       'Cash App': 'https://cash.app/$optimistic01/100',
@@ -1611,8 +1657,15 @@
   function getEffectivePackage() {
     const tier = document.querySelector('input[name="package-tier"]:checked');
     if (!tier) return 'Complete (Public) — $50';
+    const holidaySel = document.getElementById('holiday');
+    const tg = holidaySel && holidaySel.value === 'Thanksgiving';
+    if (tg) {
+      if (tier.value === 'mp3') return 'Family Gratitude MP3 (Thanksgiving) — $25';
+      if (tier.value === 'ultimate') return 'Ultimate Family (Thanksgiving, Public) — $75';
+      if (tier.value === 'ultimate-unlisted') return 'Ultimate Family (Thanksgiving, Unlisted) — $100';
+      return 'Family Gratitude Song (Thanksgiving) — $50';
+    }
     if (tier.value === 'mp3') return 'MP3 Only — $30';
-    if (tier.value === 'ultimate') return 'Ultimate Family (Thanksgiving) — $100';
     return (unlistedCheckbox && unlistedCheckbox.checked) ? 'Complete (Unlisted) — $75' : 'Complete (Public) — $50';
   }
 
@@ -1624,7 +1677,8 @@
     if (packageHiddenField) packageHiddenField.value = pkgName;
 
     const tier = document.querySelector('input[name="package-tier"]:checked');
-    if (publicNote) publicNote.style.display = (tier && tier.value === 'complete') ? 'block' : 'none';
+    const tgMode = pkgName.indexOf('(Thanksgiving') !== -1;
+    if (publicNote) publicNote.style.display = (!tgMode && tier && tier.value === 'complete') ? 'block' : 'none';
     const ultimateNote = document.getElementById('ultimate-note');
     if (ultimateNote) ultimateNote.style.display = (tier && tier.value === 'ultimate') ? 'block' : 'none';
 
@@ -1645,16 +1699,24 @@
     radio.addEventListener('change', syncPaymentRedirect);
   });
   if (unlistedCheckbox) unlistedCheckbox.addEventListener('change', syncPaymentRedirect);
+  const holidaySelForPay = document.getElementById('holiday');
+  if (holidaySelForPay) holidaySelForPay.addEventListener('change', syncPaymentRedirect);
   if (emailField) emailField.addEventListener('input', syncPaymentRedirect);
   syncPaymentRedirect();
 
-  // ===== THANKSGIVING FAMILY SPECIAL: step-by-step fields and the $100 Ultimate tier =====
+  // ===== THANKSGIVING FAMILY SPECIAL: step-by-step fields and the four price tiers ($25/$50/$75/$100) =====
   (function () {
     const sel = document.getElementById('holiday');
     const box = document.getElementById('tg-fields');
     if (!sel || !box) return;
     const ultWrap = document.getElementById('tier-ultimate-wrap');
     const ult = document.getElementById('pkg-ultimate');
+    const ultUWrap = document.getElementById('tier-ultimate-unlisted-wrap');
+    const ultU = document.getElementById('pkg-ultimate-unlisted');
+    const mp3 = document.getElementById('pkg-mp3');
+    const mp3Label = document.getElementById('pkg-mp3-label');
+    const completeLabel = document.getElementById('pkg-complete-label');
+    const unlistedBox = document.getElementById('unlisted-checkbox');
     const complete = document.getElementById('pkg-complete');
     const subjGroup = document.getElementById('subject-group');
     const subj = document.getElementById('subject');
@@ -1688,7 +1750,11 @@
       box.querySelectorAll('input').forEach(inp => { inp.disabled = !on; });
       box.querySelectorAll('[data-tg-required]').forEach(inp => { inp.required = on; });
       ultWrap.hidden = !on;
-      if (!on && ult.checked) { complete.checked = true; complete.dispatchEvent(new Event('change')); }
+      ultUWrap.hidden = !on;
+      mp3Label.textContent = on ? '🎵 MP3 Only — $25' : '🎵 MP3 Only — $30';
+      completeLabel.textContent = on ? '🎁 Family Gratitude — $50' : '🎁 Complete — $50';
+      if (on && unlistedBox && unlistedBox.checked) { unlistedBox.checked = false; }
+      if (!on && (ult.checked || ultU.checked)) { complete.checked = true; complete.dispatchEvent(new Event('change')); }
 
       subjGroup.hidden = on;
       subj.required = !on; subj.disabled = on;
@@ -1706,11 +1772,11 @@
       count.textContent = n + ' of up to ' + limit + ' people';
 
       const t = tierValue();
-      photoNote.innerHTML = t === 'ultimate'
+      photoNote.innerHTML = (t === 'ultimate' || t === 'ultimate-unlisted')
         ? '📸 <strong>Up to 10 of your real family photos go in your video.</strong> No need to upload them now. After you order, I\'ll text you simple directions for sending them.'
         : t === 'mp3'
-          ? '🎵 <strong>MP3 only:</strong> you\'ll get the song as an audio file, with no video.'
-          : '🎨 <strong>Your video uses silhouette-style artwork</strong>, not your own photos. Want your real family photos (up to 10) in the video? Choose the Ultimate Family package ($100).';
+          ? '🎵 <strong>MP3 only:</strong> you\'ll get one downloadable MP3, with no video.'
+          : '🎨 <strong>Your video uses AI-generated artwork</strong>, not your own photos. Want your real family photos (up to 10) in the video? Choose the Ultimate Family package ($75).';
     }
 
     addPerson.addEventListener('click', () => { peopleShown = Math.min(peopleShown + 1, people.length); render(); people[Math.min(peopleShown, peopleLimit()) - 1].querySelector('input').focus(); });
@@ -1723,7 +1789,7 @@
       const btn = e.target.closest('.tg-start');
       if (!btn) return;
       sel.value = 'Thanksgiving';
-      const pick = btn.dataset.tier === 'ultimate' ? ult : complete;
+      const pick = { ultimate: ult, 'ultimate-unlisted': ultU, mp3: mp3 }[btn.dataset.tier] || complete;
       render();
       pick.checked = true;
       pick.dispatchEvent(new Event('change'));
