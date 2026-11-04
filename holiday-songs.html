@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Custom Christmas Songs With Their Name, in 24 Hours | CustomSongMe</title>
-  <meta name="description" content="A personalized Christmas song with your family's names, traditions and inside jokes, written by Dan the Song Man. From $30, delivered within 24 hours. Order by Dec 22." />
-  <meta property="og:title" content="Custom Christmas &amp; Holiday Songs | CustomSongMe" />
-  <meta property="og:description" content="A custom Christmas song with their names in every chorus, or a song for Thanksgiving or any holiday. Written about your people, delivered within 24 hours." />
+  <title>Custom Thanksgiving &amp; Christmas Songs, in 24 Hours | CustomSongMe</title>
+  <meta name="description" content="A custom Thanksgiving song with every name at your table and a line of thanks for each, from $25. Or a Christmas song with their names in every chorus. Written by Dan the Song Man, delivered within 24 hours." />
+  <meta property="og:title" content="A Custom Thanksgiving Song About Your Table | CustomSongMe" />
+  <meta property="og:description" content="Every name at your table, one line of thanks for each. Play it before the toast. From $25, delivered within 24 hours. Order by Sunday, Nov 22." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.customsongme.com/holiday-songs" />
   <meta property="og:image" content="https://www.customsongme.com/dan-the-song-man.jpg" />
@@ -646,7 +646,7 @@
       <div class="w-main"><em>Holiday</em> SongMe</div>
       <div class="w-sub">by CustomSongMe</div>
     </div>
-    <h1 class="h1-sm">Custom Christmas &amp; Holiday Songs, Written About Your People</h1>
+    <h1 class="h1-sm">Custom Thanksgiving, Christmas &amp; Holiday Songs, Written About Your People</h1>
     <div class="spotlight" id="spotlight">
       <div class="s-emoji" id="spot-emoji">🎄</div>
       <div>
@@ -678,7 +678,7 @@
 <section id="quick-answer" style="padding:48px 24px 8px;text-align:center">
   <div style="max-width:760px;margin:0 auto;">
     <h2 style="margin-bottom:12px;">What is a custom holiday song?</h2>
-    <p style="font-size:1.05rem;line-height:1.7;margin:0;text-align:left;">A custom holiday song is an original song written about your people for Christmas, Thanksgiving or any holiday, using their names, your traditions and your family's inside jokes. At CustomSongMe, Dan the Song Man writes and produces it from what you share, delivered within 24 hours of confirmed payment. It costs $30 for the MP3, $50 for the complete package (MP3, public YouTube video, cover art and lyric sheet), or $75 with an unlisted video.</p>
+    <p style="font-size:1.05rem;line-height:1.7;margin:0;text-align:left;">A custom holiday song is an original song written about your people for Christmas, Thanksgiving or any holiday, using their names, your traditions and your family's inside jokes. At CustomSongMe, Dan the Song Man writes and produces it from what you share, delivered within 24 hours of confirmed payment. This Thanksgiving, the Family Gratitude Song names everyone at your table: $25 for the MP3, $50 with a public YouTube video, $75 for the Ultimate package with up to 10 of your family photos, or $100 with the video unlisted. Other holiday songs cost $30 for the MP3, $50 for the complete package (MP3, public YouTube video, cover art and lyric sheet), or $75 with an unlisted video.</p>
   </div>
 </section>
 
@@ -748,6 +748,10 @@
         <div class="tg-tag">The Thanksgiving Special</div>
         <h3>The Family Gratitude Song</h3>
         <p>One song with the names of the people at your table and one line about why you're thankful for each of them. Add a shout-out for the host, a friend, or a family business.</p>
+        <div class="hv-wrap" style="max-width:300px;margin:24px auto 32px;">
+          <h3 class="hv-title" style="text-align:center;">Hear a Thanksgiving Song</h3>
+          <iframe class="hv-frame" src="https://www.youtube-nocookie.com/embed/tGlI3x2HccE" title="Thanksgiving Song: One More Thing Before We Eat" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        </div>
         <div class="tg-tiers">
           <div class="tg-tier">
             <h4>MP3 Only</h4>
@@ -791,10 +795,6 @@
             </ul>
             <a href="#order-form" class="btn-primary tg-start" data-tier="ultimate-unlisted">Start Unlisted for $100 →</a>
           </div>
-        </div>
-        <div class="hv-wrap" style="max-width:300px;margin:32px auto 0;">
-          <h3 class="hv-title" style="text-align:center;">Hear a Thanksgiving Song</h3>
-          <iframe class="hv-frame" src="https://www.youtube-nocookie.com/embed/tGlI3x2HccE" title="Thanksgiving Song: One More Thing Before We Eat" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="tg-deadline">Order by Sunday, Nov 22 to have it ready for the table on Thanksgiving Day.</div>
       </div>
@@ -1548,6 +1548,13 @@
       const sph = document.querySelector('#specials h2'); if (sph) sph.innerHTML = 'This Year\'s <span class="gold">Thanksgiving Special</span>';
       const sps = document.getElementById('sp-sub');
       if (sps) sps.textContent = 'One song for the whole table, delivered within 24 hours. Play it before the toast.';
+      // Hero price box: show the Thanksgiving prices while Thanksgiving is the featured holiday
+      const hp = document.querySelector('.hero-price-anchor');
+      if (hp) {
+        hp.querySelector('.price-label').textContent = 'Thanksgiving Family Gratitude Song';
+        hp.querySelector('.price-includes').textContent = 'Every Name at Your Table · Public YouTube Video · Cover Art · Lyric Sheet';
+        hp.querySelector('.price-alt').textContent = 'Just want the song? MP3 Only is $25 · Order by Sunday, Nov 22';
+      }
     } else if (spGrid && spot.key === 'Halloween' && hwTpl) {
       spGrid.replaceWith(hwTpl.content.cloneNode(true));
       const sps = document.getElementById('sp-sub');
