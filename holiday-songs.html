@@ -1597,6 +1597,30 @@
           cta.insertAdjacentHTML('afterend', '<p class="tg-fine">From $25 · Printable keepsake included</p>');
         }
       }
+      // Package cards and FAQ further down: Thanksgiving prices ($25 MP3), buttons start the matching Thanksgiving package
+      const pih = document.querySelector('#pricing-intro h2');
+      if (pih) pih.innerHTML = 'Simple Pricing. <span class="gold">Starting at $25.</span>';
+      const budget = document.querySelector('#package .package-card.budget');
+      if (budget) {
+        budget.querySelector('.package-price').innerHTML = '<span>$</span>25';
+        budget.querySelector('.package-price-note').textContent = 'One-time payment · Just the song · Thanksgiving price';
+        const va = budget.querySelector('.value-anchor');
+        if (va) va.textContent = '💡 Want the video, cover art, and lyric sheet too? For $25 more, the Family Gratitude Song includes everything.';
+        const b = budget.querySelector('.package-cta a');
+        if (b) { b.classList.add('tg-start'); b.dataset.tier = 'mp3'; }
+      }
+      const featured = document.querySelector('#package .package-card.featured .package-cta a');
+      if (featured) { featured.classList.add('tg-start'); featured.dataset.tier = 'complete'; }
+      document.querySelectorAll('#christmas-songs td, #christmas-songs ~ section td, td').forEach(td => {
+        if (td.textContent.trim() === '$30 to $75, within 24 hours') td.textContent = '$25 to $100, within 24 hours';
+      });
+      const qa = document.querySelector('#quick-answer p');
+      if (qa) qa.innerHTML = qa.innerHTML.replace(/ Other holiday songs cost \$30 for the MP3[^.]*\./, '');
+      document.querySelectorAll('.faq-a').forEach(a => {
+        if (a.textContent.indexOf('MP3 Only package is $30') !== -1) {
+          a.textContent = 'Yes. For Thanksgiving, the MP3 Only package is $25 and includes the song as a downloadable MP3 audio file, with no video, cover art, or lyric sheet. The Family Gratitude Song is $50 and adds the YouTube video, cover art and lyric sheet.';
+        }
+      });
     } else if (spGrid && spot.key === 'Halloween' && hwTpl) {
       spGrid.replaceWith(hwTpl.content.cloneNode(true));
       const sps = document.getElementById('sp-sub');
