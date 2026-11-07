@@ -87,3 +87,14 @@
 /songs/*
   X-Robots-Tag: noindex, follow
   Cache-Control: no-cache
+
+# Reverse Gift: product page and personal QR pages are never in search results.
+# Noindex is not privacy: anyone with a page link can still open it.
+/reverse-gift
+  X-Robots-Tag: noindex, nofollow, noarchive
+  Cache-Control: no-cache
+  Referrer-Policy: no-referrer
+
+/reverse-gift/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+  Referrer-Policy: no-referrer
