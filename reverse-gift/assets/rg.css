@@ -56,9 +56,7 @@ body {
 .hero.has-photo .hero-text { color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.4); }
 
 /* ---------- Steps ---------- */
-.progress { display: flex; gap: 8px; justify-content: center; margin: 4px 0 14px; }
-.progress span { width: 34px; height: 6px; border-radius: 3px; background: var(--border); }
-.progress span.on { background: var(--ink); }
+.step-num { font-size: 14px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
 .step h2 { font-family: var(--font-display); font-size: 26px; color: var(--navy); margin-bottom: 4px; }
 .step .sub { color: var(--muted); font-size: 16px; margin-bottom: 14px; }
 
@@ -89,8 +87,10 @@ textarea:focus, input:focus, select:focus { outline: none; border-color: var(--i
 }
 .mic.listening { background: #ffe8e8; border-color: #d92d20; color: #b42318; border-style: solid; }
 .mic.listening .dot { animation: pulse 1s infinite; }
+.mic:not(.listening) .dot { display: none; }
 .mic .dot { width: 14px; height: 14px; border-radius: 50%; background: currentColor; }
 @keyframes pulse { 50% { opacity: .2; } }
+#micHint { margin: 0 0 12px; }
 .hint { font-size: 15px; color: var(--muted); margin-bottom: 10px; }
 
 .btn {

@@ -84,9 +84,6 @@
   /* ---------------- Steps ---------------- */
   function go(n) {
     [1, 2, 3].forEach(function (i) { $('step' + i).classList.toggle('hidden', i !== n); });
-    document.querySelectorAll('.progress span').forEach(function (s) {
-      s.classList.toggle('on', +s.getAttribute('data-p') <= n);
-    });
     var target = n === 1 ? $('hero') : $('step' + n);
     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
@@ -123,51 +120,98 @@
     $('makeCard').disabled = !m.value.trim();
   }
 
+  // iPhone/iPad: the browser's own speech feature is unreliable and can hang,
+  // so we use the keyboard's microphone, which works on every iPhone.
+  function isIOS() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  }
+
+  function micHint(html) {
+    var h = $('micHint');
+    h.innerHTML = html;
+    h.classList.remove('hidden');
+  }
+
+  function useKeyboardMic() {
+    var m = $('message');
+    m.focus();
+    micHint('Now tap the <strong>🎤 microphone on your keyboard</strong> and start talking. ' +
+      'Tap it again when you’re done.');
+  }
+
   function setupSpeech() {
     var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SR) { $('micHint').classList.remove('hidden'); return; }
-    var mic = $('mic'), rec = null, listening = false, base = '';
-    mic.classList.remove('hidden');
+    var mic = $('mic');
+    if (!SR || isIOS()) {
+      mic.addEventListener('click', useKeyboardMic);
+      return;
+    }
 
-    function stop() {
+    var rec = null, listening = false, base = '', heard = false, watchdog = null, maxTimer = null;
+
+    function reset() {
       listening = false;
+      clearTimeout(watchdog); clearTimeout(maxTimer);
       mic.classList.remove('listening'); mic.setAttribute('aria-pressed', 'false');
-      $('micLabel').textContent = 'Tap to talk';
+      $('micLabel').textContent = '🎤 Tap to talk';
       updateCounter();
     }
 
+    // Always stop right away when asked; never wait on the browser.
+    function stopNow() {
+      if (rec) { try { rec.abort(); } catch (e) {} rec.onresult = rec.onerror = rec.onend = null; rec = null; }
+      reset();
+    }
+
     mic.addEventListener('click', function () {
-      if (listening && rec) { rec.stop(); return; }
+      if (listening) { stopNow(); return; }
+      $('micHint').classList.add('hidden');
       rec = new SR();
       rec.lang = navigator.language || 'en-US';
       rec.interimResults = true;
-      rec.continuous = true;
+      rec.continuous = false;
       base = $('message').value.trim();
-      rec.onresult = function (e) {
-        var finalText = '', interim = '';
-        for (var i = 0; i < e.results.length; i++) {
-          if (e.results[i].isFinal) finalText += e.results[i][0].transcript;
-          else interim += e.results[i][0].transcript;
-        }
-        var spoken = (finalText + ' ' + interim).replace(/\s+/g, ' ').trim();
-        if (spoken) spoken = spoken.charAt(0).toUpperCase() + spoken.slice(1);
-        $('message').value = (base ? base + ' ' : '') + spoken;
+      heard = false;
+      var r = rec;
+      r.onresult = function (e) {
+        if (r !== rec) return;
+        heard = true;
+        clearTimeout(watchdog);
+        var text = '';
+        for (var i = 0; i < e.results.length; i++) text += e.results[i][0].transcript;
+        text = text.replace(/\s+/g, ' ').trim();
+        if (text) text = text.charAt(0).toUpperCase() + text.slice(1);
+        $('message').value = (base ? base + ' ' : '') + text;
         updateCounter();
       };
-      rec.onerror = function (e) {
-        stop();
+      r.onerror = function (e) {
+        if (r !== rec) return;
+        stopNow();
         if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
-          $('micHint').textContent = 'Microphone is blocked. Tap the 🎤 on your keyboard, or just type.';
-          $('micHint').classList.remove('hidden');
+          micHint('The microphone is blocked. Tap the <strong>🎤 on your keyboard</strong> instead, or just type.');
+        } else if (e.error === 'no-speech') {
+          micHint('I didn’t hear anything. Tap <strong>Tap to talk</strong> and try again, or use the 🎤 on your keyboard.');
         }
       };
-      rec.onend = stop;
+      r.onend = function () { if (r === rec) { rec = null; reset(); } };
       try {
-        rec.start();
+        r.start();
         listening = true;
         mic.classList.add('listening'); mic.setAttribute('aria-pressed', 'true');
         $('micLabel').textContent = 'Listening… tap to stop';
-      } catch (err) { stop(); }
+        // Safety stops so the button can never get stuck.
+        watchdog = setTimeout(function () {
+          if (!heard) {
+            stopNow();
+            micHint('I didn’t hear anything. Try again, or tap the <strong>🎤 on your keyboard</strong>.');
+          }
+        }, 8000);
+        maxTimer = setTimeout(stopNow, 60000);
+      } catch (err) {
+        stopNow();
+        useKeyboardMic();
+      }
     });
   }
 

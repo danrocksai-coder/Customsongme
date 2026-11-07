@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/reverse-gift/assets/rg.css?v=1" />
+  <link rel="stylesheet" href="/reverse-gift/assets/rg.css?v=2" />
 </head>
 <body>
   <div id="testBanner" class="test-banner hidden">Test page — not a real customer</div>
@@ -34,10 +34,9 @@
         </div>
       </section>
 
-      <div class="progress" aria-hidden="true"><span data-p="1"></span><span data-p="2"></span><span data-p="3"></span></div>
-
       <!-- Step 1: choose a design -->
       <section class="step" id="step1" aria-labelledby="s1h">
+        <p class="step-num">Step 1 of 3</p>
         <h2 id="s1h">Send <span class="pl"></span> some love</h2>
         <p class="sub">Tap a card design.</p>
         <div class="designs" id="designs" role="group" aria-label="Card designs"></div>
@@ -46,10 +45,11 @@
 
       <!-- Step 2: say it or type it -->
       <section class="step hidden" id="step2" aria-labelledby="s2h">
+        <p class="step-num">Step 2 of 3</p>
         <h2 id="s2h">What do you want to say?</h2>
         <p class="sub">Talk or type. You can fix any words before you send.</p>
-        <button class="mic hidden" id="mic" type="button" aria-pressed="false"><span class="dot"></span><span id="micLabel">Tap to talk</span></button>
-        <p class="hint hidden" id="micHint">Tip: tap the 🎤 on your keyboard to talk instead of type.</p>
+        <button class="mic" id="mic" type="button" aria-pressed="false"><span class="dot"></span><span id="micLabel">🎤 Tap to talk</span></button>
+        <p class="status info hidden" id="micHint" role="status" aria-live="polite"></p>
         <label class="sr" for="message">Your message</label>
         <textarea id="message" placeholder="Hey Mom, I love you. Just thinking about you today…"></textarea>
         <div class="counter" id="counter"></div>
@@ -61,6 +61,7 @@
 
       <!-- Step 3: copy + text -->
       <section class="step hidden" id="step3" aria-labelledby="s3h">
+        <p class="step-num">Step 3 of 3</p>
         <h2 id="s3h">Your card is ready!</h2>
         <div class="card-out"><img id="cardImg" alt="Your greeting card" /></div>
 
@@ -91,7 +92,7 @@
   </main>
 
   <canvas id="work" class="hidden" aria-hidden="true"></canvas>
-  <script src="/reverse-gift/assets/rg-designs.js?v=1"></script>
-  <script src="/reverse-gift/assets/rg-recipient.js?v=1"></script>
+  <script src="/reverse-gift/assets/rg-designs.js?v=2"></script>
+  <script src="/reverse-gift/assets/rg-recipient.js?v=2"></script>
 </body>
 </html>
