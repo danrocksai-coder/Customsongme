@@ -1,0 +1,10 @@
+{
+  "title": "One More Thing Before We Eat",
+  "for_line": "Sample keepsake · Thanksgiving 2026",
+  "lyrics_file": "lyrics.txt",
+  "cover_art": "cover-square.jpg",
+  "mp3_url": "https://youtube.com/shorts/tGlI3x2HccE",
+  "youtube_url": "https://youtube.com/shorts/tGlI3x2HccE",
+  "tier": 50,
+  "output": "../../../img/thanksgiving-keepsake-sample.pdf"
+}
