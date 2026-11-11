@@ -1,0 +1,12 @@
+{
+  "id": "test-mom-k8m2x7q9",
+  "status": "active",
+  "test": true,
+  "parentType": "mom",
+  "displayName": "Mom",
+  "welcome": "Hi honey! I miss your voice. Send me a little note whenever you think of me.",
+  "recipientName": "Michael",
+  "photo": "/reverse-gift/profiles/media/sample-photo.svg",
+  "theme": null,
+  "phone": "+15550100123"
+}

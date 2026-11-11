@@ -44,6 +44,10 @@ http://www.customsongme.com/* https://www.customsongme.com/:splat    301!
 /landscapers             /landscapers.html             200
 /songs/*  /songs/:splat/index.html  200
 
+# Reverse Gift (not public yet; noindex via _headers)
+# One shared template serves every parent's QR page: /reverse-gift/p/<id>
+/reverse-gift/p/*        /reverse-gift/p/index.html    200
+
 # ==========================================
 # 4. SONG MERCH QR CODES (mugs, shirts)
 # One line per customer: /play/<slug>  <their YouTube link>  302

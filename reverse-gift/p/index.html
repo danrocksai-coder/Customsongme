@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>A Note for You | Reverse Gift</title>
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <meta name="referrer" content="no-referrer" />
+  <meta name="theme-color" content="#00247f" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/reverse-gift/assets/rg.css?v=2" />
+</head>
+<body>
+  <div id="testBanner" class="test-banner hidden">Test page — not a real customer</div>
+
+  <main class="wrap">
+    <div id="loading" class="notice"><p>Loading…</p></div>
+
+    <div id="notFound" class="notice hidden">
+      <h1>This page isn’t available</h1>
+      <p>The link may be mistyped, or this magnet is no longer active.</p>
+    </div>
+
+    <div id="app" class="hidden">
+      <section id="hero" class="hero" aria-label="Your welcome message">
+        <div class="hero-text">
+          <div class="hero-eyebrow" id="heroEyebrow"></div>
+          <h1 class="hero-title" id="heroTitle"></h1>
+          <p class="hero-msg" id="heroMsg"></p>
+        </div>
+      </section>
+
+      <!-- Step 1: choose a design -->
+      <section class="step" id="step1" aria-labelledby="s1h">
+        <p class="step-num">Step 1 of 3</p>
+        <h2 id="s1h">Send <span class="pl"></span> some love</h2>
+        <p class="sub">Tap a card design.</p>
+        <div class="designs" id="designs" role="group" aria-label="Card designs"></div>
+        <button class="btn btn-primary" id="toStep2" disabled>Next</button>
+      </section>
+
+      <!-- Step 2: say it or type it -->
+      <section class="step hidden" id="step2" aria-labelledby="s2h">
+        <p class="step-num">Step 2 of 3</p>
+        <h2 id="s2h">What do you want to say?</h2>
+        <p class="sub">Talk or type. You can fix any words before you send.</p>
+        <button class="mic" id="mic" type="button" aria-pressed="false"><span class="dot"></span><span id="micLabel">🎤 Tap to talk</span></button>
+        <p class="status info hidden" id="micHint" role="status" aria-live="polite"></p>
+        <label class="sr" for="message">Your message</label>
+        <textarea id="message" placeholder="Hey Mom, I love you. Just thinking about you today…"></textarea>
+        <div class="counter" id="counter"></div>
+        <label class="field-label" for="from">Sign it from (optional)</label>
+        <input type="text" id="from" maxlength="40" autocomplete="given-name" placeholder="Your name" />
+        <button class="btn btn-primary" id="makeCard" disabled>Make my card</button>
+        <button class="btn btn-ghost" id="back1" type="button">← Change design</button>
+      </section>
+
+      <!-- Step 3: copy + text -->
+      <section class="step hidden" id="step3" aria-labelledby="s3h">
+        <p class="step-num">Step 3 of 3</p>
+        <h2 id="s3h">Your card is ready!</h2>
+        <div class="card-out"><img id="cardImg" alt="Your greeting card" /></div>
+
+        <button class="btn btn-gold" id="copyBtn">COPY IMAGE</button>
+        <div id="copyStatus" class="status hidden" role="status" aria-live="polite"></div>
+
+        <a class="btn btn-green" id="textBtn" href="#">TEXT <span class="pl-up"></span></a>
+
+        <div class="howto">
+          <ol>
+            <li>Tap <strong>Copy Image</strong>.</li>
+            <li>Tap <strong>Text <span class="pl"></span></strong>.</li>
+            <li>Press and hold in the message box, tap <strong>Paste</strong>, then <strong>Send</strong>.</li>
+          </ol>
+        </div>
+
+        <div class="row2">
+          <button class="btn" id="shareBtn" type="button">Share / Save</button>
+          <button class="btn" id="showNum" type="button">Number missing?</button>
+        </div>
+        <div id="numBox" class="status info hidden"></div>
+
+        <button class="btn btn-ghost" id="back2" type="button">← Edit message</button>
+      </section>
+
+      <p class="foot">Made with love by <a href="https://www.customsongme.com/" rel="noopener">CustomSongMe</a></p>
+    </div>
+  </main>
+
+  <canvas id="work" class="hidden" aria-hidden="true"></canvas>
+  <script src="/reverse-gift/assets/rg-designs.js?v=2"></script>
+  <script src="/reverse-gift/assets/rg-recipient.js?v=2"></script>
+</body>
+</html>

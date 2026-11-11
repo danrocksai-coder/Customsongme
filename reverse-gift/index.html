@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reverse Gift — Test Preview | CustomSongMe</title>
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <meta name="referrer" content="no-referrer" />
+  <meta name="theme-color" content="#00247f" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/reverse-gift/assets/rg.css?v=2" />
+  <style>
+    .intro h1 { font-family: var(--font-display); color: var(--navy); font-size: 30px; margin: 22px 0 6px; }
+    .intro p { color: var(--muted); font-size: 16px; }
+    .box { background: #fff; border-radius: 18px; padding: 18px; margin-top: 18px; box-shadow: 0 2px 10px rgba(0,20,60,.08); }
+    .box h2 { font-family: var(--font-display); font-size: 22px; color: var(--navy); margin-bottom: 6px; }
+    .box ul { padding-left: 20px; }
+    .box li { margin: 8px 0; }
+    .box a { color: var(--ink); font-weight: 600; }
+    .choice { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .choice label { border: 2px solid var(--border); border-radius: 12px; padding: 12px 4px; text-align: center; font-weight: 600; cursor: pointer; }
+    .choice input { position: absolute; opacity: 0; }
+    .choice input:checked + span { color: var(--ink); }
+    .choice label:has(input:checked) { border-color: var(--ink); background: #eef2ff; }
+    .themes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .theme { position: relative; border-radius: 12px; overflow: hidden; height: 84px; border: 3px solid transparent; cursor: pointer; padding: 0; font: inherit; }
+    .theme .hero-art { position: absolute; inset: 0; }
+    .theme span { position: absolute; left: 8px; bottom: 6px; right: 8px; font-size: 13px; font-weight: 700; text-align: left; }
+    .theme[aria-pressed="true"] { border-color: var(--ink); }
+    .small { font-size: 14px; color: var(--muted); margin-top: 6px; }
+  </style>
+</head>
+<body>
+  <div class="test-banner">Internal test page — Reverse Gift is not on sale yet</div>
+  <main class="wrap">
+    <div class="intro">
+      <h1>Reverse Gift — test preview</h1>
+      <p>The gift you give them. The love they send back. This page lets you try what a son or daughter sees after scanning the magnet.</p>
+    </div>
+
+    <div class="box">
+      <h2>Ready-made test pages</h2>
+      <ul>
+        <li><a href="/reverse-gift/p/test-mom-k8m2x7q9">Mom, with a photo</a></li>
+        <li><a href="/reverse-gift/p/test-dad-r4t9v2n6">Dad, “Always Here for You” design</a></li>
+        <li><a href="/reverse-gift/p/test-both-p3w8z5j2">Mom &amp; Dad, “Hugs From Mom” design</a></li>
+        <li><a href="/reverse-gift/p/test-off-m7c4h2d8">A turned-off magnet</a></li>
+      </ul>
+      <p class="small">These use made-up 555 numbers, so “Text” won’t reach anyone. Use the builder below to test with a real phone.</p>
+    </div>
+
+    <form class="box" id="builder" autocomplete="off">
+      <h2>Try it with your own phone</h2>
+      <p class="small">Nothing here is saved or sent anywhere. The photo stays on this phone.</p>
+
+      <span class="field-label">Who is it from?</span>
+      <div class="choice">
+        <label><input type="radio" name="type" value="mom" checked /><span>Mom</span></label>
+        <label><input type="radio" name="type" value="dad" /><span>Dad</span></label>
+        <label><input type="radio" name="type" value="both" /><span>Mom &amp; Dad</span></label>
+      </div>
+
+      <label class="field-label" for="name">Display name</label>
+      <input type="text" id="name" maxlength="40" placeholder="Mom" />
+
+      <label class="field-label" for="phone">Phone number that receives the texts</label>
+      <input type="tel" id="phone" placeholder="(661) 555-1234" />
+
+      <label class="field-label" for="msg">Welcome message</label>
+      <textarea id="msg" maxlength="100" style="min-height:90px">I love hearing from you. Send me a little note anytime!</textarea>
+      <div class="counter" id="msgCount"></div>
+
+      <label class="field-label" for="to">Son or daughter’s first name (optional)</label>
+      <input type="text" id="to" maxlength="30" placeholder="Michael" />
+
+      <span class="field-label">Photo or design</span>
+      <input type="file" id="photo" accept="image/*" />
+      <p class="small">Or skip the photo and pick a design:</p>
+      <div class="themes" id="themes"></div>
+
+      <button class="btn btn-primary" type="submit">Open the test page</button>
+    </form>
+  </main>
+
+  <script src="/reverse-gift/assets/rg-designs.js?v=2"></script>
+  <script>
+  (function () {
+    var theme = 'moms-love', photoReady = false;
+    var box = document.getElementById('themes');
+    Object.keys(RG.LANDING_THEMES).forEach(function (id) {
+      var t = RG.LANDING_THEMES[id];
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'theme'; b.style.background = t.bg; b.style.color = t.ink;
+      b.setAttribute('aria-pressed', id === theme ? 'true' : 'false');
+      b.innerHTML = t.art + '<span></span>';
+      b.querySelector('span').textContent = t.name;
+      b.addEventListener('click', function () {
+        theme = id;
+        box.querySelectorAll('.theme').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        document.getElementById('photo').value = ''; photoReady = false;
+      });
+      box.appendChild(b);
+    });
+
+    var msg = document.getElementById('msg'), cnt = document.getElementById('msgCount');
+    function count() { cnt.textContent = msg.value.length + ' / 100'; }
+    msg.addEventListener('input', count); count();
+
+    // Shrink the photo so it fits in this browser's session storage. It never leaves the phone.
+    document.getElementById('photo').addEventListener('change', function (e) {
+      var f = e.target.files[0]; photoReady = false;
+      if (!f) return;
+      var img = new Image();
+      img.onload = function () {
+        var s = Math.min(1, 900 / Math.max(img.width, img.height));
+        var c = document.createElement('canvas');
+        c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        try { sessionStorage.setItem('rg-demo-photo', c.toDataURL('image/jpeg', .82)); photoReady = true; }
+        catch (err) { alert('That photo is too large to preview here. Try another one.'); }
+        URL.revokeObjectURL(img.src);
+      };
+      img.src = URL.createObjectURL(f);
+    });
+
+    document.getElementById('builder').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var q = new URLSearchParams();
+      q.set('type', document.querySelector('input[name=type]:checked').value);
+      ['name', 'phone', 'msg', 'to'].forEach(function (k) {
+        var v = document.getElementById(k).value.trim(); if (v) q.set(k, v);
+      });
+      if (photoReady) q.set('photo', 'session'); else q.set('theme', theme);
+      location.href = '/reverse-gift/p/demo?' + q.toString();
+    });
+  })();
+  </script>
+</body>
+</html>
