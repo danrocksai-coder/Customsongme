@@ -177,6 +177,11 @@
     #order-form h2 { color: var(--white); text-align: center; margin-bottom: 12px; }
     .form-sub { color: rgba(255,255,255,0.65); text-align: center; margin-bottom: 36px; font-size: 0.93rem; }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .more-details > summary { cursor: pointer; font-weight: 600; color: var(--gold); padding: 12px 14px; border: 1.5px dashed var(--gold); border-radius: 10px; list-style: none; }
+    .more-details > summary .opt { color: rgba(255,255,255,0.7); font-weight: 400; }
+    .more-details > summary::-webkit-details-marker { display: none; }
+    .more-details[open] > summary { margin-bottom: 14px; border-style: solid; }
+    .more-details-grid { margin: 0; }
     .form-group { display: flex; flex-direction: column; gap: 6px; }
     .form-group.full { grid-column: 1 / -1; }
     .form-group > label { font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.65); text-transform: uppercase; letter-spacing: 0.07em; }
@@ -593,34 +598,19 @@
             </div>
           </div>
 
-          <div class="form-group full">
-            <label>¿Cómo quieres pagar?</label>
-            <div class="contact-pref-options payment-method-options">
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="Card (Stripe)" checked required />
-                <span>💳 Tarjeta</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="PayPal" required />
-                <span>PayPal</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="Cash App" required />
-                <span>Cash App</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="Venmo" required />
-                <span>Venmo</span>
-              </label>
-            </div>
-            <p class="payment-method-note" id="payment-method-note" style="display:none;">¿Vas a pagar con PayPal, Cash App, o Venmo? Por favor pon tu <strong>nombre</strong> en la nota del pago — esas apps no pueden relacionar tu pago automáticamente como lo hace el checkout con tarjeta.</p>
-          </div>
-
           <div class="form-group">
             <label for="subject">¿De quién es la canción?</label>
             <input type="text" id="subject" name="subject" placeholder="Nombre, escrito correctamente" required />
           </div>
 
+          <div class="form-group full">
+            <label for="story">Su historia</label>
+            <textarea id="story" name="story" placeholder="Anécdotas familiares, recuerdos, lo que la hace especial — lo que sea que haga que esta canción se sienta como ella." required></textarea>
+          </div>
+
+          <details class="form-group full more-details">
+            <summary>+ Añade estilo y detalles extra <span class="opt">(opcional)</span></summary>
+            <div class="form-grid more-details-grid">
           <div class="form-group">
             <label for="pronunciation">Pronunciación del nombre <span class="opt">(opcional)</span></label>
             <input type="text" id="pronunciation" name="pronunciation" placeholder="Si no se dice como se escribe" />
@@ -629,11 +619,6 @@
           <div class="form-group full">
             <label for="padrinos">Padrinos, madrinas, o tema de la fiesta <span class="opt">(opcional)</span></label>
             <input type="text" id="padrinos" name="padrinos" placeholder="ej. nombres de padrinos/madrinas, el color o tema de la fiesta, o cualquier tradición familiar importante" />
-          </div>
-
-          <div class="form-group full">
-            <label for="story">Su historia</label>
-            <textarea id="story" name="story" placeholder="Anécdotas familiares, recuerdos, lo que la hace especial — lo que sea que haga que esta canción se sienta como ella." required></textarea>
           </div>
 
           <div class="form-group full">
@@ -668,6 +653,9 @@
             </select>
           </div>
 
+            </div>
+          </details>
+
           <hr class="form-divider" />
 
           <div class="form-group full">
@@ -685,10 +673,33 @@
           </div>
 
           <div class="form-group full">
-            <label for="phone">Número de teléfono</label>
-            <input type="tel" id="phone" name="phone" placeholder="Mejor número para contactarte" autocomplete="tel" inputmode="tel" required />
+            <label for="phone">Teléfono <span class="opt">(opcional — para actualizaciones por texto)</span></label>
+            <input type="tel" id="phone" name="phone" placeholder="Mejor número para contactarte" autocomplete="tel" inputmode="tel" />
           </div>
 
+
+          <div class="form-group full">
+            <label>¿Cómo quieres pagar?</label>
+            <div class="contact-pref-options payment-method-options">
+              <label class="contact-pref-option">
+                <input type="radio" name="payment-method" value="Card (Stripe)" checked required />
+                <span>💳 Tarjeta</span>
+              </label>
+              <label class="contact-pref-option">
+                <input type="radio" name="payment-method" value="PayPal" required />
+                <span>PayPal</span>
+              </label>
+              <label class="contact-pref-option">
+                <input type="radio" name="payment-method" value="Cash App" required />
+                <span>Cash App</span>
+              </label>
+              <label class="contact-pref-option">
+                <input type="radio" name="payment-method" value="Venmo" required />
+                <span>Venmo</span>
+              </label>
+            </div>
+            <p class="payment-method-note" id="payment-method-note" style="display:none;">¿Vas a pagar con PayPal, Cash App, o Venmo? Por favor pon tu <strong>nombre</strong> en la nota del pago — esas apps no pueden relacionar tu pago automáticamente como lo hace el checkout con tarjeta.</p>
+          </div>
         </div>
 
         <div class="what-next">

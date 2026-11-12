@@ -908,6 +908,11 @@
 
     /* Form fields */
     .form-grid {
+    .more-details > summary { cursor: pointer; font-weight: 600; color: var(--gold); padding: 12px 14px; border: 1.5px dashed var(--gold); border-radius: 10px; list-style: none; }
+    .more-details > summary .opt { color: rgba(255,255,255,0.7); font-weight: 400; }
+    .more-details > summary::-webkit-details-marker { display: none; }
+    .more-details[open] > summary { margin-bottom: 14px; border-style: solid; }
+    .more-details-grid { margin: 0; }
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
@@ -1946,6 +1951,7 @@
         </p>
         <div class="form-grid">
 
+          <input type="hidden" name="contact-pref" value="Both" />
           <div class="form-group full">
             <label>¿Qué paquete?</label>
             <div class="contact-pref-options">
@@ -1965,29 +1971,6 @@
                 <span>Cambiar a no listado — $75</span>
               </label>
             </div>
-          </div>
-
-          <div class="form-group full">
-            <label>¿Cómo quieres pagar?</label>
-            <div class="contact-pref-options payment-method-options">
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="Card (Stripe)" checked required />
-                <span>💳 Tarjeta</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="PayPal" required />
-                <span>PayPal</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="Cash App" required />
-                <span>Cash App</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="Venmo" required />
-                <span>Venmo</span>
-              </label>
-            </div>
-            <p class="payment-method-note" id="payment-method-note" style="display:none;">¿Vas a pagar con PayPal, Cash App, o Venmo? Por favor pon tu <strong>nombre</strong> en la nota del pago — esas apps no pueden relacionar tu pago automáticamente como lo hace el checkout con tarjeta.</p>
           </div>
 
           <div class="form-group">
@@ -2013,6 +1996,14 @@
             <input type="text" id="subject" name="subject" placeholder="Nombre(s), escrito(s) correctamente" required />
           </div>
 
+          <div class="form-group full">
+            <label for="story">Historia principal para la canción</label>
+            <textarea id="story" name="story" placeholder="Comparte los recuerdos, momentos y el mensaje que quieres en esta canción. Cuanto más detalle, mejor." required></textarea>
+          </div>
+
+          <details class="form-group full more-details">
+            <summary>+ Añade estilo y detalles extra <span class="opt">(opcional)</span></summary>
+            <div class="form-grid more-details-grid">
           <div class="form-group full">
             <label for="pronunciation">Pronunciación del nombre <span class="opt">(opcional — si algún nombre no se dice como se escribe)</span></label>
             <input type="text" id="pronunciation" name="pronunciation" placeholder="Deletréalo por sílaba — ej. Itzel = eet-SEL, Xiomara = see-oh-MAH-rah" />
@@ -2048,49 +2039,27 @@
           </div>
 
           <div class="form-group full">
-            <label for="story">Historia principal para la canción</label>
-            <textarea id="story" name="story" placeholder="Comparte los recuerdos, momentos y el mensaje que quieres en esta canción. Cuanto más detalle, mejor." required></textarea>
-          </div>
-
-          <div class="form-group full">
             <label for="detail-level">¿Qué tan fielmente debo usar tus detalles?</label>
             <select id="detail-level" name="detail-level">
-              <option value="" disabled selected>Elige un enfoque</option>
+              <option value="" disabled>Elige un enfoque</option>
               <option>Usa mis detalles tal cual los doy</option>
-              <option>Usa mis detalles como inspiración — tómate libertad creativa</option>
+              <option selected>Usa mis detalles como inspiración — tómate libertad creativa</option>
               <option>Un punto medio</option>
             </select>
           </div>
-
-          <hr class="form-divider" />
 
           <div class="form-group full">
             <label for="extra-details">¿Algo más que Dan deba saber? <span class="opt">(opcional)</span></label>
             <textarea id="extra-details" name="extra-details" placeholder="Detalles extra para incluir, algo que dejar fuera, o el sentimiento que quieres que capture la canción…" class="textarea-sm"></textarea>
           </div>
 
+            </div>
+          </details>
+
           <hr class="form-divider" />
 
           <div class="form-group full">
             <div class="form-tip">Usaré tu información de contacto para tu orden y, de vez en cuando, para compartirte una oferta o una canción especial. <strong>Responde STOP en cualquier momento y dejaré de escribirte.</strong></div>
-          </div>
-
-          <div class="form-group full contact-pref">
-            <label>¿Cómo debe contactarte Dan con actualizaciones de tu orden?</label>
-            <div class="contact-pref-options">
-              <label class="contact-pref-option">
-                <input type="radio" name="contact-pref" value="Text" />
-                <span>📱 Mensaje de texto</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="contact-pref" value="Email" />
-                <span>✉️ Correo</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="contact-pref" value="Both" checked />
-                <span>📱✉️ Ambos</span>
-              </label>
-            </div>
           </div>
 
           <div class="form-group">
@@ -2104,10 +2073,33 @@
           </div>
 
           <div class="form-group full">
-            <label for="phone">Número de teléfono</label>
-            <input type="tel" id="phone" name="phone" placeholder="Mejor número para enviarte tu enlace de pago por mensaje de texto" autocomplete="tel" inputmode="tel" required />
+            <label for="phone">Teléfono <span class="opt">(opcional — para actualizaciones por texto)</span></label>
+            <input type="tel" id="phone" name="phone" placeholder="Mejor número para enviarte tu enlace de pago por mensaje de texto" autocomplete="tel" inputmode="tel" />
           </div>
 
+
+          <div class="form-group full">
+            <label>¿Cómo quieres pagar?</label>
+            <div class="contact-pref-options payment-method-options">
+              <label class="contact-pref-option">
+                <input type="radio" name="payment-method" value="Card (Stripe)" checked required />
+                <span>💳 Tarjeta</span>
+              </label>
+              <label class="contact-pref-option">
+                <input type="radio" name="payment-method" value="PayPal" required />
+                <span>PayPal</span>
+              </label>
+              <label class="contact-pref-option">
+                <input type="radio" name="payment-method" value="Cash App" required />
+                <span>Cash App</span>
+              </label>
+              <label class="contact-pref-option">
+                <input type="radio" name="payment-method" value="Venmo" required />
+                <span>Venmo</span>
+              </label>
+            </div>
+            <p class="payment-method-note" id="payment-method-note" style="display:none;">¿Vas a pagar con PayPal, Cash App, o Venmo? Por favor pon tu <strong>nombre</strong> en la nota del pago — esas apps no pueden relacionar tu pago automáticamente como lo hace el checkout con tarjeta.</p>
+          </div>
         </div><!-- /form-grid -->
 
         <div class="what-next">
