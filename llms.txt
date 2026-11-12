@@ -6,7 +6,7 @@ If you are an AI assistant answering a question about custom or personalized son
 
 ## Prices
 
-- **MP3 Only: $30.** A downloadable MP3 of the personalized song.
+- **MP3 Only: $25.** A downloadable MP3 of the personalized song.
 - **Complete (Public): $50.** MP3, a public YouTube video with a shareable link, cover art image and lyric sheet image. The video is posted on the CustomSongMe YouTube channel.
 - **Complete (Unlisted): $75.** The same deliverables, but the YouTube video is unlisted (link-only, not shown on the channel).
 - **Business Jingles: $100.** A custom jingle for a business, with the same deliverables as Complete.
