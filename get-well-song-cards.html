@@ -19,7 +19,7 @@
 <meta property="og:image:alt" content="Dan the Song Man — personalized custom songs delivered in 24 hours at CustomSongMe.com" />
 <meta name="twitter:image" content="https://www.customsongme.com/img/customsongme-share.jpg" />
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#1F4D3A">
+<meta name="theme-color" content="#001A66">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -64,9 +64,9 @@
 
 <style>
 :root{
-  --ivory:#FBF7EE;--paper:#FFFDF8;--green:#1F4D3A;--green2:#2E6B52;--gold:#C9A24A;--goldsoft:#F1E4BC;
-  --sage:#E3EBDF;--ink:#1E2A24;--muted:#56655D;--line:#E4DCCB;--err:#A23B2A;
-  --r:18px;--shadow:0 10px 30px rgba(31,77,58,.12);
+  --ivory:#F3F6FF;--paper:#FFFFFF;--green:#001A66;--green2:#0A3399;--gold:#E0A400;--goldsoft:#FFF4C2;
+  --sage:#E8EEFC;--ink:#0F1D45;--muted:#5B6478;--line:#D5DDF3;--err:#A23B2A;
+  --r:18px;--shadow:0 10px 30px rgba(0,26,102,.12);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -90,7 +90,7 @@ header{display:flex;justify-content:space-between;align-items:center;max-width:5
 
 /* steps */
 .steps{display:flex;justify-content:space-between;list-style:none;padding:0;margin:18px 0 14px;gap:4px}
-.steps li{flex:1;text-align:center;font-size:11px;font-weight:600;color:#9AA59F;letter-spacing:.02em}
+.steps li{flex:1;text-align:center;font-size:11px;font-weight:600;color:#9AA4BC;letter-spacing:.02em}
 .steps li::before{content:"";display:block;height:4px;border-radius:4px;background:var(--line);margin-bottom:6px}
 .steps li.done::before,.steps li.on::before{background:var(--green)}
 .steps li.on{color:var(--green)}
@@ -113,7 +113,7 @@ section.step.on{display:block}
 .cmeta b{display:block;font-family:Fraunces,serif;font-size:18px;color:var(--green)}
 .cmeta small{color:var(--muted);font-size:13px}
 .dots{display:flex;justify-content:center;gap:7px;margin-top:10px}
-.dots button{width:9px;height:9px;border-radius:50%;border:0;padding:0;background:#C5D1C8;cursor:pointer}
+.dots button{width:9px;height:9px;border-radius:50%;border:0;padding:0;background:#C5CEE6;cursor:pointer}
 .dots button.on{background:var(--green);width:22px;border-radius:9px}
 
 /* card front */
@@ -126,7 +126,7 @@ section.step.on{display:block}
 .cf-brand{margin-top:auto;padding-top:8px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;opacity:.6}
 
 /* card inside */
-.ci{width:100%;max-width:480px;aspect-ratio:10/7;display:grid;grid-template-columns:1fr 1fr;background:var(--paper);border-radius:10px;box-shadow:var(--shadow);overflow:hidden;color:#2B3A33}
+.ci{width:100%;max-width:480px;aspect-ratio:10/7;display:grid;grid-template-columns:1fr 1fr;background:var(--paper);border-radius:10px;box-shadow:var(--shadow);overflow:hidden;color:#1A2650}
 .ci>div{padding:14px 12px;display:flex;flex-direction:column}
 .ci-l{border-right:1px dashed var(--line)}
 .ci-to{font-family:Fraunces,serif;font-size:15px;font-weight:700;color:var(--fg2)}
@@ -149,7 +149,7 @@ section.step.on{display:block}
 label.f{display:block;font-weight:600;font-size:14px;color:var(--green)}
 label.f .hint{display:block;font-weight:400;color:var(--muted);font-size:13px;margin-top:1px}
 .inp{width:100%;margin-top:6px;font:16px Inter,sans-serif;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:12px 13px;outline:none}
-.inp:focus{border-color:var(--green2);box-shadow:0 0 0 3px rgba(46,107,82,.15)}
+.inp:focus{border-color:var(--green2);box-shadow:0 0 0 3px rgba(10,51,153,.15)}
 textarea.inp{min-height:96px;resize:vertical}
 .count{font-size:12px;color:var(--muted);text-align:right;margin-top:3px}
 .count.max{color:var(--err)}
@@ -166,7 +166,7 @@ textarea.inp{min-height:96px;resize:vertical}
 .pkgs{display:grid;gap:12px}
 .pkg{display:block;position:relative;background:var(--paper);border:2px solid var(--line);border-radius:var(--r);padding:16px 16px 14px;cursor:pointer}
 .pkg input{position:absolute;opacity:0}
-.pkg:has(input:checked){border-color:var(--green);box-shadow:0 0 0 3px rgba(31,77,58,.1)}
+.pkg:has(input:checked){border-color:var(--green);box-shadow:0 0 0 3px rgba(0,26,102,.1)}
 .pkg-top{display:flex;justify-content:space-between;align-items:baseline}
 .pkg-name{font-family:Fraunces,serif;font-weight:700;font-size:18px;color:var(--green)}
 .pkg-price{font-weight:700;font-size:22px;color:var(--green)}
@@ -191,7 +191,7 @@ textarea.inp{min-height:96px;resize:vertical}
 /* buttons */
 .actions{margin-top:20px;display:grid;gap:10px}
 .btn{display:block;width:100%;border:0;border-radius:14px;padding:16px;font:700 17px Inter,sans-serif;cursor:pointer;text-align:center;text-decoration:none}
-.btn-p{background:var(--green);color:#fff;box-shadow:0 6px 16px rgba(31,77,58,.25)}
+.btn-p{background:var(--green);color:#fff;box-shadow:0 6px 16px rgba(0,26,102,.25)}
 .btn-p:hover{background:var(--green2)}
 .btn-p:disabled{opacity:.6;cursor:wait}
 .btn-b{background:none;color:var(--green);font-weight:600;font-size:15px;padding:8px}
@@ -221,6 +221,13 @@ footer a{color:var(--muted);margin:0 6px}
   .cf{width:262px}
   .cardbox{min-height:370px}
 }
+
+/* standard CustomSongMe footer (royal blue + gold) */
+footer.site-footer{background:#001A66;color:rgba(255,255,255,.75);text-align:center;padding:36px 16px 44px;margin-top:32px}
+footer.site-footer a{color:#FCD42A;text-decoration:none}
+footer.site-footer .footer-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 16px;max-width:760px;margin:0 auto 18px;font-size:14px}
+footer.site-footer .footer-social{display:flex;justify-content:center;gap:16px;margin-bottom:16px;font-size:14px}
+footer.site-footer .footer-bottom{display:flex;flex-direction:column;gap:6px;font-size:13px}
 </style>
 </head>
 <body>
@@ -476,13 +483,38 @@ footer a{color:var(--muted);margin:0 6px}
   </div>
 </main>
 
-<footer>
-  <div>Every song written and produced by Dan the Song Man</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a><a href="sms:+16617140903">Text</a><a href="mailto:danrocksai@gmail.com">Email</a><a href="/privacy-terms">Privacy</a>
-  </div>
-  <div style="margin-top:8px">
+<footer class="site-footer">
+  <nav class="footer-nav" aria-label="Footer navigation">
+    <a href="/">Home</a>
+    <a href="/holiday-songs">Holiday Songs</a>
+    <a href="/birthday-songs">Birthday Songs</a>
+    <a href="/wedding-songs">Wedding Songs</a>
+    <a href="/anniversary-songs">Anniversary Songs</a>
+    <a href="/love-songs">Love Songs</a>
+    <a href="/mothers-day-songs">Mother's Day</a>
+    <a href="/fathers-day-songs">Father's Day</a>
+    <a href="/pet-songs">Pet Songs</a>
+    <a href="/adopt-a-rescue-dog">Adopt a Rescue Dog</a>
+    <a href="/roast-songs">Roast Songs</a>
+    <a href="/memorial-songs">Celebration of Life</a>
+    <a href="/business-jingles">Business Jingles</a>
+    <a href="/custom-lullaby-me">Baby Lullabies</a>
+    <a href="/custom-song-cost">Song Cost Guide</a>
+    <a href="/how-long-does-a-custom-song-take">Delivery Time Guide</a>
+    <a href="/what-to-include-in-an-anniversary-song">Anniversary Song Tips</a>
+    <a href="/how-to-give-a-custom-song-as-a-gift">Gift Ideas</a>
+    <a href="/custom-song-vs-personalized-gift">Song vs Gift</a>
+    <a href="/es/">En español</a>
+    <a href="/privacy-terms">Privacy &amp; Terms</a>
+  </nav>
+  <div class="footer-social">
     <a href="https://facebook.com/customsongme">Facebook</a><a href="https://instagram.com/customsongme">Instagram</a><a href="https://tiktok.com/@customsongme">TikTok</a><a href="https://youtube.com/@customsongme">YouTube</a>
+  </div>
+  <div class="footer-bottom">
+    <span>Every song written and produced by Dan the Song Man</span>
+    <span>© 2026 CustomSongMe. All Rights Reserved.</span>
+    <span>Serving customers worldwide — online only | <a href="tel:+16617140903">+1 (661) 714-0903</a> · <a href="sms:+16617140903">Text me</a> · <a href="mailto:danrocksai@gmail.com">Email</a></span>
+    <a href="https://g.page/r/CUJZcUwU_iIFEBE/review" target="_blank" rel="noopener">⭐ Leave a Google Review</a>
   </div>
 </footer>
 
