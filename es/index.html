@@ -39,7 +39,7 @@
     "telephone": "+16617140903",
     "email": "danrocksai@gmail.com",
     "description": "Canciones personalizadas para cumpleaños, bodas, aniversarios, mascotas, burlas, celebraciones de vida y jingles para negocios. Hechas con tu historia y entregadas en menos de 24 horas.",
-    "priceRange": "$30-$75",
+    "priceRange": "$25-$75",
     "sameAs": [
       "https://facebook.com/customsongme",
       "https://instagram.com/customsongme",
@@ -68,7 +68,7 @@
       {
         "@type": "Offer",
         "name": "Solo MP3",
-        "price": "30.00",
+        "price": "25.00",
         "priceCurrency": "USD",
         "description": "Canción personalizada entregada únicamente como archivo MP3 descargable — entregada en menos de 24 horas después del pago confirmado.",
         "availability": "https://schema.org/InStock"
@@ -128,7 +128,7 @@
       "name": "¿Hay una opción más económica que la experiencia completa?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Sí. El paquete Solo MP3 cuesta $30 e incluye tu canción personalizada como archivo MP3 descargable — sin video de YouTube, portada ni hoja de letra. La experiencia completa comienza en $50 e incluye todo lo que necesitas para compartir la canción de inmediato."
+        "text": "Sí. El paquete Solo MP3 cuesta $25 e incluye tu canción personalizada como archivo MP3 descargable — sin video de YouTube, portada ni hoja de letra. La experiencia completa comienza en $50 e incluye todo lo que necesitas para compartir la canción de inmediato."
       }
     },
     {
@@ -1718,7 +1718,7 @@
       <div class="price-label">Más popular · Todo incluido</div>
       <div class="price-main">$50</div>
       <div class="price-includes">MP3 · Video público en YouTube · Portada · Hoja con la letra</div>
-      <div class="price-alt">¿Solo quieres la canción? Solo MP3 es $30</div>
+      <div class="price-alt">¿Solo quieres la canción? Solo MP3 es $25</div>
     </div>
     <div class="hero-cta-row">
       <a href="#order-form" class="btn-primary">🎁 Empieza tu canción</a>
@@ -1751,7 +1751,7 @@
 <!-- ═══════ SECTION 4 — PRICING INTRO ═══════ -->
 <section id="pricing-intro">
   <div class="container fade-up">
-    <h2>Tres formas de pedir. <span class="gold">Desde $30.</span></h2>
+    <h2>Tres formas de pedir. <span class="gold">Desde $25.</span></h2>
     <p>Mantenlo simple con solo la canción, o ve con todo con la experiencia completa.<br>De cualquier forma, cuéntame tu historia y yo me encargo del resto.</p>
   </div>
 </section>
@@ -1793,7 +1793,7 @@
         <div class="package-header">
           <div class="package-badge alt">Opción económica</div>
           <h2>🎵 Solo MP3</h2>
-          <div class="package-price"><span>$</span>30</div>
+          <div class="package-price"><span>$</span>25</div>
           <div class="package-price-note">Pago único · Solo la canción</div>
         </div>
         <div class="package-body">
@@ -1955,7 +1955,7 @@
               </label>
               <label class="contact-pref-option">
                 <input type="radio" name="package-tier" value="mp3" required id="pkg-mp3" />
-                <span>🎵 Solo MP3 — $30</span>
+                <span>🎵 Solo MP3 — $25</span>
               </label>
             </div>
             <div class="public-note" id="public-note">
@@ -2245,7 +2245,7 @@
 
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">¿Hay una opción más económica que la experiencia completa? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Sí. El paquete Solo MP3 cuesta $30 e incluye tu canción personalizada como archivo MP3 descargable — sin video de YouTube, portada ni hoja de letra. La experiencia completa comienza en $50 e incluye todo lo que necesitas para compartir la canción de inmediato.</div>
+        <div class="faq-a">Sí. El paquete Solo MP3 cuesta $25 e incluye tu canción personalizada como archivo MP3 descargable — sin video de YouTube, portada ni hoja de letra. La experiencia completa comienza en $50 e incluye todo lo que necesitas para compartir la canción de inmediato.</div>
       </div>
 
       <div class="faq-item">
@@ -2440,7 +2440,7 @@
     });
   });
 
-  // PACKAGE + PAYMENT METHOD → PAYMENT LINK ROUTING (3-tier: MP3 $30 / Complete Public $50 / Complete Unlisted $75)
+  // PACKAGE + PAYMENT METHOD → PAYMENT LINK ROUTING (3-tier: MP3 $25 / Complete Public $50 / Complete Unlisted $75)
   // Payment is required upfront: submitting the form sends the customer straight to
   // checkout for whichever package + payment method they selected. This keeps the
   // hidden _next field (which Formspree uses to redirect after submission) in sync.
@@ -2457,10 +2457,10 @@
       'Cash App': 'https://cash.app/$optimistic01/75',
       'Venmo': 'https://venmo.com/u/Dan-Rock-5'
     },
-    'MP3 Only — $30': {
-      'Card (Stripe)': 'https://buy.stripe.com/cNieVc2767NX3hxd4q9Ve06',
-      'PayPal': 'https://www.paypal.me/DanRock834/30',
-      'Cash App': 'https://cash.app/$optimistic01/30',
+    'MP3 Only — $25': {
+      'Card (Stripe)': 'https://buy.stripe.com/3cI8wOcLK6JT05l9Se9Ve0l',
+      'PayPal': 'https://www.paypal.me/DanRock834/25',
+      'Cash App': 'https://cash.app/$optimistic01/25',
       'Venmo': 'https://venmo.com/u/Dan-Rock-5'
     }
   };
@@ -2474,7 +2474,7 @@
   function getEffectivePackage() {
     const tier = document.querySelector('input[name="package-tier"]:checked');
     if (!tier) return 'Complete (Public) — $50';
-    if (tier.value === 'mp3') return 'MP3 Only — $30';
+    if (tier.value === 'mp3') return 'MP3 Only — $25';
     return (unlistedCheckbox && unlistedCheckbox.checked) ? 'Complete (Unlisted) — $75' : 'Complete (Public) — $50';
   }
 
