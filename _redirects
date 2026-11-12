@@ -59,4 +59,4 @@ http://www.customsongme.com/* https://www.customsongme.com/:splat    301!
 # Printed codes can never change, so they point here; change the target any time.
 # Keep 302 (temporary) so phones don't cache the destination.
 # ==========================================
-/lullabies               https://www.customsongme.com/    302
+/lullabies               https://www.youtube.com/watch?v=6WJ58R7J5os    302
