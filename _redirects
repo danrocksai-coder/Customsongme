@@ -13,6 +13,29 @@ http://www.customsongme.com/* https://www.customsongme.com/:splat    301!
 /payment                   https://www.customsongme.com/payment-links    301
 
 # ==========================================
+# 2b. .html DUPLICATES -> CLEAN URLS (301)
+# Keeps Google from indexing both /page and /page.html
+# ==========================================
+/birthday-songs.html  /birthday-songs  301!
+/wedding-songs.html  /wedding-songs  301!
+/anniversary-songs.html  /anniversary-songs  301!
+/holiday-songs.html  /holiday-songs  301!
+/custom-song-cost.html  /custom-song-cost  301!
+/how-long-does-a-custom-song-take.html  /how-long-does-a-custom-song-take  301!
+/what-to-include-in-an-anniversary-song.html  /what-to-include-in-an-anniversary-song  301!
+/how-to-give-a-custom-song-as-a-gift.html  /how-to-give-a-custom-song-as-a-gift  301!
+/custom-song-vs-personalized-gift.html  /custom-song-vs-personalized-gift  301!
+/love-songs.html  /love-songs  301!
+/mothers-day-songs.html  /mothers-day-songs  301!
+/fathers-day-songs.html  /fathers-day-songs  301!
+/pet-songs.html  /pet-songs  301!
+/roast-songs.html  /roast-songs  301!
+/memorial-songs.html  /memorial-songs  301!
+/business-jingles.html  /business-jingles  301!
+/get-well-song-cards.html  /get-well-song-cards  301!
+/adopt-a-rescue-dog.html  /adopt-a-rescue-dog  301!
+
+# ==========================================
 # 3. CLEAN SUBPAGE URL MAPS (INTERNAL 200 REWRITES)
 # ==========================================
 /birthday-songs          /birthday-songs.html          200
