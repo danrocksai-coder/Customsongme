@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Personalized Custom Songs in 24 Hours, From $30 | CustomSongMe</title>
-  <meta name="description" content="A personalized song written from your story by Dan the Song Man, delivered in 24 hours. MP3, YouTube video, cover art and lyrics from $50, or MP3 only for $30." />
+  <title>Personalized Custom Songs in 24 Hours, From $25 | CustomSongMe</title>
+  <meta name="description" content="A personalized song written from your story by Dan the Song Man, delivered in 24 hours. MP3, YouTube video, cover art and lyrics from $50, or MP3 only for $25." />
   <meta name="keywords" content="custom song, personalized song gift, custom birthday song, custom wedding song, custom anniversary song, custom pet song, business jingle, Dan the Song Man" />
-  <meta property="og:title" content="Personalized Custom Songs in 24 Hours, From $30 | CustomSongMe" />
+  <meta property="og:title" content="Personalized Custom Songs in 24 Hours, From $25 | CustomSongMe" />
   <meta property="og:description" content="Tell Dan your story. Receive a complete custom song experience within 24 hours — downloadable MP3, public YouTube video, cover art & lyric sheet included." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.customsongme.com" />
@@ -85,7 +85,7 @@
     "telephone": "+16617140903",
     "email": "danrocksai@gmail.com",
     "description": "Personalized custom songs for birthdays, weddings, anniversaries, pets, roasts, celebrations of life, and business jingles. Built from your story and delivered within 24 hours.",
-    "priceRange": "$30-$100",
+    "priceRange": "$25-$100",
     "sameAs": [
       "https://facebook.com/customsongme",
       "https://instagram.com/customsongme",
@@ -105,16 +105,24 @@
       },
       {
         "@type": "Offer",
-        "name": "The Complete Custom Song Experience (Unlisted)",
+        "name": "Ultimate Package (Public, Real Photos)",
         "price": "75.00",
         "priceCurrency": "USD",
-        "description": "Personalized custom song delivered as a downloadable MP3 audio file, plus an unlisted YouTube video with shareable link (not published to the public channel), cover art image, and lyric sheet image — delivered within 24 hours of confirmed payment.",
+        "description": "Everything in the Complete package plus up to 10 of the customer's real photos in a public YouTube video, an MP4 download and a lyric PDF with artwork, delivered within 24 hours of confirmed payment.",
+        "availability": "https://schema.org/InStock"
+      },
+      {
+        "@type": "Offer",
+        "name": "Ultimate Unlisted (Real Photos)",
+        "price": "100.00",
+        "priceCurrency": "USD",
+        "description": "Everything in the Complete package plus up to 10 of the customer's real photos in an unlisted YouTube video (link-only), an MP4 download and a lyric PDF with artwork, delivered within 24 hours of confirmed payment.",
         "availability": "https://schema.org/InStock"
       },
       {
         "@type": "Offer",
         "name": "MP3 Only",
-        "price": "30.00",
+        "price": "25.00",
         "priceCurrency": "USD",
         "description": "Personalized custom song delivered as a downloadable MP3 audio file only — delivered within 24 hours of confirmed payment.",
         "availability": "https://schema.org/InStock"
@@ -173,15 +181,15 @@
       "name": "Is there a cheaper option than the Complete Custom Song Experience?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. The MP3 Only package is $30 and includes your personalized song as a downloadable MP3 audio file — no YouTube video, cover art, or lyric sheet. The Complete Custom Song Experience starts at $50 and includes everything you need to share the song right away."
+        "text": "Yes. The MP3 Only package is $25 and includes your personalized song as a downloadable MP3 audio file — no YouTube video, cover art, or lyric sheet. The Complete Custom Song Experience starts at $50 and includes everything you need to share the song right away."
       }
     },
     {
       "@type": "Question",
-      "name": "Why is the Complete Experience $50 instead of $75?",
+      "name": "Why is the Complete Experience $50?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The $50 price includes your song's video being shared publicly on the CustomSongMe YouTube channel — that public posting is part of how I keep prices affordable. If you'd rather keep your video unlisted (not published to my channel, only viewable by anyone with the direct link), that option is available for $75. You can switch to it right on the request form."
+        "text": "The $50 price includes your song's video being shared publicly on the CustomSongMe YouTube channel — that public posting is part of how I keep prices affordable. If you'd rather keep your video unlisted (not published to my channel, only viewable by anyone with the direct link), choose Ultimate Unlisted for $100. It also puts up to 10 of your real photos in the video."
       }
     },
     {
@@ -1723,6 +1731,12 @@
     @media (max-width: 360px) {
       .nav-brand { font-size: 0.82rem; }
     }
+  
+    /* 4-package layout: two even rows of two cards, 2x2 package picker on the form */
+    .package-grid { grid-template-columns: 1fr 1fr; align-items: stretch; }
+    .package-grid.ultimate-grid { margin-top: 28px; }
+    .contact-pref-options.pkg-options { display: grid; grid-template-columns: 1fr 1fr; border-radius: 18px; }
+    @media (max-width: 800px) { .package-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -1768,7 +1782,7 @@
       <div class="price-label">Most Popular · Everything Included</div>
       <div class="price-main">$50</div>
       <div class="price-includes">MP3 Audio · Public YouTube Video · Cover Art · Lyric Sheet</div>
-      <div class="price-alt">Just want the song? MP3 Only is $30</div>
+      <div class="price-alt">Just want the song? MP3 Only is $25</div>
     </div>
     <div class="hero-cta-row">
       <a href="#order-form" class="btn-primary">🎁 Start My Song</a>
@@ -1801,7 +1815,7 @@
 <!-- ═══════ SECTION 4 — PRICING INTRO ═══════ -->
 <section id="pricing-intro">
   <div class="container fade-up">
-    <h2>Three Ways to Order. <span class="gold">Starting at $30.</span></h2>
+    <h2>Four Ways to Order. <span class="gold">Starting at $25.</span></h2>
     <p>Keep it simple with just the song, or go all in with the full experience.<br>Either way — tell Dan your story, and he'll take care of the rest.</p>
   </div>
 </section>
@@ -1832,7 +1846,7 @@
             💡 Custom songs from freelancers typically run $100 or more. The Complete Custom Song Experience is $50 — and includes the YouTube video, cover art, and everything you need to share it the moment it arrives.
           </div>
           <div class="package-cta">
-            <a href="#order-form" class="btn-primary">Start My Song Request →</a>
+            <a href="#order-form" class="btn-primary" data-tier="complete">Start My Song Request →</a>
             <div class="package-cta-note">Submit your story · Pay securely · Delivered in 24 hours</div>
           </div>
         </div>
@@ -1843,7 +1857,7 @@
         <div class="package-header">
           <div class="package-badge alt">Budget Option</div>
           <h2>🎵 MP3 Only</h2>
-          <div class="package-price"><span>$</span>30</div>
+          <div class="package-price"><span>$</span>25</div>
           <div class="package-price-note">One-time payment · Just the song</div>
         </div>
         <div class="package-body">
@@ -1853,15 +1867,69 @@
             <li><span class="icon">✓</span> Personal Happiness Guarantee</li>
           </ul>
           <div class="value-anchor alt">
-            💡 Want the video, cover art, and lyric sheet too? For just $20 more, the Complete Custom Song Experience includes everything.
+            💡 Want the video, cover art, and lyric sheet too? For just $25 more, the Complete Custom Song Experience includes everything.
           </div>
           <div class="package-cta">
-            <a href="#order-form" class="btn-secondary full">Start My Song Request →</a>
+            <a href="#order-form" class="btn-secondary full" data-tier="mp3">Start My Song Request →</a>
             <div class="package-cta-note">Submit your story · Pay securely · Delivered in 24 hours</div>
           </div>
         </div>
       </div>
 
+    </div>
+
+    <div class="package-grid ultimate-grid">
+      <div class="package-card featured">
+        <div class="package-header">
+          <div class="package-badge">🌟 Ultimate</div>
+          <h2>🌟 Ultimate Package</h2>
+          <div class="package-price"><span>$</span>75</div>
+          <div class="package-price-note">One-time payment · Your real photos in the video</div>
+        </div>
+        <div class="package-body">
+          <ul class="feature-list">
+            <li><span class="icon">✓</span> Everything in the $50 Complete package</li>
+            <li><span class="icon">✓</span> Up to 10 of your real photos in the video</li>
+            <li><span class="icon">✓</span> Public YouTube video, plus the MP4 to download</li>
+            <li><span class="icon">✓</span> PDF of the lyrics with artwork</li>
+            <li><span class="icon">✓</span> Delivered within 24 hours of confirmed payment</li>
+            <li><span class="icon">✓</span> Personal Happiness Guarantee</li>
+          </ul>
+          <div class="value-anchor">
+            📸 No need to upload photos now. After you order, I'll text you simple directions for sending them.
+          </div>
+          <div class="package-cta">
+            <a href="#order-form" class="btn-primary" data-tier="ultimate">Start Ultimate for $75 →</a>
+            <div class="package-cta-note">Share your story · Pay securely · Send photos after</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="package-card featured">
+        <div class="package-header">
+          <div class="package-badge">🔒 Unlisted</div>
+          <h2>🔒 Ultimate Unlisted</h2>
+          <div class="package-price"><span>$</span>100</div>
+          <div class="package-price-note">One-time payment · Private video link</div>
+        </div>
+        <div class="package-body">
+          <ul class="feature-list">
+            <li><span class="icon">✓</span> Everything in the $75 Ultimate package</li>
+            <li><span class="icon">✓</span> Up to 10 of your real photos in the video</li>
+            <li><span class="icon">✓</span> YouTube video is unlisted: only people with the link can see it</li>
+            <li><span class="icon">✓</span> MP4 and lyric PDF to download</li>
+            <li><span class="icon">✓</span> Delivered within 24 hours of confirmed payment</li>
+            <li><span class="icon">✓</span> Personal Happiness Guarantee</li>
+          </ul>
+          <div class="value-anchor">
+            🔒 Best when the song is personal and you'd rather it not appear on my public channel.
+          </div>
+          <div class="package-cta">
+            <a href="#order-form" class="btn-primary" data-tier="ultimate-unlisted">Start Unlisted for $100 →</a>
+            <div class="package-cta-note">Share your story · Pay securely · Send photos after</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1998,22 +2066,29 @@
 
           <div class="form-group full">
             <label>Which package?</label>
-            <div class="contact-pref-options">
+            <div class="contact-pref-options pkg-options">
               <label class="contact-pref-option">
                 <input type="radio" name="package-tier" value="complete" checked required id="pkg-complete" />
                 <span>🎁 Complete — $50</span>
               </label>
               <label class="contact-pref-option">
                 <input type="radio" name="package-tier" value="mp3" required id="pkg-mp3" />
-                <span>🎵 MP3 Only — $30</span>
+                <span>🎵 MP3 Only — $25</span>
+              </label>
+              <label class="contact-pref-option">
+                <input type="radio" name="package-tier" value="ultimate" required id="pkg-ultimate" />
+                <span>🌟 Ultimate — $75</span>
+              </label>
+              <label class="contact-pref-option">
+                <input type="radio" name="package-tier" value="ultimate-unlisted" required id="pkg-ultimate-unlisted" />
+                <span>🔒 Ultimate Unlisted — $100</span>
               </label>
             </div>
             <div class="public-note" id="public-note">
-              <p>💡 I keep the Complete Experience at $50 because your video gets shared publicly on my YouTube channel — that's part of how I keep prices this low. Prefer to keep your video unlisted instead?</p>
-              <label class="unlisted-toggle">
-                <input type="checkbox" id="unlisted-checkbox" />
-                <span>Switch to Unlisted — $75</span>
-              </label>
+              <p>💡 I keep the Complete package at $50 because your video gets shared publicly on my YouTube channel. That's part of how I keep prices this low. Want your real photos in the video, or the video unlisted? Choose Ultimate ($75) or Ultimate Unlisted ($100).</p>
+            </div>
+            <div class="public-note" id="ultimate-note" style="display:none;">
+              <p>📸 Up to 10 of your real photos go in your video. No need to upload them now. After you order, I'll text you simple directions for sending them.</p>
             </div>
           </div>
 
@@ -2301,12 +2376,12 @@
 
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Is there a cheaper option than the Complete Custom Song Experience? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Yes. The MP3 Only package is $30 and includes your personalized song as a downloadable MP3 audio file — no YouTube video, cover art, or lyric sheet. The Complete Custom Song Experience starts at $50 and includes everything you need to share the song right away.</div>
+        <div class="faq-a">Yes. The MP3 Only package is $25 and includes your personalized song as a downloadable MP3 audio file — no YouTube video, cover art, or lyric sheet. The Complete Custom Song Experience starts at $50 and includes everything you need to share the song right away.</div>
       </div>
 
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Why is the Complete Experience $50 instead of $75? <span class="faq-icon">+</span></button>
-        <div class="faq-a">The $50 price includes your song's video being shared publicly on the CustomSongMe YouTube channel — that public posting is part of how I keep prices affordable. If you'd rather keep your video unlisted (not published to my channel, only viewable by anyone with the direct link), that option is available for $75. You can switch to it right on the request form.</div>
+        <button class="faq-q" aria-expanded="false">Why is the Complete Experience $50? <span class="faq-icon">+</span></button>
+        <div class="faq-a">The $50 price includes your song's video being shared publicly on the CustomSongMe YouTube channel — that public posting is part of how I keep prices affordable. If you'd rather keep your video unlisted (not published to my channel, only viewable by anyone with the direct link), choose Ultimate Unlisted for $100. It also puts up to 10 of your real photos in the video.</div>
       </div>
 
       <div class="faq-item">
@@ -2503,10 +2578,14 @@
     });
   });
 
-  // PACKAGE + PAYMENT METHOD → PAYMENT LINK ROUTING (3-tier: MP3 $30 / Complete Public $50 / Complete Unlisted $75)
-  // Payment is required upfront: submitting the form sends the customer straight to
-  // checkout for whichever package + payment method they selected. This keeps the
-  // hidden _next field (which Formspree uses to redirect after submission) in sync.
+  // PACKAGE + PAYMENT METHOD → PAYMENT LINK ROUTING (4 packages: MP3 $25 / Complete $50 / Ultimate $75 / Ultimate Unlisted $100)
+  // Payment is upfront: submitting the form sends the customer straight to checkout for the
+  // package + payment method they picked, by keeping the hidden _next field in sync.
+  // STRIPE NOTE: the $25, $75 and $100 card links below were first made for the Thanksgiving special.
+  // Swap them here if Dan makes plain everyday links in Stripe.
+  const STRIPE_MP3_25 = 'https://buy.stripe.com/3cI8wOcLK6JT05l9Se9Ve0l';
+  const STRIPE_ULTIMATE_75 = 'https://buy.stripe.com/cNiaEW3ba5FP19pe8u9Ve0k';
+  const STRIPE_ULTIMATE_UNLISTED_100 = 'https://buy.stripe.com/aFadR8132c4d6tJ6G29Ve0j';
   const PAYMENT_LINKS = {
     'Complete (Public) — $50': {
       'Card (Stripe)': 'https://buy.stripe.com/3cIaEWcLKb09cS7fcy9Ve0f',
@@ -2514,31 +2593,41 @@
       'Cash App': 'https://cash.app/$optimistic01/50',
       'Venmo': 'https://venmo.com/u/Dan-Rock-5'
     },
-    'Complete (Unlisted) — $75': {
-      'Card (Stripe)': 'https://buy.stripe.com/8x2fZgh20fgp8BRc0m9Ve0h',
+    'MP3 Only — $25': {
+      'Card (Stripe)': STRIPE_MP3_25,
+      'PayPal': 'https://www.paypal.me/DanRock834/25',
+      'Cash App': 'https://cash.app/$optimistic01/25',
+      'Venmo': 'https://venmo.com/u/Dan-Rock-5'
+    },
+    'Ultimate (Public, real photos) — $75': {
+      'Card (Stripe)': STRIPE_ULTIMATE_75,
       'PayPal': 'https://www.paypal.me/DanRock834/75',
       'Cash App': 'https://cash.app/$optimistic01/75',
       'Venmo': 'https://venmo.com/u/Dan-Rock-5'
     },
-    'MP3 Only — $30': {
-      'Card (Stripe)': 'https://buy.stripe.com/cNieVc2767NX3hxd4q9Ve06',
-      'PayPal': 'https://www.paypal.me/DanRock834/30',
-      'Cash App': 'https://cash.app/$optimistic01/30',
+    'Ultimate Unlisted (real photos) — $100': {
+      'Card (Stripe)': STRIPE_ULTIMATE_UNLISTED_100,
+      'PayPal': 'https://www.paypal.me/DanRock834/100',
+      'Cash App': 'https://cash.app/$optimistic01/100',
       'Venmo': 'https://venmo.com/u/Dan-Rock-5'
     }
+  };
+  const TIER_TO_PACKAGE = {
+    'complete': 'Complete (Public) — $50',
+    'mp3': 'MP3 Only — $25',
+    'ultimate': 'Ultimate (Public, real photos) — $75',
+    'ultimate-unlisted': 'Ultimate Unlisted (real photos) — $100'
   };
   const nextRedirectField = document.getElementById('next-redirect');
   const packageHiddenField = document.getElementById('package-hidden-field');
   const paymentMethodNote = document.getElementById('payment-method-note');
   const publicNote = document.getElementById('public-note');
-  const unlistedCheckbox = document.getElementById('unlisted-checkbox');
+  const ultimateNote = document.getElementById('ultimate-note');
   const emailField = document.getElementById('email');
 
   function getEffectivePackage() {
     const tier = document.querySelector('input[name="package-tier"]:checked');
-    if (!tier) return 'Complete (Public) — $50';
-    if (tier.value === 'mp3') return 'MP3 Only — $30';
-    return (unlistedCheckbox && unlistedCheckbox.checked) ? 'Complete (Unlisted) — $75' : 'Complete (Public) — $50';
+    return (tier && TIER_TO_PACKAGE[tier.value]) || 'Complete (Public) — $50';
   }
 
   function syncPaymentRedirect() {
@@ -2548,23 +2637,22 @@
 
     if (packageHiddenField) packageHiddenField.value = pkgName;
 
-    // Show the public/unlisted note only when Complete is selected (irrelevant for MP3 Only)
     const tier = document.querySelector('input[name="package-tier"]:checked');
-    if (publicNote) publicNote.style.display = (tier && tier.value === 'complete') ? 'block' : 'none';
+    const t = tier ? tier.value : 'complete';
+    if (publicNote) publicNote.style.display = (t === 'complete') ? 'block' : 'none';
+    if (ultimateNote) ultimateNote.style.display = (t === 'ultimate' || t === 'ultimate-unlisted') ? 'block' : 'none';
 
     const pkgLinks = PAYMENT_LINKS[pkgName];
     if (pkgLinks && pkgLinks[method.value]) {
       let url = pkgLinks[method.value];
-      // Pre-fill the customer's email at Stripe checkout so they don't have to retype it —
-      // reduces the chance of a typo breaking the email-match. Stripe-only; PayPal/Cash App/Venmo don't support this.
+      // Pre-fill the customer's email at Stripe checkout so the payment matches the order.
       if (method.value === 'Card (Stripe)' && emailField && emailField.value) {
         const separator = url.includes('?') ? '&' : '?';
         url += separator + 'prefilled_email=' + encodeURIComponent(emailField.value);
       }
       nextRedirectField.value = url;
     }
-    // PayPal/Cash App/Venmo can't force a matching field like Stripe can —
-    // remind the customer to leave their name so the payment can be matched.
+    // PayPal/Cash App/Venmo: remind the customer to leave their name so the payment can be matched.
     if (paymentMethodNote) {
       paymentMethodNote.style.display = (method.value === 'Card (Stripe)') ? 'none' : 'block';
     }
@@ -2572,9 +2660,15 @@
   document.querySelectorAll('input[name="package-tier"], input[name="payment-method"]').forEach(radio => {
     radio.addEventListener('change', syncPaymentRedirect);
   });
-  if (unlistedCheckbox) unlistedCheckbox.addEventListener('change', syncPaymentRedirect);
+  // Package buttons pre-select the matching package on the request form
+  document.querySelectorAll('a[data-tier]').forEach(a => {
+    a.addEventListener('click', () => {
+      const r = document.querySelector('input[name="package-tier"][value="' + a.dataset.tier + '"]');
+      if (r) { r.checked = true; syncPaymentRedirect(); }
+    });
+  });
   if (emailField) emailField.addEventListener('input', syncPaymentRedirect);
-  syncPaymentRedirect(); // set correctly on page load, not just on change
+  syncPaymentRedirect();
 
   // DOUBLE-SUBMIT PROTECTION — disable the button and show a loading state the moment
   // the form is submitted, so a slow connection or an impatient double-tap can't send two orders.
