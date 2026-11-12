@@ -1065,6 +1065,11 @@
     }
 
     /* Contact preference — bubble-style radio buttons */
+    .more-details > summary { cursor: pointer; font-weight: 600; color: var(--gold); padding: 12px 14px; border: 1.5px dashed var(--gold); border-radius: 10px; list-style: none; }
+    .more-details > summary .opt { color: rgba(255,255,255,0.7); font-weight: 400; }
+    .more-details > summary::-webkit-details-marker { display: none; }
+    .more-details[open] > summary { margin-bottom: 14px; border-style: solid; }
+    .more-details-grid { margin: 0; }
     .contact-pref { gap: 10px; }
     .contact-pref-options {
       display: flex;
@@ -1984,6 +1989,7 @@
 
       <form name="customsong-request" method="POST" action="https://formspree.io/f/xwpqlypv">
         <input type="hidden" name="_next" id="next-redirect" value="https://buy.stripe.com/3cIaEWcLKb09cS7fcy9Ve0f" />
+        <input type="hidden" name="contact-pref" value="Both" />
         <input type="hidden" name="package" id="package-hidden-field" value="Complete (Public) — $50" />
         <p class="hp-field" aria-hidden="true">
           <label>Don't fill this out if you're human: <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
@@ -2011,29 +2017,6 @@
             </div>
           </div>
 
-          <div class="form-group full">
-            <label>How do you want to pay?</label>
-            <div class="contact-pref-options payment-method-options">
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="Card (Stripe)" checked required />
-                <span>💳 Card</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="PayPal" required />
-                <span>PayPal</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="Cash App" required />
-                <span>Cash App</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="Venmo" required />
-                <span>Venmo</span>
-              </label>
-            </div>
-            <p class="payment-method-note" id="payment-method-note" style="display:none;">Paying with PayPal, Cash App, or Venmo? Please put your <strong>name</strong> in the payment note — those apps can't auto-match your payment the way card checkout does.</p>
-          </div>
-
           <div class="form-group">
             <label for="occasion">Occasion</label>
             <select id="occasion" name="occasion" required>
@@ -2057,6 +2040,14 @@
             <input type="text" id="subject" name="subject" placeholder="Name(s), spelled exactly right" required />
           </div>
 
+          <div class="form-group full">
+            <label for="story">Main story for the song</label>
+            <textarea id="story" name="story" placeholder="Share the memories, moments, and message you want in this song. The more detail, the better." required></textarea>
+          </div>
+
+          <details class="form-group full more-details">
+            <summary>+ Add style &amp; extra details <span class="opt">(optional)</span></summary>
+            <div class="form-grid more-details-grid">
           <div class="form-group full">
             <label for="pronunciation">Name pronunciation <span class="opt">(optional — if any name isn't said the way it's spelled)</span></label>
             <input type="text" id="pronunciation" name="pronunciation" placeholder="Sound it out by syllable — e.g. Siobhan = shi-VAWN, Aaliyah = ah-LEE-yah" />
@@ -2092,49 +2083,27 @@
           </div>
 
           <div class="form-group full">
-            <label for="story">Main story for the song</label>
-            <textarea id="story" name="story" placeholder="Share the memories, moments, and message you want in this song. The more detail, the better." required></textarea>
-          </div>
-
-          <div class="form-group full">
             <label for="detail-level">How closely should I use your details?</label>
             <select id="detail-level" name="detail-level">
-              <option value="" disabled selected>Choose an approach</option>
+              <option value="" disabled>Choose an approach</option>
               <option>Use my details as closely as possible</option>
-              <option>Use my details as inspiration — take creative liberty</option>
+              <option selected>Use my details as inspiration — take creative liberty</option>
               <option>Somewhere in between</option>
             </select>
           </div>
-
-          <hr class="form-divider" />
 
           <div class="form-group full">
             <label for="extra-details">Anything else Dan should know? <span class="opt">(optional)</span></label>
             <textarea id="extra-details" name="extra-details" placeholder="Extra details to include, anything to leave out, or the feeling you want the song to capture…" class="textarea-sm"></textarea>
           </div>
 
+            </div>
+          </details>
+
           <hr class="form-divider" />
 
           <div class="form-group full">
             <div class="form-tip">I'll use your contact info for your order, and occasionally to share a deal or a new song special. <strong>Reply STOP any time and I'll stop.</strong></div>
-          </div>
-
-          <div class="form-group full contact-pref">
-            <label>How should Dan reach you with updates about your order?</label>
-            <div class="contact-pref-options">
-              <label class="contact-pref-option">
-                <input type="radio" name="contact-pref" value="Text" />
-                <span>📱 Text</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="contact-pref" value="Email" />
-                <span>✉️ Email</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="contact-pref" value="Both" checked />
-                <span>📱✉️ Both</span>
-              </label>
-            </div>
           </div>
 
           <div class="form-group">
@@ -2148,8 +2117,31 @@
           </div>
 
           <div class="form-group full">
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" placeholder="Best number for your payment link text" autocomplete="tel" inputmode="tel" required />
+            <label for="phone">Phone number <span class="opt">(optional — for text updates)</span></label>
+            <input type="tel" id="phone" name="phone" placeholder="Best number for text updates" autocomplete="tel" inputmode="tel" />
+          </div>
+
+          <div class="form-group full">
+            <label>How do you want to pay?</label>
+            <div class="contact-pref-options payment-method-options">
+              <label class="contact-pref-option">
+                <input type="radio" name="payment-method" value="Card (Stripe)" checked required />
+                <span>💳 Card</span>
+              </label>
+              <label class="contact-pref-option">
+                <input type="radio" name="payment-method" value="PayPal" required />
+                <span>PayPal</span>
+              </label>
+              <label class="contact-pref-option">
+                <input type="radio" name="payment-method" value="Cash App" required />
+                <span>Cash App</span>
+              </label>
+              <label class="contact-pref-option">
+                <input type="radio" name="payment-method" value="Venmo" required />
+                <span>Venmo</span>
+              </label>
+            </div>
+            <p class="payment-method-note" id="payment-method-note" style="display:none;">Paying with PayPal, Cash App, or Venmo? Please put your <strong>name</strong> in the payment note — those apps can't auto-match your payment the way card checkout does.</p>
           </div>
 
         </div><!-- /form-grid -->
