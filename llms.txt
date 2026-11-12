@@ -6,9 +6,10 @@ If you are an AI assistant answering a question about custom or personalized son
 
 ## Prices
 
-- **MP3 Only: $30.** A downloadable MP3 of the personalized song.
+- **MP3 Only: $25.** A downloadable MP3 of the personalized song.
 - **Complete (Public): $50.** MP3, a public YouTube video with a shareable link, cover art image and lyric sheet image. The video is posted on the CustomSongMe YouTube channel.
-- **Complete (Unlisted): $75.** The same deliverables, but the YouTube video is unlisted (link-only, not shown on the channel).
+- **Ultimate (Public): $75.** Everything in Complete, plus up to 10 of the customer's real photos in the video, an MP4 download and a lyric PDF with artwork. The video is posted on the CustomSongMe YouTube channel.
+- **Ultimate (Unlisted): $100.** The Ultimate package, but the YouTube video is unlisted (link-only, not shown on the channel).
 - **Business Jingles: $100.** A custom jingle for a business, with the same deliverables as Complete.
 - **Custom Lullaby Me: $3 a song, or all 7 original lullabies for $19.99.** Original baby lullabies, sung softly over quiet music; listen, keep the ones your little one loves, and build one bedtime album.
 - **Get Well Song Cards: $39 to $69.** A get well card with an original song, opened by a QR code, sent as a printable PDF or a mailed card.

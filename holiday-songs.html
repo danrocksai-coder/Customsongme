@@ -47,8 +47,16 @@
     },
     {
       "@type": "Offer",
-      "name": "The Complete Custom Song Experience (Unlisted)",
+      "name": "Ultimate Package (Public, Real Photos)",
       "price": "75.00",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://www.customsongme.com/holiday-songs"
+    },
+      {
+      "@type": "Offer",
+      "name": "Ultimate Unlisted (Real Photos)",
+      "price": "100.00",
       "priceCurrency": "USD",
       "availability": "https://schema.org/InStock",
       "url": "https://www.customsongme.com/holiday-songs"
@@ -56,7 +64,7 @@
     {
       "@type": "Offer",
       "name": "MP3 Only",
-      "price": "30.00",
+      "price": "25.00",
       "priceCurrency": "USD",
       "availability": "https://schema.org/InStock",
       "url": "https://www.customsongme.com/holiday-songs"
@@ -139,15 +147,15 @@
       "name": "Is there a cheaper option than the Complete Custom Song Experience?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. The MP3 Only package is $30 and includes the song as a downloadable MP3 audio file, with no video, cover art, or lyric sheet. The Complete Custom Song Experience is $50 and includes all four."
+        "text": "Yes. The MP3 Only package is $25 and includes the song as a downloadable MP3 audio file, with no video, cover art, or lyric sheet. The Complete Custom Song Experience is $50 and includes all four."
       }
     },
     {
       "@type": "Question",
-      "name": "Why is the Complete Experience $50 instead of $75?",
+      "name": "Why is the Complete Experience $50?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The $50 price includes your video being shared publicly on the CustomSongMe YouTube channel. That public posting is part of how I keep prices affordable. If you'd rather keep your video unlisted (not published to my channel, only viewable by anyone with the direct link), that option is $75. You can switch to it right on the request form."
+        "text": "The $50 price includes your video being shared publicly on the CustomSongMe YouTube channel. That public posting is part of how I keep prices affordable. If you'd rather keep your video unlisted (not published to my channel, only viewable by anyone with the direct link), choose Ultimate Unlisted for $100. It also puts up to 10 of your real photos in the video."
       }
     },
     {
@@ -642,6 +650,12 @@
     @media (max-width: 360px) {
       .nav-brand { font-size: 0.82rem; }
     }
+  
+    /* 4-package layout: two even rows of two cards, 2x2 package picker on the form */
+    .package-grid { grid-template-columns: 1fr 1fr; align-items: stretch; }
+    .package-grid.ultimate-grid { margin-top: 28px; }
+    .contact-pref-options.pkg-options { display: grid; grid-template-columns: 1fr 1fr; border-radius: 18px; }
+    @media (max-width: 800px) { .package-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body class="theme-christmas">
@@ -689,7 +703,7 @@
       <div class="price-label">Most Popular · Everything Included</div>
       <div class="price-main">$50</div>
       <div class="price-includes">MP3 Audio · Public YouTube Video · Cover Art · Lyric Sheet</div>
-      <div class="price-alt">Just want the song? MP3 Only is $30</div>
+      <div class="price-alt">Just want the song? MP3 Only is $25</div>
     </div>
     <div><a href="#order-form" class="btn-primary"><span class="js-emoji">🎄</span> Start Your Holiday Song</a></div>
   </div>
@@ -707,7 +721,7 @@
 <section id="quick-answer" style="padding:48px 24px 8px;text-align:center">
   <div style="max-width:760px;margin:0 auto;">
     <h2 style="margin-bottom:12px;">What is a custom holiday song?</h2>
-    <p style="font-size:1.05rem;line-height:1.7;margin:0;text-align:left;">A custom holiday song is an original song written about your people for Christmas, Thanksgiving or any holiday, using their names, your traditions and your family's inside jokes. At CustomSongMe, Dan the Song Man writes and produces it from what you share, delivered within 24 hours of confirmed payment. This Thanksgiving, the Family Gratitude Song names everyone at your table: $25 for the MP3, $50 with a public YouTube video, $75 for the Ultimate package with up to 10 of your family photos, or $100 with the video unlisted. Other holiday songs cost $30 for the MP3, $50 for the complete package (MP3, public YouTube video, cover art and lyric sheet), or $75 with an unlisted video.</p>
+    <p style="font-size:1.05rem;line-height:1.7;margin:0;text-align:left;">A custom holiday song is an original song written about your people for Christmas, Thanksgiving or any holiday, using their names, your traditions and your family's inside jokes. At CustomSongMe, Dan the Song Man writes and produces it from what you share, delivered within 24 hours of confirmed payment. This Thanksgiving, the Family Gratitude Song names everyone at your table: $25 for the MP3, $50 with a public YouTube video, $75 for the Ultimate package with up to 10 of your family photos, or $100 with the video unlisted. Other holiday songs cost the same: $25 for the MP3, $50 for the complete package (MP3, public YouTube video, cover art and lyric sheet), $75 for Ultimate with your real photos, or $100 for Ultimate with the video unlisted.</p>
   </div>
 </section>
 
@@ -739,26 +753,26 @@
     <h2>Check Out the <span class="gold"><span class="js-holiday">Christmas</span> Specials</span></h2>
     <p class="sp-sub" id="sp-sub">Pick a <span class="js-holiday">Christmas</span> idea, tap it, and tell me the names and details. Your song is delivered within 24 hours. Order by Dec 22 for Christmas.</p>
     <div class="sp-grid" id="sp-grid">
-      <a class="sp-card" href="#order-form" data-special="Song From Santa" data-genre="Kids&#39; Sing-Along"><div class="sp-num">01</div><div class="sp-em">🎅</div><div class="sp-name">Song From Santa</div><div class="sp-desc">Santa sings to your kids by name: what they did this year and what's on their list.</div><div class="sp-soon">From $30 · Order</div></a>
-      <a class="sp-card" href="#order-form" data-special="Grandparents&#39; Christmas" data-genre="Heartfelt Ballad"><div class="sp-num">02</div><div class="sp-em">👵</div><div class="sp-name">Grandparents' Christmas</div><div class="sp-desc">For Grandma and Grandpa, with every grandkid's name in the chorus.</div><div class="sp-soon">From $30 · Order</div></a>
-      <a class="sp-card" href="#order-form" data-special="Our First Christmas" data-genre="Pop"><div class="sp-num">03</div><div class="sp-em">💑</div><div class="sp-name">Our First Christmas</div><div class="sp-desc">Your first Christmas together as a couple, turned into a love song.</div><div class="sp-soon">From $30 · Order</div></a>
-      <a class="sp-card" href="#order-form" data-special="Family Year in Review" data-genre="Classic Holiday Feel"><div class="sp-num">04</div><div class="sp-em">🎁</div><div class="sp-name">Family Year in Review</div><div class="sp-desc">The trips, the new baby, the new house. Your whole year in one carol.</div><div class="sp-soon">From $30 · Order</div></a>
-      <a class="sp-card" href="#order-form" data-special="The Dog Ate the Tinsel" data-genre="Funny / Roast"><div class="sp-num">05</div><div class="sp-em">🐶</div><div class="sp-name">The Dog Ate the Tinsel</div><div class="sp-desc">The pet who knocks over the tree every year finally gets a song.</div><div class="sp-soon">From $30 · Order</div></a>
-      <a class="sp-card" href="#order-form" data-special="Office Party Anthem" data-genre="Pop"><div class="sp-num">06</div><div class="sp-em">🏢</div><div class="sp-name">Office Party Anthem</div><div class="sp-desc">A fun one for the team, the break room, or the holiday party.</div><div class="sp-soon">From $30 · Order</div></a>
-      <a class="sp-card" href="#order-form" data-special="Christmas Morning Opener" data-genre="Classic Holiday Feel"><div class="sp-num">07</div><div class="sp-em">🎄</div><div class="sp-name">Christmas Morning Opener</div><div class="sp-desc">Play it as the very first gift of the morning, before anything gets unwrapped.</div><div class="sp-soon">From $30 · Order</div></a>
-      <a class="sp-card" href="#order-form" data-special="Missing You This Christmas" data-genre="Heartfelt Ballad"><div class="sp-num">08</div><div class="sp-em">🕯️</div><div class="sp-name">Missing You This Christmas</div><div class="sp-desc">A gentle song for someone who isn't at the table this year.</div><div class="sp-soon">From $30 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Song From Santa" data-genre="Kids&#39; Sing-Along"><div class="sp-num">01</div><div class="sp-em">🎅</div><div class="sp-name">Song From Santa</div><div class="sp-desc">Santa sings to your kids by name: what they did this year and what's on their list.</div><div class="sp-soon">From $25 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Grandparents&#39; Christmas" data-genre="Heartfelt Ballad"><div class="sp-num">02</div><div class="sp-em">👵</div><div class="sp-name">Grandparents' Christmas</div><div class="sp-desc">For Grandma and Grandpa, with every grandkid's name in the chorus.</div><div class="sp-soon">From $25 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Our First Christmas" data-genre="Pop"><div class="sp-num">03</div><div class="sp-em">💑</div><div class="sp-name">Our First Christmas</div><div class="sp-desc">Your first Christmas together as a couple, turned into a love song.</div><div class="sp-soon">From $25 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Family Year in Review" data-genre="Classic Holiday Feel"><div class="sp-num">04</div><div class="sp-em">🎁</div><div class="sp-name">Family Year in Review</div><div class="sp-desc">The trips, the new baby, the new house. Your whole year in one carol.</div><div class="sp-soon">From $25 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="The Dog Ate the Tinsel" data-genre="Funny / Roast"><div class="sp-num">05</div><div class="sp-em">🐶</div><div class="sp-name">The Dog Ate the Tinsel</div><div class="sp-desc">The pet who knocks over the tree every year finally gets a song.</div><div class="sp-soon">From $25 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Office Party Anthem" data-genre="Pop"><div class="sp-num">06</div><div class="sp-em">🏢</div><div class="sp-name">Office Party Anthem</div><div class="sp-desc">A fun one for the team, the break room, or the holiday party.</div><div class="sp-soon">From $25 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Christmas Morning Opener" data-genre="Classic Holiday Feel"><div class="sp-num">07</div><div class="sp-em">🎄</div><div class="sp-name">Christmas Morning Opener</div><div class="sp-desc">Play it as the very first gift of the morning, before anything gets unwrapped.</div><div class="sp-soon">From $25 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Missing You This Christmas" data-genre="Heartfelt Ballad"><div class="sp-num">08</div><div class="sp-em">🕯️</div><div class="sp-name">Missing You This Christmas</div><div class="sp-desc">A gentle song for someone who isn't at the table this year.</div><div class="sp-soon">From $25 · Order</div></a>
     </div>
 
     <template id="hw-special-tpl">
     <div class="sp-grid" id="sp-grid">
-      <a class="sp-card" href="#order-form" data-special="Party Anthem" data-genre="Spooky & Fun"><div class="sp-num">01</div><div class="sp-em">🎃</div><div class="sp-name">Party Anthem</div><div class="sp-desc">Your Halloween bash gets its own theme song. Names, costumes, the whole crew.</div><div class="sp-soon">From $30 · Order</div></a>
-      <a class="sp-card" href="#order-form" data-special="Costume Crew Roast" data-genre="Funny / Roast"><div class="sp-num">02</div><div class="sp-em">🤡</div><div class="sp-name">Costume Crew Roast</div><div class="sp-desc">A loving roast of the group costume and everyone in it.</div><div class="sp-soon">From $30 · Order</div></a>
-      <a class="sp-card" href="#order-form" data-special="Trick-or-Treat Family Song" data-genre="Kids' Sing-Along"><div class="sp-num">03</div><div class="sp-em">🍬</div><div class="sp-name">Trick-or-Treat Family Song</div><div class="sp-desc">A sing-along about your kids, the candy haul, and the neighborhood loop.</div><div class="sp-soon">From $30 · Order</div></a>
-      <a class="sp-card" href="#order-form" data-special="Haunted House Anthem" data-genre="Rock"><div class="sp-num">04</div><div class="sp-em">🏚️</div><div class="sp-name">Haunted House Anthem</div><div class="sp-desc">Big, dark and dramatic for your haunt, yard display, or scare crew.</div><div class="sp-soon">From $30 · Order</div></a>
-      <a class="sp-card" href="#order-form" data-special="Pet in Costume" data-genre="Spooky & Fun"><div class="sp-num">05</div><div class="sp-em">🐶</div><div class="sp-name">Pet in Costume</div><div class="sp-desc">Your dog, cat, or whatever in the costume that went viral at home.</div><div class="sp-soon">From $30 · Order</div></a>
-      <a class="sp-card" href="#order-form" data-special="Spooky Bedtime Lullaby" data-genre="Heartfelt Ballad"><div class="sp-num">06</div><div class="sp-em">🌙</div><div class="sp-name">Spooky Bedtime Lullaby</div><div class="sp-desc">A gentle not-too-scary good-night song for little monsters.</div><div class="sp-soon">From $30 · Order</div></a>
-      <a class="sp-card" href="#order-form" data-special="Office or Classroom Party" data-genre="Pop"><div class="sp-num">07</div><div class="sp-em">🏫</div><div class="sp-name">Office or Classroom Party</div><div class="sp-desc">A fun one for the break room, the team, or the whole class.</div><div class="sp-soon">From $30 · Order</div></a>
-      <a class="sp-card" href="#order-form" data-special="Couples' Costume Love Song" data-genre="Pop"><div class="sp-num">08</div><div class="sp-em">💀</div><div class="sp-name">Couples' Costume Love Song</div><div class="sp-desc">The two of you in matching costumes, turned into a love song.</div><div class="sp-soon">From $30 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Party Anthem" data-genre="Spooky & Fun"><div class="sp-num">01</div><div class="sp-em">🎃</div><div class="sp-name">Party Anthem</div><div class="sp-desc">Your Halloween bash gets its own theme song. Names, costumes, the whole crew.</div><div class="sp-soon">From $25 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Costume Crew Roast" data-genre="Funny / Roast"><div class="sp-num">02</div><div class="sp-em">🤡</div><div class="sp-name">Costume Crew Roast</div><div class="sp-desc">A loving roast of the group costume and everyone in it.</div><div class="sp-soon">From $25 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Trick-or-Treat Family Song" data-genre="Kids' Sing-Along"><div class="sp-num">03</div><div class="sp-em">🍬</div><div class="sp-name">Trick-or-Treat Family Song</div><div class="sp-desc">A sing-along about your kids, the candy haul, and the neighborhood loop.</div><div class="sp-soon">From $25 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Haunted House Anthem" data-genre="Rock"><div class="sp-num">04</div><div class="sp-em">🏚️</div><div class="sp-name">Haunted House Anthem</div><div class="sp-desc">Big, dark and dramatic for your haunt, yard display, or scare crew.</div><div class="sp-soon">From $25 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Pet in Costume" data-genre="Spooky & Fun"><div class="sp-num">05</div><div class="sp-em">🐶</div><div class="sp-name">Pet in Costume</div><div class="sp-desc">Your dog, cat, or whatever in the costume that went viral at home.</div><div class="sp-soon">From $25 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Spooky Bedtime Lullaby" data-genre="Heartfelt Ballad"><div class="sp-num">06</div><div class="sp-em">🌙</div><div class="sp-name">Spooky Bedtime Lullaby</div><div class="sp-desc">A gentle not-too-scary good-night song for little monsters.</div><div class="sp-soon">From $25 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Office or Classroom Party" data-genre="Pop"><div class="sp-num">07</div><div class="sp-em">🏫</div><div class="sp-name">Office or Classroom Party</div><div class="sp-desc">A fun one for the break room, the team, or the whole class.</div><div class="sp-soon">From $25 · Order</div></a>
+      <a class="sp-card" href="#order-form" data-special="Couples' Costume Love Song" data-genre="Pop"><div class="sp-num">08</div><div class="sp-em">💀</div><div class="sp-name">Couples' Costume Love Song</div><div class="sp-desc">The two of you in matching costumes, turned into a love song.</div><div class="sp-soon">From $25 · Order</div></a>
     </div>
     <div class="hv-wrap" id="hv-wrap">
       <h3 class="hv-title">Hear the Halloween Specials</h3>
@@ -852,7 +866,7 @@
 
 <section id="pricing-intro">
   <div class="container fade-up">
-    <h2>Three Ways to Order. <span class="gold">Starting at $30.</span></h2>
+    <h2>Four Ways to Order. <span class="gold">Starting at $25.</span></h2>
     <p>Keep it simple with just the song, or go all in with the full experience.<br>Either way, tell me your story and I'll take care of the rest.</p>
   </div>
 </section>
@@ -890,7 +904,7 @@
         <div class="package-header">
           <div class="package-badge alt">Budget Option</div>
           <h2>🎵 MP3 Only</h2>
-          <div class="package-price"><span>$</span>30</div>
+          <div class="package-price"><span>$</span>25</div>
           <div class="package-price-note">One-time payment · Just the song</div>
         </div>
         <div class="package-body">
@@ -900,11 +914,65 @@
             <li><span class="icon">✓</span> Personal Happiness Guarantee</li>
           </ul>
           <div class="value-anchor alt">
-            💡 Want the video, cover art, and lyric sheet too? For $20 more, the Complete Custom Song Experience includes everything.
+            💡 Want the video, cover art, and lyric sheet too? For $25 more, the Complete Custom Song Experience includes everything.
           </div>
           <div class="package-cta">
             <a href="#order-form" class="btn-secondary full">Start Your Song Request →</a>
             <div class="package-cta-note">Share your story · Pay securely · Delivered in 24 hours</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="package-grid ultimate-grid">
+      <div class="package-card featured">
+        <div class="package-header">
+          <div class="package-badge">🌟 Ultimate</div>
+          <h2>🌟 Ultimate Package</h2>
+          <div class="package-price"><span>$</span>75</div>
+          <div class="package-price-note">One-time payment · Your real photos in the video</div>
+        </div>
+        <div class="package-body">
+          <ul class="feature-list">
+            <li><span class="icon">✓</span> Everything in the $50 Complete package</li>
+            <li><span class="icon">✓</span> Up to 10 of your real photos in the video</li>
+            <li><span class="icon">✓</span> Public YouTube video, plus the MP4 to download</li>
+            <li><span class="icon">✓</span> PDF of the lyrics with artwork</li>
+            <li><span class="icon">✓</span> Delivered within 24 hours of confirmed payment</li>
+            <li><span class="icon">✓</span> Personal Happiness Guarantee</li>
+          </ul>
+          <div class="value-anchor">
+            📸 No need to upload photos now. After you order, I'll text you simple directions for sending them.
+          </div>
+          <div class="package-cta">
+            <a href="#order-form" class="btn-primary" data-tier="ultimate">Start Ultimate for $75 →</a>
+            <div class="package-cta-note">Share your story · Pay securely · Send photos after</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="package-card featured">
+        <div class="package-header">
+          <div class="package-badge">🔒 Unlisted</div>
+          <h2>🔒 Ultimate Unlisted</h2>
+          <div class="package-price"><span>$</span>100</div>
+          <div class="package-price-note">One-time payment · Private video link</div>
+        </div>
+        <div class="package-body">
+          <ul class="feature-list">
+            <li><span class="icon">✓</span> Everything in the $75 Ultimate package</li>
+            <li><span class="icon">✓</span> Up to 10 of your real photos in the video</li>
+            <li><span class="icon">✓</span> YouTube video is unlisted: only people with the link can see it</li>
+            <li><span class="icon">✓</span> MP4 and lyric PDF to download</li>
+            <li><span class="icon">✓</span> Delivered within 24 hours of confirmed payment</li>
+            <li><span class="icon">✓</span> Personal Happiness Guarantee</li>
+          </ul>
+          <div class="value-anchor">
+            🔒 Best when the song is personal and you'd rather it not appear on my public channel.
+          </div>
+          <div class="package-cta">
+            <a href="#order-form" class="btn-primary" data-tier="ultimate-unlisted">Start Unlisted for $100 →</a>
+            <div class="package-cta-note">Share your story · Pay securely · Send photos after</div>
           </div>
         </div>
       </div>
@@ -975,26 +1043,22 @@
               </label>
               <label class="contact-pref-option">
                 <input type="radio" name="package-tier" value="mp3" required id="pkg-mp3" />
-                <span id="pkg-mp3-label">🎵 MP3 Only — $30</span>
+                <span id="pkg-mp3-label">🎵 MP3 Only — $25</span>
               </label>
-              <label class="contact-pref-option" id="tier-ultimate-wrap" hidden>
+              <label class="contact-pref-option" id="tier-ultimate-wrap">
                 <input type="radio" name="package-tier" value="ultimate" required id="pkg-ultimate" />
-                <span>🌟 Ultimate Family — $75</span>
+                <span>🌟 Ultimate — $75</span>
               </label>
-              <label class="contact-pref-option" id="tier-ultimate-unlisted-wrap" hidden>
+              <label class="contact-pref-option" id="tier-ultimate-unlisted-wrap">
                 <input type="radio" name="package-tier" value="ultimate-unlisted" required id="pkg-ultimate-unlisted" />
                 <span>🔒 Ultimate Unlisted — $100</span>
               </label>
             </div>
             <div class="public-note" id="ultimate-note" style="display:none;">
-              <p id="ultimate-note-text">🌟 Your video uses up to 10 of your real family photos and goes on my public YouTube channel. You also get the MP4 and a PDF of the lyrics with artwork. Want the video unlisted instead? Choose Ultimate Unlisted ($100).</p>
+              <p id="ultimate-note-text">🌟 Your video uses up to 10 of your real photos and goes on my public YouTube channel. You also get the MP4 and a PDF of the lyrics with artwork. Want the video unlisted instead? Choose Ultimate Unlisted ($100).</p>
             </div>
             <div class="public-note" id="public-note">
-              <p>💡 I keep the Complete Experience at $50 because your video gets shared publicly on my YouTube channel. That's part of how I keep prices this low. Prefer to keep your video unlisted instead?</p>
-              <label class="unlisted-toggle">
-                <input type="checkbox" id="unlisted-checkbox" />
-                <span>Switch to Unlisted — $75</span>
-              </label>
+              <p>💡 I keep the Complete package at $50 because your video gets shared publicly on my YouTube channel. That's part of how I keep prices this low. Want your real photos in the video, or the video unlisted? Choose Ultimate ($75) or Ultimate Unlisted ($100).</p>
             </div>
           </div>
 
@@ -1340,7 +1404,7 @@
           <tr><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">Carols with a name dropped in</td><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">A familiar Christmas tune with their name swapped into a template</td><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">Free to a few dollars, instant</td></tr>
           <tr><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">AI song generators</td><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">An original song from the details you type in. The result depends on what you write</td><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">Free to about $20, minutes</td></tr>
           <tr><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">Made-to-order studios</td><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">A song written or performed for you, often at a higher price</td><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">Often $100 or more, a few days to a week or longer</td></tr>
-          <tr style="font-weight:600;background:#f7f9ff;"><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">CustomSongMe</td><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">I read your family's story, write the lyrics from your details and direct the song, produced with AI-assisted music tools. Changes and a guarantee are included</td><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">$30 to $75, within 24 hours</td></tr>
+          <tr style="font-weight:600;background:#f7f9ff;"><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">CustomSongMe</td><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">I read your family's story, write the lyrics from your details and direct the song, produced with AI-assisted music tools. Changes and a guarantee are included</td><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">$25 to $100, within 24 hours</td></tr>
         </tbody>
       </table>
     </div>
@@ -1393,11 +1457,11 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Is there a cheaper option than the Complete Custom Song Experience? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Yes. The MP3 Only package is $30 and includes the song as a downloadable MP3 audio file, with no video, cover art, or lyric sheet. The Complete Custom Song Experience is $50 and includes all four.</div>
+        <div class="faq-a">Yes. The MP3 Only package is $25 and includes the song as a downloadable MP3 audio file, with no video, cover art, or lyric sheet. The Complete Custom Song Experience is $50 and includes all four.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Why is the Complete Experience $50 instead of $75? <span class="faq-icon">+</span></button>
-        <div class="faq-a">The $50 price includes your video being shared publicly on the CustomSongMe YouTube channel. That public posting is part of how I keep prices affordable. If you'd rather keep your video unlisted (not published to my channel, only viewable by anyone with the direct link), that option is $75. You can switch to it right on the request form.</div>
+        <button class="faq-q" aria-expanded="false">Why is the Complete Experience $50? <span class="faq-icon">+</span></button>
+        <div class="faq-a">The $50 price includes your video being shared publicly on the CustomSongMe YouTube channel. That public posting is part of how I keep prices affordable. If you'd rather keep your video unlisted (not published to my channel, only viewable by anyone with the direct link), choose Ultimate Unlisted for $100. It also puts up to 10 of your real photos in the video.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Is the song guaranteed? <span class="faq-icon">+</span></button>
@@ -1631,9 +1695,9 @@
         if (td.textContent.trim() === '$30 to $75, within 24 hours') td.textContent = '$25 to $100, within 24 hours';
       });
       const qa = document.querySelector('#quick-answer p');
-      if (qa) qa.innerHTML = qa.innerHTML.replace(/ Other holiday songs cost \$30 for the MP3[^.]*\./, '');
+      if (qa) qa.innerHTML = qa.innerHTML.replace(/ Other holiday songs cost the same:[^.]*\./, '');
       document.querySelectorAll('.faq-a').forEach(a => {
-        if (a.textContent.indexOf('MP3 Only package is $30') !== -1) {
+        if (a.textContent.indexOf('MP3 Only package is $25') !== -1) {
           a.textContent = 'Yes. For Thanksgiving, the MP3 Only package is $25 and includes the song as a downloadable MP3 audio file, with no video, cover art, or lyric sheet. The Family Gratitude Song is $50 and adds the YouTube video, cover art and lyric sheet.';
         }
       });
@@ -1692,7 +1756,8 @@
   })();
 
   // PACKAGE + PAYMENT METHOD → PAYMENT LINK ROUTING
-  // Regular: MP3 $30 / Complete Public $50 / Complete Unlisted $75
+  // Everyday: MP3 $25 / Complete $50 / Ultimate $75 / Ultimate Unlisted $100
+  // STRIPE NOTE: the $25, $75 and $100 card links were first made for the Thanksgiving special; swap if Dan makes plain everyday links.
   // Thanksgiving Family Gratitude: MP3 $25 / Song $50 / Ultimate Public $75 / Ultimate Unlisted $100
   const STRIPE_TG_MP3_25 = 'https://buy.stripe.com/3cI8wOcLK6JT05l9Se9Ve0l';
   const STRIPE_TG_ULTIMATE_75 = 'https://buy.stripe.com/cNiaEW3ba5FP19pe8u9Ve0k';
@@ -1703,16 +1768,22 @@
       'Cash App': 'https://cash.app/$optimistic01/50',
       'Venmo': 'https://venmo.com/u/Dan-Rock-5'
     },
-    'Complete (Unlisted) — $75': {
-      'Card (Stripe)': 'https://buy.stripe.com/8x2fZgh20fgp8BRc0m9Ve0h',
+    'Ultimate (Public, real photos) — $75': {
+      'Card (Stripe)': STRIPE_TG_ULTIMATE_75,
       'PayPal': 'https://www.paypal.me/DanRock834/75',
       'Cash App': 'https://cash.app/$optimistic01/75',
       'Venmo': 'https://venmo.com/u/Dan-Rock-5'
     },
-    'MP3 Only — $30': {
-      'Card (Stripe)': 'https://buy.stripe.com/cNieVc2767NX3hxd4q9Ve06',
-      'PayPal': 'https://www.paypal.me/DanRock834/30',
-      'Cash App': 'https://cash.app/$optimistic01/30',
+    'Ultimate Unlisted (real photos) — $100': {
+      'Card (Stripe)': 'https://buy.stripe.com/aFadR8132c4d6tJ6G29Ve0j',
+      'PayPal': 'https://www.paypal.me/DanRock834/100',
+      'Cash App': 'https://cash.app/$optimistic01/100',
+      'Venmo': 'https://venmo.com/u/Dan-Rock-5'
+    },
+    'MP3 Only — $25': {
+      'Card (Stripe)': STRIPE_TG_MP3_25,
+      'PayPal': 'https://www.paypal.me/DanRock834/25',
+      'Cash App': 'https://cash.app/$optimistic01/25',
       'Venmo': 'https://venmo.com/u/Dan-Rock-5'
     },
     'Family Gratitude MP3 (Thanksgiving) — $25': {
@@ -1758,8 +1829,10 @@
       if (tier.value === 'ultimate-unlisted') return 'Ultimate Family (Thanksgiving, Unlisted) — $100';
       return 'Family Gratitude Song (Thanksgiving) — $50';
     }
-    if (tier.value === 'mp3') return 'MP3 Only — $30';
-    return (unlistedCheckbox && unlistedCheckbox.checked) ? 'Complete (Unlisted) — $75' : 'Complete (Public) — $50';
+    if (tier.value === 'mp3') return 'MP3 Only — $25';
+    if (tier.value === 'ultimate') return 'Ultimate (Public, real photos) — $75';
+    if (tier.value === 'ultimate-unlisted') return 'Ultimate Unlisted (real photos) — $100';
+    return 'Complete (Public) — $50';
   }
 
   function syncPaymentRedirect() {
@@ -1773,7 +1846,7 @@
     const tgMode = pkgName.indexOf('(Thanksgiving') !== -1;
     if (publicNote) publicNote.style.display = (!tgMode && tier && tier.value === 'complete') ? 'block' : 'none';
     const ultimateNote = document.getElementById('ultimate-note');
-    if (ultimateNote) ultimateNote.style.display = (tier && tier.value === 'ultimate') ? 'block' : 'none';
+    if (ultimateNote) ultimateNote.style.display = (tier && (tier.value === 'ultimate' || tier.value === 'ultimate-unlisted')) ? 'block' : 'none';
 
     const pkgLinks = PAYMENT_LINKS[pkgName];
     if (pkgLinks && pkgLinks[method.value]) {
@@ -1795,6 +1868,14 @@
   const holidaySelForPay = document.getElementById('holiday');
   if (holidaySelForPay) holidaySelForPay.addEventListener('change', syncPaymentRedirect);
   if (emailField) emailField.addEventListener('input', syncPaymentRedirect);
+  // Package buttons pre-select the matching package (Thanksgiving buttons have their own handler)
+  document.querySelectorAll('a[data-tier]').forEach(a => {
+    a.addEventListener('click', () => {
+      if (a.classList.contains('tg-start')) return;
+      const r = document.querySelector('input[name="package-tier"][value="' + a.dataset.tier + '"]');
+      if (r) { r.checked = true; r.dispatchEvent(new Event('change')); }
+    });
+  });
   syncPaymentRedirect();
 
   // ===== THANKSGIVING FAMILY SPECIAL: step-by-step fields and the four price tiers ($25/$50/$75/$100) =====
@@ -1842,12 +1923,8 @@
       box.hidden = !on;
       box.querySelectorAll('input').forEach(inp => { inp.disabled = !on; });
       box.querySelectorAll('[data-tg-required]').forEach(inp => { inp.required = on; });
-      ultWrap.hidden = !on;
-      ultUWrap.hidden = !on;
-      mp3Label.textContent = on ? '🎵 MP3 Only — $25' : '🎵 MP3 Only — $30';
       completeLabel.textContent = on ? '🎁 Family Gratitude — $50' : '🎁 Complete — $50';
       if (on && unlistedBox && unlistedBox.checked) { unlistedBox.checked = false; }
-      if (!on && (ult.checked || ultU.checked)) { complete.checked = true; complete.dispatchEvent(new Event('change')); }
 
       subjGroup.hidden = on;
       subj.required = !on; subj.disabled = on;
