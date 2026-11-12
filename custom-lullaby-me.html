@@ -156,11 +156,6 @@ ol.list li.dragging{opacity:.4}
 .totals .grand{font-size:22px;font-weight:900;border-top:1px solid var(--line);padding-top:10px;margin-top:6px}
 .formgrid{width:100%;display:grid;gap:10px}
 .lbl{font-size:12px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:var(--quiet)}
-.pay{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%}
-.pay label{border:2px solid var(--line);border-radius:14px;min-height:48px;display:grid;place-items:center;font-weight:800;font-size:14px;cursor:pointer;background:var(--card)}
-.pay input{position:absolute;opacity:0;pointer-events:none}
-.pay label:has(input:checked){border-color:var(--pick-edge);background:var(--pick)}
-.pay label:has(input:focus-visible){outline:3px solid #7a9de1;outline-offset:2px}
 .err{color:var(--bad);font-size:13.5px;font-weight:700;margin:0}
 .done{background:var(--pick);border:2px solid var(--pick-edge);border-radius:18px;padding:18px 14px;font-size:15px;width:100%;display:grid;gap:10px;justify-items:center}
 .done h3{margin:0;font-size:20px}
@@ -241,12 +236,8 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{o
       <input class="field" id="f-name" name="name" type="text" autocomplete="name" required>
       <label class="lbl" for="f-email">Email for delivery</label>
       <input class="field" id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required>
-      <span class="lbl" id="pay-lbl">Pay with</span>
-      <div class="pay" role="radiogroup" aria-labelledby="pay-lbl">
-        <label><input type="radio" name="payment-method" value="PayPal" required>PayPal</label>
-        <label><input type="radio" name="payment-method" value="Cash App">Cash App</label>
-        <label><input type="radio" name="payment-method" value="Venmo">Venmo</label>
-      </div>
+      <input type="radio" name="payment-method" value="Card (Stripe)" checked hidden>
+      <p class="quiet">💳 Secure checkout by Stripe: card, Apple Pay, Cash App Pay and more.</p>
       <p class="err" id="err" hidden></p>
       <button class="btn primary" id="checkout" type="submit" disabled>Place my order</button>
     </form>
@@ -276,11 +267,6 @@ const SONGS=[
    story:"Written by Zephyr, my AI songwriter, on November 11, 2026. A small promise set to music: you're safe, I'm here, and I'll love you tomorrow too."}
 ];
 const TOTAL_SLOTS=20, PRICE=3, PKG_PRICE=19.99, NAME_VIDEO=12, PKG=[1,2,3,4,5,6,7], PREVIEW=60;
-const PAY={
-  "PayPal":  {url:a=>`https://www.paypal.me/DanRock834/${a}`, handle:"paypal.me/DanRock834"},
-  "Cash App":{url:a=>`https://cash.app/$optimistic01/${a}`, handle:"$optimistic01"},
-  "Venmo":   {url:()=>"https://venmo.com/u/Dan-Rock-5", handle:"@Dan-Rock-5"}
-};
 const pad=n=>String(n).padStart(3,"0");
 const money=v=>"$"+v.toFixed(2);
 const secsOf=len=>{const [m,s]=len.split(":");return (+m)*60+(+s)};
@@ -401,7 +387,7 @@ $("order").addEventListener("submit",e=>{
   else if(!name) msg="Please add your name.";
   else if(!/^\S+@\S+\.\S+$/.test(email)) msg="Please add the email where I should send your album.";
   else if(nv&&!baby) msg="Please add your baby's first name for the name video.";
-  else if(!pm) msg="Please choose how you'd like to pay.";
+  
   if(msg){err.textContent=msg; err.hidden=false; return;}
   err.hidden=true;
 
@@ -415,14 +401,8 @@ $("order").addEventListener("submit",e=>{
   fetch($("order").action,{method:"POST",body:new FormData($("order")),headers:{Accept:"application/json"}})
     .then(r=>{if(!r.ok) throw new Error("fail");
       gtag("event","purchase_intent",{value:p.total,currency:"USD",method:pm.value});
-      const pay=PAY[pm.value], d=$("done");
-      d.innerHTML=`<h3>✅ Got it, your lullaby order is in!</h3>
-        <p>Last step: pay <strong>${money(p.total)}</strong> with ${esc(pm.value)}.</p>
-        <a class="btn primary" href="${pay.url(amt)}" target="_blank" rel="noopener">Open ${esc(pm.value)} to pay ${money(p.total)}</a>
-        <p>Pay to: <strong>${esc(pay.handle)}</strong></p>
-        <p>Put <strong>your name</strong> in the payment note so I can match it to your order. If the app doesn't show the amount, type in <strong>${money(p.total)}</strong>.</p>
-        <p class="quiet">I email your album to ${esc(email)} within 24 hours of confirmed payment.</p>`;
-      $("order").hidden=true; d.hidden=false; d.focus();
+      btn.textContent="Taking you to secure checkout…";
+      window.location.href="/pay/lullaby?songs="+album.join(",")+(nv?"&namevid=1":"")+"&prefilled_email="+encodeURIComponent(email);
       document.querySelectorAll("#bar i,#steps span").forEach(x=>x.classList.add("on"));
     })
     .catch(()=>{

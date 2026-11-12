@@ -41,7 +41,7 @@
     "@type": "FAQPage",
     "mainEntity": [
       {"@type":"Question","name":"How much does a custom business jingle cost?","acceptedAnswer":{"@type":"Answer","text":"A custom business jingle is $100, one-time payment. That includes a downloadable MP3 audio file, a public YouTube video with a shareable link, cover art image, and a lyric sheet image — delivered within 24 hours of confirmed payment."}},
-      {"@type":"Question","name":"How does the order process work?","acceptedAnswer":{"@type":"Answer","text":"Fill out the request form with your business name, brand message, and style preferences, then complete secure checkout — you choose card, PayPal, Cash App, or Venmo. Once payment is confirmed, Dan personally writes and produces your jingle during studio hours and delivers it within 24 hours."}},
+      {"@type":"Question","name":"How does the order process work?","acceptedAnswer":{"@type":"Answer","text":"Fill out the request form with your business name, brand message, and style preferences, then complete secure checkout through Stripe (card, Apple Pay, Cash App Pay and more). Once payment is confirmed, Dan personally writes and produces your jingle during studio hours and delivers it within 24 hours."}},
       {"@type":"Question","name":"Can I use the jingle for ads and commercial use?","acceptedAnswer":{"@type":"Answer","text":"Yes — business jingles are built for exactly that. Songs and jingles are produced using AI-assisted music tools with human creative direction, and copyright laws for AI-generated music are still evolving, so exclusive ownership can't be guaranteed, but the jingle is yours to use in your marketing and branding."}},
       {"@type":"Question","name":"Is the jingle guaranteed?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every order is backed by the Personal Happiness Guarantee. If the jingle isn't right, Dan will work with you to make it right. If he still can't make it right, you receive a full refund."}}
     ]
@@ -392,7 +392,7 @@
 <section id="trust-bar">
   <div class="trust-bar-inner">
     <div class="trust-item"><span class="check">✓</span> ⭐ 4.9 Rating · 16 Google Reviews</div>
-    <div class="trust-item"><span class="check">✓</span> Card, PayPal, Cash App &amp; Venmo Accepted</div>
+    <div class="trust-item"><span class="check">✓</span> Card, Apple Pay &amp; Cash App Pay Accepted</div>
     <div class="trust-item"><span class="check">✓</span> Delivered Within 24 Hours of Confirmed Payment</div>
     <div class="trust-item"><span class="check">✓</span> Personal Happiness Guarantee</div>
   </div>
@@ -457,7 +457,7 @@
         <div class="step-number">2</div>
         <div class="step-content">
           <h3>Complete Secure Payment</h3>
-          <p>Choose card, PayPal, Cash App, or Venmo, and check out securely. Use the same email you used on the request form — that's how your payment is matched to your order.</p>
+          <p>Check out securely through Stripe with card, Apple Pay, Cash App Pay and more. Use the same email you used on the request form — that's how your payment is matched to your order.</p>
         </div>
       </div>
       <div class="step fade-up">
@@ -565,26 +565,13 @@
 
 
           <div class="form-group full">
-            <label>How do you want to pay?</label>
+            <label>How you'll pay</label>
             <div class="contact-pref-options payment-method-options">
               <label class="contact-pref-option">
                 <input type="radio" name="payment-method" value="Card (Stripe)" checked required />
-                <span>💳 Card</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="PayPal" required />
-                <span>PayPal</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="Cash App" required />
-                <span>Cash App</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="Venmo" required />
-                <span>Venmo</span>
+                <span>💳 Card, Apple Pay, Cash App Pay &amp; more (secure Stripe checkout)</span>
               </label>
             </div>
-            <p class="payment-method-note" id="payment-method-note" style="display:none;">Paying with PayPal, Cash App, or Venmo? Please put your <strong>business name</strong> in the payment note — those apps can't auto-match your payment the way card checkout does.</p>
           </div>
         </div>
 
@@ -663,7 +650,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">How does the order process work? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Fill out the request form with your business name, brand message, and style preferences, then complete secure checkout — you choose card, PayPal, Cash App, or Venmo. Once payment is confirmed, Dan personally writes and produces your jingle during studio hours and delivers it within 24 hours.</div>
+        <div class="faq-a">Fill out the request form with your business name, brand message, and style preferences, then complete secure checkout through Stripe (card, Apple Pay, Cash App Pay and more). Once payment is confirmed, Dan personally writes and produces your jingle during studio hours and delivers it within 24 hours.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Can I use the jingle for ads and commercial use? <span class="faq-icon">+</span></button>
@@ -763,9 +750,6 @@
   // PAYMENT METHOD → LINK ROUTING (single $100 price point, no package tiers on this page)
   const PAYMENT_LINKS = {
     'Card (Stripe)': 'https://www.customsongme.com/pay/fZu4gy4fe2tDcS70hE9Ve01',
-    'PayPal': 'https://www.paypal.me/DanRock834/100',
-    'Cash App': 'https://cash.app/$optimistic01/100',
-    'Venmo': 'https://venmo.com/u/Dan-Rock-5'
   };
   const nextRedirectField = document.getElementById('next-redirect');
   const paymentMethodNote = document.getElementById('payment-method-note');
@@ -810,13 +794,7 @@
       })
       .then(response => {
         if (response.ok) {
-          const _pm = document.querySelector('input[name="payment-method"]:checked');
-          if (_pm && _pm.value !== 'Card (Stripe)' && window.CSMPayConfirm) {
-            const _pkg = document.getElementById('package-hidden-field');
-            window.CSMPayConfirm({ form: orderForm, url: nextRedirectField.value, method: _pm.value, pkg: _pkg ? _pkg.value : '', amount: '100' });
-          } else {
-            window.location.href = nextRedirectField.value;
-          }
+          window.location.href = nextRedirectField.value;
         } else {
           throw new Error('Submission failed');
         }
@@ -835,6 +813,5 @@
   }
 </script>
 
-<script src="/js/pay-confirm.js"></script>
 </body>
 </html>

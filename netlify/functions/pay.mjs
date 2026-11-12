@@ -18,12 +18,43 @@ const SITE = 'https://www.customsongme.com';
 const PACKAGES = {
   '3cIaEWcLKb09cS7fcy9Ve0f': { name: 'Custom Song — Complete (Public)', amount: 5000 },
   '8x2fZgh20fgp8BRc0m9Ve0h': { name: 'Custom Song — Complete (Unlisted)', amount: 7500 },
-  'cNieVc2767NX3hxd4q9Ve06': { name: 'Custom Song — MP3 Only', amount: 3000 },
+  'cNieVc2767NX3hxd4q9Ve06': { name: 'Custom Song — MP3 Only', amount: 2500 },
   'fZu4gy4fe2tDcS70hE9Ve01': { name: 'Business Jingle', amount: 10000 },
   '3cI8wOcLK6JT05l9Se9Ve0l': { name: 'Family Gratitude MP3 (Thanksgiving)', amount: 2500 },
   'cNiaEW3ba5FP19pe8u9Ve0k': { name: 'Ultimate Family (Thanksgiving, Public)', amount: 7500 },
   'aFadR8132c4d6tJ6G29Ve0j': { name: 'Ultimate Family (Thanksgiving, Unlisted)', amount: 10000 },
+  // Products that never had a payment link (no buy.stripe.com backup):
+  'get-well-digital': { name: 'Get Well Song Card — Digital', amount: 3900, noLink: true },
+  'get-well-mailed': { name: 'Get Well Song Card — Printed & Mailed', amount: 6900, noLink: true },
 };
+
+// Custom Lullaby Me: price depends on the album, so it's worked out here from
+// the song list (same rules as the page): The Original 7 (#1–#7) = $19.99,
+// every other song $3, baby-name video +$12.
+function lullabyPackage(params) {
+  const songs = (params.get('songs') || '').split(',').map(Number)
+    .filter((n) => Number.isInteger(n) && n >= 1 && n <= 99);
+  if (!songs.length || songs.length > 20) return null;
+  const hasPkg = [1, 2, 3, 4, 5, 6, 7].every((n) => songs.includes(n));
+  const extras = hasPkg ? songs.length - 7 : songs.length;
+  const nameVideo = params.get('namevid') === '1';
+  const amount = (hasPkg ? 1999 : 0) + extras * 300 + (nameVideo ? 1200 : 0);
+  const name = 'Custom Lullaby Me — ' + songs.length + '-song album' + (nameVideo ? ' + name video' : '');
+  return { name, amount, noLink: true };
+}
+
+// When there is no old payment link to fall back on, keep the customer calm:
+// their order is already in, and Dan will email a card link.
+function noLinkFallback() {
+  const html = '<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1">' +
+    '<title>Order received | CustomSongMe</title>' +
+    '<body style="font-family:system-ui,sans-serif;max-width:520px;margin:60px auto;padding:0 20px;line-height:1.5">' +
+    '<h1>Your order is in!</h1>' +
+    '<p>The payment page didn\'t load, but your order came through. I\'ll email you a secure payment link shortly.</p>' +
+    '<p>Questions? Text me at <a href="sms:+16617140903">(661) 714-0903</a>.</p>' +
+    '<p><a href="' + SITE + '/">Back to CustomSongMe</a></p></body>';
+  return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+}
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -39,11 +70,12 @@ export default async (req, context) => {
   const rawEmail = (url.searchParams.get('prefilled_email') || '').trim();
   const email = EMAIL_RE.test(rawEmail) ? rawEmail : '';
 
-  const pkg = PACKAGES[id];
+  const pkg = id === 'lullaby' ? lullabyPackage(url.searchParams) : PACKAGES[id];
   const key = process.env.STRIPE_SECRET_KEY;
+  const bail = () => (pkg && pkg.noLink) || id === 'lullaby' ? noLinkFallback() : fallback(id, email);
   if (!pkg || !key) {
     console.log('pay: falling back', { id, hasPkg: !!pkg, hasKey: !!key });
-    return fallback(id, email);
+    return bail();
   }
 
   // Send the customer back to the page they came from if they cancel.
@@ -77,12 +109,12 @@ export default async (req, context) => {
     const data = await res.json();
     if (!res.ok || !data.url) {
       console.log('pay: Stripe error', res.status, data && data.error && data.error.message);
-      return fallback(id, email);
+      return bail();
     }
     return Response.redirect(data.url, 303);
   } catch (err) {
     console.log('pay: request failed', String(err));
-    return fallback(id, email);
+    return bail();
   }
 };
 

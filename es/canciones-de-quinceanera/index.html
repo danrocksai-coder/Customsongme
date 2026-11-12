@@ -71,9 +71,9 @@
     "inLanguage": "es",
     "mainEntity": [
       {"@type":"Question","name":"¿Qué hace buena a una canción de quinceañera?","acceptedAnswer":{"@type":"Answer","text":"Cuanto más detalle real compartas, mejor — su nombre, el significado del tema de la fiesta, sus padrinos y madrinas, anécdotas familiares, el vals, lo que la hace especial. Ya sea un tributo sentimental para sus papás o algo divertido para compartir con sus damas y chambelanes, la canción se construye completamente con lo que tú compartas."}},
-      {"@type":"Question","name":"¿Cómo funciona el proceso para ordenar?","acceptedAnswer":{"@type":"Answer","text":"Llena el formulario con su historia y detalles, elige tu paquete, y completa el checkout seguro con tarjeta, PayPal, Cash App, o Venmo. Una vez que el pago esté confirmado, Dan revisa la historia personalmente durante el horario del estudio y escribe y produce la canción. Se entrega en menos de 24 horas después del pago confirmado."}},
+      {"@type":"Question","name":"¿Cómo funciona el proceso para ordenar?","acceptedAnswer":{"@type":"Answer","text":"Llena el formulario con su historia y detalles, elige tu paquete, y completa el checkout seguro con Stripe (tarjeta, Apple Pay, Cash App Pay y más). Una vez que el pago esté confirmado, Dan revisa la historia personalmente durante el horario del estudio y escribe y produce la canción. Se entrega en menos de 24 horas después del pago confirmado."}},
       {"@type":"Question","name":"¿Pueden incluir el vals o la ceremonia en la canción?","acceptedAnswer":{"@type":"Answer","text":"Sí — cuéntanos en el formulario si quieres que la canción mencione el vals, la ceremonia, a los padrinos o madrinas, o cualquier tradición familiar que sea importante para la celebración."}},
-      {"@type":"Question","name":"¿Hay una opción más económica que la experiencia completa?","acceptedAnswer":{"@type":"Answer","text":"Sí. El paquete Solo MP3 cuesta $30 e incluye la canción como archivo MP3 descargable — sin video, portada, ni hoja de letra. La experiencia completa comienza en $50 e incluye las cuatro cosas."}},
+      {"@type":"Question","name":"¿Hay una opción más económica que la experiencia completa?","acceptedAnswer":{"@type":"Answer","text":"Sí. El paquete Solo MP3 cuesta $25 e incluye la canción como archivo MP3 descargable — sin video, portada, ni hoja de letra. La experiencia completa comienza en $50 e incluye las cuatro cosas."}},
       {"@type":"Question","name":"¿Por qué la experiencia completa cuesta $50 en vez de $75?","acceptedAnswer":{"@type":"Answer","text":"El precio de $50 incluye que tu video se comparta públicamente en el canal de YouTube de CustomSongMe — esa publicación pública es parte de cómo mantengo los precios accesibles. Si prefieres mantener tu video no listado (no publicado en mi canal, solo visible para quien tenga el enlace directo), esa opción está disponible por $75."}}
     ]
   }
@@ -447,7 +447,7 @@
       <div class="price-label">Más popular · Todo incluido</div>
       <div class="price-main">$50</div>
       <div class="price-includes">MP3 · Video público en YouTube · Portada · Hoja con la letra</div>
-      <div class="price-alt">¿Solo quieres la canción? Solo MP3 es $30</div>
+      <div class="price-alt">¿Solo quieres la canción? Solo MP3 es $25</div>
     </div>
     <div><a href="#order-form" class="btn-primary">👑 Empieza su canción</a></div>
   </div>
@@ -456,7 +456,7 @@
 <section id="trust-bar">
   <div class="trust-bar-inner">
     <div class="trust-item"><span class="check">✓</span> ⭐ Calificación de 4.9 · 16 reseñas en Google</div>
-    <div class="trust-item"><span class="check">✓</span> Acepto tarjeta, PayPal, Cash App y Venmo</div>
+    <div class="trust-item"><span class="check">✓</span> Acepto tarjeta, Apple Pay y Cash App Pay</div>
     <div class="trust-item"><span class="check">✓</span> Entregada en menos de 24 horas después del pago confirmado</div>
     <div class="trust-item"><span class="check">✓</span> Garantía de Felicidad Personal</div>
   </div>
@@ -464,7 +464,7 @@
 
 <section id="pricing-intro">
   <div class="container fade-up">
-    <h2>Tres formas de pedir. <span class="gold">Desde $30.</span></h2>
+    <h2>Tres formas de pedir. <span class="gold">Desde $25.</span></h2>
     <p>Mantenlo simple con solo la canción, o ve con todo con la experiencia completa.<br>De cualquier forma, cuéntame su historia y yo me encargo del resto.</p>
   </div>
 </section>
@@ -539,7 +539,7 @@
         <div class="step-number">2</div>
         <div class="step-content">
           <h3>Completa tu pago seguro</h3>
-          <p>Elige tarjeta, PayPal, Cash App o Venmo y paga de forma segura. Usa el mismo correo que pusiste en el formulario; así conecto tu pago con tu pedido.</p>
+          <p>Paga de forma segura con Stripe: tarjeta, Apple Pay, Cash App Pay y más. Usa el mismo correo que pusiste en el formulario; así conecto tu pago con tu pedido.</p>
         </div>
       </div>
       <div class="step fade-up">
@@ -586,7 +586,7 @@
               </label>
               <label class="contact-pref-option">
                 <input type="radio" name="package-tier" value="mp3" required id="pkg-mp3" />
-                <span>🎵 Solo MP3 — $30</span>
+                <span>🎵 Solo MP3 — $25</span>
               </label>
             </div>
             <div class="public-note" id="public-note">
@@ -679,26 +679,13 @@
 
 
           <div class="form-group full">
-            <label>¿Cómo quieres pagar?</label>
+            <label>Cómo vas a pagar</label>
             <div class="contact-pref-options payment-method-options">
               <label class="contact-pref-option">
                 <input type="radio" name="payment-method" value="Card (Stripe)" checked required />
-                <span>💳 Tarjeta</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="PayPal" required />
-                <span>PayPal</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="Cash App" required />
-                <span>Cash App</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="Venmo" required />
-                <span>Venmo</span>
+                <span>💳 Tarjeta, Apple Pay, Cash App Pay y más (pago seguro con Stripe)</span>
               </label>
             </div>
-            <p class="payment-method-note" id="payment-method-note" style="display:none;">¿Vas a pagar con PayPal, Cash App, o Venmo? Por favor pon tu <strong>nombre</strong> en la nota del pago — esas apps no pueden relacionar tu pago automáticamente como lo hace el checkout con tarjeta.</p>
           </div>
         </div>
 
@@ -773,7 +760,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">¿Cómo funciona el proceso para ordenar? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Llena el formulario con su historia y detalles, elige tu paquete, y completa el checkout seguro con tarjeta, PayPal, Cash App, o Venmo. Una vez que el pago esté confirmado, Dan revisa la historia personalmente durante el horario del estudio y escribe y produce la canción. Se entrega en menos de 24 horas después del pago confirmado.</div>
+        <div class="faq-a">Llena el formulario con su historia y detalles, elige tu paquete, y completa el checkout seguro con Stripe (tarjeta, Apple Pay, Cash App Pay y más). Una vez que el pago esté confirmado, Dan revisa la historia personalmente durante el horario del estudio y escribe y produce la canción. Se entrega en menos de 24 horas después del pago confirmado.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">¿Pueden incluir el vals o la ceremonia en la canción? <span class="faq-icon">+</span></button>
@@ -781,7 +768,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">¿Hay una opción más económica que la experiencia completa? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Sí. El paquete Solo MP3 cuesta $30 e incluye la canción como archivo MP3 descargable — sin video, portada, ni hoja de letra. La experiencia completa a $50 incluye las cuatro cosas y es la opción recomendada para la mayoría de los clientes.</div>
+        <div class="faq-a">Sí. El paquete Solo MP3 cuesta $25 e incluye la canción como archivo MP3 descargable — sin video, portada, ni hoja de letra. La experiencia completa a $50 incluye las cuatro cosas y es la opción recomendada para la mayoría de los clientes.</div>
       </div>
 
       <div class="faq-item">
@@ -867,25 +854,16 @@
     });
   });
 
-  // PACKAGE + PAYMENT METHOD → PAYMENT LINK ROUTING (3-tier: MP3 $30 / Complete Public $50 / Complete Unlisted $75)
+  // PACKAGE + PAYMENT METHOD → PAYMENT LINK ROUTING (3-tier: MP3 $25 / Complete Public $50 / Complete Unlisted $75)
   const PAYMENT_LINKS = {
     'Complete (Public) — $50': {
       'Card (Stripe)': 'https://www.customsongme.com/pay/3cIaEWcLKb09cS7fcy9Ve0f',
-      'PayPal': 'https://www.paypal.me/DanRock834/50',
-      'Cash App': 'https://cash.app/$optimistic01/50',
-      'Venmo': 'https://venmo.com/u/Dan-Rock-5'
     },
     'Complete (Unlisted) — $75': {
       'Card (Stripe)': 'https://www.customsongme.com/pay/8x2fZgh20fgp8BRc0m9Ve0h',
-      'PayPal': 'https://www.paypal.me/DanRock834/75',
-      'Cash App': 'https://cash.app/$optimistic01/75',
-      'Venmo': 'https://venmo.com/u/Dan-Rock-5'
     },
-    'MP3 Only — $30': {
+    'MP3 Only — $25': {
       'Card (Stripe)': 'https://www.customsongme.com/pay/cNieVc2767NX3hxd4q9Ve06',
-      'PayPal': 'https://www.paypal.me/DanRock834/30',
-      'Cash App': 'https://cash.app/$optimistic01/30',
-      'Venmo': 'https://venmo.com/u/Dan-Rock-5'
     }
   };
   const nextRedirectField = document.getElementById('next-redirect');
@@ -898,7 +876,7 @@
   function getEffectivePackage() {
     const tier = document.querySelector('input[name="package-tier"]:checked');
     if (!tier) return 'Complete (Public) — $50';
-    if (tier.value === 'mp3') return 'MP3 Only — $30';
+    if (tier.value === 'mp3') return 'MP3 Only — $25';
     return (unlistedCheckbox && unlistedCheckbox.checked) ? 'Complete (Unlisted) — $75' : 'Complete (Public) — $50';
   }
 
@@ -951,13 +929,7 @@
       })
       .then(response => {
         if (response.ok) {
-          const _pm = document.querySelector('input[name="payment-method"]:checked');
-          if (_pm && _pm.value !== 'Card (Stripe)' && window.CSMPayConfirm) {
-            const _pkg = document.getElementById('package-hidden-field');
-            window.CSMPayConfirm({ form: orderForm, url: nextRedirectField.value, method: _pm.value, pkg: _pkg ? _pkg.value : '' });
-          } else {
-            window.location.href = nextRedirectField.value;
-          }
+          window.location.href = nextRedirectField.value;
         } else {
           throw new Error('Submission failed');
         }
@@ -976,6 +948,5 @@
   }
 </script>
 
-<script src="/js/pay-confirm.js"></script>
 </body>
 </html>

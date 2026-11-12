@@ -68,8 +68,8 @@
     "@type": "FAQPage",
     "mainEntity": [
       {"@type":"Question","name":"How savage can a roast song get?","acceptedAnswer":{"@type":"Answer","text":"That's your call. On the request form, you set the spice level — playful and light, medium heat, or no holds barred. Dan matches the tone to whatever you're comfortable with."}},
-      {"@type":"Question","name":"How does the order process work?","acceptedAnswer":{"@type":"Answer","text":"Fill out the request form with the jokes, stories, and roastable habits, choose your package, and complete secure checkout with card, PayPal, Cash App, or Venmo. Once payment is confirmed, Dan personally reviews the details during studio hours and writes and produces the song. It's delivered within 24 hours of confirmed payment."}},
-      {"@type":"Question","name":"Is there a cheaper option than the Complete Custom Song Experience?","acceptedAnswer":{"@type":"Answer","text":"Yes. The MP3 Only package is $30 and includes the song as a downloadable MP3 audio file — no video, cover art, or lyric sheet. The Complete Custom Song Experience starts at $50 and includes all four."}},
+      {"@type":"Question","name":"How does the order process work?","acceptedAnswer":{"@type":"Answer","text":"Fill out the request form with the jokes, stories, and roastable habits, choose your package, and complete secure checkout through Stripe (card, Apple Pay, Cash App Pay and more). Once payment is confirmed, Dan personally reviews the details during studio hours and writes and produces the song. It's delivered within 24 hours of confirmed payment."}},
+      {"@type":"Question","name":"Is there a cheaper option than the Complete Custom Song Experience?","acceptedAnswer":{"@type":"Answer","text":"Yes. The MP3 Only package is $25 and includes the song as a downloadable MP3 audio file — no video, cover art, or lyric sheet. The Complete Custom Song Experience starts at $50 and includes all four."}},
       {"@type":"Question","name":"Why is the Complete Experience $50 instead of $75?","acceptedAnswer":{"@type":"Answer","text":"The $50 price includes your video being shared publicly on the CustomSongMe YouTube channel — that public posting is part of how I keep prices affordable. If you would rather keep your video unlisted (not published to my channel, only viewable by anyone with the direct link), that option is available for $75."}}
     ]
   }
@@ -445,7 +445,7 @@
       <div class="price-label">Most Popular · Everything Included</div>
       <div class="price-main">$50</div>
       <div class="price-includes">MP3 Audio · Public YouTube Video · Cover Art · Lyric Sheet</div>
-      <div class="price-alt">Just want the song? MP3 Only is $30</div>
+      <div class="price-alt">Just want the song? MP3 Only is $25</div>
     </div>
     <div><a href="#order-form" class="btn-primary">🔥 Start Their Roast</a></div>
   </div>
@@ -454,7 +454,7 @@
 <section id="trust-bar">
   <div class="trust-bar-inner">
     <div class="trust-item"><span class="check">✓</span> ⭐ 4.9 Rating · 16 Google Reviews</div>
-    <div class="trust-item"><span class="check">✓</span> Card, PayPal, Cash App &amp; Venmo Accepted</div>
+    <div class="trust-item"><span class="check">✓</span> Card, Apple Pay &amp; Cash App Pay Accepted</div>
     <div class="trust-item"><span class="check">✓</span> Delivered Within 24 Hours of Confirmed Payment</div>
     <div class="trust-item"><span class="check">✓</span> Personal Happiness Guarantee</div>
   </div>
@@ -463,13 +463,13 @@
 <section id="quick-answer" style="padding:48px 24px 8px;text-align:center">
   <div style="max-width:760px;margin:0 auto;">
     <h2 style="margin-bottom:12px;">What is a custom roast song?</h2>
-    <p style="font-size:1.05rem;line-height:1.7;margin:0;text-align:left;">A custom roast song is an original, funny song that teases someone with their own stories and inside jokes, from playful to savage, whichever you choose. At CustomSongMe, Dan the Song Man writes and produces it from the material you share, delivered within 24 hours of confirmed payment. It costs $30 for the MP3, $50 for the complete package (MP3, public YouTube video, cover art and lyric sheet), or $75 with an unlisted video.</p>
+    <p style="font-size:1.05rem;line-height:1.7;margin:0;text-align:left;">A custom roast song is an original, funny song that teases someone with their own stories and inside jokes, from playful to savage, whichever you choose. At CustomSongMe, Dan the Song Man writes and produces it from the material you share, delivered within 24 hours of confirmed payment. It costs $25 for the MP3, $50 for the complete package (MP3, public YouTube video, cover art and lyric sheet), or $75 with an unlisted video.</p>
   </div>
 </section>
 
 <section id="pricing-intro">
   <div class="container fade-up">
-    <h2>Three Ways to Order. <span class="gold">Starting at $30.</span></h2>
+    <h2>Three Ways to Order. <span class="gold">Starting at $25.</span></h2>
     <p>Keep it simple with just the song, or go all in with the full experience.<br>Either way — give Dan the material, and he'll take care of the rest.</p>
   </div>
 </section>
@@ -544,7 +544,7 @@
         <div class="step-number">2</div>
         <div class="step-content">
           <h3>Complete Secure Payment</h3>
-          <p>Choose card, PayPal, Cash App, or Venmo, and check out securely. Use the same email you used on the request form — that's how your payment is matched to your order.</p>
+          <p>Check out securely through Stripe with card, Apple Pay, Cash App Pay and more. Use the same email you used on the request form — that's how your payment is matched to your order.</p>
         </div>
       </div>
       <div class="step fade-up">
@@ -590,7 +590,7 @@
               </label>
               <label class="contact-pref-option">
                 <input type="radio" name="package-tier" value="mp3" required id="pkg-mp3" />
-                <span>🎵 MP3 Only — $30</span>
+                <span>🎵 MP3 Only — $25</span>
               </label>
             </div>
             <div class="public-note" id="public-note">
@@ -686,26 +686,13 @@
 
 
           <div class="form-group full">
-            <label>How do you want to pay?</label>
+            <label>How you'll pay</label>
             <div class="contact-pref-options payment-method-options">
               <label class="contact-pref-option">
                 <input type="radio" name="payment-method" value="Card (Stripe)" checked required />
-                <span>💳 Card</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="PayPal" required />
-                <span>PayPal</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="Cash App" required />
-                <span>Cash App</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="Venmo" required />
-                <span>Venmo</span>
+                <span>💳 Card, Apple Pay, Cash App Pay &amp; more (secure Stripe checkout)</span>
               </label>
             </div>
-            <p class="payment-method-note" id="payment-method-note" style="display:none;">Paying with PayPal, Cash App, or Venmo? Please put your <strong>name</strong> in the payment note — those apps can't auto-match your payment the way card checkout does.</p>
           </div>
         </div>
 
@@ -784,11 +771,11 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">How does the order process work? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Fill out the request form with the jokes, stories, and roastable habits, choose your package, and complete secure checkout with card, PayPal, Cash App, or Venmo. Once payment is confirmed, Dan personally reviews the details during studio hours and writes and produces the song. It's delivered within 24 hours of confirmed payment.</div>
+        <div class="faq-a">Fill out the request form with the jokes, stories, and roastable habits, choose your package, and complete secure checkout through Stripe (card, Apple Pay, Cash App Pay and more). Once payment is confirmed, Dan personally reviews the details during studio hours and writes and produces the song. It's delivered within 24 hours of confirmed payment.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Is there a cheaper option than the Complete Custom Song Experience? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Yes. The MP3 Only package is $30 and includes the song as a downloadable MP3 audio file — no video, cover art, or lyric sheet. The Complete Custom Song Experience at $50 includes all four and is recommended for most customers.</div>
+        <div class="faq-a">Yes. The MP3 Only package is $25 and includes the song as a downloadable MP3 audio file — no video, cover art, or lyric sheet. The Complete Custom Song Experience at $50 includes all four and is recommended for most customers.</div>
       </div>
 
       <div class="faq-item">
@@ -882,25 +869,16 @@
     });
   });
 
-  // PACKAGE + PAYMENT METHOD → PAYMENT LINK ROUTING (3-tier: MP3 $30 / Complete Public $50 / Complete Unlisted $75)
+  // PACKAGE + PAYMENT METHOD → PAYMENT LINK ROUTING (3-tier: MP3 $25 / Complete Public $50 / Complete Unlisted $75)
   const PAYMENT_LINKS = {
     'Complete (Public) — $50': {
       'Card (Stripe)': 'https://www.customsongme.com/pay/3cIaEWcLKb09cS7fcy9Ve0f',
-      'PayPal': 'https://www.paypal.me/DanRock834/50',
-      'Cash App': 'https://cash.app/$optimistic01/50',
-      'Venmo': 'https://venmo.com/u/Dan-Rock-5'
     },
     'Complete (Unlisted) — $75': {
       'Card (Stripe)': 'https://www.customsongme.com/pay/8x2fZgh20fgp8BRc0m9Ve0h',
-      'PayPal': 'https://www.paypal.me/DanRock834/75',
-      'Cash App': 'https://cash.app/$optimistic01/75',
-      'Venmo': 'https://venmo.com/u/Dan-Rock-5'
     },
-    'MP3 Only — $30': {
+    'MP3 Only — $25': {
       'Card (Stripe)': 'https://www.customsongme.com/pay/cNieVc2767NX3hxd4q9Ve06',
-      'PayPal': 'https://www.paypal.me/DanRock834/30',
-      'Cash App': 'https://cash.app/$optimistic01/30',
-      'Venmo': 'https://venmo.com/u/Dan-Rock-5'
     }
   };
   const nextRedirectField = document.getElementById('next-redirect');
@@ -913,7 +891,7 @@
   function getEffectivePackage() {
     const tier = document.querySelector('input[name="package-tier"]:checked');
     if (!tier) return 'Complete (Public) — $50';
-    if (tier.value === 'mp3') return 'MP3 Only — $30';
+    if (tier.value === 'mp3') return 'MP3 Only — $25';
     return (unlistedCheckbox && unlistedCheckbox.checked) ? 'Complete (Unlisted) — $75' : 'Complete (Public) — $50';
   }
 
@@ -966,13 +944,7 @@
       })
       .then(response => {
         if (response.ok) {
-          const _pm = document.querySelector('input[name="payment-method"]:checked');
-          if (_pm && _pm.value !== 'Card (Stripe)' && window.CSMPayConfirm) {
-            const _pkg = document.getElementById('package-hidden-field');
-            window.CSMPayConfirm({ form: orderForm, url: nextRedirectField.value, method: _pm.value, pkg: _pkg ? _pkg.value : '' });
-          } else {
-            window.location.href = nextRedirectField.value;
-          }
+          window.location.href = nextRedirectField.value;
         } else {
           throw new Error('Submission failed');
         }
@@ -991,6 +963,5 @@
   }
 </script>
 
-<script src="/js/pay-confirm.js"></script>
 </body>
 </html>

@@ -429,15 +429,11 @@ footer a{color:var(--muted);margin:0 6px}
       <dl class="sum" id="sum"></dl>
 
       <div class="fields">
-        <div class="f" style="font-weight:600;font-size:15px;color:var(--green)">How would you like to pay?</div>
+        <div class="f" style="font-weight:600;font-size:15px;color:var(--green)">How you'll pay</div>
         <div class="chips" data-group="pay" id="payChips">
-          <button type="button" class="chip" data-val="cashapp" aria-pressed="true">Cash App</button>
-          <button type="button" class="chip" data-val="venmo">Venmo</button>
-          <button type="button" class="chip" data-val="paypal">PayPal</button>
-          <button type="button" class="chip" data-val="cardemail">Card</button>
+          <button type="button" class="chip" data-val="cardemail" aria-pressed="true">💳 Card</button>
         </div>
-        <div class="note paynote on" id="payNote">Please put <b>your name</b> in the payment note so I can match it to your card.</div>
-        <div class="note paynote" id="cardNote">Prefer to pay by card? No problem. Place your order and I'll email you a secure Stripe card link.</div>
+        <div class="note paynote on" id="cardNote">Secure checkout by Stripe: card, Apple Pay, Cash App Pay and more.</div>
       </div>
 
       <div class="actions">
@@ -490,8 +486,8 @@ footer a{color:var(--muted);margin:0 6px}
 (function(){
 /* ===== SETTINGS — paste your Stripe links here ===== */
 var STRIPE = {
-  digital: "",   // $39 Digital Song Card payment link, e.g. https://www.customsongme.com/pay/xxxx
-  mailed:  ""    // $69 Printed & Mailed payment link
+  digital: "/pay/get-well-digital",   // $39 Digital Song Card (dynamic Stripe Checkout)
+  mailed:  "/pay/get-well-mailed"    // $69 Printed & Mailed (dynamic Stripe Checkout)
 };
 var PRICES = {digital:39, mailed:69};
 var PKG_NAMES = {digital:"Digital Song Card", mailed:"Printed & Mailed"};
@@ -527,7 +523,7 @@ var DESIGNS=[
 ];
 
 /* ===== state ===== */
-var S={design:0,name:"",headline:"",message:"",note:"",from:"With love",edited:false,view:"front",genre:"",vocal:"",pay:"cashapp",step:1};
+var S={design:0,name:"",headline:"",message:"",note:"",from:"With love",edited:false,view:"front",genre:"",vocal:"",pay:"cardemail",step:1};
 function loadDefaults(){var d=DESIGNS[S.design];S.headline=d.headline;S.message=d.message;S.note=d.note;}
 loadDefaults();
 
@@ -569,7 +565,7 @@ document.querySelectorAll("[data-idea]").forEach(function(b){b.onclick=function(
 /* chip groups */
 document.querySelectorAll("[data-group]").forEach(function(g){g.querySelectorAll(".chip").forEach(function(c){c.onclick=function(){g.querySelectorAll(".chip").forEach(function(x){x.setAttribute("aria-pressed","false");});c.setAttribute("aria-pressed","true");S[g.dataset.group]=c.dataset.val;
  if(g.dataset.group==="genre")document.getElementById("genreOther").style.display=c.dataset.val==="Other"?"block":"none";
- if(g.dataset.group==="pay"){document.getElementById("payNote").classList.toggle("on",S.pay!=="cardemail");document.getElementById("cardNote").classList.toggle("on",S.pay==="cardemail");document.getElementById("submitBtn").textContent=S.pay==="cardemail"?"Place My Order":"Place My Order & Pay";}};});});
+};});});
 
 /* package + address */
 function pkg(){return form.querySelector('input[name="package"]:checked').value;}
@@ -614,8 +610,7 @@ function buildSummary(){var p=pkg(),d=DESIGNS[S.design];
 var sending=false;
 form.addEventListener("submit",function(e){e.preventDefault();if(sending)return;
  var p=pkg(),price=PRICES[p],email=val("email");
- var payUrl={cardemail:STRIPE[p]?STRIPE[p]+(STRIPE[p].indexOf("?")>-1?"&":"?")+"prefilled_email="+encodeURIComponent(email):"",
-  paypal:"https://paypal.me/DanRock834/"+price,cashapp:"https://cash.app/$optimistic01/"+price,venmo:"https://venmo.com/u/Dan-Rock-5"}[S.pay];
+ var payUrl={cardemail:STRIPE[p]?STRIPE[p]+(STRIPE[p].indexOf("?")>-1?"&":"?")+"prefilled_email="+encodeURIComponent(email):""}[S.pay];
  sending=true;var btn=document.getElementById("submitBtn");btn.disabled=true;btn.textContent="Sending your order…";document.getElementById("sendErr").classList.remove("show");
  var fd=new FormData(form);
  fd.append("_subject","Get Well Song Card order — "+S.name+" ($"+price+")");
