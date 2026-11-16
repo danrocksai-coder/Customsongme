@@ -57,6 +57,7 @@ const summary = (s) => {
     qrCodes: s.qrCodes || { child: s.qrCode, grandparent: null },
     pins: { child: C.pinRequired(s, 'child'), grandparent: C.pinRequired(s, 'grandparent'), guardian: C.pinRequired(s, 'guardian') },
     devices: { child: s.sessions.child.length, grandparent: s.sessions.grandparent.length, guardian: s.sessions.guardian.length },
+    childAccess: { ...C.childAccessView(s), parentName: s.childAccess.parentName || '', decidedAt: s.childAccess.decidedAt || null, hasForm: !!s.childAccess.form, history: (s.childAccess.history || []).slice(-10) },
     hasGuardian: !!s.tokenHashes.guardian, childPaused: !!s.childPaused, deletionRequestedAt: s.deletionRequestedAt || null, completedAt: s.completedAt || null,
     helloSettings: s.helloSettings,
     hellos: s.hellos.slice(-20).map((h) => ({ id: h.id, from: h.from, kind: h.kind, text: h.text || '', at: h.at, read: !!h.readAt })),
@@ -98,10 +99,27 @@ export default async (req) => {
     const body = async () => ({ ...(await req.json().catch(() => ({}))), pin });
     if (route === 'session' && req.method === 'POST') { const b = await body(); return json(await C.exchangeLink(store, String(b.t || t), { pin })); }
     if (route === 'state' && req.method === 'GET') {
-      const { story, role } = await C.authorize(store, t, { pin });
-      return json(C.publicState(story, role));
+      const { story, role, own } = await C.authorize(store, t, { pin });
+      return json(C.publicState(story, role, own));
     }
     if (route === 'consent' && req.method === 'POST') return json(await C.recordConsent(store, t, await body()));
+    // child's own link: parent-only controls (the server checks who is asking)
+    if (route === 'child-access' && req.method === 'POST') {
+      const b = await body();
+      if (b.action === 'teen') return json(await C.childAccessTeen(store, t, b));
+      if (b.action === 'link') return json(await C.setChildLink(store, t, { on: !!b.on, pin }));
+      if (b.action === 'withdraw') return json(await C.withdrawChildAccess(store, t, { pin }));
+      return json({ error: 'Unknown action.' }, 400);
+    }
+    if (route === 'consent-form' && req.method === 'POST') {
+      const data = Buffer.from(await req.arrayBuffer());
+      const st = await C.uploadConsentForm(store, t, { data, contentType: (req.headers.get('content-type') || '').split(';')[0], parentName: decodeURIComponent(req.headers.get('x-parent-name') || ''), pin });
+      try { // let Dan know a form is waiting (no form contents in the email)
+        await fetch(FORMSPREE, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ _subject: 'Family Memory Magnets: consent form waiting for review', message: 'A parent uploaded a signed consent form. Review it in Admin.' }) });
+      } catch { /* ignore */ }
+      return json(st);
+    }
     if (route === 'choose' && req.method === 'POST') return json(await C.choose(store, t, await body()));
     if (route === 'heard' && req.method === 'POST') return json(await C.markHeard(store, t, await body()));
     if (route === 'skip' && req.method === 'POST') return json(await C.skipQuestion(store, t, await body()));
@@ -229,6 +247,13 @@ async function admin(route, req, url, store, secret, origin) {
   if (route === 'hello-settings' && req.method === 'POST') return json(await C.setHelloSettings(store, b.id, b));
   if (route === 'keepsake' && req.method === 'POST') return json(await C.setKeepsake(store, b.id, b));
   if (route === 'delete' && req.method === 'POST') { if (b.confirm !== 'DELETE') return json({ error: 'Type DELETE to confirm.' }, 400); return json(await C.deleteStory(store, b.id)); }
+  if (route === 'consent-review' && req.method === 'POST') return json(await C.reviewConsentForm(store, b.id, { approve: !!b.approve, note: b.note }));
+  if (route === 'consent-form' && req.method === 'GET') { // short-lived signed link to the uploaded form
+    const id = url.searchParams.get('id') || '';
+    const story = await store.getJSON(`story/${id}`); if (!story?.childAccess?.form) return json({ error: 'No form uploaded.' }, 404);
+    const s = C.signMedia(secret, id, 'consent-form');
+    return json({ url: `/api/fmm/audio?s=${id}&k=consent-form&e=${s.exp}&sig=${s.sig}`, contentType: story.childAccess.form.contentType });
+  }
   if (route === 'media' && req.method === 'GET') {
     const id = url.searchParams.get('id'); const slot = url.searchParams.get('slot'); const n = Number(url.searchParams.get('n')) || 0;
     const story = await store.getJSON(`story/${id}`); if (!story) return json({ error: 'No such story.' }, 404);

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Parent Consent Form | Family Memory Magnets</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/family-memory-magnets/fmm.css">
+<style>
+  .form { background: #fff; color: #111; border-radius: 14px; padding: 26px; line-height: 1.55; }
+  .form h1 { font-size: 1.5rem; margin-bottom: 4px; }
+  .form ol, .form ul { margin: 8px 0 12px 22px; }
+  .line { border-bottom: 1.5px solid #111; min-height: 30px; margin: 4px 0 14px; padding: 4px 2px 0; font-weight: 700; }
+  .lab { font-size: .85rem; color: #444; margin-top: 10px; }
+  .noprint { margin: 16px 0; }
+  @media print { .topbar, .noprint { display: none !important; } body { background: #fff; } .form { padding: 0; } }
+</style>
+</head>
+<body>
+<div class="topbar">FAMILY MEMORY <b>MAGNETS</b></div>
+<main class="wrap" style="padding-top:20px;padding-bottom:40px">
+  <div class="noprint card">
+    <b>How to use this form</b>
+    <ol style="margin:8px 0 0 20px">
+      <li>Print this page, or copy it by hand onto paper.</li>
+      <li>Fill in the blanks, sign and date it.</li>
+      <li>Take a clear photo of the whole page and upload it on your Family Memory Magnets page.</li>
+    </ol>
+    <button class="btn" style="margin-top:12px" onclick="window.print()">Print this form</button>
+  </div>
+
+  <div class="form">
+    <h1>Parent or Guardian Consent</h1>
+    <div class="muted">Family Memory Magnets &middot; Child's own recording link (children under 13) &middot; Form version 2026-11-17</div>
+
+    <p style="margin-top:14px">Family Memory Magnets helps a grandchild and a grandparent record 30 short voice conversations, which become a private family keepsake. By default, a parent records together with the child on the parent's phone. This form lets a parent allow their child to have <b>their own recording link</b> instead.</p>
+
+    <p><b>What is collected from the child:</b> the child's first name, the child's voice recordings (questions up to 15 seconds and optional voice hellos up to 15 seconds), and the questions the child picks or types.</p>
+    <p><b>How it is used:</b> only to run the family's story and to make the family's keepsake (movie, storybook and recordings). It is never sold, never used for advertising, and never used to train AI or to create a voice copy.</p>
+    <p><b>Who can hear it:</b> the parent, the grandparent in this story, and Family Memory Magnets staff who make the keepsake. Recordings are stored privately with our hosting provider. Nothing is posted publicly, including on YouTube or the magnet's web page, unless the parent gives a separate yes later.</p>
+    <p><b>How long it is kept:</b> until 12 months after the 30th conversation is finished (or 12 months after the story is created, if it is not finished), then deleted. The parent can ask for deletion sooner.</p>
+    <p><b>Parent rights:</b> at any time, the parent can listen to everything the child recorded, turn off the child's link, withdraw this consent, and ask for the child's recordings to be deleted. Full details are in the privacy policy at customsongme.com/family-memory-magnets/privacy/.</p>
+
+    <p style="margin-top:16px"><b>I confirm that:</b></p>
+    <ol>
+      <li>I am the parent or legal guardian of the child named below.</li>
+      <li>I have read the information above.</li>
+      <li>I allow my child to have their own recording link, and I allow Family Memory Magnets to collect and use my child's information as described above.</li>
+      <li>I understand I can withdraw this consent at any time.</li>
+    </ol>
+
+    <div class="lab">Child's first name</div><div class="line" id="child"></div>
+    <div class="lab">Grandparent's name (as used in the story)</div><div class="line"></div>
+    <div class="lab">Parent or guardian's full name (printed)</div><div class="line"></div>
+    <div class="lab">Relationship to the child (for example: mother, father, legal guardian)</div><div class="line"></div>
+    <div class="lab">Signature</div><div class="line" style="min-height:44px"></div>
+    <div class="lab">Date</div><div class="line"></div>
+  </div>
+</main>
+<script>
+  (function () { var c = new URLSearchParams(location.search).get('child'); if (c) document.getElementById('child').textContent = c.slice(0, 40); })();
+</script>
+</body>
+</html>

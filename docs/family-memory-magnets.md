@@ -49,3 +49,14 @@ Recordings and story data are in private Netlify Blobs (store `fmm`). No public 
 - Without a parent login the parent uses the child's link (unchanged from v2).
 - Rate-limit counters and story files are read-modify-write (fine for low volume).
 - Real-device audio (iPhone Safari, Android Chrome) has not been tested.
+
+## v4: parent-run by default, child's own link by parent choice
+- The "child" link is now the **family recording link**: it is given to the parent, who records together with the child.
+- **Child's own link** (optional, parent decides): from the family link (or the parent login, if the story has one).
+  - 13+: the parent confirms age, then turns the link on.
+  - Under 13: the parent prints `/family-memory-magnets/consent-form/`, signs it, uploads a photo or PDF. Admin shows "Consent form waiting for review" (and Formspree sends a notice). Approve or reject with a note. Approval does not turn the link on; the parent does.
+  - The parent can turn the link off (link and devices die immediately), make a new link, or withdraw permission.
+- API: `POST /api/fmm/child-access` (`action`: `teen` | `link` | `withdraw`), `POST /api/fmm/consent-form` (raw file, `X-Parent-Name`), admin `GET consent-form?id=`, `POST consent-review`.
+- Privacy policy: `/family-memory-magnets/privacy/`. Legal pack and to-dos: `docs/fmm-legal/`.
+- Admin flags stories past their keep-until date.
+- 62 tests (`tests/fmm-v4.test.mjs` covers the new rules).

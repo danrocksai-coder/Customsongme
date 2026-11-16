@@ -264,14 +264,92 @@
     app.innerHTML = header() + '<div class="card center"><h2>Taking a little break</h2><p>Your parent has paused recording for now. Ask them to turn it back on when you are ready.</p></div>';
   }
   var TYPE_LABEL = { child: 'sweet', grandparent: 'sweet' };
+
+  // ----- the child's own link (parent decides; off by default) -----
+  var kidLink = '';
+  function fmtDate(t) { return new Date(t).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }); }
+  function childAccessCard() {
+    var A = S.childAccess; if (!A) return '';
+    var c = esc(S.childName), h = '<div class="card" id="ca"><h3>' + c + '\'s own link</h3>';
+    if (!A.baseConsent) return h + '<p class="muted">Give permission for recording first. Then you can decide whether ' + c + ' gets their own link.</p></div>';
+    if (kidLink) {
+      h += '<div class="msg ok">' + c + '\'s own link is on.</div><p>Send this link to ' + c + '\'s phone. It is shown only once, so send it now. You can turn it off at any time.</p>' +
+        '<code class="link" id="kl">' + esc(kidLink) + '</code><button class="btn" id="kshare">Send ' + c + ' the link</button><button class="btn alt" id="kdone" style="margin-top:10px">Done</button></div>';
+      return h;
+    }
+    if (A.status === 'approved' && A.linkActive) {
+      return h + '<p>' + c + ' has their own link and can record on their own phone. You can still listen to everything and pause recording.</p>' +
+        '<button class="btn alt" id="koff">Turn off ' + c + '\'s link</button><button class="btn alt" id="knew" style="margin-top:10px">Make a new link (the old one stops)</button>' +
+        '<button class="btn alt" id="kwd" style="margin-top:10px">Withdraw my permission</button></div>';
+    }
+    if (A.status === 'approved') {
+      return h + '<div class="msg ok">Permission approved' + (A.basis === 'age-13-plus' ? ' (13 or older)' : ' (signed form)') + '.</div><p>' + c + '\'s own link is off. Turn it on whenever you are ready.</p>' +
+        '<button class="btn" id="kon">Turn on ' + c + '\'s own link</button><button class="btn alt" id="kwd" style="margin-top:10px">Withdraw my permission</button></div>';
+    }
+    if (A.status === 'pending') {
+      return h + '<div class="msg info">Your signed form was received on ' + fmtDate(A.formUploadedAt) + '. I will review it, usually within one day. Until then you can keep recording together.</div></div>';
+    }
+    h += '<p>Right now you record together with ' + c + ' on your phone. That is the default, and it is the simplest choice.</p>' +
+      '<p class="muted">If you would like ' + c + ' to record on their own phone, you can give them their own link. It is your choice, and you can turn it off at any time.</p>';
+    if (A.status === 'rejected') h += '<div class="msg err">Your form could not be approved: ' + esc(A.reviewNote) + ' Please upload it again.</div>';
+    h += '<details' + (A.status === 'rejected' ? ' open' : '') + ' style="margin-top:10px"><summary><b>Give ' + c + ' their own link</b></summary>' +
+      '<div class="msg info" style="font-weight:500"><b>Before you decide, here is what happens:</b><ul style="margin:8px 0 0 20px">' +
+      '<li>We collect ' + c + '\'s first name and voice recordings, and the questions ' + c + ' picks or types. Nothing else about ' + c + '.</li>' +
+      '<li>Only you, ' + esc(S.grandparentName) + ', and Dan (to make your keepsake) can hear them. They are never sold or used for ads.</li>' +
+      '<li>Nothing is posted publicly. A movie goes on YouTube or the magnet page only if you give a separate yes later.</li>' +
+      '<li>Recordings are kept for 12 months after your 30th conversation, then deleted. You can ask for deletion sooner.</li>' +
+      '<li>You can turn off ' + c + '\'s link or withdraw permission at any time.</li></ul>' +
+      '<a href="/family-memory-magnets/privacy/" target="_blank" rel="noopener">Read the full privacy policy</a></div>' +
+      '<h3 style="margin-top:14px">Is ' + c + ' 13 or older?</h3>' +
+      '<div class="card" style="margin:8px 0"><b>Yes, 13 or older</b>' +
+      '<label for="tn">Your name</label><input type="text" id="tn" autocomplete="name">' +
+      '<label class="check"><input type="checkbox" id="tag"><span>I am ' + c + '\'s parent or legal guardian, ' + c + ' is 13 or older, and I allow ' + c + ' to have their own recording link.</span></label>' +
+      '<div id="tm"></div><button class="btn" id="tgo">Confirm</button></div>' +
+      '<div class="card" style="margin:8px 0"><b>No, under 13</b><p class="muted">The law asks for a signed form for children under 13.</p>' +
+      '<p><b>1.</b> <a href="/family-memory-magnets/consent-form/?child=' + encodeURIComponent(S.childName) + '" target="_blank" rel="noopener">Open the consent form</a>, then print and sign it, or sign it on paper copied by hand.</p>' +
+      '<p><b>2.</b> Take a clear photo of the signed form (or save it as a PDF) and upload it here.</p>' +
+      '<label for="fn">Your name</label><input type="text" id="fn" autocomplete="name">' +
+      '<label for="ff">Signed form (photo or PDF, up to 4 MB)</label><input type="file" id="ff" accept="image/*,application/pdf">' +
+      '<div id="fm"></div><button class="btn" id="fgo" style="margin-top:8px">Upload signed form</button></div></details></div>';
+    return h;
+  }
+  function bindChildAccess() {
+    var $ = function (id) { return app.querySelector('#' + id); };
+    if (!$('ca')) return;
+    function apply(st) { S = st; render(); var el = app.querySelector('#ca'); if (el) el.scrollIntoView({ block: 'start' }); }
+    function act(body, ok) { return api('child-access', { json: body }).then(function (r) { if (r && r.state) { kidLink = r.link ? location.origin + '/family-memory-magnets/s/?t=' + r.link : ''; apply(r.state); } else apply(r); if (ok) toast(ok); }).catch(function (e) { toast(e.message, 5000); }); }
+    if ($('tgo')) $('tgo').onclick = function () { api('child-access', { json: { action: 'teen', parentName: $('tn').value, agree: $('tag').checked } }).then(function (st) { apply(st); toast('Approved. You can now turn on the link.'); }).catch(function (e) { $('tm').innerHTML = '<div class="msg err">' + esc(e.message) + '</div>'; }); };
+    if ($('fgo')) $('fgo').onclick = function () {
+      var f = $('ff').files && $('ff').files[0], b = $('fgo');
+      if (!$('fn').value.trim()) { $('fm').innerHTML = '<div class="msg err">Please type your name.</div>'; return; }
+      if (!f) { $('fm').innerHTML = '<div class="msg err">Please choose the photo or PDF of your signed form.</div>'; return; }
+      if (f.size > 4 * 1024 * 1024) { $('fm').innerHTML = '<div class="msg err">That file is too large. Please use a photo under 4 MB.</div>'; return; }
+      b.disabled = true; b.textContent = 'Uploading…';
+      fetch('/api/fmm/consent-form?t=' + encodeURIComponent(TOKEN), { method: 'POST', body: f, headers: { 'Content-Type': f.type || 'application/octet-stream', 'X-Parent-Name': encodeURIComponent($('fn').value.trim()) } })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok) throw new Error(j.error || 'Upload failed.'); return j; }); })
+        .then(function (st) { apply(st); toast('Form received. Thank you!'); })
+        .catch(function (e) { b.disabled = false; b.textContent = 'Upload signed form'; $('fm').innerHTML = '<div class="msg err">' + esc(e.message) + '</div>'; });
+    };
+    if ($('kon')) $('kon').onclick = function () { act({ action: 'link', on: true }); };
+    if ($('knew')) $('knew').onclick = function () { if (confirm('The old link stops working right away. Make a new one?')) act({ action: 'link', on: true }); };
+    if ($('koff')) $('koff').onclick = function () { if (confirm('Turn off ' + S.childName + '\'s own link? It stops working right away.')) act({ action: 'link', on: false }, 'Link turned off.'); };
+    if ($('kwd')) $('kwd').onclick = function () { if (confirm('Withdraw your permission? ' + S.childName + '\'s own link stops working, and you would need to give permission again to turn it back on. Recordings already saved stay in your story unless you ask for deletion.')) api('child-access', { json: { action: 'withdraw' } }).then(function (st) { apply(st); toast('Permission withdrawn.'); }).catch(function (e) { toast(e.message, 5000); }); };
+    if ($('kdone')) $('kdone').onclick = function () { kidLink = ''; render(); };
+    if ($('kshare')) $('kshare').onclick = function () {
+      var text = 'Here is your own link for our Family Memory Magnets story.';
+      if (navigator.share) navigator.share({ title: 'Your Family Memory Magnets link', text: text, url: kidLink }).catch(function () {});
+      else location.href = 'sms:?&body=' + encodeURIComponent(text + ' ' + kidLink);
+    };
+  }
   function renderGuardian() {
     var h = header();
-    h += '<div class="card"><div class="stage">Parent dashboard</div><h2>You are in charge</h2><p class="muted">You can see progress, listen to recordings, control Little Hellos, pause ' + esc(S.childName) + ', and ask for everything to be deleted. You cannot record from this page.</p></div>';
+    h += '<div class="card"><div class="stage">Parent dashboard</div><h2>You are in charge</h2><p class="muted">You can see progress, listen to recordings, control Little Hellos, pause recording, decide whether ' + esc(S.childName) + ' gets their own link, and ask for everything to be deleted. To record, use the family link together with ' + esc(S.childName) + '.</p></div>';
     if (S.consentNeeded) {
-      h += '<div class="card"><h3>Permission needed</h3><p>Before ' + esc(S.childName) + ' records anything, a parent or legal guardian needs to give permission.</p><ul style="margin:8px 0 0 20px"><li>Recordings are private and are never posted publicly.</li><li>They are used only to create this family story, movie and keepsake.</li><li>You can ask for them to be deleted at any time.</li></ul>' +
+      h += '<div class="card"><h3>Permission needed</h3><p>Before ' + esc(S.childName) + ' records anything, a parent or legal guardian needs to give permission.</p><ul style="margin:8px 0 0 20px"><li>You and ' + esc(S.childName) + ' record together on your phone, using the family link.</li><li>Recordings are private and are never posted publicly without a separate yes from you.</li><li>They are used only to create this family story, movie and keepsake.</li><li>You can ask for them to be deleted at any time.</li></ul><p class="muted" style="margin-top:8px"><a href="/family-memory-magnets/privacy/" target="_blank" rel="noopener">Privacy policy</a></p>' +
         '<label for="pn">Your name</label><input type="text" id="pn" autocomplete="name"><label class="check"><input type="checkbox" id="ag"><span>I am ' + esc(S.childName) + '\'s parent or legal guardian, and I give permission for ' + esc(S.childName) + '\'s voice to be recorded and saved for this family story.</span></label><div id="cm"></div><button class="btn" id="cb">I agree and continue</button></div>';
     } else if (S.consent) h += '<div class="card"><div class="muted">Permission given by ' + esc(S.consent.parentName) + ' on ' + new Date(S.consent.at).toLocaleDateString() + '.</div></div>';
     h += '<div class="card"><h3>' + esc(S.childName) + '\'s recording</h3><p class="muted">' + (S.childPaused ? 'Paused. ' + esc(S.childName) + ' cannot record or send hellos until you turn it back on.' : 'Active.') + '</p><button class="btn ' + (S.childPaused ? '' : 'alt') + '" id="gpause">' + (S.childPaused ? 'Turn recording back on' : 'Pause recording') + '</button></div>';
+    h += childAccessCard();
     var hs = S.helloSettings;
     h += '<div class="card"><h3>Little Hellos</h3><p class="muted">Short, optional hellos sent between ' + esc(S.childName) + ' and ' + esc(S.grandparentName) + ' after a quiet couple of days. They never change the story.</p>' +
       '<label class="check"><input type="checkbox" id="hen"' + (hs.enabled ? ' checked' : '') + '><span>Allow Little Hellos</span></label>' +
@@ -300,6 +378,7 @@
     $('hsave').onclick = function () { upd({ hello: { enabled: $('hen').checked, style: $('hst').value, custom: $('hcu').value.split('\n') } }, 'Saved.'); };
     if ($('gdel')) $('gdel').onclick = function () { if (confirm('Ask for all of your family\'s recordings to be deleted? Nothing is deleted automatically. I will contact you first.')) upd({ requestDeletion: true }, 'Request sent.'); };
     if ($('gundel')) $('gundel').onclick = function () { upd({ requestDeletion: false }, 'Request cancelled.'); };
+    bindChildAccess();
     app.querySelectorAll('[data-play]').forEach(function (b) { b.onclick = function () { var p = b.getAttribute('data-play').split('|'); playMedia(b, 'slot=' + p[0] + '&n=' + p[1]); }; });
     app.querySelectorAll('[data-hello]').forEach(function (b) { b.onclick = function () { playMedia(b, 'slot=hello&id=' + encodeURIComponent(b.getAttribute('data-hello'))); }; });
   }
@@ -337,6 +416,8 @@
     }
     h += helloInbox() + helloOffer() + conversationsList();
     if (!S.done) h += chapters();
+    if (role === 'child' && !S.own && !S.done) h += '<p class="muted center">Parent and ' + esc(S.childName) + ': record together on this phone. A parent stays with ' + esc(S.childName) + ' while recording.</p>';
+    h += childAccessCard();
     h += '<p class="muted center">Your story stays open until ' + new Date(S.expiresAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + '. There is no rush.' + (S.test ? '<br><b>This is a test story.</b>' : '') + '</p>';
     app.innerHTML = h;
 
@@ -349,6 +430,7 @@
     if ($('goclose')) $('goclose').onclick = function () { setView('closing'); };
     if ($('hvoice')) $('hvoice').onclick = function () { setView('hello'); };
     if ($('invite')) renderInvite($('invite'));
+    bindChildAccess();
     app.querySelectorAll('[data-play]').forEach(function (b) { b.onclick = function () { var p = b.getAttribute('data-play').split('|'); playMedia(b, 'slot=' + p[0] + '&n=' + p[1]); }; });
     app.querySelectorAll('[data-hello]').forEach(function (b) { b.onclick = function () { playMedia(b, 'slot=hello&id=' + encodeURIComponent(b.getAttribute('data-hello'))); }; });
     app.querySelectorAll('[data-hsend]').forEach(function (b) { b.onclick = function () {
@@ -379,12 +461,13 @@
 
   function renderConsent() {
     if (S.role === 'child' && S.guardianManaged) {
-      app.innerHTML = header() + '<div class="card center"><h2>Ask your parent first</h2><p>Before you record anything, a parent needs to open their own parent link and say yes. Then you can start.</p></div>';
+      app.innerHTML = header() + '<div class="card center"><h2>Permission first</h2><p>Before anything is recorded, open your parent link and give permission there. Then come back to this link to record together.</p></div>';
       return;
     }
     app.innerHTML = header() +
       '<div class="card"><h2>A parent or guardian says yes first</h2><p>Before ' + esc(S.childName) + ' records anything, a parent or legal guardian needs to give permission.</p>' +
-      '<ul style="margin:10px 0 0 20px"><li>Recordings are private and are never posted publicly.</li><li>They are used only to create this family story, movie and keepsake.</li><li>You can ask me to delete them at any time.</li></ul>' +
+      '<ul style="margin:10px 0 0 20px"><li>You hold this link. You and ' + esc(S.childName) + ' record together on your phone.</li><li>Recordings are private and are never posted publicly without a separate yes from you.</li><li>They are used only to create this family story, movie and keepsake.</li><li>You can ask me to delete them at any time.</li></ul>' +
+      '<p class="muted" style="margin-top:8px"><a href="/family-memory-magnets/privacy/" target="_blank" rel="noopener">Privacy policy</a></p>' +
       '<label for="pn">Your name</label><input type="text" id="pn" autocomplete="name">' +
       '<label class="check"><input type="checkbox" id="ag"><span>I am ' + esc(S.childName) + '\'s parent or legal guardian, and I give permission for ' + esc(S.childName) + '\'s voice to be recorded and saved for this family story.</span></label>' +
       '<div id="cm"></div><button class="btn" id="cb">I agree and continue</button></div>';

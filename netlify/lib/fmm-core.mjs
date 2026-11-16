@@ -7,6 +7,10 @@
 //  - A printed QR code is a public identifier, NEVER a credential. It opens a device only if that device
 //    already holds a session, or the person also supplies a PIN (rate limited and locked out on guessing).
 //  - Real-child recordings are blocked until parent consent is recorded (test stories excepted).
+//  - PARENT-RUN BY DEFAULT: the family link belongs to the parent, who records together with the child.
+//    A child's OWN link exists only after the parent turns it on AND either confirms the child is 13+
+//    or uploads a signed consent form that Dan approves. The parent can turn it off at any time; the
+//    purchaser and Dan can never turn it on by themselves.
 //  - Stop N+1 unlocks only after the child has heard the answer to stop N.
 //  - Each slot accepts one upload (duplicates are refused; same upload id is idempotent).
 //  - Media is only handed out as short-lived HMAC-signed URLs.
@@ -24,6 +28,9 @@ export const DURATION_SLACK = 3; // seconds of tolerance for recorder timing
 export const ACCESS_DAYS = 365; // "12 month adventure"
 export const SIGNED_URL_SECONDS = 300;
 export const CONSENT_VERSION = '2026-11-16-v1';
+export const CHILD_ACCESS_VERSION = '2026-11-17-v1'; // parent notice + consent-form wording for the child's own link
+export const FORM_MAX_BYTES = 4 * 1024 * 1024;
+export const FORM_TYPES = ['image/jpeg', 'image/png', 'image/heic', 'image/heif', 'image/webp', 'application/pdf'];
 export const HELLO_WAIT_MS = 48 * 3600e3;      // inactivity before a Hello is offered
 export const HELLO_INTERVAL_MS = 48 * 3600e3;  // one Hello per participant per 48 hours
 export const HELLO_TEXT_MAX = 150;
@@ -126,6 +133,8 @@ export function norm(story) {
   story.drafts ||= {};
   story.sessions ||= { child: [], grandparent: [] };
   story.sessions.guardian ||= [];
+  story.sessions.kid ||= [];
+  story.childAccess ||= { status: 'none', basis: null, enabled: false, form: null, history: [] };
   story.childPaused ||= false;
   story.pins ||= {};
   story.keepsake ||= { status: 'preparing', items: [] };
@@ -267,6 +276,9 @@ export async function deleteStory(store, storyId) {
   for (const s of story.stops) for (const slot of ['q', 'a']) if (s[slot]) await store.del(s[slot].key);
   for (const k of ['intro', 'closing']) if (story[k]) await store.del(story[k].key);
   for (const h of story.hellos) if (h.audio) await store.del(h.audio.key);
+  if (story.childAccess.form) await store.del(story.childAccess.form.key);
+  if (story.tokenHashes.kid) await store.del(`token/${story.tokenHashes.kid}`);
+  await dropSessions(store, story, 'kid');
   for (const r of ALL_ROLES) { if (story.tokenHashes[r]) await store.del(`token/${story.tokenHashes[r]}`); await dropSessions(store, story, r); }
   for (const c of new Set([story.qrCode, story.qrCodes?.child, story.qrCodes?.grandparent].filter(Boolean))) {
     await store.del(`qr/${c}`); await store.del(`rl/${sha('qr|' + c)}`);
@@ -280,10 +292,18 @@ async function loadSession(store, token) {
   const ref = await store.getJSON(`sess/${sha(token)}`);
   if (!ref) fail(401, 'This phone needs to be reconnected.');
   const story = norm(await store.getJSON(`story/${ref.storyId}`) || fail(401, 'This phone needs to be reconnected.'));
-  if (!story.sessions[ref.role]?.includes(sha(token))) fail(401, 'This phone needs to be reconnected.');
+  if (!story.sessions[ref.own ? 'kid' : ref.role]?.includes(sha(token))) fail(401, 'This phone needs to be reconnected.');
   if (story.expiresAt < now()) fail(410, 'This story has passed its 12-month window.');
-  return { story, role: ref.role, via: 'session' };
+  if (ref.own) assertKidAllowed(story);
+  return { story, role: ref.role, own: !!ref.own, via: 'session' };
 }
+
+// The child's own link works only while the parent keeps it switched on and consent is approved.
+export function kidAllowed(story) {
+  const a = norm(story).childAccess;
+  return !!(a.enabled && a.status === 'approved' && story.tokenHashes.kid);
+}
+function assertKidAllowed(story) { if (!kidAllowed(story)) fail(403, 'Your parent has turned off your own link for now.'); }
 
 // token may be a private link token OR a device session ("s." prefix). Links need the PIN (if set); sessions
 // were already earned with it.
@@ -293,8 +313,9 @@ export async function authorize(store, token, { pin } = {}) {
   const ref = await store.getJSON(`token/${sha(token)}`);
   if (!ref) fail(401, 'This link is no longer valid.');
   const story = norm(await store.getJSON(`story/${ref.storyId}`) || fail(401, 'This link is no longer valid.'));
-  if (story.tokenHashes[ref.role] !== sha(token)) fail(401, 'This link is no longer valid.');
+  if (story.tokenHashes[ref.own ? 'kid' : ref.role] !== sha(token)) fail(401, 'This link is no longer valid.');
   if (story.expiresAt < now()) fail(410, 'This story has passed its 12-month window.');
+  if (ref.own) { assertKidAllowed(story); return { story, role: 'child', own: true, via: 'link' }; }
   if (pinRequired(story, ref.role)) {
     const key = `pin|${story.id}|${ref.role}`;
     if (!pin) throw Object.assign(new HttpError(401, 'PIN required.'), { pinRequired: true });
@@ -308,17 +329,17 @@ export async function authorize(store, token, { pin } = {}) {
 // Trade a private link (+PIN) for a long-lived device session, so the printed QR works on this phone from now on.
 export async function exchangeLink(store, linkToken, { pin } = {}) {
   if (typeof linkToken === 'string' && linkToken.startsWith('s.')) fail(400, 'Not a link.');
-  const { story, role } = await authorize(store, linkToken, { pin });
-  const session = await createSession(store, story, role);
+  const { story, role, own } = await authorize(store, linkToken, { pin });
+  const session = await createSession(store, story, role, own);
   const qrCodes = await ensureQrCodes(store, story);
   return { session, role, code: qrCodes[role] || story.guardianCode };
 }
 
-async function createSession(store, story, role) {
+async function createSession(store, story, role, own = false) {
   const token = 's.' + newToken();
   const h = sha(token);
-  await store.setJSON(`sess/${h}`, { storyId: story.id, role });
-  const list = story.sessions[role];
+  await store.setJSON(`sess/${h}`, own ? { storyId: story.id, role, own: true } : { storyId: story.id, role });
+  const list = story.sessions[own ? 'kid' : role];
   list.push(h);
   while (list.length > 12) await store.del(`sess/${list.shift()}`); // oldest devices drop off
   await store.setJSON(`story/${story.id}`, story);
@@ -426,10 +447,27 @@ export function guardianState(story) {
     keepsake: ci >= STOPS.length ? { status: story.keepsake.status, items: story.keepsake.status === 'ready' ? story.keepsake.items : [] } : null,
     availableUntil: ci >= STOPS.length ? story.expiresAt : null,
     deletionRequestedAt: story.deletionRequestedAt || null, limits: LIMITS, retentionDays: RETENTION_DAYS_AFTER_COMPLETION,
+    childAccess: childAccessView(story),
   };
 }
 
-export function publicState(story, role) {
+// What the parent sees about the child's own link (never the form itself).
+export function childAccessView(story) {
+  const a = norm(story).childAccess;
+  return {
+    status: a.status, basis: a.basis, enabled: !!a.enabled, linkActive: kidAllowed(story),
+    formUploadedAt: a.form?.uploadedAt || null, reviewNote: a.status === 'rejected' ? (a.note || '') : '',
+    baseConsent: !!(story.consent || story.test),
+  };
+}
+// Who may manage the child's own link: the parent login if there is one, otherwise the parent-held family link.
+function isController(story, role, own) {
+  if (own) return false;
+  if (story.tokenHashes.guardian) return role === 'guardian';
+  return role === 'child';
+}
+
+export function publicState(story, role, own = false) {
   norm(story);
   if (role === 'guardian') return guardianState(story);
   const ci = currentIndex(story);
@@ -443,7 +481,9 @@ export function publicState(story, role) {
   const out = {
     role, childName: story.childName, grandparentName: story.grandparentName,
     qrCode: story.qrCodes?.[role] || story.qrCode, test: story.test, expiresAt: story.expiresAt,
-    consentNeeded: role === 'child' && !story.test && !story.consent,
+    consentNeeded: role === 'child' && !own && !story.test && !story.consent,
+    own: role === 'child' && !!own, // true = the child's own link; false = the parent-held family link
+    childAccess: isController(story, role, own) ? childAccessView(story) : null,
     guardianManaged: !!story.tokenHashes.guardian, paused: role === 'child' && !!story.childPaused,
     availableUntil: ci >= STOPS.length ? story.expiresAt : null,
     done: ci >= STOPS.length, completed: Math.min(ci, STOPS.length),
@@ -473,8 +513,8 @@ export function publicState(story, role) {
 
 // ---------- actions ----------
 export async function recordConsent(store, token, { parentName, agree, pin }) {
-  const { story, role } = await authorize(store, token, { pin });
-  if (role === 'grandparent') fail(403, 'Only the parent can give consent.');
+  const { story, role, own } = await authorize(store, token, { pin });
+  if (role === 'grandparent' || own) fail(403, 'Only the parent can give consent.');
   if (role === 'child' && story.tokenHashes.guardian) fail(403, 'A parent needs to say yes from their own parent link.');
   if (!agree || !String(parentName || '').trim()) fail(400, 'Parent name and agreement are required.');
   story.consent = { parentName: String(parentName).trim().slice(0, 80), version: CONSENT_VERSION, at: now() };
@@ -483,7 +523,7 @@ export async function recordConsent(store, token, { parentName, agree, pin }) {
 }
 
 export async function choose(store, token, { n, qid, custom, pin }) {
-  const { story, role } = await authorize(store, token, { pin });
+  const { story, role, own } = await authorize(store, token, { pin });
   if (role !== 'child') fail(403, 'Only the child picks the question.');
   assertNotPaused(story, role);
   const i = currentIndex(story);
@@ -500,7 +540,7 @@ export async function choose(store, token, { n, qid, custom, pin }) {
     cur.chosen = { id: c.id, text: c.text };
   }
   await store.setJSON(`story/${story.id}`, story);
-  return publicState(story, role);
+  return publicState(story, role, own);
 }
 
 // ----- teleprompter drafts (private to the author; server-side so they survive refresh and device changes) -----
@@ -525,7 +565,7 @@ const PAUSED = 'Your parent has paused this for now. Ask them to turn it back on
 const assertNotPaused = (story, role) => { if (role === 'child' && story.childPaused) fail(403, PAUSED); };
 
 export async function upload(store, token, { n, slot, data, durationSec, uploadId, contentType, pin }) {
-  const { story, role } = await authorize(store, token, { pin });
+  const { story, role, own } = await authorize(store, token, { pin });
   if (!ROLE_SLOT[role].includes(slot)) fail(403, 'This link cannot record that.');
   assertNotPaused(story, role);
   if (role === 'child' && !story.test && !story.consent) fail(403, 'A parent must give consent before recording.');
@@ -547,7 +587,7 @@ export async function upload(store, token, { n, slot, data, durationSec, uploadI
     story.hellos.push({ id, from: role, kind: 'voice', at: now(), uploadId: String(uploadId || ''), audio: { key, durationSec, contentType, bytes: data.length } });
     story.helloLast[role] = now();
     await store.setJSON(`story/${story.id}`, story);
-    return { ok: true, state: publicState(story, role) };
+    return { ok: true, state: publicState(story, role, own) };
   }
 
   let target; let key;
@@ -574,11 +614,11 @@ export async function upload(store, token, { n, slot, data, durationSec, uploadI
   target[key] = { key: blobKey, uploadId: String(uploadId || ''), durationSec, contentType, at: now(), bytes: data.length };
   if (slot === 'question' || slot === 'answer') { story.lastActivityAt = now(); delete story.drafts[`${role}-${n}`]; } // notes stay private and are dropped once recorded
   await store.setJSON(`story/${story.id}`, story);
-  return { ok: true, state: publicState(story, role) };
+  return { ok: true, state: publicState(story, role, own) };
 }
 
 export async function markHeard(store, token, { n, pin }) {
-  const { story, role } = await authorize(store, token, { pin });
+  const { story, role, own } = await authorize(store, token, { pin });
   if (role !== 'child') fail(403, 'Only the child unlocks the next stop.');
   assertNotPaused(story, role);
   const i = currentIndex(story);
@@ -591,7 +631,7 @@ export async function markHeard(store, token, { n, pin }) {
     story.expiresAt = Math.max(story.expiresAt, story.completedAt + RETENTION_DAYS_AFTER_COMPLETION * 86400e3);
   }
   await store.setJSON(`story/${story.id}`, story);
-  return publicState(story, role);
+  return publicState(story, role, own);
 }
 
 // grandparent may skip a question they'd rather not answer: the child picks again
@@ -613,7 +653,7 @@ export async function skipQuestion(store, token, { n, pin }) {
 
 // ----- Little Hellos (text) -----
 export async function sendHello(store, token, { suggestion, pin }) {
-  const { story, role } = await authorize(store, token, { pin });
+  const { story, role, own } = await authorize(store, token, { pin });
   if (role === 'guardian') fail(403, 'Parents manage Little Hellos from the parent page.');
   assertNotPaused(story, role);
   const el = helloEligibility(story, role);
@@ -623,7 +663,7 @@ export async function sendHello(store, token, { suggestion, pin }) {
   story.hellos.push({ id: newToken(6), from: role, kind: 'text', text: String(text).slice(0, HELLO_TEXT_MAX), at: now() });
   story.helloLast[role] = now();
   await store.setJSON(`story/${story.id}`, story);
-  return { ok: true, state: publicState(story, role) };
+  return { ok: true, state: publicState(story, role, own) };
 }
 export async function markHelloRead(store, token, { id, pin }) {
   const { story, role } = await authorize(store, token, { pin });
@@ -652,6 +692,91 @@ export async function guardianUpdate(store, token, input) {
   if (input.requestDeletion === false) story.deletionRequestedAt = null;
   await store.setJSON(`story/${story.id}`, story);
   return guardianState(story);
+}
+
+// ----- the child's own link (parent decides; Dan only reviews signed forms) -----
+const accessLog = (a, event, extra = {}) => { a.history = [...(a.history || []), { event, at: now(), ...extra }].slice(-50); };
+async function controller(store, token, pin) {
+  const ctx = await authorize(store, token, { pin });
+  if (!isController(ctx.story, ctx.role, ctx.own)) fail(403, 'Only the parent can change this.');
+  if (!ctx.story.consent && !ctx.story.test) fail(409, 'Please give permission for recording first.');
+  return ctx;
+}
+const stateFor = (story, role, own) => (role === 'guardian' ? guardianState(story) : publicState(story, role, own));
+
+// Parent confirms the child is 13 or older: COPPA does not apply, so no form is needed.
+export async function childAccessTeen(store, token, { parentName, agree, pin }) {
+  const { story, role, own } = await controller(store, token, pin);
+  const name = String(parentName || '').trim().slice(0, 80);
+  if (!agree || !name) fail(400, 'Your name and the confirmation are required.');
+  const a = story.childAccess;
+  if (a.status === 'approved') fail(409, 'Already approved.');
+  Object.assign(a, { status: 'approved', basis: 'age-13-plus', parentName: name, decidedAt: now(), version: CHILD_ACCESS_VERSION, note: '' });
+  accessLog(a, 'teen-confirmed', { parentName: name });
+  await store.setJSON(`story/${story.id}`, story);
+  return stateFor(story, role, own);
+}
+
+// Parent uploads a signed consent form (photo or PDF) for a child under 13. Dan reviews it.
+export async function uploadConsentForm(store, token, { data, contentType, parentName, pin }) {
+  const { story, role, own } = await controller(store, token, pin);
+  const name = String(parentName || '').trim().slice(0, 80);
+  if (!name) fail(400, 'Please type your name.');
+  if (!data || !data.length) fail(400, 'Please choose a photo or PDF of the signed form.');
+  if (data.length > FORM_MAX_BYTES) fail(413, 'That file is too large. Please use a photo under 4 MB.');
+  if (!FORM_TYPES.includes(String(contentType || ''))) fail(415, 'Please upload a photo (JPG, PNG, HEIC) or a PDF.');
+  const a = story.childAccess;
+  if (a.status === 'approved') fail(409, 'Already approved.');
+  const key = `audio/${story.id}/consent-form`; // private store; served only through an admin-signed link
+  await store.setBlob(key, data, { contentType });
+  a.form = { key, contentType, bytes: data.length, uploadedAt: now(), parentName: name };
+  Object.assign(a, { status: 'pending', basis: 'signed-form', parentName: name, note: '', version: CHILD_ACCESS_VERSION });
+  accessLog(a, 'form-uploaded', { parentName: name });
+  await store.setJSON(`story/${story.id}`, story);
+  return stateFor(story, role, own);
+}
+
+// Parent switches the child's own link on (returns the new link token ONCE) or off (link dies immediately).
+export async function setChildLink(store, token, { on, pin }) {
+  const { story, role, own } = await controller(store, token, pin);
+  const a = story.childAccess;
+  if (story.tokenHashes.kid) { await store.del(`token/${story.tokenHashes.kid}`); delete story.tokenHashes.kid; }
+  await dropSessions(store, story, 'kid');
+  let link = null;
+  if (on) {
+    if (a.status !== 'approved') fail(409, 'The child\'s own link can be turned on only after permission is approved.');
+    link = newToken();
+    story.tokenHashes.kid = sha(link);
+    await store.setJSON(`token/${story.tokenHashes.kid}`, { storyId: story.id, role: 'child', own: true });
+    a.enabled = true; accessLog(a, 'link-on');
+  } else { a.enabled = false; accessLog(a, 'link-off'); }
+  await store.setJSON(`story/${story.id}`, story);
+  return { link, state: stateFor(story, role, own) };
+}
+
+// Parent withdraws permission for the child's own link entirely (link off; a new yes is needed to turn it back on).
+export async function withdrawChildAccess(store, token, { pin }) {
+  const { story, role, own } = await controller(store, token, pin);
+  const a = story.childAccess;
+  if (story.tokenHashes.kid) { await store.del(`token/${story.tokenHashes.kid}`); delete story.tokenHashes.kid; }
+  await dropSessions(store, story, 'kid');
+  Object.assign(a, { status: 'none', basis: null, enabled: false, note: '' });
+  accessLog(a, 'withdrawn');
+  await store.setJSON(`story/${story.id}`, story);
+  return stateFor(story, role, own);
+}
+
+// Dan reviews an uploaded form. Approval does NOT turn the link on: the parent still decides.
+export async function reviewConsentForm(store, storyId, { approve, note }) {
+  const story = norm(await store.getJSON(`story/${storyId}`) || fail(404, 'No such story.'));
+  const a = story.childAccess;
+  if (a.status !== 'pending' || !a.form) fail(409, 'There is no form waiting for review.');
+  a.status = approve ? 'approved' : 'rejected';
+  a.note = approve ? '' : String(note || 'Please upload a clear photo of the signed form.').slice(0, 300);
+  a.decidedAt = now();
+  accessLog(a, approve ? 'form-approved' : 'form-rejected', approve ? {} : { note: a.note });
+  await store.setJSON(`story/${storyId}`, story);
+  return { status: a.status };
 }
 
 // ----- admin-side settings (callers verify admin) -----

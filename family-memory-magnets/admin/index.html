@@ -40,7 +40,7 @@
     var h = '';
     if (newLinks) {
       h += '<div class="card"><h2>Private links (shown once)</h2><p class="muted">Copy these now. They are stored only as hashes, so I cannot show them again. Use Revoke &amp; new link if you lose one.</p>' +
-        '<b>Child / parent link (' + esc(newLinks.child) + ')</b><code class="link" id="l1">' + esc(newLinks.child) + '</code><button class="btn small alt" data-copy="l1">Copy</button>' +
+        '<b>Family recording link: give to the parent (they record together with the child)</b><code class="link" id="l1">' + esc(newLinks.child) + '</code><button class="btn small alt" data-copy="l1">Copy</button>' +
         '<br><br><b>Grandparent link</b><code class="link" id="l2">' + esc(newLinks.grandparent) + '</code><button class="btn small alt" data-copy="l2">Copy</button>' +
         (newLinks.guardian ? '<br><br><b>Parent / guardian link</b><code class="link" id="l3">' + esc(newLinks.guardian) + '</code><button class="btn small alt" data-copy="l3">Copy</button>' : '') +
         '<br><br><button class="btn small" id="dismiss">Done, hide links</button></div>';
@@ -50,9 +50,9 @@
       '<div><label>Grandparent name</label><input type="text" id="gn" value="' + esc(pf.grandparent || '') + '"></div></div><div class="row">' +
       '<div><label>Parent name</label><input type="text" id="pn" value="' + esc(pf.parentName || '') + '"></div>' +
       '<div><label>Parent email</label><input type="email" id="pe" value="' + esc(pf.email || '') + '"></div>' +
-      '</div><div class="row"><div><label>Child PIN (optional, 4–6 digits)</label><input type="text" id="pi" inputmode="numeric" maxlength="6"></div>' +
+      '</div><div class="row"><div><label>Family link PIN (optional, 4–6 digits)</label><input type="text" id="pi" inputmode="numeric" maxlength="6"></div>' +
       '<div><label>Grandparent PIN (optional)</label><input type="text" id="pg" inputmode="numeric" maxlength="6"></div></div>' +
-      '<label class="check"><input type="checkbox" id="gd"><span>Give the purchasing parent their own login (optional; the parent then controls consent, Little Hellos and pausing the child)</span></label>' +
+      '<label class="check"><input type="checkbox" id="gd"><span>Give the parent a separate dashboard login (optional; consent, the child\'s own link, Little Hellos and pausing then live there)</span></label>' +
       '<label class="check"><input type="checkbox" id="ts"><span>Test story (adult fictional recordings only, skips parent consent)</span></label>' +
       '<div id="cmsg"></div><button class="btn" id="mk">Create story &amp; links</button></div>';
 
@@ -73,11 +73,15 @@
       h += '<div style="border-top:1px solid #dde3f2;padding:14px 0"><b>' + esc(s.childName) + ' &amp; ' + esc(s.grandparentName) + '</b>' + (s.test ? ' <span class="muted">(test)</span>' : '') +
         (s.deletionRequestedAt ? '<div class="msg err">The parent asked for these recordings to be deleted (' + when(s.deletionRequestedAt) + '). Review, deliver anything owed, then use Finish &amp; delete.</div>' : '') + (s.childPaused ? '<div class="msg info">Child recording is paused by the parent.</div>' : '') +
         '<br><span class="muted">' + s.completed + '/30 complete &middot; created ' + when(s.createdAt) + ' &middot; open until ' + when(s.expiresAt) + (s.pin ? ' &middot; PIN set' : '') + '<br>Parent: ' + esc(s.parentName || '-') + ' ' + esc(s.parentEmail || '') + '<br>Consent: ' + (s.consent ? 'yes, ' + esc(s.consent.parentName) + ' on ' + when(s.consent.at) : (s.test ? 'not required (test)' : '<b style="color:#b42318">NOT RECORDED</b>')) + '</span>';
+      if (s.expiresAt < Date.now()) h += '<div class="msg err">This story\'s keep-until date has passed (' + when(s.expiresAt) + '). The privacy policy promises deletion: deliver anything owed, then use Finish &amp; delete.</div>';
+      var A = s.childAccess;
+      if (A.status === 'pending') h += '<div class="msg info"><b>Consent form waiting for review.</b> Uploaded by ' + esc(A.parentName) + ' on ' + when(A.formUploadedAt) + '. Check: it names ' + esc(s.childName) + ', is signed and dated, and the printed name matches.<div class="row" style="margin-top:8px"><button class="btn small alt" data-form="' + s.id + '">View form</button><button class="btn small" data-fok="' + s.id + '">Approve</button><button class="btn small red" data-fno="' + s.id + '">Not approved</button></div></div>';
+      h += '<div class="muted">Child\'s own link: ' + (A.status === 'approved' ? 'permission approved (' + (A.basis === 'age-13-plus' ? 'parent says 13+' : 'signed form') + ', ' + esc(A.parentName) + (A.decidedAt ? ', ' + when(A.decidedAt) : '') + '), link ' + (A.linkActive ? '<b>ON</b>' : 'off') : A.status === 'pending' ? 'form pending' : A.status === 'rejected' ? 'form not approved: ' + esc(A.reviewNote) : 'not requested (parent-run)') + (A.hasForm && A.status !== 'pending' ? ' &middot; <a href="#" data-form="' + s.id + '">view form</a>' : '') + '</div>';
       if (s.failures.length) h += '<div class="msg err">Upload problems: ' + s.failures.map(function (f) { return esc(f.slot) + ' ' + (f.n || '') + ': ' + esc(f.error) + ' (' + new Date(f.at).toLocaleString() + ')'; }).join('<br>') + '</div>';
       h += '<div style="margin:8px 0">' + s.recordings.map(function (r) {
         return '<div class="muted">Stop ' + r.n + ': ' + esc(r.chosen || '') + '<br>' + (r.q ? '<button class="btn small alt" data-play="' + s.id + '|question|' + r.n + '">Play question</button> <button class="btn small alt" data-dl="' + s.id + '|question|' + r.n + '||stop' + r.n + '-question">Download</button> ' : '') + (r.a ? '<button class="btn small alt" data-play="' + s.id + '|answer|' + r.n + '">Play answer</button> <button class="btn small alt" data-dl="' + s.id + '|answer|' + r.n + '||stop' + r.n + '-answer">Download</button>' : '') + '</div>';
       }).join('') + (s.hasIntro ? '<button class="btn small alt" data-play="' + s.id + '|intro|0">Play intro</button> <button class="btn small alt" data-dl="' + s.id + '|intro|0||intro">Download</button> ' : '') + (s.hasClosing ? '<button class="btn small alt" data-play="' + s.id + '|closing|0">Play closing</button> <button class="btn small alt" data-dl="' + s.id + '|closing|0||closing">Download</button>' : '') + '<audio id="au-' + s.id + '" controls class="hidden"></audio></div>' +
-        '<div class="row"><button class="btn small alt" data-rev="' + s.id + '|child">Revoke &amp; new child link</button><button class="btn small alt" data-rev="' + s.id + '|grandparent">Revoke &amp; new grandparent link</button></div>' +
+        '<div class="row"><button class="btn small alt" data-rev="' + s.id + '|child">Revoke &amp; new family link</button><button class="btn small alt" data-rev="' + s.id + '|grandparent">Revoke &amp; new grandparent link</button></div>' +
         '<details style="margin-top:10px"><summary><b>QR codes, PINs, Little Hellos, keepsake</b></summary>' +
         '<div class="row" style="margin-top:10px">' + ['child', 'grandparent'].map(function (r) {
           var nm = r === 'child' ? s.childName : s.grandparentName, code = s.qrCodes[r];
@@ -131,6 +135,9 @@
     function kitItems(id) { return app.querySelector('[data-kit="' + id + '"]').value.split('\n').map(function (l) { var i = l.indexOf('|'); return i < 0 ? null : { label: l.slice(0, i).trim(), url: l.slice(i + 1).trim() }; }).filter(Boolean); }
     q('[data-kready]').forEach(function (b) { b.onclick = function () { var id = b.getAttribute('data-kready'); api('keepsake', { id: id, status: 'ready', items: kitItems(id) }).then(function () { alert('Marked ready.'); load(); }).catch(function (e) { alert(e.message); }); }; });
     q('[data-kprep]').forEach(function (b) { b.onclick = function () { var id = b.getAttribute('data-kprep'); api('keepsake', { id: id, status: 'preparing', items: kitItems(id) }).then(load).catch(function (e) { alert(e.message); }); }; });
+    q('[data-form]').forEach(function (b) { b.onclick = function (e) { e.preventDefault(); var w = window.open('', '_blank'); fetch('/api/fmm/admin/consent-form?id=' + b.getAttribute('data-form'), { headers: { Authorization: 'Bearer ' + TOK } }).then(function (r) { return r.json(); }).then(function (m) { if (!m.url) throw new Error(m.error || 'No form.'); w.location = m.url; }).catch(function (err) { if (w) w.close(); alert(err.message); }); }; });
+    q('[data-fok]').forEach(function (b) { b.onclick = function () { if (!confirm('Approve this signed consent form? The parent can then turn on the child\'s own link.')) return; api('consent-review', { id: b.getAttribute('data-fok'), approve: true }).then(load).catch(function (e) { alert(e.message); }); }; });
+    q('[data-fno]').forEach(function (b) { b.onclick = function () { var n = prompt('What should the parent fix? (They will see this.)', 'Please upload a clear photo of the whole signed and dated form.'); if (n === null) return; api('consent-review', { id: b.getAttribute('data-fno'), approve: false, note: n }).then(load).catch(function (e) { alert(e.message); }); }; });
     document.getElementById('out').onclick = function () { try { sessionStorage.removeItem('fmm_admin'); } catch (e) {} TOK = ''; login(); };
   }
   function val(id) { return document.getElementById(id).value; }
