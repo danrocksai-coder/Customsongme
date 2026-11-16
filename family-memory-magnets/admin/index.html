@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Admin | Family Memory Magnets</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/family-memory-magnets/fmm.css">
+</head>
+<body>
+<div class="topbar">FAMILY MEMORY <b>MAGNETS</b> &middot; ADMIN</div>
+<main class="wide" id="app" style="padding-top:18px;padding-bottom:60px"></main>
+<script>
+(function () {
+  'use strict';
+  var app = document.getElementById('app'), TOK = '';
+  try { TOK = sessionStorage.getItem('fmm_admin') || ''; } catch (e) {}
+  function esc(s) { var d = document.createElement('div'); d.textContent = String(s == null ? '' : s); return d.innerHTML; }
+  function api(path, body) {
+    var o = { headers: { Authorization: 'Bearer ' + TOK }, cache: 'no-store' };
+    if (body !== undefined) { o.method = 'POST'; o.headers['Content-Type'] = 'application/json'; o.body = JSON.stringify(body); }
+    return fetch('/api/fmm/admin/' + path, o).then(function (r) { return r.json().then(function (j) { if (!r.ok) { var e = new Error(j.error || 'Error'); e.status = r.status; throw e; } return j; }); });
+  }
+  function login(msg) {
+    app.innerHTML = '<div class="card" style="max-width:420px;margin:30px auto"><h2>Admin login</h2>' + (msg ? '<div class="msg err">' + esc(msg) + '</div>' : '') +
+      '<label for="pw">Password</label><input type="password" id="pw" autocomplete="current-password"><button class="btn" id="go" style="margin-top:12px">Log in</button></div>';
+    var go = function () { fetch('/api/fmm/admin/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: document.getElementById('pw').value }) })
+      .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error); return j; }); })
+      .then(function (j) { TOK = j.token; try { sessionStorage.setItem('fmm_admin', TOK); } catch (e) {} load(); }).catch(function (e) { login(e.message); }); };
+    document.getElementById('go').onclick = go; document.getElementById('pw').onkeydown = function (e) { if (e.key === 'Enter') go(); };
+  }
+  var prefill = null, newLinks = null;
+  function when(t) { return new Date(t).toLocaleDateString(); }
+  function load() {
+    api('overview').then(draw).catch(function (e) { if (e.status === 401 || e.status === 503) login(e.status === 503 ? 'Admin is not configured yet (set FMM_SECRET and FMM_ADMIN_PASSWORD in Netlify).' : ''); else app.innerHTML = '<div class="msg err">' + esc(e.message) + '</div>'; });
+  }
+  function draw(d) {
+    var pf = prefill || {};
+    var h = '';
+    if (newLinks) {
+      h += '<div class="card"><h2>Private links (shown once)</h2><p class="muted">Copy these now. They are stored only as hashes, so I cannot show them again. Use Revoke &amp; new link if you lose one.</p>' +
+        '<b>Child / parent link (' + esc(newLinks.child) + ')</b><code class="link" id="l1">' + esc(newLinks.child) + '</code><button class="btn small alt" data-copy="l1">Copy</button>' +
+        '<br><br><b>Grandparent link</b><code class="link" id="l2">' + esc(newLinks.grandparent) + '</code><button class="btn small alt" data-copy="l2">Copy</button>' +
+        '<br><br><button class="btn small" id="dismiss">Done, hide links</button></div>';
+    }
+    h += '<div class="card"><h2>Create a story</h2><div class="row">' +
+      '<div><label>Child first name</label><input type="text" id="cn" value="' + esc(pf.childName || '') + '"></div>' +
+      '<div><label>Grandparent name</label><input type="text" id="gn" value="' + esc(pf.grandparent || '') + '"></div></div><div class="row">' +
+      '<div><label>Parent name</label><input type="text" id="pn" value="' + esc(pf.parentName || '') + '"></div>' +
+      '<div><label>Parent email</label><input type="email" id="pe" value="' + esc(pf.email || '') + '"></div>' +
+      '<div><label>Optional PIN (4–6 digits)</label><input type="text" id="pi" inputmode="numeric" maxlength="6"></div></div>' +
+      '<label class="check"><input type="checkbox" id="ts"><span>Test story (adult fictional recordings only, skips parent consent)</span></label>' +
+      '<div id="cmsg"></div><button class="btn" id="mk">Create story &amp; links</button></div>';
+
+    h += '<div class="card"><h2>Orders (' + d.orders.length + ')</h2>';
+    if (!d.orders.length) h += '<p class="muted">No orders yet.</p>'; else {
+      h += '<table><tr><th>Date</th><th>Package</th><th>Parent</th><th>Child / grandparent</th><th>Status</th><th></th></tr>';
+      d.orders.forEach(function (o) {
+        h += '<tr><td>' + when(o.createdAt) + '</td><td>' + esc(o.packageLabel) + '</td><td>' + esc(o.parentName) + '<br><span class="muted">' + esc(o.email) + '</span></td><td>' + esc(o.childName) + ' / ' + esc(o.grandparent1) + (o.grandparent2 ? ', ' + esc(o.grandparent2) : '') + '</td><td>' + esc(o.status) + '</td><td>' +
+          (o.status !== 'story-created' ? '<button class="btn small" data-order="' + esc(o.id) + '">Create story</button>' : '') + '</td></tr>';
+      });
+      h += '</table><p class="muted">Orders show "awaiting payment" until you confirm payment in Stripe. Create the story only after the payment arrives.</p>';
+    }
+    h += '</div>';
+
+    h += '<div class="card"><h2>Stories (' + d.stories.length + ')</h2>';
+    if (!d.stories.length) h += '<p class="muted">No stories yet.</p>';
+    d.stories.forEach(function (s) {
+      h += '<div style="border-top:1px solid #dde3f2;padding:14px 0"><b>' + esc(s.childName) + ' &amp; ' + esc(s.grandparentName) + '</b>' + (s.test ? ' <span class="muted">(test)</span>' : '') +
+        '<br><span class="muted">' + s.completed + '/30 complete &middot; created ' + when(s.createdAt) + ' &middot; open until ' + when(s.expiresAt) + (s.pin ? ' &middot; PIN set' : '') + '<br>Parent: ' + esc(s.parentName || '-') + ' ' + esc(s.parentEmail || '') + '<br>Consent: ' + (s.consent ? 'yes, ' + esc(s.consent.parentName) + ' on ' + when(s.consent.at) : (s.test ? 'not required (test)' : '<b style="color:#b42318">NOT RECORDED</b>')) + '</span>';
+      if (s.failures.length) h += '<div class="msg err">Upload problems: ' + s.failures.map(function (f) { return esc(f.slot) + ' ' + (f.n || '') + ': ' + esc(f.error) + ' (' + new Date(f.at).toLocaleString() + ')'; }).join('<br>') + '</div>';
+      h += '<div style="margin:8px 0">' + s.recordings.map(function (r) {
+        return '<div class="muted">Stop ' + r.n + ': ' + esc(r.chosen || '') + '<br>' + (r.q ? '<button class="btn small alt" data-play="' + s.id + '|question|' + r.n + '">Play question</button> ' : '') + (r.a ? '<button class="btn small alt" data-play="' + s.id + '|answer|' + r.n + '">Play answer</button>' : '') + '</div>';
+      }).join('') + (s.hasIntro ? '<button class="btn small alt" data-play="' + s.id + '|intro|0">Play intro</button> ' : '') + (s.hasClosing ? '<button class="btn small alt" data-play="' + s.id + '|closing|0">Play closing</button>' : '') + '<audio id="au-' + s.id + '" controls class="hidden"></audio></div>' +
+        '<div class="row"><button class="btn small alt" data-rev="' + s.id + '|child">Revoke &amp; new child link</button><button class="btn small alt" data-rev="' + s.id + '|grandparent">Revoke &amp; new grandparent link</button><button class="btn small red" data-del="' + s.id + '">Finish &amp; delete recordings</button></div></div>';
+    });
+    h += '</div><p class="center"><button class="btn small alt" id="out">Log out</button></p>';
+    app.innerHTML = h;
+
+    var q = function (sel) { return app.querySelectorAll(sel); };
+    q('[data-copy]').forEach(function (b) { b.onclick = function () { var t = document.getElementById(b.getAttribute('data-copy')).textContent; (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { b.textContent = 'Copied'; }).catch(function () { b.textContent = 'Select and copy manually'; }); }; });
+    var dm = document.getElementById('dismiss'); if (dm) dm.onclick = function () { newLinks = null; load(); };
+    q('[data-order]').forEach(function (b) { b.onclick = function () { var o = d.orders.filter(function (x) { return x.id === b.getAttribute('data-order'); })[0]; prefill = { childName: o.childName, grandparent: o.grandparent1, parentName: o.parentName, email: o.email, orderId: o.id }; draw(d); window.scrollTo(0, 0); }; });
+    document.getElementById('mk').onclick = function () {
+      api('create', { childName: val('cn'), grandparentName: val('gn'), parentName: val('pn'), parentEmail: val('pe'), pin: val('pi'), test: document.getElementById('ts').checked, orderId: pf.orderId || null })
+        .then(function (r) { prefill = null; newLinks = r.links; load(); }).catch(function (e) { document.getElementById('cmsg').innerHTML = '<div class="msg err">' + esc(e.message) + '</div>'; });
+    };
+    q('[data-rev]').forEach(function (b) { b.onclick = function () { var p = b.getAttribute('data-rev').split('|'); if (!confirm('The old ' + p[1] + ' link stops working immediately. Continue?')) return; api('revoke', { id: p[0], role: p[1] }).then(function (r) { newLinks = p[1] === 'child' ? { child: r.link, grandparent: '(unchanged)' } : { child: '(unchanged)', grandparent: r.link }; load(); window.scrollTo(0, 0); }).catch(function (e) { alert(e.message); }); }; });
+    q('[data-del]').forEach(function (b) { b.onclick = function () { var t = prompt('This permanently deletes ALL recordings and links for this story. Make sure the movie and downloads are delivered first.\n\nType DELETE to confirm.'); if (t !== 'DELETE') return; api('delete', { id: b.getAttribute('data-del'), confirm: t }).then(load).catch(function (e) { alert(e.message); }); }; });
+    q('[data-play]').forEach(function (b) { b.onclick = function () { var p = b.getAttribute('data-play').split('|'); fetch('/api/fmm/admin/media?id=' + p[0] + '&slot=' + p[1] + '&n=' + p[2], { headers: { Authorization: 'Bearer ' + TOK } }).then(function (r) { return r.json(); }).then(function (m) { var a = document.getElementById('au-' + p[0]); a.src = m.url; a.classList.remove('hidden'); a.play().catch(function () {}); }); }; });
+    document.getElementById('out').onclick = function () { try { sessionStorage.removeItem('fmm_admin'); } catch (e) {} TOK = ''; login(); };
+  }
+  function val(id) { return document.getElementById(id).value; }
+  if (TOK) load(); else login();
+})();
+</script>
+</body>
+</html>

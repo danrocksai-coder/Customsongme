@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Family Memory Magnets</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/family-memory-magnets/fmm.css">
+</head>
+<body>
+<div class="topbar">FAMILY MEMORY <b>MAGNETS</b></div>
+<main class="wrap center" style="padding-top:60px">
+  <h1 style="font-size:1.6rem">A Family Memory Magnets story is being created.</h1>
+  <div id="cont" class="hidden" style="margin-top:26px"><a class="btn" id="go" href="#">Continue Our Story</a></div>
+</main>
+<script>
+// Public page: shows only the sentence above. No names, photos or recordings.
+// "Continue Our Story" appears only on a phone that already opened an authorized link for this magnet.
+// The code in this page's address is NOT a key: it never grants access by itself.
+(function () {
+  try {
+    var c = new URLSearchParams(location.search).get('c') || '';
+    var map = JSON.parse(localStorage.getItem('fmm_codes') || '{}'), t = map[c];
+    if (!c || !t) return;
+    fetch('/api/fmm/state?t=' + encodeURIComponent(t), { cache: 'no-store' }).then(function (r) {
+      if (!r.ok) return;
+      r.json().then(function (j) { if (j.qrCode === c) { document.getElementById('go').href = '/family-memory-magnets/s/?t=' + encodeURIComponent(t); document.getElementById('cont').classList.remove('hidden'); } });
+    }).catch(function () {});
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>
