@@ -2023,6 +2023,12 @@
             <label class="occ-tile"><input type="radio" class="sr-radio" name="vocalist" value="Male vocalist" required /><span class="occ-face"><span class="em" aria-hidden="true">👨‍🎤</span>Male</span></label>
             <label class="occ-tile"><input type="radio" class="sr-radio" name="vocalist" value="Both (duet)" required /><span class="occ-face"><span class="em" aria-hidden="true">🎶</span>Both (duet)</span></label>
           </div>
+          <div class="step-part-label"><span class="req-tag">Required</span> How closely should I use your details?</div>
+          <div class="occ-grid three" id="detail-grid">
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="detail-level" value="Use my details as closely as possible" required /><span class="occ-face"><span class="em" aria-hidden="true">🎯</span>As close as possible</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="detail-level" value="Use my details as inspiration — take creative liberty" required /><span class="occ-face"><span class="em" aria-hidden="true">✨</span>Use as inspiration</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="detail-level" value="Somewhere in between" required /><span class="occ-face"><span class="em" aria-hidden="true">⚖️</span>Somewhere in between</span></label>
+          </div>
           <p class="sound-note" id="sound-note" role="alert">Pick a music style and a voice so I know how your song should sound.</p>
 
           <div class="optional-banner"><strong>OPTIONAL</strong><span>You can skip all of this and I'll still make your song great.</span></div>
@@ -2042,16 +2048,6 @@
           <div class="form-group full">
             <label for="pronunciation">Name pronunciation <span class="opt">(optional — if any name isn't said the way it's spelled)</span></label>
             <input type="text" id="pronunciation" name="pronunciation" placeholder="Sound it out by syllable — e.g. Siobhan = shi-VAWN, Aaliyah = ah-LEE-yah" />
-          </div>
-
-          <div class="form-group full">
-            <label for="detail-level">How closely should I use your details?</label>
-            <select id="detail-level" name="detail-level">
-              <option value="" disabled>Choose an approach</option>
-              <option>Use my details as closely as possible</option>
-              <option selected>Use my details as inspiration — take creative liberty</option>
-              <option>Somewhere in between</option>
-            </select>
           </div>
 
           <div class="form-group full">
@@ -2631,7 +2627,7 @@
     const done1 = !!occ;
     const done3 = subjectField.value.trim() !== '' && storyField.value.trim() !== '';
     const done6 = nameField.value.trim() !== '' && emailField && emailField.value.trim() !== '' && emailField.checkValidity();
-    const done4 = !!(styleSel && vocSel);
+    const done4 = !!(styleSel && vocSel && document.querySelector('input[name="detail-level"]:checked'));
     const next = !done1 ? 1 : !done3 ? 3 : !done4 ? 4 : !done6 ? 6 : 0;
     barBtn.dataset.next = next;
     document.getElementById('sb-pkg').textContent = PKG_WORD + ' ' + n + ' · ' + p.name;
@@ -2655,17 +2651,21 @@
   const soundNote = document.getElementById('sound-note');
   const orderFormEl = document.querySelector('form[name="customsong-request"]');
   const submitButton = orderFormEl.querySelector('button[type="submit"]');
+  const DETAIL_NOTE = 'Pick how closely I should use your details so I know how to write your song.';
+  const SOUND_NOTE = soundNote.textContent;
   submitButton.addEventListener('click', e => {
     const hasSound = document.querySelector('input[name="genre"]:checked') && document.querySelector('input[name="vocalist"]:checked');
-    if (hasSound) return;
-    const otherInvalid = [...orderFormEl.elements].some(el => el.required && !el.disabled && el.name !== 'genre' && el.name !== 'vocalist' && !el.checkValidity());
+    const hasDetail = document.querySelector('input[name="detail-level"]:checked');
+    if (hasSound && hasDetail) return;
+    const otherInvalid = [...orderFormEl.elements].some(el => el.required && !el.disabled && !['genre', 'vocalist', 'detail-level'].includes(el.name) && !el.checkValidity());
     if (otherInvalid) return; // the browser points at that field first
     e.preventDefault();
+    soundNote.textContent = hasSound ? DETAIL_NOTE : SOUND_NOTE;
     soundNote.style.display = 'block';
     document.getElementById('step-4').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
   orderFormEl.addEventListener('change', () => {
-    if (document.querySelector('input[name="genre"]:checked') && document.querySelector('input[name="vocalist"]:checked')) soundNote.style.display = 'none';
+    if (document.querySelector('input[name="genre"]:checked') && document.querySelector('input[name="vocalist"]:checked') && document.querySelector('input[name="detail-level"]:checked')) soundNote.style.display = 'none';
   });
   refreshBuilder();
 
