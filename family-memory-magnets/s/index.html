@@ -20,22 +20,24 @@
   'use strict';
   var app = document.getElementById('app');
   var params = new URLSearchParams(location.search);
-  var TOKEN = params.get('t') || '';
-  var PIN = ''; try { PIN = sessionStorage.getItem('fmm_pin') || ''; } catch (e) {}
-  var S = null;           // latest server state
-  var view = 'home';      // home | choose | record | listen
-  var busy = false;
+  var LINK = params.get('t') || '';      // private link token (first visit on this phone)
+  var CODE = params.get('c') || '';      // permanent QR id (public identifier, never a credential)
+  var TOKEN = '';                         // device session used for every call
+  var S = null, view = 'home';
 
   function esc(s) { var d = document.createElement('div'); d.textContent = String(s == null ? '' : s); return d.innerHTML; }
   function toast(t, ms) { var el = document.getElementById('toast'); el.textContent = t; el.classList.remove('hidden'); clearTimeout(toast._t); toast._t = setTimeout(function () { el.classList.add('hidden'); }, ms || 3500); }
+  function sessions() { try { return JSON.parse(localStorage.getItem('fmm_sess') || '{}'); } catch (e) { return {}; } }
+  function saveSession(code, tok) { try { var m = sessions(); m[code] = tok; localStorage.setItem('fmm_sess', JSON.stringify(m)); } catch (e) {} }
+  function dropSession(code) { try { var m = sessions(); delete m[code]; localStorage.setItem('fmm_sess', JSON.stringify(m)); } catch (e) {} }
 
   function api(path, opts) {
-    opts = opts || {};
-    var h = opts.headers || {}; if (PIN) h['X-Pin'] = PIN;
+    opts = opts || {}; var h = opts.headers || {};
     if (opts.json) { h['Content-Type'] = 'application/json'; opts.body = JSON.stringify(opts.json); }
-    return fetch('/api/fmm/' + path + (path.indexOf('?') > -1 ? '&' : '?') + 't=' + encodeURIComponent(TOKEN),
+    return fetch('/api/fmm/' + path + (path.indexOf('?') > -1 ? '&' : '?') + 't=' + encodeURIComponent(opts.token || TOKEN),
       { method: opts.method || (opts.body ? 'POST' : 'GET'), headers: h, body: opts.body, cache: 'no-store' })
-      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok) { var e = new Error(j.error || 'Something went wrong.'); e.status = r.status; e.pinRequired = j.pinRequired; throw e; } return j; }); });
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) {
+        if (!r.ok) { var e = new Error(j.error || 'Something went wrong.'); e.status = r.status; e.pinRequired = j.pinRequired; throw e; } return j; }); });
   }
 
   // ---------- recorder (iPhone: audio/mp4, Android: webm/mp4) ----------
@@ -45,7 +47,7 @@
     for (var i = 0; i < c.length; i++) if (MediaRecorder.isTypeSupported(c[i])) return c[i];
     return '';
   }
-  // pending recordings survive refresh / connection loss (IndexedDB)
+  // unsent recordings survive refresh / connection loss (IndexedDB)
   var DB = null;
   function idb() {
     if (DB) return Promise.resolve(DB);
@@ -53,21 +55,19 @@
       try { var r = indexedDB.open('fmm', 1); r.onupgradeneeded = function () { r.result.createObjectStore('pending'); }; r.onsuccess = function () { DB = r.result; res(DB); }; r.onerror = function () { res(null); }; } catch (e) { res(null); }
     });
   }
-  function pKey(slot, n) { return TOKEN.slice(0, 12) + '|' + slot + '|' + n; }
+  function pKey(slot, n) { return (CODE || 'x') + '|' + slot + '|' + n; }
   function pSave(slot, n, rec) { return idb().then(function (d) { if (!d) return; return new Promise(function (r) { var t = d.transaction('pending', 'readwrite'); t.objectStore('pending').put(rec, pKey(slot, n)); t.oncomplete = r; t.onerror = r; }); }); }
   function pLoad(slot, n) { return idb().then(function (d) { if (!d) return null; return new Promise(function (r) { var q = d.transaction('pending').objectStore('pending').get(pKey(slot, n)); q.onsuccess = function () { r(q.result || null); }; q.onerror = function () { r(null); }; }); }); }
   function pDel(slot, n) { return idb().then(function (d) { if (!d) return; return new Promise(function (r) { var t = d.transaction('pending', 'readwrite'); t.objectStore('pending').delete(pKey(slot, n)); t.oncomplete = r; t.onerror = r; }); }); }
-
   function uid() { return (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2); }
 
   function upload(slot, n, rec) {
-    // retries transient failures; the same upload id makes retries safe (no duplicates)
-    var attempt = 0;
+    var attempt = 0; // same upload id on every retry, so retries can never create duplicates
     function go() {
       attempt++;
       return fetch('/api/fmm/upload?t=' + encodeURIComponent(TOKEN) + '&slot=' + slot + '&n=' + n, {
         method: 'POST', body: rec.blob,
-        headers: { 'Content-Type': rec.type || 'audio/mp4', 'X-Duration': String(rec.sec), 'X-Upload-Id': rec.id, 'X-Pin': PIN }
+        headers: { 'Content-Type': rec.type || 'audio/mp4', 'X-Duration': String(rec.sec), 'X-Upload-Id': rec.id }
       }).then(function (r) {
         return r.json().catch(function () { return {}; }).then(function (j) {
           if (r.ok) return j;
@@ -82,17 +82,36 @@
   }
   function reportFail(slot, n, err) { try { api('report', { json: { slot: slot, n: n, error: String(err && err.message || err) } }).catch(function () {}); } catch (e) {} }
 
-  // Recorder UI. opts: {slot, n, limit, label, onSaved}
+  // ---------- teleprompter preferences (not sensitive; the notes themselves are NOT stored locally) ----------
+  function teleCfg() { try { return Object.assign({ size: 30, speed: 30, auto: true }, JSON.parse(localStorage.getItem('fmm_tele') || '{}')); } catch (e) { return { size: 30, speed: 30, auto: true }; } }
+  function teleSave(c) { try { localStorage.setItem('fmm_tele', JSON.stringify(c)); } catch (e) {} }
+
+  // Recorder UI. opts: {slot, n, limit, prompt (teleprompter text, optional), onSaved}
   function recorder(box, opts) {
     var limit = opts.limit, mime = pickMime();
-    var stream = null, mr = null, chunks = [], t0 = 0, timer = null, rec = null, state = 'idle', warned = false, wasAuto = false;
-    box.innerHTML = '<div class="rec"></div>';
-    var ui = box.firstChild;
-
+    var stream = null, mr = null, chunks = [], t0 = 0, timer = null, rec = null, state = 'idle', warned = false, wasAuto = false, raf = null, lastTs = 0;
+    box.innerHTML = '<div class="tele-wrap hidden"><div class="tele" id="tele"></div><div class="tele-ctl">' +
+      '<button type="button" id="tm1" aria-label="Smaller text">A−</button><button type="button" id="tp1" aria-label="Larger text">A+</button>' +
+      '<label><input type="checkbox" id="tauto"> Auto-scroll</label><label>Speed <input type="range" id="tspd" min="5" max="90" step="5"></label></div></div><div class="rec"></div>';
+    var ui = box.querySelector('.rec'), wrap = box.querySelector('.tele-wrap'), tele = box.querySelector('#tele');
+    var cfg = teleCfg();
+    if (opts.prompt) {
+      tele.textContent = opts.prompt; tele.style.fontSize = cfg.size + 'px';
+      box.querySelector('#tauto').checked = !!cfg.auto; box.querySelector('#tspd').value = cfg.speed;
+      box.querySelector('#tm1').onclick = function () { cfg.size = Math.max(16, cfg.size - 3); tele.style.fontSize = cfg.size + 'px'; teleSave(cfg); };
+      box.querySelector('#tp1').onclick = function () { cfg.size = Math.min(64, cfg.size + 3); tele.style.fontSize = cfg.size + 'px'; teleSave(cfg); };
+      box.querySelector('#tauto').onchange = function (e) { cfg.auto = e.target.checked; teleSave(cfg); };
+      box.querySelector('#tspd').oninput = function (e) { cfg.speed = Number(e.target.value); teleSave(cfg); };
+    }
     function fmt(sec) { sec = Math.max(0, Math.ceil(sec)); return Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0'); }
     function stopTracks() { if (stream) stream.getTracks().forEach(function (t) { t.stop(); }); stream = null; }
-
+    function scrollLoop(ts) { // optional automatic scrolling while recording
+      if (state !== 'recording') return;
+      if (cfg.auto) { var dt = lastTs ? (ts - lastTs) / 1000 : 0; tele.scrollTop += cfg.speed * dt; }
+      lastTs = ts; raf = requestAnimationFrame(scrollLoop);
+    }
     function draw() {
+      wrap.classList.toggle('hidden', !(opts.prompt && (state === 'idle' || state === 'recording')));
       if (state === 'idle') {
         ui.innerHTML = '<div class="stage">Ready</div><div class="timer">' + fmt(limit) + '</div>' +
           '<button class="recbtn" id="rb" type="button">Tap to record</button><p class="muted">You have up to ' + (limit >= 60 ? (limit / 60) + ' minute' + (limit > 60 ? 's' : '') : limit + ' seconds') + '. Recording stops by itself when time is up.</p><div id="rmsg"></div>';
@@ -117,7 +136,6 @@
       }
     }
     function msg(t) { var m = ui.querySelector('#rmsg'); if (m) m.innerHTML = '<div class="msg err">' + esc(t) + '</div>'; }
-
     function start() {
       if (!navigator.mediaDevices || !window.MediaRecorder || mime === null) { msg('This browser can\'t record audio. Please open the link in Safari (iPhone) or Chrome (Android).'); return; }
       navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } }).then(function (s) {
@@ -126,17 +144,18 @@
         mr.ondataavailable = function (e) { if (e.data && e.data.size) chunks.push(e.data); };
         mr.onstop = onStopped;
         mr.start(1000); t0 = Date.now(); warned = false; wasAuto = false; state = 'recording'; draw();
+        if (opts.prompt) { tele.scrollTop = 0; lastTs = 0; raf = requestAnimationFrame(scrollLoop); }
         timer = setInterval(function () {
           var left = limit - (Date.now() - t0) / 1000, tm = ui.querySelector('#tm');
           if (tm) { tm.textContent = fmt(left); tm.classList.toggle('warn', left <= 5); }
-          if (left <= 5 && !warned) { warned = true; toast('5 seconds left', 2000); } // 5-second warning
+          if (left <= 5 && !warned && limit > 5) { warned = true; toast('5 seconds left', 2000); } // 5-second warning
           if (left <= 0) finish(true);
         }, 200);
       }).catch(function (e) {
         msg(e && e.name === 'NotAllowedError' ? 'The microphone is blocked. Allow microphone access for this page in your browser settings, then try again.' : 'We could not open the microphone: ' + (e && e.message || 'unknown error'));
       });
     }
-    function finish(auto) { clearInterval(timer); if (mr && mr.state !== 'inactive') { wasAuto = auto; rec = { sec: Math.min(limit, (Date.now() - t0) / 1000) }; mr.stop(); } }
+    function finish(auto) { clearInterval(timer); if (raf) cancelAnimationFrame(raf); if (mr && mr.state !== 'inactive') { wasAuto = auto; rec = { sec: Math.min(limit, (Date.now() - t0) / 1000) }; mr.stop(); } }
     function onStopped() {
       stopTracks();
       var type = (mr && mr.mimeType) || mime || 'audio/mp4';
@@ -152,29 +171,27 @@
     function send() {
       if (!rec) return; var r = rec; state = 'sending'; draw();
       upload(opts.slot, opts.n, r).then(function (j) {
-        pDel(opts.slot, opts.n);
-        toast('Saved. Your recording is safe.', 3500);
-        opts.onSaved(j);
+        pDel(opts.slot, opts.n); toast('Saved. Your recording is safe.', 3500); opts.onSaved(j);
       }).catch(function (e) {
         reportFail(opts.slot, opts.n, e);
         if (e.status === 409) { pDel(opts.slot, opts.n); toast('This was already saved.'); opts.onSaved(null); return; }
+        if (e.status === 401) { dropSession(CODE); location.href = '/family-memory-magnets/q/?c=' + encodeURIComponent(CODE); return; }
         if (e.status >= 400 && e.status < 500) { rec.err = e.message; state = 'failed'; draw(); return; }
         rec.err = 'Check your connection and try again.'; state = 'failed'; draw();
       });
     }
-    // restore a recording that never finished sending (refresh / lost connection)
-    pLoad(opts.slot, opts.n).then(function (p) {
+    pLoad(opts.slot, opts.n).then(function (p) { // restore a recording that never finished sending
       if (p && p.blob) { rec = { blob: p.blob, type: p.type, sec: p.sec, id: p.id, url: URL.createObjectURL(p.blob), err: '' }; state = 'failed'; draw(); ui.insertAdjacentHTML('afterbegin', '<div class="msg info">Welcome back. Your last recording is still here.</div>'); }
     });
     draw();
-    return { destroy: function () { clearInterval(timer); stopTracks(); } };
+    return { destroy: function () { clearInterval(timer); if (raf) cancelAnimationFrame(raf); stopTracks(); } };
   }
 
   // ---------- views ----------
-  var activeRec = null;
+  var activeRec = null, draftTimer = null;
   function setView(v) { if (activeRec) { activeRec.destroy(); activeRec = null; } view = v; render(); window.scrollTo(0, 0); }
   function title() { return esc(S.childName) + ' &amp; ' + esc(S.grandparentName) + '\'s Family Story'; }
-
+  function other() { return S.role === 'child' ? S.grandparentName : S.childName; }
   function header() {
     return '<div class="apphead"><small>Family Memory Magnets</small><h1>' + title() + '</h1>' +
       '<div class="bar"><i style="width:' + Math.round(S.completed / 30 * 100) + '%"></i></div>' +
@@ -191,64 +208,125 @@
     });
     return h;
   }
+  function playMedia(btn, q) { // fetch a short-lived signed URL, then play it
+    btn.disabled = true;
+    api('media?' + q).then(function (m) { var a = new Audio(m.url); a.play().catch(function () { toast('Tap play again to listen.'); }); btn.disabled = false; })
+      .catch(function (e) { toast(e.message); btn.disabled = false; });
+  }
+  function ago(t) { var d = Math.max(0, Date.now() - t), h = Math.floor(d / 3600e3); return h < 1 ? 'just now' : h < 24 ? h + ' hour' + (h > 1 ? 's' : '') + ' ago' : Math.floor(h / 24) + ' day' + (h >= 48 ? 's' : '') + ' ago'; }
+
+  function helloInbox() {
+    if (!S.hellos.length) return '';
+    var h = '<div class="card"><h3>Little Hellos from ' + esc(other()) + '</h3>';
+    S.hellos.forEach(function (m) {
+      h += '<div class="hello"><small>' + ago(m.at) + (m.read ? '' : '<span class="badge">NEW</span>') + '</small>' +
+        (m.kind === 'text' ? esc(m.text) : '<button class="btn small alt" data-hello="' + esc(m.id) + '">▶ Play voice hello</button>') + '</div>';
+    });
+    return h + '</div>';
+  }
+  function helloOffer() {
+    var o = S.helloOffer; if (!o) return '';
+    return '<div class="card"><h3>Send a Little Hello</h3><p class="muted">It has been quiet for a while. A little hello can make ' + esc(other()) + ' smile. It will not change your story.</p>' +
+      '<button class="hellochoice" data-hsend="' + esc(o.options[0].id) + '"><small>Sweet</small>' + esc(o.options[0].text) + '</button>' +
+      '<button class="hellochoice" data-hsend="' + esc(o.options[1].id) + '"><small>Playful</small>' + esc(o.options[1].text) + '</button>' +
+      '<button class="hellochoice" id="hvoice"><small>Your voice</small>Record a Voice Hello (up to ' + o.voiceLimit + ' seconds)</button></div>';
+  }
+  function conversationsList() {
+    if (!S.conversations.length) return '';
+    var h = '<div class="card"><h3>' + (S.done ? 'Our conversations' : 'Your Story Is Growing!') + '</h3><p class="muted">Replay what you have already saved.</p>';
+    S.conversations.forEach(function (c) {
+      h += '<div class="conv"><b>Stop ' + c.n + ' &middot; ' + esc(c.title) + '</b><div class="muted">' + esc(c.question) + '</div><div class="row">' +
+        '<button class="btn small alt" data-play="question|' + c.n + '">▶ Question</button><button class="btn small alt" data-play="answer|' + c.n + '">▶ Answer</button></div></div>';
+    });
+    return h + '</div>';
+  }
+  function keepsake() {
+    var k = S.keepsake; if (!k) return '';
+    if (k.status === 'ready' && k.items.length) {
+      return '<div class="card"><h2>Your family keepsake</h2>' + k.items.map(function (i) { return '<a class="btn" style="margin:6px 0" target="_blank" rel="noopener" href="' + esc(i.url) + '">' + esc(i.label) + '</a>'; }).join('') + '</div>';
+    }
+    return '<div class="card"><h2>Your keepsake is being prepared</h2><p>All 30 conversations are saved. Your family movie, digital storybook and keepsake will appear right here, on this same magnet, when they are ready. You can replay every recording below in the meantime.</p></div>';
+  }
+
+  function homeHeadline() {
+    var cur = S.current, role = S.role, c = esc(S.childName), g = esc(S.grandparentName), st = cur.status;
+    if (role === 'child') {
+      if (st === 'choose' || st === 'record-question') return ['Your Turn!', 'Choose and record your next question.'];
+      if (st === 'awaiting-answer') return ['Waiting for ' + g, 'Your question is saved. Check back soon.'];
+      return [g + ' Answered!', 'Listen to ' + g + '\'s response and continue the adventure.'];
+    }
+    if (st === 'awaiting-answer') return [c + ' Has a Question!', 'Listen and record your answer.'];
+    if (st === 'heard-pending') return ['Waiting for ' + c, 'Your answer is saved.'];
+    return ['Waiting for ' + c, c + ' is choosing the next question.'];
+  }
 
   function render() {
     if (!S) return;
     if (S.consentNeeded) return renderConsent();
     var role = S.role, cur = S.current;
-    var h = header();
-
     if (view === 'choose' && role === 'child' && cur && cur.status === 'choose') return renderChoose();
+    if (view === 'prepare' && cur) return renderPrepare();
     if (view === 'record' && cur) return renderRecord();
     if (view === 'listen' && cur) return renderListen();
+    if (view === 'hello') return renderHelloVoice();
+    if (view === 'intro' || view === 'closing') return renderSpecial(view);
 
-    // ---- home ----
+    var h = header();
     if (S.done) {
-      h += '<div class="card center"><h2>All 30 conversations are saved</h2><p>' + esc(S.childName) + ' and ' + esc(S.grandparentName) + ' have created a family history of their own.</p></div>';
+      h += keepsake();
       if (role === 'grandparent' && !S.closingDone) h += '<div class="card"><h3>A closing message</h3><p class="muted">You can leave a personal message of up to 2 minutes.</p><button class="btn" id="goclose">Record my closing message</button></div>';
-      h += '<div class="card"><p class="muted">The family movie and keepsake are prepared from your saved recordings. You will hear from me when they are ready.</p></div>';
     } else if (cur) {
-      h += '<div class="card"><div class="stage">Stop ' + cur.n + ' of 30 &middot; ' + esc(cur.title) + '</div>';
+      var hd = homeHeadline();
+      h += '<div class="card"><div class="stage">Stop ' + cur.n + ' of 30 &middot; ' + esc(cur.title) + '</div><h2>' + hd[0] + '</h2><p>' + hd[1] + '</p>';
       if (role === 'child') {
-        if (cur.status === 'choose') h += '<h2>Choose the next question</h2><button class="btn" id="gochoose">Pick a question for ' + esc(S.grandparentName) + '</button>';
-        else if (cur.status === 'record-question') h += '<h2>Record your question</h2><div class="qbox">' + esc(cur.chosen.text) + '</div><button class="btn" id="gorecord">Record my question</button><button class="btn alt" id="gochoose" style="margin-top:10px">Pick a different question</button>';
-        else if (cur.status === 'awaiting-answer') h += '<h2>Your question is saved</h2><p>' + esc(S.grandparentName) + ' will get a private invitation to answer.</p><div id="invite"></div>';
-        else if (cur.status === 'heard-pending') h += '<h2>' + esc(S.grandparentName) + ' answered!</h2><button class="btn" id="golisten">Listen to the answer</button>';
+        if (cur.status === 'choose') h += '<button class="btn" id="gochoose">Pick a question for ' + esc(S.grandparentName) + '</button>';
+        else if (cur.status === 'record-question') h += '<div class="qbox">' + esc(cur.chosen.text) + '</div><button class="btn" id="gorecord">Record My Question</button><button class="btn alt" id="goprep" style="margin-top:10px">Write It First</button><button class="btn alt" id="gochoose" style="margin-top:10px">Pick a different question</button>';
+        else if (cur.status === 'awaiting-answer') h += '<div id="invite"></div>';
+        else if (cur.status === 'heard-pending') h += '<button class="btn" id="golisten">Listen to the answer</button>';
       } else {
-        if (cur.status === 'awaiting-answer') h += '<h2>' + esc(S.childName) + ' has a question for you</h2><button class="btn" id="gorecord">Listen and answer</button>';
-        else if (cur.status === 'heard-pending') h += '<h2>Your answer is saved</h2><p>Waiting for ' + esc(S.childName) + ' to listen. The next question unlocks after that.</p>';
-        else h += '<h2>Waiting for ' + esc(S.childName) + '</h2><p>' + esc(S.childName) + ' is choosing the next question. Check back soon.</p>';
+        if (cur.status === 'awaiting-answer') h += '<button class="btn" id="gorecord">Listen and Record My Answer</button><button class="btn alt" id="goprep" style="margin-top:10px">Write It First</button>';
         if (!S.introDone && S.completed === 0) h += '<hr style="margin:16px 0;border:0;border-top:1px solid #dde3f2"><p class="muted">Optional: introduce yourself with a short message (up to 2 minutes).</p><button class="btn alt" id="gointro">Record an introduction</button>';
       }
       h += '</div>';
     }
-    h += chapters();
+    h += helloInbox() + helloOffer() + conversationsList();
+    if (!S.done) h += chapters();
     h += '<p class="muted center">Your story stays open until ' + new Date(S.expiresAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + '. There is no rush.' + (S.test ? '<br><b>This is a test story.</b>' : '') + '</p>';
     app.innerHTML = h;
 
     var $ = function (id) { return app.querySelector('#' + id); };
     if ($('gochoose')) $('gochoose').onclick = function () { setView('choose'); };
-    if ($('gorecord')) $('gorecord').onclick = function () { setView('record'); };
+    if ($('gorecord')) $('gorecord').onclick = function () { prepText = ''; setView('record'); };
+    if ($('goprep')) $('goprep').onclick = function () { setView('prepare'); };
     if ($('golisten')) $('golisten').onclick = function () { setView('listen'); };
-    if ($('gointro')) $('gointro').onclick = function () { view = 'intro'; renderSpecial('intro'); };
-    if ($('goclose')) $('goclose').onclick = function () { view = 'closing'; renderSpecial('closing'); };
+    if ($('gointro')) $('gointro').onclick = function () { setView('intro'); };
+    if ($('goclose')) $('goclose').onclick = function () { setView('closing'); };
+    if ($('hvoice')) $('hvoice').onclick = function () { setView('hello'); };
     if ($('invite')) renderInvite($('invite'));
+    app.querySelectorAll('[data-play]').forEach(function (b) { b.onclick = function () { var p = b.getAttribute('data-play').split('|'); playMedia(b, 'slot=' + p[0] + '&n=' + p[1]); }; });
+    app.querySelectorAll('[data-hello]').forEach(function (b) { b.onclick = function () { playMedia(b, 'slot=hello&id=' + encodeURIComponent(b.getAttribute('data-hello'))); }; });
+    app.querySelectorAll('[data-hsend]').forEach(function (b) { b.onclick = function () {
+      b.disabled = true;
+      api('hello', { json: { suggestion: b.getAttribute('data-hsend') } }).then(function (r) { S = r.state; toast('Little Hello sent!'); render(); }).catch(function (e) { toast(e.message); refresh().then(render); });
+    }; });
+    // mark received hellos as read once they have been shown
+    S.hellos.filter(function (m) { return !m.read; }).forEach(function (m) { api('hello-read', { json: { id: m.id } }).catch(function () {}); });
   }
 
   function renderInvite(el) {
     var key = 'fmm_gp_' + S.qrCode, saved = ''; try { saved = localStorage.getItem(key) || ''; } catch (e) {}
+    var gp = esc(S.grandparentName);
     function draw() {
-      var msg = encodeURIComponent(S.childName + ' has a question for you! Open your private link to listen and answer: ' + saved);
-      if (saved) el.innerHTML = '<button class="btn" id="shr">Send ' + esc(S.grandparentName) + ' her invitation</button><p class="muted" style="margin-top:8px">This opens your phone\'s share sheet (Messages, WhatsApp, email…).</p>';
-      else el.innerHTML = '<p class="muted">Paste ' + esc(S.grandparentName) + '\'s private link once (it\'s in your setup email) so this phone can send the invitation for you.</p><input type="text" id="gpl" placeholder="Paste her private link"><button class="btn alt" id="sv" style="margin-top:8px">Save link</button>';
+      if (saved) el.innerHTML = '<button class="btn" id="shr">Send ' + gp + ' a reminder</button><p class="muted" style="margin-top:8px">' + gp + ' can also just scan her own magnet. This opens your phone\'s share sheet.</p>';
+      else el.innerHTML = '<p class="muted">' + gp + ' can open her story by scanning her own magnet. To also text her a link, paste her private link once (it is in your setup email).</p><input type="text" id="gpl" placeholder="Paste her private link"><button class="btn alt" id="sv" style="margin-top:8px">Save link</button>';
       var b = el.querySelector('#shr');
       if (b) b.onclick = function () {
         var text = S.childName + ' has a question for you! Open your private link to listen and answer.';
         if (navigator.share) navigator.share({ title: 'A question from ' + S.childName, text: text, url: saved }).catch(function () {});
-        else location.href = 'sms:?&body=' + msg;
+        else location.href = 'sms:?&body=' + encodeURIComponent(text + ' ' + saved);
       };
       var sv = el.querySelector('#sv');
-      if (sv) sv.onclick = function () { var v = el.querySelector('#gpl').value.trim(); if (!/^https:\/\/.+[?&]t=[\w-]{10,}/.test(v)) { toast('That does not look like her private link.'); return; } saved = v; try { localStorage.setItem(key, v); } catch (e) {} draw(); };
+      if (sv) sv.onclick = function () { var v = el.querySelector('#gpl').value.trim(); if (!/^https:\/\/.+[?&](t|c)=[\w.-]{10,}/.test(v)) { toast('That does not look like her link.'); return; } saved = v; try { localStorage.setItem(key, v); } catch (e) {} draw(); };
     }
     draw();
   }
@@ -262,7 +340,7 @@
       '<div id="cm"></div><button class="btn" id="cb">I agree and continue</button></div>';
     app.querySelector('#cb').onclick = function () {
       api('consent', { json: { parentName: app.querySelector('#pn').value, agree: app.querySelector('#ag').checked } })
-        .then(function () { return refresh(); }).catch(function (e) { app.querySelector('#cm').innerHTML = '<div class="msg err">' + esc(e.message) + '</div>'; });
+        .then(function () { return refresh(); }).then(render).catch(function (e) { app.querySelector('#cm').innerHTML = '<div class="msg err">' + esc(e.message) + '</div>'; });
     };
   }
 
@@ -273,23 +351,56 @@
     h += '<label for="cq">Or ask your own question</label><textarea id="cq" rows="2" maxlength="200" placeholder="Type your question…"></textarea><button class="btn alt" id="usec" style="margin-top:8px">Use my question</button><div id="cm"></div>' +
       '<button class="btn alt" id="back" style="margin-top:14px">Back</button></div>';
     app.innerHTML = h;
-    function pick(payload) { api('choose', { json: Object.assign({ n: cur.n }, payload) }).then(function (st) { S = st; setView('record'); }).catch(function (e) { app.querySelector('#cm').innerHTML = '<div class="msg err">' + esc(e.message) + '</div>'; }); }
+    function pick(payload) { api('choose', { json: Object.assign({ n: cur.n }, payload) }).then(function (st) { S = st; setView('home'); }).catch(function (e) { app.querySelector('#cm').innerHTML = '<div class="msg err">' + esc(e.message) + '</div>'; }); }
     app.querySelectorAll('.choice').forEach(function (b) { b.onclick = function () { pick({ qid: b.getAttribute('data-q') }); }; });
     app.querySelector('#usec').onclick = function () { var v = app.querySelector('#cq').value.trim(); if (!v) { toast('Type a question first.'); return; } pick({ custom: v }); };
     app.querySelector('#back').onclick = function () { setView('home'); };
   }
 
+  // ----- Write It First: notes are saved on the server for the author only, never shown to the other person -----
+  var prepText = '';
+  function renderPrepare() {
+    var cur = S.current, role = S.role;
+    var okState = role === 'child' ? cur.status === 'record-question' : cur.status === 'awaiting-answer';
+    if (!okState) { setView('home'); return; }
+    var limit = role === 'child' ? S.limits.question : S.limits.answer;
+    var start = S.draft || (role === 'child' && cur.chosen ? S.grandparentName + ', ' + cur.chosen.text.charAt(0).toLowerCase() + cur.chosen.text.slice(1) : '');
+    var sk = 'fmm_draft_' + CODE + '_' + cur.n, local = '';
+    try { local = sessionStorage.getItem(sk) || ''; } catch (e) {} // session-only backup; cleared when the tab closes
+    if (!S.draft && local) start = local;
+    var h = header() + '<div class="card"><div class="stage">Write It First</div><h2>' + (role === 'child' ? 'Write your question' : 'Write your answer or notes') + '</h2>' +
+      '<p class="muted">Only you can see this. It will appear as a big, easy-to-read teleprompter while you record (up to ' + limit + ' seconds). It is never shared with ' + esc(other()) + '.</p>' +
+      (role === 'grandparent' ? '<div class="qbox" style="font-size:1.05rem">' + esc(S.childName) + ' asked: ' + esc(cur.chosen ? cur.chosen.text : '') + '</div>' : '') +
+      '<textarea class="draft" id="dt" maxlength="2000"></textarea><div class="muted" id="dsave">&nbsp;</div>' +
+      '<button class="btn" id="dgo">Start recording with teleprompter</button><button class="btn alt" id="dclear" style="margin-top:10px">Clear my notes</button><button class="btn alt" id="back" style="margin-top:10px">Back</button></div>';
+    app.innerHTML = h;
+    var ta = app.querySelector('#dt'); ta.value = start;
+    function save(now) {
+      clearTimeout(draftTimer);
+      try { sessionStorage.setItem(sk, ta.value); } catch (e) {}
+      var run = function () { return api('draft', { json: { n: cur.n, text: ta.value } }).then(function () { S.draft = ta.value; var d = app.querySelector('#dsave'); if (d) d.textContent = 'Saved'; }).catch(function () { var d = app.querySelector('#dsave'); if (d) d.textContent = 'Not saved yet. Keep this page open.'; }); };
+      if (now) return run(); draftTimer = setTimeout(run, 600); return Promise.resolve();
+    }
+    ta.oninput = function () { var d = app.querySelector('#dsave'); if (d) d.textContent = 'Saving…'; save(false); };
+    app.querySelector('#dgo').onclick = function () { if (!ta.value.trim()) { toast('Write something first, or go back and record without notes.'); return; } save(true).then(function () { prepText = ta.value; setView('record'); }); };
+    app.querySelector('#dclear').onclick = function () { ta.value = ''; try { sessionStorage.removeItem(sk); } catch (e) {} save(true); };
+    app.querySelector('#back').onclick = function () { save(true).then(function () { setView('home'); }); };
+    if (!S.draft && start) save(false);
+  }
+
+  function afterSaved() { try { sessionStorage.removeItem('fmm_draft_' + CODE + '_' + (S.current ? S.current.n : 0)); } catch (e) {} prepText = ''; refresh().then(function () { setView('home'); }); }
+
   function renderRecord() {
     var cur = S.current, role = S.role;
-    var h = header(), slot, limit, intro = '';
+    var h = header(), slot, limit;
     if (role === 'child') {
       if (cur.status !== 'record-question') { setView('home'); return; }
       slot = 'question'; limit = S.limits.question;
-      h += '<div class="card"><div class="stage">Stop ' + cur.n + ' &middot; ' + esc(cur.title) + '</div><h2>Ask your question</h2><p class="muted">Read it out loud to ' + esc(S.grandparentName) + '.</p><div class="qbox">' + esc(cur.chosen.text) + '</div><div id="rbox"></div><button class="btn alt" id="back" style="margin-top:14px">Back</button></div>';
+      h += '<div class="card"><div class="stage">Stop ' + cur.n + ' &middot; ' + esc(cur.title) + '</div><h2>Ask your question</h2><p class="muted">Read it out loud to ' + esc(S.grandparentName) + '. You have ' + limit + ' seconds.</p>' + (prepText ? '' : '<div class="qbox">' + esc(cur.chosen.text) + '</div>') + '<div id="rbox"></div><button class="btn alt" id="back" style="margin-top:14px">Back</button></div>';
     } else {
       if (cur.status !== 'awaiting-answer') { setView('home'); return; }
       slot = 'answer'; limit = S.limits.answer;
-      h += '<div class="card"><div class="stage">Stop ' + cur.n + ' &middot; ' + esc(cur.title) + '</div><h2>' + esc(S.childName) + ' asks:</h2><div class="qbox" id="qt">' + esc(cur.chosen ? cur.chosen.text : '') + '</div><audio id="qa" controls playsinline preload="auto"></audio><p class="muted">Listen first, then record your answer in your own words.</p><div id="rbox"></div>' +
+      h += '<div class="card"><div class="stage">Stop ' + cur.n + ' &middot; ' + esc(cur.title) + '</div><h2>' + esc(S.childName) + ' asks:</h2><div class="qbox" id="qt">' + esc(cur.chosen ? cur.chosen.text : '') + '</div><audio id="qa" controls playsinline preload="auto"></audio><p class="muted">Listen first, then record your answer in your own words. You can finish early.</p><div id="rbox"></div>' +
         '<button class="btn alt" id="skip" style="margin-top:14px">Skip this question</button><button class="btn alt" id="back" style="margin-top:10px">Back</button></div>';
     }
     app.innerHTML = h;
@@ -301,15 +412,19 @@
         api('skip', { json: { n: cur.n } }).then(function (st) { S = st; setView('home'); toast('Skipped. ' + S.childName + ' will pick another.'); }).catch(function (e) { toast(e.message); });
       };
     }
-    activeRec = recorder(app.querySelector('#rbox'), { slot: slot, n: cur.n, limit: limit, onSaved: function () { refresh().then(function () { setView('home'); }); } });
+    activeRec = recorder(app.querySelector('#rbox'), { slot: slot, n: cur.n, limit: limit, prompt: prepText, onSaved: afterSaved });
   }
 
   function renderSpecial(slot) {
-    var h = header() + '<div class="card"><h2>' + (slot === 'intro' ? 'Introduce yourself' : 'Your closing message') + '</h2><p class="muted">Up to 2 minutes, in your own words.</p><div id="rbox"></div><button class="btn alt" id="back" style="margin-top:14px">Back</button></div>';
-    app.innerHTML = h;
+    app.innerHTML = header() + '<div class="card"><h2>' + (slot === 'intro' ? 'Introduce yourself' : 'Your closing message') + '</h2><p class="muted">Up to 2 minutes, in your own words.</p><div id="rbox"></div><button class="btn alt" id="back" style="margin-top:14px">Back</button></div>';
     app.querySelector('#back').onclick = function () { setView('home'); };
-    if (activeRec) activeRec.destroy();
     activeRec = recorder(app.querySelector('#rbox'), { slot: slot, n: 0, limit: S.limits[slot], onSaved: function () { refresh().then(function () { setView('home'); }); } });
+  }
+
+  function renderHelloVoice() {
+    app.innerHTML = header() + '<div class="card"><h2>Record a Voice Hello</h2><p class="muted">A short, friendly hello for ' + esc(other()) + ' (up to ' + S.limits.hello + ' seconds). It will not change your story.</p><div id="rbox"></div><button class="btn alt" id="back" style="margin-top:14px">Back</button></div>';
+    app.querySelector('#back').onclick = function () { setView('home'); };
+    activeRec = recorder(app.querySelector('#rbox'), { slot: 'hello', n: 0, limit: S.limits.hello, onSaved: function () { refresh().then(function () { setView('home'); toast('Little Hello sent!'); }); } });
   }
 
   function renderListen() {
@@ -325,19 +440,36 @@
     app.querySelector('#back').onclick = function () { setView('home'); };
   }
 
-  // ---------- boot ----------
+  // ---------- boot: link -> device session -> dashboard; QR -> dashboard ----------
   function showError(e) {
-    if (e.pinRequired || (e.status === 401 && /PIN/i.test(e.message))) {
-      app.innerHTML = '<div class="card center"><h2>Enter your PIN</h2><input type="password" inputmode="numeric" id="pin" maxlength="6" style="text-align:center;font-size:1.6rem"><div id="pm"></div><button class="btn" id="pb" style="margin-top:10px">Open</button></div>';
-      app.querySelector('#pb').onclick = function () { PIN = app.querySelector('#pin').value; try { sessionStorage.setItem('fmm_pin', PIN); } catch (x) {} boot(); };
-      return;
-    }
     app.innerHTML = '<div class="card center"><h2>This link is not working</h2><p>' + esc(e.message || 'Something went wrong.') + '</p><p class="muted">If you think this is a mistake, text me at (661) 714-0903 and I will send a fresh link.</p></div>';
   }
-  function refresh() { return api('state').then(function (st) { S = st; try { if (S.qrCode) { var m = JSON.parse(localStorage.getItem('fmm_codes') || '{}'); m[S.qrCode] = TOKEN; localStorage.setItem('fmm_codes', JSON.stringify(m)); } } catch (e) {} }); }
+  function askPin(msg) {
+    app.innerHTML = '<div class="card center"><h2>Enter your PIN</h2>' + (msg ? '<div class="msg err">' + esc(msg) + '</div>' : '') + '<input type="password" inputmode="numeric" autocomplete="one-time-code" id="pin" maxlength="6" style="text-align:center;font-size:1.6rem"><button class="btn" id="pb" style="margin-top:10px">Open</button></div>';
+    var go = function () { exchange(app.querySelector('#pin').value); };
+    app.querySelector('#pb').onclick = go; app.querySelector('#pin').onkeydown = function (e) { if (e.key === 'Enter') go(); };
+  }
+  function exchange(pin) {
+    var h = {}; if (pin) h['X-Pin'] = pin;
+    return fetch('/api/fmm/session?t=' + encodeURIComponent(LINK), { method: 'POST', headers: Object.assign({ 'Content-Type': 'application/json' }, h), body: '{}', cache: 'no-store' })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok) { var e = new Error(j.error || 'Error'); e.status = r.status; e.pinRequired = j.pinRequired; throw e; } return j; }); })
+      .then(function (j) {
+        saveSession(j.code, j.session); CODE = j.code; TOKEN = j.session; LINK = '';
+        history.replaceState(null, '', '/family-memory-magnets/s/?c=' + encodeURIComponent(j.code)); // the private link no longer sits in the address bar
+        return refresh().then(function () { view = 'home'; render(); });
+      }).catch(function (e) { if (e.pinRequired) askPin(''); else if (e.status === 401 && pin) askPin(e.message); else if (e.status === 429) askPin(e.message); else showError(e); });
+  }
+  function refresh() { return api('state').then(function (st) { S = st; }); }
   function boot() {
-    if (!TOKEN) return showError({ message: 'No link was found.' });
-    refresh().then(function () { view = 'home'; render(); }).catch(showError);
+    if (LINK) return exchange('');
+    if (CODE) {
+      TOKEN = sessions()[CODE] || '';
+      if (!TOKEN) { location.replace('/family-memory-magnets/q/?c=' + encodeURIComponent(CODE)); return; }
+      return refresh().then(function () { view = 'home'; render(); }).catch(function (e) {
+        if (e.status === 401) { dropSession(CODE); location.replace('/family-memory-magnets/q/?c=' + encodeURIComponent(CODE)); } else showError(e);
+      });
+    }
+    showError({ message: 'No link was found.' });
   }
   boot();
 })();
