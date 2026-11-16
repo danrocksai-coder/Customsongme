@@ -22,10 +22,25 @@ Recordings and story data are in private Netlify Blobs (store `fmm`). No public 
 "Finish & delete recordings" in Admin permanently removes a story, its audio, tokens and QR mapping.
 
 ## Tests
-`npm test` (19 server-rule tests). Browser walkthrough: Devon/Mimi role test described in the PR.
+`npm test` (38 server-rule tests, including a legacy-story compatibility fixture).
 
 ## Known limits (v1)
 - One story file per story, no record locking: fine for two people per story; not for high volume.
 - Audio only, up to ~4 MB per recording (Netlify function limit).
 - The family movie, magnet and storybook are produced by hand from the saved recordings.
 - Android (webm) recordings played on very old iPhones may not play; iPhones record mp4/aac.
+
+## v2 additions (this branch)
+- Limits: question 15 s, answer 60 s, Little Hello voice 15 s (server allows ~3 s timing slack). No answer-extension button.
+- **Write It First**: optional teleprompter for BOTH roles. Notes are saved server-side for the author only (never shown to the other person, never in the movie/storybook), survive refresh, and are deleted once the recording is saved. A session-only (tab) backup is used; nothing is kept in long-term phone storage.
+- **Little Hellos**: offered to the person who is waiting after 48 h without conversation activity; two rotating suggested texts (sweet / playful) or a 15 s voice hello; one per participant per 48 h; never counts toward the 30, never unlocks anything; admin can disable, pick a style, or add approved custom messages. No SMS/email.
+- **Two permanent QR codes** per story (child, grandparent). A QR code is a public identifier, not a credential. It opens a dashboard only on a phone that already holds a device session (earned by opening the private link once, plus the PIN if set) or after QR + PIN on a new phone. PINs (both roles, optional) are scrypt-hashed; 5 wrong tries lock out for 15 min, doubling up to 24 h.
+- **Same QR after completion**: the dashboard turns into the keepsake view. It truthfully says "being prepared" until you mark real https deliverables ready in Admin.
+- Admin: view/download each QR as SVG or PNG (encodes only the public address), set/clear PINs, forget remembered phones, Little Hello settings, keepsake links.
+- Existing stories keep working with no migration; older stories get a second QR id added the first time Admin is opened (their existing code stays the child's).
+
+## Known limits / decisions needed
+- No separate "parent" login: the parent uses the child's link. "Parent can review or disable Little Hellos" is done by Dan in Admin for now.
+- Retention after completion is not defined; access still ends at the story's 12-month expiry.
+- Rate-limit counters and story files are read-modify-write (fine for low volume).
+- Real-device audio (iPhone Safari, Android Chrome) has not been tested.

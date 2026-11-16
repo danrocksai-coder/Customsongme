@@ -2,10 +2,12 @@
 // Storage: Netlify Blobs (private, server-side only). Secrets come from Netlify environment settings:
 //   FMM_SECRET          long random string (signs media links + admin sessions)
 //   FMM_ADMIN_PASSWORD  Dan's admin password
+//   FMM_PUBLIC_BASE     optional, e.g. https://www.customsongme.com (domain printed inside QR codes)
 // No secret is ever sent to the browser. If either is missing the API fails closed.
 
 import { getStore } from '@netlify/blobs';
 import { randomBytes } from 'node:crypto';
+import QRCode from 'qrcode';
 import * as C from '../lib/fmm-core.mjs';
 
 const FORMSPREE = process.env.FMM_FORMSPREE_URL || 'https://formspree.io/f/xwpqlypv';
@@ -45,13 +47,22 @@ function audioResponse(blob, req) {
   return new Response(data, { status: 200, headers: { ...base, 'Content-Length': String(data.length) } });
 }
 
-const summary = (s) => ({
-  id: s.id, childName: s.childName, grandparentName: s.grandparentName, test: s.test, packageName: s.packageName,
-  parentName: s.parentName, parentEmail: s.parentEmail, createdAt: s.createdAt, expiresAt: s.expiresAt,
-  completed: C.currentIndex(s), consent: s.consent ? { parentName: s.consent.parentName, at: s.consent.at, version: s.consent.version } : null,
-  hasIntro: !!s.intro, hasClosing: !!s.closing, qrCode: s.qrCode, pin: !!s.pinHash, failures: (s.failures || []).slice(-10),
-  recordings: s.stops.map((x, i) => ({ n: i + 1, q: !!x.q, a: !!x.a, chosen: x.chosen?.text || null })).filter((x) => x.q || x.a),
-});
+const summary = (s) => {
+  C.norm(s);
+  return {
+    id: s.id, childName: s.childName, grandparentName: s.grandparentName, test: s.test, packageName: s.packageName,
+    parentName: s.parentName, parentEmail: s.parentEmail, createdAt: s.createdAt, expiresAt: s.expiresAt,
+    completed: C.currentIndex(s), consent: s.consent ? { parentName: s.consent.parentName, at: s.consent.at, version: s.consent.version } : null,
+    hasIntro: !!s.intro, hasClosing: !!s.closing,
+    qrCodes: s.qrCodes || { child: s.qrCode, grandparent: null },
+    pins: { child: C.pinRequired(s, 'child'), grandparent: C.pinRequired(s, 'grandparent') },
+    devices: { child: s.sessions.child.length, grandparent: s.sessions.grandparent.length },
+    helloSettings: s.helloSettings,
+    hellos: s.hellos.slice(-20).map((h) => ({ id: h.id, from: h.from, kind: h.kind, text: h.text || '', at: h.at, read: !!h.readAt })),
+    keepsake: s.keepsake, failures: (s.failures || []).slice(-10),
+    recordings: s.stops.map((x, i) => ({ n: i + 1, q: !!x.q, a: !!x.a, chosen: x.chosen?.text || null })).filter((x) => x.q || x.a),
+  };
+};
 
 export default async (req) => {
   const url = new URL(req.url);
@@ -68,26 +79,32 @@ export default async (req) => {
     if (!secret) return json({ error: 'Not configured.' }, 503);
 
     if (route === 'audio' && req.method === 'GET') {
-      const p = Object.fromEntries(url.searchParams);
-      return audioResponse(await C.readSignedAudio(store, secret, p), req);
+      return audioResponse(await C.readSignedAudio(store, secret, Object.fromEntries(url.searchParams)), req);
     }
+    if (route === 'qrinfo' && req.method === 'GET') return json(await C.qrInfo(store, url.searchParams.get('c') || ''));
+    if (route === 'unlock' && req.method === 'POST') { const b = await req.json().catch(() => ({})); return json(await C.unlockWithQr(store, String(b.c || ''), String(b.pin || ''))); }
 
     // ---------- admin ----------
     if (route.startsWith('admin/')) return await admin(route.slice(6), req, url, store, secret, origin);
 
-    // ---------- participant ----------
+    // ---------- participant (credential = private link token OR device session) ----------
     const t = url.searchParams.get('t') || '';
     const pin = req.headers.get('x-pin') || '';
+    const body = async () => ({ ...(await req.json().catch(() => ({}))), pin });
+    if (route === 'session' && req.method === 'POST') { const b = await body(); return json(await C.exchangeLink(store, String(b.t || t), { pin })); }
     if (route === 'state' && req.method === 'GET') {
       const { story, role } = await C.authorize(store, t, { pin });
       return json(C.publicState(story, role));
     }
-    if (route === 'consent' && req.method === 'POST') return json(await C.recordConsent(store, t, await req.json()));
-    if (route === 'choose' && req.method === 'POST') return json(await C.choose(store, t, { ...(await req.json()), pin }));
-    if (route === 'heard' && req.method === 'POST') return json(await C.markHeard(store, t, { ...(await req.json()), pin }));
-    if (route === 'skip' && req.method === 'POST') return json(await C.skipQuestion(store, t, await req.json()));
+    if (route === 'consent' && req.method === 'POST') return json(await C.recordConsent(store, t, await body()));
+    if (route === 'choose' && req.method === 'POST') return json(await C.choose(store, t, await body()));
+    if (route === 'heard' && req.method === 'POST') return json(await C.markHeard(store, t, await body()));
+    if (route === 'skip' && req.method === 'POST') return json(await C.skipQuestion(store, t, await body()));
+    if (route === 'draft' && req.method === 'POST') return json(await C.saveDraft(store, t, await body()));
+    if (route === 'hello' && req.method === 'POST') return json(await C.sendHello(store, t, await body()));
+    if (route === 'hello-read' && req.method === 'POST') return json(await C.markHelloRead(store, t, await body()));
     if (route === 'media' && req.method === 'GET') {
-      return json(await C.mediaAccess(store, secret, t, { n: Number(url.searchParams.get('n')), slot: url.searchParams.get('slot'), pin }));
+      return json(await C.mediaAccess(store, secret, t, { n: Number(url.searchParams.get('n')), slot: url.searchParams.get('slot'), id: url.searchParams.get('id') || '', pin }));
     }
     if (route === 'upload' && req.method === 'POST') {
       const data = Buffer.from(await req.arrayBuffer());
@@ -146,27 +163,50 @@ async function admin(route, req, url, store, secret, origin) {
   const auth = (req.headers.get('authorization') || '').replace(/^Bearer /, '');
   if (!C.verifyAdmin(secret, auth)) return json({ error: 'Please log in.' }, 401);
   const link = (tok) => `${origin}/family-memory-magnets/s/?t=${tok}`;
+  const base = (process.env.FMM_PUBLIC_BASE || origin).replace(/\/$/, '');
+  const qrUrl = (code) => `${base}/family-memory-magnets/q/?c=${code}`; // public id only: never a token
 
   if (route === 'overview') {
     const stories = [];
-    for (const k of await store.list('story/')) { const s = await store.getJSON(k); if (s) stories.push(summary(s)); }
+    for (const k of await store.list('story/')) {
+      const s = await store.getJSON(k);
+      if (!s) continue;
+      await C.ensureQrCodes(store, s); // additive: adds the grandparent's permanent QR id to older stories
+      stories.push({ ...summary(s), qrUrls: { child: qrUrl(s.qrCodes.child), grandparent: qrUrl(s.qrCodes.grandparent) } });
+    }
     const orders = [];
     for (const k of await store.list('order/')) { const o = await store.getJSON(k); if (o) orders.push(o); }
     stories.sort((a, b) => b.createdAt - a.createdAt); orders.sort((a, b) => b.createdAt - a.createdAt);
     return json({ stories, orders });
   }
+  if (route === 'qr' && req.method === 'GET') { // printable QR image; encodes the public URL only
+    const code = url.searchParams.get('code') || '';
+    if (!(await store.getJSON(`qr/${code}`))) return json({ error: 'Unknown code.' }, 404);
+    const fmt = url.searchParams.get('format') === 'png' ? 'png' : 'svg';
+    const opts = { errorCorrectionLevel: 'M', margin: 2, width: 1200 };
+    if (fmt === 'png') {
+      const buf = await QRCode.toBuffer(qrUrl(code), { ...opts, type: 'png' });
+      return new Response(buf, { headers: { 'Content-Type': 'image/png', 'Content-Disposition': `attachment; filename="fmm-qr-${code.slice(0, 6)}.png"`, 'Cache-Control': 'no-store' } });
+    }
+    const svg = await QRCode.toString(qrUrl(code), { ...opts, type: 'svg' });
+    return new Response(svg, { headers: { 'Content-Type': 'image/svg+xml', 'Cache-Control': 'no-store' } });
+  }
   const b = req.method === 'POST' ? await req.json().catch(() => ({})) : {};
   if (route === 'create' && req.method === 'POST') {
     const { story, tokens } = await C.createStory(store, b);
     if (b.orderId) { const o = await store.getJSON(`order/${b.orderId}`); if (o) { o.status = 'story-created'; o.storyId = story.id; await store.setJSON(`order/${o.id}`, o); } }
-    return json({ story: summary(story), links: { child: link(tokens.child), grandparent: link(tokens.grandparent) } });
+    return json({ story: summary(story), links: { child: link(tokens.child), grandparent: link(tokens.grandparent) }, qrUrls: { child: qrUrl(story.qrCodes.child), grandparent: qrUrl(story.qrCodes.grandparent) } });
   }
   if (route === 'revoke' && req.method === 'POST') return json({ link: link(await C.revokeToken(store, b.id, b.role)) });
+  if (route === 'revoke-devices' && req.method === 'POST') return json(await C.revokeDevices(store, b.id, b.role));
+  if (route === 'set-pin' && req.method === 'POST') return json(await C.setStoryPin(store, b.id, b.role, b.pin || ''));
+  if (route === 'hello-settings' && req.method === 'POST') return json(await C.setHelloSettings(store, b.id, b));
+  if (route === 'keepsake' && req.method === 'POST') return json(await C.setKeepsake(store, b.id, b));
   if (route === 'delete' && req.method === 'POST') { if (b.confirm !== 'DELETE') return json({ error: 'Type DELETE to confirm.' }, 400); return json(await C.deleteStory(store, b.id)); }
   if (route === 'media' && req.method === 'GET') {
     const id = url.searchParams.get('id'); const slot = url.searchParams.get('slot'); const n = Number(url.searchParams.get('n')) || 0;
     const story = await store.getJSON(`story/${id}`); if (!story) return json({ error: 'No such story.' }, 404);
-    const key = C.slotKey(n, slot); const s = C.signMedia(secret, id, key);
+    const key = C.slotKey(n, slot, url.searchParams.get('hid') || ''); const s = C.signMedia(secret, id, key);
     return json({ url: `/api/fmm/audio?s=${id}&k=${encodeURIComponent(key)}&e=${s.exp}&sig=${s.sig}` });
   }
   return json({ error: 'Not found.' }, 404);

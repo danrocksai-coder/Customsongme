@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
 <title>Family Memory Magnets</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/family-memory-magnets/fmm.css">
@@ -11,23 +12,50 @@
 <body>
 <div class="topbar">FAMILY MEMORY <b>MAGNETS</b></div>
 <main class="wrap center" style="padding-top:60px">
-  <h1 style="font-size:1.6rem">A Family Memory Magnets story is being created.</h1>
-  <div id="cont" class="hidden" style="margin-top:26px"><a class="btn" id="go" href="#">Continue Our Story</a></div>
+  <h1 style="font-size:1.6rem" id="msg">A Family Memory Magnets story is being created.</h1>
+  <div id="pinbox" class="hidden" style="margin-top:26px">
+    <label for="pin" style="text-align:center">Enter your PIN</label>
+    <input type="password" inputmode="numeric" autocomplete="one-time-code" id="pin" maxlength="6" style="text-align:center;font-size:1.6rem">
+    <div id="perr"></div>
+    <button class="btn" id="pgo" style="margin-top:12px">Open</button>
+  </div>
+  <p class="muted" id="help" style="margin-top:26px">Already have your private link? Open it once on this phone, and this magnet will take you straight to your story from then on.</p>
 </main>
 <script>
-// Public page: shows only the sentence above. No names, photos or recordings.
-// "Continue Our Story" appears only on a phone that already opened an authorized link for this magnet.
-// The code in this page's address is NOT a key: it never grants access by itself.
+// PUBLIC page. For anyone without access it shows only the sentence above: no names, photos or recordings.
+// The code in this address is a public identifier, NOT a key. It opens a story only on a phone that already
+// holds a device session for it, or after the right PIN (rate limited, with lockout on guessing).
 (function () {
-  try {
-    var c = new URLSearchParams(location.search).get('c') || '';
-    var map = JSON.parse(localStorage.getItem('fmm_codes') || '{}'), t = map[c];
-    if (!c || !t) return;
-    fetch('/api/fmm/state?t=' + encodeURIComponent(t), { cache: 'no-store' }).then(function (r) {
-      if (!r.ok) return;
-      r.json().then(function (j) { if (j.qrCode === c) { document.getElementById('go').href = '/family-memory-magnets/s/?t=' + encodeURIComponent(t); document.getElementById('cont').classList.remove('hidden'); } });
+  var code = new URLSearchParams(location.search).get('c') || '';
+  var $ = function (id) { return document.getElementById(id); };
+  function sessions() { try { return JSON.parse(localStorage.getItem('fmm_sess') || '{}'); } catch (e) { return {}; } }
+  function go() { location.replace('/family-memory-magnets/s/?c=' + encodeURIComponent(code)); }
+  if (!code) return;
+  var tok = sessions()[code];
+  if (tok) { // this phone already earned access: confirm it is still valid, then open the dashboard
+    fetch('/api/fmm/state?t=' + encodeURIComponent(tok), { cache: 'no-store' }).then(function (r) {
+      if (r.ok) return go();
+      try { var m = sessions(); delete m[code]; localStorage.setItem('fmm_sess', JSON.stringify(m)); } catch (e) {}
+      pinCheck();
+    }).catch(function () { pinCheck(); });
+  } else pinCheck();
+  function pinCheck() {
+    fetch('/api/fmm/qrinfo?c=' + encodeURIComponent(code), { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (j) {
+      if (!j.pin) return;
+      $('pinbox').classList.remove('hidden'); $('help').classList.add('hidden');
+      var submit = function () {
+        $('perr').innerHTML = '';
+        fetch('/api/fmm/unlock', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ c: code, pin: $('pin').value }), cache: 'no-store' })
+          .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, status: r.status, b: b }; }); })
+          .then(function (x) {
+            if (!x.ok) { $('perr').innerHTML = '<div class="msg err">' + (x.status === 429 ? 'Too many tries. Please wait and try again later.' : 'That PIN did not work.') + '</div>'; return; }
+            try { var m = sessions(); m[x.b.code] = x.b.session; localStorage.setItem('fmm_sess', JSON.stringify(m)); } catch (e) {}
+            go();
+          });
+      };
+      $('pgo').onclick = submit; $('pin').onkeydown = function (e) { if (e.key === 'Enter') submit(); };
     }).catch(function () {});
-  } catch (e) {}
+  }
 })();
 </script>
 </body>

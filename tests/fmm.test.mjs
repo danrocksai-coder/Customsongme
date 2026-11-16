@@ -140,13 +140,13 @@ test('duplicate uploads: same upload id is idempotent; a second different record
   assert.equal(await status(C.upload(store, tokens.child, rec({ n: 1, slot: 'question', uploadId: 'other' }))), 409);
 });
 
-test('limits: 30s question, 60s answer, size cap, audio only', async () => {
+test('limits: 15s question, 60s answer, 15s hello, size cap, audio only', async () => {
   const { store, tokens } = await mk();
   await C.choose(store, tokens.child, { n: 1, qid: '1.1.F' });
-  assert.equal(await status(C.upload(store, tokens.child, rec({ n: 1, slot: 'question', durationSec: 45 }))), 400);
+  assert.equal(await status(C.upload(store, tokens.child, rec({ n: 1, slot: 'question', durationSec: 30 }))), 400); // old 30s limit is gone
   assert.equal(await status(C.upload(store, tokens.child, rec({ n: 1, slot: 'question', data: Buffer.alloc(5 * 1024 * 1024) }))), 413);
   assert.equal(await status(C.upload(store, tokens.child, rec({ n: 1, slot: 'question', contentType: 'video/mp4' }))), 415);
-  assert.equal(await status(C.upload(store, tokens.child, rec({ n: 1, slot: 'question', durationSec: 31 }))), 200); // 1s slack
+  assert.equal(await status(C.upload(store, tokens.child, rec({ n: 1, slot: 'question', durationSec: 16 }))), 200); // small timing slack
   assert.equal(await status(C.upload(store, tokens.grandparent, rec({ n: 1, slot: 'answer', durationSec: 75 }))), 400);
   assert.equal(await status(C.upload(store, tokens.grandparent, rec({ slot: 'intro', durationSec: 118 }))), 200);
 });
