@@ -38,6 +38,12 @@ const NEW_PACKAGES = {
   pkg3: { name: 'Package 3 — Story', amount: 7500, canUnlist: true },
   pkg4: { name: 'Package 4 — Ultimate', amount: 10000, canUnlist: true },
 };
+// Family Memory Magnets — prices live here on the server, never in the browser.
+const FMM_PACKAGES = {
+  fmm1: { name: 'Family Memory Magnets — One Grandparent', amount: 9999, noLink: true },
+  fmm2: { name: 'Family Memory Magnets — Two Grandparents', amount: 17999, noLink: true },
+};
+
 function newPackage(id, params) {
   const base = NEW_PACKAGES[id];
   if (!base) return null;
@@ -94,9 +100,9 @@ export default async (req, context) => {
 
   const pkg = id === 'lullaby' ? lullabyPackage(url.searchParams)
     : NEW_PACKAGES[id] ? newPackage(id, url.searchParams)
-    : PACKAGES[id];
+    : FMM_PACKAGES[id] || PACKAGES[id];
   const key = process.env.STRIPE_SECRET_KEY;
-  const bail = () => (pkg && pkg.noLink) || id === 'lullaby' || NEW_PACKAGES[id] ? noLinkFallback() : fallback(id, email);
+  const bail = () => (pkg && pkg.noLink) || id === 'lullaby' || NEW_PACKAGES[id] || FMM_PACKAGES[id] ? noLinkFallback() : fallback(id, email);
   if (!pkg || !key) {
     console.log('pay: falling back', { id, hasPkg: !!pkg, hasKey: !!key });
     return bail();
@@ -113,11 +119,14 @@ export default async (req, context) => {
     'line_items[0][price_data][currency]': 'usd',
     'line_items[0][price_data][unit_amount]': String(pkg.amount),
     'line_items[0][price_data][product_data][name]': pkg.name,
-    success_url: SITE + '/thanks?session_id={CHECKOUT_SESSION_ID}',
+    success_url: FMM_PACKAGES[id]
+      ? SITE + '/family-memory-magnets/thanks/?session_id={CHECKOUT_SESSION_ID}'
+      : SITE + '/thanks?session_id={CHECKOUT_SESSION_ID}',
     cancel_url: cancelUrl,
     'metadata[package]': pkg.name,
     'metadata[link_id]': id,
-    'payment_intent_data[description]': 'CustomSongMe — ' + pkg.name,
+    ...(FMM_PACKAGES[id] && url.searchParams.get('order') ? { 'metadata[fmm_order]': url.searchParams.get('order').slice(0, 40) } : {}),
+    'payment_intent_data[description]': (FMM_PACKAGES[id] ? 'CustomGiftMe — ' : 'CustomSongMe — ') + pkg.name,
   });
   if (email) body.set('customer_email', email);
 

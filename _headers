@@ -98,3 +98,19 @@
 /reverse-gift/*
   X-Robots-Tag: noindex, nofollow, noarchive
   Referrer-Policy: no-referrer
+
+# Family Memory Magnets — private app pages are never indexed or cached
+/family-memory-magnets/s/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+/family-memory-magnets/admin/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+/family-memory-magnets/q/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+/family-memory-magnets/thanks/*
+  X-Robots-Tag: noindex, nofollow
+/api/fmm/*
+  X-Robots-Tag: noindex
+  Cache-Control: no-store
