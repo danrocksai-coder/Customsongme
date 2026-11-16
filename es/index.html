@@ -1009,19 +1009,6 @@
     }
     .payment-method-note strong { color: var(--gold); }
 
-
-    /* ═══ PACKAGE POP-UP ═══ */
-    .pkg-dialog { border: 0; padding: 0; background: transparent; width: min(94vw, 760px); max-height: 96vh; margin: auto; overflow: visible; }
-    .pkg-dialog::backdrop { background: rgba(4, 9, 30, 0.88); }
-    .pkg-dialog img { display: block; width: 100%; height: auto; max-height: 88vh; object-fit: contain; border-radius: 12px; }
-    .pkg-dialog-close { display: block; margin: 10px auto 0; background: var(--gold); color: var(--black); border: 0; border-radius: 50px; padding: 10px 26px; font-weight: 700; font-size: 0.95rem; cursor: pointer; }
-    .unlisted-block { margin: 8px 0 22px; }
-    .unlisted-block .public-note { margin-top: 0; }
-    .unlisted-block .public-note p { margin: 10px 0 0; font-size: 0.9rem; color: rgba(255,255,255,0.85); }
-    .unlisted-block .order-total { margin-top: 16px; font-size: 1.25rem; text-align: center; }
-    .order-total { margin-top: 14px; font-size: 1.05rem; font-weight: 700; color: var(--gold); }
-    .char-count { display: block; font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-top: 4px; }
-
     /* Public/Unlisted toggle note — shown only when Complete $50 is selected */
     .public-note {
       background: rgba(252,212,42,0.08);
@@ -1593,63 +1580,6 @@
     #faq { background: linear-gradient(to bottom, var(--black) 0, var(--cream) 72px); }
     #social { background: linear-gradient(to bottom, var(--cream) 0, var(--charcoal) 32px); }
 
-    /* ═══ STEP-BY-STEP BUILDER ═══ */
-    #order-form .form-wrap { max-width: 1080px; }
-    .builder-step { max-width: 680px; margin: 0 auto 22px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.14); border-radius: var(--radius-lg); padding: 24px 20px; scroll-margin-top: 130px; }
-    .builder-step.wide { max-width: none; }
-    .step-kicker { display: inline-block; background: var(--gold); color: var(--black); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 50px; margin-bottom: 10px; }
-    .step-head h3 { color: var(--white); font-size: 1.4rem; margin: 0 0 6px; }
-    .step-head .opt { color: rgba(255,255,255,0.65); font-weight: 400; font-size: 1rem; }
-    .step-hint { color: rgba(255,255,255,0.7); font-size: 0.88rem; margin: 0 0 16px; }
-    .step-head + .form-grid, .step-head + .occ-grid { margin-top: 16px; }
-    .sr-radio { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
-    .occ-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-    .occ-tile { display: block; position: relative; cursor: pointer; min-width: 0; }
-    .occ-face { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 84px; padding: 10px 8px; text-align: center; font-size: 0.92rem; font-weight: 600; color: var(--white); background: rgba(255,255,255,0.06); border: 2px solid rgba(255,255,255,0.2); border-radius: var(--radius-lg); transition: border-color 0.15s, background 0.15s; }
-    .occ-face .em { font-size: 1.6rem; line-height: 1; }
-    .occ-tile:hover .occ-face { border-color: rgba(252,212,42,0.6); }
-    .occ-tile input:checked + .occ-face { border-color: var(--gold); background: rgba(252,212,42,0.16); color: var(--gold); }
-    .occ-tile input:focus-visible + .occ-face { outline: 3px solid var(--gold-light); outline-offset: 2px; }
-    .pkg-pick { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px 12px; margin-top: 20px; }
-    .pkg-card { display: block; position: relative; cursor: pointer; }
-    .pkg-card-inner { display: flex; flex-direction: column; align-items: center; height: 100%; padding: 22px 10px 12px; background: rgba(255,255,255,0.06); border: 2px solid rgba(252,212,42,0.3); border-radius: var(--radius-lg); text-align: center; transition: border-color 0.15s, background 0.15s, box-shadow 0.15s; }
-    .pkg-card:hover .pkg-card-inner { border-color: rgba(252,212,42,0.65); }
-    .pkg-card input:checked + .pkg-card-inner { border-color: var(--gold); background: rgba(252,212,42,0.13); box-shadow: 0 0 0 3px rgba(252,212,42,0.28); }
-    .pkg-card input:focus-visible + .pkg-card-inner { outline: 3px solid var(--gold-light); outline-offset: 3px; }
-    .pkg-check { position: absolute; top: 10px; right: 10px; width: 26px; height: 26px; border-radius: 50%; background: var(--gold); color: var(--black); font-weight: 900; font-size: 0.95rem; display: none; align-items: center; justify-content: center; }
-    .pkg-card input:checked + .pkg-card-inner .pkg-check { display: flex; }
-    .pkg-tag { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--black); font-size: 0.66rem; font-weight: 800; padding: 3px 10px; border-radius: 50px; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.06em; z-index: 1; }
-    .pkg-disc { width: 124px; height: 124px; border-radius: 50%; border: 3px solid var(--gold); background: radial-gradient(circle at 30% 25%, #1a3d9e, var(--black)); display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 6px 0 12px; box-shadow: inset 0 0 0 4px var(--black), inset 0 0 0 5px rgba(252,212,42,0.45); }
-    .pkg-disc small { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.75); }
-    .pkg-disc strong { font-family: var(--font-display); font-size: 1rem; color: var(--white); line-height: 1.15; }
-    .pkg-disc em { font-style: normal; font-family: var(--font-display); font-size: 1.7rem; font-weight: 900; color: var(--gold); line-height: 1.1; }
-    .pkg-best { font-size: 0.8rem; color: rgba(255,255,255,0.85); margin-bottom: 10px; }
-    .pkg-best b { color: var(--gold); }
-    .pkg-inc { list-style: none; padding: 0; margin: 0 0 12px; text-align: left; width: 100%; display: grid; gap: 6px; font-size: 0.82rem; color: rgba(255,255,255,0.88); line-height: 1.35; }
-    .pkg-inc li.new { color: var(--gold); font-weight: 700; }
-    .pkg-example { margin-top: auto; background: none; border: 0; color: var(--gold); text-decoration: underline; font-weight: 700; font-size: 0.88rem; cursor: pointer; padding: 10px 8px; font-family: inherit; }
-    .hint-chips { display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 8px; }
-    .hint-chips-label { width: 100%; font-size: 0.8rem; color: rgba(255,255,255,0.7); }
-    .hint-chip { background: rgba(252,212,42,0.12); border: 1px solid rgba(252,212,42,0.55); color: var(--gold); border-radius: 50px; padding: 8px 14px; font-size: 0.85rem; font-weight: 600; cursor: pointer; font-family: inherit; }
-    .hint-chip:hover { background: rgba(252,212,42,0.25); }
-    .addon-p1 { display: none; color: rgba(255,255,255,0.8); font-size: 0.92rem; margin: 0; }
-    .receipt { max-width: 680px; margin: 0 auto 22px; background: var(--cream); color: var(--ink); border: 2px dashed var(--gold); border-radius: var(--radius-lg); padding: 18px 20px; }
-    .receipt h3 { font-size: 1.05rem; margin: 0 0 10px; color: var(--ink); text-transform: uppercase; letter-spacing: 0.08em; }
-    .receipt dl { margin: 0; }
-    .receipt .rc-row { display: flex; justify-content: space-between; gap: 14px; padding: 7px 0; border-bottom: 1px dotted rgba(0,26,102,0.25); font-size: 0.95rem; }
-    .receipt dt { color: var(--muted); }
-    .receipt dd { margin: 0; font-weight: 700; text-align: right; }
-    .receipt .rc-total { border-bottom: 0; padding-top: 12px; font-size: 1.25rem; }
-    .receipt .rc-total dd { font-family: var(--font-display); }
-    #order-form .builder-step .what-next, #order-form .builder-step .form-submit-area { max-width: none; }
-    .step-bar { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; width: 100%; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: var(--black); color: var(--white); border: 0; border-top: 2px solid var(--gold); font-family: inherit; font-size: 0.85rem; cursor: pointer; text-align: left; }
-    .step-bar .sb-pkg { font-weight: 700; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .step-bar .sb-total { color: var(--gold); font-family: var(--font-display); font-size: 1.15rem; font-weight: 900; }
-    .step-bar .sb-step { color: var(--gold); font-weight: 700; white-space: nowrap; }
-    @media (max-width: 760px) { .step-bar.show { display: flex; } }
-    @media (min-width: 600px) { .occ-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (min-width: 900px) { .pkg-pick { grid-template-columns: repeat(4, 1fr); } .pkg-disc { width: 136px; height: 136px; } }
-    @media (max-width: 420px) { .pkg-disc { width: 108px; height: 108px; } .pkg-disc em { font-size: 1.45rem; } .pkg-disc strong { font-size: 0.92rem; } .builder-step { padding: 20px 14px; } }
     .nav-cta--logo { background: none; padding: 0; pointer-events: none; }
     #samples { background: var(--black); }
     #real-stories { background: linear-gradient(to bottom, var(--black) 0, var(--white) 72px); padding-top: 112px; }
@@ -1657,35 +1587,8 @@
     #guarantee { background: linear-gradient(to bottom, var(--white) 0, var(--gold-pale) 48px); }
     #why-dan { background: linear-gradient(to bottom, var(--gold-pale) 0, var(--black) 72px); }
 
-    .step-part-label { display: flex; align-items: center; gap: 10px; margin: 18px 0 10px; color: var(--white); font-weight: 700; font-size: 1rem; }
-    .req-tag { background: var(--gold); color: var(--black); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 9px; border-radius: 50px; }
-    .occ-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .optional-banner { margin: 30px 0 14px; padding: 14px 16px; border: 2px dashed rgba(255,255,255,0.45); border-radius: var(--radius-lg); text-align: center; }
-    .optional-banner strong { display: block; color: var(--white); font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 0.18em; }
-    .optional-banner span { color: rgba(255,255,255,0.75); font-size: 0.9rem; }
-    .sound-note { display: none; margin: 14px 0 0; padding: 12px 14px; background: rgba(252,212,42,0.15); border: 1px solid var(--gold); border-radius: var(--radius-lg); color: var(--gold); font-weight: 600; font-size: 0.95rem; }
-
     #order-form { background: var(--black); }
     #samples { background: var(--black); padding-top: 72px; }
-    .hero-price-anchor { display: block; max-width: 560px; margin: 0 auto 36px; padding: 22px 26px; text-align: center; }
-    .hero-price-anchor .price-label { font-weight: 700; letter-spacing: 0.16em; margin-bottom: 4px; }
-    .hero-price-anchor .price-main { font-size: clamp(2.2rem, 7vw, 3rem); line-height: 1.1; }
-    .hero-price-anchor .price-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 14px 0 12px; }
-    .hero-price-anchor .price-pill { background: var(--gold); color: var(--black); font-weight: 700; font-size: 0.85rem; padding: 6px 14px; border-radius: 50px; cursor: default; user-select: none; }
-    .hero-price-anchor .price-includes { font-size: 0.95rem; color: rgba(255,255,255,0.82); margin-top: 0; }
-    .hero-price-anchor .price-alt { font-size: 0.9rem; color: rgba(255,255,255,0.85); margin-top: 14px; padding-top: 12px; }
-    .occ-note { display: none; margin: 14px 0 0; padding: 10px 14px; background: rgba(252,212,42,0.12); border: 1px solid rgba(252,212,42,0.5); border-radius: var(--radius-lg); text-align: center; }
-    .occ-note a { color: var(--gold); font-weight: 700; }
-    .other-wrap { display: none; margin-top: 14px; }
-
-    .songfor-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; margin: 14px 0 16px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-lg); transition: border-color 0.2s, background 0.2s; }
-    .songfor-row.flash { border-color: var(--gold); background: rgba(252,212,42,0.14); }
-    .sf-check { position: relative; display: inline-flex; align-items: center; gap: 10px; cursor: pointer; color: var(--white); font-weight: 600; font-size: 0.98rem; }
-    .sf-box { width: 24px; height: 24px; flex-shrink: 0; border: 2px solid rgba(255,255,255,0.6); border-radius: 5px; display: inline-flex; align-items: center; justify-content: center; color: transparent; font-weight: 900; font-size: 0.95rem; line-height: 1; transition: background 0.15s, border-color 0.15s; }
-    .sf-box::after { content: '✓'; }
-    .sf-check input:checked + .sf-box { background: var(--gold); border-color: var(--gold); color: var(--black); }
-    .sf-check input:focus-visible + .sf-box { outline: 3px solid var(--gold-light); outline-offset: 2px; }
-    @media (max-width: 520px) { .songfor-row { flex-direction: column; align-items: flex-start; } }
 
     /* NAV — balanced header: English on the left, Start My Song in the middle, Español on the right */
     body > nav {
@@ -1764,6 +1667,7 @@
       .nav-brand { font-size: 0.82rem; }
     }
   </style>
+  <link rel="stylesheet" href="/css/builder.css?v=20261116" />
 </head>
 <body>
 
@@ -1860,27 +1764,26 @@
           <div class="songfor-row" id="songfor-row" role="radiogroup" aria-label="¿Para quién es esta canción?">
             <span class="req-tag">Obligatorio</span>
             <label class="sf-check"><input type="radio" class="sr-radio" name="song-for" value="Sobre mí" data-me="1" data-short="Yo" required /><span class="sf-box" aria-hidden="true"></span><span class="sf-text">Esta canción es para mí</span></label>
-            <label class="sf-check"><input type="radio" class="sr-radio" name="song-for" value="Un regalo para alguien" data-short="Alguien más" required /><span class="sf-box" aria-hidden="true"></span><span class="sf-text">Esta canción es para alguien más</span></label>
+            <label class="sf-check"><input type="radio" class="sr-radio" name="song-for" value="Un regalo para alguien" data-gift="1" data-short="Alguien más" required /><span class="sf-box" aria-hidden="true"></span><span class="sf-text">Esta canción es para alguien más</span></label>
           </div>
           <p class="sound-note" id="gift-note" role="alert">Primero, marca para quién es la canción.</p>
           <div class="occ-grid">
-          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Cumpleaños" required /><span class="occ-face"><span class="em" aria-hidden="true">🎂</span>Cumpleaños</span></label>
-          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Boda" required /><span class="occ-face"><span class="em" aria-hidden="true">💍</span>Boda</span></label>
-          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Aniversario" required /><span class="occ-face"><span class="em" aria-hidden="true">💑</span>Aniversario</span></label>
-          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Canción de amor" required /><span class="occ-face"><span class="em" aria-hidden="true">❤️</span>Canción de amor</span></label>
-          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Día de las Madres" required /><span class="occ-face"><span class="em" aria-hidden="true">🌸</span>Día de las Madres</span></label>
-          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Día del Padre" required /><span class="occ-face"><span class="em" aria-hidden="true">👔</span>Día del Padre</span></label>
-          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Canción para mascota" required /><span class="occ-face"><span class="em" aria-hidden="true">🐶</span>Canción para mascota</span></label>
-          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Burla" required /><span class="occ-face"><span class="em" aria-hidden="true">🔥</span>Burla</span></label>
-          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Celebración de vida" required /><span class="occ-face"><span class="em" aria-hidden="true">🕊️</span>Celebración de vida</span></label>
-          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Jingle para negocios" data-page="/business-jingles" required /><span class="occ-face"><span class="em" aria-hidden="true">🏢</span>Jingle para negocios</span></label>
-                    <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Día festivo" required /><span class="occ-face"><span class="em" aria-hidden="true">🎄</span>Día festivo</span></label>
-          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Que te mejores" data-page="/get-well-song-cards" required /><span class="occ-face"><span class="em" aria-hidden="true">💐</span>Que te mejores</span></label>
-          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Canción de cuna" data-page="/custom-lullaby-me" required /><span class="occ-face"><span class="em" aria-hidden="true">🍼</span>Canción de cuna</span></label>
-          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Quinceañera" required /><span class="occ-face"><span class="em" aria-hidden="true">👗</span>Quinceañera</span></label>
-          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Otro" data-other="1" required /><span class="occ-face"><span class="em" aria-hidden="true">✨</span>Otro</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Cumpleaños" data-key="birthday" required /><span class="occ-face"><span class="em" aria-hidden="true">🎂</span>Cumpleaños</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Boda" data-key="wedding" required /><span class="occ-face"><span class="em" aria-hidden="true">💍</span>Boda</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Aniversario" data-key="anniversary" required /><span class="occ-face"><span class="em" aria-hidden="true">💑</span>Aniversario</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Canción de amor" data-key="love" required /><span class="occ-face"><span class="em" aria-hidden="true">❤️</span>Canción de amor</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Día de las Madres" data-key="mothers-day" required /><span class="occ-face"><span class="em" aria-hidden="true">🌸</span>Día de las Madres</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Día del Padre" data-key="fathers-day" required /><span class="occ-face"><span class="em" aria-hidden="true">👔</span>Día del Padre</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Canción para mascota" data-key="pet" required /><span class="occ-face"><span class="em" aria-hidden="true">🐶</span>Canción para mascota</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Burla" data-key="roast" required /><span class="occ-face"><span class="em" aria-hidden="true">🔥</span>Burla</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Celebración de vida" data-key="celebration" required /><span class="occ-face"><span class="em" aria-hidden="true">🕊️</span>Celebración de vida</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Jingle para negocios" data-key="jingle" required /><span class="occ-face"><span class="em" aria-hidden="true">🏢</span>Jingle para negocios</span></label>
+                    <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Día festivo" data-key="holiday" required /><span class="occ-face"><span class="em" aria-hidden="true">🎄</span>Día festivo</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Que te mejores" data-key="getwell" required /><span class="occ-face"><span class="em" aria-hidden="true">💐</span>Que te mejores</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Canción de cuna" data-key="lullaby" required /><span class="occ-face"><span class="em" aria-hidden="true">🍼</span>Canción de cuna</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Quinceañera" data-key="quince" required /><span class="occ-face"><span class="em" aria-hidden="true">👗</span>Quinceañera</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Otro" data-key="other" data-other="1" required /><span class="occ-face"><span class="em" aria-hidden="true">✨</span>Otro</span></label>
           </div>
-          <p class="occ-note" id="occ-note" role="status"><a href="#" id="occ-note-link">Esta tiene su propia página y precios →</a></p>
           <div class="other-wrap" id="other-wrap">
             <div class="form-group full">
               <label for="occasion-other">¿Cuál es la ocasión? <span class="req-tag">Obligatorio</span></label>
@@ -2457,262 +2360,8 @@
       player.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     });
   });
-
-  // FOUR PACKAGES + UNLISTED ADD-ON → dynamic Stripe Checkout (/pay/pkg1..pkg4?unlisted=1)
-  // The server (netlify/functions/pay.mjs) works out the real total; the numbers below are for display only.
-  // The old payment links are kept here, unused, until the final cleanup pass.
-  const LEGACY_PAYMENT_LINKS = {
-    'Complete (Public) — $50': {
-      'Card (Stripe)': 'https://www.customsongme.com/pay/3cIaEWcLKb09cS7fcy9Ve0f',
-    },
-    'Complete (Unlisted) — $75': {
-      'Card (Stripe)': 'https://www.customsongme.com/pay/8x2fZgh20fgp8BRc0m9Ve0h',
-    },
-    'MP3 Only — $25': {
-      'Card (Stripe)': 'https://www.customsongme.com/pay/cNieVc2767NX3hxd4q9Ve06',
-    }
-  };
-  const PKGS = {"1": {"name": "Solo MP3", "price": 25}, "2": {"name": "Completo", "price": 50}, "3": {"name": "Historia", "price": 75}, "4": {"name": "Definitivo", "price": 100}};
-  const UNLISTED_PRICE = 25;
-  const PKG_NAME_TPL = "Paquete {n} — {name} — ${price}";
-  const UNL_NOTE = " + Mantenlo no listado +$25";
-  const TOTAL_LABEL = "Tu total: ";
-  const CHARS_WORD = "caracteres";
-  const MSG_LABELS = ["Mensaje personal para la tarjeta", "Mensaje personal 1"];
-  const nextRedirectField = document.getElementById('next-redirect');
-  const packageHiddenField = document.getElementById('package-hidden-field');
-  const totalHiddenField = document.getElementById('total-hidden-field');
-  const paymentMethodNote = document.getElementById('payment-method-note');
-  const publicNote = document.getElementById('public-note');
-  const unlistedCheckbox = document.getElementById('unlisted-checkbox');
-  const orderTotal = document.getElementById('order-total');
-  const emailField = document.getElementById('email');
-  const msg1 = document.getElementById('msg1'), msg2 = document.getElementById('msg2');
-  const msg1Group = document.getElementById('msg1-group'), msg2Group = document.getElementById('msg2-group');
-
-  function selectedPackage() {
-    const r = document.querySelector('input[name="package-tier"]:checked');
-    return r ? r.value : '2';
-  }
-  function countText(el) { return el.value.length + ' / ' + el.maxLength + ' ' + CHARS_WORD; }
-  function configureMessages(n) {
-    const boxes = n === '2' ? 1 : (n === '3' || n === '4') ? 2 : 0;
-    msg1Group.style.display = boxes >= 1 ? '' : 'none';
-    msg2Group.style.display = boxes >= 2 ? '' : 'none';
-    msg1.disabled = boxes < 1; msg2.disabled = boxes < 2;
-    msg1.maxLength = boxes === 1 ? 60 : 150;
-    msg1.rows = boxes === 1 ? 2 : 6;
-    msg2.rows = 6; msg2.maxLength = 150;
-    document.getElementById('msg1-label').textContent = boxes === 2 ? MSG_LABELS[1] : MSG_LABELS[0];
-    if (msg1.value.length > msg1.maxLength) msg1.value = msg1.value.slice(0, msg1.maxLength);
-    document.getElementById('msg1-count').textContent = countText(msg1);
-    document.getElementById('msg2-count').textContent = countText(msg2);
-  }
-
-  function syncPaymentRedirect() {
-    const n = selectedPackage();
-    const p = PKGS[n];
-    const canUnlist = n !== '1';
-    if (!canUnlist && unlistedCheckbox) unlistedCheckbox.checked = false;
-    if (publicNote) publicNote.style.display = canUnlist ? 'block' : 'none';
-    const unlisted = canUnlist && unlistedCheckbox && unlistedCheckbox.checked;
-    const total = p.price + (unlisted ? UNLISTED_PRICE : 0);
-    configureMessages(n);
-
-    const pkgName = PKG_NAME_TPL.replace('{n}', n).replace('{name}', p.name).replace('{price}', p.price);
-    if (packageHiddenField) packageHiddenField.value = pkgName + (unlisted ? UNL_NOTE : '') + ' = $' + total;
-    if (totalHiddenField) totalHiddenField.value = '$' + total;
-    if (orderTotal) orderTotal.textContent = TOTAL_LABEL + '$' + total;
-
-    const params = [];
-    if (unlisted) params.push('unlisted=1');
-    if (emailField && emailField.value) params.push('prefilled_email=' + encodeURIComponent(emailField.value));
-    nextRedirectField.value = 'https://www.customsongme.com/pay/pkg' + n + (params.length ? '?' + params.join('&') : '');
-    if (paymentMethodNote) paymentMethodNote.style.display = 'none';
-  }
-  document.querySelectorAll('input[name="package-tier"], input[name="payment-method"]').forEach(radio => {
-    radio.addEventListener('change', syncPaymentRedirect);
-  });
-  if (unlistedCheckbox) unlistedCheckbox.addEventListener('change', syncPaymentRedirect);
-  if (emailField) emailField.addEventListener('input', syncPaymentRedirect);
-  [msg1, msg2].forEach(el => el.addEventListener('input', () => {
-    document.getElementById(el.id + '-count').textContent = countText(el);
-  }));
-  syncPaymentRedirect(); // set correctly on page load, not just on change
-
-  const pkgDialog = document.getElementById('pkg-dialog');
-  const pkgDialogImg = document.getElementById('pkg-dialog-img');
-  document.querySelectorAll('.pkg-example').forEach(btn => btn.addEventListener('click', (e) => {
-    e.preventDefault(); e.stopPropagation(); // "See example" never selects the package
-    pkgDialogImg.src = btn.dataset.full;
-    pkgDialogImg.alt = btn.dataset.alt;
-    if (pkgDialog.showModal) pkgDialog.showModal(); else pkgDialog.setAttribute('open', '');
-  }));
-  document.getElementById('pkg-dialog-close').addEventListener('click', () => {
-    if (pkgDialog.close) pkgDialog.close(); else pkgDialog.removeAttribute('open');
-  });
-  pkgDialog.addEventListener('click', e => { if (e.target === pkgDialog && pkgDialog.close) pkgDialog.close(); });
-
-  // BUILDER EXTRAS: starter chips, order summary, mobile step bar (display only; totals and links stay in syncPaymentRedirect)
-  const T_YES = 'Sí (+$25)', T_NO = 'No', T_NONE = 'Aún sin elegir';
-  const BAR_STEP = 'Paso {n} de 6', BAR_READY = 'Listo para enviar';
-  const PKG_WORD = 'Paquete';
-  const storyField = document.getElementById('story');
-  document.querySelectorAll('.hint-chip').forEach(chip => chip.addEventListener('click', () => {
-    const v = storyField.value;
-    storyField.value = (v && !v.endsWith('\n') ? v + '\n' : v) + chip.dataset.add;
-    storyField.focus();
-    storyField.setSelectionRange(storyField.value.length, storyField.value.length);
-    storyField.dispatchEvent(new Event('input', { bubbles: true }));
-  }));
-  const subjectField = document.getElementById('subject');
-  const nameField = document.getElementById('name');
-  function refreshBuilder() {
-    const n = selectedPackage(), p = PKGS[n];
-    const unlisted = n !== '1' && unlistedCheckbox && unlistedCheckbox.checked;
-    const total = p.price + (unlisted ? UNLISTED_PRICE : 0);
-    const occ = document.querySelector('input[name="occasion"]:checked');
-    const otherTxt = document.getElementById('occasion-other');
-    document.getElementById('rc-occasion').textContent = occ ? (occ.dataset.other && otherTxt.value.trim() ? occ.value + ' — ' + otherTxt.value.trim() : occ.value) : T_NONE;
-    const sfSel = document.querySelector('input[name="song-for"]:checked');
-    document.getElementById('rc-songfor').textContent = sfSel ? sfSel.dataset.short : T_NONE;
-    document.getElementById('rc-package').textContent = PKG_WORD + ' ' + n + ' · ' + p.name + ' ($' + p.price + ')';
-    document.getElementById('rc-unlisted').textContent = unlisted ? T_YES : T_NO;
-    const styleSel = document.querySelector('input[name="genre"]:checked'), vocSel = document.querySelector('input[name="vocalist"]:checked');
-    document.getElementById('rc-style').textContent = styleSel ? styleSel.nextElementSibling.lastChild.textContent.trim() : T_NONE;
-    document.getElementById('rc-vocals').textContent = vocSel ? vocSel.nextElementSibling.lastChild.textContent.trim() : T_NONE;
-    document.getElementById('rc-total').textContent = '$' + total;
-    document.getElementById('addon-p1').style.display = n === '1' ? 'block' : 'none';
-    const done1 = !!sfSel && !!occ && (!occ.dataset.other || otherTxt.value.trim() !== '');
-    const done3 = subjectField.value.trim() !== '' && storyField.value.trim() !== '';
-    const done6 = nameField.value.trim() !== '' && emailField && emailField.value.trim() !== '' && emailField.checkValidity();
-    const done4 = !!(styleSel && vocSel && document.querySelector('input[name="detail-level"]:checked'));
-    const next = !done1 ? 1 : !done3 ? 3 : !done4 ? 4 : !done6 ? 6 : 0;
-    barBtn.dataset.next = next;
-    document.getElementById('sb-pkg').textContent = PKG_WORD + ' ' + n + ' · ' + p.name;
-    document.getElementById('sb-total').textContent = '$' + total;
-    document.getElementById('sb-step').textContent = (next ? BAR_STEP.replace('{n}', next) : BAR_READY) + ' ›';
-  }
-  const barBtn = document.getElementById('step-bar');
-  barBtn.addEventListener('click', () => {
-    const next = barBtn.dataset.next;
-    const target = next && next !== '0' ? document.getElementById('step-' + next) : orderForm.querySelector('.form-submit-area');
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-  const builderSection = document.getElementById('order-form');
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver(entries => barBtn.classList.toggle('show', entries[0].isIntersecting), { threshold: 0 }).observe(builderSection);
-  } else { barBtn.classList.add('show'); }
-  document.querySelector('form[name="customsong-request"]').addEventListener('change', refreshBuilder);
-  document.querySelector('form[name="customsong-request"]').addEventListener('input', refreshBuilder);
-
-  // Style + vocals are required. If either is missing (and nothing else blocks the form), send them back to Step 4 with a friendly note.
-  const soundNote = document.getElementById('sound-note');
-  const orderFormEl = document.querySelector('form[name="customsong-request"]');
-  const submitButton = orderFormEl.querySelector('button[type="submit"]');
-  const DETAIL_NOTE = 'Elige qué tan fielmente debo usar tus detalles para saber cómo escribir tu canción.';
-  const SOUND_NOTE = soundNote.textContent;
-  const giftNote = document.getElementById('gift-note');
-  const songForRow = document.getElementById('songfor-row');
-  function showGiftNote() {
-    giftNote.style.display = 'block';
-    songForRow.classList.add('flash');
-    clearTimeout(showGiftNote.t);
-    showGiftNote.t = setTimeout(() => songForRow.classList.remove('flash'), 2600);
-  }
-  // Check "who is it for" before choosing an occasion: gently stop and point at the row
-  const occGrid = document.querySelector('.occ-grid');
-  occGrid.addEventListener('click', e => {
-    if (!e.target.closest('.occ-tile') || document.querySelector('input[name="song-for"]:checked')) return;
-    e.preventDefault();
-    showGiftNote();
-    songForRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  });
-  occGrid.addEventListener('change', e => {
-    if (document.querySelector('input[name="song-for"]:checked') || !e.target.checked) return;
-    e.target.checked = false; // keyboard fallback
-    showGiftNote();
-    orderFormEl.dispatchEvent(new Event('change'));
-  });
-  submitButton.addEventListener('click', e => {
-    const hasFor = document.querySelector('input[name="song-for"]:checked');
-    const hasSound = document.querySelector('input[name="genre"]:checked') && document.querySelector('input[name="vocalist"]:checked');
-    const hasDetail = document.querySelector('input[name="detail-level"]:checked');
-    if (hasFor && hasSound && hasDetail) return;
-    const gated = ['song-for', 'genre', 'vocalist', 'detail-level'];
-    const otherInvalid = [...orderFormEl.elements].some(el => el.required && !el.disabled && !gated.includes(el.name) && !el.checkValidity());
-    if (otherInvalid) return; // the browser points at that field first
-    e.preventDefault();
-    if (!hasFor) {
-      showGiftNote();
-      document.getElementById('step-1').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      return;
-    }
-    soundNote.textContent = hasSound ? DETAIL_NOTE : SOUND_NOTE;
-    soundNote.style.display = 'block';
-    document.getElementById('step-4').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-  // Occasion extras: own-page note (jingle / get well / lullaby) and the required "Other" text box
-  const occNote = document.getElementById('occ-note'), occNoteLink = document.getElementById('occ-note-link');
-  const otherWrap = document.getElementById('other-wrap'), otherInput = document.getElementById('occasion-other');
-  const subjectEl = document.getElementById('subject'), SUBJECT_PH = subjectEl.placeholder, ME_PH = '¡Yo! (Tu nombre, para que la escriba desde tu punto de vista)';
-  orderFormEl.addEventListener('change', () => {
-    const occ = document.querySelector('input[name="occasion"]:checked');
-    const page = occ && occ.dataset.page;
-    occNote.style.display = page ? 'block' : 'none';
-    if (page) occNoteLink.href = page;
-    const isOther = !!(occ && occ.dataset.other);
-    otherWrap.style.display = isOther ? 'block' : 'none';
-    otherInput.disabled = !isOther; otherInput.required = isOther;
-    const sf = document.querySelector('input[name="song-for"]:checked');
-    if (sf) giftNote.style.display = 'none';
-    subjectEl.placeholder = sf && sf.dataset.me ? ME_PH : SUBJECT_PH;
-    if (sf) songForRow.classList.remove('flash');
-  });
-  orderFormEl.addEventListener('change', () => {
-    if (document.querySelector('input[name="genre"]:checked') && document.querySelector('input[name="vocalist"]:checked') && document.querySelector('input[name="detail-level"]:checked')) soundNote.style.display = 'none';
-  });
-  refreshBuilder();
-
-  // DOUBLE-SUBMIT PROTECTION — disable the button and show a loading state the moment
-  // the form is submitted, so a slow connection or an impatient double-tap can't send two orders.
-  const orderForm = document.querySelector('form[name="customsong-request"]');
-  const submitBtn = orderForm ? orderForm.querySelector('button[type="submit"]') : null;
-  const formErrorMsg = document.getElementById('form-error-msg');
-  const submitBtnOriginalText = submitBtn ? submitBtn.textContent : '';
-  if (orderForm && submitBtn) {
-    orderForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Enviando tu solicitud…';
-      if (formErrorMsg) formErrorMsg.style.display = 'none';
-
-      const formData = new FormData(orderForm);
-      fetch(orderForm.action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(response => {
-        if (response.ok) {
-          window.location.href = nextRedirectField.value;
-        } else {
-          throw new Error('Submission failed');
-        }
-      })
-      .catch(() => {
-        submitBtn.disabled = false;
-        submitBtn.textContent = submitBtnOriginalText;
-        if (formErrorMsg) {
-          formErrorMsg.style.display = 'block';
-          formErrorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-          alert('Algo salió mal al enviar tu solicitud. Por favor intenta de nuevo, o envíale un mensaje de texto a Dan directamente al (661) 714-0903.');
-        }
-      });
-    });
-  }
 </script>
+<script src="/js/builder.js?v=20261116"></script>
 
 </body>
 </html>
