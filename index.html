@@ -1698,10 +1698,6 @@
     .hero-build-link { display: inline-block; margin-top: 22px; color: var(--gold); font-weight: 700; font-size: 1.1rem; text-decoration: none; border-bottom: 2px solid var(--gold); padding-bottom: 2px; }
     .hero-build-link:hover { color: var(--gold-light); border-color: var(--gold-light); }
     .nav-cta--logo { background: none; padding: 0; pointer-events: none; }
-    #how-it-works.how-short { padding: 92px 24px 44px; text-align: center; }
-    .how-line { max-width: 820px; margin: 0 auto; font-family: var(--font-display); font-size: clamp(1.05rem, 2.8vw, 1.4rem); line-height: 1.7; color: var(--ink); font-weight: 600; }
-    .how-line .hl { white-space: nowrap; }
-    .how-line .ar { color: var(--gold-ink, #8a6d00); margin: 0 4px; }
     #samples { background: var(--black); }
     #real-stories { background: linear-gradient(to bottom, var(--black) 0, var(--white) 72px); padding-top: 112px; }
     #reviews { background: var(--white); }
@@ -1716,6 +1712,8 @@
     .optional-banner span { color: rgba(255,255,255,0.75); font-size: 0.9rem; }
     .sound-note { display: none; margin: 14px 0 0; padding: 12px 14px; background: rgba(252,212,42,0.15); border: 1px solid var(--gold); border-radius: var(--radius-lg); color: var(--gold); font-weight: 600; font-size: 0.95rem; }
 
+    #order-form { background: var(--black); }
+    #samples { background: var(--black); padding-top: 72px; }
     /* NAV — balanced header: English on the left, Start My Song in the middle, Español on the right */
     body > nav {
       position: sticky;
@@ -1851,36 +1849,6 @@
   </div>
 </section>
 
-<!-- ═══════ SECTION 6 — SAMPLES ═══════ -->
-<section id="samples">
-  <div class="container">
-    <h2 class="fade-up">🎧 Hear Real Songs</h2>
-    <p class="sub fade-up">Real songs created for real people. Tap any thumbnail to play.</p>
-    <div class="samples-grid fade-up">
-      <button class="sample-card" data-video="GjYQl-JdHos" aria-label="Play a custom birthday song sample">
-        <img class="sample-thumb" src="https://img.youtube.com/vi/GjYQl-JdHos/hqdefault.jpg" alt="Custom birthday song video thumbnail" loading="lazy" width="56" height="56" />
-        <div class="sample-info"><div class="title">Custom Birthday Song</div><div class="label">Tap to play</div></div>
-        <div class="sample-play">▶</div>
-      </button>
-      <button class="sample-card" data-video="tAXW-qBS7do" aria-label="Play a custom anniversary song sample">
-        <img class="sample-thumb" src="https://img.youtube.com/vi/tAXW-qBS7do/hqdefault.jpg" alt="Custom anniversary song video thumbnail" loading="lazy" width="56" height="56" />
-        <div class="sample-info"><div class="title">Custom Anniversary Song</div><div class="label">Tap to play</div></div>
-        <div class="sample-play">▶</div>
-      </button>
-      <button class="sample-card" data-video="z3Hcyk0hbnk" aria-label="Play a custom Father's Day song sample with a real reaction">
-        <img class="sample-thumb" src="https://img.youtube.com/vi/z3Hcyk0hbnk/hqdefault.jpg" alt="Custom Father's Day song video thumbnail" loading="lazy" width="56" height="56" />
-        <div class="sample-info"><div class="title">Custom Father's Day Song</div><div class="label">Real reaction · Tap to play</div></div>
-        <div class="sample-play">▶</div>
-      </button>
-      <button class="sample-card" data-video="lH0YlrAjwQk" aria-label="Play a custom Mother's Day song sample">
-        <img class="sample-thumb" src="https://img.youtube.com/vi/lH0YlrAjwQk/hqdefault.jpg" alt="Custom Mother's Day song video thumbnail" loading="lazy" width="56" height="56" />
-        <div class="sample-info"><div class="title">Custom Mother's Day Song</div><div class="label">Tap to play</div></div>
-        <div class="sample-play">▶</div>
-      </button>
-    </div>
-  </div>
-</section>
-
 <!-- ═══════ SECTION 3 — VIDEO ═══════ -->
 <section id="video-section">
   <div class="video-inner fade-up">
@@ -1889,13 +1857,6 @@
     <div class="video-wrapper">
       <iframe src="https://www.youtube-nocookie.com/embed/wqjlcfAUczQ" title="Turn Your Story Into a Custom Song | CustomSongMe" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
-  </div>
-</section>
-
-<!-- ═══════ SECTION 7 — HOW IT WORKS ═══════ -->
-<section id="how-it-works" class="how-short">
-  <div class="container fade-up">
-    <p class="how-line">Pick your occasion → Pick your package → Tell me your story → Pay → Your song within 24 hours.</p>
   </div>
 </section>
 
@@ -2145,6 +2106,36 @@
   <span class="sb-total" id="sb-total">$50</span>
   <span class="sb-step" id="sb-step">Step 1 of 6 ›</span>
 </button>
+
+<!-- ═══════ SECTION 6 — SAMPLES ═══════ -->
+<section id="samples">
+  <div class="container">
+    <h2 class="fade-up">🎧 Hear Real Songs</h2>
+    <p class="sub fade-up">Real songs created for real people. Tap any thumbnail to play.</p>
+    <div class="samples-grid fade-up">
+      <button class="sample-card" data-video="GjYQl-JdHos" aria-label="Play a custom birthday song sample">
+        <img class="sample-thumb" src="https://img.youtube.com/vi/GjYQl-JdHos/hqdefault.jpg" alt="Custom birthday song video thumbnail" loading="lazy" width="56" height="56" />
+        <div class="sample-info"><div class="title">Custom Birthday Song</div><div class="label">Tap to play</div></div>
+        <div class="sample-play">▶</div>
+      </button>
+      <button class="sample-card" data-video="tAXW-qBS7do" aria-label="Play a custom anniversary song sample">
+        <img class="sample-thumb" src="https://img.youtube.com/vi/tAXW-qBS7do/hqdefault.jpg" alt="Custom anniversary song video thumbnail" loading="lazy" width="56" height="56" />
+        <div class="sample-info"><div class="title">Custom Anniversary Song</div><div class="label">Tap to play</div></div>
+        <div class="sample-play">▶</div>
+      </button>
+      <button class="sample-card" data-video="z3Hcyk0hbnk" aria-label="Play a custom Father's Day song sample with a real reaction">
+        <img class="sample-thumb" src="https://img.youtube.com/vi/z3Hcyk0hbnk/hqdefault.jpg" alt="Custom Father's Day song video thumbnail" loading="lazy" width="56" height="56" />
+        <div class="sample-info"><div class="title">Custom Father's Day Song</div><div class="label">Real reaction · Tap to play</div></div>
+        <div class="sample-play">▶</div>
+      </button>
+      <button class="sample-card" data-video="lH0YlrAjwQk" aria-label="Play a custom Mother's Day song sample">
+        <img class="sample-thumb" src="https://img.youtube.com/vi/lH0YlrAjwQk/hqdefault.jpg" alt="Custom Mother's Day song video thumbnail" loading="lazy" width="56" height="56" />
+        <div class="sample-info"><div class="title">Custom Mother's Day Song</div><div class="label">Tap to play</div></div>
+        <div class="sample-play">▶</div>
+      </button>
+    </div>
+  </div>
+</section>
 
 <!-- ═══════ SECTION 5B — REAL STORIES ═══════ -->
 <section id="real-stories">
