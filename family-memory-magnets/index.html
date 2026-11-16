@@ -14,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/family-memory-magnets/fmm.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Product","name":"Family Memory Magnets","description":"30 recorded conversations between a grandchild and a grandparent, with a family movie, a personalized QR refrigerator magnet, a digital storybook and downloadable recordings.","brand":{"@type":"Brand","name":"CustomGiftMe"},"offers":[{"@type":"Offer","name":"One grandparent","price":"99.99","priceCurrency":"USD"},{"@type":"Offer","name":"Two grandparents","price":"179.99","priceCurrency":"USD"}]}
+{"@context":"https://schema.org","@type":"Product","name":"Family Memory Magnets","description":"30 recorded conversations between a grandchild and a grandparent, with a family movie, a personalized QR refrigerator magnet, a digital storybook and downloadable recordings.","brand":{"@type":"Brand","name":"CustomGiftMe"}}
 </script>
 </head>
 <body>
@@ -23,7 +23,7 @@
 <header class="hero">
   <h1>30 conversations. Two voices. <em>One lasting family story.</em></h1>
   <p>What if one simple gift could bring a grandchild and grandparent closer together, no matter how far apart they live?</p>
-  <a class="btn" href="#order">Start Our Story</a>
+  <a class="btn" href="#waitlist">Join the Waiting List</a>
 </header>
 
 <div class="video"><div class="video-box">
@@ -66,10 +66,11 @@
   </div>
 </section>
 
-<section id="order">
+<section id="waitlist">
   <div class="wrap">
-    <h2 class="center">Choose your story</h2>
-    <form id="orderForm" class="card" novalidate>
+    <h2 class="center">Coming soon</h2>
+    <p class="center muted">Family Memory Magnets isn't open for orders yet. Join the free waiting list and you'll be the first to know when it is. No payment, no commitment.</p>
+    <form id="waitForm" class="card" novalidate>
       <div class="pkgs">
         <label class="pkg sel" id="pk-one"><input type="radio" name="package" value="one" checked class="sr" style="position:absolute;opacity:0">
           <h3>One Grandparent</h3><div class="price">$99.99</div>
@@ -78,31 +79,19 @@
           <h3>Two Grandparents</h3><div class="price">$179.99</div>
           <ul><li>2 separate journeys, 30 conversations each</li><li>A family movie for each story</li><li>QR refrigerator magnets</li><li>Storybooks and downloadable recordings</li></ul></label>
       </div>
+      <p class="muted center">Planned launch prices. Pick the one you're most interested in.</p>
 
-      <label for="parentName">Parent or guardian name</label>
-      <input id="parentName" type="text" autocomplete="name" required>
+      <label for="name">Your name</label>
+      <input id="name" type="text" autocomplete="name" required>
       <label for="email">Email</label>
       <input id="email" type="email" autocomplete="email" required>
-      <label for="phone">Phone (optional)</label>
-      <input id="phone" type="tel" autocomplete="tel">
-      <label for="childName">Child's first name</label>
-      <input id="childName" type="text" required>
-      <label for="gp1">Grandparent's name (what the child calls them)</label>
-      <input id="gp1" type="text" placeholder="Mimi, Grandpa Joe…" required>
-      <div id="gp2wrap" class="hidden">
-        <label for="gp2">Second grandparent's name</label>
-        <input id="gp2" type="text" required>
-      </div>
-      <label for="notes">Anything I should know? (optional)</label>
+      <label for="notes">Anything you'd like me to know? (optional)</label>
       <textarea id="notes" rows="2"></textarea>
       <input id="website" type="text" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
 
-      <label class="check"><input id="agree" type="checkbox" required>
-        <span>I am the child's parent or legal guardian, or I will have the child's parent or guardian give permission before any recording of a child is saved.</span></label>
-
-      <div id="orderMsg"></div>
-      <button class="btn" id="orderBtn" type="submit">Continue to secure payment</button>
-      <p class="muted center" style="margin-top:10px">You pay on Stripe's secure page. I never see your card number.</p>
+      <div id="waitMsg"></div>
+      <button class="btn" id="waitBtn" type="submit">Join the Waiting List</button>
+      <p class="muted center" style="margin-top:10px">Free. I'll only email you about Family Memory Magnets.</p>
     </form>
   </div>
 </section>
@@ -129,29 +118,24 @@
 <script>
 (function () {
   var $ = function (id) { return document.getElementById(id); };
-  var form = $('orderForm');
-  function pick(v) {
-    $('pk-one').classList.toggle('sel', v === 'one'); $('pk-two').classList.toggle('sel', v === 'two');
-    $('gp2wrap').classList.toggle('hidden', v !== 'two');
-  }
+  var form = $('waitForm');
+  function pick(v) { $('pk-one').classList.toggle('sel', v === 'one'); $('pk-two').classList.toggle('sel', v === 'two'); }
   form.querySelectorAll('input[name=package]').forEach(function (r) { r.addEventListener('change', function () { pick(r.value); }); });
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var pkg = form.querySelector('input[name=package]:checked').value;
-    var msg = $('orderMsg'); msg.innerHTML = '';
-    var data = { package: pkg, parentName: $('parentName').value, email: $('email').value, phone: $('phone').value,
-      childName: $('childName').value, grandparent1: $('gp1').value, grandparent2: pkg === 'two' ? $('gp2').value : '', notes: $('notes').value, website: $('website').value };
-    if (!$('agree').checked) { msg.innerHTML = '<div class="msg err">Please check the permission box to continue.</div>'; return; }
-    $('orderBtn').disabled = true; $('orderBtn').textContent = 'One moment…';
-    fetch('/api/fmm/order', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+    var msg = $('waitMsg'); msg.innerHTML = '';
+    var data = { package: form.querySelector('input[name=package]:checked').value, name: $('name').value, email: $('email').value,
+      notes: $('notes').value, website: $('website').value };
+    $('waitBtn').disabled = true; $('waitBtn').textContent = 'One moment…';
+    fetch('/api/fmm/waitlist', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
       .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
       .then(function (res) {
         if (!res.ok) throw new Error(res.j.error || 'Please check the form.');
-        location.href = res.j.payUrl;
+        form.innerHTML = '<div class="msg ok">Thank you! You\'re on the list. I\'ll email you as soon as Family Memory Magnets opens.</div>';
       })
       .catch(function (err) {
         msg.innerHTML = '<div class="msg err">' + String(err.message).replace(/</g, '&lt;') + '</div>';
-        $('orderBtn').disabled = false; $('orderBtn').textContent = 'Continue to secure payment';
+        $('waitBtn').disabled = false; $('waitBtn').textContent = 'Join the Waiting List';
       });
   });
 })();
