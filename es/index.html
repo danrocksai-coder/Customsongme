@@ -1603,8 +1603,8 @@
     .step-hint { color: rgba(255,255,255,0.7); font-size: 0.88rem; margin: 0 0 16px; }
     .step-head + .form-grid, .step-head + .occ-grid { margin-top: 16px; }
     .sr-radio { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
-    .occ-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .occ-tile { display: block; position: relative; cursor: pointer; }
+    .occ-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .occ-tile { display: block; position: relative; cursor: pointer; min-width: 0; }
     .occ-face { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 84px; padding: 10px 8px; text-align: center; font-size: 0.92rem; font-weight: 600; color: var(--white); background: rgba(255,255,255,0.06); border: 2px solid rgba(255,255,255,0.2); border-radius: var(--radius-lg); transition: border-color 0.15s, background 0.15s; }
     .occ-face .em { font-size: 1.6rem; line-height: 1; }
     .occ-tile:hover .occ-face { border-color: rgba(252,212,42,0.6); }
@@ -1650,8 +1650,6 @@
     @media (min-width: 600px) { .occ-grid { grid-template-columns: repeat(3, 1fr); } }
     @media (min-width: 900px) { .pkg-pick { grid-template-columns: repeat(4, 1fr); } .pkg-disc { width: 136px; height: 136px; } }
     @media (max-width: 420px) { .pkg-disc { width: 108px; height: 108px; } .pkg-disc em { font-size: 1.45rem; } .pkg-disc strong { font-size: 0.92rem; } .builder-step { padding: 20px 14px; } }
-    .hero-build-link { display: inline-block; margin-top: 22px; color: var(--gold); font-weight: 700; font-size: 1.1rem; text-decoration: none; border-bottom: 2px solid var(--gold); padding-bottom: 2px; }
-    .hero-build-link:hover { color: var(--gold-light); border-color: var(--gold-light); }
     .nav-cta--logo { background: none; padding: 0; pointer-events: none; }
     #samples { background: var(--black); }
     #real-stories { background: linear-gradient(to bottom, var(--black) 0, var(--white) 72px); padding-top: 112px; }
@@ -1661,7 +1659,8 @@
 
     .step-part-label { display: flex; align-items: center; gap: 10px; margin: 18px 0 10px; color: var(--white); font-weight: 700; font-size: 1rem; }
     .req-tag { background: var(--gold); color: var(--black); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 9px; border-radius: 50px; }
-    .occ-grid.three { grid-template-columns: repeat(3, 1fr); }
+    .occ-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .occ-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .optional-banner { margin: 30px 0 14px; padding: 14px 16px; border: 2px dashed rgba(255,255,255,0.45); border-radius: var(--radius-lg); text-align: center; }
     .optional-banner strong { display: block; color: var(--white); font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 0.18em; }
     .optional-banner span { color: rgba(255,255,255,0.75); font-size: 0.9rem; }
@@ -1669,6 +1668,17 @@
 
     #order-form { background: var(--black); }
     #samples { background: var(--black); padding-top: 72px; }
+    .hero-price-anchor { display: block; max-width: 560px; margin: 0 auto 36px; padding: 22px 26px; text-align: center; }
+    .hero-price-anchor .price-label { font-weight: 700; letter-spacing: 0.16em; margin-bottom: 4px; }
+    .hero-price-anchor .price-main { font-size: clamp(2.2rem, 7vw, 3rem); line-height: 1.1; }
+    .hero-price-anchor .price-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 14px 0 12px; }
+    .hero-price-anchor .price-pill { background: var(--gold); color: var(--black); font-weight: 700; font-size: 0.85rem; padding: 6px 14px; border-radius: 50px; cursor: default; user-select: none; }
+    .hero-price-anchor .price-includes { font-size: 0.95rem; color: rgba(255,255,255,0.82); margin-top: 0; }
+    .hero-price-anchor .price-alt { font-size: 0.9rem; color: rgba(255,255,255,0.85); margin-top: 14px; padding-top: 12px; }
+    .occ-note { display: none; margin: 14px 0 0; padding: 10px 14px; background: rgba(252,212,42,0.12); border: 1px solid rgba(252,212,42,0.5); border-radius: var(--radius-lg); text-align: center; }
+    .occ-note a { color: var(--gold); font-weight: 700; }
+    .other-wrap { display: none; margin-top: 14px; }
+
     /* NAV — balanced header: English on the left, Start My Song in the middle, Español on the right */
     body > nav {
       position: sticky;
@@ -1784,12 +1794,12 @@
     <h1>Canciones personalizadas,<br><em>entregadas en 24 horas</em></h1>
     <p class="hero-sub">Una canción personalizada hecha con tus recuerdos, momentos y mensaje — creada por Dan the Song Man y entregada en menos de 24 horas después del pago.</p>
     <div class="hero-price-anchor">
-      <div class="price-label">Cuatro paquetes · Elige el tuyo abajo</div>
+      <div class="price-label">Paquetes de canciones personalizadas</div>
       <div class="price-main">Desde $25</div>
-      <div class="price-includes">MP3 · Video musical · Video con historia · Álbum de fotos de la fiesta</div>
-      <div class="price-alt">El más popular: Completo, $50</div>
+      <div class="price-pills" aria-hidden="false"><span class="price-pill">🎁 Regálala</span><span class="price-pill">🎤 Hazla sobre ti</span></div>
+      <div class="price-includes">Escrita con los recuerdos que compartes. Entregada en menos de 24 horas.</div>
+      <div class="price-alt">La más popular: Completo · Canción + video musical · $50</div>
     </div>
-    <a href="#step-1" class="hero-build-link">Arma tu canción abajo ↓</a>
   </div>
 </section>
 
@@ -1849,8 +1859,19 @@
           <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Canción para mascota" required /><span class="occ-face"><span class="em" aria-hidden="true">🐶</span>Canción para mascota</span></label>
           <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Burla" required /><span class="occ-face"><span class="em" aria-hidden="true">🔥</span>Burla</span></label>
           <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Celebración de vida" required /><span class="occ-face"><span class="em" aria-hidden="true">🕊️</span>Celebración de vida</span></label>
-          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Jingle para negocios" required /><span class="occ-face"><span class="em" aria-hidden="true">🏢</span>Jingle para negocios</span></label>
-          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Otro" required /><span class="occ-face"><span class="em" aria-hidden="true">✨</span>Otro</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Jingle para negocios" data-page="/business-jingles" required /><span class="occ-face"><span class="em" aria-hidden="true">🏢</span>Jingle para negocios</span></label>
+                    <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Día festivo" required /><span class="occ-face"><span class="em" aria-hidden="true">🎄</span>Día festivo</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Que te mejores" data-page="/get-well-song-cards" required /><span class="occ-face"><span class="em" aria-hidden="true">💐</span>Que te mejores</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Canción de cuna" data-page="/custom-lullaby-me" required /><span class="occ-face"><span class="em" aria-hidden="true">🍼</span>Canción de cuna</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Quinceañera" required /><span class="occ-face"><span class="em" aria-hidden="true">👗</span>Quinceañera</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Otro" data-other="1" required /><span class="occ-face"><span class="em" aria-hidden="true">✨</span>Otro</span></label>
+          </div>
+          <p class="occ-note" id="occ-note" role="status"><a href="#" id="occ-note-link">Esta tiene su propia página y precios →</a></p>
+          <div class="other-wrap" id="other-wrap">
+            <div class="form-group full">
+              <label for="occasion-other">¿Cuál es la ocasión? <span class="req-tag">Obligatorio</span></label>
+              <input type="text" id="occasion-other" name="occasion-other" placeholder="ej. Fiesta de jubilación, graduación, casa nueva" disabled />
+            </div>
           </div>
         </div>
 
@@ -1903,7 +1924,13 @@
 
         <div class="builder-step" id="step-3" data-step="3">
           <div class="step-head"><span class="step-kicker">Paso 3 de 6</span><h3>¿Para quién es y cuál es la historia?</h3></div>
-          <div class="form-grid">
+          <div class="step-part-label" style="margin-top:0"><span class="req-tag">Obligatorio</span> Esta canción es…</div>
+          <div class="occ-grid two" id="songfor-grid">
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="song-for" value="Un regalo para alguien" required /><span class="occ-face"><span class="em" aria-hidden="true">🎁</span>Un regalo para alguien</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="song-for" value="Sobre mí" required /><span class="occ-face"><span class="em" aria-hidden="true">🎤</span>Sobre mí</span></label>
+          </div>
+          <p class="sound-note" id="gift-note" role="alert">Elige si esta canción es un regalo o es sobre ti para saber desde qué punto de vista escribirla.</p>
+          <div class="form-grid" style="margin-top:16px">
           <div class="form-group full">
             <label for="subject">¿De quién es la canción?</label>
             <input type="text" id="subject" name="subject" placeholder="Mi esposa, María (llevamos 25 años casados)" required />
@@ -2033,6 +2060,7 @@
             <h3>Resumen de tu orden</h3>
             <dl>
               <div class="rc-row"><dt>Ocasión</dt><dd id="rc-occasion">—</dd></div>
+              <div class="rc-row"><dt>Esta canción es</dt><dd id="rc-songfor">—</dd></div>
               <div class="rc-row"><dt>Paquete</dt><dd id="rc-package">—</dd></div>
               <div class="rc-row"><dt>Estilo musical</dt><dd id="rc-style">—</dd></div>
               <div class="rc-row"><dt>Voz</dt><dd id="rc-vocals">—</dd></div>
@@ -2536,7 +2564,10 @@
     const unlisted = n !== '1' && unlistedCheckbox && unlistedCheckbox.checked;
     const total = p.price + (unlisted ? UNLISTED_PRICE : 0);
     const occ = document.querySelector('input[name="occasion"]:checked');
-    document.getElementById('rc-occasion').textContent = occ ? occ.value : T_NONE;
+    const otherTxt = document.getElementById('occasion-other');
+    document.getElementById('rc-occasion').textContent = occ ? (occ.dataset.other && otherTxt.value.trim() ? occ.value + ' — ' + otherTxt.value.trim() : occ.value) : T_NONE;
+    const sfSel = document.querySelector('input[name="song-for"]:checked');
+    document.getElementById('rc-songfor').textContent = sfSel ? sfSel.nextElementSibling.lastChild.textContent.trim() : T_NONE;
     document.getElementById('rc-package').textContent = PKG_WORD + ' ' + n + ' · ' + p.name + ' ($' + p.price + ')';
     document.getElementById('rc-unlisted').textContent = unlisted ? T_YES : T_NO;
     const styleSel = document.querySelector('input[name="genre"]:checked'), vocSel = document.querySelector('input[name="vocalist"]:checked');
@@ -2544,8 +2575,8 @@
     document.getElementById('rc-vocals').textContent = vocSel ? vocSel.nextElementSibling.lastChild.textContent.trim() : T_NONE;
     document.getElementById('rc-total').textContent = '$' + total;
     document.getElementById('addon-p1').style.display = n === '1' ? 'block' : 'none';
-    const done1 = !!occ;
-    const done3 = subjectField.value.trim() !== '' && storyField.value.trim() !== '';
+    const done1 = !!occ && (!occ.dataset.other || otherTxt.value.trim() !== '');
+    const done3 = !!sfSel && subjectField.value.trim() !== '' && storyField.value.trim() !== '';
     const done6 = nameField.value.trim() !== '' && emailField && emailField.value.trim() !== '' && emailField.checkValidity();
     const done4 = !!(styleSel && vocSel && document.querySelector('input[name="detail-level"]:checked'));
     const next = !done1 ? 1 : !done3 ? 3 : !done4 ? 4 : !done6 ? 6 : 0;
@@ -2573,16 +2604,40 @@
   const submitButton = orderFormEl.querySelector('button[type="submit"]');
   const DETAIL_NOTE = 'Elige qué tan fielmente debo usar tus detalles para saber cómo escribir tu canción.';
   const SOUND_NOTE = soundNote.textContent;
+  const giftNote = document.getElementById('gift-note');
   submitButton.addEventListener('click', e => {
+    const hasFor = document.querySelector('input[name="song-for"]:checked');
     const hasSound = document.querySelector('input[name="genre"]:checked') && document.querySelector('input[name="vocalist"]:checked');
     const hasDetail = document.querySelector('input[name="detail-level"]:checked');
-    if (hasSound && hasDetail) return;
-    const otherInvalid = [...orderFormEl.elements].some(el => el.required && !el.disabled && !['genre', 'vocalist', 'detail-level'].includes(el.name) && !el.checkValidity());
+    if (hasFor && hasSound && hasDetail) return;
+    const gated = ['song-for', 'genre', 'vocalist', 'detail-level'];
+    const otherInvalid = [...orderFormEl.elements].some(el => el.required && !el.disabled && !gated.includes(el.name) && !el.checkValidity());
     if (otherInvalid) return; // the browser points at that field first
     e.preventDefault();
+    if (!hasFor) {
+      giftNote.style.display = 'block';
+      document.getElementById('step-3').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
     soundNote.textContent = hasSound ? DETAIL_NOTE : SOUND_NOTE;
     soundNote.style.display = 'block';
     document.getElementById('step-4').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  // Occasion extras: own-page note (jingle / get well / lullaby) and the required "Other" text box
+  const occNote = document.getElementById('occ-note'), occNoteLink = document.getElementById('occ-note-link');
+  const otherWrap = document.getElementById('other-wrap'), otherInput = document.getElementById('occasion-other');
+  const subjectEl = document.getElementById('subject'), SUBJECT_PH = subjectEl.placeholder, ME_PH = '¡Yo! (Tu nombre, para que la escriba desde tu punto de vista)';
+  orderFormEl.addEventListener('change', () => {
+    const occ = document.querySelector('input[name="occasion"]:checked');
+    const page = occ && occ.dataset.page;
+    occNote.style.display = page ? 'block' : 'none';
+    if (page) occNoteLink.href = page;
+    const isOther = !!(occ && occ.dataset.other);
+    otherWrap.style.display = isOther ? 'block' : 'none';
+    otherInput.disabled = !isOther; otherInput.required = isOther;
+    const sf = document.querySelector('input[name="song-for"]:checked');
+    if (sf) giftNote.style.display = 'none';
+    subjectEl.placeholder = sf && sf.value === document.querySelectorAll('input[name="song-for"]')[1].value ? ME_PH : SUBJECT_PH;
   });
   orderFormEl.addEventListener('change', () => {
     if (document.querySelector('input[name="genre"]:checked') && document.querySelector('input[name="vocalist"]:checked') && document.querySelector('input[name="detail-level"]:checked')) soundNote.style.display = 'none';
