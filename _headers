@@ -114,3 +114,5 @@
 /api/fmm/*
   X-Robots-Tag: noindex
   Cache-Control: no-store
+/family-memory-magnets/consent-form/*
+  X-Robots-Tag: noindex, nofollow
