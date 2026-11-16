@@ -6,4 +6,4 @@
 - **Defective or undelivered:** if your magnet is damaged or never arrives, or the keepsake is not delivered, we will replace it or refund it.
 - **Your rights:** this policy does not limit any rights you have under consumer protection law.
 
-To ask for a refund, text (661) 714-0903 or email [business email].
+To ask for a refund, text (661) 714-0903 or email danrocksai@gmail.com.
