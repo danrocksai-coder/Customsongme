@@ -28,6 +28,28 @@ const PACKAGES = {
   'get-well-mailed': { name: 'Get Well Song Card — Printed & Mailed', amount: 6900, noLink: true },
 };
 
+// New homepage packages (pkg1 – pkg4) plus the optional "Keep it Unlisted" add-on.
+// The total is worked out here, never taken from the browser. The add-on is +$25
+// and only valid on Packages 2, 3 and 4. Anything unexpected returns null, and
+// the customer lands on the calm "order received" page instead of a wrong charge.
+const NEW_PACKAGES = {
+  pkg1: { name: 'Package 1 — MP3 Only', amount: 2500, canUnlist: false },
+  pkg2: { name: 'Package 2 — Complete', amount: 5000, canUnlist: true },
+  pkg3: { name: 'Package 3 — Story', amount: 7500, canUnlist: true },
+  pkg4: { name: 'Package 4 — Ultimate', amount: 10000, canUnlist: true },
+};
+function newPackage(id, params) {
+  const base = NEW_PACKAGES[id];
+  if (!base) return null;
+  const wantsUnlisted = params.get('unlisted') === '1';
+  if (wantsUnlisted && !base.canUnlist) return null;
+  return {
+    name: base.name + (wantsUnlisted ? ' + Keep it Unlisted' : ''),
+    amount: base.amount + (wantsUnlisted ? 2500 : 0),
+    noLink: true,
+  };
+}
+
 // Custom Lullaby Me: price depends on the album, so it's worked out here from
 // the song list (same rules as the page): The Original 7 (#1–#7) = $19.99,
 // every other song $3, baby-name video +$12.
@@ -70,9 +92,11 @@ export default async (req, context) => {
   const rawEmail = (url.searchParams.get('prefilled_email') || '').trim();
   const email = EMAIL_RE.test(rawEmail) ? rawEmail : '';
 
-  const pkg = id === 'lullaby' ? lullabyPackage(url.searchParams) : PACKAGES[id];
+  const pkg = id === 'lullaby' ? lullabyPackage(url.searchParams)
+    : NEW_PACKAGES[id] ? newPackage(id, url.searchParams)
+    : PACKAGES[id];
   const key = process.env.STRIPE_SECRET_KEY;
-  const bail = () => (pkg && pkg.noLink) || id === 'lullaby' ? noLinkFallback() : fallback(id, email);
+  const bail = () => (pkg && pkg.noLink) || id === 'lullaby' || NEW_PACKAGES[id] ? noLinkFallback() : fallback(id, email);
   if (!pkg || !key) {
     console.log('pay: falling back', { id, hasPkg: !!pkg, hasKey: !!key });
     return bail();
