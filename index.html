@@ -1064,14 +1064,14 @@
     .pkg-list .icon { color: var(--gold); flex-shrink: 0; }
     .pkg-body .btn-primary { margin-top: auto; width: 100%; padding: 14px 10px; font-size: 0.95rem; }
     .pkg-hint { text-align: center; color: var(--muted); font-size: 0.85rem; margin: 0 auto 18px; }
-    .pkg-addon { max-width: 760px; margin: 28px auto 0; background: var(--gold-pale); border: 1px solid var(--gold); border-radius: var(--radius-lg); padding: 18px 22px; text-align: center; }
-    .pkg-addon h3 { font-size: 1.2rem; margin-bottom: 6px; }
-    .pkg-addon .gold { color: var(--ink); }
-    .pkg-addon p { font-size: 0.92rem; color: var(--charcoal); line-height: 1.55; margin: 0; }
     .pkg-dialog { border: 0; padding: 0; background: transparent; width: min(94vw, 760px); max-height: 96vh; margin: auto; overflow: visible; }
     .pkg-dialog::backdrop { background: rgba(4, 9, 30, 0.88); }
     .pkg-dialog img { display: block; width: 100%; height: auto; max-height: 88vh; object-fit: contain; border-radius: 12px; }
     .pkg-dialog-close { display: block; margin: 10px auto 0; background: var(--gold); color: var(--black); border: 0; border-radius: 50px; padding: 10px 26px; font-weight: 700; font-size: 0.95rem; cursor: pointer; }
+    .unlisted-block { margin: 8px 0 22px; }
+    .unlisted-block .public-note { margin-top: 0; }
+    .unlisted-block .public-note p { margin: 10px 0 0; font-size: 0.9rem; color: rgba(255,255,255,0.85); }
+    .unlisted-block .order-total { margin-top: 16px; font-size: 1.25rem; text-align: center; }
     .order-total { margin-top: 14px; font-size: 1.05rem; font-weight: 700; color: var(--gold); }
     .char-count { display: block; font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-top: 4px; }
     @media (max-width: 1000px) { .pkg-grid { grid-template-columns: repeat(2, 1fr); max-width: 640px; } }
@@ -1804,6 +1804,45 @@
   </div>
 </section>
 
+<!-- ═══════ SECTION 7 — HOW IT WORKS ═══════ -->
+<section id="how-it-works">
+  <div class="container">
+    <h2 class="fade-up">How It Works</h2>
+    <div class="steps-list">
+      <div class="step fade-up">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>Tell Your Story</h3>
+          <p>Fill out the request form — starting with your package and the occasion, then who the song is for, your style and vocalist preferences, and finally the memories, moments, and message you'd like included. The more detail you provide, the more personal your song becomes.</p>
+        </div>
+      </div>
+      <div class="step fade-up">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>Complete Secure Payment</h3>
+          <p>When you submit your story, you're taken straight to secure checkout for the package you chose. Enter the same email you used on the request form — that's how your payment is matched to your song.</p>
+        </div>
+      </div>
+      <div class="step fade-up">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>Dan Gets to Work</h3>
+          <p>Once your payment is confirmed, Dan the Song Man personally reviews your story during studio hours and begins writing and producing your song.</p>
+          <div class="studio-hours-badge">📅 Studio Hours: Mon–Fri 9am–6pm PT &nbsp;|&nbsp; Sat 10am–2pm PT</div>
+        </div>
+      </div>
+      <div class="step fade-up">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h3>Receive Your Song</h3>
+          <p>Within 24 hours of confirmed payment, your song is delivered — backed by the Personal Happiness Guarantee. Ready to watch, share, and enjoy.</p>
+        </div>
+      </div>
+    </div>
+    <p class="how-it-works-cta fade-up">💡 Ready to start? Tap the <strong>🎁 Start My Song</strong> button in the top right corner any time — it'll take you straight to the form below.</p>
+  </div>
+</section>
+
 <!-- ═══════ SECTION 4 — PRICING INTRO ═══════ -->
 <section id="pricing-intro">
   <div class="container fade-up">
@@ -1865,10 +1904,6 @@
           <a href="#order-form" class="btn-primary pkg-choose" data-pkg="4">Choose Package 4</a>
         </div>
       </article>
-    </div>
-    <div class="pkg-addon">
-      <h3>Keep it Unlisted <span class="gold">+$25</span></h3>
-      <p>On Packages 2, 3 and 4, add this and your video stays off my public YouTube channel. Only people with your link or QR code can watch it. Package 1 is already private.</p>
     </div>
   </div>
 </section>
@@ -1943,45 +1978,6 @@
   </div>
 </section>
 
-<!-- ═══════ SECTION 7 — HOW IT WORKS ═══════ -->
-<section id="how-it-works">
-  <div class="container">
-    <h2 class="fade-up">How It Works</h2>
-    <div class="steps-list">
-      <div class="step fade-up">
-        <div class="step-number">1</div>
-        <div class="step-content">
-          <h3>Tell Your Story</h3>
-          <p>Fill out the request form — starting with your package and the occasion, then who the song is for, your style and vocalist preferences, and finally the memories, moments, and message you'd like included. The more detail you provide, the more personal your song becomes.</p>
-        </div>
-      </div>
-      <div class="step fade-up">
-        <div class="step-number">2</div>
-        <div class="step-content">
-          <h3>Complete Secure Payment</h3>
-          <p>When you submit your story, you're taken straight to secure checkout for the package you chose. Enter the same email you used on the request form — that's how your payment is matched to your song.</p>
-        </div>
-      </div>
-      <div class="step fade-up">
-        <div class="step-number">3</div>
-        <div class="step-content">
-          <h3>Dan Gets to Work</h3>
-          <p>Once your payment is confirmed, Dan the Song Man personally reviews your story during studio hours and begins writing and producing your song.</p>
-          <div class="studio-hours-badge">📅 Studio Hours: Mon–Fri 9am–6pm PT &nbsp;|&nbsp; Sat 10am–2pm PT</div>
-        </div>
-      </div>
-      <div class="step fade-up">
-        <div class="step-number">4</div>
-        <div class="step-content">
-          <h3>Receive Your Song</h3>
-          <p>Within 24 hours of confirmed payment, your song is delivered — backed by the Personal Happiness Guarantee. Ready to watch, share, and enjoy.</p>
-        </div>
-      </div>
-    </div>
-    <p class="how-it-works-cta fade-up">💡 Ready to start? Tap the <strong>🎁 Start My Song</strong> button in the top right corner any time — it'll take you straight to the form below.</p>
-  </div>
-</section>
-
 <!-- ═══════ SECTION 8 — ORDER FORM ═══════ -->
 <section id="order-form">
   <div class="container">
@@ -2029,14 +2025,6 @@
                 <span>👑 Package 4 · Ultimate — $100</span>
               </label>
             </div>
-            <div class="public-note" id="public-note">
-              <p>💡 Packages 2, 3 and 4 include a video on my YouTube channel. Prefer to keep yours off the public channel?</p>
-              <label class="unlisted-toggle">
-                <input type="checkbox" id="unlisted-checkbox" name="unlisted-addon" value="Yes" />
-                <span>Keep it Unlisted +$25</span>
-              </label>
-            </div>
-            <div class="order-total" id="order-total" aria-live="polite"></div>
           </div>
 
           <div class="form-group full" id="msg1-group">
@@ -2176,6 +2164,17 @@
             <li>Your song is delivered within 24 hours of confirmed payment — backed by the Personal Happiness Guarantee.</li>
           </ol>
           <div class="lock-note">🔒 <strong>Production does not begin until your payment is received and matched to your order.</strong></div>
+        </div>
+
+        <div class="unlisted-block">
+          <div class="public-note" id="public-note">
+            <label class="unlisted-toggle">
+              <input type="checkbox" id="unlisted-checkbox" name="unlisted-addon" value="Yes" />
+              <span>Keep it Unlisted +$25</span>
+            </label>
+            <p><strong>Keep it Unlisted is +$25, and it is only for Packages 2, 3 and 4.</strong> By default, your video is posted on my public CustomSongMe YouTube channel. With Keep it Unlisted, I do not post it on my channel, and only people with your private link or QR code can watch it. Package 1 has no video and is already private.</p>
+          </div>
+          <div class="order-total" id="order-total" aria-live="polite"></div>
         </div>
 
         <div class="form-submit-area">
