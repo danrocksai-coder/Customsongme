@@ -34,6 +34,8 @@ export const LOCK_MAX_MS = 24 * 3600e3;
 export const STOPS = QUESTIONS.stops;
 export const CHAPTERS = QUESTIONS.chapters;
 export const ROLES = ['child', 'grandparent'];
+export const ALL_ROLES = ['child', 'grandparent', 'guardian']; // guardian = the purchasing parent/guardian (optional login)
+export const RETENTION_DAYS_AFTER_COMPLETION = 365; // keepsake stays open 12 months after the 30th conversation
 
 // Little Hello suggestions. Every line is 150 characters or fewer (enforced by a test).
 export const HELLO_SWEET = [
@@ -123,6 +125,8 @@ export function norm(story) {
   story.helloSettings ||= { enabled: true, style: 'both', custom: [] };
   story.drafts ||= {};
   story.sessions ||= { child: [], grandparent: [] };
+  story.sessions.guardian ||= [];
+  story.childPaused ||= false;
   story.pins ||= {};
   story.keepsake ||= { status: 'preparing', items: [] };
   if (!story.lastActivityAt) {
@@ -151,7 +155,7 @@ function pinOk(story, role, pin) {
   return true;
 }
 export function setPin(story, role, pin) { // pin '' clears
-  if (!ROLES.includes(role)) fail(400, 'Bad role.');
+  if (!ALL_ROLES.includes(role) || (role === 'guardian' && !story.tokenHashes.guardian)) fail(400, 'Bad role.');
   if (pin === '' || pin == null) { delete story.pins[role]; if (role === 'child') story.pinHash = null; return; }
   const salt = newToken(12);
   story.pins[role] = { salt, hash: hashPin(cleanPin(pin), salt) };
@@ -182,6 +186,7 @@ export async function createStory(store, input) {
   if (!childName || !grandparentName) fail(400, 'Child name and grandparent name are required.');
   const id = newToken(9);
   const tokens = { child: newToken(), grandparent: newToken() };
+  if (input.guardian) tokens.guardian = newToken();
   const qrCodes = { child: newToken(12), grandparent: newToken(12) };
   const story = norm({
     id, createdAt: now(), expiresAt: now() + ACCESS_DAYS * 86400e3,
@@ -193,6 +198,7 @@ export async function createStory(store, input) {
     tokenHashes: { child: sha(tokens.child), grandparent: sha(tokens.grandparent) },
     consent: null, stops: emptyStops(), intro: null, closing: null, deletedAt: null,
   });
+  if (tokens.guardian) { story.tokenHashes.guardian = sha(tokens.guardian); story.guardianCode = newToken(12); }
   const pc = input.pinChild ?? input.pin; // `pin` kept for older callers
   if (pc) setPin(story, 'child', pc);
   if (input.pinGrandparent) setPin(story, 'grandparent', input.pinGrandparent);
@@ -200,7 +206,19 @@ export async function createStory(store, input) {
   await store.setJSON(`token/${story.tokenHashes.child}`, { storyId: id, role: 'child' });
   await store.setJSON(`token/${story.tokenHashes.grandparent}`, { storyId: id, role: 'grandparent' });
   for (const r of ROLES) await store.setJSON(`qr/${qrCodes[r]}`, { storyId: id, role: r });
+  if (tokens.guardian) await store.setJSON(`token/${story.tokenHashes.guardian}`, { storyId: id, role: 'guardian' });
   return { story, tokens };
+}
+
+// Add the optional parent/guardian login to an existing story (no other credential changes).
+export async function addGuardian(store, storyId) {
+  const story = norm(await store.getJSON(`story/${storyId}`) || fail(404, 'No such story.'));
+  if (story.tokenHashes.guardian) fail(409, 'This story already has a parent login. Use "Revoke & new link" to replace it.');
+  const t = newToken();
+  story.tokenHashes.guardian = sha(t); story.guardianCode = newToken(12);
+  await store.setJSON(`token/${story.tokenHashes.guardian}`, { storyId, role: 'guardian' });
+  await store.setJSON(`story/${storyId}`, story);
+  return t;
 }
 
 // Older stories have one QR id (stored as qrCode). Keep it as the child's permanent code and add the
@@ -223,8 +241,9 @@ async function dropSessions(store, story, role) {
 }
 
 export async function revokeToken(store, storyId, role) {
-  if (!ROLES.includes(role)) fail(400, 'Bad role.');
+  if (!ALL_ROLES.includes(role)) fail(400, 'Bad role.');
   const story = norm(await store.getJSON(`story/${storyId}`) || fail(404, 'No such story.'));
+  if (!story.tokenHashes[role]) fail(404, 'That login does not exist.');
   await store.del(`token/${story.tokenHashes[role]}`); // old link dies immediately
   await dropSessions(store, story, role);              // and so does every remembered device
   const t = newToken();
@@ -236,7 +255,7 @@ export async function revokeToken(store, storyId, role) {
 
 // Forget remembered devices without changing the link (e.g. a lost phone).
 export async function revokeDevices(store, storyId, role) {
-  if (!ROLES.includes(role)) fail(400, 'Bad role.');
+  if (!ALL_ROLES.includes(role)) fail(400, 'Bad role.');
   const story = norm(await store.getJSON(`story/${storyId}`) || fail(404, 'No such story.'));
   await dropSessions(store, story, role);
   await store.setJSON(`story/${storyId}`, story);
@@ -248,7 +267,7 @@ export async function deleteStory(store, storyId) {
   for (const s of story.stops) for (const slot of ['q', 'a']) if (s[slot]) await store.del(s[slot].key);
   for (const k of ['intro', 'closing']) if (story[k]) await store.del(story[k].key);
   for (const h of story.hellos) if (h.audio) await store.del(h.audio.key);
-  for (const r of ROLES) { await store.del(`token/${story.tokenHashes[r]}`); await dropSessions(store, story, r); }
+  for (const r of ALL_ROLES) { if (story.tokenHashes[r]) await store.del(`token/${story.tokenHashes[r]}`); await dropSessions(store, story, r); }
   for (const c of new Set([story.qrCode, story.qrCodes?.child, story.qrCodes?.grandparent].filter(Boolean))) {
     await store.del(`qr/${c}`); await store.del(`rl/${sha('qr|' + c)}`);
   }
@@ -292,7 +311,7 @@ export async function exchangeLink(store, linkToken, { pin } = {}) {
   const { story, role } = await authorize(store, linkToken, { pin });
   const session = await createSession(store, story, role);
   const qrCodes = await ensureQrCodes(store, story);
-  return { session, role, code: qrCodes[role] };
+  return { session, role, code: qrCodes[role] || story.guardianCode };
 }
 
 async function createSession(store, story, role) {
@@ -391,8 +410,28 @@ export function helloEligibility(story, role, at = now()) {
   return { ok: true };
 }
 
+// What the purchasing parent/guardian sees: oversight and controls, never recording.
+export function guardianState(story) {
+  norm(story);
+  const ci = currentIndex(story);
+  const name = (r) => (r === 'child' ? story.childName : story.grandparentName);
+  return {
+    role: 'guardian', childName: story.childName, grandparentName: story.grandparentName, test: story.test,
+    expiresAt: story.expiresAt, completed: Math.min(ci, STOPS.length), done: ci >= STOPS.length, completedAt: story.completedAt || null,
+    consent: story.consent ? { parentName: story.consent.parentName, at: story.consent.at } : null,
+    consentNeeded: !story.test && !story.consent,
+    childPaused: !!story.childPaused, helloSettings: story.helloSettings,
+    hellos: story.hellos.slice(-30).reverse().map((h) => ({ id: h.id, kind: h.kind, text: h.text || '', at: h.at, from: h.from, fromName: name(h.from), toName: name(h.from === 'child' ? 'grandparent' : 'child') })),
+    conversations: story.stops.map((s, i) => ((s.q || s.a) ? { n: i + 1, title: STOPS[i].title, question: s.chosen?.text || '', hasQ: !!s.q, hasA: !!s.a } : null)).filter(Boolean),
+    keepsake: ci >= STOPS.length ? { status: story.keepsake.status, items: story.keepsake.status === 'ready' ? story.keepsake.items : [] } : null,
+    availableUntil: ci >= STOPS.length ? story.expiresAt : null,
+    deletionRequestedAt: story.deletionRequestedAt || null, limits: LIMITS, retentionDays: RETENTION_DAYS_AFTER_COMPLETION,
+  };
+}
+
 export function publicState(story, role) {
   norm(story);
+  if (role === 'guardian') return guardianState(story);
   const ci = currentIndex(story);
   const stops = STOPS.map((def, i) => ({
     n: def.n, chapter: def.chapter, title: def.title,
@@ -405,6 +444,8 @@ export function publicState(story, role) {
     role, childName: story.childName, grandparentName: story.grandparentName,
     qrCode: story.qrCodes?.[role] || story.qrCode, test: story.test, expiresAt: story.expiresAt,
     consentNeeded: role === 'child' && !story.test && !story.consent,
+    guardianManaged: !!story.tokenHashes.guardian, paused: role === 'child' && !!story.childPaused,
+    availableUntil: ci >= STOPS.length ? story.expiresAt : null,
     done: ci >= STOPS.length, completed: Math.min(ci, STOPS.length),
     chapters: CHAPTERS, stops, introDone: !!story.intro, closingDone: !!story.closing,
     limits: LIMITS, current: null, draft: '',
@@ -433,7 +474,8 @@ export function publicState(story, role) {
 // ---------- actions ----------
 export async function recordConsent(store, token, { parentName, agree, pin }) {
   const { story, role } = await authorize(store, token, { pin });
-  if (role !== 'child') fail(403, 'Only the parent link can give consent.');
+  if (role === 'grandparent') fail(403, 'Only the parent can give consent.');
+  if (role === 'child' && story.tokenHashes.guardian) fail(403, 'A parent needs to say yes from their own parent link.');
   if (!agree || !String(parentName || '').trim()) fail(400, 'Parent name and agreement are required.');
   story.consent = { parentName: String(parentName).trim().slice(0, 80), version: CONSENT_VERSION, at: now() };
   await store.setJSON(`story/${story.id}`, story);
@@ -443,6 +485,7 @@ export async function recordConsent(store, token, { parentName, agree, pin }) {
 export async function choose(store, token, { n, qid, custom, pin }) {
   const { story, role } = await authorize(store, token, { pin });
   if (role !== 'child') fail(403, 'Only the child picks the question.');
+  assertNotPaused(story, role);
   const i = currentIndex(story);
   if (n !== STOPS[i]?.n) fail(409, 'That stop is not open yet.');
   const cur = story.stops[i];
@@ -463,6 +506,8 @@ export async function choose(store, token, { n, qid, custom, pin }) {
 // ----- teleprompter drafts (private to the author; server-side so they survive refresh and device changes) -----
 export async function saveDraft(store, token, { n, text, pin }) {
   const { story, role } = await authorize(store, token, { pin });
+  if (role === 'guardian') fail(403, 'Parents do not write recording notes.');
+  assertNotPaused(story, role);
   const i = currentIndex(story);
   if (n !== STOPS[i]?.n) fail(409, 'That stop is not open.');
   const st = stopStatus(story, i);
@@ -475,11 +520,14 @@ export async function saveDraft(store, token, { n, text, pin }) {
   return { ok: true, saved: t.length };
 }
 
-const ROLE_SLOT = { child: ['question', 'hello'], grandparent: ['answer', 'intro', 'closing', 'hello'] };
+const ROLE_SLOT = { child: ['question', 'hello'], grandparent: ['answer', 'intro', 'closing', 'hello'], guardian: [] };
+const PAUSED = 'Your parent has paused this for now. Ask them to turn it back on.';
+const assertNotPaused = (story, role) => { if (role === 'child' && story.childPaused) fail(403, PAUSED); };
 
 export async function upload(store, token, { n, slot, data, durationSec, uploadId, contentType, pin }) {
   const { story, role } = await authorize(store, token, { pin });
   if (!ROLE_SLOT[role].includes(slot)) fail(403, 'This link cannot record that.');
+  assertNotPaused(story, role);
   if (role === 'child' && !story.test && !story.consent) fail(403, 'A parent must give consent before recording.');
   if (!data || !data.length) fail(400, 'Empty recording.');
   if (data.length > MAX_BYTES) fail(413, 'Recording is too large.');
@@ -532,11 +580,16 @@ export async function upload(store, token, { n, slot, data, durationSec, uploadI
 export async function markHeard(store, token, { n, pin }) {
   const { story, role } = await authorize(store, token, { pin });
   if (role !== 'child') fail(403, 'Only the child unlocks the next stop.');
+  assertNotPaused(story, role);
   const i = currentIndex(story);
   if (n !== STOPS[i]?.n) fail(409, 'That stop is not open.');
   if (!story.stops[i].a) fail(409, 'The answer has not been recorded yet.');
   story.stops[i].heardAt = now();
   story.lastActivityAt = now();
+  if (currentIndex(story) >= STOPS.length) { // retention policy: the keepsake stays open 12 months after completion
+    story.completedAt = now();
+    story.expiresAt = Math.max(story.expiresAt, story.completedAt + RETENTION_DAYS_AFTER_COMPLETION * 86400e3);
+  }
   await store.setJSON(`story/${story.id}`, story);
   return publicState(story, role);
 }
@@ -561,6 +614,8 @@ export async function skipQuestion(store, token, { n, pin }) {
 // ----- Little Hellos (text) -----
 export async function sendHello(store, token, { suggestion, pin }) {
   const { story, role } = await authorize(store, token, { pin });
+  if (role === 'guardian') fail(403, 'Parents manage Little Hellos from the parent page.');
+  assertNotPaused(story, role);
   const el = helloEligibility(story, role);
   if (!el.ok) fail(409, 'A Little Hello is not available right now.');
   const text = helloText(story, suggestion);
@@ -572,10 +627,31 @@ export async function sendHello(store, token, { suggestion, pin }) {
 }
 export async function markHelloRead(store, token, { id, pin }) {
   const { story, role } = await authorize(store, token, { pin });
+  if (role === 'guardian') return { ok: true };
   const h = story.hellos.find((x) => x.id === id && x.from !== role);
   if (!h) fail(404, 'No such message.');
   if (!h.readAt) { h.readAt = now(); await store.setJSON(`story/${story.id}`, story); }
   return { ok: true };
+}
+
+// ----- parent/guardian controls (server checks the role; the purchaser decides) -----
+export async function guardianUpdate(store, token, input) {
+  const { story, role } = await authorize(store, token, { pin: input.pin });
+  if (role !== 'guardian') fail(403, 'Only the parent can change these settings.');
+  if (typeof input.childPaused === 'boolean') story.childPaused = input.childPaused;
+  if (input.hello) {
+    const { enabled, style, custom } = input.hello;
+    if (!['both', 'sweet', 'funny', 'custom'].includes(style || 'both')) fail(400, 'Bad style.');
+    const list = (Array.isArray(custom) ? custom : []).map((t) => String(t).trim()).filter(Boolean);
+    if (list.length > 10) fail(400, 'At most 10 custom messages.');
+    if (list.some((t) => t.length > HELLO_TEXT_MAX)) fail(400, `Messages are limited to ${HELLO_TEXT_MAX} characters.`);
+    if ((style || 'both') === 'custom' && !list.length) fail(400, 'Add at least one custom message.');
+    story.helloSettings = { enabled: enabled !== false, style: style || 'both', custom: list };
+  }
+  if (input.requestDeletion === true) story.deletionRequestedAt = story.deletionRequestedAt || now();
+  if (input.requestDeletion === false) story.deletionRequestedAt = null;
+  await store.setJSON(`story/${story.id}`, story);
+  return guardianState(story);
 }
 
 // ----- admin-side settings (callers verify admin) -----

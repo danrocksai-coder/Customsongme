@@ -55,8 +55,9 @@ const summary = (s) => {
     completed: C.currentIndex(s), consent: s.consent ? { parentName: s.consent.parentName, at: s.consent.at, version: s.consent.version } : null,
     hasIntro: !!s.intro, hasClosing: !!s.closing,
     qrCodes: s.qrCodes || { child: s.qrCode, grandparent: null },
-    pins: { child: C.pinRequired(s, 'child'), grandparent: C.pinRequired(s, 'grandparent') },
-    devices: { child: s.sessions.child.length, grandparent: s.sessions.grandparent.length },
+    pins: { child: C.pinRequired(s, 'child'), grandparent: C.pinRequired(s, 'grandparent'), guardian: C.pinRequired(s, 'guardian') },
+    devices: { child: s.sessions.child.length, grandparent: s.sessions.grandparent.length, guardian: s.sessions.guardian.length },
+    hasGuardian: !!s.tokenHashes.guardian, childPaused: !!s.childPaused, deletionRequestedAt: s.deletionRequestedAt || null, completedAt: s.completedAt || null,
     helloSettings: s.helloSettings,
     hellos: s.hellos.slice(-20).map((h) => ({ id: h.id, from: h.from, kind: h.kind, text: h.text || '', at: h.at, read: !!h.readAt })),
     keepsake: s.keepsake, failures: (s.failures || []).slice(-10),
@@ -100,6 +101,7 @@ export default async (req) => {
     if (route === 'choose' && req.method === 'POST') return json(await C.choose(store, t, await body()));
     if (route === 'heard' && req.method === 'POST') return json(await C.markHeard(store, t, await body()));
     if (route === 'skip' && req.method === 'POST') return json(await C.skipQuestion(store, t, await body()));
+    if (route === 'guardian' && req.method === 'POST') return json(await C.guardianUpdate(store, t, await body()));
     if (route === 'draft' && req.method === 'POST') return json(await C.saveDraft(store, t, await body()));
     if (route === 'hello' && req.method === 'POST') return json(await C.sendHello(store, t, await body()));
     if (route === 'hello-read' && req.method === 'POST') return json(await C.markHelloRead(store, t, await body()));
@@ -195,8 +197,11 @@ async function admin(route, req, url, store, secret, origin) {
   if (route === 'create' && req.method === 'POST') {
     const { story, tokens } = await C.createStory(store, b);
     if (b.orderId) { const o = await store.getJSON(`order/${b.orderId}`); if (o) { o.status = 'story-created'; o.storyId = story.id; await store.setJSON(`order/${o.id}`, o); } }
-    return json({ story: summary(story), links: { child: link(tokens.child), grandparent: link(tokens.grandparent) }, qrUrls: { child: qrUrl(story.qrCodes.child), grandparent: qrUrl(story.qrCodes.grandparent) } });
+    const links = { child: link(tokens.child), grandparent: link(tokens.grandparent) };
+    if (tokens.guardian) links.guardian = link(tokens.guardian);
+    return json({ story: summary(story), links, qrUrls: { child: qrUrl(story.qrCodes.child), grandparent: qrUrl(story.qrCodes.grandparent) } });
   }
+  if (route === 'add-guardian' && req.method === 'POST') return json({ link: link(await C.addGuardian(store, b.id)) });
   if (route === 'revoke' && req.method === 'POST') return json({ link: link(await C.revokeToken(store, b.id, b.role)) });
   if (route === 'revoke-devices' && req.method === 'POST') return json(await C.revokeDevices(store, b.id, b.role));
   if (route === 'set-pin' && req.method === 'POST') return json(await C.setStoryPin(store, b.id, b.role, b.pin || ''));

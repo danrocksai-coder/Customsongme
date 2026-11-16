@@ -39,8 +39,13 @@ Recordings and story data are in private Netlify Blobs (store `fmm`). No public 
 - Admin: view/download each QR as SVG or PNG (encodes only the public address), set/clear PINs, forget remembered phones, Little Hello settings, keepsake links.
 - Existing stories keep working with no migration; older stories get a second QR id added the first time Admin is opened (their existing code stays the child's).
 
+## v3 additions: approved questions, retention, optional parent login
+- **Questions are approved and locked** (`netlify/lib/fmm-questions.mjs`, version `approved-1.0`). A test fingerprints all 90, so any wording change fails until the fingerprint is updated on purpose.
+- **Retention policy:** a story is open for 12 months from creation. When the 30th conversation is finished, access is extended to 12 months after completion (never shortened). The family sees the date. Deletion is manual: the parent can *ask* for deletion (Admin shows a red banner) and Dan deletes after delivering what is owed.
+- **Optional parent/guardian login** (third credential): chosen at setup or added later in Admin. The purchaser decides, depending on the child's age. The parent can: give consent (child link can no longer do so once a parent login exists), pause/resume the child, control Little Hellos (on/off, style, own messages), listen to all recordings and hellos, see progress, and ask for deletion. The parent cannot record. Optional PIN and device sessions work as for the other roles.
+- Admin: add/revoke the parent link, download any recording (m4a/webm).
+
 ## Known limits / decisions needed
-- No separate "parent" login: the parent uses the child's link. "Parent can review or disable Little Hellos" is done by Dan in Admin for now.
-- Retention after completion is not defined; access still ends at the story's 12-month expiry.
+- Without a parent login the parent uses the child's link (unchanged from v2).
 - Rate-limit counters and story files are read-modify-write (fine for low volume).
 - Real-device audio (iPhone Safari, Android Chrome) has not been tested.
