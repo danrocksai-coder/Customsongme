@@ -103,6 +103,10 @@ export default async (req, context) => {
     : FMM_PACKAGES[id] || PACKAGES[id];
   const key = process.env.STRIPE_SECRET_KEY;
   const bail = () => (pkg && pkg.noLink) || id === 'lullaby' || NEW_PACKAGES[id] || FMM_PACKAGES[id] ? noLinkFallback() : fallback(id, email);
+  // Family Memory Magnets sales are paused until Dan sets FMM_SALES_OPEN=true in Netlify.
+  if (FMM_PACKAGES[id] && process.env.FMM_SALES_OPEN !== 'true') {
+    return Response.redirect(SITE + '/family-memory-magnets/#waitlist', 302);
+  }
   if (!pkg || !key) {
     console.log('pay: falling back', { id, hasPkg: !!pkg, hasKey: !!key });
     return bail();

@@ -75,7 +75,11 @@ export default async (req) => {
   try {
     // ---------- public ----------
     if (route === 'qr') return json({ message: C.QR_MESSAGE }); // identical for every code
-    if (route === 'order' && req.method === 'POST') return await order(req, store);
+    if (route === 'order' && req.method === 'POST') {
+      if (process.env.FMM_SALES_OPEN !== 'true') return json({ error: 'Orders are not open yet. Please join the waiting list.' }, 403);
+      return await order(req, store);
+    }
+    if (route === 'waitlist' && req.method === 'POST') return await waitlist(req, store);
 
     if (!secret) return json({ error: 'Not configured.' }, 503);
 
@@ -152,6 +156,23 @@ async function order(req, store) {
       body: JSON.stringify({ _subject: 'New Family Memory Magnets order (awaiting payment)', ...o }) });
   } catch { /* ignore */ }
   return json({ ok: true, orderId: o.id, payUrl: `/pay/${pkg.id}?order=${encodeURIComponent(o.id)}&prefilled_email=${encodeURIComponent(email)}` });
+}
+
+async function waitlist(req, store) { // free waiting-list signup; no payment, no order
+  const b = await req.json().catch(() => ({}));
+  if (b.website) return json({ ok: true }); // honeypot
+  const clean = (v, n) => String(v || '').trim().slice(0, n);
+  const w = {
+    id: randomBytes(8).toString('base64url'), createdAt: Date.now(),
+    name: clean(b.name, 80), email: clean(b.email, 120), interest: PACKAGES[b.package]?.label || '', notes: clean(b.notes, 400),
+  };
+  if (!w.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(w.email)) return json({ error: 'Please enter your name and email.' }, 400);
+  await store.setJSON(`waitlist/${w.id}`, w);
+  try {
+    await fetch(FORMSPREE, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ _subject: 'Family Memory Magnets waiting list signup', ...w }) });
+  } catch { /* ignore */ }
+  return json({ ok: true });
 }
 
 async function admin(route, req, url, store, secret, origin) {
