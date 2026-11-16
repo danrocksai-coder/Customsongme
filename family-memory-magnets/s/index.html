@@ -243,9 +243,9 @@
   function keepsake() {
     var k = S.keepsake; if (!k) return '';
     if (k.status === 'ready' && k.items.length) {
-      return '<div class="card"><h2>Your family keepsake</h2>' + k.items.map(function (i) { return '<a class="btn" style="margin:6px 0" target="_blank" rel="noopener" href="' + esc(i.url) + '">' + esc(i.label) + '</a>'; }).join('') + '</div>';
+      return '<div class="card"><h2>Your family keepsake</h2>' + (S.availableUntil ? '<p class="muted">Available here until ' + new Date(S.availableUntil).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + '.</p>' : '') + k.items.map(function (i) { return '<a class="btn" style="margin:6px 0" target="_blank" rel="noopener" href="' + esc(i.url) + '">' + esc(i.label) + '</a>'; }).join('') + '</div>';
     }
-    return '<div class="card"><h2>Your keepsake is being prepared</h2><p>All 30 conversations are saved. Your family movie, digital storybook and keepsake will appear right here, on this same magnet, when they are ready. You can replay every recording below in the meantime.</p></div>';
+    return '<div class="card"><h2>Your keepsake is being prepared</h2><p>All 30 conversations are saved. Your family movie, digital storybook and keepsake will appear right here, on this same magnet, when they are ready. You can replay every recording below in the meantime.</p>' + (S.availableUntil ? '<p class="muted">Your recordings stay available here until ' + new Date(S.availableUntil).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + '.</p>' : '') + '</div>';
   }
 
   function homeHeadline() {
@@ -260,9 +260,55 @@
     return ['Waiting for ' + c, c + ' is choosing the next question.'];
   }
 
+  function renderPaused() {
+    app.innerHTML = header() + '<div class="card center"><h2>Taking a little break</h2><p>Your parent has paused recording for now. Ask them to turn it back on when you are ready.</p></div>';
+  }
+  var TYPE_LABEL = { child: 'sweet', grandparent: 'sweet' };
+  function renderGuardian() {
+    var h = header();
+    h += '<div class="card"><div class="stage">Parent dashboard</div><h2>You are in charge</h2><p class="muted">You can see progress, listen to recordings, control Little Hellos, pause ' + esc(S.childName) + ', and ask for everything to be deleted. You cannot record from this page.</p></div>';
+    if (S.consentNeeded) {
+      h += '<div class="card"><h3>Permission needed</h3><p>Before ' + esc(S.childName) + ' records anything, a parent or legal guardian needs to give permission.</p><ul style="margin:8px 0 0 20px"><li>Recordings are private and are never posted publicly.</li><li>They are used only to create this family story, movie and keepsake.</li><li>You can ask for them to be deleted at any time.</li></ul>' +
+        '<label for="pn">Your name</label><input type="text" id="pn" autocomplete="name"><label class="check"><input type="checkbox" id="ag"><span>I am ' + esc(S.childName) + '\'s parent or legal guardian, and I give permission for ' + esc(S.childName) + '\'s voice to be recorded and saved for this family story.</span></label><div id="cm"></div><button class="btn" id="cb">I agree and continue</button></div>';
+    } else if (S.consent) h += '<div class="card"><div class="muted">Permission given by ' + esc(S.consent.parentName) + ' on ' + new Date(S.consent.at).toLocaleDateString() + '.</div></div>';
+    h += '<div class="card"><h3>' + esc(S.childName) + '\'s recording</h3><p class="muted">' + (S.childPaused ? 'Paused. ' + esc(S.childName) + ' cannot record or send hellos until you turn it back on.' : 'Active.') + '</p><button class="btn ' + (S.childPaused ? '' : 'alt') + '" id="gpause">' + (S.childPaused ? 'Turn recording back on' : 'Pause recording') + '</button></div>';
+    var hs = S.helloSettings;
+    h += '<div class="card"><h3>Little Hellos</h3><p class="muted">Short, optional hellos sent between ' + esc(S.childName) + ' and ' + esc(S.grandparentName) + ' after a quiet couple of days. They never change the story.</p>' +
+      '<label class="check"><input type="checkbox" id="hen"' + (hs.enabled ? ' checked' : '') + '><span>Allow Little Hellos</span></label>' +
+      '<label for="hst">Style</label><select id="hst"><option value="both">Sweet and playful</option><option value="sweet">Sweet only</option><option value="funny">Playful only</option><option value="custom">Only my own messages</option></select>' +
+      '<label for="hcu">Your own approved messages (one per line, up to 150 characters)</label><textarea id="hcu" rows="3"></textarea><div id="hm"></div><button class="btn" id="hsave" style="margin-top:8px">Save Little Hello settings</button></div>';
+    if (S.hellos.length) {
+      h += '<div class="card"><h3>Little Hellos sent so far</h3>';
+      S.hellos.forEach(function (m) { h += '<div class="hello"><small>' + esc(m.fromName) + ' to ' + esc(m.toName) + ' &middot; ' + ago(m.at) + '</small>' + (m.kind === 'text' ? esc(m.text) : '<button class="btn small alt" data-hello="' + esc(m.id) + '">▶ Play voice hello</button>') + '</div>'; });
+      h += '</div>';
+    }
+    if (S.conversations.length) {
+      h += '<div class="card"><h3>Conversations so far</h3>';
+      S.conversations.forEach(function (c) { h += '<div class="conv"><b>Stop ' + c.n + ' &middot; ' + esc(c.title) + '</b><div class="muted">' + esc(c.question) + '</div><div class="row">' + (c.hasQ ? '<button class="btn small alt" data-play="question|' + c.n + '">▶ Question</button>' : '') + (c.hasA ? '<button class="btn small alt" data-play="answer|' + c.n + '">▶ Answer</button>' : '') + '</div></div>'; });
+      h += '</div>';
+    }
+    if (S.done) h += keepsake();
+    h += '<div class="card"><h3>Keeping and deleting</h3><p class="muted">Recordings are kept for ' + Math.round(S.retentionDays / 30) + ' months after your 30th conversation is complete' + (S.done ? ' (until ' + new Date(S.expiresAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + ')' : '') + ', unless you ask for them to be deleted sooner. You can ask at any time.</p>' +
+      (S.deletionRequestedAt ? '<div class="msg info">Deletion requested on ' + new Date(S.deletionRequestedAt).toLocaleDateString() + '. I will be in touch.</div><button class="btn alt" id="gundel">Cancel my deletion request</button>' : '<button class="btn alt" id="gdel">Ask for my recordings to be deleted</button>') + '</div>';
+    h += '<p class="muted center">Questions? Text me at (661) 714-0903.' + (S.test ? '<br><b>This is a test story.</b>' : '') + '</p>';
+    app.innerHTML = h;
+    var $ = function (id) { return app.querySelector('#' + id); };
+    if ($('cb')) $('cb').onclick = function () { api('consent', { json: { parentName: $('pn').value, agree: $('ag').checked } }).then(refresh).then(render).catch(function (e) { $('cm').innerHTML = '<div class="msg err">' + esc(e.message) + '</div>'; }); };
+    if ($('hst')) { $('hst').value = hs.style; $('hcu').value = (hs.custom || []).join('\n'); }
+    function upd(body, ok) { return api('guardian', { json: body }).then(function (st) { S = st; if (ok) toast(ok); render(); }).catch(function (e) { toast(e.message, 5000); }); }
+    $('gpause').onclick = function () { upd({ childPaused: !S.childPaused }, S.childPaused ? 'Recording turned back on.' : 'Recording paused.'); };
+    $('hsave').onclick = function () { upd({ hello: { enabled: $('hen').checked, style: $('hst').value, custom: $('hcu').value.split('\n') } }, 'Saved.'); };
+    if ($('gdel')) $('gdel').onclick = function () { if (confirm('Ask for all of your family\'s recordings to be deleted? Nothing is deleted automatically. I will contact you first.')) upd({ requestDeletion: true }, 'Request sent.'); };
+    if ($('gundel')) $('gundel').onclick = function () { upd({ requestDeletion: false }, 'Request cancelled.'); };
+    app.querySelectorAll('[data-play]').forEach(function (b) { b.onclick = function () { var p = b.getAttribute('data-play').split('|'); playMedia(b, 'slot=' + p[0] + '&n=' + p[1]); }; });
+    app.querySelectorAll('[data-hello]').forEach(function (b) { b.onclick = function () { playMedia(b, 'slot=hello&id=' + encodeURIComponent(b.getAttribute('data-hello'))); }; });
+  }
+
   function render() {
     if (!S) return;
+    if (S.role === 'guardian') return renderGuardian();
     if (S.consentNeeded) return renderConsent();
+    if (S.paused) return renderPaused();
     var role = S.role, cur = S.current;
     if (view === 'choose' && role === 'child' && cur && cur.status === 'choose') return renderChoose();
     if (view === 'prepare' && cur) return renderPrepare();
@@ -332,6 +378,10 @@
   }
 
   function renderConsent() {
+    if (S.role === 'child' && S.guardianManaged) {
+      app.innerHTML = header() + '<div class="card center"><h2>Ask your parent first</h2><p>Before you record anything, a parent needs to open their own parent link and say yes. Then you can start.</p></div>';
+      return;
+    }
     app.innerHTML = header() +
       '<div class="card"><h2>A parent or guardian says yes first</h2><p>Before ' + esc(S.childName) + ' records anything, a parent or legal guardian needs to give permission.</p>' +
       '<ul style="margin:10px 0 0 20px"><li>Recordings are private and are never posted publicly.</li><li>They are used only to create this family story, movie and keepsake.</li><li>You can ask me to delete them at any time.</li></ul>' +

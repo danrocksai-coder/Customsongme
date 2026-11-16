@@ -1,6 +1,8 @@
-// Draft question bank v0.1 (90 questions). Generated from the approved structure; edit here to change wording.
+// APPROVED question bank v1.0 (90 questions), approved by Dan on 2026-11-16.
+// Wording is locked: tests/fmm-v3.test.mjs fingerprints every question. Change a question only on purpose,
+// then update the fingerprint in that test in the same commit.
 export default {
- "version": "draft-0.1",
+ "version": "approved-1.0",
  "chapters": [
   {
    "n": 1,
