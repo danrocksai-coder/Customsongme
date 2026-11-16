@@ -21,7 +21,7 @@ Drafted November 17, 2026 by Claude for Dan Rock. **Not legal advice.** These dr
 
 ## Still to do before the pilot
 - [x] Business email on the privacy page.
-- [ ] Fill in the **mailing address** on the privacy page (highlighted placeholder; a P.O. box or virtual mailbox is fine).
+- [x] Mailing address on the privacy page.
 - [ ] Attorney review of: privacy page, consent form, publication consent, refund policy, and the sign-up flow. Ask specifically: (a) is the signed-form method acceptable as verifiable parental consent for our use, including later publication with a separate yes; (b) state laws for where we sell; (c) whether CustomSongMe's general Terms cover this product.
 - [ ] Self-host the web fonts on the app pages (they load from Google Fonts today, which sends the visitor's IP address to Google).
 - [ ] Independent backups (see security plan) before real recordings.
