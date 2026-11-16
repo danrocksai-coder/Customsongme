@@ -683,6 +683,31 @@ export async function setKeepsake(store, storyId, { status, items }) {
   return story.keepsake;
 }
 
+// READ-ONLY. Lists every saved clip of a story (for the Admin "Download all recordings" ZIP).
+// Returns details only; the audio itself is fetched one clip at a time through the normal signed admin media links.
+// Never writes: norm() only fills defaults in memory and nothing is saved back.
+export async function exportClips(store, id) {
+  const story = await store.getJSON(`story/${id}`);
+  if (!story) fail(404, 'No such story.');
+  norm(story);
+  const clips = [];
+  const add = (c, item) => { if (item && item.key) clips.push({ ...c, durationSec: item.durationSec ?? null, contentType: item.contentType || '', at: item.at || null }); };
+  story.stops.forEach((s, i) => {
+    const def = STOPS[i]; if (!def) return;
+    const ch = CHAPTERS.find((x) => x.n === def.chapter);
+    const base = { n: def.n, chapter: ch ? ch.title : '', stopTitle: def.title, question: s.chosen?.text || '' };
+    add({ ...base, slot: 'question', hid: '', by: story.childName }, s.q);
+    add({ ...base, slot: 'answer', hid: '', by: story.grandparentName }, s.a);
+  });
+  add({ n: 0, slot: 'intro', hid: '', chapter: '', stopTitle: 'Introduction', question: '', by: story.grandparentName }, story.intro);
+  add({ n: 0, slot: 'closing', hid: '', chapter: '', stopTitle: 'Closing message', question: '', by: story.grandparentName }, story.closing);
+  for (const h of story.hellos) {
+    if (h.kind !== 'voice' || !h.audio) continue;
+    add({ n: 0, slot: 'hello', hid: h.id, chapter: '', stopTitle: 'Little Hello', question: '', by: h.from === 'child' ? story.childName : story.grandparentName }, { ...h.audio, at: h.at });
+  }
+  return { storyId: story.id, childName: story.childName, grandparentName: story.grandparentName, test: !!story.test, clips };
+}
+
 // What each role may hear, decided here (never by the browser).
 export async function mediaAccess(store, secret, token, { n, slot, id, pin }) {
   const { story, role } = await authorize(store, token, { pin });
