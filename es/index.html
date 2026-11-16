@@ -1659,7 +1659,6 @@
 
     .step-part-label { display: flex; align-items: center; gap: 10px; margin: 18px 0 10px; color: var(--white); font-weight: 700; font-size: 1rem; }
     .req-tag { background: var(--gold); color: var(--black); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 9px; border-radius: 50px; }
-    .occ-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .occ-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .optional-banner { margin: 30px 0 14px; padding: 14px 16px; border: 2px dashed rgba(255,255,255,0.45); border-radius: var(--radius-lg); text-align: center; }
     .optional-banner strong { display: block; color: var(--white); font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 0.18em; }
@@ -1678,6 +1677,15 @@
     .occ-note { display: none; margin: 14px 0 0; padding: 10px 14px; background: rgba(252,212,42,0.12); border: 1px solid rgba(252,212,42,0.5); border-radius: var(--radius-lg); text-align: center; }
     .occ-note a { color: var(--gold); font-weight: 700; }
     .other-wrap { display: none; margin-top: 14px; }
+
+    .songfor-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; margin: 14px 0 16px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-lg); transition: border-color 0.2s, background 0.2s; }
+    .songfor-row.flash { border-color: var(--gold); background: rgba(252,212,42,0.14); }
+    .sf-check { position: relative; display: inline-flex; align-items: center; gap: 10px; cursor: pointer; color: var(--white); font-weight: 600; font-size: 0.98rem; }
+    .sf-box { width: 24px; height: 24px; flex-shrink: 0; border: 2px solid rgba(255,255,255,0.6); border-radius: 5px; display: inline-flex; align-items: center; justify-content: center; color: transparent; font-weight: 900; font-size: 0.95rem; line-height: 1; transition: background 0.15s, border-color 0.15s; }
+    .sf-box::after { content: '✓'; }
+    .sf-check input:checked + .sf-box { background: var(--gold); border-color: var(--gold); color: var(--black); }
+    .sf-check input:focus-visible + .sf-box { outline: 3px solid var(--gold-light); outline-offset: 2px; }
+    @media (max-width: 520px) { .songfor-row { flex-direction: column; align-items: flex-start; } }
 
     /* NAV — balanced header: English on the left, Start My Song in the middle, Español on the right */
     body > nav {
@@ -1849,6 +1857,12 @@
         
         <div class="builder-step" id="step-1" data-step="1">
           <div class="step-head"><span class="step-kicker">Paso 1 de 6</span><h3>¿Cuál es la ocasión?</h3></div>
+          <div class="songfor-row" id="songfor-row" role="radiogroup" aria-label="¿Para quién es esta canción?">
+            <span class="req-tag">Obligatorio</span>
+            <label class="sf-check"><input type="radio" class="sr-radio" name="song-for" value="Sobre mí" data-me="1" data-short="Yo" required /><span class="sf-box" aria-hidden="true"></span><span class="sf-text">Esta canción es para mí</span></label>
+            <label class="sf-check"><input type="radio" class="sr-radio" name="song-for" value="Un regalo para alguien" data-short="Alguien más" required /><span class="sf-box" aria-hidden="true"></span><span class="sf-text">Esta canción es para alguien más</span></label>
+          </div>
+          <p class="sound-note" id="gift-note" role="alert">Primero, marca para quién es la canción.</p>
           <div class="occ-grid">
           <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Cumpleaños" required /><span class="occ-face"><span class="em" aria-hidden="true">🎂</span>Cumpleaños</span></label>
           <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Boda" required /><span class="occ-face"><span class="em" aria-hidden="true">💍</span>Boda</span></label>
@@ -1924,13 +1938,7 @@
 
         <div class="builder-step" id="step-3" data-step="3">
           <div class="step-head"><span class="step-kicker">Paso 3 de 6</span><h3>¿Para quién es y cuál es la historia?</h3></div>
-          <div class="step-part-label" style="margin-top:0"><span class="req-tag">Obligatorio</span> Esta canción es…</div>
-          <div class="occ-grid two" id="songfor-grid">
-            <label class="occ-tile"><input type="radio" class="sr-radio" name="song-for" value="Un regalo para alguien" required /><span class="occ-face"><span class="em" aria-hidden="true">🎁</span>Un regalo para alguien</span></label>
-            <label class="occ-tile"><input type="radio" class="sr-radio" name="song-for" value="Sobre mí" required /><span class="occ-face"><span class="em" aria-hidden="true">🎤</span>Sobre mí</span></label>
-          </div>
-          <p class="sound-note" id="gift-note" role="alert">Elige si esta canción es un regalo o es sobre ti para saber desde qué punto de vista escribirla.</p>
-          <div class="form-grid" style="margin-top:16px">
+          <div class="form-grid">
           <div class="form-group full">
             <label for="subject">¿De quién es la canción?</label>
             <input type="text" id="subject" name="subject" placeholder="Mi esposa, María (llevamos 25 años casados)" required />
@@ -2060,7 +2068,7 @@
             <h3>Resumen de tu orden</h3>
             <dl>
               <div class="rc-row"><dt>Ocasión</dt><dd id="rc-occasion">—</dd></div>
-              <div class="rc-row"><dt>Esta canción es</dt><dd id="rc-songfor">—</dd></div>
+              <div class="rc-row"><dt>La canción es para</dt><dd id="rc-songfor">—</dd></div>
               <div class="rc-row"><dt>Paquete</dt><dd id="rc-package">—</dd></div>
               <div class="rc-row"><dt>Estilo musical</dt><dd id="rc-style">—</dd></div>
               <div class="rc-row"><dt>Voz</dt><dd id="rc-vocals">—</dd></div>
@@ -2567,7 +2575,7 @@
     const otherTxt = document.getElementById('occasion-other');
     document.getElementById('rc-occasion').textContent = occ ? (occ.dataset.other && otherTxt.value.trim() ? occ.value + ' — ' + otherTxt.value.trim() : occ.value) : T_NONE;
     const sfSel = document.querySelector('input[name="song-for"]:checked');
-    document.getElementById('rc-songfor').textContent = sfSel ? sfSel.nextElementSibling.lastChild.textContent.trim() : T_NONE;
+    document.getElementById('rc-songfor').textContent = sfSel ? sfSel.dataset.short : T_NONE;
     document.getElementById('rc-package').textContent = PKG_WORD + ' ' + n + ' · ' + p.name + ' ($' + p.price + ')';
     document.getElementById('rc-unlisted').textContent = unlisted ? T_YES : T_NO;
     const styleSel = document.querySelector('input[name="genre"]:checked'), vocSel = document.querySelector('input[name="vocalist"]:checked');
@@ -2575,8 +2583,8 @@
     document.getElementById('rc-vocals').textContent = vocSel ? vocSel.nextElementSibling.lastChild.textContent.trim() : T_NONE;
     document.getElementById('rc-total').textContent = '$' + total;
     document.getElementById('addon-p1').style.display = n === '1' ? 'block' : 'none';
-    const done1 = !!occ && (!occ.dataset.other || otherTxt.value.trim() !== '');
-    const done3 = !!sfSel && subjectField.value.trim() !== '' && storyField.value.trim() !== '';
+    const done1 = !!sfSel && !!occ && (!occ.dataset.other || otherTxt.value.trim() !== '');
+    const done3 = subjectField.value.trim() !== '' && storyField.value.trim() !== '';
     const done6 = nameField.value.trim() !== '' && emailField && emailField.value.trim() !== '' && emailField.checkValidity();
     const done4 = !!(styleSel && vocSel && document.querySelector('input[name="detail-level"]:checked'));
     const next = !done1 ? 1 : !done3 ? 3 : !done4 ? 4 : !done6 ? 6 : 0;
@@ -2605,6 +2613,27 @@
   const DETAIL_NOTE = 'Elige qué tan fielmente debo usar tus detalles para saber cómo escribir tu canción.';
   const SOUND_NOTE = soundNote.textContent;
   const giftNote = document.getElementById('gift-note');
+  const songForRow = document.getElementById('songfor-row');
+  function showGiftNote() {
+    giftNote.style.display = 'block';
+    songForRow.classList.add('flash');
+    clearTimeout(showGiftNote.t);
+    showGiftNote.t = setTimeout(() => songForRow.classList.remove('flash'), 2600);
+  }
+  // Check "who is it for" before choosing an occasion: gently stop and point at the row
+  const occGrid = document.querySelector('.occ-grid');
+  occGrid.addEventListener('click', e => {
+    if (!e.target.closest('.occ-tile') || document.querySelector('input[name="song-for"]:checked')) return;
+    e.preventDefault();
+    showGiftNote();
+    songForRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+  occGrid.addEventListener('change', e => {
+    if (document.querySelector('input[name="song-for"]:checked') || !e.target.checked) return;
+    e.target.checked = false; // keyboard fallback
+    showGiftNote();
+    orderFormEl.dispatchEvent(new Event('change'));
+  });
   submitButton.addEventListener('click', e => {
     const hasFor = document.querySelector('input[name="song-for"]:checked');
     const hasSound = document.querySelector('input[name="genre"]:checked') && document.querySelector('input[name="vocalist"]:checked');
@@ -2615,8 +2644,8 @@
     if (otherInvalid) return; // the browser points at that field first
     e.preventDefault();
     if (!hasFor) {
-      giftNote.style.display = 'block';
-      document.getElementById('step-3').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      showGiftNote();
+      document.getElementById('step-1').scrollIntoView({ behavior: 'smooth', block: 'start' });
       return;
     }
     soundNote.textContent = hasSound ? DETAIL_NOTE : SOUND_NOTE;
@@ -2637,7 +2666,8 @@
     otherInput.disabled = !isOther; otherInput.required = isOther;
     const sf = document.querySelector('input[name="song-for"]:checked');
     if (sf) giftNote.style.display = 'none';
-    subjectEl.placeholder = sf && sf.value === document.querySelectorAll('input[name="song-for"]')[1].value ? ME_PH : SUBJECT_PH;
+    subjectEl.placeholder = sf && sf.dataset.me ? ME_PH : SUBJECT_PH;
+    if (sf) songForRow.classList.remove('flash');
   });
   orderFormEl.addEventListener('change', () => {
     if (document.querySelector('input[name="genre"]:checked') && document.querySelector('input[name="vocalist"]:checked') && document.querySelector('input[name="detail-level"]:checked')) soundNote.style.display = 'none';
