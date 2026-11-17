@@ -10,6 +10,7 @@
 <body>
 <div class="topbar">FAMILY MEMORY <b>MAGNETS</b> &middot; ADMIN</div>
 <main class="wide" id="app" style="padding-top:18px;padding-bottom:60px"></main>
+<script src="/family-memory-magnets/admin/magnet.js"></script>
 <script>
 (function () {
   'use strict';
@@ -91,6 +92,7 @@
           return '<div class="card" style="margin:0"><b>' + esc(nm) + '\'s permanent QR</b><br><img alt="QR code for ' + esc(nm) + '" data-qr="' + esc(code) + '" style="width:100%;max-width:220px;background:#fff"><br>' +
             '<code class="link">' + esc(s.qrUrls[r]) + '</code><span class="muted">This web address is public and never contains a private link. It stays the same after the story is finished.</span><div class="row" style="margin-top:6px">' +
             '<a class="btn small alt" href="#" data-qrdl="' + esc(code) + '|svg">Download SVG</a><a class="btn small alt" href="#" data-qrdl="' + esc(code) + '|png">Download PNG</a></div>' +
+            '<button class="btn small" style="margin-top:6px" data-magnet="' + esc(code) + '|' + esc(s.childName + ' & ' + s.grandparentName) + '|' + esc(nm) + '">Magnet artwork (5×5 in, Printful)</button>' +
             '<div class="muted" style="margin-top:8px">PIN: ' + (s.pins[r] ? 'set' : 'none') + ' &middot; remembered phones: ' + s.devices[r] + '</div><div class="row" style="margin-top:6px">' +
             '<input type="text" inputmode="numeric" maxlength="6" placeholder="New PIN (blank = none)" data-pinval="' + s.id + '|' + r + '"><button class="btn small alt" data-setpin="' + s.id + '|' + r + '">Set / clear PIN</button>' +
             '<button class="btn small alt" data-forget="' + s.id + '|' + r + '">Forget all phones</button></div></div>';
@@ -143,6 +145,17 @@
     q('[data-kprep]').forEach(function (b) { b.onclick = function () { var id = b.getAttribute('data-kprep'); api('keepsake', { id: id, status: 'preparing', items: kitItems(id) }).then(load).catch(function (e) { alert(e.message); }); }; });
     q('[data-phview]').forEach(function (b) { b.onclick = function () { var p = b.getAttribute('data-phview').split('|'), w = window.open('', '_blank'); fetch('/api/fmm/admin/media?id=' + p[0] + '&slot=photo&n=0&hid=' + encodeURIComponent(p[1]), { headers: { Authorization: 'Bearer ' + TOK } }).then(function (r) { return r.json(); }).then(function (m) { w.location = m.url; }).catch(function (e) { if (w) w.close(); alert(e.message); }); }; });
     q('[data-unpub]').forEach(function (b) { b.onclick = function () { if (!confirm('Confirm the video is off YouTube and removed from the keepsake links?')) return; api('unpublish-done', { id: b.getAttribute('data-unpub') }).then(load).catch(function (e) { alert(e.message); }); }; });
+    q('[data-magnet]').forEach(function (b) { b.onclick = function () {
+      var p = b.getAttribute('data-magnet').split('|'), label = b.textContent;
+      b.disabled = true; b.textContent = 'Drawing…';
+      fetch('/api/fmm/admin/qr?code=' + encodeURIComponent(p[0]), { headers: { Authorization: 'Bearer ' + TOK } })
+        .then(function (r) { if (!r.ok) throw new Error('Could not load the QR code.'); return r.text(); })
+        .then(function (svg) { return FMMMagnet.draw(document.createElement('canvas'), { qrSvg: svg, title: p[1], line: 'Scan to hear our family story' }); })
+        .then(function (c) { return FMMMagnet.toPngBlob(c); })
+        .then(function (blob) { var u = URL.createObjectURL(blob), l = document.createElement('a'); l.href = u; l.download = 'magnet-5x5in-300dpi-' + p[2].replace(/[^A-Za-z0-9]+/g, '-') + '-' + p[0].slice(0, 6) + '.png'; document.body.appendChild(l); l.click(); l.remove(); })
+        .catch(function (e) { alert(e.message); })
+        .then(function () { b.disabled = false; b.textContent = label; });
+    }; });
     q('[data-form]').forEach(function (b) { b.onclick = function (e) { e.preventDefault(); var w = window.open('', '_blank'); fetch('/api/fmm/admin/consent-form?id=' + b.getAttribute('data-form'), { headers: { Authorization: 'Bearer ' + TOK } }).then(function (r) { return r.json(); }).then(function (m) { if (!m.url) throw new Error(m.error || 'No form.'); w.location = m.url; }).catch(function (err) { if (w) w.close(); alert(err.message); }); }; });
     q('[data-fok]').forEach(function (b) { b.onclick = function () { if (!confirm('Approve this signed consent form? The parent can then turn on the child\'s own link.')) return; api('consent-review', { id: b.getAttribute('data-fok'), approve: true }).then(load).catch(function (e) { alert(e.message); }); }; });
     q('[data-fno]').forEach(function (b) { b.onclick = function () { var n = prompt('What should the parent fix? (They will see this.)', 'Please upload a clear photo of the whole signed and dated form.'); if (n === null) return; api('consent-review', { id: b.getAttribute('data-fno'), approve: false, note: n }).then(load).catch(function (e) { alert(e.message); }); }; });

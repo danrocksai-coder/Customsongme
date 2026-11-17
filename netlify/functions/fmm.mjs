@@ -234,7 +234,7 @@ async function admin(route, req, url, store, secret, origin) {
     const code = url.searchParams.get('code') || '';
     if (!(await store.getJSON(`qr/${code}`))) return json({ error: 'Unknown code.' }, 404);
     const fmt = url.searchParams.get('format') === 'png' ? 'png' : 'svg';
-    const opts = { errorCorrectionLevel: 'M', margin: 2, width: 1200 };
+    const opts = { errorCorrectionLevel: 'Q', margin: 2, width: 1200 }; // Q survives scuffs on a printed magnet
     if (fmt === 'png') {
       const buf = await QRCode.toBuffer(qrUrl(code), { ...opts, type: 'png' });
       return new Response(buf, { headers: { 'Content-Type': 'image/png', 'Content-Disposition': `attachment; filename="fmm-qr-${code.slice(0, 6)}.png"`, 'Cache-Control': 'no-store' } });
