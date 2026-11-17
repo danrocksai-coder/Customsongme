@@ -21,7 +21,6 @@
 <header class="hero">
   <h1>30 conversations. Two voices. <em>One lasting family story.</em></h1>
   <p>What if one simple gift could bring a grandchild and grandparent closer together, no matter how far apart they live?</p>
-  <a class="btn" href="#waitlist">Join the Waiting List</a>
 </header>
 
 <div class="video"><div class="video-box">
@@ -35,7 +34,7 @@
     <h2 class="center">How it works</h2>
     <p class="center muted" style="margin-bottom:18px">A grandchild asks the questions. A grandparent answers in their own voice.</p>
     <div class="steps">
-      <div class="step"><b>Choose your story.</b> Create a story with Grandma, Grandpa, or a package celebrating both. Each grandparent gets a personal journey of 30 meaningful conversations.</div>
+      <div class="step"><b>Choose your story.</b> One grandparent (30 conversations), Grandma and Grandpa together in one shared story (15 conversations each), or two separate stories (30 with each).</div>
       <div class="step"><b>Order and get your link.</b> After ordering, you receive a confirmation and a link to begin. A parent helps set things up, and your personalized QR magnet is prepared for delivery.</div>
       <div class="step"><b>Personalize it.</b> Enter the child's name and the grandparent's name. For example, a little girl named Devon creating a story with her grandmother, Mimi.</div>
       <div class="step"><b>Open your family story.</b> Explore six chapters with five special stops in each, and watch your collection of memories grow.</div>
@@ -69,13 +68,16 @@
     <h2 class="center">Choose your story</h2>
     <div id="previewNote" class="msg info hidden">Preview only: checkout is turned off. Nothing will be ordered or charged.</div>
     <form id="orderForm" class="card" novalidate>
-      <div class="pkgs">
+      <div class="pkgs pkgs3">
         <label class="pkg sel" id="po-one"><input type="radio" name="opackage" value="one" checked class="sr" style="position:absolute;opacity:0">
           <h3>One Grandparent</h3><div class="price">$99.99</div>
-          <ul><li>1 personal journey of 30 conversations</li><li>Family movie with photos and voices</li><li>QR refrigerator magnet</li><li>Digital storybook and downloadable recordings</li></ul></label>
+          <ul><li>30 conversations with Grandma <i>or</i> Grandpa</li><li>Family movie with photos and voices</li><li>QR refrigerator magnet</li><li>Digital storybook and downloadable recordings</li></ul></label>
+        <label class="pkg" id="po-together"><input type="radio" name="opackage" value="together" class="sr" style="position:absolute;opacity:0">
+          <h3>Grandma &amp; Grandpa Together</h3><div class="price">$99.99</div>
+          <ul><li>One shared story: 30 conversations, 15 with each grandparent</li><li>One family movie with both voices</li><li>QR refrigerator magnet</li><li>Digital storybook and downloadable recordings</li></ul></label>
         <label class="pkg" id="po-two"><input type="radio" name="opackage" value="two" class="sr" style="position:absolute;opacity:0">
-          <h3>Two Grandparents</h3><div class="price">$179.99</div>
-          <ul><li>2 separate journeys, 30 conversations each</li><li>A family movie for each story</li><li>QR refrigerator magnets</li><li>Storybooks and downloadable recordings</li></ul></label>
+          <h3>Two Separate Stories</h3><div class="price">$179.99</div>
+          <ul><li>A full 30-conversation story with each grandparent (60 in all)</li><li>A family movie for each story</li><li>Two QR refrigerator magnets</li><li>Storybooks and downloadable recordings</li><li><b>Save $20</b> compared with two single stories</li></ul></label>
       </div>
 
       <label for="parentName">Parent or guardian name</label>
@@ -89,7 +91,7 @@
       <label for="gp1">Grandparent's name (what the child calls them)</label>
       <input id="gp1" type="text" placeholder="Mimi, Grandpa Joe…" required>
       <div id="gp2wrap" class="hidden">
-        <label for="gp2">Second grandparent's name</label>
+        <label for="gp2" id="gp2label">Second grandparent's name</label>
         <input id="gp2" type="text">
       </div>
       <label for="onotes">Anything I should know? (optional)</label>
@@ -111,13 +113,16 @@
     <h2 class="center">Coming soon</h2>
     <p class="center muted">Family Memory Magnets isn't open for orders yet. Join the free waiting list and you'll be the first to know when it is. No payment, no commitment.</p>
     <form id="waitForm" class="card" novalidate>
-      <div class="pkgs">
+      <div class="pkgs pkgs3">
         <label class="pkg sel" id="pk-one"><input type="radio" name="package" value="one" checked class="sr" style="position:absolute;opacity:0">
           <h3>One Grandparent</h3><div class="price">$99.99</div>
-          <ul><li>1 personal journey of 30 conversations</li><li>Family movie with photos and voices</li><li>QR refrigerator magnet</li><li>Digital storybook and downloadable recordings</li></ul></label>
+          <ul><li>30 conversations with Grandma <i>or</i> Grandpa</li><li>Family movie with photos and voices</li><li>QR refrigerator magnet</li><li>Digital storybook and downloadable recordings</li></ul></label>
+        <label class="pkg" id="pk-together"><input type="radio" name="package" value="together" class="sr" style="position:absolute;opacity:0">
+          <h3>Grandma &amp; Grandpa Together</h3><div class="price">$99.99</div>
+          <ul><li>One shared story: 30 conversations, 15 with each grandparent</li><li>One family movie with both voices</li><li>QR refrigerator magnet</li><li>Digital storybook and downloadable recordings</li></ul></label>
         <label class="pkg" id="pk-two"><input type="radio" name="package" value="two" class="sr" style="position:absolute;opacity:0">
-          <h3>Two Grandparents</h3><div class="price">$179.99</div>
-          <ul><li>2 separate journeys, 30 conversations each</li><li>A family movie for each story</li><li>QR refrigerator magnets</li><li>Storybooks and downloadable recordings</li></ul></label>
+          <h3>Two Separate Stories</h3><div class="price">$179.99</div>
+          <ul><li>A full 30-conversation story with each grandparent (60 in all)</li><li>A family movie for each story</li><li>Two QR refrigerator magnets</li><li>Storybooks and downloadable recordings</li><li><b>Save $20</b> compared with two single stories</li></ul></label>
       </div>
       <p class="muted center">Planned launch prices. Pick the one you're most interested in.</p>
 
@@ -149,6 +154,7 @@
     <div class="card"><b>Does the grandparent need an app?</b><br>No. They open a private link on their phone, listen, and tap record.</div>
     <div class="card"><b>How long do we have?</b><br>Your story stays open for 12 months from the day it is created. There is no rush within that time.</div>
     <div class="card"><b>What if a grandparent doesn't want to answer a question?</b><br>They can skip it, and the child picks a different one.</div>
+    <div class="card"><b>What's the difference between "Together" and "Two Separate Stories"?</b><br>Together is one shared story for the same price as one grandparent: the 30 conversations are split, 15 with Grandma and 15 with Grandpa, and you get one movie and one magnet. Two Separate Stories gives each grandparent their own full 30 conversations, their own movie and their own magnet.</div>
     <div class="card"><b>What do we get when it's finished?</b><br>A family movie with photographs and your original voices, a personalized refrigerator magnet with a QR code that opens the movie, a digital storybook, and downloadable recordings.</div>
   </div>
 </section>
@@ -163,7 +169,7 @@
   var qs = new URLSearchParams(location.search), src = [qs.get('utm_source'), qs.get('utm_medium'), qs.get('utm_campaign')].filter(Boolean).join(' / ');
   try { if (src) sessionStorage.setItem('fmm_src', src); else src = sessionStorage.getItem('fmm_src') || ''; } catch (e) {}
   function source() { return (src || (document.referrer && !/customsongme\.com/.test(document.referrer) ? 'referrer: ' + document.referrer.split('/')[2] : 'direct')).slice(0, 80); }
-  function pick(v) { $('pk-one').classList.toggle('sel', v === 'one'); $('pk-two').classList.toggle('sel', v === 'two'); }
+  function pick(v) { ['one', 'together', 'two'].forEach(function (k) { $('pk-' + k).classList.toggle('sel', v === k); }); }
   form.querySelectorAll('input[name=package]').forEach(function (r) { r.addEventListener('change', function () { pick(r.value); }); });
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -188,14 +194,17 @@
   var preview = qs.get('preview') === 'checkout';
   function showCheckout() {
     $('order').classList.remove('hidden'); $('waitlist').classList.add('hidden');
-    var cta = document.querySelector('.hero .btn'); if (cta) { cta.textContent = 'Start Our Story'; cta.setAttribute('href', '#order'); }
     if (preview) $('previewNote').classList.remove('hidden');
     if (location.hash === '#waitlist' || location.hash === '#order') $('order').scrollIntoView();
   }
   if (preview) showCheckout();
   else fetch('/api/fmm/sales', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (j) { if (j.open) showCheckout(); }).catch(function () {});
   var oform = $('orderForm');
-  function opick(v) { $('po-one').classList.toggle('sel', v === 'one'); $('po-two').classList.toggle('sel', v === 'two'); $('gp2wrap').classList.toggle('hidden', v !== 'two'); }
+  function opick(v) {
+    ['one', 'together', 'two'].forEach(function (k) { $('po-' + k).classList.toggle('sel', v === k); });
+    $('gp2wrap').classList.toggle('hidden', v === 'one');
+    $('gp2label').textContent = v === 'together' ? 'Second grandparent (they take turns: 15 questions each)' : 'Second grandparent (their own separate story)';
+  }
   oform.querySelectorAll('input[name=opackage]').forEach(function (r) { r.addEventListener('change', function () { opick(r.value); }); });
   oform.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -203,7 +212,7 @@
     if (!$('agree').checked) { msg.innerHTML = '<div class="msg err">Please check the permission box to continue.</div>'; return; }
     if (preview) { msg.innerHTML = '<div class="msg info">Preview only: this is where the customer goes on to Stripe\'s secure payment page.</div>'; return; }
     var data = { package: pkg, parentName: $('parentName').value, email: $('oemail').value, phone: $('phone').value, childName: $('childName').value,
-      grandparent1: $('gp1').value, grandparent2: pkg === 'two' ? $('gp2').value : '', notes: $('onotes').value, website: $('owebsite').value, source: source() };
+      grandparent1: $('gp1').value, grandparent2: pkg === 'one' ? '' : $('gp2').value, notes: $('onotes').value, website: $('owebsite').value, source: source() };
     $('orderBtn').disabled = true; $('orderBtn').textContent = 'One moment…';
     fetch('/api/fmm/order', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
       .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })

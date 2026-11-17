@@ -236,6 +236,11 @@ def gold_rule(img, y, w=360):
     ImageDraw.Draw(img).rounded_rectangle(((SW - w) / 2, y, (SW + w) / 2, y + 14), 7, fill=GOLD)
 
 
+def names(k):
+    g = k.get("grandparents")
+    return f"{k['childName']}, {g[0]} & {g[1]}" if g and len(g) == 2 else f"{k['childName']} & {k['grandparentName']}"
+
+
 def title_card(k, photo):
     img = photo_frame(photo) if photo else brand_bg()
     if photo:
@@ -244,8 +249,10 @@ def title_card(k, photo):
     d = ImageDraw.Draw(img)
     small = font("bold", 84)
     text_block(img, ["FAMILY MEMORY MAGNETS"], small, SH * 0.25, GOLD)
-    f, lines = wrap(d, f"{k['childName']} & {k['grandparentName']}", "display_x", SW * 0.84, 2, 330, 180)
-    bottom = text_block(img, lines, f, SH * 0.36, (255, 255, 255), shadow=True)
+    f, lines = wrap(d, names(k), "display_x", SW * 0.84, 2, 330, 180)
+    if len(lines) > 1:  # long names: smaller and higher, so the subtitle stays well inside the frame
+        f, lines = wrap(d, names(k), "display_x", SW * 0.84, 2, 230, 150)
+    bottom = text_block(img, lines, f, SH * (0.36 if len(lines) == 1 else 0.33), (255, 255, 255), shadow=True)
     gold_rule(img, bottom + 60)
     text_block(img, ["Our Family Story"], font("display", 150), bottom + 140, (255, 255, 255))
     return img
@@ -266,8 +273,9 @@ def question_card(k, stop):
     d = ImageDraw.Draw(img)
     text_block(img, [f"STOP {stop['n']}  ·  {stop['title'].upper()}"], font("bold", 76), SH * 0.16, INK)
     q = stop["question"] or "A question"
-    if not q.lower().startswith(k["grandparentName"].lower()):
-        q = f"{k['grandparentName']}, {q[0].lower()}{q[1:]}"
+    who = stop.get("answerer") or k["grandparentName"]  # "together" stories: grandparents take turns
+    if not q.lower().startswith(who.lower()):
+        q = f"{who}, {q[0].lower()}{q[1:]}"
     f, lines = wrap(d, f"“{q}”", "display", SW * 0.8, 4, 190, 110)
     top = SH * 0.5 - block_height(f, len(lines)) / 2
     bottom = text_block(img, lines, f, top, NAVY)
@@ -302,7 +310,7 @@ def lower_third(img, label, line2="", caption=""):
 
 def answer_frame(k, stop, photo, caption):
     img = photo_frame(photo) if photo else question_card(k, stop)
-    return lower_third(img, f"{k['grandparentName']} answers", stop["question"], caption if photo else "")
+    return lower_third(img, f"{stop.get('answerer') or k['grandparentName']} answers", stop["question"], caption if photo else "")
 
 
 def message_frame(k, photo, label, caption):
@@ -313,7 +321,7 @@ def message_frame(k, photo, label, caption):
 def end_card(k):
     img = brand_bg()
     d = ImageDraw.Draw(img)
-    f, lines = wrap(d, f"{k['childName']} & {k['grandparentName']}", "display_x", SW * 0.8, 2, 260, 160)
+    f, lines = wrap(d, names(k), "display_x", SW * 0.8, 2, 260, 160)
     bottom = text_block(img, lines, f, SH * 0.32, (255, 255, 255))
     text_block(img, ["Thirty conversations. Two voices. One lasting family story."], font("body", 92), bottom + 80, (255, 255, 255))
     gold_rule(img, SH * 0.72)

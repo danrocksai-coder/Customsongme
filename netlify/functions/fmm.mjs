@@ -13,7 +13,11 @@ import * as C from '../lib/fmm-core.mjs';
 const FORMSPREE = process.env.FMM_FORMSPREE_URL || 'https://formspree.io/f/xwpqlypv';
 // Sales are OPEN by default. Pause them without a code change: FMM_SALES_OPEN=false in Netlify, then redeploy.
 const salesOpen = () => process.env.FMM_SALES_OPEN !== 'false';
-const PACKAGES = { one: { id: 'fmm1', label: 'One grandparent', grandparents: 1 }, two: { id: 'fmm2', label: 'Two grandparents', grandparents: 2 } };
+const PACKAGES = {
+  one: { id: 'fmm1', label: 'One grandparent', grandparents: 1 },
+  together: { id: 'fmm3', label: 'Grandma & Grandpa together (15 each)', grandparents: 2 },
+  two: { id: 'fmm2', label: 'Two separate stories', grandparents: 2 },
+};
 
 function blobStore() {
   const s = getStore({ name: 'fmm', consistency: 'strong' });
@@ -52,7 +56,7 @@ function audioResponse(blob, req) {
 const summary = (s) => {
   C.norm(s);
   return {
-    id: s.id, childName: s.childName, grandparentName: s.grandparentName, test: s.test, packageName: s.packageName,
+    id: s.id, childName: s.childName, grandparentName: s.grandparentName, grandparents: s.grandparents || null, test: s.test, packageName: s.packageName,
     parentName: s.parentName, parentEmail: s.parentEmail, createdAt: s.createdAt, expiresAt: s.expiresAt,
     completed: C.currentIndex(s), consent: s.consent ? { parentName: s.consent.parentName, at: s.consent.at, version: s.consent.version } : null,
     grandparentConsent: s.grandparentConsent ? { name: s.grandparentConsent.name, at: s.grandparentConsent.at, version: s.grandparentConsent.version } : null,
@@ -256,7 +260,14 @@ async function admin(route, req, url, store, secret, origin) {
   if (route === 'create' && req.method === 'POST') {
     const { story, tokens } = await C.createStory(store, b);
     await log(story.id, 'story created', story.test ? 'test' : '');
-    if (b.orderId) { const o = await store.getJSON(`order/${b.orderId}`); if (o) { o.status = 'story-created'; o.storyId = story.id; await store.setJSON(`order/${o.id}`, o); } }
+    if (b.orderId) {
+      const o = await store.getJSON(`order/${b.orderId}`);
+      if (o) {
+        o.storyIds = [...(o.storyIds || (o.storyId ? [o.storyId] : [])), story.id]; o.storyId = o.storyIds[0];
+        o.status = o.package === 'two' && o.storyIds.length < 2 ? 'story 1 of 2 created' : 'story-created';
+        await store.setJSON(`order/${o.id}`, o);
+      }
+    }
     const links = { child: link(tokens.child), grandparent: link(tokens.grandparent) };
     if (tokens.guardian) links.guardian = link(tokens.guardian);
     return json({ story: summary(story), links, qrUrls: { child: qrUrl(story.qrCodes.child), grandparent: qrUrl(story.qrCodes.grandparent) } });

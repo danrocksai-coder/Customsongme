@@ -234,7 +234,7 @@
     var h = '<div class="card"><h3>' + (S.done ? 'Our conversations' : 'Your Story Is Growing!') + '</h3><p class="muted">Replay what you have already saved.</p>';
     S.conversations.forEach(function (c) {
       h += '<div class="conv"><b>Stop ' + c.n + ' &middot; ' + esc(c.title) + '</b><div class="muted">' + esc(c.question) + '</div><div class="row">' +
-        '<button class="btn small alt" data-play="question|' + c.n + '">▶ Question</button><button class="btn small alt" data-play="answer|' + c.n + '">▶ Answer</button></div></div>';
+        '<button class="btn small alt" data-play="question|' + c.n + '">▶ Question</button><button class="btn small alt" data-play="answer|' + c.n + '">▶ ' + (couple() && c.answerer ? esc(c.answerer) + '\'s answer' : 'Answer') + '</button></div></div>';
     });
     return h + '</div>';
   }
@@ -246,14 +246,16 @@
     return '<div class="card"><h2>Your keepsake is being prepared</h2><p>All 30 conversations are saved. Your family movie, digital storybook and keepsake will appear right here, on this same magnet, when they are ready. You can replay every recording below in the meantime.</p>' + (S.availableUntil ? '<p class="muted">Your recordings stay available here until ' + new Date(S.availableUntil).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + '.</p>' : '') + '</div>';
   }
 
+  function who(cur) { return (cur && cur.answerer) || S.grandparentName; } // together package: grandparents take turns
+  function couple() { return !!(S.grandparents && S.grandparents.length === 2); }
   function homeHeadline() {
-    var cur = S.current, role = S.role, c = esc(S.childName), g = esc(S.grandparentName), st = cur.status;
+    var cur = S.current, role = S.role, c = esc(S.childName), g = esc(who(cur)), st = cur.status;
     if (role === 'child') {
       if (st === 'choose' || st === 'record-question') return ['Your Turn!', 'Choose and record your next question.'];
       if (st === 'awaiting-answer') return ['Waiting for ' + g, 'Your question is saved. Check back soon.'];
       return [g + ' Answered!', 'Listen to ' + g + '\'s response and continue the adventure.'];
     }
-    if (st === 'awaiting-answer') return [c + ' Has a Question!', 'Listen and record your answer.'];
+    if (st === 'awaiting-answer') return couple() ? [c + ' Has a Question for ' + g + '!', 'This one is for ' + g + '. Listen and record your answer.'] : [c + ' Has a Question!', 'Listen and record your answer.'];
     if (st === 'heard-pending') return ['Waiting for ' + c, 'Your answer is saved.'];
     return ['Waiting for ' + c, c + ' is choosing the next question.'];
   }
@@ -497,7 +499,7 @@
       var hd = homeHeadline();
       h += '<div class="card"><div class="stage">Stop ' + cur.n + ' of 30 &middot; ' + esc(cur.title) + '</div><h2>' + hd[0] + '</h2><p>' + hd[1] + '</p>';
       if (role === 'child') {
-        if (cur.status === 'choose') h += '<button class="btn" id="gochoose">Pick a question for ' + esc(S.grandparentName) + '</button>';
+        if (cur.status === 'choose') h += '<button class="btn" id="gochoose">Pick a question for ' + esc(who(cur)) + '</button>';
         else if (cur.status === 'record-question') h += '<div class="qbox">' + esc(cur.chosen.text) + '</div><button class="btn" id="gorecord">Record My Question</button><button class="btn alt" id="goprep" style="margin-top:10px">Write It First</button><button class="btn alt" id="gochoose" style="margin-top:10px">Pick a different question</button>';
         else if (cur.status === 'awaiting-answer') h += '<div id="invite"></div>';
         else if (cur.status === 'heard-pending') h += '<button class="btn" id="golisten">Listen to the answer</button>';
@@ -562,11 +564,19 @@
         '<li>Nothing is posted publicly unless you and ' + c + '\'s parent both say yes later.</li>' +
         '<li>They are kept until 12 months after your story is finished, then deleted. You can ask for them to be deleted sooner, and you can skip any question.</li></ul>' +
         '<p class="muted" style="margin-top:8px"><a href="/family-memory-magnets/privacy/" target="_blank" rel="noopener">Privacy policy</a></p>' +
-        '<label for="pn">Your name</label><input type="text" id="pn" autocomplete="name">' +
-        '<label class="check"><input type="checkbox" id="ag"><span>I agree to be recorded for this family story.</span></label>' +
-        '<div id="cm"></div><button class="btn" id="cb">I agree and continue</button></div>';
+        (couple()
+          ? '<p style="margin-top:10px"><b>You take turns:</b> ' + esc(S.grandparents[0]) + ' answers stops 1, 3, 5… and ' + esc(S.grandparents[1]) + ' answers stops 2, 4, 6…, 15 each. Each of you agrees for yourself.</p>' +
+            '<label for="pn">' + esc(S.grandparents[0]) + ': your name</label><input type="text" id="pn" autocomplete="off">' +
+            '<label class="check"><input type="checkbox" id="ag"><span>I agree to be recorded for this family story.</span></label>' +
+            '<label for="pn2">' + esc(S.grandparents[1]) + ': your name</label><input type="text" id="pn2" autocomplete="off">' +
+            '<label class="check"><input type="checkbox" id="ag2"><span>I agree to be recorded for this family story.</span></label>'
+          : '<label for="pn">Your name</label><input type="text" id="pn" autocomplete="name">' +
+            '<label class="check"><input type="checkbox" id="ag"><span>I agree to be recorded for this family story.</span></label>') +
+        '<div id="cm"></div><button class="btn" id="cb">' + (couple() ? 'We agree and continue' : 'I agree and continue') + '</button></div>';
       app.querySelector('#cb').onclick = function () {
-        api('grandparent-consent', { json: { name: app.querySelector('#pn').value, agree: app.querySelector('#ag').checked } })
+        var b = { name: app.querySelector('#pn').value, agree: app.querySelector('#ag').checked };
+        if (couple()) { b.name2 = app.querySelector('#pn2').value; b.agree2 = app.querySelector('#ag2').checked; }
+        api('grandparent-consent', { json: b })
           .then(function () { return refresh(); }).then(render).catch(function (e) { app.querySelector('#cm').innerHTML = '<div class="msg err">' + esc(e.message) + '</div>'; });
       };
       return;
@@ -590,8 +600,8 @@
 
   var TYPE = { F: 'Fun', C: 'Curious', M: 'Meaningful' };
   function renderChoose() {
-    var cur = S.current, h = header() + '<div class="card"><div class="stage">Stop ' + cur.n + ' &middot; ' + esc(cur.title) + '</div><h2>What would you like to ask ' + esc(S.grandparentName) + '?</h2>';
-    cur.choices.forEach(function (c) { h += '<button class="choice" data-q="' + esc(c.id) + '"><small>' + TYPE[c.type] + '</small>' + esc(S.grandparentName) + ', ' + esc(c.text.charAt(0).toLowerCase() + c.text.slice(1)) + '</button>'; });
+    var cur = S.current, h = header() + '<div class="card"><div class="stage">Stop ' + cur.n + ' &middot; ' + esc(cur.title) + '</div><h2>What would you like to ask ' + esc(who(cur)) + '?</h2>';
+    cur.choices.forEach(function (c) { h += '<button class="choice" data-q="' + esc(c.id) + '"><small>' + TYPE[c.type] + '</small>' + esc(who(cur)) + ', ' + esc(c.text.charAt(0).toLowerCase() + c.text.slice(1)) + '</button>'; });
     h += '<label for="cq">Or ask your own question</label><textarea id="cq" rows="2" maxlength="200" placeholder="Type your question…"></textarea><button class="btn alt" id="usec" style="margin-top:8px">Use my question</button><div id="cm"></div>' +
       '<button class="btn alt" id="back" style="margin-top:14px">Back</button></div>';
     app.innerHTML = h;
@@ -608,7 +618,7 @@
     var okState = role === 'child' ? cur.status === 'record-question' : cur.status === 'awaiting-answer';
     if (!okState) { setView('home'); return; }
     var limit = role === 'child' ? S.limits.question : S.limits.answer;
-    var start = S.draft || (role === 'child' && cur.chosen ? S.grandparentName + ', ' + cur.chosen.text.charAt(0).toLowerCase() + cur.chosen.text.slice(1) : '');
+    var start = S.draft || (role === 'child' && cur.chosen ? who(cur) + ', ' + cur.chosen.text.charAt(0).toLowerCase() + cur.chosen.text.slice(1) : '');
     var sk = 'fmm_draft_' + CODE + '_' + cur.n, local = '';
     try { local = sessionStorage.getItem(sk) || ''; } catch (e) {} // session-only backup; cleared when the tab closes
     if (!S.draft && local) start = local;
@@ -640,11 +650,11 @@
     if (role === 'child') {
       if (cur.status !== 'record-question') { setView('home'); return; }
       slot = 'question'; limit = S.limits.question;
-      h += '<div class="card"><div class="stage">Stop ' + cur.n + ' &middot; ' + esc(cur.title) + '</div><h2>Ask your question</h2><p class="muted">Read it out loud to ' + esc(S.grandparentName) + '. You have ' + limit + ' seconds.</p>' + (prepText ? '' : '<div class="qbox">' + esc(cur.chosen.text) + '</div>') + '<div id="rbox"></div><button class="btn alt" id="back" style="margin-top:14px">Back</button></div>';
+      h += '<div class="card"><div class="stage">Stop ' + cur.n + ' &middot; ' + esc(cur.title) + '</div><h2>Ask your question</h2><p class="muted">Read it out loud to ' + esc(who(cur)) + '. You have ' + limit + ' seconds.</p>' + (prepText ? '' : '<div class="qbox">' + esc(cur.chosen.text) + '</div>') + '<div id="rbox"></div><button class="btn alt" id="back" style="margin-top:14px">Back</button></div>';
     } else {
       if (cur.status !== 'awaiting-answer') { setView('home'); return; }
       slot = 'answer'; limit = S.limits.answer;
-      h += '<div class="card"><div class="stage">Stop ' + cur.n + ' &middot; ' + esc(cur.title) + '</div><h2>' + esc(S.childName) + ' asks:</h2><div class="qbox" id="qt">' + esc(cur.chosen ? cur.chosen.text : '') + '</div><audio id="qa" controls playsinline preload="auto"></audio><p class="muted">Listen first, then record your answer in your own words. You can finish early.</p><div id="rbox"></div>' +
+      h += '<div class="card"><div class="stage">Stop ' + cur.n + ' &middot; ' + esc(cur.title) + '</div><h2>' + esc(S.childName) + ' asks' + (couple() ? ' ' + esc(who(cur)) : '') + ':</h2><div class="qbox" id="qt">' + esc(cur.chosen ? cur.chosen.text : '') + '</div><audio id="qa" controls playsinline preload="auto"></audio><p class="muted">Listen first, then record your answer in your own words. You can finish early.</p><div id="rbox"></div>' +
         '<button class="btn alt" id="skip" style="margin-top:14px">Skip this question</button><button class="btn alt" id="back" style="margin-top:10px">Back</button></div>';
     }
     app.innerHTML = h;
@@ -674,7 +684,7 @@
   function renderListen() {
     var cur = S.current;
     if (S.role !== 'child' || cur.status !== 'heard-pending') { setView('home'); return; }
-    app.innerHTML = header() + '<div class="card"><div class="stage">Stop ' + cur.n + ' &middot; ' + esc(cur.title) + '</div><h2>' + esc(S.grandparentName) + '\'s answer</h2><audio id="aa" controls playsinline preload="auto"></audio><p class="muted" id="hint">Listen all the way through to continue the adventure.</p><button class="btn" id="cont" disabled>Continue our adventure</button><button class="btn alt" id="back" style="margin-top:10px">Back</button></div>';
+    app.innerHTML = header() + '<div class="card"><div class="stage">Stop ' + cur.n + ' &middot; ' + esc(cur.title) + '</div><h2>' + esc(who(cur)) + '\'s answer</h2><audio id="aa" controls playsinline preload="auto"></audio><p class="muted" id="hint">Listen all the way through to continue the adventure.</p><button class="btn" id="cont" disabled>Continue our adventure</button><button class="btn alt" id="back" style="margin-top:10px">Back</button></div>';
     var au = app.querySelector('#aa'), cont = app.querySelector('#cont');
     api('media?n=' + cur.n + '&slot=answer').then(function (m) { au.src = m.url; }).catch(function (e) { toast(e.message); });
     function ok() { cont.disabled = false; app.querySelector('#hint').textContent = 'Ready when you are.'; }

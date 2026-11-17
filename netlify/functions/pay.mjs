@@ -41,7 +41,8 @@ const NEW_PACKAGES = {
 // Family Memory Magnets — prices live here on the server, never in the browser.
 const FMM_PACKAGES = {
   fmm1: { name: 'Family Memory Magnets — One Grandparent', amount: 9999, noLink: true },
-  fmm2: { name: 'Family Memory Magnets — Two Grandparents', amount: 17999, noLink: true },
+  fmm2: { name: 'Family Memory Magnets — Two Separate Stories', amount: 17999, noLink: true },
+  fmm3: { name: 'Family Memory Magnets — Grandma & Grandpa Together', amount: 9999, noLink: true },
 };
 
 function newPackage(id, params) {
