@@ -11,6 +11,9 @@ http://www.customsongme.com/* https://www.customsongme.com/:splat    301!
 /free-custom-song-guide    https://www.customsongme.com/    301
 /thank-you                 https://www.customsongme.com/thanks    301
 /payment                   https://www.customsongme.com/payment-links    301
+# Family Memory Magnets short link for YouTube descriptions and videos (302 so it can be repointed later)
+/magnets                   /family-memory-magnets/?utm_source=youtube&utm_medium=video    302
+/magnets/                  /family-memory-magnets/?utm_source=youtube&utm_medium=video    302
 
 # ==========================================
 # 2b. .html DUPLICATES -> CLEAN URLS (301)

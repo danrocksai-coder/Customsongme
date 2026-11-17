@@ -39,7 +39,7 @@
       <div class="step"><b>Order and get your link.</b> After ordering, you receive a confirmation and a link to begin. A parent helps set things up, and your personalized QR magnet is prepared for delivery.</div>
       <div class="step"><b>Personalize it.</b> Enter the child's name and the grandparent's name. For example, a little girl named Devon creating a story with her grandmother, Mimi.</div>
       <div class="step"><b>Open your family story.</b> Explore six chapters with five special stops in each, and watch your collection of memories grow.</div>
-      <div class="step"><b>The child picks a question.</b> At every stop the child chooses a suggested question, or writes their own, then taps record and asks it out loud (up to 30 seconds).</div>
+      <div class="step"><b>The child picks a question.</b> At every stop the child chooses a suggested question, or writes their own. Then, with a parent beside them, they tap record and ask it out loud (up to 15 seconds). If the parent chooses, older kids can have their own link.</div>
       <div class="step"><b>The grandparent answers.</b> A private invitation goes to the grandparent. They listen to the real question, then record their memories in their own words and voice (up to 60 seconds). No complicated technology. They can listen back, record again, then submit.</div>
       <div class="step"><b>The adventure continues.</b> The child listens to the answer and discovers things about their grandparent they may never have known. Then the next question unlocks.</div>
       <div class="step"><b>No rush.</b> Childhood memories, family traditions, adventures and lessons learned, at your own pace, throughout your 12-month adventure.</div>
@@ -100,7 +100,7 @@
     <div class="card"><ul style="margin-left:20px">
       <li>Each person gets a private link. No accounts and no passwords.</li>
       <li>A parent or guardian gives permission before a child's recording is saved.</li>
-      <li>Recordings are never public. The QR magnet's public page shows no names, photos or recordings.</li>
+      <li>Recordings stay private. Your family movie is shared on the magnet or YouTube only if the parent and the grandparent both say yes. Until then, the QR magnet's public page shows no names, photos or recordings.</li>
       <li>You can ask for your family's recordings to be deleted.</li>
     </ul></div>
     <h2 class="center" style="margin-top:26px">Questions</h2>
@@ -117,13 +117,17 @@
 (function () {
   var $ = function (id) { return document.getElementById(id); };
   var form = $('waitForm');
+  // where this visitor came from (e.g. customsongme.com/magnets adds ?utm_source=youtube); kept for this visit only
+  var qs = new URLSearchParams(location.search), src = [qs.get('utm_source'), qs.get('utm_medium'), qs.get('utm_campaign')].filter(Boolean).join(' / ');
+  try { if (src) sessionStorage.setItem('fmm_src', src); else src = sessionStorage.getItem('fmm_src') || ''; } catch (e) {}
+  function source() { return (src || (document.referrer && !/customsongme\.com/.test(document.referrer) ? 'referrer: ' + document.referrer.split('/')[2] : 'direct')).slice(0, 80); }
   function pick(v) { $('pk-one').classList.toggle('sel', v === 'one'); $('pk-two').classList.toggle('sel', v === 'two'); }
   form.querySelectorAll('input[name=package]').forEach(function (r) { r.addEventListener('change', function () { pick(r.value); }); });
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var msg = $('waitMsg'); msg.innerHTML = '';
     var data = { package: form.querySelector('input[name=package]:checked').value, name: $('name').value, email: $('email').value,
-      notes: $('notes').value, website: $('website').value };
+      notes: $('notes').value, website: $('website').value, source: source() };
     $('waitBtn').disabled = true; $('waitBtn').textContent = 'One moment…';
     fetch('/api/fmm/waitlist', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
       .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
