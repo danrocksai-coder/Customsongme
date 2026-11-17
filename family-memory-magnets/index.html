@@ -74,9 +74,9 @@
     <h2 class="center">How to order</h2>
     <ol class="steps4">
       <li><b>Pick your package</b><span>One grandparent or both, 30 or 60 conversations.</span></li>
-      <li><b>Fill in the details</b><span>Names and the two mailing addresses for the magnets.</span></li>
-      <li><b>Confirm your settings</b><span>You decide how your child records. You can fill in the grandparents' profiles any time.</span></li>
-      <li><b>Sign the waiver and pay</b><span>Check the permission box, then pay securely with Stripe.</span></li>
+      <li><b>Fill in your details</b><span>Who you are, and the parent if that's someone else.</span></li>
+      <li><b>Choose settings and profiles</b><span>How the child records, Little Hellos, music, sharing, and each person's profile.</span></li>
+      <li><b>Sign the waiver and pay</b><span>Add both magnet addresses, check the permission box, then pay securely with Stripe.</span></li>
     </ol>
     <div class="next card"><b>What happens next:</b> your two custom magnets are ordered within 24 hours, and I email you when they will arrive. In the meantime you get <b>two personal QR codes by email</b> to print, so you can start your story right away.</div>
   </div>
@@ -86,9 +86,10 @@
   <div class="wrap">
     <div id="previewNote" class="msg info hidden">Preview only: checkout is turned off. Nothing will be ordered or charged.</div>
     <form id="orderForm" class="card" novalidate>
-      <h2>Your details</h2>
       <div class="msg info" style="font-weight:500" id="pickedPkg"></div>
-      <p class="muted">You're the buyer, so you hold the settings: you can set everything up now or later, fill in each grandparent's profile, add photos, and change settings at any time. The child's parent always gives permission, even when someone else buys.</p>
+
+      <h2 class="fs"><span>1</span>Your details</h2>
+      <p class="muted">You're the buyer, so you set everything up: the settings, the profiles and the photos. You can change any of it later. The child's parent always gives permission, even when someone else buys.</p>
       <label for="buyer">Who is buying?</label>
       <select id="buyer"><option value="parent">I'm the child's parent or guardian</option><option value="grandparent">I'm a grandparent</option><option value="other">Someone else (a relative or friend)</option></select>
       <label for="buyerName">Your name</label>
@@ -103,16 +104,46 @@
         <label for="parentEmail">Their email</label>
         <input id="parentEmail" type="email">
       </div>
-      <label for="childName">Child's first name</label>
-      <input id="childName" type="text" required>
-      <label for="gp1" id="gp1label">Grandparent's name (what the child calls them)</label>
-      <input id="gp1" type="text" placeholder="Mimi, Grandpa Joe…" required>
-      <div id="gp2wrap" class="hidden">
-        <label for="gp2">Second grandparent's name</label>
+
+      <h2 class="fs"><span>2</span>Your settings</h2>
+      <label for="childRec">How will the child record their questions?</label>
+      <select id="childRec"><option value="parent">With a parent, on the parent's phone (recommended)</option><option value="own">On their own, by scanning their QR magnet (voice only, up to 15 seconds)</option></select>
+      <p class="muted" id="ownNote" style="display:none">The parent decides when a child is ready. For a child under 13, the parent signs a short consent form after checkout before the child's own access turns on.</p>
+      <label class="check"><input id="parentLogin" type="checkbox" checked><span>Send the child's parent their own settings link too (recommended)</span></label>
+      <label for="helloStyle">Little Hellos (short "thinking of you" notes after a quiet couple of days)</label>
+      <select id="helloStyle"><option value="both">On: sweet and playful</option><option value="sweet">On: sweet only</option><option value="funny">On: playful only</option><option value="off">Off</option></select>
+      <label for="music">Family movie music</label>
+      <select id="music"><option value="soft">Soft instrumental music under the voices</option><option value="none">No music, voices only</option></select>
+      <label for="share">Sharing the finished movie</label>
+      <select id="share"><option value="private">Keep it private (download only)</option><option value="open">Open to sharing on the magnet page and unlisted YouTube</option></select>
+      <p class="muted">Sharing still needs a yes from the parent and the grandparent when the movie is ready.</p>
+      <ul class="muted setlist">
+        <li>Voice only. There is never any video.</li>
+        <li>Children never upload photos. You, the parent and the grandparents add the family photos.</li>
+      </ul>
+
+      <h2 class="fs"><span>3</span>The profiles</h2>
+      <div class="prof">
+        <b>The child</b>
+        <label for="childName">First name</label>
+        <input id="childName" type="text" required>
+        <label for="childAge">Age</label>
+        <select id="childAge"><option value="">Choose…</option><option>3 to 5</option><option>6 to 8</option><option>9 to 12</option><option>13 to 17</option><option>18 or older</option></select>
+      </div>
+      <div class="prof">
+        <b id="gp1title">The grandparent</b>
+        <label for="gp1" id="gp1label">What the child calls them</label>
+        <input id="gp1" type="text" placeholder="Mimi, Grandpa Joe…" required>
+        <details class="pre" id="pre0"><summary id="pre0sum">Fill in their profile now (optional, 20 quick questions)</summary><div class="pqs"><p class="muted" style="margin:6px 0 0">Answer as the grandparent would. You can change these later, and the grandparent can too.</p><label class="pq">Which decade were you born in?<select data-prof="0|born"><option value="">Skip for now</option><option value="0">1930s</option><option value="1">1940s</option><option value="2">1950s</option><option value="3">1960s</option><option value="4">1970s</option><option value="5">1980s</option></select></label><label class="pq">Where did you grow up?<select data-prof="0|grewup"><option value="">Skip for now</option><option value="0">A big city</option><option value="1">A small town</option><option value="2">A farm or the countryside</option><option value="3">The suburbs</option><option value="4">Another country</option><option value="5">We moved around a lot</option></select></label><label class="pq">How many brothers and sisters did you have?<select data-prof="0|siblings"><option value="">Skip for now</option><option value="0">None</option><option value="1">One</option><option value="2">Two</option><option value="3">Three</option><option value="4">Four</option><option value="5">Five or more</option></select></label><label class="pq">Where were you in your family?<select data-prof="0|birthorder"><option value="">Skip for now</option><option value="0">The oldest</option><option value="1">In the middle</option><option value="2">The youngest</option><option value="3">An only child</option><option value="4">A twin</option></select></label><label class="pq">What was your favorite subject in school?<select data-prof="0|school"><option value="">Skip for now</option><option value="0">Reading and writing</option><option value="1">Math</option><option value="2">Science</option><option value="3">History</option><option value="4">Art or music</option><option value="5">Sports</option><option value="6">Recess!</option></select></label><label class="pq">What was your first job?<select data-prof="0|firstjob"><option value="">Skip for now</option><option value="0">Babysitting</option><option value="1">A store or restaurant</option><option value="2">Farm work</option><option value="3">A paper route</option><option value="4">An office</option><option value="5">A factory</option><option value="6">The military</option><option value="7">Something else</option></select></label><label class="pq">What music did you love as a teenager?<select data-prof="0|music"><option value="">Skip for now</option><option value="0">Rock and roll</option><option value="1">Country</option><option value="2">Motown and soul</option><option value="3">Pop</option><option value="4">Jazz or big band</option><option value="5">Gospel</option><option value="6">Disco</option><option value="7">Something else</option></select></label><label class="pq">Your favorite way to spend a Saturday as a kid?<select data-prof="0|saturday"><option value="">Skip for now</option><option value="0">Outside with friends</option><option value="1">Playing sports</option><option value="2">Reading</option><option value="3">Helping at home</option><option value="4">Fishing or hunting</option><option value="5">At the movies</option><option value="6">Church or community</option></select></label><label class="pq">Did you serve in the military?<select data-prof="0|military"><option value="">Skip for now</option><option value="0">No</option><option value="1">Army</option><option value="2">Navy</option><option value="3">Air Force</option><option value="4">Marines</option><option value="5">Coast Guard</option><option value="6">Another service</option></select></label><label class="pq">How did you meet your partner?<select data-prof="0|met"><option value="">Skip for now</option><option value="0">At school</option><option value="1">At work</option><option value="2">At church</option><option value="3">Friends introduced us</option><option value="4">At a dance or party</option><option value="5">Somewhere else</option><option value="6">This one does not fit me</option></select></label><label class="pq">What are you most proud of?<select data-prof="0|proud"><option value="">Skip for now</option><option value="0">Being a parent</option><option value="1">Being a grandparent</option><option value="2">My work</option><option value="3">Serving others</option><option value="4">My faith</option><option value="5">My community</option><option value="6">Something else</option></select></label><label class="pq">What is your favorite holiday?<select data-prof="0|holiday"><option value="">Skip for now</option><option value="0">Christmas</option><option value="1">Thanksgiving</option><option value="2">Easter</option><option value="3">Fourth of July</option><option value="4">Halloween</option><option value="5">Birthdays</option><option value="6">Another holiday</option></select></label><label class="pq">What do you love to make in the kitchen?<select data-prof="0|food"><option value="">Skip for now</option><option value="0">Desserts and baking</option><option value="1">Big breakfasts</option><option value="2">Holiday dinners</option><option value="3">Soups and stews</option><option value="4">Barbecue and grilling</option><option value="5">A family recipe from the old country</option><option value="6">I do not cook!</option></select></label><label class="pq">Your favorite kind of trip?<select data-prof="0|vacation"><option value="">Skip for now</option><option value="0">The beach</option><option value="1">The mountains</option><option value="2">A road trip</option><option value="3">Camping</option><option value="4">A big city</option><option value="5">Another country</option><option value="6">Staying home</option></select></label><label class="pq">Did you have pets growing up?<select data-prof="0|pets"><option value="">Skip for now</option><option value="0">Dogs</option><option value="1">Cats</option><option value="2">Farm animals</option><option value="3">Birds</option><option value="4">Fish</option><option value="5">Lots of pets</option><option value="6">No pets</option></select></label><label class="pq">What hobby do you love?<select data-prof="0|hobby"><option value="">Skip for now</option><option value="0">Gardening</option><option value="1">Cooking</option><option value="2">Crafts or sewing</option><option value="3">Sports</option><option value="4">Music</option><option value="5">Reading</option><option value="6">Travel</option><option value="7">Fixing things</option></select></label><label class="pq">What makes you laugh the most?<select data-prof="0|laugh"><option value="">Skip for now</option><option value="0">Family stories</option><option value="1">Funny movies or TV</option><option value="2">My grandkids</option><option value="3">Jokes and puns</option><option value="4">Silly mistakes</option></select></label><label class="pq">Which advice do you live by?<select data-prof="0|advice"><option value="">Skip for now</option><option value="0">Work hard</option><option value="1">Be kind</option><option value="2">Family comes first</option><option value="3">Keep the faith</option><option value="4">Enjoy the little things</option><option value="5">Never give up</option></select></label><label class="pq">What is your favorite season?<select data-prof="0|season"><option value="">Skip for now</option><option value="0">Spring</option><option value="1">Summer</option><option value="2">Fall</option><option value="3">Winter</option></select></label><label class="pq">Which word do people use to describe you?<select data-prof="0|word"><option value="">Skip for now</option><option value="0">Funny</option><option value="1">Kind</option><option value="2">Strong</option><option value="3">Wise</option><option value="4">Adventurous</option><option value="5">Patient</option><option value="6">Stubborn</option></select></label></div></details>
+      </div>
+      <div class="prof hidden" id="gp2wrap">
+        <b>The second grandparent</b>
+        <label for="gp2">What the child calls them</label>
         <input id="gp2" type="text" placeholder="Papa, Grandma Rose…">
+        <details class="pre" id="pre1"><summary id="pre1sum">Fill in their profile now (optional, 20 quick questions)</summary><div class="pqs"><p class="muted" style="margin:6px 0 0">Answer as the grandparent would. You can change these later, and the grandparent can too.</p><label class="pq">Which decade were you born in?<select data-prof="1|born"><option value="">Skip for now</option><option value="0">1930s</option><option value="1">1940s</option><option value="2">1950s</option><option value="3">1960s</option><option value="4">1970s</option><option value="5">1980s</option></select></label><label class="pq">Where did you grow up?<select data-prof="1|grewup"><option value="">Skip for now</option><option value="0">A big city</option><option value="1">A small town</option><option value="2">A farm or the countryside</option><option value="3">The suburbs</option><option value="4">Another country</option><option value="5">We moved around a lot</option></select></label><label class="pq">How many brothers and sisters did you have?<select data-prof="1|siblings"><option value="">Skip for now</option><option value="0">None</option><option value="1">One</option><option value="2">Two</option><option value="3">Three</option><option value="4">Four</option><option value="5">Five or more</option></select></label><label class="pq">Where were you in your family?<select data-prof="1|birthorder"><option value="">Skip for now</option><option value="0">The oldest</option><option value="1">In the middle</option><option value="2">The youngest</option><option value="3">An only child</option><option value="4">A twin</option></select></label><label class="pq">What was your favorite subject in school?<select data-prof="1|school"><option value="">Skip for now</option><option value="0">Reading and writing</option><option value="1">Math</option><option value="2">Science</option><option value="3">History</option><option value="4">Art or music</option><option value="5">Sports</option><option value="6">Recess!</option></select></label><label class="pq">What was your first job?<select data-prof="1|firstjob"><option value="">Skip for now</option><option value="0">Babysitting</option><option value="1">A store or restaurant</option><option value="2">Farm work</option><option value="3">A paper route</option><option value="4">An office</option><option value="5">A factory</option><option value="6">The military</option><option value="7">Something else</option></select></label><label class="pq">What music did you love as a teenager?<select data-prof="1|music"><option value="">Skip for now</option><option value="0">Rock and roll</option><option value="1">Country</option><option value="2">Motown and soul</option><option value="3">Pop</option><option value="4">Jazz or big band</option><option value="5">Gospel</option><option value="6">Disco</option><option value="7">Something else</option></select></label><label class="pq">Your favorite way to spend a Saturday as a kid?<select data-prof="1|saturday"><option value="">Skip for now</option><option value="0">Outside with friends</option><option value="1">Playing sports</option><option value="2">Reading</option><option value="3">Helping at home</option><option value="4">Fishing or hunting</option><option value="5">At the movies</option><option value="6">Church or community</option></select></label><label class="pq">Did you serve in the military?<select data-prof="1|military"><option value="">Skip for now</option><option value="0">No</option><option value="1">Army</option><option value="2">Navy</option><option value="3">Air Force</option><option value="4">Marines</option><option value="5">Coast Guard</option><option value="6">Another service</option></select></label><label class="pq">How did you meet your partner?<select data-prof="1|met"><option value="">Skip for now</option><option value="0">At school</option><option value="1">At work</option><option value="2">At church</option><option value="3">Friends introduced us</option><option value="4">At a dance or party</option><option value="5">Somewhere else</option><option value="6">This one does not fit me</option></select></label><label class="pq">What are you most proud of?<select data-prof="1|proud"><option value="">Skip for now</option><option value="0">Being a parent</option><option value="1">Being a grandparent</option><option value="2">My work</option><option value="3">Serving others</option><option value="4">My faith</option><option value="5">My community</option><option value="6">Something else</option></select></label><label class="pq">What is your favorite holiday?<select data-prof="1|holiday"><option value="">Skip for now</option><option value="0">Christmas</option><option value="1">Thanksgiving</option><option value="2">Easter</option><option value="3">Fourth of July</option><option value="4">Halloween</option><option value="5">Birthdays</option><option value="6">Another holiday</option></select></label><label class="pq">What do you love to make in the kitchen?<select data-prof="1|food"><option value="">Skip for now</option><option value="0">Desserts and baking</option><option value="1">Big breakfasts</option><option value="2">Holiday dinners</option><option value="3">Soups and stews</option><option value="4">Barbecue and grilling</option><option value="5">A family recipe from the old country</option><option value="6">I do not cook!</option></select></label><label class="pq">Your favorite kind of trip?<select data-prof="1|vacation"><option value="">Skip for now</option><option value="0">The beach</option><option value="1">The mountains</option><option value="2">A road trip</option><option value="3">Camping</option><option value="4">A big city</option><option value="5">Another country</option><option value="6">Staying home</option></select></label><label class="pq">Did you have pets growing up?<select data-prof="1|pets"><option value="">Skip for now</option><option value="0">Dogs</option><option value="1">Cats</option><option value="2">Farm animals</option><option value="3">Birds</option><option value="4">Fish</option><option value="5">Lots of pets</option><option value="6">No pets</option></select></label><label class="pq">What hobby do you love?<select data-prof="1|hobby"><option value="">Skip for now</option><option value="0">Gardening</option><option value="1">Cooking</option><option value="2">Crafts or sewing</option><option value="3">Sports</option><option value="4">Music</option><option value="5">Reading</option><option value="6">Travel</option><option value="7">Fixing things</option></select></label><label class="pq">What makes you laugh the most?<select data-prof="1|laugh"><option value="">Skip for now</option><option value="0">Family stories</option><option value="1">Funny movies or TV</option><option value="2">My grandkids</option><option value="3">Jokes and puns</option><option value="4">Silly mistakes</option></select></label><label class="pq">Which advice do you live by?<select data-prof="1|advice"><option value="">Skip for now</option><option value="0">Work hard</option><option value="1">Be kind</option><option value="2">Family comes first</option><option value="3">Keep the faith</option><option value="4">Enjoy the little things</option><option value="5">Never give up</option></select></label><label class="pq">What is your favorite season?<select data-prof="1|season"><option value="">Skip for now</option><option value="0">Spring</option><option value="1">Summer</option><option value="2">Fall</option><option value="3">Winter</option></select></label><label class="pq">Which word do people use to describe you?<select data-prof="1|word"><option value="">Skip for now</option><option value="0">Funny</option><option value="1">Kind</option><option value="2">Strong</option><option value="3">Wise</option><option value="4">Adventurous</option><option value="5">Patient</option><option value="6">Stubborn</option></select></label></div></details>
       </div>
 
-      <h3 style="margin-top:20px">Where should the magnets go?</h3>
+      <h2 class="fs"><span>4</span>Where should the magnets go?</h2>
       <fieldset class="addr"><legend id="gpAddrLegend">Grandparent's mailing address</legend>
         <input id="gpLine" type="text" placeholder="Street address" autocomplete="off">
         <div class="row"><input id="gpCity" type="text" placeholder="City" autocomplete="off"><input id="gpState" type="text" placeholder="State" maxlength="20" autocomplete="off"><input id="gpZip" type="text" placeholder="ZIP" maxlength="10" inputmode="numeric" autocomplete="off"></div>
@@ -121,20 +152,11 @@
         <input id="chLine" type="text" placeholder="Street address" autocomplete="off">
         <div class="row"><input id="chCity" type="text" placeholder="City" autocomplete="off"><input id="chState" type="text" placeholder="State" maxlength="20" autocomplete="off"><input id="chZip" type="text" placeholder="ZIP" maxlength="10" inputmode="numeric" autocomplete="off"></div>
       </fieldset>
-
-      <h3 style="margin-top:20px">Your settings</h3>
-      <label for="childRec">How will your child record their questions?</label>
-      <select id="childRec"><option value="parent">With a parent, on the parent's phone (recommended)</option><option value="own">On their own, by scanning their QR magnet (voice only, up to 15 seconds)</option></select>
-      <p class="muted" id="ownNote" style="display:none">The parent decides when a child is ready. For a child under 13, the parent signs a short consent form after checkout before the child's own access turns on.</p>
-      <ul class="muted setlist">
-        <li>Voice only. There is never any video.</li>
-        <li>Children never upload photos. Adults add the family photos.</li>
-        <li>You can fill in or change each grandparent's profile and these settings any time.</li>
-      </ul>
       <label for="onotes">Anything I should know? (optional)</label>
       <textarea id="onotes" rows="2"></textarea>
       <input id="owebsite" type="text" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
 
+      <h2 class="fs"><span>5</span>Sign and pay</h2>
       <div class="waiver">
         <b>Waiver and permission</b>
         <label class="check"><input id="agree" type="checkbox" required>
@@ -227,7 +249,7 @@
     Object.keys(NAMES).forEach(function (k) { $('pk-' + k).classList.toggle('sel', v === k); });
     var two = v === 'together' || v === 'bigtogether';
     $('gp2wrap').classList.toggle('hidden', !two);
-    $('gp1label').textContent = two ? 'First grandparent\'s name (what the child calls them)' : 'Grandparent\'s name (what the child calls them)';
+    $('gp1title').textContent = two ? 'The first grandparent' : 'The grandparent';
     $('gpAddrLegend').textContent = two ? 'Grandparents\' mailing address' : 'Grandparent\'s mailing address';
     $('pickedPkg').innerHTML = 'Your package: <b>' + NAMES[v] + '</b>';
   }
@@ -235,6 +257,14 @@
   pick('one');
   $('buyer').addEventListener('change', function () { $('parentWrap').classList.toggle('hidden', $('buyer').value === 'parent'); });
   $('childRec').addEventListener('change', function () { $('ownNote').style.display = $('childRec').value === 'own' ? 'block' : 'none'; });
+  function nameOr(id, fallback) { return ($(id).value || '').trim() || fallback; }
+  function profSummaries() { $('pre0sum').textContent = 'Fill in ' + nameOr('gp1', 'their') + (nameOr('gp1', '') ? '\'s' : '') + ' profile now (optional, 20 quick questions)'; $('pre1sum').textContent = 'Fill in ' + nameOr('gp2', 'their') + (nameOr('gp2', '') ? '\'s' : '') + ' profile now (optional, 20 quick questions)'; }
+  $('gp1').addEventListener('input', profSummaries); $('gp2').addEventListener('input', profSummaries);
+  function profiles(two) {
+    var out = [{ answers: {} }, { answers: {} }];
+    document.querySelectorAll('[data-prof]').forEach(function (sel) { if (sel.value === '') return; var p = sel.getAttribute('data-prof').split('|'); out[Number(p[0])].answers[p[1]] = Number(sel.value); });
+    return two ? out : [out[0]];
+  }
   function addr(p) { return { line1: $(p + 'Line').value.trim(), city: $(p + 'City').value.trim(), state: $(p + 'State').value.trim(), zip: $(p + 'Zip').value.trim() }; }
   function addrOk(a) { return a.line1 && a.city && a.state && a.zip; }
 
@@ -269,7 +299,9 @@
     var data = { package: pkg, buyerRole: buyer, buyerName: $('buyerName').value, email: $('oemail').value, phone: $('phone').value,
       parentName: buyer === 'parent' ? $('buyerName').value : $('parentName').value, parentEmail: buyer === 'parent' ? $('oemail').value : $('parentEmail').value,
       childName: $('childName').value, grandparent1: $('gp1').value, grandparent2: two ? $('gp2').value : '', notes: $('onotes').value, website: $('owebsite').value, source: source(),
-      gpAddress: addr('gp'), childAddress: addr('ch'), childRecording: $('childRec').value, waiver: true };
+      gpAddress: addr('gp'), childAddress: addr('ch'), childRecording: $('childRec').value, waiver: true,
+      childAge: $('childAge').value, settings: { parentLogin: $('parentLogin').checked, hello: $('helloStyle').value, music: $('music').value, share: $('share').value },
+      profiles: profiles(two) };
     $('orderBtn').disabled = true; $('orderBtn').textContent = 'One moment…';
     fetch('/api/fmm/order', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
       .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })

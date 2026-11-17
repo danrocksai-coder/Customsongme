@@ -54,7 +54,11 @@ export const LOCK_MAX_MS = 24 * 3600e3;
 export const STOPS = QUESTIONS.stops;
 export const CHAPTERS = QUESTIONS.chapters;
 export const ROLES = ['child', 'grandparent'];
-export const ALL_ROLES = ['child', 'grandparent', 'guardian']; // guardian = the purchasing parent/guardian (optional login)
+export const ALL_ROLES = ['child', 'grandparent', 'guardian', 'buyer'];
+// guardian = the child's parent/guardian (optional login; may also be the buyer)
+// buyer    = whoever bought it when that is NOT the parent (a grandparent, a relative). The buyer sets things up:
+//            profiles, photos, Little Hellos, progress. Parent-only decisions (permission, the child's own link,
+//            the parent's publishing answer) stay with the parent, and the buyer cannot play the family's recordings.
 export const RETENTION_DAYS_AFTER_COMPLETION = 365; // keepsake stays open 12 months after the 30th conversation
 
 // Little Hello suggestions. Every line is 150 characters or fewer (enforced by a test).
@@ -166,6 +170,7 @@ export function norm(story) {
   story.drafts ||= {};
   story.sessions ||= { child: [], grandparent: [] };
   story.sessions.guardian ||= [];
+  story.sessions.buyer ||= [];
   story.sessions.kid ||= [];
   story.photos ||= [];
   story.profiles ||= {};
@@ -201,7 +206,7 @@ function pinOk(story, role, pin) {
   return true;
 }
 export function setPin(story, role, pin) { // pin '' clears
-  if (!ALL_ROLES.includes(role) || (role === 'guardian' && !story.tokenHashes.guardian)) fail(400, 'Bad role.');
+  if (!ALL_ROLES.includes(role) || ((role === 'guardian' || role === 'buyer') && !story.tokenHashes[role])) fail(400, 'Bad role.');
   if (pin === '' || pin == null) { delete story.pins[role]; if (role === 'child') story.pinHash = null; return; }
   const salt = newToken(12);
   story.pins[role] = { salt, hash: hashPin(cleanPin(pin), salt) };
@@ -235,6 +240,7 @@ export async function createStory(store, input) {
   const id = newToken(9);
   const tokens = { child: newToken(), grandparent: newToken() };
   if (input.guardian) tokens.guardian = newToken();
+  if (input.buyer) tokens.buyer = newToken();
   const qrCodes = { child: newToken(12), grandparent: newToken(12) };
   const story = norm({
     id, createdAt: now(), expiresAt: null, // no deadline while recording; set to completion + 12 months when finished
@@ -248,6 +254,8 @@ export async function createStory(store, input) {
     consent: null, stops: emptyStops(SIZES.includes(Number(input.stops)) ? Number(input.stops) : 30), intro: null, closing: null, deletedAt: null,
   });
   if (tokens.guardian) { story.tokenHashes.guardian = sha(tokens.guardian); story.guardianCode = newToken(12); }
+  if (tokens.buyer) setBuyer(story, tokens.buyer, input);
+  applyOrderChoices(story, input.fromOrder);
   const pc = input.pinChild ?? input.pin; // `pin` kept for older callers
   if (pc) setPin(story, 'child', pc);
   if (input.pinGrandparent) setPin(story, 'grandparent', input.pinGrandparent);
@@ -256,7 +264,38 @@ export async function createStory(store, input) {
   await store.setJSON(`token/${story.tokenHashes.grandparent}`, { storyId: id, role: 'grandparent' });
   for (const r of ROLES) await store.setJSON(`qr/${qrCodes[r]}`, { storyId: id, role: r });
   if (tokens.guardian) await store.setJSON(`token/${story.tokenHashes.guardian}`, { storyId: id, role: 'guardian' });
+  if (tokens.buyer) await store.setJSON(`token/${story.tokenHashes.buyer}`, { storyId: id, role: 'buyer' });
   return { story, tokens };
+}
+
+// The buyer's choices from the order page become the story's starting settings (all changeable later).
+function applyOrderChoices(story, o) {
+  if (!o) return;
+  const st = o.settings || {};
+  if (st.hello === 'off') story.helloSettings = { enabled: false, style: 'both', custom: [] };
+  else if (['both', 'sweet', 'funny'].includes(st.hello)) story.helloSettings = { enabled: true, style: st.hello, custom: [] };
+  story.prefs = { music: st.music === 'none' ? 'none' : 'soft', share: st.share === 'open' ? 'open' : 'private',
+    childRecording: o.childRecording === 'own' ? 'own' : 'parent', childAge: String(o.childAge || '').slice(0, 20) };
+  (Array.isArray(o.profiles) ? o.profiles : []).slice(0, 2).forEach((p, k) => {
+    const answers = {};
+    for (const q of PROFILE) { const v = p?.answers?.[q.id]; if (Number.isInteger(v) && v >= 0 && v < q.options.length) answers[q.id] = v; }
+    if (Object.keys(answers).length) story.profiles[k] = { answers, at: now() };
+  });
+}
+
+function setBuyer(story, token, input) {
+  story.tokenHashes.buyer = sha(token); story.buyerCode = newToken(12);
+  story.buyer = { name: String(input.buyerName || '').trim().slice(0, 80), email: String(input.buyerEmail || '').trim().slice(0, 120),
+    relation: ['grandparent', 'other'].includes(input.buyerRole) ? input.buyerRole : 'other' };
+}
+// Add the buyer's own login to an existing story (when someone other than the parent bought it).
+export async function addBuyer(store, storyId, input = {}) {
+  const story = norm(await store.getJSON(`story/${storyId}`) || fail(404, 'No such story.'));
+  if (story.tokenHashes.buyer) fail(409, 'This story already has a buyer login. Use "Revoke & new link" to replace it.');
+  const t = newToken(); setBuyer(story, t, input);
+  await store.setJSON(`token/${story.tokenHashes.buyer}`, { storyId, role: 'buyer' });
+  await store.setJSON(`story/${storyId}`, story);
+  return t;
 }
 
 // Add the optional parent/guardian login to an existing story (no other credential changes).
@@ -373,7 +412,7 @@ export async function exchangeLink(store, linkToken, { pin } = {}) {
   const { story, role, own } = await authorize(store, linkToken, { pin });
   const session = await createSession(store, story, role, own);
   const qrCodes = await ensureQrCodes(store, story);
-  return { session, role, code: qrCodes[role] || story.guardianCode };
+  return { session, role, code: qrCodes[role] || (role === 'buyer' ? story.buyerCode : story.guardianCode) };
 }
 
 async function createSession(store, story, role, own = false) {
@@ -478,6 +517,19 @@ export function helloEligibility(story, role, at = now()) {
   return { ok: true };
 }
 
+// What the buyer sees (when the buyer is not the parent): set-up and progress, never the family's recordings.
+export function buyerState(story) {
+  const g = guardianState(story);
+  return {
+    ...g, role: 'buyer', buyer: story.buyer || null,
+    consentNeeded: false, consentPending: !story.test && !story.consent, // shown as "waiting for the parent"
+    childAccess: null, publication: null, childPaused: !!story.childPaused,
+    conversations: g.conversations.map((c) => ({ ...c, hasQ: false, hasA: false })), // progress only; recordings stay with the family
+    hellos: g.hellos.map((h) => ({ ...h, kind: 'text', text: h.kind === 'text' ? h.text : '(voice hello)' })),
+    photos: photoList(story, 'buyer', false), parentLogin: !!story.tokenHashes.guardian,
+  };
+}
+
 // What the purchasing parent/guardian sees: oversight and controls, never recording.
 export function guardianState(story) {
   norm(story);
@@ -514,7 +566,7 @@ export function publicationView(story, side) {
 function pubSide(story, role, own) { if (role === 'grandparent') return 'grandparent'; return isController(story, role, own) ? 'parent' : null; }
 
 // Who may add photos: the parent (parent login or parent-held family link) and the grandparent. Never a child's own link.
-function canAddPhotos(story, role, own) { return !own && (role === 'grandparent' || isController(story, role, own)); }
+function canAddPhotos(story, role, own) { return !own && (role === 'grandparent' || role === 'buyer' || isController(story, role, own)); }
 function photoList(story, role, own) {
   const parentSide = isController(story, role, own);
   return story.photos.map((p) => ({ id: p.id, caption: p.caption, by: p.by, at: p.at, canDelete: parentSide || (p.by === role && !own) }));
@@ -539,6 +591,7 @@ function isController(story, role, own) {
 export function publicState(story, role, own = false) {
   norm(story);
   if (role === 'guardian') return guardianState(story);
+  if (role === 'buyer') return buyerState(story);
   const ci = currentIndex(story);
   const stops = story.stops.map((_, i) => ({
     n: i + 1, chapter: defAt(story, i).chapter, title: defAt(story, i).title,
@@ -587,7 +640,7 @@ export function publicState(story, role, own = false) {
 // ---------- actions ----------
 export async function recordConsent(store, token, { parentName, agree, pin }) {
   const { story, role, own } = await authorize(store, token, { pin });
-  if (role === 'grandparent' || own) fail(403, 'Only the parent can give consent.');
+  if (role === 'grandparent' || role === 'buyer' || own) fail(403, 'Only the parent can give consent.');
   if (role === 'child' && story.tokenHashes.guardian) fail(403, 'A parent needs to say yes from their own parent link.');
   if (!agree || !String(parentName || '').trim()) fail(400, 'Parent name and agreement are required.');
   story.consent = { parentName: String(parentName).trim().slice(0, 80), version: CONSENT_VERSION, at: now() };
@@ -636,7 +689,7 @@ export async function choose(store, token, { n, qid, custom, pin }) {
 // ----- teleprompter drafts (private to the author; server-side so they survive refresh and device changes) -----
 export async function saveDraft(store, token, { n, text, pin }) {
   const { story, role } = await authorize(store, token, { pin });
-  if (role === 'guardian') fail(403, 'Parents do not write recording notes.');
+  if (role === 'guardian' || role === 'buyer') fail(403, 'Only the people recording write notes.');
   assertNotPaused(story, role);
   const i = currentIndex(story);
   if (n !== openN(story, i)) fail(409, 'That stop is not open.');
@@ -650,7 +703,7 @@ export async function saveDraft(store, token, { n, text, pin }) {
   return { ok: true, saved: t.length };
 }
 
-const ROLE_SLOT = { child: ['question', 'hello'], grandparent: ['answer', 'intro', 'closing', 'hello'], guardian: [] };
+const ROLE_SLOT = { child: ['question', 'hello'], grandparent: ['answer', 'intro', 'closing', 'hello'], guardian: [], buyer: [] };
 const PAUSED = 'Your parent has paused this for now. Ask them to turn it back on.';
 const assertNotPaused = (story, role) => { if (role === 'child' && story.childPaused) fail(403, PAUSED); };
 
@@ -745,7 +798,7 @@ export async function skipQuestion(store, token, { n, pin }) {
 // ----- Little Hellos (text) -----
 export async function sendHello(store, token, { suggestion, pin }) {
   const { story, role, own } = await authorize(store, token, { pin });
-  if (role === 'guardian') fail(403, 'Parents manage Little Hellos from the parent page.');
+  if (role === 'guardian' || role === 'buyer') fail(403, 'Little Hellos are managed from your settings page.');
   assertNotPaused(story, role);
   const el = helloEligibility(story, role);
   if (!el.ok) fail(409, 'A Little Hello is not available right now.');
@@ -758,7 +811,7 @@ export async function sendHello(store, token, { suggestion, pin }) {
 }
 export async function markHelloRead(store, token, { id, pin }) {
   const { story, role } = await authorize(store, token, { pin });
-  if (role === 'guardian') return { ok: true };
+  if (role === 'guardian' || role === 'buyer') return { ok: true };
   const h = story.hellos.find((x) => x.id === id && x.from !== role);
   if (!h) fail(404, 'No such message.');
   if (!h.readAt) { h.readAt = now(); await store.setJSON(`story/${story.id}`, story); }
@@ -768,8 +821,11 @@ export async function markHelloRead(store, token, { id, pin }) {
 // ----- parent/guardian controls (server checks the role; the purchaser decides) -----
 export async function guardianUpdate(store, token, input) {
   const { story, role } = await authorize(store, token, { pin: input.pin });
-  if (role !== 'guardian') fail(403, 'Only the parent can change these settings.');
-  if (typeof input.childPaused === 'boolean') story.childPaused = input.childPaused;
+  if (role !== 'guardian' && role !== 'buyer') fail(403, 'Only the parent or the buyer can change these settings.');
+  if (typeof input.childPaused === 'boolean') {
+    if (role !== 'guardian') fail(403, 'Only the parent can pause the child.');
+    story.childPaused = input.childPaused;
+  }
   if (input.hello) {
     const { enabled, style, custom } = input.hello;
     if (!['both', 'sweet', 'funny', 'custom'].includes(style || 'both')) fail(400, 'Bad style.');
@@ -782,7 +838,7 @@ export async function guardianUpdate(store, token, input) {
   if (input.requestDeletion === true) story.deletionRequestedAt = story.deletionRequestedAt || now();
   if (input.requestDeletion === false) story.deletionRequestedAt = null;
   await store.setJSON(`story/${story.id}`, story);
-  return guardianState(story);
+  return stateFor(story, role, false);
 }
 
 // ----- the child's own link (parent decides; Dan only reviews signed forms) -----
@@ -793,7 +849,7 @@ async function controller(store, token, pin) {
   if (!ctx.story.consent && !ctx.story.test) fail(409, 'Please give permission for recording first.');
   return ctx;
 }
-const stateFor = (story, role, own) => (role === 'guardian' ? guardianState(story) : publicState(story, role, own));
+const stateFor = (story, role, own) => (role === 'guardian' ? guardianState(story) : role === 'buyer' ? buyerState(story) : publicState(story, role, own));
 
 // Parent confirms the child is 13 or older: COPPA does not apply, so no form is needed.
 export async function childAccessTeen(store, token, { parentName, agree, pin }) {
@@ -900,7 +956,7 @@ export function profileView(story) {
 export async function saveProfile(store, token, { k, qid, answer, pin }) {
   const { story, role, own } = await authorize(store, token, { pin });
   if (own) fail(403, 'A grandparent or parent fills this in.');
-  if (!(role === 'grandparent' || isController(story, role, own))) fail(403, 'A grandparent or parent fills this in.');
+  if (!(role === 'grandparent' || role === 'buyer' || isController(story, role, own))) fail(403, 'A grandparent or parent fills this in.');
   const names = gpNames(story); const idx = Number(k) || 0;
   if (!(idx >= 0 && idx < names.length)) fail(400, 'Unknown grandparent.');
   const q = PROFILE.find((x) => x.id === qid); if (!q) fail(400, 'Unknown question.');
@@ -956,7 +1012,7 @@ export function movieKit(story, secret) {
       n: i + 1, chapter: defAt(story, i).chapter, title: defAt(story, i).title, question: s.chosen?.text || '', answerer: answererFor(story, i + 1),
       q: clip(s.q, slotKey(i + 1, 'question')), a: clip(s.a, slotKey(i + 1, 'answer')),
     })),
-    intro: clip(story.intro, 'intro'), closing: clip(story.closing, 'closing'),
+    intro: clip(story.intro, 'intro'), closing: clip(story.closing, 'closing'), prefs: story.prefs || null,
     profiles: profileView(story).map((p) => ({ name: p.name, answers: Object.fromEntries(Object.entries(p.answers).map(([id, i]) => [PROFILE.find((q) => q.id === id)?.text || id, PROFILE.find((q) => q.id === id)?.options[i]])) })),
     photos: story.photos.map((p) => ({ id: p.id, caption: p.caption, by: p.by, type: p.contentType, url: link(slotKey(0, 'photo', p.id)) })),
   };
@@ -1006,6 +1062,7 @@ export async function setKeepsake(store, storyId, { status, items }) {
 // What each role may hear, decided here (never by the browser).
 export async function mediaAccess(store, secret, token, { n, slot, id, pin }) {
   const { story, role } = await authorize(store, token, { pin });
+  if (role === 'buyer' && slot !== 'photo') fail(403, 'The family\'s recordings are private to the people in the story.');
   const i = currentIndex(story);
   const idx = Number.isInteger(n) && n >= 1 && n <= T(story) ? n - 1 : -1;
   let item; let key;

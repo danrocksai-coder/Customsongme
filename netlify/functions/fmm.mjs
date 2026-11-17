@@ -9,6 +9,7 @@ import { getStore } from '@netlify/blobs';
 import { randomBytes } from 'node:crypto';
 import QRCode from 'qrcode';
 import * as C from '../lib/fmm-core.mjs';
+import PROFILE from '../lib/fmm-profile.mjs';
 
 const FORMSPREE = process.env.FMM_FORMSPREE_URL || 'https://formspree.io/f/xwpqlypv';
 // Sales are OPEN by default. Pause them without a code change: FMM_SALES_OPEN=false in Netlify, then redeploy.
@@ -64,8 +65,9 @@ const summary = (s) => {
     grandparentConsent: s.grandparentConsent ? { name: s.grandparentConsent.name, at: s.grandparentConsent.at, version: s.grandparentConsent.version } : null,
     hasIntro: !!s.intro, hasClosing: !!s.closing, payment: s.payment || null,
     qrCodes: s.qrCodes || { child: s.qrCode, grandparent: null },
-    pins: { child: C.pinRequired(s, 'child'), grandparent: C.pinRequired(s, 'grandparent'), guardian: C.pinRequired(s, 'guardian') },
-    devices: { child: s.sessions.child.length, grandparent: s.sessions.grandparent.length, guardian: s.sessions.guardian.length },
+    pins: { child: C.pinRequired(s, 'child'), grandparent: C.pinRequired(s, 'grandparent'), guardian: C.pinRequired(s, 'guardian'), buyer: C.pinRequired(s, 'buyer') },
+    devices: { child: s.sessions.child.length, grandparent: s.sessions.grandparent.length, guardian: s.sessions.guardian.length, buyer: s.sessions.buyer.length },
+    hasBuyer: !!s.tokenHashes.buyer, buyer: s.buyer || null,
     childAccess: { ...C.childAccessView(s), parentName: s.childAccess.parentName || '', decidedAt: s.childAccess.decidedAt || null, hasForm: !!s.childAccess.form, history: (s.childAccess.history || []).slice(-10) },
     hasGuardian: !!s.tokenHashes.guardian, childPaused: !!s.childPaused, deletionRequestedAt: s.deletionRequestedAt || null, completedAt: s.completedAt || null,
     helloSettings: s.helloSettings,
@@ -176,6 +178,15 @@ export default async (req) => {
 
 const cleanAddr = (a) => { a = a && typeof a === 'object' ? a : {}; const c = (v, n) => String(v || '').trim().slice(0, n); return { line1: c(a.line1, 120), city: c(a.city, 60), state: c(a.state, 20), zip: c(a.zip, 10) }; };
 const addrOk = (a) => !!(a.line1 && a.city && a.state && a.zip);
+// the buyer's choices on the order page; applied when Dan creates the story
+const cleanSettings = (x) => { x = x && typeof x === 'object' ? x : {}; return {
+  parentLogin: x.parentLogin !== false, hello: ['both', 'sweet', 'funny', 'off'].includes(x.hello) ? x.hello : 'both',
+  music: x.music === 'none' ? 'none' : 'soft', share: x.share === 'open' ? 'open' : 'private' }; };
+const cleanProfiles = (list) => (Array.isArray(list) ? list.slice(0, 2) : []).map((p) => {
+  const answers = {};
+  for (const q of PROFILE) { const v = p?.answers?.[q.id]; if (Number.isInteger(v) && v >= 0 && v < q.options.length) answers[q.id] = v; }
+  return { answers };
+});
 
 async function order(req, store) {
   const b = await req.json().catch(() => ({}));
@@ -192,6 +203,7 @@ async function order(req, store) {
     source: clean(b.source, 80) || 'direct', status: 'awaiting-payment',
     gpAddress: cleanAddr(b.gpAddress), childAddress: cleanAddr(b.childAddress), // where the two magnets go
     childRecording: b.childRecording === 'own' ? 'own' : 'parent', waiverAt: b.waiver === true ? Date.now() : null,
+    childAge: clean(b.childAge, 20), settings: cleanSettings(b.settings), profiles: cleanProfiles(b.profiles),
   };
   const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!pkg || pkg.id === 'fmm2' || !o.buyerName || !EMAIL.test(email) || !o.childName || !o.grandparent1 || (pkg.grandparents === 2 && !o.grandparent2)) {
@@ -274,6 +286,8 @@ async function admin(route, req, url, store, secret, origin) {
   const AUDITED = { 'add-guardian': 'parent login added', revoke: 'link revoked', 'revoke-devices': 'phones forgotten', 'set-pin': 'PIN changed', 'hello-settings': 'hello settings', keepsake: 'keepsake updated', 'consent-review': 'consent form reviewed' };
   if (req.method === 'POST' && AUDITED[route] && b.id) await log(b.id, AUDITED[route], [b.role, route === 'consent-review' ? (b.approve ? 'approved' : 'not approved') : ''].filter(Boolean).join(' '));
   if (route === 'create' && req.method === 'POST') {
+    const ord = b.orderId ? await store.getJSON(`order/${b.orderId}`) : null;
+    if (ord) Object.assign(b, { fromOrder: { settings: ord.settings, profiles: ord.profiles, childRecording: ord.childRecording, childAge: ord.childAge } });
     const { story, tokens } = await C.createStory(store, b);
     await log(story.id, 'story created', story.test ? 'test' : '');
     if (b.orderId) {
@@ -286,6 +300,7 @@ async function admin(route, req, url, store, secret, origin) {
     }
     const links = { child: link(tokens.child), grandparent: link(tokens.grandparent) };
     if (tokens.guardian) links.guardian = link(tokens.guardian);
+    if (tokens.buyer) links.buyer = link(tokens.buyer);
     return json({ story: summary(story), links, qrUrls: { child: qrUrl(story.qrCodes.child), grandparent: qrUrl(story.qrCodes.grandparent) } });
   }
   if (route === 'order-paid' && req.method === 'POST') { // paid outside Stripe (cash, family, gift); Dan records it here
@@ -295,6 +310,7 @@ async function admin(route, req, url, store, secret, origin) {
     await store.setJSON(`order/${o.id}`, o);
     return json(o);
   }
+  if (route === 'add-buyer' && req.method === 'POST') return json({ link: link(await C.addBuyer(store, b.id, b)) });
   if (route === 'add-guardian' && req.method === 'POST') return json({ link: link(await C.addGuardian(store, b.id)) });
   if (route === 'revoke' && req.method === 'POST') return json({ link: link(await C.revokeToken(store, b.id, b.role)) });
   if (route === 'revoke-devices' && req.method === 'POST') return json(await C.revokeDevices(store, b.id, b.role));
