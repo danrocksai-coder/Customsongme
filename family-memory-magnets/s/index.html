@@ -553,6 +553,24 @@
   }
 
   function renderConsent() {
+    if (S.role === 'grandparent') {
+      var c = esc(S.childName);
+      app.innerHTML = header() +
+        '<div class="card"><h2>Before you record</h2><p>' + c + ' would love to hear your stories. Here is what happens with your recordings:</p>' +
+        '<ul style="margin:10px 0 0 20px"><li>Your voice recordings, and any photos you add, are saved privately for ' + c + '\'s family story, movie and storybook.</li>' +
+        '<li>Only your family and Dan (who makes the keepsake) can hear or see them. They are never sold or used for ads.</li>' +
+        '<li>Nothing is posted publicly unless you and ' + c + '\'s parent both say yes later.</li>' +
+        '<li>They are kept until 12 months after your story is finished, then deleted. You can ask for them to be deleted sooner, and you can skip any question.</li></ul>' +
+        '<p class="muted" style="margin-top:8px"><a href="/family-memory-magnets/privacy/" target="_blank" rel="noopener">Privacy policy</a></p>' +
+        '<label for="pn">Your name</label><input type="text" id="pn" autocomplete="name">' +
+        '<label class="check"><input type="checkbox" id="ag"><span>I agree to be recorded for this family story.</span></label>' +
+        '<div id="cm"></div><button class="btn" id="cb">I agree and continue</button></div>';
+      app.querySelector('#cb').onclick = function () {
+        api('grandparent-consent', { json: { name: app.querySelector('#pn').value, agree: app.querySelector('#ag').checked } })
+          .then(function () { return refresh(); }).then(render).catch(function (e) { app.querySelector('#cm').innerHTML = '<div class="msg err">' + esc(e.message) + '</div>'; });
+      };
+      return;
+    }
     if (S.role === 'child' && S.guardianManaged) {
       app.innerHTML = header() + '<div class="card center"><h2>Permission first</h2><p>Before anything is recorded, open your parent link and give permission there. Then come back to this link to record together.</p></div>';
       return;

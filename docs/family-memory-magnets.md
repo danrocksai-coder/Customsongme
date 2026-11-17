@@ -75,3 +75,10 @@ Recordings and story data are in private Netlify Blobs (store `fmm`). No public 
 - Output: a 1080p H.264/AAC MP4 (faststart), a thumbnail, and YouTube chapter times. Loudness is evened out per recording, and music ducks under voices. The output is checked automatically.
 - Admin shows each story's ID for the movie maker.
 - 73 tests.
+
+## v7: grandparent consent
+- On a real (non-test) story, the grandparent sees "Before you record" once: a short notice, their name and "I agree to be recorded for this family story." Until they agree, the server refuses their recordings (answers, intro, closing, voice hellos) and photos.
+- Stored as `grandparentConsent` {name, version, at}. Admin shows "Grandparent agreed: yes/not yet". `POST /api/fmm/grandparent-consent`.
+- It is separate from the parent's permission: a grandparent can never give the parent's consent.
+- Existing stories: the grandparent agrees once before their next recording. Earlier recordings are kept.
+- 77 tests.

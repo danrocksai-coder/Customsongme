@@ -79,6 +79,10 @@ test('legacy story: existing links, PIN, progress and 25s recordings all keep wo
   // and the next real step works on the old document
   await C.choose(store, child, { n: 9, qid: '2.4.F', pin: '4821' });
   await C.upload(store, child, rec({ n: 9, slot: 'question', durationSec: 9, pin: '4821' }));
+  // since v7 a real (non-test) story's grandparent agrees to be recorded once before their next recording
+  assert.equal(await status(C.upload(store, gp, rec({ n: 9, slot: 'answer', durationSec: 40 }))), 403);
+  assert.equal(C.publicState((await C.authorize(store, gp)).story, 'grandparent').consentNeeded, true);
+  await C.recordGrandparentConsent(store, gp, { name: 'Mimi', agree: true });
   await C.upload(store, gp, rec({ n: 9, slot: 'answer', durationSec: 40 }));
   assert.equal(C.publicState((await C.authorize(store, gp)).story, 'grandparent').current.status, 'heard-pending');
 });

@@ -53,6 +53,7 @@ const summary = (s) => {
     id: s.id, childName: s.childName, grandparentName: s.grandparentName, test: s.test, packageName: s.packageName,
     parentName: s.parentName, parentEmail: s.parentEmail, createdAt: s.createdAt, expiresAt: s.expiresAt,
     completed: C.currentIndex(s), consent: s.consent ? { parentName: s.consent.parentName, at: s.consent.at, version: s.consent.version } : null,
+    grandparentConsent: s.grandparentConsent ? { name: s.grandparentConsent.name, at: s.grandparentConsent.at, version: s.grandparentConsent.version } : null,
     hasIntro: !!s.intro, hasClosing: !!s.closing,
     qrCodes: s.qrCodes || { child: s.qrCode, grandparent: null },
     pins: { child: C.pinRequired(s, 'child'), grandparent: C.pinRequired(s, 'grandparent'), guardian: C.pinRequired(s, 'guardian') },
@@ -105,6 +106,7 @@ export default async (req) => {
       return json(C.publicState(story, role, own));
     }
     if (route === 'consent' && req.method === 'POST') return json(await C.recordConsent(store, t, await body()));
+    if (route === 'grandparent-consent' && req.method === 'POST') return json(await C.recordGrandparentConsent(store, t, await body()));
     // child's own link: parent-only controls (the server checks who is asking)
     if (route === 'child-access' && req.method === 'POST') {
       const b = await body();
