@@ -654,10 +654,6 @@
       <span class="nav-brand">CustomSongMe.com</span>
       <span class="nav-language-label">English</span>
     </a>
-    <a href="#order-form" class="nav-cta">
-      <img src="/img/customsongme-icon-144.png" alt="" class="nav-logo-icon" width="44" height="44" />
-      <span>Start My Song</span>
-    </a>
     <a href="/es/" class="nav-language" lang="es">
       <span class="nav-brand">CustomSongMe.com</span>
       <span class="nav-language-label">Español</span>
@@ -691,7 +687,6 @@
       <div class="price-includes">MP3 Audio · Public YouTube Video · Cover Art · Lyric Sheet</div>
       <div class="price-alt">Just want the song? MP3 Only is $25</div>
     </div>
-    <div><a href="#order-form" class="btn-primary"><span class="js-emoji">🎄</span> Start Your Holiday Song</a></div>
   </div>
 </section>
 
@@ -729,7 +724,6 @@
         <p>A gift with their name in every chorus. For parents, grandparents, kids, a couple's first Christmas together, or the whole family on Christmas morning.</p>
       </div>
     </div>
-    <div class="cu-cta"><a href="#order-form" class="btn-secondary">Get Yours Started Early →</a></div>
   </div>
 </section>
 
@@ -791,7 +785,6 @@
               <li>Host, location, and shout-outs in the song</li>
               <li>One downloadable MP3</li>
             </ul>
-            <a href="#order-form" class="btn-secondary full tg-start" data-tier="mp3">Start for $25 →</a>
           </div>
           <div class="tg-tier">
             <h4>Family Gratitude Song</h4>
@@ -801,7 +794,6 @@
               <li>Public YouTube video with AI-generated artwork (not your photos)</li>
               <li>Cover art and lyric sheet</li>
             </ul>
-            <a href="#order-form" class="btn-secondary full tg-start" data-tier="complete">Start for $50 →</a>
           </div>
           <div class="tg-tier ultimate">
             <div class="tg-tier-badge">🌟 Ultimate</div>
@@ -813,7 +805,6 @@
               <li>Public YouTube video, plus the MP4 to download</li>
               <li>PDF of the lyrics with artwork</li>
             </ul>
-            <a href="#order-form" class="btn-primary tg-start" data-tier="ultimate">Start Ultimate for $75 →</a>
           </div>
           <div class="tg-tier ultimate">
             <div class="tg-tier-badge">🔒 Unlisted</div>
@@ -823,7 +814,6 @@
               <li>Everything in the $75 Ultimate package</li>
               <li>Your YouTube video is <strong>unlisted</strong>: only people with the link can see it</li>
             </ul>
-            <a href="#order-form" class="btn-primary tg-start" data-tier="ultimate-unlisted">Start Unlisted for $100 →</a>
           </div>
         </div>
         <div class="tg-deadline">Order by Sunday, Nov 22 to have it ready for the table on Thanksgiving Day.</div>
@@ -879,10 +869,6 @@
           <div class="value-anchor">
             💡 The video makes it easy to play for the whole room: the party, the dinner table, or the family group chat.
           </div>
-          <div class="package-cta">
-            <a href="#order-form" class="btn-primary">Start Your Song Request →</a>
-            <div class="package-cta-note">Share your story · Pay securely · Delivered in 24 hours</div>
-          </div>
         </div>
       </div>
 
@@ -901,10 +887,6 @@
           </ul>
           <div class="value-anchor alt">
             💡 Want the video, cover art, and lyric sheet too? For $20 more, the Complete Custom Song Experience includes everything.
-          </div>
-          <div class="package-cta">
-            <a href="#order-form" class="btn-secondary full">Start Your Song Request →</a>
-            <div class="package-cta-note">Share your story · Pay securely · Delivered in 24 hours</div>
           </div>
         </div>
       </div>
@@ -1598,6 +1580,9 @@
           cta.href = '#specials';
           cta.textContent = 'Create My Thanksgiving Song';
           cta.insertAdjacentHTML('afterend', '<p class="tg-fine">From $25 · Printable keepsake included</p>');
+        } else { // no jump button any more: keep the price line visible under the intro
+          const lede = heroIn.querySelector('.tg-lede');
+          if (lede) lede.insertAdjacentHTML('afterend', '<p class="tg-fine">From $25 · Printable keepsake included</p>');
         }
       }
       // Package cards and FAQ further down: Thanksgiving prices ($25 MP3), buttons start the matching Thanksgiving package
