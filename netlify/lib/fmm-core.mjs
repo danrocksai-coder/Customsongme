@@ -7,6 +7,7 @@
 //  - A printed QR code is a public identifier, NEVER a credential. It opens a device only if that device
 //    already holds a session, or the person also supplies a PIN (rate limited and locked out on guessing).
 //  - Real-child recordings are blocked until parent consent is recorded (test stories excepted).
+//  - Grandparent recordings and photos are blocked until the grandparent agrees to be recorded (test stories excepted).
 //  - PARENT-RUN BY DEFAULT: the family link belongs to the parent, who records together with the child.
 //    A child's OWN link exists only after the parent turns it on AND either confirms the child is 13+
 //    or uploads a signed consent form that Dan approves. The parent can turn it off at any time; the
@@ -28,6 +29,7 @@ export const DURATION_SLACK = 3; // seconds of tolerance for recorder timing
 export const ACCESS_DAYS = 365; // "12 month adventure"
 export const SIGNED_URL_SECONDS = 300;
 export const CONSENT_VERSION = '2026-11-16-v1';
+export const GRANDPARENT_CONSENT_VERSION = '2026-11-17-v1';
 export const CHILD_ACCESS_VERSION = '2026-11-17-v1'; // parent notice + consent-form wording for the child's own link
 export const FORM_MAX_BYTES = 4 * 1024 * 1024;
 export const PUBLICATION_VERSION = '2026-11-17-v1';
@@ -140,6 +142,7 @@ export function norm(story) {
   story.sessions.guardian ||= [];
   story.sessions.kid ||= [];
   story.photos ||= [];
+  story.grandparentConsent ||= null;
   story.publication ||= { parent: null, grandparent: null, history: [] };
   story.childAccess ||= { status: 'none', basis: null, enabled: false, form: null, history: [] };
   story.childPaused ||= false;
@@ -510,7 +513,7 @@ export function publicState(story, role, own = false) {
   const out = {
     role, childName: story.childName, grandparentName: story.grandparentName,
     qrCode: story.qrCodes?.[role] || story.qrCode, test: story.test, expiresAt: story.expiresAt,
-    consentNeeded: role === 'child' && !own && !story.test && !story.consent,
+    consentNeeded: (role === 'child' && !own && !story.test && !story.consent) || (role === 'grandparent' && !story.test && !story.grandparentConsent),
     own: role === 'child' && !!own, // true = the child's own link; false = the parent-held family link
     childAccess: isController(story, role, own) ? childAccessView(story) : null,
     photos: photoList(story, role, own), canAddPhotos: canAddPhotos(story, role, own), photoMax: PHOTO_MAX,
@@ -549,6 +552,17 @@ export async function recordConsent(store, token, { parentName, agree, pin }) {
   if (role === 'child' && story.tokenHashes.guardian) fail(403, 'A parent needs to say yes from their own parent link.');
   if (!agree || !String(parentName || '').trim()) fail(400, 'Parent name and agreement are required.');
   story.consent = { parentName: String(parentName).trim().slice(0, 80), version: CONSENT_VERSION, at: now() };
+  await store.setJSON(`story/${story.id}`, story);
+  return { ok: true };
+}
+
+// The grandparent agrees, for themselves, to be recorded (separate from the parent's permission for the child).
+export async function recordGrandparentConsent(store, token, { name, agree, pin }) {
+  const { story, role } = await authorize(store, token, { pin });
+  if (role !== 'grandparent') fail(403, 'Only the grandparent can agree to this.');
+  const nm = String(name || '').trim().slice(0, 80);
+  if (!agree || !nm) fail(400, 'Your name and agreement are required.');
+  story.grandparentConsent = { name: nm, version: GRANDPARENT_CONSENT_VERSION, at: now() };
   await store.setJSON(`story/${story.id}`, story);
   return { ok: true };
 }
@@ -600,6 +614,7 @@ export async function upload(store, token, { n, slot, data, durationSec, uploadI
   if (!ROLE_SLOT[role].includes(slot)) fail(403, 'This link cannot record that.');
   assertNotPaused(story, role);
   if (role === 'child' && !story.test && !story.consent) fail(403, 'A parent must give consent before recording.');
+  if (role === 'grandparent' && !story.test && !story.grandparentConsent) fail(403, 'Please agree to be recorded first.');
   if (!data || !data.length) fail(400, 'Empty recording.');
   if (data.length > MAX_BYTES) fail(413, 'Recording is too large.');
   const limit = LIMITS[slot];
@@ -833,6 +848,7 @@ export async function uploadPhoto(store, token, { data, contentType, caption, up
   const { story, role, own } = await authorize(store, token, { pin });
   if (!canAddPhotos(story, role, own)) fail(403, 'Only a parent or the grandparent can add photos.');
   if (role !== 'grandparent' && !story.consent && !story.test) fail(409, 'Please give permission for recording first.');
+  if (role === 'grandparent' && !story.grandparentConsent && !story.test) fail(409, 'Please agree to be recorded first.');
   const dup = story.photos.find((p) => uploadId && p.uploadId === uploadId);
   if (dup) return { ok: true, duplicate: true, state: stateFor(story, role, own) };
   if (story.photos.length >= PHOTO_MAX) fail(409, `This story already has ${PHOTO_MAX} photos. Remove one to add another.`);
