@@ -82,3 +82,11 @@ Recordings and story data are in private Netlify Blobs (store `fmm`). No public 
 - It is separate from the parent's permission: a grandparent can never give the parent's consent.
 - Existing stories: the grandparent agrees once before their next recording. Earlier recordings are kept.
 - 77 tests.
+
+## v8: magnet artwork (Printful 5" x 5" die-cut magnet)
+- Admin > a story > "QR codes, PINs…" > each person's QR card > **Magnet artwork (5×5 in, Printful)** downloads `magnet-5x5in-300dpi-<name>-<code>.png`.
+- 1500 x 1500 px, tagged 300 DPI, full bleed (Printful adds a white border unless the design fills the print area). Navy with a gold frame, "FAMILY MEMORY MAGNETS", the names, the QR code on a white card, "Scan to hear our family story". Everything important sits at least 0.3" inside the edge. Very long names wrap to two lines.
+- The QR code encodes only the public `/q/?c=` address. It now uses error correction level Q (it still scans with some of the code scuffed). Existing codes keep working: the address is the same.
+- Drawn in the browser (`family-memory-magnets/admin/magnet.js`); no server image tools needed.
+- Checked: full-size and phone-distance scans decode to the right address.
+- 79 tests.
