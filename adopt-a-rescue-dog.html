@@ -212,7 +212,7 @@
       max-width: 1100px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: minmax(0,1fr) auto minmax(0,1fr);
+      grid-template-columns: minmax(0,1fr) minmax(0,1fr); /* no middle button any more */
       align-items: center;
       gap: 16px;
       min-height: 92px;
@@ -267,7 +267,7 @@
       .nav-inner { grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 8px 12px; min-height: 0; padding: 10px 0; }
       .nav-cta { grid-column: 1 / -1; grid-row: 1; justify-self: center; font-size: 0.9rem; padding: 6px 18px 6px 8px; }
       .nav-logo-icon { height: 36px; }
-      .nav-language { grid-row: 2; }
+      .nav-language { grid-row: 1; }
       .nav-brand { font-size: 0.95rem; }
       .nav-language-label { font-size: 0.74rem; }
       section[id] { scroll-margin-top: 128px; }
@@ -295,10 +295,6 @@
       <span class="nav-brand">CustomSongMe.com</span>
       <span class="nav-language-label">English</span>
     </a>
-    <a href="#request-form" class="nav-cta">
-      <img src="/img/customsongme-icon-144.png" alt="" class="nav-logo-icon" width="44" height="44" />
-      <span>Submit a Dog</span>
-    </a>
     <a href="/es/" class="nav-language" lang="es">
       <span class="nav-brand">CustomSongMe.com</span>
       <span class="nav-language-label">Español</span>
@@ -314,7 +310,6 @@
       <div class="label">No Cost · No Catch</div>
       <div class="main">100% Free</div>
     </div>
-    <div><a href="#request-form" class="btn-primary">🐾 Submit a Rescue Dog</a></div>
   </div>
 </section>
 

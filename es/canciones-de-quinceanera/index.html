@@ -352,7 +352,7 @@
       max-width: 1100px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: minmax(0,1fr) auto minmax(0,1fr);
+      grid-template-columns: minmax(0,1fr) minmax(0,1fr); /* no middle button any more */
       align-items: center;
       gap: 16px;
       min-height: 92px;
@@ -407,7 +407,7 @@
       .nav-inner { grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 8px 12px; min-height: 0; padding: 10px 0; }
       .nav-cta { grid-column: 1 / -1; grid-row: 1; justify-self: center; font-size: 0.9rem; padding: 6px 18px 6px 8px; }
       .nav-logo-icon { height: 36px; }
-      .nav-language { grid-row: 2; }
+      .nav-language { grid-row: 1; }
       .nav-brand { font-size: 0.95rem; }
       .nav-language-label { font-size: 0.74rem; }
       section[id] { scroll-margin-top: 128px; }
@@ -427,10 +427,6 @@
       <span class="nav-brand">CustomSongMe.com</span>
       <span class="nav-language-label">English</span>
     </a>
-    <a href="#order-form" class="nav-cta">
-      <img src="/img/customsongme-icon-144.png" alt="" class="nav-logo-icon" width="44" height="44" />
-      <span>Crear mi canción</span>
-    </a>
     <a href="/es/" class="nav-language" lang="es" aria-current="true">
       <span class="nav-brand">CustomSongMe.com</span>
       <span class="nav-language-label">Español</span>
@@ -449,7 +445,6 @@
       <div class="price-includes">MP3 · Video público en YouTube · Portada · Hoja con la letra</div>
       <div class="price-alt">¿Solo quieres la canción? Solo MP3 es $25</div>
     </div>
-    <div><a href="#order-form" class="btn-primary">👑 Empieza su canción</a></div>
   </div>
 </section>
 
@@ -491,10 +486,6 @@
           <div class="value-anchor">
             💡 El video y la portada hacen que esta sea la opción perfecta para compartir en la fiesta — publícala, envíala por mensaje, o tócala en el momento en que ella entre al salón.
           </div>
-          <div class="package-cta">
-            <a href="#order-form" class="btn-primary">Empieza su solicitud →</a>
-            <div class="package-cta-note">Comparte su historia · Paga de forma segura · Recíbela en 24 horas</div>
-          </div>
         </div>
       </div>
 
@@ -513,10 +504,6 @@
           </ul>
           <div class="value-anchor alt">
             💡 ¿También quieres el video, la portada y la hoja de letra? Por solo $20 más, la experiencia completa lo incluye todo.
-          </div>
-          <div class="package-cta">
-            <a href="#order-form" class="btn-secondary full">Empieza su solicitud →</a>
-            <div class="package-cta-note">Comparte su historia · Paga de forma segura · Recíbela en 24 horas</div>
           </div>
         </div>
       </div>

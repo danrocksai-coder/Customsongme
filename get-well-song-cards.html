@@ -466,7 +466,6 @@ footer a{color:var(--muted);margin:0 6px}
 
     <div class="closer">
       <p>Someone you love could use a brighter day.</p>
-      <a href="#order" class="btn btn-p" id="startOver">Start Their Card</a>
       <p style="margin-top:14px;font-size:14px">Rather talk to me directly? Text <a href="sms:+16617140903"><b>661-714-0903</b></a> for the fastest service, or email <a href="mailto:danrocksai@gmail.com">danrocksai@gmail.com</a>.</p>
     </div>
   </div>
@@ -590,7 +589,7 @@ function go(n){S.step=n;document.querySelectorAll("section.step").forEach(functi
  try{gtag("event","getwell_step",{step:n});}catch(e){}}
 document.querySelectorAll("[data-next]").forEach(function(b){b.onclick=function(){if(validate(S.step))go(S.step+1);};});
 document.querySelectorAll("[data-back]").forEach(function(b){b.onclick=function(){go(S.step-1);};});
-document.getElementById("startOver").onclick=function(e){e.preventDefault();go(1);};
+var startOver=document.getElementById("startOver");if(startOver)startOver.onclick=function(e){e.preventDefault();go(1);};
 
 function buildSummary(){var p=pkg(),d=DESIGNS[S.design];
  var genre=S.genre==="Other"?val("genre_other"):S.genre;
