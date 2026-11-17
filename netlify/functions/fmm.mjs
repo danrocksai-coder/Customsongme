@@ -11,6 +11,8 @@ import QRCode from 'qrcode';
 import * as C from '../lib/fmm-core.mjs';
 
 const FORMSPREE = process.env.FMM_FORMSPREE_URL || 'https://formspree.io/f/xwpqlypv';
+// Sales are OPEN by default. Pause them without a code change: FMM_SALES_OPEN=false in Netlify, then redeploy.
+const salesOpen = () => process.env.FMM_SALES_OPEN !== 'false';
 const PACKAGES = { one: { id: 'fmm1', label: 'One grandparent', grandparents: 1 }, two: { id: 'fmm2', label: 'Two grandparents', grandparents: 2 } };
 
 function blobStore() {
@@ -80,11 +82,11 @@ export default async (req) => {
     // ---------- public ----------
     if (route === 'qr') return json({ message: C.QR_MESSAGE }); // identical for every code
     if (route === 'order' && req.method === 'POST') {
-      if (process.env.FMM_SALES_OPEN !== 'true') return json({ error: 'Orders are not open yet. Please join the waiting list.' }, 403);
+      if (!salesOpen()) return json({ error: 'Orders are not open yet. Please join the waiting list.' }, 403);
       return await order(req, store);
     }
     if (route === 'waitlist' && req.method === 'POST') return await waitlist(req, store);
-    if (route === 'sales' && req.method === 'GET') return json({ open: process.env.FMM_SALES_OPEN === 'true' }); // the sales page asks which form to show
+    if (route === 'sales' && req.method === 'GET') return json({ open: salesOpen() }); // the sales page asks which form to show
 
     if (!secret) return json({ error: 'Not configured.' }, 503);
 

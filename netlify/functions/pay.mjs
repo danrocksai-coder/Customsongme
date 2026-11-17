@@ -103,8 +103,9 @@ export default async (req, context) => {
     : FMM_PACKAGES[id] || PACKAGES[id];
   const key = process.env.STRIPE_SECRET_KEY;
   const bail = () => (pkg && pkg.noLink) || id === 'lullaby' || NEW_PACKAGES[id] || FMM_PACKAGES[id] ? noLinkFallback() : fallback(id, email);
-  // Family Memory Magnets sales are paused until Dan sets FMM_SALES_OPEN=true in Netlify.
-  if (FMM_PACKAGES[id] && process.env.FMM_SALES_OPEN !== 'true') {
+  // Family Memory Magnets sales are OPEN by default (since Nov 2026). To pause them without a code change,
+  // set FMM_SALES_OPEN=false in Netlify's environment variables (then redeploy).
+  if (FMM_PACKAGES[id] && process.env.FMM_SALES_OPEN === 'false') {
     return Response.redirect(SITE + '/family-memory-magnets/#waitlist', 302);
   }
   if (!pkg || !key) {
