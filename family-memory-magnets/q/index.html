@@ -6,11 +6,25 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="referrer" content="no-referrer">
 <title>Family Memory Magnets</title>
-<link rel="stylesheet" href="/family-memory-magnets/fmm.css?v=4e65a6f084">
+<link rel="stylesheet" href="/family-memory-magnets/fmm.css?v=38e0bd024b">
 </head>
 <body>
 <div class="topbar">FAMILY MEMORY <b>MAGNETS</b></div>
-<main class="wrap center" style="padding-top:60px">
+<section id="watch" class="hidden">
+  <header class="hero watch-hero">
+    <div class="eyebrow">Family Memory Magnets</div>
+    <h1 id="wtitle">Our Family Story</h1>
+    <svg viewBox="0 0 40 36" width="34" height="31" aria-hidden="true"><path d="M20 34 C-6 16 4 -4 20 8 C36 -4 46 16 20 34Z" fill="#e8405b"/></svg>
+  </header>
+  <div class="wrap center watch-body">
+    <div class="player" id="player"></div>
+    <a class="btn" id="ytopen" target="_blank" rel="noopener" style="margin-top:16px">Open in YouTube</a>
+    <p class="muted" id="fbwrap" style="margin-top:12px"><a href="#" id="fbgo">Trouble playing? Watch the backup copy</a></p>
+    <p class="muted hidden" id="mine" style="margin-top:12px"><a href="#" id="minego">Open our private story</a></p>
+    <p class="muted" style="margin-top:26px">Made with love with <a href="/magnets">Family Memory Magnets</a></p>
+  </div>
+</section>
+<main class="wrap center" style="padding-top:60px" id="status">
   <h1 style="font-size:1.6rem" id="msg">A Family Memory Magnets story is being created.</h1>
   <div id="pinbox" class="hidden" style="margin-top:26px">
     <label for="pin" style="text-align:center">Enter your PIN</label>
@@ -31,6 +45,26 @@
   function go() { location.replace('/family-memory-magnets/s/?c=' + encodeURIComponent(code)); }
   if (!code) return;
   var tok = sessions()[code];
+  // Published movie? Then this magnet is a watch page for everyone (both the parent and the grandparent said "share").
+  fetch('/api/fmm/watch?c=' + encodeURIComponent(code), { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (w) {
+    if (!w.published) return start();
+    showWatch(w);
+  }).catch(start);
+  function showWatch(w) {
+    $('status').classList.add('hidden'); $('watch').classList.remove('hidden');
+    $('wtitle').textContent = w.title + '\'s Family Story'; document.title = w.title + '\'s Family Story | Family Memory Magnets';
+    var p = $('player');
+    function backup() { p.innerHTML = '<video controls playsinline autoplay src="' + w.fallbackUrl.replace(/"/g, '') + '"></video>'; $('fbwrap').classList.add('hidden'); }
+    if (w.youtubeId) {
+      var id = encodeURIComponent(w.youtubeId);
+      p.innerHTML = '<button class="poster" id="pplay" aria-label="Play the family movie"><img alt="" src="https://i.ytimg.com/vi/' + id + '/hqdefault.jpg"><span class="playbig" aria-hidden="true"></span></button>';
+      $('pplay').onclick = function () { p.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1" title="Family movie" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>'; };
+      $('ytopen').href = 'https://youtu.be/' + id;
+    } else { $('ytopen').classList.add('hidden'); backup(); }
+    if (!w.fallbackUrl) $('fbwrap').classList.add('hidden'); else $('fbgo').onclick = function (e) { e.preventDefault(); backup(); };
+    if (tok) { $('mine').classList.remove('hidden'); $('minego').onclick = function (e) { e.preventDefault(); go(); }; }
+  }
+  function start() {
   if (tok) { // this phone already earned access: confirm it is still valid, then open the dashboard
     fetch('/api/fmm/state?t=' + encodeURIComponent(tok), { cache: 'no-store' }).then(function (r) {
       if (r.ok) return go();
@@ -38,6 +72,7 @@
       pinCheck();
     }).catch(function () { pinCheck(); });
   } else pinCheck();
+  }
   function pinCheck() {
     fetch('/api/fmm/qrinfo?c=' + encodeURIComponent(code), { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (j) {
       if (!j.pin) return;

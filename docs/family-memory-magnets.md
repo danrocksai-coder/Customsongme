@@ -147,3 +147,10 @@ Recordings and story data are in private Netlify Blobs (store `fmm`). No public 
   5. Sign the waiver and pay.
 - **On the order and the story:** the order stores `settings`, `childAge` and `profiles`. When Dan creates the story from the order, the story starts with those choices (`story.prefs`, `helloSettings`, `profiles`), and the movie kit includes `prefs`.
 - 97 tests.
+
+## v14: watch page
+- **Admin → story → Watch page:** paste the unlisted YouTube link and a backup MP4 link (any https link), then **Publish watch page**. Publishing is only possible once the story is finished and both the parent and the grandparent chose "share." **Unpublish now** takes it down at any time.
+- **Both magnets** (`/q/?c=…`) then show a branded page: "<names>'s Family Story," a big play button (privacy-mode YouTube player), **Open in YouTube**, and "Trouble playing? Watch the backup copy." A connected family phone also sees "Open our private story."
+- **If anyone changes their answer to private,** the watch page goes dark immediately. Admin still shows the red banner to take the video off YouTube.
+- `GET /api/fmm/watch?c=` returns only `{ published, title, youtubeId, fallbackUrl }`, and nothing at all before publishing.
+- 103 tests.

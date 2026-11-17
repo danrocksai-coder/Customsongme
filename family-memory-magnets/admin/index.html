@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Admin | Family Memory Magnets</title>
-<link rel="stylesheet" href="/family-memory-magnets/fmm.css?v=4e65a6f084">
+<link rel="stylesheet" href="/family-memory-magnets/fmm.css?v=38e0bd024b">
 </head>
 <body>
 <div class="topbar">FAMILY MEMORY <b>MAGNETS</b> &middot; ADMIN</div>
@@ -139,6 +139,13 @@
         '<label>Your own approved messages (one per line, up to 150 characters)</label><textarea rows="3" data-hcu="' + s.id + '">' + esc((s.helloSettings.custom || []).join('\n')) + '</textarea>' +
         '<button class="btn small" style="margin-top:6px" data-hsave="' + s.id + '">Save Little Hello settings</button>' +
         s.hellos.map(function (m) { return '<div class="muted" style="margin-top:6px">' + new Date(m.at).toLocaleDateString() + ' &middot; from ' + (m.from === 'child' ? esc(s.childName) : esc(s.grandparentName)) + ': ' + (m.kind === 'text' ? esc(m.text) : '<button class="btn small alt" data-play="' + s.id + '|hello|0|' + esc(m.id) + '">Play voice</button>') + '</div>'; }).join('') + '</div>' +
+        '<div class="card" style="margin:10px 0 0"><b>Watch page</b> <span class="muted">(what both magnets show once the movie is shared)</span>' +
+        '<div class="muted">Status: <b>' + (s.watch && s.watch.published ? 'PUBLISHED' : 'not published') + '</b>' + (s.publication && s.publication.allowed ? ' &middot; both said share' : ' &middot; needs a "share" from the parent and the grandparent') + '</div>' +
+        '<label>Unlisted YouTube link</label><input type="text" data-wyt="' + s.id + '" value="' + esc(s.watch && s.watch.youtubeId ? 'https://youtu.be/' + s.watch.youtubeId : '') + '" placeholder="https://youtu.be/…">' +
+        '<label>Backup copy of the movie (https link to the MP4, used if YouTube fails)</label><input type="text" data-wfb="' + s.id + '" value="' + esc(s.watch && s.watch.fallbackUrl || '') + '" placeholder="https://…/movie.mp4">' +
+        '<div class="row" style="margin-top:6px"><button class="btn small alt" data-wsave="' + s.id + '">Save links</button>' +
+        (s.watch && s.watch.published ? '<button class="btn small red" data-wpub="' + s.id + '|0">Unpublish now</button>' : '<button class="btn small" data-wpub="' + s.id + '|1">Publish watch page</button>') +
+        '<a class="btn small alt" target="_blank" rel="noopener" href="' + esc(s.qrUrls.grandparent) + '">Open magnet page</a></div></div>' +
         '<div class="card" style="margin:10px 0 0"><b>Keepsake</b> <span class="muted">(shown to the family on their QR codes once the story is complete)</span>' +
         '<div class="muted">Status: ' + esc(s.keepsake.status) + '. Only mark ready when real links exist.</div>' +
         '<label>Links, one per line: Label | https://…</label><textarea rows="3" data-kit="' + s.id + '">' + esc((s.keepsake.items || []).map(function (i) { return i.label + ' | ' + i.url; }).join('\n')) + '</textarea>' +
@@ -200,6 +207,8 @@
       var u = URL.createObjectURL(new Blob([rows.map(function (r) { return r.map(cell).join(','); }).join('\n')], { type: 'text/csv' })), l = document.createElement('a');
       l.href = u; l.download = 'fmm-waiting-list.csv'; document.body.appendChild(l); l.click(); l.remove();
     };
+    q('[data-wsave]').forEach(function (b) { b.onclick = function () { var id = b.getAttribute('data-wsave'); api('watch-set', { id: id, youtube: app.querySelector('[data-wyt="' + id + '"]').value.trim(), fallback: app.querySelector('[data-wfb="' + id + '"]').value.trim() }).then(function () { alert('Saved.'); load(); }).catch(function (e) { alert(e.message); }); }; });
+    q('[data-wpub]').forEach(function (b) { b.onclick = function () { var p = b.getAttribute('data-wpub').split('|'); if (p[1] === '1' && !confirm('Publish? Anyone who scans either magnet will see and can play the family movie.')) return; api('watch-publish', { id: p[0], on: p[1] === '1' }).then(load).catch(function (e) { alert(e.message); }); }; });
     q('[data-ophoto]').forEach(function (a) { a.onclick = function (e) { e.preventDefault(); var p = a.getAttribute('data-ophoto').split('|'), w = window.open('', '_blank'); fetch('/api/fmm/admin/order-photo?order=' + encodeURIComponent(p[0]) + '&k=' + p[1], { headers: { Authorization: 'Bearer ' + TOK } }).then(function (r) { return r.json(); }).then(function (m) { if (!m.url) throw new Error(m.error || 'No photo.'); w.location = m.url; }).catch(function (err) { if (w) w.close(); alert(err.message); }); }; });
     q('[data-magnet]').forEach(function (b) { b.onclick = function () {
       var p = b.getAttribute('data-magnet').split('|'), label = b.textContent;

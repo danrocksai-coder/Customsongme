@@ -67,7 +67,7 @@ const summary = (s) => {
     qrCodes: s.qrCodes || { child: s.qrCode, grandparent: null },
     pins: { child: C.pinRequired(s, 'child'), grandparent: C.pinRequired(s, 'grandparent'), guardian: C.pinRequired(s, 'guardian'), buyer: C.pinRequired(s, 'buyer') },
     devices: { child: s.sessions.child.length, grandparent: s.sessions.grandparent.length, guardian: s.sessions.guardian.length, buyer: s.sessions.buyer.length },
-    hasBuyer: !!s.tokenHashes.buyer, buyer: s.buyer || null, orderId: s.orderId || null, magnets: s.magnets || null,
+    watch: s.watch || null, hasBuyer: !!s.tokenHashes.buyer, buyer: s.buyer || null, orderId: s.orderId || null, magnets: s.magnets || null,
     childAccess: { ...C.childAccessView(s), parentName: s.childAccess.parentName || '', decidedAt: s.childAccess.decidedAt || null, hasForm: !!s.childAccess.form, history: (s.childAccess.history || []).slice(-10) },
     hasGuardian: !!s.tokenHashes.guardian, childPaused: !!s.childPaused, deletionRequestedAt: s.deletionRequestedAt || null, completedAt: s.completedAt || null,
     helloSettings: s.helloSettings,
@@ -102,6 +102,7 @@ export default async (req) => {
     if (route === 'audio' && req.method === 'GET') {
       return audioResponse(await C.readSignedAudio(store, secret, Object.fromEntries(url.searchParams)), req);
     }
+    if (route === 'watch' && req.method === 'GET') return json(await C.watchInfo(store, url.searchParams.get('c') || ''));
     if (route === 'qrinfo' && req.method === 'GET') return json(await C.qrInfo(store, url.searchParams.get('c') || ''));
     if (route === 'unlock' && req.method === 'POST') { const b = await req.json().catch(() => ({})); return json(await C.unlockWithQr(store, String(b.c || ''), String(b.pin || ''))); }
 
@@ -338,6 +339,8 @@ async function admin(route, req, url, store, secret, origin) {
     const s = C.signMedia(secret, id, 'consent-form');
     return json({ url: `/api/fmm/audio?s=${id}&k=consent-form&e=${s.exp}&sig=${s.sig}`, contentType: story.childAccess.form.contentType });
   }
+  if (route === 'watch-set' && req.method === 'POST') { const w = await C.setWatch(store, b.id, b); await log(b.id, 'watch page links updated'); return json(w); }
+  if (route === 'watch-publish' && req.method === 'POST') { const w = await C.publishWatch(store, b.id, !!b.on); await log(b.id, b.on ? 'watch page published' : 'watch page unpublished'); return json(w); }
   if (route === 'order-photo' && req.method === 'GET') { // the buyer's magnet photo, for printing
     const id = url.searchParams.get('order') || '', k = url.searchParams.get('k') === 'gp' ? 'gp' : 'child';
     const o = await store.getJSON(`order/${id}`); if (!o?.magnets?.[k]?.hasPhoto) return json({ error: 'No photo for that magnet.' }, 404);
