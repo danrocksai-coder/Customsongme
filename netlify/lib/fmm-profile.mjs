@@ -1,0 +1,25 @@
+// Family Memory Magnets: the grandparent profile. 20 quick multiple-choice questions, every one optional,
+// filled in at the grandparent's own pace. Used to finish the movie and storybook (intro card, "about" page).
+// `need: true` = the three answers the keepsake really uses; the app asks for these first.
+export default [
+  { id: 'born', need: true, text: 'Which decade were you born in?', options: ['1930s', '1940s', '1950s', '1960s', '1970s', '1980s'] },
+  { id: 'grewup', need: true, text: 'Where did you grow up?', options: ['A big city', 'A small town', 'A farm or the countryside', 'The suburbs', 'Another country', 'We moved around a lot'] },
+  { id: 'siblings', text: 'How many brothers and sisters did you have?', options: ['None', 'One', 'Two', 'Three', 'Four', 'Five or more'] },
+  { id: 'birthorder', text: 'Where were you in your family?', options: ['The oldest', 'In the middle', 'The youngest', 'An only child', 'A twin'] },
+  { id: 'school', text: 'What was your favorite subject in school?', options: ['Reading and writing', 'Math', 'Science', 'History', 'Art or music', 'Sports', 'Recess!'] },
+  { id: 'firstjob', text: 'What was your first job?', options: ['Babysitting', 'A store or restaurant', 'Farm work', 'A paper route', 'An office', 'A factory', 'The military', 'Something else'] },
+  { id: 'music', text: 'What music did you love as a teenager?', options: ['Rock and roll', 'Country', 'Motown and soul', 'Pop', 'Jazz or big band', 'Gospel', 'Disco', 'Something else'] },
+  { id: 'saturday', text: 'Your favorite way to spend a Saturday as a kid?', options: ['Outside with friends', 'Playing sports', 'Reading', 'Helping at home', 'Fishing or hunting', 'At the movies', 'Church or community'] },
+  { id: 'military', text: 'Did you serve in the military?', options: ['No', 'Army', 'Navy', 'Air Force', 'Marines', 'Coast Guard', 'Another service'] },
+  { id: 'met', text: 'How did you meet your partner?', options: ['At school', 'At work', 'At church', 'Friends introduced us', 'At a dance or party', 'Somewhere else', 'This one does not fit me'] },
+  { id: 'proud', need: true, text: 'What are you most proud of?', options: ['Being a parent', 'Being a grandparent', 'My work', 'Serving others', 'My faith', 'My community', 'Something else'] },
+  { id: 'holiday', text: 'What is your favorite holiday?', options: ['Christmas', 'Thanksgiving', 'Easter', 'Fourth of July', 'Halloween', 'Birthdays', 'Another holiday'] },
+  { id: 'food', text: 'What do you love to make in the kitchen?', options: ['Desserts and baking', 'Big breakfasts', 'Holiday dinners', 'Soups and stews', 'Barbecue and grilling', 'A family recipe from the old country', 'I do not cook!'] },
+  { id: 'vacation', text: 'Your favorite kind of trip?', options: ['The beach', 'The mountains', 'A road trip', 'Camping', 'A big city', 'Another country', 'Staying home'] },
+  { id: 'pets', text: 'Did you have pets growing up?', options: ['Dogs', 'Cats', 'Farm animals', 'Birds', 'Fish', 'Lots of pets', 'No pets'] },
+  { id: 'hobby', text: 'What hobby do you love?', options: ['Gardening', 'Cooking', 'Crafts or sewing', 'Sports', 'Music', 'Reading', 'Travel', 'Fixing things'] },
+  { id: 'laugh', text: 'What makes you laugh the most?', options: ['Family stories', 'Funny movies or TV', 'My grandkids', 'Jokes and puns', 'Silly mistakes'] },
+  { id: 'advice', text: 'Which advice do you live by?', options: ['Work hard', 'Be kind', 'Family comes first', 'Keep the faith', 'Enjoy the little things', 'Never give up'] },
+  { id: 'season', text: 'What is your favorite season?', options: ['Spring', 'Summer', 'Fall', 'Winter'] },
+  { id: 'word', text: 'Which word do people use to describe you?', options: ['Funny', 'Kind', 'Strong', 'Wise', 'Adventurous', 'Patient', 'Stubborn'] },
+];

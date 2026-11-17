@@ -40,9 +40,11 @@ const NEW_PACKAGES = {
 };
 // Family Memory Magnets — prices live here on the server, never in the browser.
 const FMM_PACKAGES = {
-  fmm1: { name: 'Family Memory Magnets — One Grandparent', amount: 9999, noLink: true },
+  fmm1: { name: 'Family Memory Magnets — Just the Two of Us (30 conversations)', amount: 9999, noLink: true },
   fmm2: { name: 'Family Memory Magnets — Two Separate Stories', amount: 17999, noLink: true },
-  fmm3: { name: 'Family Memory Magnets — Grandma & Grandpa Together', amount: 9999, noLink: true },
+  fmm3: { name: 'Family Memory Magnets — Grandma & Grandpa Together (15 each)', amount: 9999, noLink: true },
+  fmm4: { name: 'Family Memory Magnets — The Big Story (60 conversations)', amount: 18999, noLink: true },
+  fmm5: { name: 'Family Memory Magnets — The Big Story, Together (30 each)', amount: 18999, noLink: true },
 };
 
 function newPackage(id, params) {

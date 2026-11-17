@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Family Memory Magnets movie maker (v1).
 
-Turns a finished family story (30 recorded questions + answers, optional intro/closing, family photos)
+Turns a finished family story (30 or 60 recorded questions + answers, optional intro/closing, family photos)
 into a 1080p MP4 movie, plus YouTube chapter times and a thumbnail.
 
 Run with Dan's video-tool Python (it already has Pillow and ffmpeg):
@@ -323,7 +323,9 @@ def end_card(k):
     d = ImageDraw.Draw(img)
     f, lines = wrap(d, names(k), "display_x", SW * 0.8, 2, 260, 160)
     bottom = text_block(img, lines, f, SH * 0.32, (255, 255, 255))
-    text_block(img, ["Thirty conversations. Two voices. One lasting family story."], font("body", 92), bottom + 80, (255, 255, 255))
+    n = len(k.get("stops") or []) or 30
+    words = {30: "Thirty", 60: "Sixty"}.get(n, str(n))
+    text_block(img, [f"{words} conversations. One lasting family story."], font("body", 92), bottom + 80, (255, 255, 255))
     gold_rule(img, SH * 0.72)
     text_block(img, ["FAMILY MEMORY MAGNETS"], font("bold", 80), SH * 0.76, GOLD)
     return img
@@ -385,8 +387,9 @@ def cmd_render(a):
     with open(os.path.join(kit_dir, "story.json")) as fh:
         k = json.load(fh)
     stops = [s for s in k["stops"] if s.get("q") and s.get("a")]
-    if len(stops) < 30 and not a.allow_incomplete:
-        sys.exit(f"Only {len(stops)} of 30 stops have both a question and an answer. Finish the story first, "
+    want = len(k["stops"]) or 30
+    if len(stops) < want and not a.allow_incomplete:
+        sys.exit(f"Only {len(stops)} of {want} stops have both a question and an answer. Finish the story first, "
                  "or add --allow-incomplete for a draft movie.")
     if not stops:
         sys.exit("No finished stops to put in a movie yet.")
