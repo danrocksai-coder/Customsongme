@@ -301,7 +301,7 @@ body.fmm-theme .pol h2::after, body.fmm-theme main .card > h2::after { content: 
 body.fmm-theme .foot { margin-top: 30px; padding-bottom: 40px; }
 /* magnet status page: a centered card on a navy band */
 body.q-page { background: radial-gradient(circle at 50% 0%, #22408f, #132a6b 55%, #0b1a4d); min-height: 100vh; }
-.status-card { background: #fff; border: 3px solid var(--gold); border-radius: 24px; margin: 50px auto 30px !important; padding: 34px 22px !important; box-shadow: 0 18px 50px rgba(0,0,0,.35); max-width: 520px; }
+.status-card { background: #fff; border: 3px solid var(--gold); border-radius: 24px; margin: 50px auto 30px !important; width: calc(100% - 32px); padding: 34px 22px !important; box-shadow: 0 18px 50px rgba(0,0,0,.35); max-width: 520px; }
 .status-card h1 { color: var(--navy); }
 /* the family app: navy progress header and gold-trimmed cards */
 body.app-page .apphead { background: radial-gradient(circle at 50% 0%, #22408f, #132a6b 60%, #0b1a4d); color: #fff; border: 3px solid var(--gold); border-radius: 22px; padding: 18px 16px 14px; margin: 16px 0 6px; box-shadow: 0 12px 30px rgba(0,20,60,.25); }
