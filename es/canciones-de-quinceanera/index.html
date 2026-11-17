@@ -31,14 +31,22 @@
     "@context": "https://schema.org",
     "@type": "Product",
     "name": "Canción Personalizada para Quinceañera",
-    "image": "https://www.customsongme.com/dan-the-song-man.jpg",
-    "description": "Una canción personalizada para tus quince años, hecha con tu historia, tu familia y tus padrinos, entregada como archivo MP3 descargable, un video público en YouTube con enlace para compartir, imagen de portada y hoja de letra — entregada en menos de 24 horas después del pago confirmado.",
+    "image": "https://www.customsongme.com/img/dan-portrait.webp",
+    "description": "Una canción personalizada para tus quince años, hecha con tu historia, tu familia y tus padrinos, entregada como un MP3 personalizado completo con una tarjeta de recuerdo con la letra, con opciones de video musical en YouTube, video narrado de su historia y álbum de fotos compartido — entregada en menos de 24 horas después del pago confirmado.",
     "brand": { "@type": "Brand", "name": "CustomSongMe" },
     "inLanguage": "es",
     "offers": [
       {
         "@type": "Offer",
-        "name": "La Experiencia Completa de Canción Personalizada (Público)",
+        "name": "Paquete 1: Solo MP3",
+        "price": "25.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.customsongme.com/es/canciones-de-quinceanera/"
+      },
+      {
+        "@type": "Offer",
+        "name": "Paquete 2: Completo",
         "price": "50.00",
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock",
@@ -46,7 +54,7 @@
       },
       {
         "@type": "Offer",
-        "name": "La Experiencia Completa de Canción Personalizada (No listado)",
+        "name": "Paquete 3: Historia",
         "price": "75.00",
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock",
@@ -54,8 +62,16 @@
       },
       {
         "@type": "Offer",
-        "name": "Solo MP3",
-        "price": "30.00",
+        "name": "Paquete 4: Definitivo",
+        "price": "100.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.customsongme.com/es/canciones-de-quinceanera/"
+      },
+      {
+        "@type": "Offer",
+        "name": "Extra: Mantenlo no listado",
+        "price": "25.00",
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock",
         "url": "https://www.customsongme.com/es/canciones-de-quinceanera/"
@@ -73,8 +89,8 @@
       {"@type":"Question","name":"¿Qué hace buena a una canción de quinceañera?","acceptedAnswer":{"@type":"Answer","text":"Cuanto más detalle real compartas, mejor — su nombre, el significado del tema de la fiesta, sus padrinos y madrinas, anécdotas familiares, el vals, lo que la hace especial. Ya sea un tributo sentimental para sus papás o algo divertido para compartir con sus damas y chambelanes, la canción se construye completamente con lo que tú compartas."}},
       {"@type":"Question","name":"¿Cómo funciona el proceso para ordenar?","acceptedAnswer":{"@type":"Answer","text":"Llena el formulario con su historia y detalles, elige tu paquete, y completa el checkout seguro con Stripe (tarjeta, Apple Pay, Cash App Pay y más). Una vez que el pago esté confirmado, Dan revisa la historia personalmente durante el horario del estudio y escribe y produce la canción. Se entrega en menos de 24 horas después del pago confirmado."}},
       {"@type":"Question","name":"¿Pueden incluir el vals o la ceremonia en la canción?","acceptedAnswer":{"@type":"Answer","text":"Sí — cuéntanos en el formulario si quieres que la canción mencione el vals, la ceremonia, a los padrinos o madrinas, o cualquier tradición familiar que sea importante para la celebración."}},
-      {"@type":"Question","name":"¿Hay una opción más económica que la experiencia completa?","acceptedAnswer":{"@type":"Answer","text":"Sí. El paquete Solo MP3 cuesta $25 e incluye la canción como archivo MP3 descargable — sin video, portada, ni hoja de letra. La experiencia completa comienza en $50 e incluye las cuatro cosas."}},
-      {"@type":"Question","name":"¿Por qué la experiencia completa cuesta $50 en vez de $75?","acceptedAnswer":{"@type":"Answer","text":"El precio de $50 incluye que tu video se comparta públicamente en el canal de YouTube de CustomSongMe — esa publicación pública es parte de cómo mantengo los precios accesibles. Si prefieres mantener tu video no listado (no publicado en mi canal, solo visible para quien tenga el enlace directo), esa opción está disponible por $75."}}
+      {"@type":"Question","name":"¿Hay una opción más económica que Completo?","acceptedAnswer":{"@type":"Answer","text":"Sí. El Paquete 1, Solo MP3, cuesta $25 e incluye un MP3 personalizado completo, una tarjeta de recuerdo con la letra y 1 código QR para la canción. No tiene video y es privado, nunca se publica. El Paquete 2, Completo, cuesta $50 y agrega un video musical en YouTube, un mensaje personal en la tarjeta y un segundo código QR para el video. El Paquete 3, Historia ($75), y el Paquete 4, Definitivo ($100), agregan todavía más."}},
+      {"@type":"Question","name":"¿Por qué Completo cuesta $50 y qué agrega Mantenlo no listado?","acceptedAnswer":{"@type":"Answer","text":"Completo cuesta $50 porque el video musical se publica en el canal de YouTube de CustomSongMe, y eso es parte de cómo mantengo los precios accesibles. Si prefieres que el video no aparezca en mi canal, Mantenlo no listado cuesta +$25 en los Paquetes 2, 3 y 4, así que Completo no listado queda en $75. No listado significa que no lo publico en mi canal y solo quien tenga tu enlace privado o tu código QR puede verlo. Puedes marcar la casilla en el Paso 5."}}
     ]
   }
   </script>
@@ -416,6 +432,7 @@
       .nav-brand { font-size: 0.82rem; }
     }
   </style>
+  <link rel="stylesheet" href="/css/builder.css?v=20261117" />
 </head>
 <body>
 
@@ -440,10 +457,11 @@
     <h1>Sus quince años merecen más que una canción cualquiera.<br><em>Dale una que sea solo de ella.</em></h1>
     <p class="hero-sub">Una canción personalizada para su quinceañera, hecha con su historia, su familia, sus padrinos y madrinas — escrita por Dan the Song Man, entregada en menos de 24 horas. Perfecta para el vals, el brindis, o para reproducir mientras llegan las fotos del gran día.</p>
     <div class="hero-price-anchor">
-      <div class="price-label">Más popular · Todo incluido</div>
-      <div class="price-main">$50</div>
-      <div class="price-includes">MP3 · Video público en YouTube · Portada · Hoja con la letra</div>
-      <div class="price-alt">¿Solo quieres la canción? Solo MP3 es $25</div>
+      <div class="price-label">Paquetes de canciones personalizadas</div>
+      <div class="price-main">Desde $25</div>
+      <div class="price-pills" aria-hidden="false"><span class="price-pill">🎁 Regálala</span><span class="price-pill">🎤 Hazla sobre ti</span></div>
+      <div class="price-includes">Escrita con los recuerdos que compartes. Entregada en menos de 24 horas.</div>
+      <div class="price-alt">La más popular: Completo · Canción + video musical · $50</div>
     </div>
   </div>
 </section>
@@ -454,60 +472,6 @@
     <div class="trust-item"><span class="check">✓</span> Acepto tarjeta, Apple Pay y Cash App Pay</div>
     <div class="trust-item"><span class="check">✓</span> Entregada en menos de 24 horas después del pago confirmado</div>
     <div class="trust-item"><span class="check">✓</span> Garantía de Felicidad Personal</div>
-  </div>
-</section>
-
-<section id="pricing-intro">
-  <div class="container fade-up">
-    <h2>Tres formas de pedir. <span class="gold">Desde $25.</span></h2>
-    <p>Mantenlo simple con solo la canción, o ve con todo con la experiencia completa.<br>De cualquier forma, cuéntame su historia y yo me encargo del resto.</p>
-  </div>
-</section>
-
-<section id="package">
-  <div class="container fade-up">
-    <div class="package-grid">
-      <div class="package-card featured">
-        <div class="package-header">
-          <div class="package-badge">⭐ Más popular</div>
-          <h2>🎁 La experiencia completa de canción personalizada</h2>
-          <div class="package-price"><span>$</span>50</div>
-          <div class="package-price-note">Pago único · Sin suscripciones · Sin cargos ocultos</div>
-        </div>
-        <div class="package-body">
-          <ul class="feature-list">
-            <li><span class="icon">✓</span> Su canción como archivo MP3 descargable</li>
-            <li><span class="icon">✓</span> Video público en YouTube — enlace para compartir incluido</li>
-            <li><span class="icon">✓</span> Imagen de portada personalizada</li>
-            <li><span class="icon">✓</span> Hoja con la letra completa de su canción</li>
-            <li><span class="icon">✓</span> Entregada en menos de 24 horas después del pago confirmado</li>
-            <li><span class="icon">✓</span> Garantía de Felicidad Personal</li>
-          </ul>
-          <div class="value-anchor">
-            💡 El video y la portada hacen que esta sea la opción perfecta para compartir en la fiesta — publícala, envíala por mensaje, o tócala en el momento en que ella entre al salón.
-          </div>
-        </div>
-      </div>
-
-      <div class="package-card budget">
-        <div class="package-header">
-          <div class="package-badge alt">Opción económica</div>
-          <h2>🎵 Solo MP3</h2>
-          <div class="package-price"><span>$</span>30</div>
-          <div class="package-price-note">Pago único · Solo la canción</div>
-        </div>
-        <div class="package-body">
-          <ul class="feature-list single-col">
-            <li><span class="icon">✓</span> Su canción como archivo MP3 descargable</li>
-            <li><span class="icon">✓</span> Entregada en menos de 24 horas después del pago confirmado</li>
-            <li><span class="icon">✓</span> Garantía de Felicidad Personal</li>
-          </ul>
-          <div class="value-anchor alt">
-            💡 ¿También quieres el video, la portada y la hoja de letra? Por solo $20 más, la experiencia completa lo incluye todo.
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -548,122 +512,227 @@
   </div>
 </section>
 
-<section id="order-form">
+<dialog class="pkg-dialog" id="pkg-dialog" aria-label="Paquete">
+  <img id="pkg-dialog-img" src="" alt="" />
+  <button type="button" class="pkg-dialog-close" id="pkg-dialog-close">Cerrar</button>
+</dialog>
+
+<!-- ═══════ SECTION 8 — ORDER FORM ═══════ -->
+<section id="order-form" data-occasion-key="quince">
   <div class="container">
     <div class="form-wrap">
-      <h2 class="fade-up">Solicita su canción de quinceañera</h2>
-      <p class="form-sub fade-up">Llena el formulario de abajo. Cuanto más detalle compartas, más personal se vuelve la canción.</p>
+      <h2 class="fade-up">Arma su canción de quinceañera</h2>
+      <p class="form-sub fade-up">Seis pasos rápidos. Mientras más detalles compartas, más personal será tu canción.</p>
 
-      <form name="quinceanera-song-request" method="POST" action="https://formspree.io/f/xwpqlypv">
+      <form name="customsong-request" method="POST" action="https://formspree.io/f/xwpqlypv">
         <input type="hidden" name="_next" id="next-redirect" value="https://www.customsongme.com/pay/3cIaEWcLKb09cS7fcy9Ve0f" />
-        <input type="hidden" name="package" id="package-hidden-field" value="Complete (Public) — $50" />
-        <input type="hidden" name="occasion" value="Quinceañera" />
+        <input type="hidden" name="package" id="package-hidden-field" value="Paquete 2 — Completo — $50" />
+        <input type="hidden" name="total" id="total-hidden-field" value="$50" />
         <input type="hidden" name="language" value="es" />
+        <input type="hidden" name="contact-pref" value="Both" />
         <p class="hp-field" aria-hidden="true">
           <label>No llenes esto si eres humano: <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
         </p>
-        <div class="form-grid">
-
-          <div class="form-group full">
-            <label>¿Qué paquete?</label>
-            <div class="contact-pref-options">
-              <label class="contact-pref-option">
-                <input type="radio" name="package-tier" value="complete" checked required id="pkg-complete" />
-                <span>🎁 Completo — $50</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="package-tier" value="mp3" required id="pkg-mp3" />
-                <span>🎵 Solo MP3 — $25</span>
-              </label>
-            </div>
-            <div class="public-note" id="public-note">
-              <p>💡 Mantengo la experiencia completa en $50 porque tu video se comparte públicamente en mi canal de YouTube — eso es parte de cómo mantengo los precios bajos. ¿Prefieres mantener tu video no listado?</p>
-              <label class="unlisted-toggle">
-                <input type="checkbox" id="unlisted-checkbox" />
-                <span>Cambiar a no listado — $75</span>
-              </label>
+        
+        <div class="builder-step" id="step-1" data-step="1">
+          <div class="step-head"><span class="step-kicker">Paso 1 de 6</span><h3>¿Cuál es la ocasión?</h3></div>
+          <div class="songfor-row" id="songfor-row" role="radiogroup" aria-label="¿Para quién es esta canción?">
+            <span class="req-tag">Obligatorio</span>
+            <label class="sf-check"><input type="radio" class="sr-radio" name="song-for" value="Sobre mí" data-me="1" data-short="Yo" required /><span class="sf-box" aria-hidden="true"></span><span class="sf-text">Esta canción es para mí</span></label>
+            <label class="sf-check"><input type="radio" class="sr-radio" name="song-for" value="Un regalo para alguien" data-gift="1" data-short="Alguien más" required /><span class="sf-box" aria-hidden="true"></span><span class="sf-text">Esta canción es para alguien más</span></label>
+          </div>
+          <p class="sound-note" id="gift-note" role="alert">Primero, marca para quién es la canción.</p>
+          <div class="occ-chosen" id="occ-chosen" hidden><span id="occ-chosen-label">👗 Quinceañera</span><button type="button" class="occ-change" id="occ-change">cambiar</button></div>
+          <div class="occ-grid">
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Cumpleaños" data-key="birthday" required /><span class="occ-face"><span class="em" aria-hidden="true">🎂</span>Cumpleaños</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Boda" data-key="wedding" required /><span class="occ-face"><span class="em" aria-hidden="true">💍</span>Boda</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Aniversario" data-key="anniversary" required /><span class="occ-face"><span class="em" aria-hidden="true">💑</span>Aniversario</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Canción de amor" data-key="love" required /><span class="occ-face"><span class="em" aria-hidden="true">❤️</span>Canción de amor</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Día de las Madres" data-key="mothers-day" required /><span class="occ-face"><span class="em" aria-hidden="true">🌸</span>Día de las Madres</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Día del Padre" data-key="fathers-day" required /><span class="occ-face"><span class="em" aria-hidden="true">👔</span>Día del Padre</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Canción para mascota" data-key="pet" required /><span class="occ-face"><span class="em" aria-hidden="true">🐶</span>Canción para mascota</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Burla" data-key="roast" required /><span class="occ-face"><span class="em" aria-hidden="true">🔥</span>Burla</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Celebración de vida" data-key="celebration" required /><span class="occ-face"><span class="em" aria-hidden="true">🕊️</span>Celebración de vida</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Jingle para negocios" data-key="jingle" required /><span class="occ-face"><span class="em" aria-hidden="true">🏢</span>Jingle para negocios</span></label>
+                    <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Día festivo" data-key="holiday" required /><span class="occ-face"><span class="em" aria-hidden="true">🎄</span>Día festivo</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Que te mejores" data-key="getwell" required /><span class="occ-face"><span class="em" aria-hidden="true">💐</span>Que te mejores</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Canción de cuna" data-key="lullaby" required /><span class="occ-face"><span class="em" aria-hidden="true">🍼</span>Canción de cuna</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Quinceañera" data-key="quince" required /><span class="occ-face"><span class="em" aria-hidden="true">👗</span>Quinceañera</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Otro" data-key="other" data-other="1" required /><span class="occ-face"><span class="em" aria-hidden="true">✨</span>Otro</span></label>
+          </div>
+          <div class="other-wrap" id="other-wrap">
+            <div class="form-group full">
+              <label for="occasion-other">¿Cuál es la ocasión? <span class="req-tag">Obligatorio</span></label>
+              <input type="text" id="occasion-other" name="occasion-other" placeholder="ej. Fiesta de jubilación, graduación, casa nueva" disabled />
             </div>
           </div>
+        </div>
 
-          <div class="form-group">
+        <div class="builder-step wide" id="step-2" data-step="2">
+          <div class="step-head"><span class="step-kicker">Paso 2 de 6</span><h3>Elige tu paquete</h3></div>
+        <p class="step-hint">Toca una tarjeta para elegirla. Toca «Ver ejemplo» para ver el recuerdo.</p>
+          <div class="pkg-pick">
+          <label class="pkg-card">
+            <input type="radio" class="sr-radio" name="package-tier" value="1" required id="pkg-1" />
+            <div class="pkg-card-inner">
+              <span class="pkg-check" aria-hidden="true">✓</span>
+              <div class="pkg-disc"><small>Paquete 1</small><strong>Solo MP3</strong><em>$25</em></div>
+              <div class="pkg-best"><b>Ideal para:</b> Un regalo privado</div>
+              <ul class="pkg-inc"><li>Canción en MP3</li><li>Tarjeta con la letra</li><li>1 código QR (escanea para reproducir)</li><li>Privado, nunca publicado</li></ul>
+              <button type="button" class="pkg-example" data-full="/img/package-1-mp3-only.webp" data-alt="CustomSongMe Paquete 1, Solo MP3, $25: tarjeta de recuerdo con la letra y un código QR" aria-haspopup="dialog">Ver ejemplo</button>
+            </div>
+          </label>
+          <label class="pkg-card">
+            <input type="radio" class="sr-radio" name="package-tier" value="2" checked required id="pkg-2" />
+            <div class="pkg-card-inner">
+              <span class="pkg-tag">Más popular</span><span class="pkg-check" aria-hidden="true">✓</span>
+              <div class="pkg-disc"><small>Paquete 2</small><strong>Completo</strong><em>$50</em></div>
+              <div class="pkg-best"><b>Ideal para:</b> Compartir con la familia</div>
+              <ul class="pkg-inc"><li>Canción en MP3</li><li>Tarjeta con la letra</li><li class="new">+ Video musical</li><li class="new">+ Tu mensaje en la tarjeta</li><li class="new">+ 2 códigos QR (escanea para reproducir)</li></ul>
+              <button type="button" class="pkg-example" data-full="/img/package-2-complete.webp" data-alt="CustomSongMe Paquete 2, Completo, $50: tarjeta de recuerdo con código QR del video y mensaje personal" aria-haspopup="dialog">Ver ejemplo</button>
+            </div>
+          </label>
+          <label class="pkg-card">
+            <input type="radio" class="sr-radio" name="package-tier" value="3" required id="pkg-3" />
+            <div class="pkg-card-inner">
+              <span class="pkg-check" aria-hidden="true">✓</span>
+              <div class="pkg-disc"><small>Paquete 3</small><strong>Historia</strong><em>$75</em></div>
+              <div class="pkg-best"><b>Ideal para:</b> Grandes momentos</div>
+              <ul class="pkg-inc"><li>Canción en MP3</li><li>Tarjeta con la letra</li><li>Video musical</li><li class="new">+ Video con historia: tu historia leída en voz alta sobre tus fotos</li><li class="new">+ 2 mensajes personales</li><li class="new">+ 3 códigos QR (escanea para reproducir)</li></ul>
+              <button type="button" class="pkg-example" data-full="/img/package-3-story.webp" data-alt="CustomSongMe Paquete 3, Historia, $75: tarjeta de recuerdo con códigos QR de canción, video e historia" aria-haspopup="dialog">Ver ejemplo</button>
+            </div>
+          </label>
+          <label class="pkg-card">
+            <input type="radio" class="sr-radio" name="package-tier" value="4" required id="pkg-4" />
+            <div class="pkg-card-inner">
+              <span class="pkg-check" aria-hidden="true">✓</span>
+              <div class="pkg-disc"><small>Paquete 4</small><strong>Definitivo</strong><em>$100</em></div>
+              <div class="pkg-best"><b>Ideal para:</b> Fiestas y eventos</div>
+              <ul class="pkg-inc"><li>Canción en MP3</li><li>Tarjeta con la letra</li><li>Video musical</li><li>Video con historia</li><li>2 mensajes personales</li><li class="new">+ Álbum de fotos de la fiesta al que los invitados suman fotos</li><li class="new">+ Diseño de tarjeta de cuatro esquinas</li><li class="new">+ 4 códigos QR (escanea para reproducir)</li></ul>
+              <button type="button" class="pkg-example" data-full="/img/package-4-ultimate.webp" data-alt="CustomSongMe Paquete 4, Definitivo, $100: recuerdo de cuatro esquinas con cuatro códigos QR" aria-haspopup="dialog">Ver ejemplo</button>
+            </div>
+          </label>
+          </div>
+        </div>
+
+        <div class="builder-step" id="step-3" data-step="3">
+          <div class="step-head"><span class="step-kicker">Paso 3 de 6</span><h3>¿Para quién es y cuál es la historia?</h3></div>
+          <div class="form-grid">
+          <div class="form-group full">
             <label for="subject">¿De quién es la canción?</label>
-            <input type="text" id="subject" name="subject" placeholder="Nombre, escrito correctamente" required />
+            <input type="text" id="subject" name="subject" placeholder="Mi esposa, María (llevamos 25 años casados)" required />
+          </div>
+
+          <div class="form-group full hint-chips" role="group" aria-label="Agrega un inicio a tu historia">
+            <span class="hint-chips-label">¿Necesitas ideas? Toca para agregar un inicio:</span><button type="button" class="hint-chip" data-add="Cómo nos conocimos: ">Cómo nos conocimos</button><button type="button" class="hint-chip" data-add="Chistes internos: ">Chistes internos</button><button type="button" class="hint-chip" data-add="Un recuerdo favorito: ">Un recuerdo favorito</button><button type="button" class="hint-chip" data-add="Lo que quiero que sientan: ">Lo que quiero que sientan</button>
           </div>
 
           <div class="form-group full">
-            <label for="story">Su historia</label>
-            <textarea id="story" name="story" placeholder="Anécdotas familiares, recuerdos, lo que la hace especial — lo que sea que haga que esta canción se sienta como ella." required></textarea>
+            <label for="story">Historia principal para la canción</label>
+            <textarea id="story" name="story" placeholder="Nos conocimos en un puesto de tacos en 2009. Ella se rió de mi chiste malísimo, y desde entonces no hemos parado de reír..." required></textarea>
           </div>
 
-          <details class="form-group full more-details">
-            <summary>+ Añade estilo y detalles extra <span class="opt">(opcional)</span></summary>
-            <div class="form-grid more-details-grid">
-          <div class="form-group">
-            <label for="pronunciation">Pronunciación del nombre <span class="opt">(opcional)</span></label>
-            <input type="text" id="pronunciation" name="pronunciation" placeholder="Si no se dice como se escribe" />
-          </div>
 
-          <div class="form-group full">
+          <div class="form-group full" data-occ-only="quince">
             <label for="padrinos">Padrinos, madrinas, o tema de la fiesta <span class="opt">(opcional)</span></label>
             <input type="text" id="padrinos" name="padrinos" placeholder="ej. nombres de padrinos/madrinas, el color o tema de la fiesta, o cualquier tradición familiar importante" />
           </div>
 
-          <div class="form-group full">
+
+          <div class="form-group full" data-occ-only="quince">
             <label for="feeling">¿Qué sentimiento quieres que transmita la canción? <span class="opt">(opcional)</span></label>
             <input type="text" id="feeling" name="feeling" placeholder="ej. feliz y celebrada, entre risas, sentimental..." />
           </div>
 
-          <div class="form-group">
-            <label for="genre">Estilo <span class="opt">(opcional)</span></label>
-            <select id="genre" name="genre">
-              <option value="" disabled selected>Cualquier estilo está bien</option>
-              <option>Pop</option>
-              <option>Banda</option>
-              <option>Cumbia</option>
-              <option>Mariachi</option>
-              <option>Hip-Hop</option>
-              <option>R&amp;B / Soul</option>
-              <option>Reggae</option>
-              <option>Latino / Reggaetón</option>
-              <option>EDM</option>
-              <option>Sorpréndeme</option>
-            </select>
+          </div>
+        </div>
+
+        <div class="builder-step" id="step-4" data-step="4">
+          <div class="step-head"><span class="step-kicker">Paso 4 de 6</span><h3>Elige el sonido y luego hazla tuya</h3></div>
+          <div class="step-part-label"><span class="req-tag">Obligatorio</span> Estilo musical</div>
+          <div class="occ-grid" id="style-grid">
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Pop" required /><span class="occ-face"><span class="em" aria-hidden="true">🎤</span>Pop</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Country" required /><span class="occ-face"><span class="em" aria-hidden="true">🤠</span>Country</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="R&amp;B / Soul" required /><span class="occ-face"><span class="em" aria-hidden="true">🎶</span>R&amp;B</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Hip-Hop" required /><span class="occ-face"><span class="em" aria-hidden="true">🎧</span>Hip-Hop</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Rock" required /><span class="occ-face"><span class="em" aria-hidden="true">🎸</span>Rock</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Folk / Acústico" required /><span class="occ-face"><span class="em" aria-hidden="true">🪕</span>Acústico</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Gospel" required /><span class="occ-face"><span class="em" aria-hidden="true">🙌</span>Gospel</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Latino / Reggaetón" required /><span class="occ-face"><span class="em" aria-hidden="true">💃</span>Latino</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Sorpréndeme" required /><span class="occ-face"><span class="em" aria-hidden="true">🎲</span>No estoy seguro, tú eliges</span></label>
+          </div>
+          <div class="step-part-label"><span class="req-tag">Obligatorio</span> Voz</div>
+          <div class="occ-grid three" id="vocals-grid">
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="vocalist" value="Voz femenina" required /><span class="occ-face"><span class="em" aria-hidden="true">👩‍🎤</span>Femenina</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="vocalist" value="Voz masculina" required /><span class="occ-face"><span class="em" aria-hidden="true">👨‍🎤</span>Masculina</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="vocalist" value="Ambas (dueto)" required /><span class="occ-face"><span class="em" aria-hidden="true">🎶</span>Ambas (dueto)</span></label>
+          </div>
+          <div class="step-part-label"><span class="req-tag">Obligatorio</span> ¿Qué tan fielmente debo usar tus detalles?</div>
+          <div class="occ-grid three" id="detail-grid">
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="detail-level" value="Usa mis detalles tal cual los doy" required /><span class="occ-face"><span class="em" aria-hidden="true">🎯</span>Lo más fiel posible</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="detail-level" value="Usa mis detalles como inspiración — tómate libertad creativa" required /><span class="occ-face"><span class="em" aria-hidden="true">✨</span>Como inspiración</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="detail-level" value="Un punto medio" required /><span class="occ-face"><span class="em" aria-hidden="true">⚖️</span>Un punto medio</span></label>
+          </div>
+          <p class="sound-note" id="sound-note" role="alert">Elige un estilo musical y una voz para saber cómo debe sonar tu canción.</p>
+
+          <div class="optional-banner"><strong>OPCIONAL</strong><span>Puedes saltarte todo esto y aun así haré que tu canción quede genial.</span></div>
+          <div class="form-grid">
+          <div class="form-group full" id="msg1-group">
+            <label for="msg1" id="msg1-label">Mensaje personal para la tarjeta</label>
+            <textarea id="msg1" name="personal-message-1" rows="2" maxlength="60" placeholder="¡Feliz 40, mamá! Te quiero más que a los tacos. – Jake"></textarea>
+            <span class="char-count" id="msg1-count"></span>
           </div>
 
-          <div class="form-group">
-            <label for="vocalist">Preferencia de voz <span class="opt">(opcional)</span></label>
-            <select id="vocalist" name="vocalist">
-              <option value="" disabled selected>Sin preferencia específica</option>
-              <option>Voz masculina</option>
-              <option>Voz femenina</option>
-              <option>Ambas / cualquiera está bien</option>
-            </select>
+          <div class="form-group full" id="msg2-group" style="display:none;">
+            <label for="msg2">Mensaje personal 2</label>
+            <textarea id="msg2" name="personal-message-2" rows="6" maxlength="150" placeholder="Veinticinco años, tres hijos, un perro, y lo haría todo otra vez. Feliz aniversario, mi amor. – Daniel" disabled></textarea>
+            <span class="char-count" id="msg2-count"></span>
           </div>
-
-            </div>
-          </details>
-
-          <hr class="form-divider" />
 
           <div class="form-group full">
-            <div class="form-tip">Usaré tu información de contacto para tu orden y, de vez en cuando, para compartirte una oferta o una canción especial. <strong>Responde STOP en cualquier momento y dejaré de escribirte.</strong></div>
+            <label for="pronunciation">Pronunciación del nombre <span class="opt">(opcional — si algún nombre no se dice como se escribe)</span></label>
+            <input type="text" id="pronunciation" name="pronunciation" placeholder="Deletréalo por sílaba — ej. Itzel = eet-SEL, Xiomara = see-oh-MAH-rah" />
           </div>
 
+          <div class="form-group full">
+            <label for="extra-details">¿Algo más que Dan deba saber? <span class="opt">(opcional)</span></label>
+            <textarea id="extra-details" name="extra-details" placeholder="Por favor menciona su apodo «Burbujas» y nuestra canción, Brown Eyed Girl" class="textarea-sm"></textarea>
+          </div>
+          </div>
+        </div>
+
+        <div class="builder-step" id="step-5" data-step="5">
+          <div class="step-head"><span class="step-kicker">Paso 5 de 6</span><h3>Complemento</h3></div>
+          <p class="addon-p1" id="addon-p1">El Paquete 1 ya es privado, así que aquí no hay nada que agregar.</p>
+<div class="unlisted-block">
+          <div class="public-note" id="public-note">
+            <label class="unlisted-toggle">
+              <input type="checkbox" id="unlisted-checkbox" name="unlisted-addon" value="Yes" />
+              <span>Mantenlo no listado +$25</span>
+            </label>
+            <p><strong>Mantenlo no listado cuesta +$25 y es solo para los Paquetes 2, 3 y 4.</strong> Por defecto, tu video se publica en mi canal público de YouTube de CustomSongMe. Con Mantenlo no listado, no lo publico en mi canal, y solo quien tenga tu enlace privado o código QR puede verlo. El Paquete 1 no tiene video y ya es privado.</p>
+          </div>        </div>
+        </div>
+
+        <div class="builder-step" id="step-6" data-step="6">
+          <div class="step-head"><span class="step-kicker">Paso 6 de 6</span><h3>Tus datos y el pago</h3></div>
+          <div class="form-grid">
           <div class="form-group">
             <label for="name">Tu nombre</label>
-            <input type="text" id="name" name="name" placeholder="Nombre y apellido" autocomplete="name" required />
+            <input type="text" id="name" name="name" placeholder="María García" autocomplete="name" required />
           </div>
 
           <div class="form-group">
             <label for="email">Tu correo electrónico</label>
-            <input type="email" id="email" name="email" placeholder="tu@correo.com" autocomplete="email" inputmode="email" required />
+            <input type="email" id="email" name="email" placeholder="maria@correo.com" autocomplete="email" inputmode="email" required />
           </div>
 
           <div class="form-group full">
             <label for="phone">Teléfono <span class="opt">(opcional — para actualizaciones por texto)</span></label>
-            <input type="tel" id="phone" name="phone" placeholder="Mejor número para contactarte" autocomplete="tel" inputmode="tel" />
+            <input type="tel" id="phone" name="phone" placeholder="(805) 555-0123" autocomplete="tel" inputmode="tel" />
           </div>
 
+          <div class="form-tip">Usaré tu información de contacto para tu orden y, de vez en cuando, para compartirte una oferta o una canción especial. <strong>Responde STOP en cualquier momento y dejaré de escribirte.</strong></div>
 
           <div class="form-group full">
             <label>Cómo vas a pagar</label>
@@ -674,32 +743,53 @@
               </label>
             </div>
           </div>
-        </div>
+          </div>
 
-        <div class="what-next">
-          <h3>👑 ¿Qué pasa después?</h3>
+          <div class="what-next">
+          <h3>🎵 ¿Qué pasa después?</h3>
           <ol>
-            <li>Envía tu solicitud — te llevaremos directo al checkout seguro para el paquete que elegiste.</li>
+            <li>Envía tu solicitud de canción — te llevaremos directo al checkout seguro para el paquete que elegiste.</li>
             <li>En el checkout, usa el mismo correo con el que ordenaste — así se relaciona tu pago con tu canción.</li>
-            <li>Una vez que el pago esté confirmado, Dan revisa la historia personalmente durante el horario del estudio y se pone a trabajar.</li>
-            <li>La canción se entrega en menos de 24 horas después del pago confirmado — respaldada por la Garantía de Felicidad Personal.</li>
+            <li>Una vez que el pago esté confirmado, Dan revisa tu historia personalmente durante el horario del estudio y se pone a trabajar.</li>
+            <li>Tu canción se entrega en menos de 24 horas después del pago confirmado — respaldada por la Garantía de Felicidad Personal.</li>
           </ol>
           <div class="lock-note">🔒 <strong>La producción no comienza hasta que tu pago sea recibido y relacionado con tu orden.</strong></div>
         </div>
 
-        <div class="form-submit-area">
+          <div class="receipt" id="receipt" aria-live="polite">
+            <h3>Resumen de tu orden</h3>
+            <dl>
+              <div class="rc-row"><dt>Ocasión</dt><dd id="rc-occasion">—</dd></div>
+              <div class="rc-row"><dt>La canción es para</dt><dd id="rc-songfor">—</dd></div>
+              <div class="rc-row"><dt>Paquete</dt><dd id="rc-package">—</dd></div>
+              <div class="rc-row"><dt>Estilo musical</dt><dd id="rc-style">—</dd></div>
+              <div class="rc-row"><dt>Voz</dt><dd id="rc-vocals">—</dd></div>
+              <div class="rc-row"><dt>Mantenlo no listado</dt><dd id="rc-unlisted">—</dd></div>
+              <div class="rc-row rc-total"><dt>Total</dt><dd id="rc-total">—</dd></div>
+            </dl>
+          </div>
+
+          <div class="form-submit-area">
           <button type="submit" class="btn-primary">Enviar y continuar al pago →</button>
           <div class="form-security">🔒 Checkout seguro · Pago único · Sin suscripciones</div>
           <div class="form-error-msg" id="form-error-msg" style="display:none;">⚠️ Algo salió mal al enviar tu solicitud. Por favor intenta de nuevo, o envíale un mensaje de texto a Dan directamente al <a href="sms:+16617140903">(661) 714-0903</a>.</div>
+        </div>
         </div>
 
         <div class="form-contact">
           ¿Preguntas? Envíale un mensaje de texto a Dan directamente al <a href="sms:+16617140903">+1 (661) 714-0903</a>
         </div>
+
       </form>
     </div>
   </div>
 </section>
+
+<button type="button" class="step-bar" id="step-bar" aria-label="Paso  de 6">
+  <span class="sb-pkg" id="sb-pkg">—</span>
+  <span class="sb-total" id="sb-total">$50</span>
+  <span class="sb-step" id="sb-step">Paso 1 de 6 ›</span>
+</button>
 
 <section id="guarantee">
   <div class="container fade-up">
@@ -727,7 +817,7 @@
   <div class="container">
     <div class="why-dan-inner fade-up">
       <div class="why-dan-header">
-        <img class="why-dan-photo" src="/dan-the-song-man-512.jpg" alt="Dan, fundador de CustomSongMe, también conocido como Dan the Song Man" width="514" height="520" loading="lazy" decoding="async" />
+        <img class="why-dan-photo" src="/img/dan-portrait.webp" alt="Dan, fundador de CustomSongMe, también conocido como Dan the Song Man" width="640" height="853" loading="lazy" decoding="async" />
         <div class="why-dan-intro">
           <h2 class="gold">¿Por qué trabajar con Dan?</h2>
           <p class="why-dan-lead">Esto no es una gran empresa ni una fábrica de contenido. <strong>Soy Dan,</strong> y escribo y produzco personalmente cada canción de quinceañera que pasa por CustomSongMe. Su historia guía todo el proceso — sin plantillas genéricas, sin canciones copiadas y pegadas. Su canción, escrita en español.</p>
@@ -754,13 +844,13 @@
         <div class="faq-a">Sí — cuéntanos en el formulario si quieres que la canción mencione el vals, la ceremonia, a los padrinos o madrinas, o cualquier tradición familiar que sea importante para la celebración.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">¿Hay una opción más económica que la experiencia completa? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Sí. El paquete Solo MP3 cuesta $25 e incluye la canción como archivo MP3 descargable — sin video, portada, ni hoja de letra. La experiencia completa a $50 incluye las cuatro cosas y es la opción recomendada para la mayoría de los clientes.</div>
+        <button class="faq-q" aria-expanded="false">¿Hay una opción más económica que Completo? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Sí. El Paquete 1, Solo MP3, cuesta $25 e incluye un MP3 personalizado completo, una tarjeta de recuerdo con la letra y 1 código QR para la canción. No tiene video y es privado, nunca se publica. El Paquete 2, Completo, cuesta $50 y agrega un video musical en YouTube, un mensaje personal en la tarjeta y un segundo código QR para el video. El Paquete 3, Historia ($75), y el Paquete 4, Definitivo ($100), agregan todavía más.</div>
       </div>
 
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">¿Por qué la experiencia completa cuesta $50 en vez de $75? <span class="faq-icon">+</span></button>
-        <div class="faq-a">El precio de $50 incluye que tu video se comparta públicamente en el canal de YouTube de CustomSongMe — esa publicación pública es parte de cómo mantengo los precios accesibles. Si prefieres mantener tu video no listado (no publicado en mi canal, solo visible para quien tenga el enlace directo), esa opción está disponible por $75. Puedes cambiarte a esa opción directamente en el formulario.</div>
+        <button class="faq-q" aria-expanded="false">¿Por qué Completo cuesta $50 y qué agrega Mantenlo no listado? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Completo cuesta $50 porque el video musical se publica en el canal de YouTube de CustomSongMe, y eso es parte de cómo mantengo los precios accesibles. Si prefieres que el video no aparezca en mi canal, Mantenlo no listado cuesta +$25 en los Paquetes 2, 3 y 4, así que Completo no listado queda en $75. No listado significa que no lo publico en mi canal y solo quien tenga tu enlace privado o tu código QR puede verlo. Puedes marcar la casilla en el Paso 5.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">¿La canción tiene garantía? <span class="faq-icon">+</span></button>
@@ -812,7 +902,7 @@
     </nav>
     <div class="footer-bottom">
       <span class="footer-copy">© 2026 CustomSongMe. Todos los derechos reservados.</span>
-      <span class="footer-copy">Atendemos a clientes en todo el país — solo en línea | <a href="tel:+16617140903" class="gold-link">+1 (661) 714-0903</a></span>
+      <span class="footer-copy">Atendemos a clientes en todo el mundo — solo en línea | <a href="tel:+16617140903" class="gold-link">+1 (661) 714-0903</a></span>
     </div>
   </div>
 </footer>
@@ -841,99 +931,9 @@
     });
   });
 
-  // PACKAGE + PAYMENT METHOD → PAYMENT LINK ROUTING (3-tier: MP3 $25 / Complete Public $50 / Complete Unlisted $75)
-  const PAYMENT_LINKS = {
-    'Complete (Public) — $50': {
-      'Card (Stripe)': 'https://www.customsongme.com/pay/3cIaEWcLKb09cS7fcy9Ve0f',
-    },
-    'Complete (Unlisted) — $75': {
-      'Card (Stripe)': 'https://www.customsongme.com/pay/8x2fZgh20fgp8BRc0m9Ve0h',
-    },
-    'MP3 Only — $25': {
-      'Card (Stripe)': 'https://www.customsongme.com/pay/cNieVc2767NX3hxd4q9Ve06',
-    }
-  };
-  const nextRedirectField = document.getElementById('next-redirect');
-  const packageHiddenField = document.getElementById('package-hidden-field');
-  const paymentMethodNote = document.getElementById('payment-method-note');
-  const publicNote = document.getElementById('public-note');
-  const unlistedCheckbox = document.getElementById('unlisted-checkbox');
-  const emailField = document.getElementById('email');
-
-  function getEffectivePackage() {
-    const tier = document.querySelector('input[name="package-tier"]:checked');
-    if (!tier) return 'Complete (Public) — $50';
-    if (tier.value === 'mp3') return 'MP3 Only — $25';
-    return (unlistedCheckbox && unlistedCheckbox.checked) ? 'Complete (Unlisted) — $75' : 'Complete (Public) — $50';
-  }
-
-  function syncPaymentRedirect() {
-    const pkgName = getEffectivePackage();
-    const method = document.querySelector('input[name="payment-method"]:checked');
-    if (!method) return;
-
-    if (packageHiddenField) packageHiddenField.value = pkgName;
-
-    const tier = document.querySelector('input[name="package-tier"]:checked');
-    if (publicNote) publicNote.style.display = (tier && tier.value === 'complete') ? 'block' : 'none';
-
-    const pkgLinks = PAYMENT_LINKS[pkgName];
-    if (pkgLinks && pkgLinks[method.value]) {
-      let url = pkgLinks[method.value];
-      if (method.value === 'Card (Stripe)' && emailField && emailField.value) {
-        const separator = url.includes('?') ? '&' : '?';
-        url += separator + 'prefilled_email=' + encodeURIComponent(emailField.value);
-      }
-      nextRedirectField.value = url;
-    }
-    if (paymentMethodNote) {
-      paymentMethodNote.style.display = (method.value === 'Card (Stripe)') ? 'none' : 'block';
-    }
-  }
-  document.querySelectorAll('input[name="package-tier"], input[name="payment-method"]').forEach(radio => {
-    radio.addEventListener('change', syncPaymentRedirect);
-  });
-  if (unlistedCheckbox) unlistedCheckbox.addEventListener('change', syncPaymentRedirect);
-  if (emailField) emailField.addEventListener('input', syncPaymentRedirect);
-  syncPaymentRedirect();
-
-  const orderForm = document.querySelector('.form-wrap form');
-  const submitBtn = orderForm ? orderForm.querySelector('button[type="submit"]') : null;
-  const formErrorMsg = document.getElementById('form-error-msg');
-  const submitBtnOriginalText = submitBtn ? submitBtn.textContent : '';
-  if (orderForm && submitBtn) {
-    orderForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Enviando tu solicitud…';
-      if (formErrorMsg) formErrorMsg.style.display = 'none';
-
-      const formData = new FormData(orderForm);
-      fetch(orderForm.action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(response => {
-        if (response.ok) {
-          window.location.href = nextRedirectField.value;
-        } else {
-          throw new Error('Submission failed');
-        }
-      })
-      .catch(() => {
-        submitBtn.disabled = false;
-        submitBtn.textContent = submitBtnOriginalText;
-        if (formErrorMsg) {
-          formErrorMsg.style.display = 'block';
-          formErrorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-          alert('Algo salió mal al enviar tu solicitud. Por favor intenta de nuevo, o envíale un mensaje de texto a Dan directamente al (661) 714-0903.');
-        }
-      });
-    });
-  }
 </script>
+
+<script src="/js/builder.js?v=20261117"></script>
 
 </body>
 </html>

@@ -22,10 +22,20 @@
 
   // ───────────────────────── OCCASION ROUTING (edit these lists as pages are converted) ─────────────────────────
   // Occasions that have a converted page. Key = the tile's data-key. Only used when "for someone else" is checked.
-  // Spanish has no converted pages yet, so the Spanish homepage keeps everything on the page.
+  // Spanish converted pages: only the quinceañera page so far; other Spanish occasions stay on the Spanish homepage.
   var CONVERTED_PAGES = {
-    en: { birthday: '/birthday-songs' },
-    es: {}
+    en: {
+      birthday: '/birthday-songs',
+      anniversary: '/anniversary-songs',
+      wedding: '/wedding-songs',
+      love: '/love-songs',
+      'mothers-day': '/mothers-day-songs',
+      'fathers-day': '/fathers-day-songs',
+      pet: '/pet-songs',
+      roast: '/roast-songs',
+      celebration: '/memorial-songs'
+    },
+    es: { quince: '/es/canciones-de-quinceanera' }
   };
   // Occasions that always jump straight to their own page and pricing, even with nothing checked.
   var OWN_PAGES = {
