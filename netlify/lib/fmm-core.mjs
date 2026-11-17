@@ -274,6 +274,7 @@ function applyOrderChoices(story, o) {
   const st = o.settings || {};
   if (st.hello === 'off') story.helloSettings = { enabled: false, style: 'both', custom: [] };
   else if (['both', 'sweet', 'funny'].includes(st.hello)) story.helloSettings = { enabled: true, style: st.hello, custom: [] };
+  if (o.magnets) story.magnets = o.magnets; // the buyer's silhouette/photo choice for each magnet
   story.prefs = { music: st.music === 'none' ? 'none' : 'soft', share: st.share === 'open' ? 'open' : 'private',
     childRecording: o.childRecording === 'own' ? 'own' : 'parent', childAge: String(o.childAge || '').slice(0, 20) };
   (Array.isArray(o.profiles) ? o.profiles : []).slice(0, 2).forEach((p, k) => {

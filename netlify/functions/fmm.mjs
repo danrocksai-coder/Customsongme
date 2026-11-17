@@ -67,7 +67,7 @@ const summary = (s) => {
     qrCodes: s.qrCodes || { child: s.qrCode, grandparent: null },
     pins: { child: C.pinRequired(s, 'child'), grandparent: C.pinRequired(s, 'grandparent'), guardian: C.pinRequired(s, 'guardian'), buyer: C.pinRequired(s, 'buyer') },
     devices: { child: s.sessions.child.length, grandparent: s.sessions.grandparent.length, guardian: s.sessions.guardian.length, buyer: s.sessions.buyer.length },
-    hasBuyer: !!s.tokenHashes.buyer, buyer: s.buyer || null,
+    hasBuyer: !!s.tokenHashes.buyer, buyer: s.buyer || null, orderId: s.orderId || null, magnets: s.magnets || null,
     childAccess: { ...C.childAccessView(s), parentName: s.childAccess.parentName || '', decidedAt: s.childAccess.decidedAt || null, hasForm: !!s.childAccess.form, history: (s.childAccess.history || []).slice(-10) },
     hasGuardian: !!s.tokenHashes.guardian, childPaused: !!s.childPaused, deletionRequestedAt: s.deletionRequestedAt || null, completedAt: s.completedAt || null,
     helloSettings: s.helloSettings,
@@ -204,6 +204,8 @@ async function order(req, store) {
     gpAddress: cleanAddr(b.gpAddress), childAddress: cleanAddr(b.childAddress), // where the two magnets go
     childRecording: b.childRecording === 'own' ? 'own' : 'parent', waiverAt: b.waiver === true ? Date.now() : null,
     childAge: clean(b.childAge, 20), settings: cleanSettings(b.settings), profiles: cleanProfiles(b.profiles),
+    magnets: { child: { figure: ['boy', 'girl'].includes(b.magnets?.child?.figure) ? b.magnets.child.figure : 'boy', hasPhoto: false },
+      gp: { figure: ['grandma', 'grandpa', 'both'].includes(b.magnets?.gp?.figure) ? b.magnets.gp.figure : 'grandma', hasPhoto: false } },
   };
   const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!pkg || pkg.id === 'fmm2' || !o.buyerName || !EMAIL.test(email) || !o.childName || !o.grandparent1 || (pkg.grandparents === 2 && !o.grandparent2)) {
@@ -213,6 +215,15 @@ async function order(req, store) {
   if (!o.waiverAt) return json({ error: 'Please check the waiver and permission box.' }, 400);
   // the child's parent is always involved: when someone else buys, we need the parent's name and email
   if (!o.parentName || !EMAIL.test(o.parentEmail)) return json({ error: "Please add the child's parent or guardian's name and email." }, 400);
+  // magnet photos (optional): small JPEGs made on the buyer's phone; printed on the magnet only
+  for (const k of ['child', 'gp']) {
+    const m = /^data:image\/jpeg;base64,([A-Za-z0-9+/=]+)$/.exec(String(b.magnets?.[k]?.photo || ''));
+    if (!m) continue;
+    const data = Buffer.from(m[1], 'base64');
+    if (data.length > 2.5 * 1024 * 1024) return json({ error: 'That magnet photo is too large. Please choose a smaller one.' }, 413);
+    await store.setBlob(`audio/order-${o.id}/magnet-${k}`, data, { contentType: 'image/jpeg' });
+    o.magnets[k].hasPhoto = true;
+  }
   await store.setJSON(`order/${o.id}`, o);
   try { // tell Dan (same Formspree inbox the rest of the site uses); never block the customer on it
     await fetch(FORMSPREE, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
@@ -287,7 +298,7 @@ async function admin(route, req, url, store, secret, origin) {
   if (req.method === 'POST' && AUDITED[route] && b.id) await log(b.id, AUDITED[route], [b.role, route === 'consent-review' ? (b.approve ? 'approved' : 'not approved') : ''].filter(Boolean).join(' '));
   if (route === 'create' && req.method === 'POST') {
     const ord = b.orderId ? await store.getJSON(`order/${b.orderId}`) : null;
-    if (ord) Object.assign(b, { fromOrder: { settings: ord.settings, profiles: ord.profiles, childRecording: ord.childRecording, childAge: ord.childAge } });
+    if (ord) Object.assign(b, { fromOrder: { settings: ord.settings, profiles: ord.profiles, childRecording: ord.childRecording, childAge: ord.childAge, magnets: ord.magnets } });
     const { story, tokens } = await C.createStory(store, b);
     await log(story.id, 'story created', story.test ? 'test' : '');
     if (b.orderId) {
@@ -326,6 +337,12 @@ async function admin(route, req, url, store, secret, origin) {
     await log(id, 'viewed consent form');
     const s = C.signMedia(secret, id, 'consent-form');
     return json({ url: `/api/fmm/audio?s=${id}&k=consent-form&e=${s.exp}&sig=${s.sig}`, contentType: story.childAccess.form.contentType });
+  }
+  if (route === 'order-photo' && req.method === 'GET') { // the buyer's magnet photo, for printing
+    const id = url.searchParams.get('order') || '', k = url.searchParams.get('k') === 'gp' ? 'gp' : 'child';
+    const o = await store.getJSON(`order/${id}`); if (!o?.magnets?.[k]?.hasPhoto) return json({ error: 'No photo for that magnet.' }, 404);
+    const sg = C.signMedia(secret, 'order-' + id, 'magnet-' + k);
+    return json({ url: `/api/fmm/audio?s=order-${id}&k=magnet-${k}&e=${sg.exp}&sig=${sg.sig}` });
   }
   if (route === 'movie-kit' && req.method === 'GET') { // used by tools/fmm-movie (the local movie maker)
     const id = url.searchParams.get('id') || '';

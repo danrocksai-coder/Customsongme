@@ -178,3 +178,13 @@ fieldset.addr .row { margin-top: 8px; } fieldset.addr input { margin: 0; }
 .prof > b { color: var(--navy); }
 details.pre { margin-top: 10px; } details.pre summary { cursor: pointer; color: var(--ink); font-weight: 700; }
 .pqs { margin-top: 6px; } label.pq { font-weight: 600; font-size: .92rem; margin: 10px 0 0; } label.pq select { margin-top: 4px; }
+
+/* the two magnets on the order page (symmetrical) */
+.mags { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; margin: 12px 0; }
+@media (max-width: 420px) { .mags { grid-template-columns: 1fr; } }
+.mag { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.magc { width: 100%; max-width: 230px; aspect-ratio: 1; border-radius: 12px; box-shadow: 0 8px 22px rgba(0,20,60,.25); background: var(--navy); }
+.magt { color: var(--navy); font-size: .95rem; }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.seg .btn.small { width: auto; padding: 7px 12px; font-size: .9rem; }
+.upl { cursor: pointer; margin: 0; }

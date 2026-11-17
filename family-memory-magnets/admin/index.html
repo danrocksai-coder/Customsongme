@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Admin | Family Memory Magnets</title>
-<link rel="stylesheet" href="/family-memory-magnets/fmm.css?v=e8145b441b">
+<link rel="stylesheet" href="/family-memory-magnets/fmm.css?v=e0b14aa6eb">
 </head>
 <body>
 <div class="topbar">FAMILY MEMORY <b>MAGNETS</b> &middot; ADMIN</div>
 <main class="wide" id="app" style="padding-top:18px;padding-bottom:60px"></main>
-<script src="/family-memory-magnets/admin/magnet.js?v=74b94160e3"></script>
+<script src="/family-memory-magnets/admin/magnet.js?v=1127dbc15c"></script>
 <script>
 (function () {
   'use strict';
@@ -79,7 +79,8 @@
     if (!d.orders.length) h += '<p class="muted">No orders yet.</p>'; else {
       h += '<table><tr><th>Date</th><th>Package</th><th>Parent</th><th>Child / grandparent</th><th>Status</th><th></th></tr>';
       d.orders.forEach(function (o) {
-        h += '<tr><td>' + when(o.createdAt) + '</td><td>' + esc(o.packageLabel) + '</td><td>' + esc(o.buyerName || o.parentName) + (o.buyerRole && o.buyerRole !== 'parent' ? ' <span class="muted">(' + esc(o.buyerRole) + ')</span>' : '') + '<br><span class="muted">' + esc(o.email) + '</span>' + (o.buyerRole && o.buyerRole !== 'parent' ? '<br>Parent: ' + esc(o.parentName) + ' <span class="muted">' + esc(o.parentEmail || '') + '</span>' : '') + (o.gpAddress ? '<br><span class="muted">Magnet 1 (grandparent): ' + (function (a) { return a && a.line1 ? esc(a.line1) + ', ' + esc(a.city) + ', ' + esc(a.state) + ' ' + esc(a.zip) : '-'; })(o.gpAddress) + '<br>Magnet 2 (child): ' + (function (a) { return a && a.line1 ? esc(a.line1) + ', ' + esc(a.city) + ', ' + esc(a.state) + ' ' + esc(a.zip) : '-'; })(o.childAddress) + '<br>Child records: ' + (o.childRecording === 'own' ? 'on their own (needs consent step)' : 'with a parent') + (o.waiverAt ? ' &middot; waiver signed ' + when(o.waiverAt) : '') + '</span>' : '') + '</td><td>' + esc(o.childName) + ' / ' + esc(o.grandparent1) + (o.grandparent2 ? ', ' + esc(o.grandparent2) : '') + '</td><td>' + esc(o.status) +
+        h += '<tr><td>' + when(o.createdAt) + '</td><td>' + esc(o.packageLabel) + '</td><td>' + esc(o.buyerName || o.parentName) + (o.buyerRole && o.buyerRole !== 'parent' ? ' <span class="muted">(' + esc(o.buyerRole) + ')</span>' : '') + '<br><span class="muted">' + esc(o.email) + '</span>' + (o.buyerRole && o.buyerRole !== 'parent' ? '<br>Parent: ' + esc(o.parentName) + ' <span class="muted">' + esc(o.parentEmail || '') + '</span>' : '') + (o.gpAddress ? '<br><span class="muted">Magnet 1 (grandparent): ' + (function (a) { return a && a.line1 ? esc(a.line1) + ', ' + esc(a.city) + ', ' + esc(a.state) + ' ' + esc(a.zip) : '-'; })(o.gpAddress) + '<br>Magnet 2 (child): ' + (function (a) { return a && a.line1 ? esc(a.line1) + ', ' + esc(a.city) + ', ' + esc(a.state) + ' ' + esc(a.zip) : '-'; })(o.childAddress) + '<br>Magnets: child ' + (o.magnets ? (o.magnets.child.hasPhoto ? '<a href="#" data-ophoto="' + esc(o.id) + '|child">photo</a>' : esc(o.magnets.child.figure)) + ', grandparent ' + (o.magnets.gp.hasPhoto ? '<a href="#" data-ophoto="' + esc(o.id) + '|gp">photo</a>' : esc(o.magnets.gp.figure)) : 'not chosen') +
+          '<br>Child records: ' + (o.childRecording === 'own' ? 'on their own (needs consent step)' : 'with a parent') + (o.waiverAt ? ' &middot; waiver signed ' + when(o.waiverAt) : '') + '</span>' : '') + '</td><td>' + esc(o.childName) + ' / ' + esc(o.grandparent1) + (o.grandparent2 ? ', ' + esc(o.grandparent2) : '') + '</td><td>' + esc(o.status) +
           (o.paid ? '<br><span class="muted">paid: ' + esc(o.paid.method) + (o.paid.note ? ', ' + esc(o.paid.note) : '') + ' (' + when(o.paid.at) + ')</span>' : '') + '</td><td>' +
           (!o.paid && o.status !== 'story-created' ? '<button class="btn small alt" data-paid="' + esc(o.id) + '">Mark paid (cash / other)</button> ' : '') +
           (o.package === 'two'
@@ -117,7 +118,7 @@
           return '<div class="card" style="margin:0"><b>' + esc(nm) + '\'s permanent QR</b><br><img alt="QR code for ' + esc(nm) + '" data-qr="' + esc(code) + '" style="width:100%;max-width:220px;background:#fff"><br>' +
             '<code class="link">' + esc(s.qrUrls[r]) + '</code><span class="muted">This web address is public and never contains a private link. It stays the same after the story is finished.</span><div class="row" style="margin-top:6px">' +
             '<a class="btn small alt" href="#" data-qrdl="' + esc(code) + '|svg">Download SVG</a><a class="btn small alt" href="#" data-qrdl="' + esc(code) + '|png">Download PNG</a></div>' +
-            '<button class="btn small" style="margin-top:6px" data-magnet="' + esc(code) + '|' + esc(s.grandparents ? s.childName + ', ' + s.grandparents[0] + ' & ' + s.grandparents[1] : s.childName + ' & ' + s.grandparentName) + '|' + esc(nm) + '">Magnet artwork (5×5 in, Printful)</button>' +
+            '<button class="btn small" style="margin-top:6px" data-magnet="' + esc(code) + '|' + esc(s.grandparents ? s.childName + ', ' + s.grandparents[0] + ' & ' + s.grandparents[1] : s.childName + ' & ' + s.grandparentName) + '|' + esc(nm) + '|' + (s.magnets ? (r === 'child' ? s.magnets.child.figure : s.magnets.gp.figure) : '') + '|' + (s.magnets && s.orderId && (r === 'child' ? s.magnets.child.hasPhoto : s.magnets.gp.hasPhoto) ? s.orderId + ':' + (r === 'child' ? 'child' : 'gp') : '') + '">Magnet artwork (5×5 in, Printful)' + (s.magnets ? ': ' + ((r === 'child' ? s.magnets.child.hasPhoto : s.magnets.gp.hasPhoto) ? 'photo' : esc(r === 'child' ? s.magnets.child.figure : s.magnets.gp.figure)) : '') + '</button>' +
             '<div class="muted" style="margin-top:8px">PIN: ' + (s.pins[r] ? 'set' : 'none') + ' &middot; remembered phones: ' + s.devices[r] + '</div><div class="row" style="margin-top:6px">' +
             '<input type="text" inputmode="numeric" maxlength="6" placeholder="New PIN (blank = none)" data-pinval="' + s.id + '|' + r + '"><button class="btn small alt" data-setpin="' + s.id + '|' + r + '">Set / clear PIN</button>' +
             '<button class="btn small alt" data-forget="' + s.id + '|' + r + '">Forget all phones</button></div></div>';
@@ -199,12 +200,17 @@
       var u = URL.createObjectURL(new Blob([rows.map(function (r) { return r.map(cell).join(','); }).join('\n')], { type: 'text/csv' })), l = document.createElement('a');
       l.href = u; l.download = 'fmm-waiting-list.csv'; document.body.appendChild(l); l.click(); l.remove();
     };
+    q('[data-ophoto]').forEach(function (a) { a.onclick = function (e) { e.preventDefault(); var p = a.getAttribute('data-ophoto').split('|'), w = window.open('', '_blank'); fetch('/api/fmm/admin/order-photo?order=' + encodeURIComponent(p[0]) + '&k=' + p[1], { headers: { Authorization: 'Bearer ' + TOK } }).then(function (r) { return r.json(); }).then(function (m) { if (!m.url) throw new Error(m.error || 'No photo.'); w.location = m.url; }).catch(function (err) { if (w) w.close(); alert(err.message); }); }; });
     q('[data-magnet]').forEach(function (b) { b.onclick = function () {
       var p = b.getAttribute('data-magnet').split('|'), label = b.textContent;
       b.disabled = true; b.textContent = 'Drawing…';
       fetch('/api/fmm/admin/qr?code=' + encodeURIComponent(p[0]), { headers: { Authorization: 'Bearer ' + TOK } })
         .then(function (r) { if (!r.ok) throw new Error('Could not load the QR code.'); return r.text(); })
-        .then(function (svg) { return FMMMagnet.draw(document.createElement('canvas'), { qrSvg: svg, title: p[1], line: 'Scan to hear our family story' }); })
+        .then(function (svg) {
+          var ph = p[4] ? p[4].split(':') : null; // the buyer's uploaded photo, if any
+          var photoP = ph ? fetch('/api/fmm/admin/order-photo?order=' + encodeURIComponent(ph[0]) + '&k=' + ph[1], { headers: { Authorization: 'Bearer ' + TOK } }).then(function (r) { return r.json(); }).then(function (m) { if (!m.url) throw new Error(m.error || 'Could not load the magnet photo.'); return m.url; }) : Promise.resolve(null);
+          return photoP.then(function (photo) { return FMMMagnet.draw(document.createElement('canvas'), { qrSvg: svg, title: p[1], line: 'Scan to hear our family story', figure: p[3] || undefined, photo: photo || undefined }); });
+        })
         .then(function (c) { return FMMMagnet.toPngBlob(c); })
         .then(function (blob) { var u = URL.createObjectURL(blob), l = document.createElement('a'); l.href = u; l.download = 'magnet-5x5in-300dpi-' + p[2].replace(/[^A-Za-z0-9]+/g, '-') + '-' + p[0].slice(0, 6) + '.png'; document.body.appendChild(l); l.click(); l.remove(); })
         .catch(function (e) { alert(e.message); })
