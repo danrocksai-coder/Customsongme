@@ -193,6 +193,7 @@ async function waitlist(req, store) { // free waiting-list signup; no payment, n
   const w = {
     id: randomBytes(8).toString('base64url'), createdAt: Date.now(),
     name: clean(b.name, 80), email: clean(b.email, 120), interest: PACKAGES[b.package]?.label || '', notes: clean(b.notes, 400),
+    source: clean(b.source, 80) || 'direct',
   };
   if (!w.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(w.email)) return json({ error: 'Please enter your name and email.' }, 400);
   await store.setJSON(`waitlist/${w.id}`, w);
@@ -227,8 +228,10 @@ async function admin(route, req, url, store, secret, origin) {
     }
     const orders = [];
     for (const k of await store.list('order/')) { const o = await store.getJSON(k); if (o) orders.push(o); }
-    stories.sort((a, b) => b.createdAt - a.createdAt); orders.sort((a, b) => b.createdAt - a.createdAt);
-    return json({ stories, orders });
+    const waitlist = [];
+    for (const k of await store.list('waitlist/')) { const w = await store.getJSON(k); if (w) waitlist.push(w); }
+    stories.sort((a, b) => b.createdAt - a.createdAt); orders.sort((a, b) => b.createdAt - a.createdAt); waitlist.sort((a, b) => b.createdAt - a.createdAt);
+    return json({ stories, orders, waitlist });
   }
   if (route === 'qr' && req.method === 'GET') { // printable QR image; encodes the public URL only
     const code = url.searchParams.get('code') || '';

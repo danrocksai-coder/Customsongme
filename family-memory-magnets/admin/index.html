@@ -56,6 +56,17 @@
       '<label class="check"><input type="checkbox" id="ts"><span>Test story (adult fictional recordings only, skips parent consent)</span></label>' +
       '<div id="cmsg"></div><button class="btn" id="mk">Create story &amp; links</button></div>';
 
+    var wl = d.waitlist || [], bySrc = {};
+    wl.forEach(function (w) { var k = w.source || 'direct'; bySrc[k] = (bySrc[k] || 0) + 1; });
+    h += '<div class="card"><h2>Waiting list (' + wl.length + ')</h2>';
+    if (!wl.length) h += '<p class="muted">No signups yet.</p>'; else {
+      h += '<p class="muted">Where they came from: ' + Object.keys(bySrc).map(function (k) { return esc(k) + ' ' + bySrc[k]; }).join(' &middot; ') + '</p>' +
+        '<button class="btn small alt" id="wlcopy">Copy all emails</button> <button class="btn small alt" id="wlcsv">Download CSV</button>' +
+        '<details style="margin-top:8px"><summary>Show signups</summary><table><tr><th>Date</th><th>Name</th><th>Email</th><th>Interested in</th><th>From</th><th>Note</th></tr>' +
+        wl.map(function (w) { return '<tr><td>' + when(w.createdAt) + '</td><td>' + esc(w.name) + '</td><td>' + esc(w.email) + '</td><td>' + esc(w.interest || '') + '</td><td>' + esc(w.source || 'direct') + '</td><td>' + esc(w.notes || '') + '</td></tr>'; }).join('') + '</table></details>';
+    }
+    h += '</div>';
+
     h += '<div class="card"><h2>Orders (' + d.orders.length + ')</h2>';
     if (!d.orders.length) h += '<p class="muted">No orders yet.</p>'; else {
       h += '<table><tr><th>Date</th><th>Package</th><th>Parent</th><th>Child / grandparent</th><th>Status</th><th></th></tr>';
@@ -145,6 +156,15 @@
     q('[data-kprep]').forEach(function (b) { b.onclick = function () { var id = b.getAttribute('data-kprep'); api('keepsake', { id: id, status: 'preparing', items: kitItems(id) }).then(load).catch(function (e) { alert(e.message); }); }; });
     q('[data-phview]').forEach(function (b) { b.onclick = function () { var p = b.getAttribute('data-phview').split('|'), w = window.open('', '_blank'); fetch('/api/fmm/admin/media?id=' + p[0] + '&slot=photo&n=0&hid=' + encodeURIComponent(p[1]), { headers: { Authorization: 'Bearer ' + TOK } }).then(function (r) { return r.json(); }).then(function (m) { w.location = m.url; }).catch(function (e) { if (w) w.close(); alert(e.message); }); }; });
     q('[data-unpub]').forEach(function (b) { b.onclick = function () { if (!confirm('Confirm the video is off YouTube and removed from the keepsake links?')) return; api('unpublish-done', { id: b.getAttribute('data-unpub') }).then(load).catch(function (e) { alert(e.message); }); }; });
+    var wc = document.getElementById('wlcopy');
+    if (wc) wc.onclick = function () { var t = (d.waitlist || []).map(function (w) { return w.email; }).join(', '); (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { wc.textContent = 'Copied'; }).catch(function () { prompt('Copy these emails:', t); }); };
+    var wv = document.getElementById('wlcsv');
+    if (wv) wv.onclick = function () {
+      var cell = function (v) { return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"'; };
+      var rows = [['date', 'name', 'email', 'interested_in', 'source', 'note']].concat((d.waitlist || []).map(function (w) { return [new Date(w.createdAt).toISOString().slice(0, 10), w.name, w.email, w.interest, w.source || 'direct', w.notes]; }));
+      var u = URL.createObjectURL(new Blob([rows.map(function (r) { return r.map(cell).join(','); }).join('\n')], { type: 'text/csv' })), l = document.createElement('a');
+      l.href = u; l.download = 'fmm-waiting-list.csv'; document.body.appendChild(l); l.click(); l.remove();
+    };
     q('[data-magnet]').forEach(function (b) { b.onclick = function () {
       var p = b.getAttribute('data-magnet').split('|'), label = b.textContent;
       b.disabled = true; b.textContent = 'Drawing…';
