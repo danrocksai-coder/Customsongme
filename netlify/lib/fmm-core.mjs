@@ -940,7 +940,10 @@ export async function setPublication(store, token, { choice, name, agree, pin })
   const was = publishAllowed(story);
   p[side] = { choice, name: nm, at: now(), version: PUBLICATION_VERSION };
   p.history = [...(p.history || []), { side, choice, name: nm, at: now() }].slice(-50);
-  if (was && !publishAllowed(story)) story.unpublishRequestedAt = now(); // someone took back their yes: Dan must take it down
+  if (was && !publishAllowed(story)) { // someone took back their yes: the watch page goes dark now; Dan takes YouTube down
+    story.unpublishRequestedAt = now();
+    if (story.watch) story.watch.published = false;
+  }
   await store.setJSON(`story/${story.id}`, story);
   return stateFor(story, role, own);
 }
@@ -1093,6 +1096,49 @@ export async function readSignedAudio(store, secret, { s, k, e, sig }) {
   const blob = await store.getBlob(`audio/${s}/${k}`);
   if (!blob) fail(404, 'Not found.');
   return blob;
+}
+
+// ----- watch page: what the magnet shows once the movie is published (both yeses required) -----
+export function youtubeId(input) {
+  const v = String(input || '').trim();
+  if (/^[\w-]{11}$/.test(v)) return v;
+  let u; try { u = new URL(v); } catch { return null; }
+  const host = u.hostname.replace(/^www\.|^m\./, '');
+  let id = null;
+  if (host === 'youtu.be') id = u.pathname.slice(1);
+  else if (host === 'youtube.com' || host === 'youtube-nocookie.com') id = u.searchParams.get('v') || (u.pathname.match(/^\/(?:embed|shorts|live)\/([\w-]{11})/) || [])[1];
+  return id && /^[\w-]{11}$/.test(id) ? id : null;
+}
+export async function setWatch(store, storyId, { youtube, fallback }) {
+  const story = norm(await store.getJSON(`story/${storyId}`) || fail(404, 'No such story.'));
+  const yt = youtube ? youtubeId(youtube) : null;
+  if (youtube && !yt) fail(400, 'That does not look like a YouTube video link.');
+  const fb = String(fallback || '').trim();
+  if (fb && !/^https:\/\/[^\s]+$/.test(fb)) fail(400, 'The backup video must be an https link.');
+  story.watch = { ...(story.watch || {}), youtubeId: yt, fallbackUrl: fb || null };
+  if (!yt && !fb) story.watch.published = false;
+  await store.setJSON(`story/${storyId}`, story);
+  return story.watch;
+}
+export async function publishWatch(store, storyId, on) {
+  const story = norm(await store.getJSON(`story/${storyId}`) || fail(404, 'No such story.'));
+  if (on) {
+    if (currentIndex(story) < T(story)) fail(409, 'The story is not finished yet.');
+    if (!publishAllowed(story)) fail(409, 'Publishing needs a "share" answer from both the parent and the grandparent.');
+    if (!story.watch?.youtubeId && !story.watch?.fallbackUrl) fail(409, 'Add the YouTube link (and ideally a backup video link) first.');
+  }
+  story.watch = { ...(story.watch || {}), published: !!on, publishedAt: on ? now() : (story.watch?.publishedAt || null) };
+  await store.setJSON(`story/${storyId}`, story);
+  return story.watch;
+}
+// Public: what a scanned magnet may show. Nothing unless the movie is published with both yeses.
+export async function watchInfo(store, code) {
+  if (!code || typeof code !== 'string' || code.length > 40) return { published: false };
+  const ref = await store.getJSON(`qr/${code}`);
+  const story = ref ? norm((await store.getJSON(`story/${ref.storyId}`)) || {}) : null;
+  if (!story?.id || !story.watch?.published || !publishAllowed(story) || isExpired(story)) return { published: false };
+  const g = Array.isArray(story.grandparents) && story.grandparents.length === 2 ? `${story.grandparents[0]} & ${story.grandparents[1]}` : story.grandparentName;
+  return { published: true, title: `${story.childName} & ${g}`, youtubeId: story.watch.youtubeId || null, fallbackUrl: story.watch.fallbackUrl || null };
 }
 
 // Public QR page: always the same sentence; leaks nothing about whether a code exists.

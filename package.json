@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test tests/fmm.test.mjs tests/fmm-v2.test.mjs tests/fmm-v3.test.mjs tests/fmm-v4.test.mjs tests/fmm-v5.test.mjs tests/fmm-v6.test.mjs tests/fmm-v7.test.mjs tests/fmm-v8.test.mjs tests/fmm-v9.test.mjs tests/fmm-v10.test.mjs tests/fmm-v11.test.mjs tests/fmm-v12.test.mjs tests/fmm-assets.test.mjs"
+    "test": "node --test tests/fmm.test.mjs tests/fmm-v2.test.mjs tests/fmm-v3.test.mjs tests/fmm-v4.test.mjs tests/fmm-v5.test.mjs tests/fmm-v6.test.mjs tests/fmm-v7.test.mjs tests/fmm-v8.test.mjs tests/fmm-v9.test.mjs tests/fmm-v10.test.mjs tests/fmm-v11.test.mjs tests/fmm-v12.test.mjs tests/fmm-assets.test.mjs tests/fmm-v13.test.mjs"
   },
   "dependencies": {
     "@netlify/blobs": "^11.1.9",
