@@ -98,3 +98,6 @@ Recordings and story data are in private Netlify Blobs (store `fmm`). No public 
 - **Refund policy page:** `/family-memory-magnets/refunds/`, linked from the order form and the footer. Still to be confirmed by the attorney review.
 - Orders also record where the buyer came from (e.g. youtube / video).
 - 80 tests.
+
+## Sales switch (updated)
+- Sales are **open by default**. To pause them, set `FMM_SALES_OPEN=false` in Netlify (Site settings > Environment variables), then redeploy. Delete it, or set it to `true`, to reopen.
