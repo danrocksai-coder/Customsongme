@@ -6,8 +6,6 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="referrer" content="no-referrer">
 <title>Our Family Story | Family Memory Magnets</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/family-memory-magnets/fmm.css">
 </head>
 <body>
@@ -265,6 +263,101 @@
   }
   var TYPE_LABEL = { child: 'sweet', grandparent: 'sweet' };
 
+  // ----- publishing: a separate yes from the parent AND the grandparent -----
+  function publicationCard() {
+    var P = S.publication; if (!P || !S.done) return '';
+    var parent = P.side === 'parent', h = '<div class="card" id="pub"><h3>Share your family movie?</h3>';
+    if (P.mine) {
+      h += '<div class="msg ' + (P.mine.choice === 'share' ? 'ok' : 'info') + '">Your answer: <b>' + (P.mine.choice === 'share' ? 'Share it with the magnet' : 'Keep it private') + '</b> (' + esc(P.mine.name) + ', ' + new Date(P.mine.at).toLocaleDateString() + ').</div>' +
+        '<p class="muted">' + (P.allowed ? 'Both of you said yes, so the movie can be shared with the magnet.' : P.mine.choice === 'share' && !P.otherAnswered ? 'Waiting for ' + (parent ? esc(S.grandparentName) : 'the parent') + ' to answer. The movie is shared only if both of you say yes.' : 'The movie stays private unless both of you choose to share.') + '</p>' +
+        '<button class="btn alt" id="pubchange">Change my answer</button></div>';
+      return h;
+    }
+    h += '<p>Your movie is being made. You choose how it can be watched:</p><ul style="margin:8px 0 0 20px">' +
+      '<li><b>Keep it private.</b> You download the movie and recordings. Nothing is posted. The magnet shows your keepsake only on phones you have connected.</li>' +
+      '<li><b>Share it with the magnet.</b> The movie is posted on YouTube as an <b>unlisted</b> video and shown on your magnet\'s page. Unlisted means it does not appear in YouTube search, but <b>anyone who has the link or scans the magnet can watch it</b>, and they could share it with others.</li></ul>' +
+      '<p class="muted">The movie is shared only if both ' + (parent ? esc(S.grandparentName) : 'the parent') + ' and you say yes. You can change your mind later; the video is then taken down within 7 days, but copies someone already saved cannot be recalled.</p>' +
+      '<label class="check"><input type="radio" name="pubc" value="private"><span>Keep it private</span></label>' +
+      '<label class="check"><input type="radio" name="pubc" value="share"><span>Share it with the magnet (unlisted YouTube)</span></label>' +
+      '<label for="pubn">Your name</label><input type="text" id="pubn" autocomplete="name">' +
+      '<label class="check"><input type="checkbox" id="puba"><span>' + (parent ? 'I am ' + esc(S.childName) + '\'s parent or legal guardian, and this is my choice.' : 'This is my choice.') + '</span></label>' +
+      '<div id="pubm"></div><button class="btn" id="pubgo">Save my answer</button></div>';
+    return h;
+  }
+  function bindPublication() {
+    var box = app.querySelector('#pub'); if (!box) return;
+    var ch = box.querySelector('#pubchange');
+    if (ch) ch.onclick = function () { S.publication.mine = null; render(); var el = app.querySelector('#pub'); if (el) el.scrollIntoView({ block: 'start' }); };
+    var go = box.querySelector('#pubgo');
+    if (go) go.onclick = function () {
+      var c = box.querySelector('input[name=pubc]:checked');
+      if (!c) { box.querySelector('#pubm').innerHTML = '<div class="msg err">Please choose one option.</div>'; return; }
+      api('publication', { json: { choice: c.value, name: box.querySelector('#pubn').value, agree: box.querySelector('#puba').checked } })
+        .then(function (st) { S = st; render(); toast('Your answer is saved.'); })
+        .catch(function (e) { box.querySelector('#pubm').innerHTML = '<div class="msg err">' + esc(e.message) + '</div>'; });
+    };
+  }
+
+  // ----- family photos (for the movie and storybook) -----
+  function photosCard() {
+    if (!S.photos || (!S.photos.length && !S.canAddPhotos)) return '';
+    var h = '<div class="card" id="ph"><h3>Family photos <span class="muted" style="font-size:.9rem">' + S.photos.length + ' of ' + S.photoMax + '</span></h3>';
+    if (S.canAddPhotos) h += '<p class="muted">Add photos for your family movie and storybook: old photos, places, and favorite moments.' +
+      (S.role === 'grandparent' ? ' Please add photos from your life. ' + esc(S.childName) + '\'s parent will add any photos of ' + esc(S.childName) + '.' : '') + ' Only your family and Dan can see them.</p>';
+    if (S.photos.length) {
+      h += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0">';
+      S.photos.forEach(function (p) {
+        h += '<figure style="margin:0"><img data-photo="' + esc(p.id) + '" alt="' + esc(p.caption || 'Family photo') + '" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;background:#dde3f2">' +
+          (p.caption ? '<figcaption class="muted" style="font-size:.8rem">' + esc(p.caption) + '</figcaption>' : '') +
+          (p.canDelete ? '<button class="btn small alt" data-phdel="' + esc(p.id) + '" style="margin-top:4px;padding:6px">Remove</button>' : '') + '</figure>';
+      });
+      h += '</div>';
+    }
+    if (S.canAddPhotos && S.photos.length < S.photoMax) h += '<label for="phcap">Caption (optional, for the next photos you add)</label><input type="text" id="phcap" maxlength="150" placeholder="For example: Mimi at age 7, 1962">' +
+      '<label for="phf" class="btn" style="margin-top:10px">Add photos</label><input type="file" id="phf" accept="image/*" multiple class="hidden"><div id="phm"></div>';
+    return h + '</div>';
+  }
+  function shrink(file) { // resize on the phone so uploads are small and fast; falls back to the original
+    return new Promise(function (res) {
+      if (!window.createImageBitmap) return res(file);
+      createImageBitmap(file).then(function (bm) {
+        var max = 2400, k = Math.min(1, max / Math.max(bm.width, bm.height)), c = document.createElement('canvas');
+        c.width = Math.round(bm.width * k); c.height = Math.round(bm.height * k);
+        c.getContext('2d').drawImage(bm, 0, 0, c.width, c.height);
+        c.toBlob(function (b) { res(b && b.size ? b : file); }, 'image/jpeg', 0.85);
+      }).catch(function () { res(file); });
+    });
+  }
+  function bindPhotos() {
+    var box = app.querySelector('#ph'); if (!box) return;
+    box.querySelectorAll('[data-photo]').forEach(function (img) {
+      api('media?slot=photo&id=' + encodeURIComponent(img.getAttribute('data-photo'))).then(function (m) { img.src = m.url; }).catch(function () {});
+    });
+    box.querySelectorAll('[data-phdel]').forEach(function (b) { b.onclick = function () {
+      if (!confirm('Remove this photo? It will be deleted.')) return;
+      api('photo-delete', { json: { id: b.getAttribute('data-phdel') } }).then(function (st) { S = st; render(); toast('Photo removed.'); }).catch(function (e) { toast(e.message, 5000); });
+    }; });
+    var inp = box.querySelector('#phf'); if (!inp) return;
+    inp.onchange = function () {
+      var files = Array.prototype.slice.call(inp.files || []), cap = (box.querySelector('#phcap').value || '').trim(), msg = box.querySelector('#phm'), done = 0, failed = [];
+      if (!files.length) return;
+      var room = S.photoMax - S.photos.length;
+      if (files.length > room) { files = files.slice(0, room); toast('Only ' + room + ' more photo' + (room === 1 ? '' : 's') + ' can be added.', 4000); }
+      function next(i) {
+        if (i >= files.length) {
+          refresh().then(function () { render(); toast(done + ' photo' + (done === 1 ? '' : 's') + ' added.' + (failed.length ? ' ' + failed.length + ' could not be added: ' + failed[0] : ''), 6000); });
+          return;
+        }
+        msg.innerHTML = '<div class="msg info">Adding photo ' + (i + 1) + ' of ' + files.length + '… Please keep this page open.</div>';
+        shrink(files[i]).then(function (blob) {
+          return fetch('/api/fmm/photo?t=' + encodeURIComponent(TOKEN), { method: 'POST', body: blob, headers: { 'Content-Type': blob.type || files[i].type || 'image/jpeg', 'X-Caption': encodeURIComponent(cap), 'X-Upload-Id': uid() } })
+            .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok) throw new Error(j.error || 'Upload failed.'); done++; }); });
+        }).catch(function (e) { failed.push(e.message); }).then(function () { next(i + 1); });
+      }
+      next(0);
+    };
+  }
+
   // ----- the child's own link (parent decides; off by default) -----
   var kidLink = '';
   function fmtDate(t) { return new Date(t).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }); }
@@ -349,7 +442,7 @@
         '<label for="pn">Your name</label><input type="text" id="pn" autocomplete="name"><label class="check"><input type="checkbox" id="ag"><span>I am ' + esc(S.childName) + '\'s parent or legal guardian, and I give permission for ' + esc(S.childName) + '\'s voice to be recorded and saved for this family story.</span></label><div id="cm"></div><button class="btn" id="cb">I agree and continue</button></div>';
     } else if (S.consent) h += '<div class="card"><div class="muted">Permission given by ' + esc(S.consent.parentName) + ' on ' + new Date(S.consent.at).toLocaleDateString() + '.</div></div>';
     h += '<div class="card"><h3>' + esc(S.childName) + '\'s recording</h3><p class="muted">' + (S.childPaused ? 'Paused. ' + esc(S.childName) + ' cannot record or send hellos until you turn it back on.' : 'Active.') + '</p><button class="btn ' + (S.childPaused ? '' : 'alt') + '" id="gpause">' + (S.childPaused ? 'Turn recording back on' : 'Pause recording') + '</button></div>';
-    h += childAccessCard();
+    h += publicationCard() + childAccessCard() + photosCard();
     var hs = S.helloSettings;
     h += '<div class="card"><h3>Little Hellos</h3><p class="muted">Short, optional hellos sent between ' + esc(S.childName) + ' and ' + esc(S.grandparentName) + ' after a quiet couple of days. They never change the story.</p>' +
       '<label class="check"><input type="checkbox" id="hen"' + (hs.enabled ? ' checked' : '') + '><span>Allow Little Hellos</span></label>' +
@@ -378,7 +471,7 @@
     $('hsave').onclick = function () { upd({ hello: { enabled: $('hen').checked, style: $('hst').value, custom: $('hcu').value.split('\n') } }, 'Saved.'); };
     if ($('gdel')) $('gdel').onclick = function () { if (confirm('Ask for all of your family\'s recordings to be deleted? Nothing is deleted automatically. I will contact you first.')) upd({ requestDeletion: true }, 'Request sent.'); };
     if ($('gundel')) $('gundel').onclick = function () { upd({ requestDeletion: false }, 'Request cancelled.'); };
-    bindChildAccess();
+    bindChildAccess(); bindPhotos(); bindPublication();
     app.querySelectorAll('[data-play]').forEach(function (b) { b.onclick = function () { var p = b.getAttribute('data-play').split('|'); playMedia(b, 'slot=' + p[0] + '&n=' + p[1]); }; });
     app.querySelectorAll('[data-hello]').forEach(function (b) { b.onclick = function () { playMedia(b, 'slot=hello&id=' + encodeURIComponent(b.getAttribute('data-hello'))); }; });
   }
@@ -417,7 +510,7 @@
     h += helloInbox() + helloOffer() + conversationsList();
     if (!S.done) h += chapters();
     if (role === 'child' && !S.own && !S.done) h += '<p class="muted center">Parent and ' + esc(S.childName) + ': record together on this phone. A parent stays with ' + esc(S.childName) + ' while recording.</p>';
-    h += childAccessCard();
+    h += publicationCard() + photosCard() + childAccessCard();
     h += '<p class="muted center">Your story stays open until ' + new Date(S.expiresAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + '. There is no rush.' + (S.test ? '<br><b>This is a test story.</b>' : '') + '</p>';
     app.innerHTML = h;
 
@@ -430,7 +523,7 @@
     if ($('goclose')) $('goclose').onclick = function () { setView('closing'); };
     if ($('hvoice')) $('hvoice').onclick = function () { setView('hello'); };
     if ($('invite')) renderInvite($('invite'));
-    bindChildAccess();
+    bindChildAccess(); bindPhotos(); bindPublication();
     app.querySelectorAll('[data-play]').forEach(function (b) { b.onclick = function () { var p = b.getAttribute('data-play').split('|'); playMedia(b, 'slot=' + p[0] + '&n=' + p[1]); }; });
     app.querySelectorAll('[data-hello]').forEach(function (b) { b.onclick = function () { playMedia(b, 'slot=hello&id=' + encodeURIComponent(b.getAttribute('data-hello'))); }; });
     app.querySelectorAll('[data-hsend]').forEach(function (b) { b.onclick = function () {

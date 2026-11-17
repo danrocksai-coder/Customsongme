@@ -30,6 +30,10 @@ export const SIGNED_URL_SECONDS = 300;
 export const CONSENT_VERSION = '2026-11-16-v1';
 export const CHILD_ACCESS_VERSION = '2026-11-17-v1'; // parent notice + consent-form wording for the child's own link
 export const FORM_MAX_BYTES = 4 * 1024 * 1024;
+export const PUBLICATION_VERSION = '2026-11-17-v1';
+export const PHOTO_MAX = 40;                    // photos per story
+export const PHOTO_MAX_BYTES = 4 * 1024 * 1024; // the browser shrinks photos first; this is the hard cap
+export const PHOTO_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif'];
 export const FORM_TYPES = ['image/jpeg', 'image/png', 'image/heic', 'image/heif', 'image/webp', 'application/pdf'];
 export const HELLO_WAIT_MS = 48 * 3600e3;      // inactivity before a Hello is offered
 export const HELLO_INTERVAL_MS = 48 * 3600e3;  // one Hello per participant per 48 hours
@@ -121,6 +125,7 @@ export function verifyAdmin(secret, tok) {
 export function slotKey(n, slot, id) {
   if (slot === 'intro' || slot === 'closing') return slot;
   if (slot === 'hello') return `hello-${id}`;
+  if (slot === 'photo') return `photo-${id}`;
   return `${slot}-${n}`;
 }
 const emptyStops = () => STOPS.map((s) => ({ n: s.n, chosen: null, skipped: [], q: null, a: null, heardAt: null }));
@@ -134,6 +139,8 @@ export function norm(story) {
   story.sessions ||= { child: [], grandparent: [] };
   story.sessions.guardian ||= [];
   story.sessions.kid ||= [];
+  story.photos ||= [];
+  story.publication ||= { parent: null, grandparent: null, history: [] };
   story.childAccess ||= { status: 'none', basis: null, enabled: false, form: null, history: [] };
   story.childPaused ||= false;
   story.pins ||= {};
@@ -277,6 +284,7 @@ export async function deleteStory(store, storyId) {
   for (const k of ['intro', 'closing']) if (story[k]) await store.del(story[k].key);
   for (const h of story.hellos) if (h.audio) await store.del(h.audio.key);
   if (story.childAccess.form) await store.del(story.childAccess.form.key);
+  for (const ph of story.photos) await store.del(ph.key);
   if (story.tokenHashes.kid) await store.del(`token/${story.tokenHashes.kid}`);
   await dropSessions(store, story, 'kid');
   for (const r of ALL_ROLES) { if (story.tokenHashes[r]) await store.del(`token/${story.tokenHashes[r]}`); await dropSessions(store, story, r); }
@@ -448,7 +456,28 @@ export function guardianState(story) {
     availableUntil: ci >= STOPS.length ? story.expiresAt : null,
     deletionRequestedAt: story.deletionRequestedAt || null, limits: LIMITS, retentionDays: RETENTION_DAYS_AFTER_COMPLETION,
     childAccess: childAccessView(story),
+    photos: photoList(story, 'guardian', false), canAddPhotos: true, photoMax: PHOTO_MAX,
+    publication: publicationView(story, 'parent'),
   };
+}
+
+// Publishing (unlisted YouTube + the magnet's movie page) needs a separate yes from BOTH the parent and the grandparent.
+export function publishAllowed(story) {
+  const p = norm(story).publication;
+  return p.parent?.choice === 'share' && p.grandparent?.choice === 'share';
+}
+export function publicationView(story, side) {
+  const p = norm(story).publication;
+  const mine = p[side];
+  return { side, mine: mine ? { choice: mine.choice, name: mine.name, at: mine.at } : null, allowed: publishAllowed(story), otherAnswered: !!p[side === 'parent' ? 'grandparent' : 'parent'] };
+}
+function pubSide(story, role, own) { if (role === 'grandparent') return 'grandparent'; return isController(story, role, own) ? 'parent' : null; }
+
+// Who may add photos: the parent (parent login or parent-held family link) and the grandparent. Never a child's own link.
+function canAddPhotos(story, role, own) { return !own && (role === 'grandparent' || isController(story, role, own)); }
+function photoList(story, role, own) {
+  const parentSide = isController(story, role, own);
+  return story.photos.map((p) => ({ id: p.id, caption: p.caption, by: p.by, at: p.at, canDelete: parentSide || (p.by === role && !own) }));
 }
 
 // What the parent sees about the child's own link (never the form itself).
@@ -484,6 +513,8 @@ export function publicState(story, role, own = false) {
     consentNeeded: role === 'child' && !own && !story.test && !story.consent,
     own: role === 'child' && !!own, // true = the child's own link; false = the parent-held family link
     childAccess: isController(story, role, own) ? childAccessView(story) : null,
+    photos: photoList(story, role, own), canAddPhotos: canAddPhotos(story, role, own), photoMax: PHOTO_MAX,
+    publication: pubSide(story, role, own) && ci >= STOPS.length ? publicationView(story, pubSide(story, role, own)) : null,
     guardianManaged: !!story.tokenHashes.guardian, paused: role === 'child' && !!story.childPaused,
     availableUntil: ci >= STOPS.length ? story.expiresAt : null,
     done: ci >= STOPS.length, completed: Math.min(ci, STOPS.length),
@@ -779,6 +810,62 @@ export async function reviewConsentForm(store, storyId, { approve, note }) {
   return { status: a.status };
 }
 
+// ----- publication consent (Stage 2): each side answers for themselves; either can change their answer later -----
+export async function setPublication(store, token, { choice, name, agree, pin }) {
+  const { story, role, own } = await authorize(store, token, { pin });
+  const side = pubSide(story, role, own);
+  if (!side) fail(403, 'Only the parent and the grandparent can decide this.');
+  if (currentIndex(story) < STOPS.length) fail(409, 'This comes after all 30 conversations are finished.');
+  if (!['private', 'share'].includes(choice)) fail(400, 'Please choose an option.');
+  const nm = String(name || '').trim().slice(0, 80);
+  if (!nm || !agree) fail(400, 'Your name and the confirmation are required.');
+  const p = story.publication;
+  const was = publishAllowed(story);
+  p[side] = { choice, name: nm, at: now(), version: PUBLICATION_VERSION };
+  p.history = [...(p.history || []), { side, choice, name: nm, at: now() }].slice(-50);
+  if (was && !publishAllowed(story)) story.unpublishRequestedAt = now(); // someone took back their yes: Dan must take it down
+  await store.setJSON(`story/${story.id}`, story);
+  return stateFor(story, role, own);
+}
+
+// ----- family photos (for the movie and storybook) -----
+export async function uploadPhoto(store, token, { data, contentType, caption, uploadId, pin }) {
+  const { story, role, own } = await authorize(store, token, { pin });
+  if (!canAddPhotos(story, role, own)) fail(403, 'Only a parent or the grandparent can add photos.');
+  if (role !== 'grandparent' && !story.consent && !story.test) fail(409, 'Please give permission for recording first.');
+  const dup = story.photos.find((p) => uploadId && p.uploadId === uploadId);
+  if (dup) return { ok: true, duplicate: true, state: stateFor(story, role, own) };
+  if (story.photos.length >= PHOTO_MAX) fail(409, `This story already has ${PHOTO_MAX} photos. Remove one to add another.`);
+  if (!data || !data.length) fail(400, 'Empty photo.');
+  if (data.length > PHOTO_MAX_BYTES) fail(413, 'That photo is too large.');
+  if (!PHOTO_TYPES.includes(String(contentType || ''))) fail(415, 'Please choose a photo (JPG, PNG or HEIC).');
+  const id = newToken(6);
+  const key = `audio/${story.id}/photo-${id}`; // private store; served only through short-lived signed links
+  await store.setBlob(key, data, { contentType });
+  story.photos.push({ id, key, by: role, caption: String(caption || '').trim().slice(0, 150), at: now(), bytes: data.length, contentType, uploadId: String(uploadId || '').slice(0, 60) });
+  await store.setJSON(`story/${story.id}`, story);
+  return { ok: true, state: stateFor(story, role, own) };
+}
+export async function deletePhoto(store, token, { id, pin }) {
+  const { story, role, own } = await authorize(store, token, { pin });
+  const i = story.photos.findIndex((p) => p.id === id);
+  if (i < 0) fail(404, 'No such photo.');
+  if (!photoList(story, role, own)[i].canDelete) fail(403, 'You can remove only photos you added.');
+  await store.del(story.photos[i].key);
+  story.photos.splice(i, 1);
+  await store.setJSON(`story/${story.id}`, story);
+  return stateFor(story, role, own);
+}
+
+// ----- admin audit log: every admin look at private material, and every admin change -----
+export const AUDIT_MAX = 300;
+export async function auditLog(store, storyId, action, detail = '') {
+  const story = await store.getJSON(`story/${storyId}`);
+  if (!story) return;
+  story.audit = [...(story.audit || []), { at: now(), action: String(action).slice(0, 40), detail: String(detail || '').slice(0, 120) }].slice(-AUDIT_MAX);
+  await store.setJSON(`story/${storyId}`, story);
+}
+
 // ----- admin-side settings (callers verify admin) -----
 export async function setHelloSettings(store, storyId, { enabled, style, custom }) {
   const story = norm(await store.getJSON(`story/${storyId}`) || fail(404, 'No such story.'));
@@ -803,6 +890,9 @@ export async function setKeepsake(store, storyId, { status, items }) {
   const list = (Array.isArray(items) ? items : []).slice(0, 10).map((x) => ({ label: String(x.label || '').slice(0, 60), url: String(x.url || '').slice(0, 500) }));
   if (list.some((x) => !x.label || !/^https:\/\//.test(x.url))) fail(400, 'Each item needs a label and an https link.');
   if (status === 'ready' && !list.length) fail(400, 'Add at least one item before marking the keepsake ready.');
+  if (list.some((x) => /(^|\.)(youtube\.com|youtube-nocookie\.com|youtu\.be)\//i.test(x.url.replace(/^https:\/\//, ''))) && !publishAllowed(story)) {
+    fail(409, 'A YouTube link needs a "share" answer from both the parent and the grandparent first.');
+  }
   story.keepsake = { status, items: list };
   await store.setJSON(`story/${storyId}`, story);
   return story.keepsake;
@@ -821,6 +911,10 @@ export async function mediaAccess(store, secret, token, { n, slot, id, pin }) {
     key = slotKey(n, slot);
   } else if (slot === 'intro' || slot === 'closing') {
     item = story[slot]; key = slot;
+  } else if (slot === 'photo') {
+    const ph = story.photos.find((x) => x.id === id);
+    if (!ph) fail(404, 'No such photo.');
+    item = ph; key = `photo-${id}`;
   } else if (slot === 'hello') {
     const h = story.hellos.find((x) => x.id === id && x.kind === 'voice');
     if (!h) fail(404, 'Nothing recorded yet.');

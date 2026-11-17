@@ -3,7 +3,7 @@
 Owner: Dan Rock (security coordinator). Version 1, November 17, 2026. Review at least once a year and after any incident.
 
 ## 1. What we protect
-Voice recordings (children, parents, grandparents), names used in stories, parent email/phone, consent records, uploaded consent forms, private notes, link tokens and PINs.
+Voice recordings (children, parents, grandparents), family photos, names used in stories, parent email/phone, consent records, uploaded consent forms, private notes, link tokens and PINs.
 
 ## 2. Where it lives
 - Recordings, consent forms and story data: Netlify Blobs, private store `fmm`. Never at a public URL.
@@ -23,7 +23,7 @@ Only Dan has admin access. Do not share the admin password. Listen to private re
 
 ## 5. Gaps to close before real families
 - [ ] Independent automatic backups (for example Backblaze B2), plus one test restore.
-- [ ] Admin access log (who opened which recording or form, when).
+- [x] Admin access log: every admin view of a recording, photo or consent form, and every admin change, is logged on the story (Admin > Admin activity log).
 - [ ] Turn on two-factor authentication for Netlify, GitHub, Stripe and the email account.
 - [ ] Use a long, unique admin password stored in a password manager.
 
