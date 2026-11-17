@@ -197,8 +197,10 @@
     if (preview) $('previewNote').classList.remove('hidden');
     if (location.hash === '#waitlist' || location.hash === '#order') $('order').scrollIntoView();
   }
-  if (preview) showCheckout();
-  else fetch('/api/fmm/sales', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (j) { if (j.open) showCheckout(); }).catch(function () {});
+  // When sales are open, the preview link behaves like the normal page (a real checkout), so a shared link never blocks a buyer.
+  fetch('/api/fmm/sales', { cache: 'no-store' }).then(function (r) { return r.json(); })
+    .then(function (j) { if (j.open) preview = false; if (j.open || preview) showCheckout(); })
+    .catch(function () { if (preview) showCheckout(); });
   var oform = $('orderForm');
   function opick(v) {
     ['one', 'together', 'two'].forEach(function (k) { $('po-' + k).classList.toggle('sel', v === k); });
