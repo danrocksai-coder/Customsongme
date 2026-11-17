@@ -64,6 +64,48 @@
   </div>
 </section>
 
+<section id="order" class="hidden">
+  <div class="wrap">
+    <h2 class="center">Choose your story</h2>
+    <div id="previewNote" class="msg info hidden">Preview only: checkout is turned off. Nothing will be ordered or charged.</div>
+    <form id="orderForm" class="card" novalidate>
+      <div class="pkgs">
+        <label class="pkg sel" id="po-one"><input type="radio" name="opackage" value="one" checked class="sr" style="position:absolute;opacity:0">
+          <h3>One Grandparent</h3><div class="price">$99.99</div>
+          <ul><li>1 personal journey of 30 conversations</li><li>Family movie with photos and voices</li><li>QR refrigerator magnet</li><li>Digital storybook and downloadable recordings</li></ul></label>
+        <label class="pkg" id="po-two"><input type="radio" name="opackage" value="two" class="sr" style="position:absolute;opacity:0">
+          <h3>Two Grandparents</h3><div class="price">$179.99</div>
+          <ul><li>2 separate journeys, 30 conversations each</li><li>A family movie for each story</li><li>QR refrigerator magnets</li><li>Storybooks and downloadable recordings</li></ul></label>
+      </div>
+
+      <label for="parentName">Parent or guardian name</label>
+      <input id="parentName" type="text" autocomplete="name" required>
+      <label for="oemail">Email</label>
+      <input id="oemail" type="email" autocomplete="email" required>
+      <label for="phone">Phone (optional)</label>
+      <input id="phone" type="tel" autocomplete="tel">
+      <label for="childName">Child's first name</label>
+      <input id="childName" type="text" required>
+      <label for="gp1">Grandparent's name (what the child calls them)</label>
+      <input id="gp1" type="text" placeholder="Mimi, Grandpa Joe…" required>
+      <div id="gp2wrap" class="hidden">
+        <label for="gp2">Second grandparent's name</label>
+        <input id="gp2" type="text">
+      </div>
+      <label for="onotes">Anything I should know? (optional)</label>
+      <textarea id="onotes" rows="2"></textarea>
+      <input id="owebsite" type="text" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+
+      <label class="check"><input id="agree" type="checkbox" required>
+        <span>I am the child's parent or legal guardian, or the child's parent or guardian will give permission before anything is recorded. I have read the <a href="/family-memory-magnets/privacy/" target="_blank" rel="noopener">privacy policy</a> and the <a href="/family-memory-magnets/refunds/" target="_blank" rel="noopener">refund policy</a>.</span></label>
+
+      <div id="orderMsg"></div>
+      <button class="btn" id="orderBtn" type="submit">Continue to secure payment</button>
+      <p class="muted center" style="margin-top:10px">You pay on Stripe's secure page. I never see your card number.</p>
+    </form>
+  </div>
+</section>
+
 <section id="waitlist">
   <div class="wrap">
     <h2 class="center">Coming soon</h2>
@@ -111,7 +153,7 @@
   </div>
 </section>
 
-<footer class="foot">Family Memory Magnets &middot; <a href="/">CustomSongMe</a> &middot; <a href="/family-memory-magnets/privacy/">Privacy</a> &middot; <a href="/privacy-terms">Terms</a><br>Questions? Text (661) 714-0903.</footer>
+<footer class="foot">Family Memory Magnets &middot; <a href="/family-memory-magnets/refunds/">Refunds</a> &middot; <a href="/">CustomSongMe</a> &middot; <a href="/family-memory-magnets/privacy/">Privacy</a> &middot; <a href="/privacy-terms">Terms</a><br>Questions? Text (661) 714-0903.</footer>
 
 <script>
 (function () {
@@ -139,6 +181,34 @@
         msg.innerHTML = '<div class="msg err">' + String(err.message).replace(/</g, '&lt;') + '</div>';
         $('waitBtn').disabled = false; $('waitBtn').textContent = 'Join the Waiting List';
       });
+  });
+
+  // ----- checkout: shown only when sales are switched on in Netlify (FMM_SALES_OPEN=true) -----
+  // ?preview=checkout shows the form so Dan can see it; preview never submits.
+  var preview = qs.get('preview') === 'checkout';
+  function showCheckout() {
+    $('order').classList.remove('hidden'); $('waitlist').classList.add('hidden');
+    var cta = document.querySelector('.hero .btn'); if (cta) { cta.textContent = 'Start Our Story'; cta.setAttribute('href', '#order'); }
+    if (preview) $('previewNote').classList.remove('hidden');
+    if (location.hash === '#waitlist' || location.hash === '#order') $('order').scrollIntoView();
+  }
+  if (preview) showCheckout();
+  else fetch('/api/fmm/sales', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (j) { if (j.open) showCheckout(); }).catch(function () {});
+  var oform = $('orderForm');
+  function opick(v) { $('po-one').classList.toggle('sel', v === 'one'); $('po-two').classList.toggle('sel', v === 'two'); $('gp2wrap').classList.toggle('hidden', v !== 'two'); }
+  oform.querySelectorAll('input[name=opackage]').forEach(function (r) { r.addEventListener('change', function () { opick(r.value); }); });
+  oform.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var pkg = oform.querySelector('input[name=opackage]:checked').value, msg = $('orderMsg'); msg.innerHTML = '';
+    if (!$('agree').checked) { msg.innerHTML = '<div class="msg err">Please check the permission box to continue.</div>'; return; }
+    if (preview) { msg.innerHTML = '<div class="msg info">Preview only: this is where the customer goes on to Stripe\'s secure payment page.</div>'; return; }
+    var data = { package: pkg, parentName: $('parentName').value, email: $('oemail').value, phone: $('phone').value, childName: $('childName').value,
+      grandparent1: $('gp1').value, grandparent2: pkg === 'two' ? $('gp2').value : '', notes: $('onotes').value, website: $('owebsite').value, source: source() };
+    $('orderBtn').disabled = true; $('orderBtn').textContent = 'One moment…';
+    fetch('/api/fmm/order', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) { if (!res.ok) throw new Error(res.j.error || 'Please check the form.'); location.href = res.j.payUrl; })
+      .catch(function (err) { msg.innerHTML = '<div class="msg err">' + String(err.message).replace(/</g, '&lt;') + '</div>'; $('orderBtn').disabled = false; $('orderBtn').textContent = 'Continue to secure payment'; });
   });
 })();
 </script>

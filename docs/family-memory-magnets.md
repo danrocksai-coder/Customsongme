@@ -90,3 +90,11 @@ Recordings and story data are in private Netlify Blobs (store `fmm`). No public 
 - Drawn in the browser (`family-memory-magnets/admin/magnet.js`); no server image tools needed.
 - Checked: full-size and phone-distance scans decode to the right address.
 - 79 tests.
+
+## v9: cash payments, checkout switch, refund page
+- **Paid outside Stripe:** Admin > Orders > "Mark paid (cash / other)" records method, note and date. The Create story form has "How was it paid?" (card, cash, other, free, or not paid/test) plus a note, and each story shows "Paid: …".
+- **Checkout switch:** the sales page asks `/api/fmm/sales`. With `FMM_SALES_OPEN=true` in Netlify it shows the order form ("Start Our Story", then Stripe). Otherwise it shows the waiting list. The server enforces the same switch.
+- **Preview the checkout any time:** `https://www.customsongme.com/family-memory-magnets/?preview=checkout#order`. It never submits or charges.
+- **Refund policy page:** `/family-memory-magnets/refunds/`, linked from the order form and the footer. Still to be confirmed by the attorney review.
+- Orders also record where the buyer came from (e.g. youtube / video).
+- 80 tests.
