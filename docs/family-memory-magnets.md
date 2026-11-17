@@ -154,3 +154,14 @@ Recordings and story data are in private Netlify Blobs (store `fmm`). No public 
 - **If anyone changes their answer to private,** the watch page goes dark immediately. Admin still shows the red banner to take the video off YouTube.
 - `GET /api/fmm/watch?c=` returns only `{ published, title, youtubeId, fallbackUrl }`, and nothing at all before publishing.
 - 103 tests.
+
+## v15: automatic emails + payment auto-check
+- **Payment auto-check:** the thank-you page calls `GET /api/fmm/confirm?session_id=`. The server asks Stripe whether the Checkout Session is paid; if so, it marks the order paid ("$X by card") and sends the confirmation emails. It works now and needs no new keys.
+- **Emails** (`netlify/lib/fmm-email.mjs` for the templates, `fmm-notify.mjs` for when to send), sent through Resend. They're **off until `RESEND_API_KEY` is set in Netlify**. Optional: `FMM_EMAIL_FROM`, `FMM_DAN_EMAIL`. Replies go to Dan.
+  - Order paid → buyer (and parent) confirmation, plus a "new paid order" alert to Dan.
+  - Story created (Admin "Email the private links…" box, on by default) → welcome emails with the links and both QR codes attached.
+  - Grandparent answered → "your turn" to the parent. Chapter finished → milestone. Story finished → congratulations and the sharing question.
+  - Consent form reviewed, watch page published, magnets shipped (new Admin button with tracking) → family emails.
+  - **Daily job** (`netlify/functions/fmm-daily.mjs`, 15:00 UTC): a permission reminder after 3 days (weekly, at most 3), a gentle nudge after 7 quiet days (at most weekly), and Dan's morning to-do email (only when something needs him). Test stories and families with reminders switched off get none.
+- **Admin:** an Emails card per story (recent emails and their status, a magnets-shipped button, a stop/restart reminders toggle).
+- The privacy policy names Resend. 110 tests.

@@ -10,6 +10,7 @@ import { randomBytes } from 'node:crypto';
 import QRCode from 'qrcode';
 import * as C from '../lib/fmm-core.mjs';
 import PROFILE from '../lib/fmm-profile.mjs';
+import * as N from '../lib/fmm-notify.mjs';
 
 const FORMSPREE = process.env.FMM_FORMSPREE_URL || 'https://formspree.io/f/xwpqlypv';
 // Sales are OPEN by default. Pause them without a code change: FMM_SALES_OPEN=false in Netlify, then redeploy.
@@ -67,7 +68,7 @@ const summary = (s) => {
     qrCodes: s.qrCodes || { child: s.qrCode, grandparent: null },
     pins: { child: C.pinRequired(s, 'child'), grandparent: C.pinRequired(s, 'grandparent'), guardian: C.pinRequired(s, 'guardian'), buyer: C.pinRequired(s, 'buyer') },
     devices: { child: s.sessions.child.length, grandparent: s.sessions.grandparent.length, guardian: s.sessions.guardian.length, buyer: s.sessions.buyer.length },
-    watch: s.watch || null, hasBuyer: !!s.tokenHashes.buyer, buyer: s.buyer || null, orderId: s.orderId || null, magnets: s.magnets || null,
+    emailLog: (s.emailLog || []).slice(-8).reverse(), emailOff: !!s.emailOff, magnetsShippedAt: s.magnetsShippedAt || null, watch: s.watch || null, hasBuyer: !!s.tokenHashes.buyer, buyer: s.buyer || null, orderId: s.orderId || null, magnets: s.magnets || null,
     childAccess: { ...C.childAccessView(s), parentName: s.childAccess.parentName || '', decidedAt: s.childAccess.decidedAt || null, hasForm: !!s.childAccess.form, history: (s.childAccess.history || []).slice(-10) },
     hasGuardian: !!s.tokenHashes.guardian, childPaused: !!s.childPaused, deletionRequestedAt: s.deletionRequestedAt || null, completedAt: s.completedAt || null,
     helloSettings: s.helloSettings,
@@ -102,6 +103,7 @@ export default async (req) => {
     if (route === 'audio' && req.method === 'GET') {
       return audioResponse(await C.readSignedAudio(store, secret, Object.fromEntries(url.searchParams)), req);
     }
+    if (route === 'confirm' && req.method === 'GET') return json(await N.confirmStripe(store, url.searchParams.get('session_id') || '')); // thank-you page
     if (route === 'watch' && req.method === 'GET') return json(await C.watchInfo(store, url.searchParams.get('c') || ''));
     if (route === 'qrinfo' && req.method === 'GET') return json(await C.qrInfo(store, url.searchParams.get('c') || ''));
     if (route === 'unlock' && req.method === 'POST') { const b = await req.json().catch(() => ({})); return json(await C.unlockWithQr(store, String(b.c || ''), String(b.pin || ''))); }
@@ -145,7 +147,11 @@ export default async (req) => {
       return json(st);
     }
     if (route === 'choose' && req.method === 'POST') return json(await C.choose(store, t, await body()));
-    if (route === 'heard' && req.method === 'POST') return json(await C.markHeard(store, t, await body()));
+    if (route === 'heard' && req.method === 'POST') {
+      const b2 = await body(); const st = await C.markHeard(store, t, b2);
+      try { const { story } = await C.authorize(store, t, { pin }); await N.afterHeard(store, story.id, Number(b2.n)); } catch { /* emails never block the family */ }
+      return json(st);
+    }
     if (route === 'skip' && req.method === 'POST') return json(await C.skipQuestion(store, t, await body()));
     if (route === 'guardian' && req.method === 'POST') return json(await C.guardianUpdate(store, t, await body()));
     if (route === 'draft' && req.method === 'POST') return json(await C.saveDraft(store, t, await body()));
@@ -156,11 +162,15 @@ export default async (req) => {
     }
     if (route === 'upload' && req.method === 'POST') {
       const data = Buffer.from(await req.arrayBuffer());
-      return json(await C.upload(store, t, {
+      const upRes = await C.upload(store, t, {
         n: Number(url.searchParams.get('n')), slot: url.searchParams.get('slot'), data,
         durationSec: Number(req.headers.get('x-duration')), uploadId: req.headers.get('x-upload-id') || '',
         contentType: (req.headers.get('content-type') || '').split(';')[0], pin,
-      }));
+      });
+      if (url.searchParams.get('slot') === 'answer' && upRes.ok && !upRes.duplicate) {
+        try { const { story } = await C.authorize(store, t, { pin }); await N.afterAnswer(store, story.id, Number(url.searchParams.get('n'))); } catch { /* never block */ }
+      }
+      return json(upRes);
     }
     if (route === 'report' && req.method === 'POST') { // browser reports an upload failure so Dan can see it
       const { story } = await C.authorize(store, t, { pin });
@@ -313,13 +323,20 @@ async function admin(route, req, url, store, secret, origin) {
     const links = { child: link(tokens.child), grandparent: link(tokens.grandparent) };
     if (tokens.guardian) links.guardian = link(tokens.guardian);
     if (tokens.buyer) links.buyer = link(tokens.buyer);
-    return json({ story: summary(story), links, qrUrls: { child: qrUrl(story.qrCodes.child), grandparent: qrUrl(story.qrCodes.grandparent) } });
+    let emailed = null;
+    if (b.sendEmail !== false && (story.parentEmail || story.buyer?.email)) {
+      const png = async (code, who) => ({ filename: `qr-${who}.png`, data: await QRCode.toBuffer(qrUrl(code), { errorCorrectionLevel: 'Q', margin: 2, width: 900, type: 'png' }) });
+      const qrs = [await png(story.qrCodes.child, 'child'), await png(story.qrCodes.grandparent, 'grandparent')];
+      emailed = (await N.welcome(store, story, links, qrs)).map((r) => (r.ok ? 'sent' : r.skipped ? 'not sent (' + r.reason + ')' : 'failed'));
+    }
+    return json({ emailed, story: summary(story), links, qrUrls: { child: qrUrl(story.qrCodes.child), grandparent: qrUrl(story.qrCodes.grandparent) } });
   }
   if (route === 'order-paid' && req.method === 'POST') { // paid outside Stripe (cash, family, gift); Dan records it here
     const o = await store.getJSON(`order/${b.id}`); if (!o) return json({ error: 'No such order.' }, 404);
     const method = ['cash', 'other', 'free', 'stripe'].includes(b.method) ? b.method : 'cash';
     Object.assign(o, { paid: { method, note: String(b.note || '').slice(0, 200), at: Date.now() }, status: o.status === 'story-created' ? o.status : 'paid' });
     await store.setJSON(`order/${o.id}`, o);
+    await N.orderPaid(store, o.id, method);
     return json(o);
   }
   if (route === 'add-buyer' && req.method === 'POST') return json({ link: link(await C.addBuyer(store, b.id, b)) });
@@ -331,7 +348,7 @@ async function admin(route, req, url, store, secret, origin) {
   if (route === 'keepsake' && req.method === 'POST') return json(await C.setKeepsake(store, b.id, b));
   if (route === 'delete' && req.method === 'POST') { if (b.confirm !== 'DELETE') return json({ error: 'Type DELETE to confirm.' }, 400); return json(await C.deleteStory(store, b.id)); }
   if (route === 'unpublish-done' && req.method === 'POST') { const st = await store.getJSON(`story/${b.id}`); if (!st) return json({ error: 'No such story.' }, 404); st.unpublishRequestedAt = null; await store.setJSON(`story/${b.id}`, st); await log(b.id, 'video taken down'); return json({ ok: true }); }
-  if (route === 'consent-review' && req.method === 'POST') return json(await C.reviewConsentForm(store, b.id, { approve: !!b.approve, note: b.note }));
+  if (route === 'consent-review' && req.method === 'POST') { const r = await C.reviewConsentForm(store, b.id, { approve: !!b.approve, note: b.note }); await N.consentReviewed(store, b.id, !!b.approve, b.note); return json(r); }
   if (route === 'consent-form' && req.method === 'GET') { // short-lived signed link to the uploaded form
     const id = url.searchParams.get('id') || '';
     const story = await store.getJSON(`story/${id}`); if (!story?.childAccess?.form) return json({ error: 'No form uploaded.' }, 404);
@@ -340,7 +357,13 @@ async function admin(route, req, url, store, secret, origin) {
     return json({ url: `/api/fmm/audio?s=${id}&k=consent-form&e=${s.exp}&sig=${s.sig}`, contentType: story.childAccess.form.contentType });
   }
   if (route === 'watch-set' && req.method === 'POST') { const w = await C.setWatch(store, b.id, b); await log(b.id, 'watch page links updated'); return json(w); }
-  if (route === 'watch-publish' && req.method === 'POST') { const w = await C.publishWatch(store, b.id, !!b.on); await log(b.id, b.on ? 'watch page published' : 'watch page unpublished'); return json(w); }
+  if (route === 'watch-publish' && req.method === 'POST') {
+    const w = await C.publishWatch(store, b.id, !!b.on); await log(b.id, b.on ? 'watch page published' : 'watch page unpublished');
+    if (b.on) { const st = await store.getJSON(`story/${b.id}`); if (st) await N.watchPublished(store, b.id, qrUrl(st.qrCodes.grandparent)); }
+    return json(w);
+  }
+  if (route === 'magnets-shipped' && req.method === 'POST') { await N.magnetsShipped(store, b.id, b.tracking); await log(b.id, 'magnets marked shipped'); return json({ ok: true }); }
+  if (route === 'email-off' && req.method === 'POST') { const st = await store.getJSON(`story/${b.id}`); if (!st) return json({ error: 'No such story.' }, 404); st.emailOff = !!b.off; await store.setJSON(`story/${b.id}`, st); await log(b.id, b.off ? 'reminder emails off' : 'reminder emails on'); return json({ ok: true }); }
   if (route === 'order-photo' && req.method === 'GET') { // the buyer's magnet photo, for printing
     const id = url.searchParams.get('order') || '', k = url.searchParams.get('k') === 'gp' ? 'gp' : 'child';
     const o = await store.getJSON(`order/${id}`); if (!o?.magnets?.[k]?.hasPhoto) return json({ error: 'No photo for that magnet.' }, 404);

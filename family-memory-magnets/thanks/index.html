@@ -25,6 +25,10 @@
     <p class="muted" style="margin-top:12px">Suggested pace: about one conversation a week, one chapter a month (two months for the Big Story). There is no deadline. Watch your email, including spam. Questions? Text (661) 714-0903.</p>
   </div>
 </main>
+<script>
+// Confirms the card payment with Stripe (server side), marks the order paid and sends the confirmation emails.
+(function () { var id = new URLSearchParams(location.search).get('session_id'); if (id) fetch('/api/fmm/confirm?session_id=' + encodeURIComponent(id), { cache: 'no-store' }).catch(function () {}); })();
+</script>
 <footer class="foot">Family Memory Magnets &middot; <a href="/magnets">Home</a> &middot; <a href="/family-memory-magnets/help/">Help</a> &middot; <a href="/family-memory-magnets/privacy/">Privacy</a> &middot; <a href="/family-memory-magnets/refunds/">Refunds</a> &middot; <a href="/privacy-terms">Terms</a><br>Questions? Text (661) 714-0903.</footer>
 </body>
 </html>
