@@ -315,3 +315,17 @@ body.admin-page main .card { border: 2px solid #f1d97a; box-shadow: 0 6px 18px r
 @media print { body.fmm-theme::before, .noprint { display: none !important; } body.fmm-theme { background: #fff; } }
 body.q-page .watch-body .muted { color: rgba(255,255,255,.85); } body.q-page .watch-body a:not(.btn) { color: var(--gold); }
 body.q-page #watch .watch-hero { background: transparent; }
+
+/* ---- grandparent help page: big, simple, centered ---- */
+body.help-page { font-size: 20px; }
+.help-page .card p { line-height: 1.6; }
+.help-call { text-align: center; background: #fff7d6 !important; }
+.help-call .btn { max-width: 360px; font-size: 1.2rem; }
+.big-steps { list-style: none; counter-reset: bs; padding: 0; margin: 8px 0; }
+.big-steps li { counter-increment: bs; position: relative; padding: 12px 6px 12px 56px; border-bottom: 1px solid var(--border); line-height: 1.5; }
+.big-steps li:last-child { border-bottom: 0; }
+.big-steps li::before { content: counter(bs); position: absolute; left: 6px; top: 12px; width: 36px; height: 36px; border-radius: 50%; background: var(--navy); color: var(--gold); font-weight: 800; display: grid; place-items: center; }
+.tip { background: #eef3ff; border: 2px solid #c9d6f5; border-radius: 14px; padding: 12px 14px; margin-top: 12px; }
+.two-col { display: grid; gap: 12px; grid-template-columns: 1fr; } @media (min-width: 600px) { .two-col { grid-template-columns: 1fr 1fr; } }
+.mini { background: #f7f9ff; border: 2px solid #c9d6f5; border-radius: 14px; padding: 12px 14px; text-align: center; }
+.mini ol { text-align: left; margin: 8px 0 0 22px; }
