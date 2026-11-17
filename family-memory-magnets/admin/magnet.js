@@ -65,9 +65,20 @@
       if (ctx.letterSpacing !== undefined) ctx.letterSpacing = '0px';
 
       var maxW = SIZE - 2 * SAFE - 120;
-      var ts = fit(ctx, opts.title, 'FMM Display', '800', maxW, 124, 60);
-      ctx.fillStyle = WHITE; ctx.font = '800 ' + ts + 'px "FMM Display"';
-      ctx.fillText(opts.title, SIZE / 2, 205 + 30 + ts);
+      ctx.fillStyle = WHITE;
+      ctx.font = '800 70px "FMM Display"';
+      var amp = opts.title.indexOf(' & ');
+      if (ctx.measureText(opts.title).width <= maxW || amp < 0) { // one line, as large as fits
+        var ts = fit(ctx, opts.title, 'FMM Display', '800', maxW, 124, 44);
+        ctx.font = '800 ' + ts + 'px "FMM Display"';
+        ctx.fillText(opts.title, SIZE / 2, 205 + 30 + ts);
+      } else { // long names: "Name &" / "Name" on two lines, both kept between the label and the QR card
+        var l1 = opts.title.slice(0, amp + 2), l2 = opts.title.slice(amp + 3);
+        var s2 = Math.min(fit(ctx, l1, 'FMM Display', '800', maxW, 72, 40), fit(ctx, l2, 'FMM Display', '800', maxW, 72, 40));
+        ctx.font = '800 ' + s2 + 'px "FMM Display"';
+        ctx.fillText(l1, SIZE / 2, 225 + s2);
+        ctx.fillText(l2, SIZE / 2, 225 + s2 * 2.05);
+      }
 
       // QR on a white rounded card (the card's white margin is the quiet zone the scanner needs)
       var card = 760, cx = (SIZE - card) / 2, cy = 400;
