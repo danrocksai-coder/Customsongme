@@ -47,7 +47,8 @@
     }
     h += '<div class="card"><h2>Create a story</h2><div class="row">' +
       '<div><label>Child first name</label><input type="text" id="cn" value="' + esc(pf.childName || '') + '"></div>' +
-      '<div><label>Grandparent name</label><input type="text" id="gn" value="' + esc(pf.grandparent || '') + '"></div></div><div class="row">' +
+      '<div><label>Grandparent name</label><input type="text" id="gn" value="' + esc(pf.grandparent || '') + '"></div>' +
+      '<div><label>Second grandparent, only for "Together" (15 each)</label><input type="text" id="gn2" value="' + esc(pf.grandparent2 || '') + '"></div></div><div class="row">' +
       '<div><label>Parent name</label><input type="text" id="pn" value="' + esc(pf.parentName || '') + '"></div>' +
       '<div><label>Parent email</label><input type="email" id="pe" value="' + esc(pf.email || '') + '"></div>' +
       '</div><div class="row"><div><label>Family link PIN (optional, 4–6 digits)</label><input type="text" id="pi" inputmode="numeric" maxlength="6"></div>' +
@@ -76,7 +77,9 @@
         h += '<tr><td>' + when(o.createdAt) + '</td><td>' + esc(o.packageLabel) + '</td><td>' + esc(o.parentName) + '<br><span class="muted">' + esc(o.email) + '</span></td><td>' + esc(o.childName) + ' / ' + esc(o.grandparent1) + (o.grandparent2 ? ', ' + esc(o.grandparent2) : '') + '</td><td>' + esc(o.status) +
           (o.paid ? '<br><span class="muted">paid: ' + esc(o.paid.method) + (o.paid.note ? ', ' + esc(o.paid.note) : '') + ' (' + when(o.paid.at) + ')</span>' : '') + '</td><td>' +
           (!o.paid && o.status !== 'story-created' ? '<button class="btn small alt" data-paid="' + esc(o.id) + '">Mark paid (cash / other)</button> ' : '') +
-          (o.status !== 'story-created' ? '<button class="btn small" data-order="' + esc(o.id) + '">Create story</button>' : '') + '</td></tr>';
+          (o.package === 'two'
+            ? '<button class="btn small" data-order="' + esc(o.id) + '|1">Create story with ' + esc(o.grandparent1) + '</button> <button class="btn small" data-order="' + esc(o.id) + '|2">Create story with ' + esc(o.grandparent2) + '</button>' + (o.storyIds && o.storyIds.length ? '<br><span class="muted">' + o.storyIds.length + ' of 2 created</span>' : '')
+            : (o.status !== 'story-created' ? '<button class="btn small" data-order="' + esc(o.id) + '|1">Create story</button>' : '')) + '</td></tr>';
       });
       h += '</table><p class="muted">Orders show "awaiting payment" until you confirm payment in Stripe. Paid in cash or another way? Use "Mark paid". Create the story only after the payment arrives.</p>';
     }
@@ -107,7 +110,7 @@
           return '<div class="card" style="margin:0"><b>' + esc(nm) + '\'s permanent QR</b><br><img alt="QR code for ' + esc(nm) + '" data-qr="' + esc(code) + '" style="width:100%;max-width:220px;background:#fff"><br>' +
             '<code class="link">' + esc(s.qrUrls[r]) + '</code><span class="muted">This web address is public and never contains a private link. It stays the same after the story is finished.</span><div class="row" style="margin-top:6px">' +
             '<a class="btn small alt" href="#" data-qrdl="' + esc(code) + '|svg">Download SVG</a><a class="btn small alt" href="#" data-qrdl="' + esc(code) + '|png">Download PNG</a></div>' +
-            '<button class="btn small" style="margin-top:6px" data-magnet="' + esc(code) + '|' + esc(s.childName + ' & ' + s.grandparentName) + '|' + esc(nm) + '">Magnet artwork (5×5 in, Printful)</button>' +
+            '<button class="btn small" style="margin-top:6px" data-magnet="' + esc(code) + '|' + esc(s.grandparents ? s.childName + ', ' + s.grandparents[0] + ' & ' + s.grandparents[1] : s.childName + ' & ' + s.grandparentName) + '|' + esc(nm) + '">Magnet artwork (5×5 in, Printful)</button>' +
             '<div class="muted" style="margin-top:8px">PIN: ' + (s.pins[r] ? 'set' : 'none') + ' &middot; remembered phones: ' + s.devices[r] + '</div><div class="row" style="margin-top:6px">' +
             '<input type="text" inputmode="numeric" maxlength="6" placeholder="New PIN (blank = none)" data-pinval="' + s.id + '|' + r + '"><button class="btn small alt" data-setpin="' + s.id + '|' + r + '">Set / clear PIN</button>' +
             '<button class="btn small alt" data-forget="' + s.id + '|' + r + '">Forget all phones</button></div></div>';
@@ -138,7 +141,12 @@
     var q = function (sel) { return app.querySelectorAll(sel); };
     q('[data-copy]').forEach(function (b) { b.onclick = function () { var t = document.getElementById(b.getAttribute('data-copy')).textContent; (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { b.textContent = 'Copied'; }).catch(function () { b.textContent = 'Select and copy manually'; }); }; });
     var dm = document.getElementById('dismiss'); if (dm) dm.onclick = function () { newLinks = null; load(); };
-    q('[data-order]').forEach(function (b) { b.onclick = function () { var o = d.orders.filter(function (x) { return x.id === b.getAttribute('data-order'); })[0]; prefill = { childName: o.childName, grandparent: o.grandparent1, parentName: o.parentName, email: o.email, orderId: o.id, pay: o.paid ? o.paid.method : '', payNote: o.paid ? o.paid.note : '' }; draw(d); window.scrollTo(0, 0); }; });
+    q('[data-order]').forEach(function (b) { b.onclick = function () {
+      var p = b.getAttribute('data-order').split('|'), o = d.orders.filter(function (x) { return x.id === p[0]; })[0];
+      var together = o.package === 'together', second = o.package === 'two' && p[1] === '2';
+      prefill = { childName: o.childName, grandparent: second ? o.grandparent2 : o.grandparent1, grandparent2: together ? o.grandparent2 : '', parentName: o.parentName, email: o.email, orderId: o.id, pay: o.paid ? o.paid.method : '', payNote: o.paid ? o.paid.note : '' };
+      draw(d); window.scrollTo(0, 0);
+    }; });
     q('[data-paid]').forEach(function (b) { b.onclick = function () {
       var method = prompt('How was it paid? Type: cash, other, or free', 'cash'); if (method === null) return;
       method = String(method).trim().toLowerCase(); if (['cash', 'other', 'free'].indexOf(method) < 0) { alert('Please type cash, other, or free.'); return; }
@@ -147,7 +155,7 @@
     }; });
     if (pf.pay !== undefined) { var ps = document.getElementById('pay'); if (ps) ps.value = pf.pay; var pn2 = document.getElementById('paynote'); if (pn2) pn2.value = pf.payNote || ''; }
     document.getElementById('mk').onclick = function () {
-      api('create', { childName: val('cn'), grandparentName: val('gn'), parentName: val('pn'), parentEmail: val('pe'), pinChild: val('pi'), pinGrandparent: val('pg'), test: document.getElementById('ts').checked, guardian: document.getElementById('gd').checked, orderId: pf.orderId || null, payment: val('pay'), paymentNote: val('paynote') })
+      api('create', { childName: val('cn'), grandparentName: val('gn'), grandparentName2: val('gn2'), parentName: val('pn'), parentEmail: val('pe'), pinChild: val('pi'), pinGrandparent: val('pg'), test: document.getElementById('ts').checked, guardian: document.getElementById('gd').checked, orderId: pf.orderId || null, payment: val('pay'), paymentNote: val('paynote') })
         .then(function (r) { prefill = null; newLinks = r.links; load(); }).catch(function (e) { document.getElementById('cmsg').innerHTML = '<div class="msg err">' + esc(e.message) + '</div>'; });
     };
     q('[data-rev]').forEach(function (b) { b.onclick = function () { var p = b.getAttribute('data-rev').split('|'); if (!confirm('The old ' + p[1] + ' link stops working immediately. Continue?')) return; api('revoke', { id: p[0], role: p[1] }).then(function (r) { newLinks = p[1] === 'child' ? { child: r.link, grandparent: '(unchanged)' } : p[1] === 'guardian' ? { child: '(unchanged)', grandparent: '(unchanged)', guardian: r.link } : { child: '(unchanged)', grandparent: r.link }; load(); window.scrollTo(0, 0); }).catch(function (e) { alert(e.message); }); }; });

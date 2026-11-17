@@ -201,15 +201,17 @@ async function rlClear(store, key) { await store.del(`rl/${sha(key)}`); }
 // ---------- story lifecycle ----------
 export async function createStory(store, input) {
   const childName = String(input.childName || '').trim().slice(0, 40);
-  const grandparentName = String(input.grandparentName || '').trim().slice(0, 40);
-  if (!childName || !grandparentName) fail(400, 'Child name and grandparent name are required.');
+  const gp1 = String(input.grandparentName || '').trim().slice(0, 40);
+  const gp2 = String(input.grandparentName2 || '').trim().slice(0, 40); // "Grandma & Grandpa together": 15 stops each
+  if (!childName || !gp1) fail(400, 'Child name and grandparent name are required.');
+  const grandparentName = gp2 ? `${gp1} and ${gp2}` : gp1;
   const id = newToken(9);
   const tokens = { child: newToken(), grandparent: newToken() };
   if (input.guardian) tokens.guardian = newToken();
   const qrCodes = { child: newToken(12), grandparent: newToken(12) };
   const story = norm({
     id, createdAt: now(), expiresAt: now() + ACCESS_DAYS * 86400e3,
-    test: !!input.test, childName, grandparentName,
+    test: !!input.test, childName, grandparentName, grandparents: gp2 ? [gp1, gp2] : null,
     parentName: String(input.parentName || '').slice(0, 80),
     parentEmail: String(input.parentEmail || '').slice(0, 120),
     orderId: input.orderId || null, packageName: String(input.packageName || '').slice(0, 60),
@@ -382,6 +384,12 @@ export async function qrInfo(store, code) { // public: only tells the page wheth
   return { pin: !!(story.id && pinRequired(story, ref.role || 'child')) };
 }
 
+// ---------- who answers each stop ----------
+// One grandparent: every stop. "Together" package: they take turns (stops 1, 3, 5… = first; 2, 4, 6… = second), 15 each.
+export function answererFor(story, n) {
+  return Array.isArray(story.grandparents) && story.grandparents.length === 2 ? story.grandparents[(n - 1) % 2] : story.grandparentName;
+}
+
 // ---------- state ----------
 export function stopStatus(story, i) {
   const s = story.stops[i];
@@ -455,7 +463,7 @@ export function guardianState(story) {
     consentNeeded: !story.test && !story.consent,
     childPaused: !!story.childPaused, helloSettings: story.helloSettings,
     hellos: story.hellos.slice(-30).reverse().map((h) => ({ id: h.id, kind: h.kind, text: h.text || '', at: h.at, from: h.from, fromName: name(h.from), toName: name(h.from === 'child' ? 'grandparent' : 'child') })),
-    conversations: story.stops.map((s, i) => ((s.q || s.a) ? { n: i + 1, title: STOPS[i].title, question: s.chosen?.text || '', hasQ: !!s.q, hasA: !!s.a } : null)).filter(Boolean),
+    conversations: story.stops.map((s, i) => ((s.q || s.a) ? { n: i + 1, title: STOPS[i].title, question: s.chosen?.text || '', answerer: answererFor(story, i + 1), hasQ: !!s.q, hasA: !!s.a } : null)).filter(Boolean),
     keepsake: ci >= STOPS.length ? { status: story.keepsake.status, items: story.keepsake.status === 'ready' ? story.keepsake.items : [] } : null,
     availableUntil: ci >= STOPS.length ? story.expiresAt : null,
     deletionRequestedAt: story.deletionRequestedAt || null, limits: LIMITS, retentionDays: RETENTION_DAYS_AFTER_COMPLETION,
@@ -512,7 +520,7 @@ export function publicState(story, role, own = false) {
   const def = ci < STOPS.length ? STOPS[ci] : null;
   const other = role === 'child' ? 'grandparent' : 'child';
   const out = {
-    role, childName: story.childName, grandparentName: story.grandparentName,
+    role, childName: story.childName, grandparentName: story.grandparentName, grandparents: story.grandparents || null,
     qrCode: story.qrCodes?.[role] || story.qrCode, test: story.test, expiresAt: story.expiresAt,
     consentNeeded: (role === 'child' && !own && !story.test && !story.consent) || (role === 'grandparent' && !story.test && !story.grandparentConsent),
     own: role === 'child' && !!own, // true = the child's own link; false = the parent-held family link
@@ -525,7 +533,7 @@ export function publicState(story, role, own = false) {
     chapters: CHAPTERS, stops, introDone: !!story.intro, closingDone: !!story.closing,
     limits: LIMITS, current: null, draft: '',
     // finished conversations the participant can replay (real recordings only)
-    conversations: story.stops.map((s, i) => (s.heardAt ? { n: i + 1, title: STOPS[i].title, question: s.chosen?.text || '' } : null)).filter(Boolean),
+    conversations: story.stops.map((s, i) => (s.heardAt ? { n: i + 1, title: STOPS[i].title, question: s.chosen?.text || '', answerer: answererFor(story, i + 1) } : null)).filter(Boolean),
     keepsake: ci >= STOPS.length ? { status: story.keepsake.status, items: story.keepsake.status === 'ready' ? story.keepsake.items : [] } : null,
     hellos: story.hellos.filter((h) => h.from === other).slice(-20).reverse().map((h) => ({ id: h.id, kind: h.kind, text: h.text || '', at: h.at, read: !!h.readAt })),
     helloOffer: null,
@@ -534,7 +542,7 @@ export function publicState(story, role, own = false) {
   if (el.ok) out.helloOffer = { options: helloOptions(story, role), voiceLimit: LIMITS.hello, from: role === 'child' ? story.childName : story.grandparentName };
   if (cur) {
     out.current = {
-      n: def.n, title: def.title, status: stopStatus(story, ci),
+      n: def.n, title: def.title, status: stopStatus(story, ci), answerer: answererFor(story, def.n),
       choices: def.choices.filter((c) => !cur.skipped.includes(c.id)).map((c) => ({ id: c.id, text: c.text, type: c.type, sensitive: c.sensitive })),
       chosen: cur.chosen,
     };
@@ -558,12 +566,18 @@ export async function recordConsent(store, token, { parentName, agree, pin }) {
 }
 
 // The grandparent agrees, for themselves, to be recorded (separate from the parent's permission for the child).
-export async function recordGrandparentConsent(store, token, { name, agree, pin }) {
+export async function recordGrandparentConsent(store, token, { name, agree, name2, agree2, pin }) {
   const { story, role } = await authorize(store, token, { pin });
   if (role !== 'grandparent') fail(403, 'Only the grandparent can agree to this.');
   const nm = String(name || '').trim().slice(0, 80);
   if (!agree || !nm) fail(400, 'Your name and agreement are required.');
-  story.grandparentConsent = { name: nm, version: GRANDPARENT_CONSENT_VERSION, at: now() };
+  const names = [nm];
+  if (Array.isArray(story.grandparents) && story.grandparents.length === 2) { // both of them agree, each for themselves
+    const nm2 = String(name2 || '').trim().slice(0, 80);
+    if (!agree2 || !nm2) fail(400, 'Both grandparents need to type their name and agree.');
+    names.push(nm2);
+  }
+  story.grandparentConsent = { name: names.join(' and '), names, version: GRANDPARENT_CONSENT_VERSION, at: now() };
   await store.setJSON(`story/${story.id}`, story);
   return { ok: true };
 }
@@ -881,11 +895,11 @@ export function movieKit(story, secret) {
   const link = (key) => { const s = signMedia(secret, story.id, key, KIT_LINK_SECONDS); return `/api/fmm/audio?s=${story.id}&k=${encodeURIComponent(key)}&e=${s.exp}&sig=${s.sig}`; };
   const clip = (x, key) => (x ? { url: link(key), seconds: x.durationSec, type: x.contentType } : null);
   return {
-    version: 1, storyId: story.id, childName: story.childName, grandparentName: story.grandparentName, test: !!story.test,
+    version: 1, storyId: story.id, childName: story.childName, grandparentName: story.grandparentName, grandparents: story.grandparents || null, test: !!story.test,
     completed: Math.min(currentIndex(story), STOPS.length), publishAllowed: publishAllowed(story),
     chapters: CHAPTERS.map((c) => ({ n: c.n, title: c.title })),
     stops: story.stops.map((s, i) => ({
-      n: i + 1, chapter: STOPS[i].chapter, title: STOPS[i].title, question: s.chosen?.text || '',
+      n: i + 1, chapter: STOPS[i].chapter, title: STOPS[i].title, question: s.chosen?.text || '', answerer: answererFor(story, i + 1),
       q: clip(s.q, slotKey(i + 1, 'question')), a: clip(s.a, slotKey(i + 1, 'answer')),
     })),
     intro: clip(story.intro, 'intro'), closing: clip(story.closing, 'closing'),

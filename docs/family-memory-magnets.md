@@ -101,3 +101,13 @@ Recordings and story data are in private Netlify Blobs (store `fmm`). No public 
 
 ## Sales switch (updated)
 - Sales are **open by default**. To pause them, set `FMM_SALES_OPEN=false` in Netlify (Site settings > Environment variables), then redeploy. Delete it, or set it to `true`, to reopen.
+
+## v10: three packages, no jump buttons
+- **Packages:**
+  - **One Grandparent:** $99.99 (`fmm1`), 30 conversations.
+  - **Grandma & Grandpa Together:** $99.99 (`fmm3`). One shared story; the grandparents take turns (odd stops = first grandparent, even stops = second), 15 each. One movie and one magnet.
+  - **Two Separate Stories:** $179.99 (`fmm2`). A full story with each grandparent.
+- **Together stories:** `createStory({ grandparentName, grandparentName2 })` sets `grandparents: [a, b]` and `grandparentName: "a and b"`. `answererFor(story, n)` names who answers each stop. The app, movie kit and movie maker all use it (question cards, "Papa answers", "Papa's answer"). Both grandparents agree to be recorded on the consent screen.
+- **Admin:** the Create story form has a "Second grandparent" field for Together. Two-separate-stories orders get one "Create story with …" button per grandparent, and the order tracks both stories.
+- **Sales page:** no hero jump button; people scroll. Three package cards on the order form and the waiting list. A new FAQ explains Together vs Two Separate Stories.
+- 84 tests.
