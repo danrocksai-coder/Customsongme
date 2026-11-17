@@ -857,6 +857,25 @@ export async function deletePhoto(store, token, { id, pin }) {
   return stateFor(story, role, own);
 }
 
+// ----- movie kit: everything the local movie maker needs, with long-enough signed links (admin only) -----
+export const KIT_LINK_SECONDS = 1800;
+export function movieKit(story, secret) {
+  norm(story);
+  const link = (key) => { const s = signMedia(secret, story.id, key, KIT_LINK_SECONDS); return `/api/fmm/audio?s=${story.id}&k=${encodeURIComponent(key)}&e=${s.exp}&sig=${s.sig}`; };
+  const clip = (x, key) => (x ? { url: link(key), seconds: x.durationSec, type: x.contentType } : null);
+  return {
+    version: 1, storyId: story.id, childName: story.childName, grandparentName: story.grandparentName, test: !!story.test,
+    completed: Math.min(currentIndex(story), STOPS.length), publishAllowed: publishAllowed(story),
+    chapters: CHAPTERS.map((c) => ({ n: c.n, title: c.title })),
+    stops: story.stops.map((s, i) => ({
+      n: i + 1, chapter: STOPS[i].chapter, title: STOPS[i].title, question: s.chosen?.text || '',
+      q: clip(s.q, slotKey(i + 1, 'question')), a: clip(s.a, slotKey(i + 1, 'answer')),
+    })),
+    intro: clip(story.intro, 'intro'), closing: clip(story.closing, 'closing'),
+    photos: story.photos.map((p) => ({ id: p.id, caption: p.caption, by: p.by, type: p.contentType, url: link(slotKey(0, 'photo', p.id)) })),
+  };
+}
+
 // ----- admin audit log: every admin look at private material, and every admin change -----
 export const AUDIT_MAX = 300;
 export async function auditLog(store, storyId, action, detail = '') {

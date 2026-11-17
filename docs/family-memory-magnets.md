@@ -68,3 +68,10 @@ Recordings and story data are in private Netlify Blobs (store `fmm`). No public 
 - **Fonts** are served from `/family-memory-magnets/fonts/` (SIL OFL), with no requests to Google.
 - Stripe receipts for these orders now read "Family Memory Magnets — …".
 - 72 tests (`tests/fmm-v5.test.mjs` covers this release).
+
+## v6: movie maker
+- `tools/fmm-movie/fmm_movie.py` (see its README): `demo`, `list`, `fetch <story id>`, `render <kit>`. It runs on Dan's Mac with `~/.csm-video-tool/venv/bin/python`.
+- New admin endpoint `GET /api/fmm/admin/movie-kit?id=`: story data plus 30-minute signed links. Each download is logged in the story's activity log.
+- Output: a 1080p H.264/AAC MP4 (faststart), a thumbnail, and YouTube chapter times. Loudness is evened out per recording, and music ducks under voices. The output is checked automatically.
+- Admin shows each story's ID for the movie maker.
+- 73 tests.
