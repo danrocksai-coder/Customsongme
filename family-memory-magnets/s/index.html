@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="referrer" content="no-referrer">
 <title>Our Family Story | Family Memory Magnets</title>
-<link rel="stylesheet" href="/family-memory-magnets/fmm.css?v=9b439f1c25">
+<link rel="stylesheet" href="/family-memory-magnets/fmm.css?v=4ced3cfb1a">
 </head>
 <body class="fmm-theme app-page">
 <div class="topbar">FAMILY MEMORY <b>MAGNETS</b></div>
@@ -497,7 +497,8 @@
     if (S.done) h += keepsake();
     h += '<div class="card"><h3>Keeping and deleting</h3><p class="muted">Recordings are kept for ' + Math.round(S.retentionDays / 30) + ' months after your last conversation is complete' + (S.done ? ' (until ' + new Date(S.expiresAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + ')' : '') + ', unless you ask for them to be deleted sooner. You can ask at any time.</p>' +
       (S.deletionRequestedAt ? '<div class="msg info">Deletion requested on ' + new Date(S.deletionRequestedAt).toLocaleDateString() + '. I will be in touch.</div><button class="btn alt" id="gundel">Cancel my deletion request</button>' : '<button class="btn alt" id="gdel">Ask for my recordings to be deleted</button>') + '</div>';
-    h += '<p class="muted center">Questions? Text me at (661) 714-0903.' + (S.test ? '<br><b>This is a test story.</b>' : '') + '</p>';
+    h += '<p class="muted center">Questions? Text me at (661) 714-0903.' + (S.test ? '<br><b>This is a test story.</b>' : '') + '</p>' +
+      '<p class="center" style="margin:4px 0 24px"><a class="btn small alt" href="/family-memory-magnets/help/">Need help? Step-by-step help</a></p>';
     app.innerHTML = h;
     var $ = function (id) { return app.querySelector('#' + id); };
     if ($('cb')) $('cb').onclick = function () { api('consent', { json: { parentName: $('pn').value, agree: $('ag').checked } }).then(refresh).then(render).catch(function (e) { $('cm').innerHTML = '<div class="msg err">' + esc(e.message) + '</div>'; }); };
@@ -547,7 +548,8 @@
     if (!S.done) h += chapters();
     if (role === 'child' && !S.own && !S.done) h += '<p class="muted center">Parent and ' + esc(S.childName) + ': record together on this phone. A parent stays with ' + esc(S.childName) + ' while recording.</p>';
     h += publicationCard() + profileCard() + photosCard() + childAccessCard();
-    h += '<p class="muted center">' + (S.done && S.expiresAt ? 'Your keepsake stays here until ' + new Date(S.expiresAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + '.' : 'Designed to take about ' + (S.paceMonths === 12 ? 'a year' : (S.paceMonths || 6) + ' months') + '. There is no deadline: keep going at your own pace until your story is finished.') + (S.test ? '<br><b>This is a test story.</b>' : '') + '</p>';
+    h += '<p class="muted center">' + (S.done && S.expiresAt ? 'Your keepsake stays here until ' + new Date(S.expiresAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + '.' : 'Designed to take about ' + (S.paceMonths === 12 ? 'a year' : (S.paceMonths || 6) + ' months') + '. There is no deadline: keep going at your own pace until your story is finished.') + (S.test ? '<br><b>This is a test story.</b>' : '') + '</p>' +
+      '<p class="center" style="margin:4px 0 24px"><a class="btn small alt" href="/family-memory-magnets/help/">Need help? Step-by-step help</a></p>';
     app.innerHTML = h;
 
     var $ = function (id) { return app.querySelector('#' + id); };
@@ -730,7 +732,7 @@
 
   // ---------- boot: link -> device session -> dashboard; QR -> dashboard ----------
   function showError(e) {
-    app.innerHTML = '<div class="card center"><h2>This link is not working</h2><p>' + esc(e.message || 'Something went wrong.') + '</p><p class="muted">If you think this is a mistake, text me at (661) 714-0903 and I will send a fresh link.</p></div>';
+    app.innerHTML = '<div class="card center"><h2>This link is not working</h2><p>' + esc(e.message || 'Something went wrong.') + '</p><p class="muted">If you think this is a mistake, text me at (661) 714-0903 and I will send a fresh link.</p><p><a href="/family-memory-magnets/help/">See the help page</a></p></div>';
   }
   function askPin(msg) {
     app.innerHTML = '<div class="card center"><h2>Enter your PIN</h2>' + (msg ? '<div class="msg err">' + esc(msg) + '</div>' : '') + '<input type="password" inputmode="numeric" autocomplete="one-time-code" id="pin" maxlength="6" style="text-align:center;font-size:1.6rem"><button class="btn" id="pb" style="margin-top:10px">Open</button></div>';
