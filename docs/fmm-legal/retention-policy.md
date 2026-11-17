@@ -4,7 +4,7 @@ Version 1, November 17, 2026. Matches the public privacy policy.
 
 | Data | Kept until | Then |
 |---|---|---|
-| Story, recordings, hellos | 12 months after creation, or 12 months after the 30th conversation if finished (the later date) | Deleted with Admin > Finish & delete |
+| Story, recordings, hellos, family photos | 12 months after creation, or 12 months after the 30th conversation if finished (the later date) | Deleted with Admin > Finish & delete |
 | "Write It First" notes | Until that recording is saved | Deleted automatically |
 | Uploaded consent form | Same as the story | Deleted with the story |
 | Consent record (who / when / version) | As long as needed to show compliance (suggest 3 years) | Deleted |

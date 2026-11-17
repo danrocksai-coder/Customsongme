@@ -1,4 +1,6 @@
-# Publication consent (draft for Stage 2)
+# Publication consent
+
+**Built** (v5): this wording is live in the app once all 30 conversations are finished. Still to be reviewed by the attorney.
 
 Shown separately to the **parent** and to the **grandparent** after the movie is ready and before anything is published. Both must say yes. The buyer cannot say yes for them.
 

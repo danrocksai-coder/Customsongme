@@ -61,7 +61,9 @@ const summary = (s) => {
     hasGuardian: !!s.tokenHashes.guardian, childPaused: !!s.childPaused, deletionRequestedAt: s.deletionRequestedAt || null, completedAt: s.completedAt || null,
     helloSettings: s.helloSettings,
     hellos: s.hellos.slice(-20).map((h) => ({ id: h.id, from: h.from, kind: h.kind, text: h.text || '', at: h.at, read: !!h.readAt })),
-    keepsake: s.keepsake, failures: (s.failures || []).slice(-10),
+    keepsake: s.keepsake, failures: (s.failures || []).slice(-10), audit: (s.audit || []).slice(-40).reverse(),
+    publication: { allowed: C.publishAllowed(s), parent: s.publication.parent, grandparent: s.publication.grandparent, unpublishRequestedAt: s.unpublishRequestedAt || null },
+    photos: s.photos.map((p) => ({ id: p.id, by: p.by, caption: p.caption, at: p.at })),
     recordings: s.stops.map((x, i) => ({ n: i + 1, q: !!x.q, a: !!x.a, chosen: x.chosen?.text || null })).filter((x) => x.q || x.a),
   };
 };
@@ -111,6 +113,12 @@ export default async (req) => {
       if (b.action === 'withdraw') return json(await C.withdrawChildAccess(store, t, { pin }));
       return json({ error: 'Unknown action.' }, 400);
     }
+    if (route === 'photo' && req.method === 'POST') {
+      const data = Buffer.from(await req.arrayBuffer());
+      return json(await C.uploadPhoto(store, t, { data, contentType: (req.headers.get('content-type') || '').split(';')[0], caption: decodeURIComponent(req.headers.get('x-caption') || ''), uploadId: req.headers.get('x-upload-id') || '', pin }));
+    }
+    if (route === 'publication' && req.method === 'POST') return json(await C.setPublication(store, t, await body()));
+    if (route === 'photo-delete' && req.method === 'POST') return json(await C.deletePhoto(store, t, await body()));
     if (route === 'consent-form' && req.method === 'POST') {
       const data = Buffer.from(await req.arrayBuffer());
       const st = await C.uploadConsentForm(store, t, { data, contentType: (req.headers.get('content-type') || '').split(';')[0], parentName: decodeURIComponent(req.headers.get('x-parent-name') || ''), pin });
@@ -233,8 +241,13 @@ async function admin(route, req, url, store, secret, origin) {
     return new Response(svg, { headers: { 'Content-Type': 'image/svg+xml', 'Cache-Control': 'no-store' } });
   }
   const b = req.method === 'POST' ? await req.json().catch(() => ({})) : {};
+  const log = (id, action, detail) => C.auditLog(store, id, action, detail).catch(() => {});
+  // every admin change to a story is recorded on that story
+  const AUDITED = { 'add-guardian': 'parent login added', revoke: 'link revoked', 'revoke-devices': 'phones forgotten', 'set-pin': 'PIN changed', 'hello-settings': 'hello settings', keepsake: 'keepsake updated', 'consent-review': 'consent form reviewed' };
+  if (req.method === 'POST' && AUDITED[route] && b.id) await log(b.id, AUDITED[route], [b.role, route === 'consent-review' ? (b.approve ? 'approved' : 'not approved') : ''].filter(Boolean).join(' '));
   if (route === 'create' && req.method === 'POST') {
     const { story, tokens } = await C.createStory(store, b);
+    await log(story.id, 'story created', story.test ? 'test' : '');
     if (b.orderId) { const o = await store.getJSON(`order/${b.orderId}`); if (o) { o.status = 'story-created'; o.storyId = story.id; await store.setJSON(`order/${o.id}`, o); } }
     const links = { child: link(tokens.child), grandparent: link(tokens.grandparent) };
     if (tokens.guardian) links.guardian = link(tokens.guardian);
@@ -247,10 +260,12 @@ async function admin(route, req, url, store, secret, origin) {
   if (route === 'hello-settings' && req.method === 'POST') return json(await C.setHelloSettings(store, b.id, b));
   if (route === 'keepsake' && req.method === 'POST') return json(await C.setKeepsake(store, b.id, b));
   if (route === 'delete' && req.method === 'POST') { if (b.confirm !== 'DELETE') return json({ error: 'Type DELETE to confirm.' }, 400); return json(await C.deleteStory(store, b.id)); }
+  if (route === 'unpublish-done' && req.method === 'POST') { const st = await store.getJSON(`story/${b.id}`); if (!st) return json({ error: 'No such story.' }, 404); st.unpublishRequestedAt = null; await store.setJSON(`story/${b.id}`, st); await log(b.id, 'video taken down'); return json({ ok: true }); }
   if (route === 'consent-review' && req.method === 'POST') return json(await C.reviewConsentForm(store, b.id, { approve: !!b.approve, note: b.note }));
   if (route === 'consent-form' && req.method === 'GET') { // short-lived signed link to the uploaded form
     const id = url.searchParams.get('id') || '';
     const story = await store.getJSON(`story/${id}`); if (!story?.childAccess?.form) return json({ error: 'No form uploaded.' }, 404);
+    await log(id, 'viewed consent form');
     const s = C.signMedia(secret, id, 'consent-form');
     return json({ url: `/api/fmm/audio?s=${id}&k=consent-form&e=${s.exp}&sig=${s.sig}`, contentType: story.childAccess.form.contentType });
   }
@@ -258,6 +273,7 @@ async function admin(route, req, url, store, secret, origin) {
     const id = url.searchParams.get('id'); const slot = url.searchParams.get('slot'); const n = Number(url.searchParams.get('n')) || 0;
     const story = await store.getJSON(`story/${id}`); if (!story) return json({ error: 'No such story.' }, 404);
     const key = C.slotKey(n, slot, url.searchParams.get('hid') || ''); const s = C.signMedia(secret, id, key);
+    await log(id, 'opened recording', key);
     return json({ url: `/api/fmm/audio?s=${id}&k=${encodeURIComponent(key)}&e=${s.exp}&sig=${s.sig}` });
   }
   return json({ error: 'Not found.' }, 404);

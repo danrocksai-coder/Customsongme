@@ -60,3 +60,11 @@ Recordings and story data are in private Netlify Blobs (store `fmm`). No public 
 - Privacy policy: `/family-memory-magnets/privacy/`. Legal pack and to-dos: `docs/fmm-legal/`.
 - Admin flags stories past their keep-until date.
 - 62 tests (`tests/fmm-v4.test.mjs` covers the new rules).
+
+## v5: photos, publishing consent, activity log, self-hosted fonts
+- **Family photos:** the parent (parent login or family link) and the grandparent can add up to 40 photos per story, with optional captions. The phone shrinks them to max 2400 px JPEG before upload. A child's own link can view but not add. The grandparent removes only their own; the parent can remove any. Private storage, 5-minute signed links, deleted with the story. Admin > Family photos: View / Download.
+- **Publishing consent:** after all 30 conversations, the parent and the grandparent each choose "Keep it private" or "Share it with the magnet (unlisted YouTube)". Publishing is allowed only when both choose share. Either can change their answer; if a yes is taken back, Admin shows a red "take it down within 7 days" banner. The server refuses YouTube links in the keepsake until both have said share.
+- **Admin activity log:** every admin view of a recording, photo or consent form, and every admin change, is logged on the story (Admin > Admin activity log, last 300).
+- **Fonts** are served from `/family-memory-magnets/fonts/` (SIL OFL), with no requests to Google.
+- Stripe receipts for these orders now read "Family Memory Magnets — …".
+- 72 tests (`tests/fmm-v5.test.mjs` covers this release).

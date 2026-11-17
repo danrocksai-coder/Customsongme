@@ -130,7 +130,7 @@ export default async (req, context) => {
     'metadata[package]': pkg.name,
     'metadata[link_id]': id,
     ...(FMM_PACKAGES[id] && url.searchParams.get('order') ? { 'metadata[fmm_order]': url.searchParams.get('order').slice(0, 40) } : {}),
-    'payment_intent_data[description]': (FMM_PACKAGES[id] ? 'CustomGiftMe — ' : 'CustomSongMe — ') + pkg.name,
+    'payment_intent_data[description]': FMM_PACKAGES[id] ? pkg.name : 'CustomSongMe — ' + pkg.name, // FMM names already start with "Family Memory Magnets" 
   });
   if (email) body.set('customer_email', email);
 
