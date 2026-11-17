@@ -44,9 +44,42 @@
     ctx.fill(); ctx.restore();
   }
 
-  // opts: { qrSvg (text), title ("Devon & Mimi"), line ("Scan to hear our family story") }
+  // ----- silhouettes: grandma, grandpa, both (grandma + grandpa), boy, girl -----
+  function figure(ctx, kind, x, y, w, h) {
+    ctx.save(); ctx.fillStyle = NAVY;
+    function person(cx, base, s, style) { // s = head radius; base = bottom of the shoulders
+      var hy = base - s * 3.6;
+      // hair behind the head
+      if (style === 'grandma') { ctx.beginPath(); ctx.arc(cx, hy - s * 1.05, s * 0.55, 0, Math.PI * 2); ctx.fill(); } // bun
+      if (style === 'girl') { ctx.beginPath(); ctx.ellipse(cx - s * 1.1, hy + s * 0.2, s * 0.42, s * 0.75, 0.35, 0, Math.PI * 2); ctx.ellipse(cx + s * 1.1, hy + s * 0.2, s * 0.42, s * 0.75, -0.35, 0, Math.PI * 2); ctx.fill(); } // pigtails
+      ctx.beginPath(); ctx.arc(cx, hy, s, 0, Math.PI * 2); ctx.fill(); // head
+      if (style === 'grandpa') { ctx.beginPath(); ctx.ellipse(cx, hy - s * 0.55, s * 1.12, s * 0.42, 0, Math.PI, 0); ctx.fill(); ctx.fillRect(cx - s * 1.45, hy - s * 0.62, s * 2.9, s * 0.22); } // flat cap
+      if (style === 'boy') { ctx.beginPath(); ctx.ellipse(cx, hy - s * 0.45, s * 1.05, s * 0.62, 0, Math.PI, 0); ctx.fill(); } // short hair
+      // shoulders and body
+      ctx.beginPath(); ctx.moveTo(cx - s * 1.9, base); ctx.bezierCurveTo(cx - s * 1.9, hy + s * 1.6, cx - s * 0.9, hy + s * 1.25, cx, hy + s * 1.25);
+      ctx.bezierCurveTo(cx + s * 0.9, hy + s * 1.25, cx + s * 1.9, hy + s * 1.6, cx + s * 1.9, base); ctx.closePath(); ctx.fill();
+      if (style === 'grandma' || style === 'grandpa') { // glasses, in gold, so they read as grandparents
+        ctx.strokeStyle = GOLD; ctx.lineWidth = Math.max(3, s * 0.09);
+        ctx.beginPath(); ctx.arc(cx - s * 0.38, hy + s * 0.08, s * 0.27, 0, Math.PI * 2); ctx.moveTo(cx + s * 0.65, hy + s * 0.08); ctx.arc(cx + s * 0.38, hy + s * 0.08, s * 0.27, 0, Math.PI * 2);
+        ctx.moveTo(cx - s * 0.11, hy + s * 0.08); ctx.lineTo(cx + s * 0.11, hy + s * 0.08); ctx.stroke();
+      }
+    }
+    var base = y + h; // figures stand on the bottom of the panel
+    if (kind === 'both') { person(x + w * 0.34, base, h * 0.15, 'grandma'); person(x + w * 0.68, base, h * 0.155, 'grandpa'); }
+    else if (kind === 'boy' || kind === 'girl') person(x + w / 2, base, h * 0.16, kind);
+    else person(x + w / 2, base, h * 0.17, kind === 'grandpa' ? 'grandpa' : 'grandma');
+    ctx.restore();
+  }
+  function loadImage(src) {
+    return new Promise(function (res, rej) { var i = new Image(); i.onload = function () { res(i); }; i.onerror = function () { rej(new Error('Could not read that photo.')); }; i.src = src; });
+  }
+
+  // opts: { qrSvg (text), title ("Devon & Mimi"), line ("Scan to hear our family story"),
+  //         figure: 'grandma'|'grandpa'|'both'|'boy'|'girl' (optional), photo: image URL (optional, wins over figure) }
   function draw(canvas, opts) {
-    return loadFonts().then(function () { return svgImage(opts.qrSvg); }).then(function (qr) {
+    var photoP = opts.photo ? loadImage(opts.photo) : Promise.resolve(null);
+    return loadFonts().then(function () { return Promise.all([svgImage(opts.qrSvg), photoP]); }).then(function (both) {
+      var qr = both[0], photo = both[1];
       canvas.width = SIZE; canvas.height = SIZE;
       var ctx = canvas.getContext('2d');
       // background: navy with a soft light from the top
@@ -80,6 +113,7 @@
         ctx.fillText(l2, SIZE / 2, 225 + s2 * 2.05);
       }
 
+      if (opts.figure || photo) return twoPanel(ctx, qr, photo, opts, maxW);
       // QR on a white rounded card (the card's white margin is the quiet zone the scanner needs)
       var card = 760, cx = (SIZE - card) / 2, cy = 400;
       ctx.save(); ctx.shadowColor = 'rgba(0,0,0,0.35)'; ctx.shadowBlur = 30; ctx.shadowOffsetY = 10;
@@ -93,6 +127,31 @@
       ctx.fillText(opts.line, SIZE / 2, cy + card + 205);
       return canvas;
     });
+  }
+
+  // Photo or silhouette on the left, QR on the right, both the same size (symmetrical).
+  function twoPanel(ctx, qr, photo, opts, maxW) {
+    var box = 590, gap = 50, y = 430, x1 = (SIZE - 2 * box - gap) / 2, x2 = x1 + box + gap;
+    ctx.save(); ctx.shadowColor = 'rgba(0,0,0,0.35)'; ctx.shadowBlur = 30; ctx.shadowOffsetY = 10;
+    ctx.fillStyle = '#f6efe0'; roundRect(ctx, x1, y, box, box, 40); ctx.fill();
+    ctx.fillStyle = WHITE; roundRect(ctx, x2, y, box, box, 40); ctx.fill(); ctx.restore();
+    ctx.save(); roundRect(ctx, x1, y, box, box, 40); ctx.clip();
+    if (photo) { // cover-crop the photo into the square
+      var s = Math.max(box / photo.width, box / photo.height), w = photo.width * s, h = photo.height * s;
+      ctx.imageSmoothingEnabled = true; ctx.drawImage(photo, x1 + (box - w) / 2, y + (box - h) / 2, w, h);
+    } else {
+      var g2 = ctx.createLinearGradient(0, y, 0, y + box); g2.addColorStop(0, '#fbf6ea'); g2.addColorStop(1, '#efe3c6');
+      ctx.fillStyle = g2; ctx.fillRect(x1, y, box, box);
+      figure(ctx, opts.figure, x1, y + box * 0.06, box, box * 0.94);
+    }
+    ctx.restore();
+    var pad = 34; ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(qr, x2 + pad, y + pad, box - 2 * pad, box - 2 * pad);
+    heart(ctx, SIZE / 2, y + box + 95, 70, GOLD);
+    var ls = fit(ctx, opts.line, 'FMM Body', '800', maxW, 64, 40);
+    ctx.fillStyle = WHITE; ctx.font = '800 ' + ls + 'px "FMM Body"'; ctx.textAlign = 'center';
+    ctx.fillText(opts.line, SIZE / 2, y + box + 210);
+    return ctx.canvas;
   }
 
   function roundRect(ctx, x, y, w, h, r) {

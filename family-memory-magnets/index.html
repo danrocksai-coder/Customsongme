@@ -13,7 +13,8 @@
 <meta property="og:url" content="https://www.customsongme.com/family-memory-magnets/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="/family-memory-magnets/fmm.css?v=e8145b441b">
+<script src="/family-memory-magnets/admin/magnet.js?v=1127dbc15c"></script>
+<link rel="stylesheet" href="/family-memory-magnets/fmm.css?v=e0b14aa6eb">
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "Product", "name": "Family Memory Magnets", "description": "A gift from grandkids to grandparents: 30 or 60 recorded conversations where the grandchild asks and the grandparent answers, turned into a family movie, a digital storybook and two QR fridge magnets.", "brand": {"@type": "Brand", "name": "Family Memory Magnets"}, "image": "https://www.customsongme.com/family-memory-magnets/explainer-poster.jpg", "offers": [{"@type": "Offer", "name": "Just the Two of Us", "price": "99.99", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://www.customsongme.com/family-memory-magnets/"}, {"@type": "Offer", "name": "Grandma & Grandpa Together", "price": "99.99", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://www.customsongme.com/family-memory-magnets/"}, {"@type": "Offer", "name": "The Big Story", "price": "189.99", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://www.customsongme.com/family-memory-magnets/"}, {"@type": "Offer", "name": "The Big Story, Together", "price": "189.99", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://www.customsongme.com/family-memory-magnets/"}]}
 </script>
@@ -156,7 +157,25 @@
       <textarea id="onotes" rows="2"></textarea>
       <input id="owebsite" type="text" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
 
-      <h2 class="fs"><span>5</span>Sign and pay</h2>
+      <h2 class="fs"><span>5</span>Your two magnets</h2>
+      <p class="muted center">This is exactly what gets printed, one for each home. Pick a silhouette or upload a photo. Your real QR code is added when your story is set up.</p>
+      <div class="mags">
+        <div class="mag" id="mag-child">
+          <canvas class="magc" width="1500" height="1500" aria-label="Preview of the child's magnet"></canvas>
+          <b class="magt" id="magt-child">The child's magnet</b>
+          <div class="seg" data-seg="child"><button type="button" class="btn small" data-fig="boy">Boy</button><button type="button" class="btn small alt" data-fig="girl">Girl</button></div>
+          <div class="seg"><label class="btn small alt upl">Upload photo<input type="file" accept="image/*" data-photo="child" class="hidden"></label><button type="button" class="btn small alt" data-keep="child">Keep as is</button></div>
+        </div>
+        <div class="mag" id="mag-gp">
+          <canvas class="magc" width="1500" height="1500" aria-label="Preview of the grandparent's magnet"></canvas>
+          <b class="magt" id="magt-gp">The grandparent's magnet</b>
+          <div class="seg" data-seg="gp"><button type="button" class="btn small" data-fig="grandma">Grandma</button><button type="button" class="btn small alt" data-fig="grandpa">Grandpa</button><button type="button" class="btn small alt hidden" data-fig="both" id="fig-both">Both</button></div>
+          <div class="seg"><label class="btn small alt upl">Upload photo<input type="file" accept="image/*" data-photo="gp" class="hidden"></label><button type="button" class="btn small alt" data-keep="gp">Keep as is</button></div>
+        </div>
+      </div>
+      <p class="muted center" id="magMsg"></p>
+
+      <h2 class="fs"><span>6</span>Sign and pay</h2>
       <div class="waiver">
         <b>Waiver and permission</b>
         <label class="check"><input id="agree" type="checkbox" required>
@@ -251,6 +270,8 @@
     $('gp2wrap').classList.toggle('hidden', !two);
     $('gp1title').textContent = two ? 'The first grandparent' : 'The grandparent';
     $('gpAddrLegend').textContent = two ? 'Grandparents\' mailing address' : 'Grandparent\'s mailing address';
+    $('fig-both').classList.toggle('hidden', !two);
+    if (MAG) { if (!two && MAG.gp.figure === 'both') MAG.gp.figure = 'grandma'; if (two && !MAG.gp.photo) MAG.gp.figure = 'both'; drawMags(); }
     $('pickedPkg').innerHTML = 'Your package: <b>' + NAMES[v] + '</b>';
   }
   document.querySelectorAll('input[name=package]').forEach(function (r) { r.addEventListener('change', function () { pick(r.value); }); });
@@ -265,6 +286,35 @@
     document.querySelectorAll('[data-prof]').forEach(function (sel) { if (sel.value === '') return; var p = sel.getAttribute('data-prof').split('|'); out[Number(p[0])].answers[p[1]] = Number(sel.value); });
     return two ? out : [out[0]];
   }
+  // ----- the two magnets: silhouette or photo, previewed exactly as printed -----
+  var MAG = { child: { figure: 'boy', photo: null }, gp: { figure: 'grandma', photo: null } }, sampleQr = null, magT = null;
+  function magTitle() { var c = ($('childName').value || '').trim(), g1 = ($('gp1').value || '').trim(), g2 = ($('gp2').value || '').trim(), two = pkg === 'together' || pkg === 'bigtogether';
+    if (!c && !g1) return 'Your Names Here'; return two && g2 ? (c || 'Child') + ', ' + (g1 || 'Grandma') + ' & ' + g2 : (c || 'Child') + ' & ' + (g1 || 'Grandparent'); }
+  function drawMags() {
+    if (!window.FMMMagnet || !sampleQr) return;
+    var c = ($('childName').value || '').trim(), g1 = ($('gp1').value || '').trim();
+    $('magt-child').textContent = (c ? c + '\'s' : 'The child\'s') + ' magnet, for their home';
+    $('magt-gp').textContent = (g1 ? g1 + '\'s' : 'The grandparent\'s') + ' magnet, for their home';
+    ['child', 'gp'].forEach(function (k) {
+      FMMMagnet.draw($('mag-' + k).querySelector('canvas'), { qrSvg: sampleQr, title: magTitle(), line: 'Scan to hear our family story', figure: MAG[k].figure, photo: MAG[k].photo }).catch(function () {});
+      $('mag-' + k).querySelectorAll('[data-fig]').forEach(function (b) { b.classList.toggle('alt', MAG[k].photo || b.getAttribute('data-fig') !== MAG[k].figure); });
+    });
+  }
+  function redrawSoon() { clearTimeout(magT); magT = setTimeout(drawMags, 250); }
+  fetch('/family-memory-magnets/sample-qr.svg').then(function (r) { return r.text(); }).then(function (t) { sampleQr = t; drawMags(); }).catch(function () {});
+  ['childName', 'gp1', 'gp2'].forEach(function (id) { $(id).addEventListener('input', redrawSoon); });
+  document.querySelectorAll('[data-seg] [data-fig]').forEach(function (b) { b.addEventListener('click', function () { var k = b.closest('[data-seg]').getAttribute('data-seg'); MAG[k].figure = b.getAttribute('data-fig'); MAG[k].photo = null; drawMags(); }); });
+  document.querySelectorAll('[data-keep]').forEach(function (b) { b.addEventListener('click', function () { MAG[b.getAttribute('data-keep')].photo = null; drawMags(); }); });
+  document.querySelectorAll('[data-photo]').forEach(function (inp) { inp.addEventListener('change', function () {
+    var f = inp.files && inp.files[0], k = inp.getAttribute('data-photo'); if (!f) return;
+    $('magMsg').textContent = 'Preparing your photo…';
+    createImageBitmap(f).then(function (bm) { // shrink on the phone: plenty for a 2-inch print area
+      var m = 1200, r = Math.min(1, m / Math.max(bm.width, bm.height)), cv = document.createElement('canvas');
+      cv.width = Math.round(bm.width * r); cv.height = Math.round(bm.height * r); cv.getContext('2d').drawImage(bm, 0, 0, cv.width, cv.height);
+      MAG[k].photo = cv.toDataURL('image/jpeg', 0.85); $('magMsg').textContent = ''; drawMags();
+    }).catch(function () { $('magMsg').textContent = 'That photo could not be opened. Please try a JPG or PNG.'; });
+    inp.value = '';
+  }); });
   function addr(p) { return { line1: $(p + 'Line').value.trim(), city: $(p + 'City').value.trim(), state: $(p + 'State').value.trim(), zip: $(p + 'Zip').value.trim() }; }
   function addrOk(a) { return a.line1 && a.city && a.state && a.zip; }
 
@@ -301,7 +351,7 @@
       childName: $('childName').value, grandparent1: $('gp1').value, grandparent2: two ? $('gp2').value : '', notes: $('onotes').value, website: $('owebsite').value, source: source(),
       gpAddress: addr('gp'), childAddress: addr('ch'), childRecording: $('childRec').value, waiver: true,
       childAge: $('childAge').value, settings: { parentLogin: $('parentLogin').checked, hello: $('helloStyle').value, music: $('music').value, share: $('share').value },
-      profiles: profiles(two) };
+      profiles: profiles(two), magnets: { child: { figure: MAG.child.figure, photo: MAG.child.photo }, gp: { figure: MAG.gp.figure, photo: MAG.gp.photo } } };
     $('orderBtn').disabled = true; $('orderBtn').textContent = 'One moment…';
     fetch('/api/fmm/order', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
       .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
