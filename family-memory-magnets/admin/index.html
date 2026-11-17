@@ -53,6 +53,8 @@
       '</div><div class="row"><div><label>Family link PIN (optional, 4–6 digits)</label><input type="text" id="pi" inputmode="numeric" maxlength="6"></div>' +
       '<div><label>Grandparent PIN (optional)</label><input type="text" id="pg" inputmode="numeric" maxlength="6"></div></div>' +
       '<label class="check"><input type="checkbox" id="gd"><span>Give the parent a separate dashboard login (optional; consent, the child\'s own link, Little Hellos and pausing then live there)</span></label>' +
+      '<div class="row"><div><label>How was it paid?</label><select id="pay"><option value="stripe">Card (Stripe)</option><option value="cash">Cash</option><option value="other">Other (Venmo, Zelle, check…)</option><option value="free">Free / gift from me</option><option value="">Not paid yet / test</option></select></div>' +
+      '<div><label>Payment note (optional)</label><input type="text" id="paynote" maxlength="200" placeholder="e.g. $99.99 cash, Nov 16"></div></div>' +
       '<label class="check"><input type="checkbox" id="ts"><span>Test story (adult fictional recordings only, skips parent consent)</span></label>' +
       '<div id="cmsg"></div><button class="btn" id="mk">Create story &amp; links</button></div>';
 
@@ -71,10 +73,12 @@
     if (!d.orders.length) h += '<p class="muted">No orders yet.</p>'; else {
       h += '<table><tr><th>Date</th><th>Package</th><th>Parent</th><th>Child / grandparent</th><th>Status</th><th></th></tr>';
       d.orders.forEach(function (o) {
-        h += '<tr><td>' + when(o.createdAt) + '</td><td>' + esc(o.packageLabel) + '</td><td>' + esc(o.parentName) + '<br><span class="muted">' + esc(o.email) + '</span></td><td>' + esc(o.childName) + ' / ' + esc(o.grandparent1) + (o.grandparent2 ? ', ' + esc(o.grandparent2) : '') + '</td><td>' + esc(o.status) + '</td><td>' +
+        h += '<tr><td>' + when(o.createdAt) + '</td><td>' + esc(o.packageLabel) + '</td><td>' + esc(o.parentName) + '<br><span class="muted">' + esc(o.email) + '</span></td><td>' + esc(o.childName) + ' / ' + esc(o.grandparent1) + (o.grandparent2 ? ', ' + esc(o.grandparent2) : '') + '</td><td>' + esc(o.status) +
+          (o.paid ? '<br><span class="muted">paid: ' + esc(o.paid.method) + (o.paid.note ? ', ' + esc(o.paid.note) : '') + ' (' + when(o.paid.at) + ')</span>' : '') + '</td><td>' +
+          (!o.paid && o.status !== 'story-created' ? '<button class="btn small alt" data-paid="' + esc(o.id) + '">Mark paid (cash / other)</button> ' : '') +
           (o.status !== 'story-created' ? '<button class="btn small" data-order="' + esc(o.id) + '">Create story</button>' : '') + '</td></tr>';
       });
-      h += '</table><p class="muted">Orders show "awaiting payment" until you confirm payment in Stripe. Create the story only after the payment arrives.</p>';
+      h += '</table><p class="muted">Orders show "awaiting payment" until you confirm payment in Stripe. Paid in cash or another way? Use "Mark paid". Create the story only after the payment arrives.</p>';
     }
     h += '</div>';
 
@@ -83,7 +87,7 @@
     d.stories.forEach(function (s) {
       h += '<div style="border-top:1px solid #dde3f2;padding:14px 0"><b>' + esc(s.childName) + ' &amp; ' + esc(s.grandparentName) + '</b>' + (s.test ? ' <span class="muted">(test)</span>' : '') +
         (s.deletionRequestedAt ? '<div class="msg err">The parent asked for these recordings to be deleted (' + when(s.deletionRequestedAt) + '). Review, deliver anything owed, then use Finish &amp; delete.</div>' : '') + (s.childPaused ? '<div class="msg info">Child recording is paused by the parent.</div>' : '') +
-        '<br><span class="muted">' + s.completed + '/30 complete &middot; created ' + when(s.createdAt) + ' &middot; open until ' + when(s.expiresAt) + (s.pin ? ' &middot; PIN set' : '') + '<br>Parent: ' + esc(s.parentName || '-') + ' ' + esc(s.parentEmail || '') + '<br>Consent: ' + (s.consent ? 'yes, ' + esc(s.consent.parentName) + ' on ' + when(s.consent.at) : (s.test ? 'not required (test)' : '<b style="color:#b42318">NOT RECORDED</b>')) + ' &middot; Grandparent agreed: ' + (s.grandparentConsent ? 'yes, ' + esc(s.grandparentConsent.name) + ' on ' + when(s.grandparentConsent.at) : (s.test ? 'not required (test)' : 'not yet')) + '</span>';
+        '<br><span class="muted">' + s.completed + '/30 complete &middot; created ' + when(s.createdAt) + ' &middot; open until ' + when(s.expiresAt) + (s.pin ? ' &middot; PIN set' : '') + '<br>Parent: ' + esc(s.parentName || '-') + ' ' + esc(s.parentEmail || '') + ' &middot; Paid: ' + (s.payment ? esc(s.payment.method) + (s.payment.note ? ' (' + esc(s.payment.note) + ')' : '') : (s.test ? 'test' : 'not recorded')) + '<br>Consent: ' + (s.consent ? 'yes, ' + esc(s.consent.parentName) + ' on ' + when(s.consent.at) : (s.test ? 'not required (test)' : '<b style="color:#b42318">NOT RECORDED</b>')) + ' &middot; Grandparent agreed: ' + (s.grandparentConsent ? 'yes, ' + esc(s.grandparentConsent.name) + ' on ' + when(s.grandparentConsent.at) : (s.test ? 'not required (test)' : 'not yet')) + '</span>';
       if (s.expiresAt < Date.now()) h += '<div class="msg err">This story\'s keep-until date has passed (' + when(s.expiresAt) + '). The privacy policy promises deletion: deliver anything owed, then use Finish &amp; delete.</div>';
       var PB = s.publication, ans = function (x) { return x ? (x.choice === 'share' ? 'share' : 'private') + ' (' + esc(x.name) + ', ' + when(x.at) + ')' : 'no answer'; };
       if (PB.unpublishRequestedAt) h += '<div class="msg err">Someone took back their yes to sharing (' + when(PB.unpublishRequestedAt) + '). Take the video off YouTube and the keepsake links within 7 days. <button class="btn small" data-unpub="' + s.id + '">Done, it is taken down</button></div>';
@@ -134,9 +138,16 @@
     var q = function (sel) { return app.querySelectorAll(sel); };
     q('[data-copy]').forEach(function (b) { b.onclick = function () { var t = document.getElementById(b.getAttribute('data-copy')).textContent; (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { b.textContent = 'Copied'; }).catch(function () { b.textContent = 'Select and copy manually'; }); }; });
     var dm = document.getElementById('dismiss'); if (dm) dm.onclick = function () { newLinks = null; load(); };
-    q('[data-order]').forEach(function (b) { b.onclick = function () { var o = d.orders.filter(function (x) { return x.id === b.getAttribute('data-order'); })[0]; prefill = { childName: o.childName, grandparent: o.grandparent1, parentName: o.parentName, email: o.email, orderId: o.id }; draw(d); window.scrollTo(0, 0); }; });
+    q('[data-order]').forEach(function (b) { b.onclick = function () { var o = d.orders.filter(function (x) { return x.id === b.getAttribute('data-order'); })[0]; prefill = { childName: o.childName, grandparent: o.grandparent1, parentName: o.parentName, email: o.email, orderId: o.id, pay: o.paid ? o.paid.method : '', payNote: o.paid ? o.paid.note : '' }; draw(d); window.scrollTo(0, 0); }; });
+    q('[data-paid]').forEach(function (b) { b.onclick = function () {
+      var method = prompt('How was it paid? Type: cash, other, or free', 'cash'); if (method === null) return;
+      method = String(method).trim().toLowerCase(); if (['cash', 'other', 'free'].indexOf(method) < 0) { alert('Please type cash, other, or free.'); return; }
+      var note = prompt('Note (optional), e.g. "$99.99 cash from Amber, Nov 16"', ''); if (note === null) return;
+      api('order-paid', { id: b.getAttribute('data-paid'), method: method, note: note }).then(load).catch(function (e) { alert(e.message); });
+    }; });
+    if (pf.pay !== undefined) { var ps = document.getElementById('pay'); if (ps) ps.value = pf.pay; var pn2 = document.getElementById('paynote'); if (pn2) pn2.value = pf.payNote || ''; }
     document.getElementById('mk').onclick = function () {
-      api('create', { childName: val('cn'), grandparentName: val('gn'), parentName: val('pn'), parentEmail: val('pe'), pinChild: val('pi'), pinGrandparent: val('pg'), test: document.getElementById('ts').checked, guardian: document.getElementById('gd').checked, orderId: pf.orderId || null })
+      api('create', { childName: val('cn'), grandparentName: val('gn'), parentName: val('pn'), parentEmail: val('pe'), pinChild: val('pi'), pinGrandparent: val('pg'), test: document.getElementById('ts').checked, guardian: document.getElementById('gd').checked, orderId: pf.orderId || null, payment: val('pay'), paymentNote: val('paynote') })
         .then(function (r) { prefill = null; newLinks = r.links; load(); }).catch(function (e) { document.getElementById('cmsg').innerHTML = '<div class="msg err">' + esc(e.message) + '</div>'; });
     };
     q('[data-rev]').forEach(function (b) { b.onclick = function () { var p = b.getAttribute('data-rev').split('|'); if (!confirm('The old ' + p[1] + ' link stops working immediately. Continue?')) return; api('revoke', { id: p[0], role: p[1] }).then(function (r) { newLinks = p[1] === 'child' ? { child: r.link, grandparent: '(unchanged)' } : p[1] === 'guardian' ? { child: '(unchanged)', grandparent: '(unchanged)', guardian: r.link } : { child: '(unchanged)', grandparent: r.link }; load(); window.scrollTo(0, 0); }).catch(function (e) { alert(e.message); }); }; });

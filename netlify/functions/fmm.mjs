@@ -54,7 +54,7 @@ const summary = (s) => {
     parentName: s.parentName, parentEmail: s.parentEmail, createdAt: s.createdAt, expiresAt: s.expiresAt,
     completed: C.currentIndex(s), consent: s.consent ? { parentName: s.consent.parentName, at: s.consent.at, version: s.consent.version } : null,
     grandparentConsent: s.grandparentConsent ? { name: s.grandparentConsent.name, at: s.grandparentConsent.at, version: s.grandparentConsent.version } : null,
-    hasIntro: !!s.intro, hasClosing: !!s.closing,
+    hasIntro: !!s.intro, hasClosing: !!s.closing, payment: s.payment || null,
     qrCodes: s.qrCodes || { child: s.qrCode, grandparent: null },
     pins: { child: C.pinRequired(s, 'child'), grandparent: C.pinRequired(s, 'grandparent'), guardian: C.pinRequired(s, 'guardian') },
     devices: { child: s.sessions.child.length, grandparent: s.sessions.grandparent.length, guardian: s.sessions.guardian.length },
@@ -84,6 +84,7 @@ export default async (req) => {
       return await order(req, store);
     }
     if (route === 'waitlist' && req.method === 'POST') return await waitlist(req, store);
+    if (route === 'sales' && req.method === 'GET') return json({ open: process.env.FMM_SALES_OPEN === 'true' }); // the sales page asks which form to show
 
     if (!secret) return json({ error: 'Not configured.' }, 503);
 
@@ -173,7 +174,7 @@ async function order(req, store) {
     id: randomBytes(8).toString('base64url'), createdAt: Date.now(), package: b.package, packageLabel: pkg?.label,
     parentName: clean(b.parentName, 80), email, phone: clean(b.phone, 30),
     childName: clean(b.childName, 40), grandparent1: clean(b.grandparent1, 40), grandparent2: clean(b.grandparent2, 40), notes: clean(b.notes, 400),
-    status: 'awaiting-payment',
+    source: clean(b.source, 80) || 'direct', status: 'awaiting-payment',
   };
   if (!pkg || !o.parentName || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !o.childName || !o.grandparent1 || (pkg.grandparents === 2 && !o.grandparent2)) {
     return json({ error: 'Please complete all required fields.' }, 400);
@@ -257,6 +258,13 @@ async function admin(route, req, url, store, secret, origin) {
     const links = { child: link(tokens.child), grandparent: link(tokens.grandparent) };
     if (tokens.guardian) links.guardian = link(tokens.guardian);
     return json({ story: summary(story), links, qrUrls: { child: qrUrl(story.qrCodes.child), grandparent: qrUrl(story.qrCodes.grandparent) } });
+  }
+  if (route === 'order-paid' && req.method === 'POST') { // paid outside Stripe (cash, family, gift); Dan records it here
+    const o = await store.getJSON(`order/${b.id}`); if (!o) return json({ error: 'No such order.' }, 404);
+    const method = ['cash', 'other', 'free', 'stripe'].includes(b.method) ? b.method : 'cash';
+    Object.assign(o, { paid: { method, note: String(b.note || '').slice(0, 200), at: Date.now() }, status: o.status === 'story-created' ? o.status : 'paid' });
+    await store.setJSON(`order/${o.id}`, o);
+    return json(o);
   }
   if (route === 'add-guardian' && req.method === 'POST') return json({ link: link(await C.addGuardian(store, b.id)) });
   if (route === 'revoke' && req.method === 'POST') return json({ link: link(await C.revokeToken(store, b.id, b.role)) });

@@ -213,6 +213,7 @@ export async function createStory(store, input) {
     parentName: String(input.parentName || '').slice(0, 80),
     parentEmail: String(input.parentEmail || '').slice(0, 120),
     orderId: input.orderId || null, packageName: String(input.packageName || '').slice(0, 60),
+    payment: input.payment ? { method: ['stripe', 'cash', 'other', 'free'].includes(input.payment) ? input.payment : 'other', note: String(input.paymentNote || '').slice(0, 200), at: now() } : null,
     qrCode: qrCodes.child, qrCodes, pinHash: null,
     tokenHashes: { child: sha(tokens.child), grandparent: sha(tokens.grandparent) },
     consent: null, stops: emptyStops(), intro: null, closing: null, deletedAt: null,
