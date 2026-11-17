@@ -269,6 +269,12 @@ async function admin(route, req, url, store, secret, origin) {
     const s = C.signMedia(secret, id, 'consent-form');
     return json({ url: `/api/fmm/audio?s=${id}&k=consent-form&e=${s.exp}&sig=${s.sig}`, contentType: story.childAccess.form.contentType });
   }
+  if (route === 'movie-kit' && req.method === 'GET') { // used by tools/fmm-movie (the local movie maker)
+    const id = url.searchParams.get('id') || '';
+    const story = await store.getJSON(`story/${id}`); if (!story) return json({ error: 'No such story.' }, 404);
+    await log(id, 'movie kit downloaded');
+    return json(C.movieKit(story, secret));
+  }
   if (route === 'media' && req.method === 'GET') {
     const id = url.searchParams.get('id'); const slot = url.searchParams.get('slot'); const n = Number(url.searchParams.get('n')) || 0;
     const story = await store.getJSON(`story/${id}`); if (!story) return json({ error: 'No such story.' }, 404);
