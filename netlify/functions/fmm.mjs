@@ -14,9 +14,11 @@ const FORMSPREE = process.env.FMM_FORMSPREE_URL || 'https://formspree.io/f/xwpql
 // Sales are OPEN by default. Pause them without a code change: FMM_SALES_OPEN=false in Netlify, then redeploy.
 const salesOpen = () => process.env.FMM_SALES_OPEN !== 'false';
 const PACKAGES = {
-  one: { id: 'fmm1', label: 'One grandparent', grandparents: 1 },
-  together: { id: 'fmm3', label: 'Grandma & Grandpa together (15 each)', grandparents: 2 },
-  two: { id: 'fmm2', label: 'Two separate stories', grandparents: 2 },
+  one: { id: 'fmm1', label: 'Just the Two of Us (30)', grandparents: 1, stops: 30 },
+  together: { id: 'fmm3', label: 'Grandma & Grandpa Together (15 each)', grandparents: 2, stops: 30 },
+  big: { id: 'fmm4', label: 'The Big Story (60)', grandparents: 1, stops: 60 },
+  bigtogether: { id: 'fmm5', label: 'The Big Story, Together (30 each)', grandparents: 2, stops: 60 },
+  two: { id: 'fmm2', label: 'Two separate stories (older package)', grandparents: 2, stops: 30 }, // kept so older orders still read
 };
 
 function blobStore() {
@@ -71,6 +73,7 @@ const summary = (s) => {
     keepsake: s.keepsake, failures: (s.failures || []).slice(-10), audit: (s.audit || []).slice(-40).reverse(),
     publication: { allowed: C.publishAllowed(s), parent: s.publication.parent, grandparent: s.publication.grandparent, unpublishRequestedAt: s.unpublishRequestedAt || null },
     photos: s.photos.map((p) => ({ id: p.id, by: p.by, caption: p.caption, at: p.at })),
+    lastActivityAt: s.lastActivityAt || null, total: s.stops.length, profiles: C.profileView(s).map((p) => ({ name: p.name, answered: p.answered, total: p.total })),
     recordings: s.stops.map((x, i) => ({ n: i + 1, q: !!x.q, a: !!x.a, chosen: x.chosen?.text || null })).filter((x) => x.q || x.a),
   };
 };
@@ -127,6 +130,7 @@ export default async (req) => {
       return json(await C.uploadPhoto(store, t, { data, contentType: (req.headers.get('content-type') || '').split(';')[0], caption: decodeURIComponent(req.headers.get('x-caption') || ''), uploadId: req.headers.get('x-upload-id') || '', pin }));
     }
     if (route === 'publication' && req.method === 'POST') return json(await C.setPublication(store, t, await body()));
+    if (route === 'profile' && req.method === 'POST') return json(await C.saveProfile(store, t, await body()));
     if (route === 'photo-delete' && req.method === 'POST') return json(await C.deletePhoto(store, t, await body()));
     if (route === 'consent-form' && req.method === 'POST') {
       const data = Buffer.from(await req.arrayBuffer());
@@ -178,13 +182,18 @@ async function order(req, store) {
   const email = clean(b.email, 120);
   const o = {
     id: randomBytes(8).toString('base64url'), createdAt: Date.now(), package: b.package, packageLabel: pkg?.label,
-    parentName: clean(b.parentName, 80), email, phone: clean(b.phone, 30),
+    buyerRole: ['parent', 'grandparent', 'other'].includes(b.buyerRole) ? b.buyerRole : 'parent',
+    buyerName: clean(b.buyerName || b.parentName, 80), stops: pkg?.stops || 30,
+    parentName: clean(b.parentName, 80), parentEmail: clean(b.parentEmail || (b.buyerRole === 'parent' || !b.buyerRole ? b.email : ''), 120), email, phone: clean(b.phone, 30),
     childName: clean(b.childName, 40), grandparent1: clean(b.grandparent1, 40), grandparent2: clean(b.grandparent2, 40), notes: clean(b.notes, 400),
     source: clean(b.source, 80) || 'direct', status: 'awaiting-payment',
   };
-  if (!pkg || !o.parentName || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !o.childName || !o.grandparent1 || (pkg.grandparents === 2 && !o.grandparent2)) {
+  const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!pkg || pkg.id === 'fmm2' || !o.buyerName || !EMAIL.test(email) || !o.childName || !o.grandparent1 || (pkg.grandparents === 2 && !o.grandparent2)) {
     return json({ error: 'Please complete all required fields.' }, 400);
   }
+  // the child's parent is always involved: when someone else buys, we need the parent's name and email
+  if (!o.parentName || !EMAIL.test(o.parentEmail)) return json({ error: "Please add the child's parent or guardian's name and email." }, 400);
   await store.setJSON(`order/${o.id}`, o);
   try { // tell Dan (same Formspree inbox the rest of the site uses); never block the customer on it
     await fetch(FORMSPREE, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },

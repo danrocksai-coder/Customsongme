@@ -125,21 +125,18 @@ test('parent sees every Little Hello (both directions) with names', async () => 
   assert.equal(gs.hellos.length, 1); assert.equal(gs.hellos[0].fromName, 'Mimi'); assert.equal(gs.hellos[0].toName, 'Devon');
 });
 
-test('RETENTION: completing the 30th conversation keeps the keepsake open 12 months from completion', async () => {
+test('RETENTION: no deadline while recording; finishing keeps the keepsake open 12 months from completion', async () => {
   const { store, story, tokens } = await mk();
-  const original = story.expiresAt;
-  const s = await load(store, story.id); s.expiresAt = Date.now() + 20 * 86400e3; await store.setJSON(`story/${story.id}`, s); // only 20 days of the first window left
-  for (let n = 1; n <= 30; n++) await exchange(store, tokens, n);
+  assert.equal(story.expiresAt, null); // no deadline
+  const s = await load(store, story.id); s.createdAt = Date.now() - 900 * 86400e3; await store.setJSON(`story/${story.id}`, s); // started 2.5 years ago
+  for (let n = 1; n <= 30; n++) await exchange(store, tokens, n); // still fine
   const done = await load(store, story.id);
   assert.ok(done.completedAt);
   const want = done.completedAt + C.RETENTION_DAYS_AFTER_COMPLETION * 86400e3;
   assert.ok(Math.abs(done.expiresAt - want) < 5000);                                 // extended to 12 months after completion
   const st = C.publicState(done, 'child'); assert.equal(st.availableUntil, done.expiresAt);
-  // never shortens an already longer window
-  const again = await mk(); const a = await load(again.store, again.story.id); a.expiresAt = Date.now() + 700 * 86400e3; await again.store.setJSON(`story/${again.story.id}`, a);
-  for (let n = 1; n <= 30; n++) await exchange(again.store, again.tokens, n);
-  assert.ok((await load(again.store, again.story.id)).expiresAt >= a.expiresAt);
-  assert.equal(C.RETENTION_DAYS_AFTER_COMPLETION, 365); assert.ok(original > 0);
+  assert.equal(C.RETENTION_DAYS_AFTER_COMPLETION, 365);
+  assert.equal(C.paceMonths(done), 6);
 });
 
 test('deleting a story also removes the parent login and its remembered phones', async () => {

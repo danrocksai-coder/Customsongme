@@ -362,7 +362,8 @@ test('expired stories are refused on links and sessions alike; deleting a story 
   await C.deleteStory(store, story.id);
   const d = store._dump(); assert.deepEqual(d.json, []); assert.deepEqual(d.blobs, []);
   const e = await mk(); const ex2 = await C.exchangeLink(e.store, e.tokens.child);
-  const s = await load(e.store, e.story.id); s.expiresAt = Date.now() - 1; await e.store.setJSON(`story/${e.story.id}`, s);
+  // since v11 only a FINISHED story's keepsake period can end (unfinished stories never expire)
+  const s = await load(e.store, e.story.id); s.completedAt = Date.now() - 2; s.expiresAt = Date.now() - 1; await e.store.setJSON(`story/${e.story.id}`, s);
   assert.equal(await status(C.authorize(e.store, e.tokens.child)), 410);
   assert.equal(await status(C.authorize(e.store, ex2.session)), 410);
 });

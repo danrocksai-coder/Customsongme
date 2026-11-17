@@ -111,3 +111,18 @@ Recordings and story data are in private Netlify Blobs (store `fmm`). No public 
 - **Admin:** the Create story form has a "Second grandparent" field for Together. Two-separate-stories orders get one "Create story with …" button per grandparent, and the order tracks both stories.
 - **Sales page:** no hero jump button; people scroll. Three package cards on the order form and the waiting list. A new FAQ explains Together vs Two Separate Stories.
 - 84 tests.
+
+## v11: four packages, grandparent profile, no deadline
+| Package | Value | Stripe | Stops | Grandparents | Photos |
+|---|---|---|---|---|---|
+| Just the Two of Us | `one` | fmm1 $99.99 | 30 | 1 | 30 |
+| Grandma & Grandpa Together | `together` | fmm3 $99.99 | 30 (15 each) | 2 | 30 |
+| The Big Story | `big` | fmm4 $189.99 | 60 | 1 | 60 |
+| The Big Story, Together | `bigtogether` | fmm5 $189.99 | 60 (30 each) | 2 | 60 |
+- **60-stop stories** walk the 30 approved stops twice in a row (`baseIndex`, `defAt`, `choicesAt`). With one grandparent, the second visit hides the question used on the first. With two grandparents, they alternate (`answererFor`), so each gets every stop once.
+- **Grandparent profile:** 20 optional multiple-choice questions (`netlify/lib/fmm-profile.mjs`), one profile per grandparent. Filled by the grandparent or the parent (not a child's own link). Included in the movie kit. Admin shows progress.
+- **Photos:** one per conversation (`photoMax(story)` = 30 or 60).
+- **No deadline:** `expiresAt` is null while recording. Finishing sets it to completion + 12 months (`isExpired` only applies to finished stories). The pace shown to families is about 6 months for 30 and about 1 year for 60. Admin flags an unfinished story with no activity for 2 years (contact the family before deleting).
+- **Order form:** asks who's buying (parent / grandparent / someone else). When the buyer isn't the parent, the parent's name and email are required, because the parent always gives permission. Admin shows the buyer and the parent, and prefills the story with the parent's email and the package size.
+- **Sales page:** hero, video, the 4 packages, the order form, 3-step "How it works", privacy, 5 FAQs. The 10-step list and the chapter list are gone.
+- 92 tests.

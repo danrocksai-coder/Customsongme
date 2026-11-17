@@ -192,15 +192,15 @@
   function other() { return S.role === 'child' ? S.grandparentName : S.childName; }
   function header() {
     return '<div class="apphead"><small>Family Memory Magnets</small><h1>' + title() + '</h1>' +
-      '<div class="bar"><i style="width:' + Math.round(S.completed / 30 * 100) + '%"></i></div>' +
-      '<div class="muted">' + S.completed + ' of 30 conversations saved</div></div>';
+      '<div class="bar"><i style="width:' + Math.round(S.completed / (S.total || 30) * 100) + '%"></i></div>' +
+      '<div class="muted">' + S.completed + ' of ' + (S.total || 30) + ' conversations saved</div></div>';
   }
   function chapters() {
     var h = '';
     S.chapters.forEach(function (c) {
       var st = S.stops.filter(function (s) { return s.chapter === c.n; });
       var done = st.filter(function (s) { return s.status === 'done'; }).length;
-      h += '<div class="card chapter"><h3>' + c.n + '. ' + esc(c.title) + '<span>' + done + '/5</span></h3><div class="muted">' + esc(c.setting) + '</div><div class="dots">';
+      h += '<div class="card chapter"><h3>' + c.n + '. ' + esc(c.title) + '<span>' + done + '/' + st.length + '</span></h3><div class="muted">' + esc(c.setting) + '</div><div class="dots">';
       st.forEach(function (s) { h += '<i class="dot ' + (s.status === 'done' ? 'done' : (s.status !== 'locked' ? 'now' : '')) + '" title="' + esc(s.title) + '"></i>'; });
       h += '</div></div>';
     });
@@ -243,7 +243,7 @@
     if (k.status === 'ready' && k.items.length) {
       return '<div class="card"><h2>Your family keepsake</h2>' + (S.availableUntil ? '<p class="muted">Available here until ' + new Date(S.availableUntil).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + '.</p>' : '') + k.items.map(function (i) { return '<a class="btn" style="margin:6px 0" target="_blank" rel="noopener" href="' + esc(i.url) + '">' + esc(i.label) + '</a>'; }).join('') + '</div>';
     }
-    return '<div class="card"><h2>Your keepsake is being prepared</h2><p>All 30 conversations are saved. Your family movie, digital storybook and keepsake will appear right here, on this same magnet, when they are ready. You can replay every recording below in the meantime.</p>' + (S.availableUntil ? '<p class="muted">Your recordings stay available here until ' + new Date(S.availableUntil).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + '.</p>' : '') + '</div>';
+    return '<div class="card"><h2>Your keepsake is being prepared</h2><p>All ' + (S.total || 30) + ' conversations are saved. Your family movie, digital storybook and keepsake will appear right here, on this same magnet, when they are ready. You can replay every recording below in the meantime.</p>' + (S.availableUntil ? '<p class="muted">Your recordings stay available here until ' + new Date(S.availableUntil).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + '.</p>' : '') + '</div>';
   }
 
   function who(cur) { return (cur && cur.answerer) || S.grandparentName; } // together package: grandparents take turns
@@ -300,6 +300,36 @@
     };
   }
 
+
+  // ----- grandparent profile: 20 quick multiple-choice questions, all optional -----
+  var profK = 0, profOpen = false;
+  function profileCard() {
+    var P = S.profiles; if (!P || !P.length) return '';
+    var h = '<div class="card" id="prof"><h3>' + (S.role === 'grandparent' ? (P.length > 1 ? 'Your profiles' : 'Your profile') : 'Grandparent profile' + (P.length > 1 ? 's' : '')) + '</h3>' +
+      '<p class="muted">' + (S.role === 'grandparent' ? 'Quick multiple-choice questions about you, for the movie and storybook. Every one is optional, and there is no rush. It helps most before the story is finished.' : 'Quick questions about ' + (P.length > 1 ? 'the grandparents' : esc(P[0].name)) + ' for the movie and storybook. All optional.') + '</p>';
+    P.forEach(function (p) { h += '<div class="muted" style="margin:4px 0">' + esc(p.name) + ': <b>' + p.answered + ' of ' + p.total + '</b> answered</div>'; });
+    if (!S.canEditProfile) return h + '</div>';
+    if (!profOpen) return h + '<button class="btn alt" id="profgo" style="margin-top:8px">' + (P.some(function (p) { return p.answered; }) ? 'Continue the profile' : 'Start the profile (about 3 minutes)') + '</button></div>';
+    if (P.length > 1) h += '<div class="row" style="margin:10px 0">' + P.map(function (p) { return '<button class="btn small ' + (p.k === profK ? '' : 'alt') + '" data-profk="' + p.k + '">' + esc(p.name) + '</button>'; }).join('') + '</div>';
+    var me = P[profK] || P[0], Q = S.profileQuestions || [];
+    Q.slice().sort(function (a, b) { return (b.need ? 1 : 0) - (a.need ? 1 : 0); }).forEach(function (q) {
+      var cur = me.answers[q.id];
+      h += '<div style="margin:14px 0"><b>' + esc(q.text) + '</b>' + (q.need ? ' <span class="muted">(helps the movie most)</span>' : '') + '<div class="row" style="flex-wrap:wrap;gap:6px;margin-top:6px">' +
+        q.options.map(function (o, i) { return '<button class="btn small ' + (cur === i ? '' : 'alt') + '" style="width:auto" data-pq="' + q.id + '|' + i + '">' + esc(o) + '</button>'; }).join('') +
+        (cur !== undefined ? '<button class="btn small alt" style="width:auto" data-pq="' + q.id + '|">Clear</button>' : '') + '</div></div>';
+    });
+    return h + '<button class="btn alt" id="profdone">Done for now</button></div>';
+  }
+  function bindProfile() {
+    var box = app.querySelector('#prof'); if (!box) return;
+    var go = box.querySelector('#profgo'); if (go) go.onclick = function () { profOpen = true; render(); app.querySelector('#prof').scrollIntoView({ block: 'start' }); };
+    var dn = box.querySelector('#profdone'); if (dn) dn.onclick = function () { profOpen = false; render(); toast('Saved. Come back any time.'); };
+    box.querySelectorAll('[data-profk]').forEach(function (b) { b.onclick = function () { profK = Number(b.getAttribute('data-profk')); render(); app.querySelector('#prof').scrollIntoView({ block: 'start' }); }; });
+    box.querySelectorAll('[data-pq]').forEach(function (b) { b.onclick = function () {
+      var p = b.getAttribute('data-pq').split('|'), y = window.scrollY;
+      api('profile', { json: { k: profK, qid: p[0], answer: p[1] } }).then(function (r) { S.profiles = r.profiles; render(); window.scrollTo(0, y); }).catch(function (e) { toast(e.message, 5000); });
+    }; });
+  }
   // ----- family photos (for the movie and storybook) -----
   function photosCard() {
     if (!S.photos || (!S.photos.length && !S.canAddPhotos)) return '';
@@ -444,7 +474,7 @@
         '<label for="pn">Your name</label><input type="text" id="pn" autocomplete="name"><label class="check"><input type="checkbox" id="ag"><span>I am ' + esc(S.childName) + '\'s parent or legal guardian, and I give permission for ' + esc(S.childName) + '\'s voice to be recorded and saved for this family story.</span></label><div id="cm"></div><button class="btn" id="cb">I agree and continue</button></div>';
     } else if (S.consent) h += '<div class="card"><div class="muted">Permission given by ' + esc(S.consent.parentName) + ' on ' + new Date(S.consent.at).toLocaleDateString() + '.</div></div>';
     h += '<div class="card"><h3>' + esc(S.childName) + '\'s recording</h3><p class="muted">' + (S.childPaused ? 'Paused. ' + esc(S.childName) + ' cannot record or send hellos until you turn it back on.' : 'Active.') + '</p><button class="btn ' + (S.childPaused ? '' : 'alt') + '" id="gpause">' + (S.childPaused ? 'Turn recording back on' : 'Pause recording') + '</button></div>';
-    h += publicationCard() + childAccessCard() + photosCard();
+    h += publicationCard() + childAccessCard() + profileCard() + photosCard();
     var hs = S.helloSettings;
     h += '<div class="card"><h3>Little Hellos</h3><p class="muted">Short, optional hellos sent between ' + esc(S.childName) + ' and ' + esc(S.grandparentName) + ' after a quiet couple of days. They never change the story.</p>' +
       '<label class="check"><input type="checkbox" id="hen"' + (hs.enabled ? ' checked' : '') + '><span>Allow Little Hellos</span></label>' +
@@ -461,7 +491,7 @@
       h += '</div>';
     }
     if (S.done) h += keepsake();
-    h += '<div class="card"><h3>Keeping and deleting</h3><p class="muted">Recordings are kept for ' + Math.round(S.retentionDays / 30) + ' months after your 30th conversation is complete' + (S.done ? ' (until ' + new Date(S.expiresAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + ')' : '') + ', unless you ask for them to be deleted sooner. You can ask at any time.</p>' +
+    h += '<div class="card"><h3>Keeping and deleting</h3><p class="muted">Recordings are kept for ' + Math.round(S.retentionDays / 30) + ' months after your last conversation is complete' + (S.done ? ' (until ' + new Date(S.expiresAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + ')' : '') + ', unless you ask for them to be deleted sooner. You can ask at any time.</p>' +
       (S.deletionRequestedAt ? '<div class="msg info">Deletion requested on ' + new Date(S.deletionRequestedAt).toLocaleDateString() + '. I will be in touch.</div><button class="btn alt" id="gundel">Cancel my deletion request</button>' : '<button class="btn alt" id="gdel">Ask for my recordings to be deleted</button>') + '</div>';
     h += '<p class="muted center">Questions? Text me at (661) 714-0903.' + (S.test ? '<br><b>This is a test story.</b>' : '') + '</p>';
     app.innerHTML = h;
@@ -473,7 +503,7 @@
     $('hsave').onclick = function () { upd({ hello: { enabled: $('hen').checked, style: $('hst').value, custom: $('hcu').value.split('\n') } }, 'Saved.'); };
     if ($('gdel')) $('gdel').onclick = function () { if (confirm('Ask for all of your family\'s recordings to be deleted? Nothing is deleted automatically. I will contact you first.')) upd({ requestDeletion: true }, 'Request sent.'); };
     if ($('gundel')) $('gundel').onclick = function () { upd({ requestDeletion: false }, 'Request cancelled.'); };
-    bindChildAccess(); bindPhotos(); bindPublication();
+    bindChildAccess(); bindPhotos(); bindPublication(); bindProfile();
     app.querySelectorAll('[data-play]').forEach(function (b) { b.onclick = function () { var p = b.getAttribute('data-play').split('|'); playMedia(b, 'slot=' + p[0] + '&n=' + p[1]); }; });
     app.querySelectorAll('[data-hello]').forEach(function (b) { b.onclick = function () { playMedia(b, 'slot=hello&id=' + encodeURIComponent(b.getAttribute('data-hello'))); }; });
   }
@@ -497,7 +527,7 @@
       if (role === 'grandparent' && !S.closingDone) h += '<div class="card"><h3>A closing message</h3><p class="muted">You can leave a personal message of up to 2 minutes.</p><button class="btn" id="goclose">Record my closing message</button></div>';
     } else if (cur) {
       var hd = homeHeadline();
-      h += '<div class="card"><div class="stage">Stop ' + cur.n + ' of 30 &middot; ' + esc(cur.title) + '</div><h2>' + hd[0] + '</h2><p>' + hd[1] + '</p>';
+      h += '<div class="card"><div class="stage">Stop ' + cur.n + ' of ' + (S.total || 30) + ' &middot; ' + esc(cur.title) + '</div><h2>' + hd[0] + '</h2><p>' + hd[1] + '</p>';
       if (role === 'child') {
         if (cur.status === 'choose') h += '<button class="btn" id="gochoose">Pick a question for ' + esc(who(cur)) + '</button>';
         else if (cur.status === 'record-question') h += '<div class="qbox">' + esc(cur.chosen.text) + '</div><button class="btn" id="gorecord">Record My Question</button><button class="btn alt" id="goprep" style="margin-top:10px">Write It First</button><button class="btn alt" id="gochoose" style="margin-top:10px">Pick a different question</button>';
@@ -512,8 +542,8 @@
     h += helloInbox() + helloOffer() + conversationsList();
     if (!S.done) h += chapters();
     if (role === 'child' && !S.own && !S.done) h += '<p class="muted center">Parent and ' + esc(S.childName) + ': record together on this phone. A parent stays with ' + esc(S.childName) + ' while recording.</p>';
-    h += publicationCard() + photosCard() + childAccessCard();
-    h += '<p class="muted center">Your story stays open until ' + new Date(S.expiresAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + '. There is no rush.' + (S.test ? '<br><b>This is a test story.</b>' : '') + '</p>';
+    h += publicationCard() + profileCard() + photosCard() + childAccessCard();
+    h += '<p class="muted center">' + (S.done && S.expiresAt ? 'Your keepsake stays here until ' + new Date(S.expiresAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + '.' : 'Designed to take about ' + (S.paceMonths === 12 ? 'a year' : (S.paceMonths || 6) + ' months') + '. There is no deadline: keep going at your own pace until your story is finished.') + (S.test ? '<br><b>This is a test story.</b>' : '') + '</p>';
     app.innerHTML = h;
 
     var $ = function (id) { return app.querySelector('#' + id); };
@@ -525,7 +555,7 @@
     if ($('goclose')) $('goclose').onclick = function () { setView('closing'); };
     if ($('hvoice')) $('hvoice').onclick = function () { setView('hello'); };
     if ($('invite')) renderInvite($('invite'));
-    bindChildAccess(); bindPhotos(); bindPublication();
+    bindChildAccess(); bindPhotos(); bindPublication(); bindProfile();
     app.querySelectorAll('[data-play]').forEach(function (b) { b.onclick = function () { var p = b.getAttribute('data-play').split('|'); playMedia(b, 'slot=' + p[0] + '&n=' + p[1]); }; });
     app.querySelectorAll('[data-hello]').forEach(function (b) { b.onclick = function () { playMedia(b, 'slot=hello&id=' + encodeURIComponent(b.getAttribute('data-hello'))); }; });
     app.querySelectorAll('[data-hsend]').forEach(function (b) { b.onclick = function () {
@@ -690,7 +720,7 @@
     function ok() { cont.disabled = false; app.querySelector('#hint').textContent = 'Ready when you are.'; }
     au.addEventListener('ended', ok);
     au.addEventListener('error', function () { app.querySelector('#hint').textContent = 'This device could not play the answer. You can still continue.'; ok(); });
-    cont.onclick = function () { cont.disabled = true; api('heard', { json: { n: cur.n } }).then(function (st) { S = st; setView('home'); toast(st.done ? 'All 30 conversations are complete!' : 'Next stop unlocked!'); }).catch(function (e) { toast(e.message); cont.disabled = false; }); };
+    cont.onclick = function () { cont.disabled = true; api('heard', { json: { n: cur.n } }).then(function (st) { S = st; setView('home'); toast(st.done ? 'All ' + (st.total || 30) + ' conversations are complete!' : 'Next stop unlocked!'); }).catch(function (e) { toast(e.message); cont.disabled = false; }); };
     app.querySelector('#back').onclick = function () { setView('home'); };
   }
 

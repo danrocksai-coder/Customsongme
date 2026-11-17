@@ -22,18 +22,25 @@
 
 import { createHash, createHmac, randomBytes, scryptSync, timingSafeEqual } from 'node:crypto';
 import QUESTIONS from './fmm-questions.mjs';
+import PROFILE from './fmm-profile.mjs';
+export const PROFILE_QUESTIONS = PROFILE;
 
 export const LIMITS = { question: 15, answer: 60, intro: 120, closing: 120, hello: 15 }; // seconds
 export const MAX_BYTES = 4 * 1024 * 1024; // Netlify sync functions cap requests near 6 MB
 export const DURATION_SLACK = 3; // seconds of tolerance for recorder timing
-export const ACCESS_DAYS = 365; // "12 month adventure"
+export const ACCESS_DAYS = 365; // legacy only: stories no longer have a deadline (see isExpired)
+// A story never expires while it is being recorded. 30 conversations are designed to take about 6 months, 60 about a year.
+export const paceMonths = (story) => (story.stops.length === 60 ? 12 : 6);
+export const INACTIVE_NOTICE_DAYS = 730; // Admin flags an unfinished story with no activity for 2 years (contact the family first)
+export function isExpired(story) { return !!(story.completedAt && story.expiresAt && story.expiresAt < now()); }
 export const SIGNED_URL_SECONDS = 300;
 export const CONSENT_VERSION = '2026-11-16-v1';
 export const GRANDPARENT_CONSENT_VERSION = '2026-11-17-v1';
 export const CHILD_ACCESS_VERSION = '2026-11-17-v1'; // parent notice + consent-form wording for the child's own link
 export const FORM_MAX_BYTES = 4 * 1024 * 1024;
 export const PUBLICATION_VERSION = '2026-11-17-v1';
-export const PHOTO_MAX = 40;                    // photos per story
+export const PHOTO_MAX = 30;                    // default; a story allows one photo per conversation: photoMax(story)
+export const photoMax = (story) => story.stops.length;
 export const PHOTO_MAX_BYTES = 4 * 1024 * 1024; // the browser shrinks photos first; this is the hard cap
 export const PHOTO_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif'];
 export const FORM_TYPES = ['image/jpeg', 'image/png', 'image/heic', 'image/heif', 'image/webp', 'application/pdf'];
@@ -130,7 +137,26 @@ export function slotKey(n, slot, id) {
   if (slot === 'photo') return `photo-${id}`;
   return `${slot}-${n}`;
 }
-const emptyStops = () => STOPS.map((s) => ({ n: s.n, chosen: null, skipped: [], q: null, a: null, heardAt: null }));
+const emptyStops = (count = 30) => Array.from({ length: count }, (_, i) => ({ n: i + 1, chosen: null, skipped: [], q: null, a: null, heardAt: null }));
+
+// ---------- story size: 30 stops (standard) or 60 (big upgrade) ----------
+// 60-stop stories walk the same 30 approved stops twice in a row (stop 1, stop 1, stop 2, stop 2 …):
+// one grandparent answers two different questions per stop; in the together package each grandparent answers one.
+export const SIZES = [30, 60];
+export const T = (story) => story.stops.length;
+export function baseIndex(story, i) { return T(story) === 60 ? Math.floor(i / 2) : i; }
+export function defAt(story, i) { return STOPS[baseIndex(story, i)]; }
+export function choicesAt(story, i) {
+  const cur = story.stops[i]; const def = defAt(story, i);
+  let out = def.choices.filter((c) => !cur.skipped.includes(c.id));
+  const couple = Array.isArray(story.grandparents) && story.grandparents.length === 2;
+  if (T(story) === 60 && !couple && i % 2 === 1) { // same grandparent, same stop: offer the questions not used the first time
+    const used = story.stops[i - 1]?.chosen?.id;
+    if (used) out = out.filter((c) => c.id !== used);
+  }
+  return out;
+}
+const openN = (story, i) => (i < T(story) ? i + 1 : -1);
 
 // Fill defaults for stories created by earlier versions (in memory only).
 export function norm(story) {
@@ -142,6 +168,7 @@ export function norm(story) {
   story.sessions.guardian ||= [];
   story.sessions.kid ||= [];
   story.photos ||= [];
+  story.profiles ||= {};
   story.grandparentConsent ||= null;
   story.publication ||= { parent: null, grandparent: null, history: [] };
   story.childAccess ||= { status: 'none', basis: null, enabled: false, form: null, history: [] };
@@ -210,7 +237,7 @@ export async function createStory(store, input) {
   if (input.guardian) tokens.guardian = newToken();
   const qrCodes = { child: newToken(12), grandparent: newToken(12) };
   const story = norm({
-    id, createdAt: now(), expiresAt: now() + ACCESS_DAYS * 86400e3,
+    id, createdAt: now(), expiresAt: null, // no deadline while recording; set to completion + 12 months when finished
     test: !!input.test, childName, grandparentName, grandparents: gp2 ? [gp1, gp2] : null,
     parentName: String(input.parentName || '').slice(0, 80),
     parentEmail: String(input.parentEmail || '').slice(0, 120),
@@ -218,7 +245,7 @@ export async function createStory(store, input) {
     payment: input.payment ? { method: ['stripe', 'cash', 'other', 'free'].includes(input.payment) ? input.payment : 'other', note: String(input.paymentNote || '').slice(0, 200), at: now() } : null,
     qrCode: qrCodes.child, qrCodes, pinHash: null,
     tokenHashes: { child: sha(tokens.child), grandparent: sha(tokens.grandparent) },
-    consent: null, stops: emptyStops(), intro: null, closing: null, deletedAt: null,
+    consent: null, stops: emptyStops(SIZES.includes(Number(input.stops)) ? Number(input.stops) : 30), intro: null, closing: null, deletedAt: null,
   });
   if (tokens.guardian) { story.tokenHashes.guardian = sha(tokens.guardian); story.guardianCode = newToken(12); }
   const pc = input.pinChild ?? input.pin; // `pin` kept for older callers
@@ -307,7 +334,7 @@ async function loadSession(store, token) {
   if (!ref) fail(401, 'This phone needs to be reconnected.');
   const story = norm(await store.getJSON(`story/${ref.storyId}`) || fail(401, 'This phone needs to be reconnected.'));
   if (!story.sessions[ref.own ? 'kid' : ref.role]?.includes(sha(token))) fail(401, 'This phone needs to be reconnected.');
-  if (story.expiresAt < now()) fail(410, 'This story has passed its 12-month window.');
+  if (isExpired(story)) fail(410, 'This story\'s keepsake period has ended.');
   if (ref.own) assertKidAllowed(story);
   return { story, role: ref.role, own: !!ref.own, via: 'session' };
 }
@@ -328,7 +355,7 @@ export async function authorize(store, token, { pin } = {}) {
   if (!ref) fail(401, 'This link is no longer valid.');
   const story = norm(await store.getJSON(`story/${ref.storyId}`) || fail(401, 'This link is no longer valid.'));
   if (story.tokenHashes[ref.own ? 'kid' : ref.role] !== sha(token)) fail(401, 'This link is no longer valid.');
-  if (story.expiresAt < now()) fail(410, 'This story has passed its 12-month window.');
+  if (isExpired(story)) fail(410, 'This story\'s keepsake period has ended.');
   if (ref.own) { assertKidAllowed(story); return { story, role: 'child', own: true, via: 'link' }; }
   if (pinRequired(story, ref.role)) {
     const key = `pin|${story.id}|${ref.role}`;
@@ -370,7 +397,7 @@ export async function unlockWithQr(store, code, pin) {
   const ref = await store.getJSON(`qr/${code}`);
   const story = ref ? norm((await store.getJSON(`story/${ref.storyId}`)) || {}) : null;
   const role = ref ? (ref.role || 'child') : null;
-  const okExists = story && story.id && story.expiresAt >= now() && pinRequired(story, role);
+  const okExists = story && story.id && !isExpired(story) && pinRequired(story, role);
   if (!okExists || !pin || !pinOk(story, role, pin)) { if (ref) await rlFail(store, key); fail(401, GENERIC_UNLOCK); }
   await rlClear(store, key);
   return { session: await createSession(store, story, role), role, code };
@@ -401,12 +428,12 @@ export function stopStatus(story, i) {
 }
 export function currentIndex(story) {
   const i = story.stops.findIndex((s) => !s.heardAt);
-  return i === -1 ? STOPS.length : i;
+  return i === -1 ? T(story) : i;
 }
 // Who is currently waiting on the other person (the one who may send a Little Hello).
 export function waitingRole(story) {
   const i = currentIndex(story);
-  if (i >= STOPS.length) return null;
+  if (i >= T(story)) return null;
   const st = stopStatus(story, i);
   if (st === 'awaiting-answer') return 'child';
   return 'grandparent'; // choose / record-question / heard-pending: Mimi is waiting on Devon
@@ -458,18 +485,19 @@ export function guardianState(story) {
   const name = (r) => (r === 'child' ? story.childName : story.grandparentName);
   return {
     role: 'guardian', childName: story.childName, grandparentName: story.grandparentName, test: story.test,
-    expiresAt: story.expiresAt, completed: Math.min(ci, STOPS.length), done: ci >= STOPS.length, completedAt: story.completedAt || null,
+    expiresAt: ci >= T(story) ? story.expiresAt : null, paceMonths: paceMonths(story), completed: Math.min(ci, T(story)), total: T(story), done: ci >= T(story), completedAt: story.completedAt || null,
     consent: story.consent ? { parentName: story.consent.parentName, at: story.consent.at } : null,
     consentNeeded: !story.test && !story.consent,
     childPaused: !!story.childPaused, helloSettings: story.helloSettings,
     hellos: story.hellos.slice(-30).reverse().map((h) => ({ id: h.id, kind: h.kind, text: h.text || '', at: h.at, from: h.from, fromName: name(h.from), toName: name(h.from === 'child' ? 'grandparent' : 'child') })),
-    conversations: story.stops.map((s, i) => ((s.q || s.a) ? { n: i + 1, title: STOPS[i].title, question: s.chosen?.text || '', answerer: answererFor(story, i + 1), hasQ: !!s.q, hasA: !!s.a } : null)).filter(Boolean),
-    keepsake: ci >= STOPS.length ? { status: story.keepsake.status, items: story.keepsake.status === 'ready' ? story.keepsake.items : [] } : null,
-    availableUntil: ci >= STOPS.length ? story.expiresAt : null,
+    conversations: story.stops.map((s, i) => ((s.q || s.a) ? { n: i + 1, title: defAt(story, i).title, question: s.chosen?.text || '', answerer: answererFor(story, i + 1), hasQ: !!s.q, hasA: !!s.a } : null)).filter(Boolean),
+    keepsake: ci >= T(story) ? { status: story.keepsake.status, items: story.keepsake.status === 'ready' ? story.keepsake.items : [] } : null,
+    availableUntil: ci >= T(story) ? story.expiresAt : null,
     deletionRequestedAt: story.deletionRequestedAt || null, limits: LIMITS, retentionDays: RETENTION_DAYS_AFTER_COMPLETION,
     childAccess: childAccessView(story),
-    photos: photoList(story, 'guardian', false), canAddPhotos: true, photoMax: PHOTO_MAX,
+    photos: photoList(story, 'guardian', false), canAddPhotos: true, photoMax: photoMax(story),
     publication: publicationView(story, 'parent'),
+    profiles: profileView(story), profileQuestions: PROFILE,
   };
 }
 
@@ -512,29 +540,31 @@ export function publicState(story, role, own = false) {
   norm(story);
   if (role === 'guardian') return guardianState(story);
   const ci = currentIndex(story);
-  const stops = STOPS.map((def, i) => ({
-    n: def.n, chapter: def.chapter, title: def.title,
+  const stops = story.stops.map((_, i) => ({
+    n: i + 1, chapter: defAt(story, i).chapter, title: defAt(story, i).title,
     status: i < ci ? 'done' : i === ci ? stopStatus(story, i) : 'locked',
   }));
-  const cur = ci < STOPS.length ? story.stops[ci] : null;
-  const def = ci < STOPS.length ? STOPS[ci] : null;
+  const cur = ci < T(story) ? story.stops[ci] : null;
+  const def = ci < T(story) ? { ...defAt(story, ci), n: ci + 1 } : null;
   const other = role === 'child' ? 'grandparent' : 'child';
   const out = {
     role, childName: story.childName, grandparentName: story.grandparentName, grandparents: story.grandparents || null,
-    qrCode: story.qrCodes?.[role] || story.qrCode, test: story.test, expiresAt: story.expiresAt,
+    qrCode: story.qrCodes?.[role] || story.qrCode, test: story.test, expiresAt: ci >= T(story) ? story.expiresAt : null, paceMonths: paceMonths(story),
     consentNeeded: (role === 'child' && !own && !story.test && !story.consent) || (role === 'grandparent' && !story.test && !story.grandparentConsent),
     own: role === 'child' && !!own, // true = the child's own link; false = the parent-held family link
     childAccess: isController(story, role, own) ? childAccessView(story) : null,
-    photos: photoList(story, role, own), canAddPhotos: canAddPhotos(story, role, own), photoMax: PHOTO_MAX,
-    publication: pubSide(story, role, own) && ci >= STOPS.length ? publicationView(story, pubSide(story, role, own)) : null,
+    photos: photoList(story, role, own), canAddPhotos: canAddPhotos(story, role, own), photoMax: photoMax(story),
+    publication: pubSide(story, role, own) && ci >= T(story) ? publicationView(story, pubSide(story, role, own)) : null,
+    profiles: own ? null : profileView(story), profileQuestions: own ? null : PROFILE,
+    canEditProfile: !own && (role === 'grandparent' || isController(story, role, own)),
     guardianManaged: !!story.tokenHashes.guardian, paused: role === 'child' && !!story.childPaused,
-    availableUntil: ci >= STOPS.length ? story.expiresAt : null,
-    done: ci >= STOPS.length, completed: Math.min(ci, STOPS.length),
+    availableUntil: ci >= T(story) ? story.expiresAt : null,
+    done: ci >= T(story), completed: Math.min(ci, T(story)), total: T(story),
     chapters: CHAPTERS, stops, introDone: !!story.intro, closingDone: !!story.closing,
     limits: LIMITS, current: null, draft: '',
     // finished conversations the participant can replay (real recordings only)
-    conversations: story.stops.map((s, i) => (s.heardAt ? { n: i + 1, title: STOPS[i].title, question: s.chosen?.text || '', answerer: answererFor(story, i + 1) } : null)).filter(Boolean),
-    keepsake: ci >= STOPS.length ? { status: story.keepsake.status, items: story.keepsake.status === 'ready' ? story.keepsake.items : [] } : null,
+    conversations: story.stops.map((s, i) => (s.heardAt ? { n: i + 1, title: defAt(story, i).title, question: s.chosen?.text || '', answerer: answererFor(story, i + 1) } : null)).filter(Boolean),
+    keepsake: ci >= T(story) ? { status: story.keepsake.status, items: story.keepsake.status === 'ready' ? story.keepsake.items : [] } : null,
     hellos: story.hellos.filter((h) => h.from === other).slice(-20).reverse().map((h) => ({ id: h.id, kind: h.kind, text: h.text || '', at: h.at, read: !!h.readAt })),
     helloOffer: null,
   };
@@ -543,7 +573,7 @@ export function publicState(story, role, own = false) {
   if (cur) {
     out.current = {
       n: def.n, title: def.title, status: stopStatus(story, ci), answerer: answererFor(story, def.n),
-      choices: def.choices.filter((c) => !cur.skipped.includes(c.id)).map((c) => ({ id: c.id, text: c.text, type: c.type, sensitive: c.sensitive })),
+      choices: choicesAt(story, ci).map((c) => ({ id: c.id, text: c.text, type: c.type, sensitive: c.sensitive })),
       chosen: cur.chosen,
     };
     // the grandparent sees the child's pick only once the question is actually recorded
@@ -587,7 +617,7 @@ export async function choose(store, token, { n, qid, custom, pin }) {
   if (role !== 'child') fail(403, 'Only the child picks the question.');
   assertNotPaused(story, role);
   const i = currentIndex(story);
-  if (n !== STOPS[i]?.n) fail(409, 'That stop is not open yet.');
+  if (n !== openN(story, i)) fail(409, 'That stop is not open yet.');
   const cur = story.stops[i];
   if (cur.q) fail(409, 'This question is already recorded.');
   if (custom) {
@@ -595,7 +625,7 @@ export async function choose(store, token, { n, qid, custom, pin }) {
     if (!text) fail(400, 'Empty custom question.');
     cur.chosen = { id: 'custom', text, custom: true };
   } else {
-    const c = STOPS[i].choices.find((x) => x.id === qid && !cur.skipped.includes(x.id));
+    const c = choicesAt(story, i).find((x) => x.id === qid);
     if (!c) fail(400, 'Unknown question choice.');
     cur.chosen = { id: c.id, text: c.text };
   }
@@ -609,7 +639,7 @@ export async function saveDraft(store, token, { n, text, pin }) {
   if (role === 'guardian') fail(403, 'Parents do not write recording notes.');
   assertNotPaused(story, role);
   const i = currentIndex(story);
-  if (n !== STOPS[i]?.n) fail(409, 'That stop is not open.');
+  if (n !== openN(story, i)) fail(409, 'That stop is not open.');
   const st = stopStatus(story, i);
   const allowed = role === 'child' ? ['choose', 'record-question'] : ['awaiting-answer'];
   if (!allowed.includes(st)) fail(409, 'Nothing to prepare right now.');
@@ -653,7 +683,7 @@ export async function upload(store, token, { n, slot, data, durationSec, uploadI
 
   let target; let key;
   if (slot === 'intro' || slot === 'closing') {
-    if (slot === 'closing' && currentIndex(story) < STOPS.length) fail(409, 'The closing message comes after all 30 conversations.');
+    if (slot === 'closing' && currentIndex(story) < T(story)) fail(409, 'The closing message comes after all the conversations.');
     target = story; key = slot; // story.intro / story.closing
     if (story[key]) {
       if (story[key].uploadId === uploadId) return { ok: true, duplicate: true };
@@ -661,7 +691,7 @@ export async function upload(store, token, { n, slot, data, durationSec, uploadI
     }
   } else {
     const i = currentIndex(story);
-    if (n !== STOPS[i]?.n) fail(409, 'That stop is not open.');
+    if (n !== openN(story, i)) fail(409, 'That stop is not open.');
     target = story.stops[i]; key = slot === 'question' ? 'q' : 'a';
     if (slot === 'question' && !target.chosen) fail(409, 'Pick a question first.');
     if (slot === 'answer' && !target.q) fail(409, 'The question has not been recorded yet.');
@@ -683,13 +713,13 @@ export async function markHeard(store, token, { n, pin }) {
   if (role !== 'child') fail(403, 'Only the child unlocks the next stop.');
   assertNotPaused(story, role);
   const i = currentIndex(story);
-  if (n !== STOPS[i]?.n) fail(409, 'That stop is not open.');
+  if (n !== openN(story, i)) fail(409, 'That stop is not open.');
   if (!story.stops[i].a) fail(409, 'The answer has not been recorded yet.');
   story.stops[i].heardAt = now();
   story.lastActivityAt = now();
-  if (currentIndex(story) >= STOPS.length) { // retention policy: the keepsake stays open 12 months after completion
+  if (currentIndex(story) >= T(story)) { // retention policy: the keepsake stays open 12 months after completion
     story.completedAt = now();
-    story.expiresAt = Math.max(story.expiresAt, story.completedAt + RETENTION_DAYS_AFTER_COMPLETION * 86400e3);
+    story.expiresAt = story.completedAt + RETENTION_DAYS_AFTER_COMPLETION * 86400e3;
   }
   await store.setJSON(`story/${story.id}`, story);
   return publicState(story, role, own);
@@ -700,7 +730,7 @@ export async function skipQuestion(store, token, { n, pin }) {
   const { story, role } = await authorize(store, token, { pin });
   if (role !== 'grandparent') fail(403, 'Only the grandparent can skip.');
   const i = currentIndex(story);
-  if (n !== STOPS[i]?.n) fail(409, 'That stop is not open.');
+  if (n !== openN(story, i)) fail(409, 'That stop is not open.');
   const cur = story.stops[i];
   if (!cur.q) fail(409, 'No question to skip.');
   if (cur.a) fail(409, 'Already answered.');
@@ -845,7 +875,7 @@ export async function setPublication(store, token, { choice, name, agree, pin })
   const { story, role, own } = await authorize(store, token, { pin });
   const side = pubSide(story, role, own);
   if (!side) fail(403, 'Only the parent and the grandparent can decide this.');
-  if (currentIndex(story) < STOPS.length) fail(409, 'This comes after all 30 conversations are finished.');
+  if (currentIndex(story) < T(story)) fail(409, 'This comes after all the conversations are finished.');
   if (!['private', 'share'].includes(choice)) fail(400, 'Please choose an option.');
   const nm = String(name || '').trim().slice(0, 80);
   if (!nm || !agree) fail(400, 'Your name and the confirmation are required.');
@@ -858,6 +888,30 @@ export async function setPublication(store, token, { choice, name, agree, pin })
   return stateFor(story, role, own);
 }
 
+// ----- grandparent profile: 20 quick multiple-choice questions per grandparent, all optional -----
+function gpNames(story) { return Array.isArray(story.grandparents) && story.grandparents.length === 2 ? story.grandparents : [story.grandparentName]; }
+export function profileView(story) {
+  norm(story);
+  return gpNames(story).map((name, k) => {
+    const a = story.profiles[k]?.answers || {};
+    return { k, name, answers: a, answered: Object.keys(a).length, total: PROFILE.length };
+  });
+}
+export async function saveProfile(store, token, { k, qid, answer, pin }) {
+  const { story, role, own } = await authorize(store, token, { pin });
+  if (own) fail(403, 'A grandparent or parent fills this in.');
+  if (!(role === 'grandparent' || isController(story, role, own))) fail(403, 'A grandparent or parent fills this in.');
+  const names = gpNames(story); const idx = Number(k) || 0;
+  if (!(idx >= 0 && idx < names.length)) fail(400, 'Unknown grandparent.');
+  const q = PROFILE.find((x) => x.id === qid); if (!q) fail(400, 'Unknown question.');
+  const prof = (story.profiles[idx] ||= { answers: {} });
+  if (answer === null || answer === '') delete prof.answers[qid];
+  else { const i = Number(answer); if (!Number.isInteger(i) || i < 0 || i >= q.options.length) fail(400, 'Please pick one of the answers.'); prof.answers[qid] = i; }
+  prof.at = now();
+  await store.setJSON(`story/${story.id}`, story);
+  return { ok: true, profiles: profileView(story) };
+}
+
 // ----- family photos (for the movie and storybook) -----
 export async function uploadPhoto(store, token, { data, contentType, caption, uploadId, pin }) {
   const { story, role, own } = await authorize(store, token, { pin });
@@ -866,7 +920,7 @@ export async function uploadPhoto(store, token, { data, contentType, caption, up
   if (role === 'grandparent' && !story.grandparentConsent && !story.test) fail(409, 'Please agree to be recorded first.');
   const dup = story.photos.find((p) => uploadId && p.uploadId === uploadId);
   if (dup) return { ok: true, duplicate: true, state: stateFor(story, role, own) };
-  if (story.photos.length >= PHOTO_MAX) fail(409, `This story already has ${PHOTO_MAX} photos. Remove one to add another.`);
+  if (story.photos.length >= photoMax(story)) fail(409, `This story already has ${photoMax(story)} photos (one per conversation). Remove one to add another.`);
   if (!data || !data.length) fail(400, 'Empty photo.');
   if (data.length > PHOTO_MAX_BYTES) fail(413, 'That photo is too large.');
   if (!PHOTO_TYPES.includes(String(contentType || ''))) fail(415, 'Please choose a photo (JPG, PNG or HEIC).');
@@ -896,13 +950,14 @@ export function movieKit(story, secret) {
   const clip = (x, key) => (x ? { url: link(key), seconds: x.durationSec, type: x.contentType } : null);
   return {
     version: 1, storyId: story.id, childName: story.childName, grandparentName: story.grandparentName, grandparents: story.grandparents || null, test: !!story.test,
-    completed: Math.min(currentIndex(story), STOPS.length), publishAllowed: publishAllowed(story),
+    completed: Math.min(currentIndex(story), T(story)), total: T(story), publishAllowed: publishAllowed(story),
     chapters: CHAPTERS.map((c) => ({ n: c.n, title: c.title })),
     stops: story.stops.map((s, i) => ({
-      n: i + 1, chapter: STOPS[i].chapter, title: STOPS[i].title, question: s.chosen?.text || '', answerer: answererFor(story, i + 1),
+      n: i + 1, chapter: defAt(story, i).chapter, title: defAt(story, i).title, question: s.chosen?.text || '', answerer: answererFor(story, i + 1),
       q: clip(s.q, slotKey(i + 1, 'question')), a: clip(s.a, slotKey(i + 1, 'answer')),
     })),
     intro: clip(story.intro, 'intro'), closing: clip(story.closing, 'closing'),
+    profiles: profileView(story).map((p) => ({ name: p.name, answers: Object.fromEntries(Object.entries(p.answers).map(([id, i]) => [PROFILE.find((q) => q.id === id)?.text || id, PROFILE.find((q) => q.id === id)?.options[i]])) })),
     photos: story.photos.map((p) => ({ id: p.id, caption: p.caption, by: p.by, type: p.contentType, url: link(slotKey(0, 'photo', p.id)) })),
   };
 }
@@ -952,7 +1007,7 @@ export async function setKeepsake(store, storyId, { status, items }) {
 export async function mediaAccess(store, secret, token, { n, slot, id, pin }) {
   const { story, role } = await authorize(store, token, { pin });
   const i = currentIndex(story);
-  const idx = STOPS.findIndex((s) => s.n === n);
+  const idx = Number.isInteger(n) && n >= 1 && n <= T(story) ? n - 1 : -1;
   let item; let key;
   if (slot === 'question' || slot === 'answer') {
     item = story.stops[idx]?.[slot === 'question' ? 'q' : 'a'];

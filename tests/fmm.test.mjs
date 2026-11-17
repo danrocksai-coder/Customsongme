@@ -187,9 +187,11 @@ test('optional PIN protects the child link', async () => {
   assert.equal(await status(C.authorize(store, tokens.grandparent)), 200); // grandparent needs no PIN
 });
 
-test('12-month window is enforced', async () => {
+test('no deadline while recording; a finished story closes 12 months after completion', async () => {
   const { store, story, tokens } = await mk();
-  story.expiresAt = Date.now() - 1000; await store.setJSON(`story/${story.id}`, story);
+  story.expiresAt = Date.now() - 1000; await store.setJSON(`story/${story.id}`, story); // an old-style date on an unfinished story
+  assert.equal(await status(C.authorize(store, tokens.child)), 200);                  // is ignored
+  story.completedAt = Date.now() - 2000; await store.setJSON(`story/${story.id}`, story);
   assert.equal(await status(C.authorize(store, tokens.child)), 410);
 });
 
