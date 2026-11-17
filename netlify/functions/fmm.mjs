@@ -174,6 +174,9 @@ export default async (req) => {
   }
 };
 
+const cleanAddr = (a) => { a = a && typeof a === 'object' ? a : {}; const c = (v, n) => String(v || '').trim().slice(0, n); return { line1: c(a.line1, 120), city: c(a.city, 60), state: c(a.state, 20), zip: c(a.zip, 10) }; };
+const addrOk = (a) => !!(a.line1 && a.city && a.state && a.zip);
+
 async function order(req, store) {
   const b = await req.json().catch(() => ({}));
   if (b.website) return json({ ok: true }); // honeypot
@@ -187,11 +190,15 @@ async function order(req, store) {
     parentName: clean(b.parentName, 80), parentEmail: clean(b.parentEmail || (b.buyerRole === 'parent' || !b.buyerRole ? b.email : ''), 120), email, phone: clean(b.phone, 30),
     childName: clean(b.childName, 40), grandparent1: clean(b.grandparent1, 40), grandparent2: clean(b.grandparent2, 40), notes: clean(b.notes, 400),
     source: clean(b.source, 80) || 'direct', status: 'awaiting-payment',
+    gpAddress: cleanAddr(b.gpAddress), childAddress: cleanAddr(b.childAddress), // where the two magnets go
+    childRecording: b.childRecording === 'own' ? 'own' : 'parent', waiverAt: b.waiver === true ? Date.now() : null,
   };
   const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!pkg || pkg.id === 'fmm2' || !o.buyerName || !EMAIL.test(email) || !o.childName || !o.grandparent1 || (pkg.grandparents === 2 && !o.grandparent2)) {
     return json({ error: 'Please complete all required fields.' }, 400);
   }
+  if (!addrOk(o.gpAddress) || !addrOk(o.childAddress)) return json({ error: 'Please fill in both mailing addresses so the magnets can be sent.' }, 400);
+  if (!o.waiverAt) return json({ error: 'Please check the waiver and permission box.' }, 400);
   // the child's parent is always involved: when someone else buys, we need the parent's name and email
   if (!o.parentName || !EMAIL.test(o.parentEmail)) return json({ error: "Please add the child's parent or guardian's name and email." }, 400);
   await store.setJSON(`order/${o.id}`, o);

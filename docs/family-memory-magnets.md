@@ -126,3 +126,10 @@ Recordings and story data are in private Netlify Blobs (store `fmm`). No public 
 - **Order form:** asks who's buying (parent / grandparent / someone else). When the buyer isn't the parent, the parent's name and email are required, because the parent always gives permission. Admin shows the buyer and the parent, and prefills the story with the parent's email and the package size.
 - **Sales page:** hero, video, the 4 packages, the order form, 3-step "How it works", privacy, 5 FAQs. The 10-step list and the chapter list are gone.
 - 92 tests.
+
+## v12: sales page v3 (SEO, silhouettes, 4 steps, addresses, pace, FAQ)
+- **Keyword positioning:** the gap is "the grandchild asks", which competitors (Storyworth, Remento, Storii) don't own. Title, description, H1 and FAQ target: gift for grandparents from grandkids, grandchild interviews grandparent, questions grandkids ask grandparents, long-distance grandparents, voice keepsake, QR magnet.
+- **Page order:** hero → video → "Get to know the life they lived" + the 6 chapters → 4 package cards (silhouettes: one grandparent + child, or two + child; Big Story cards tinted) → "How to order" (4 steps) + what happens next (magnets ordered within 24 h; 2 QR codes emailed to print) → Your details (buyer controls; parent always gives permission) with both mailing addresses, child-recording setting and the waiver → suggested pace tables (30 = 1 chapter/month; 60 = 1 chapter per 2 months) → privacy → 14-question FAQ.
+- **Structured data:** Product with 4 Offers, plus a FAQPage that mirrors the visible FAQ.
+- **Orders** store `gpAddress`, `childAddress`, `childRecording` ('parent' | 'own') and `waiverAt`, and the server requires both addresses and the waiver. Admin shows them on each order.
+- **Packages** now include two magnets (one per home). The privacy policy lists the addresses and Printful as a provider.
