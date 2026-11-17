@@ -161,3 +161,11 @@ fieldset.addr .row { margin-top: 8px; } fieldset.addr input { margin: 0; }
 .faq summary::after { content: '+'; position: absolute; right: 0; top: 10px; font-size: 1.4rem; color: var(--ink); }
 .faq[open] summary::after { content: '−'; }
 .faq p { padding: 0 0 14px; margin: 0; }
+
+/* order form v4: numbered sections, profiles */
+.fs { display: flex; align-items: center; gap: 10px; margin-top: 22px; font-size: 1.3rem; }
+.fs span { width: 30px; height: 30px; border-radius: 50%; background: var(--navy); color: var(--gold); font: 800 1rem var(--body); display: grid; place-items: center; flex: none; }
+.prof { border: 1px solid var(--border); border-radius: 14px; padding: 12px 14px; margin: 10px 0; }
+.prof > b { color: var(--navy); }
+details.pre { margin-top: 10px; } details.pre summary { cursor: pointer; color: var(--ink); font-weight: 700; }
+.pqs { margin-top: 6px; } label.pq { font-weight: 600; font-size: .92rem; margin: 10px 0 0; } label.pq select { margin-top: 4px; }

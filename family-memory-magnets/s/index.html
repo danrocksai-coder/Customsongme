@@ -468,12 +468,16 @@
   }
   function renderGuardian() {
     var h = header();
-    h += '<div class="card"><div class="stage">Parent dashboard</div><h2>You are in charge</h2><p class="muted">You can see progress, listen to recordings, control Little Hellos, pause recording, decide whether ' + esc(S.childName) + ' gets their own link, and ask for everything to be deleted. To record, use the family link together with ' + esc(S.childName) + '.</p></div>';
-    if (S.consentNeeded) {
+    var BUY = S.role === 'buyer';
+    if (BUY) h += '<div class="card"><div class="stage">Your settings</div><h2>You set it up</h2><p class="muted">You bought this story, so you can fill in each grandparent\'s profile, add family photos, choose Little Hello settings and follow progress. ' + esc(S.childName) + '\'s parent gives permission and decides how ' + esc(S.childName) + ' records. The recordings themselves stay private to the family members in the story.</p></div>' +
+      (S.consentPending ? '<div class="msg info">Waiting for ' + esc(S.childName) + '\'s parent to give permission. Nothing is recorded until they do.</div>' : '');
+    else h += '<div class="card"><div class="stage">Parent dashboard</div><h2>You are in charge</h2><p class="muted">You can see progress, listen to recordings, control Little Hellos, pause recording, decide whether ' + esc(S.childName) + ' gets their own link, and ask for everything to be deleted. To record, use the family link together with ' + esc(S.childName) + '.</p></div>';
+    if (BUY) { /* parent-only steps are not shown to the buyer */ }
+    else if (S.consentNeeded) {
       h += '<div class="card"><h3>Permission needed</h3><p>Before ' + esc(S.childName) + ' records anything, a parent or legal guardian needs to give permission.</p><ul style="margin:8px 0 0 20px"><li>You and ' + esc(S.childName) + ' record together on your phone, using the family link.</li><li>Recordings are private and are never posted publicly without a separate yes from you.</li><li>They are used only to create this family story, movie and keepsake.</li><li>You can ask for them to be deleted at any time.</li></ul><p class="muted" style="margin-top:8px"><a href="/family-memory-magnets/privacy/" target="_blank" rel="noopener">Privacy policy</a></p>' +
         '<label for="pn">Your name</label><input type="text" id="pn" autocomplete="name"><label class="check"><input type="checkbox" id="ag"><span>I am ' + esc(S.childName) + '\'s parent or legal guardian, and I give permission for ' + esc(S.childName) + '\'s voice to be recorded and saved for this family story.</span></label><div id="cm"></div><button class="btn" id="cb">I agree and continue</button></div>';
     } else if (S.consent) h += '<div class="card"><div class="muted">Permission given by ' + esc(S.consent.parentName) + ' on ' + new Date(S.consent.at).toLocaleDateString() + '.</div></div>';
-    h += '<div class="card"><h3>' + esc(S.childName) + '\'s recording</h3><p class="muted">' + (S.childPaused ? 'Paused. ' + esc(S.childName) + ' cannot record or send hellos until you turn it back on.' : 'Active.') + '</p><button class="btn ' + (S.childPaused ? '' : 'alt') + '" id="gpause">' + (S.childPaused ? 'Turn recording back on' : 'Pause recording') + '</button></div>';
+    if (!BUY) h += '<div class="card"><h3>' + esc(S.childName) + '\'s recording</h3><p class="muted">' + (S.childPaused ? 'Paused. ' + esc(S.childName) + ' cannot record or send hellos until you turn it back on.' : 'Active.') + '</p><button class="btn ' + (S.childPaused ? '' : 'alt') + '" id="gpause">' + (S.childPaused ? 'Turn recording back on' : 'Pause recording') + '</button></div>';
     h += publicationCard() + childAccessCard() + profileCard() + photosCard();
     var hs = S.helloSettings;
     h += '<div class="card"><h3>Little Hellos</h3><p class="muted">Short, optional hellos sent between ' + esc(S.childName) + ' and ' + esc(S.grandparentName) + ' after a quiet couple of days. They never change the story.</p>' +
@@ -499,7 +503,7 @@
     if ($('cb')) $('cb').onclick = function () { api('consent', { json: { parentName: $('pn').value, agree: $('ag').checked } }).then(refresh).then(render).catch(function (e) { $('cm').innerHTML = '<div class="msg err">' + esc(e.message) + '</div>'; }); };
     if ($('hst')) { $('hst').value = hs.style; $('hcu').value = (hs.custom || []).join('\n'); }
     function upd(body, ok) { return api('guardian', { json: body }).then(function (st) { S = st; if (ok) toast(ok); render(); }).catch(function (e) { toast(e.message, 5000); }); }
-    $('gpause').onclick = function () { upd({ childPaused: !S.childPaused }, S.childPaused ? 'Recording turned back on.' : 'Recording paused.'); };
+    if ($('gpause')) $('gpause').onclick = function () { upd({ childPaused: !S.childPaused }, S.childPaused ? 'Recording turned back on.' : 'Recording paused.'); };
     $('hsave').onclick = function () { upd({ hello: { enabled: $('hen').checked, style: $('hst').value, custom: $('hcu').value.split('\n') } }, 'Saved.'); };
     if ($('gdel')) $('gdel').onclick = function () { if (confirm('Ask for all of your family\'s recordings to be deleted? Nothing is deleted automatically. I will contact you first.')) upd({ requestDeletion: true }, 'Request sent.'); };
     if ($('gundel')) $('gundel').onclick = function () { upd({ requestDeletion: false }, 'Request cancelled.'); };
@@ -510,7 +514,7 @@
 
   function render() {
     if (!S) return;
-    if (S.role === 'guardian') return renderGuardian();
+    if (S.role === 'guardian' || S.role === 'buyer') return renderGuardian();
     if (S.consentNeeded) return renderConsent();
     if (S.paused) return renderPaused();
     var role = S.role, cur = S.current;

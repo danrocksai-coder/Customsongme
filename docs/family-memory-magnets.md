@@ -133,3 +133,17 @@ Recordings and story data are in private Netlify Blobs (store `fmm`). No public 
 - **Structured data:** Product with 4 Offers, plus a FAQPage that mirrors the visible FAQ.
 - **Orders** store `gpAddress`, `childAddress`, `childRecording` ('parent' | 'own') and `waiverAt`, and the server requires both addresses and the waiver. Admin shows them on each order.
 - **Packages** now include two magnets (one per home). The privacy policy lists the addresses and Printful as a provider.
+
+## v13: buyer login + set everything up on the order page
+- **Buyer login (role `buyer`):** for when a grandparent or relative buys.
+  - **Can:** fill in or edit the grandparent profiles, add photos, change Little Hello settings, follow progress, and ask for deletion.
+  - **Cannot:** give permission, turn on the child's own link, pause the child, give the parent's publishing answer, or play the family's recordings (only progress and photos).
+  - **Admin:** add, revoke and set a PIN on the buyer login. It's prefilled when the order's buyer isn't the parent.
+- **Order page, step by step:**
+  1. Your details.
+  2. Your settings: how the child records, a parent settings link, Little Hellos, movie music, movie sharing.
+  3. The profiles: the child's first name and age; each grandparent's name, plus optional prefilled answers to the 20 profile questions.
+  4. Both magnet addresses.
+  5. Sign the waiver and pay.
+- **On the order and the story:** the order stores `settings`, `childAge` and `profiles`. When Dan creates the story from the order, the story starts with those choices (`story.prefs`, `helloSettings`, `profiles`), and the movie kit includes `prefs`.
+- 97 tests.
