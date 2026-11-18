@@ -434,7 +434,7 @@
       .nav-brand { font-size: 0.82rem; }
     }
   </style>
-  <link rel="stylesheet" href="/css/builder.css?v=20261118" />
+  <link rel="stylesheet" href="/css/builder.css?v=20261120" />
 </head>
 <body>
 
@@ -541,15 +541,15 @@
         <p class="hp-field" aria-hidden="true">
           <label>Don't fill this out if you're human: <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
         </p>
+
+        <div class="songfor-row who-pick" id="songfor-row" role="radiogroup" aria-label="Who is this song for?">
+          <label class="sf-check who-card"><input type="radio" class="sr-radio" name="song-for" value="About me" data-me="1" data-short="Me" required /><span class="sf-box" aria-hidden="true"></span><span class="who-text"><strong>Your story, your song</strong><small>A song about you</small></span></label>
+          <label class="sf-check who-card"><input type="radio" class="sr-radio" name="song-for" value="A gift for someone" data-gift="1" data-short="Someone else" required /><span class="sf-box" aria-hidden="true"></span><span class="who-text"><strong>Gift a song</strong><small>For someone special</small></span></label>
+        </div>
+        <p class="sound-note" id="gift-note" role="alert">First, choose: your story, or a gift?</p>
         
         <div class="builder-step" id="step-1" data-step="1">
           <div class="step-head"><span class="step-kicker">Step 1 of 6</span><h3>What's the occasion?</h3></div>
-          <div class="songfor-row" id="songfor-row" role="radiogroup" aria-label="Who is this song for?">
-            <span class="req-tag">Required</span>
-            <label class="sf-check"><input type="radio" class="sr-radio" name="song-for" value="About me" data-me="1" data-short="Me" required /><span class="sf-box" aria-hidden="true"></span><span class="sf-text">This song is for me</span></label>
-            <label class="sf-check"><input type="radio" class="sr-radio" name="song-for" value="A gift for someone" data-gift="1" data-short="Someone else" required /><span class="sf-box" aria-hidden="true"></span><span class="sf-text">This song is for someone else</span></label>
-          </div>
-          <p class="sound-note" id="gift-note" role="alert">First, check who the song is for.</p>
           <div class="occ-chosen" id="occ-chosen" hidden><span id="occ-chosen-label">🐶 Pet Song</span><button type="button" class="occ-change" id="occ-change">change</button></div>
           <div class="occ-grid">
           <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Birthday" data-key="birthday" required /><span class="occ-face"><span class="em" aria-hidden="true">🎂</span>Birthday</span></label>
@@ -578,16 +578,15 @@
 
         <div class="builder-step wide" id="step-2" data-step="2">
           <div class="step-head"><span class="step-kicker">Step 2 of 6</span><h3>Pick your package</h3></div>
-        <p class="step-hint">Tap a card to choose it. Tap "See example" to preview the keepsake.</p>
+        <p class="step-hint">Tap a card to choose it. Everything arrives by email, and by text if you opt in.</p>
           <div class="pkg-pick">
           <label class="pkg-card">
             <input type="radio" class="sr-radio" name="package-tier" value="1" required id="pkg-1" />
             <div class="pkg-card-inner">
               <span class="pkg-check" aria-hidden="true">✓</span>
               <div class="pkg-disc"><small>Package 1</small><strong>MP3 Only</strong><em>$25</em></div>
-              <div class="pkg-best"><b>Best for:</b> A simple gift</div>
-              <ul class="pkg-inc"><li>Downloadable MP3<ul class="pkg-sub"><li>Full set of lyrics (lyrics card)</li><li>QR code links directly to your MP3</li></ul></li></ul>
-              <button type="button" class="pkg-example" data-full="/img/package-1-mp3-only.webp" data-alt="CustomSongMe Package 1, MP3 Only, $25: keepsake card with lyrics and a QR code" aria-haspopup="dialog">See example</button>
+              <div class="pkg-preview"><img src="/img/package-1-mp3-only-thumb.webp" alt="CustomSongMe Package 1, MP3 Only, $25: keepsake card with lyrics and a QR code" width="420" height="543" loading="lazy" decoding="async" /><button type="button" class="pkg-example pkg-zoom" data-full="/img/package-1-mp3-only.webp" data-alt="CustomSongMe Package 1, MP3 Only, $25: keepsake card with lyrics and a QR code" aria-haspopup="dialog" aria-label="See it bigger">🔍</button></div>
+              <p class="pkg-get">Your song as an MP3, plus a lyrics card with a QR code.</p>
             </div>
           </label>
           <label class="pkg-card">
@@ -595,9 +594,8 @@
             <div class="pkg-card-inner">
               <span class="pkg-tag">Most popular</span><span class="pkg-check" aria-hidden="true">✓</span>
               <div class="pkg-disc"><small>Package 2</small><strong>Complete</strong><em>$50</em></div>
-              <div class="pkg-best"><b>Best for:</b> Sharing with family</div>
-              <ul class="pkg-inc"><li>Downloadable MP3<ul class="pkg-sub"><li>Full set of lyrics (lyrics card)</li></ul></li><li class="new">Public YouTube video link</li><li class="new">Your message on the card</li></ul>
-              <button type="button" class="pkg-example" data-full="/img/package-2-complete.webp" data-alt="CustomSongMe Package 2, Complete, $50: keepsake card with a music video QR code and personal message" aria-haspopup="dialog">See example</button>
+              <div class="pkg-preview"><img src="/img/package-2-complete-thumb.webp" alt="CustomSongMe Package 2, Complete, $50: keepsake card with a music video QR code and personal message" width="420" height="543" loading="lazy" decoding="async" /><button type="button" class="pkg-example pkg-zoom" data-full="/img/package-2-complete.webp" data-alt="CustomSongMe Package 2, Complete, $50: keepsake card with a music video QR code and personal message" aria-haspopup="dialog" aria-label="See it bigger">🔍</button></div>
+              <p class="pkg-get">Your MP3, a music video on YouTube, and your message on the card.</p>
             </div>
           </label>
           <label class="pkg-card">
@@ -605,9 +603,9 @@
             <div class="pkg-card-inner">
               <span class="pkg-check" aria-hidden="true">✓</span>
               <div class="pkg-disc"><small>Package 3</small><strong>Story</strong><em>$75</em></div>
-              <div class="pkg-best"><b>Best for:</b> Big milestones</div>
-              <ul class="pkg-inc"><li>Downloadable MP3<ul class="pkg-sub"><li>Full set of lyrics (lyrics card)</li></ul></li><li>Public YouTube video link</li><li class="new">Backstory<ul class="pkg-sub"><li>The details you share, told with your photos</li><li>Up to 5 photos</li></ul></li><li class="new">1 personal message on the card</li></ul>
-              <button type="button" class="pkg-example" data-full="/img/package-3-story.webp" data-alt="CustomSongMe Package 3, Story, $75: keepsake card with song, video and story QR codes" aria-haspopup="dialog">See example</button>
+              <div class="pkg-preview"><img src="/img/package-3-story-thumb.webp" alt="CustomSongMe Package 3, Story, $75: keepsake card with song, video and story QR codes" width="420" height="543" loading="lazy" decoding="async" /><button type="button" class="pkg-example pkg-zoom" data-full="/img/package-3-story.webp" data-alt="CustomSongMe Package 3, Story, $75: keepsake card with song, video and story QR codes" aria-haspopup="dialog" aria-label="See it bigger">🔍</button></div>
+              <p class="pkg-get">Everything in Complete, plus your story told with up to 5 photos.</p>
+              <p class="pkg-photos">📸 After you order, you’ll get a private Google Drive link for your photos.</p>
             </div>
           </label>
           <label class="pkg-card">
@@ -615,9 +613,9 @@
             <div class="pkg-card-inner">
               <span class="pkg-check" aria-hidden="true">✓</span>
               <div class="pkg-disc"><small>Package 4</small><strong>Ultimate</strong><em>$100</em></div>
-              <div class="pkg-best"><b>Best for:</b> Parties and events</div>
-              <ul class="pkg-inc"><li>Downloadable MP3<ul class="pkg-sub"><li>Full set of lyrics (lyrics card)</li></ul></li><li>Public YouTube video link</li><li>Backstory<ul class="pkg-sub"><li>The details you share, told with your photos</li></ul></li><li>1 personal message on the card</li><li class="new">Up to 15 photos</li><li class="new">Party photo album guests add to</li><li class="new">Four-corner card design</li></ul>
-              <button type="button" class="pkg-example" data-full="/img/package-4-ultimate.webp" data-alt="CustomSongMe Package 4, Ultimate, $100: four-corner keepsake with four QR codes" aria-haspopup="dialog">See example</button>
+              <div class="pkg-preview"><img src="/img/package-4-ultimate-thumb.webp" alt="CustomSongMe Package 4, Ultimate, $100: four-corner keepsake with four QR codes" width="420" height="543" loading="lazy" decoding="async" /><button type="button" class="pkg-example pkg-zoom" data-full="/img/package-4-ultimate.webp" data-alt="CustomSongMe Package 4, Ultimate, $100: four-corner keepsake with four QR codes" aria-haspopup="dialog" aria-label="See it bigger">🔍</button></div>
+              <p class="pkg-get">Everything in Story, plus 15 photos, a party photo album and a four-corner card.</p>
+              <p class="pkg-photos">📸 After you order, you’ll get a private Google Drive link for your photos.</p>
             </div>
           </label>
           </div>
