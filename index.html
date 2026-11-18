@@ -1789,7 +1789,15 @@ footer { border-top: 3px solid var(--gold); }
 .footer-legal a { color: var(--gold); font-weight: 700; font-size: 0.85rem; }
 .footer-fine { max-width: 760px; margin: 0 auto 12px; text-align: center; font-size: 0.78rem; line-height: 1.5; color: rgba(255,255,255,0.65); }
 .footer-fine a { color: var(--gold); }
+.why-dan-title { text-align: center; }
+.why-dan-split { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px; margin: 18px 0 30px; }
+.why-dan-split .why-dan-photo { width: clamp(110px, 30vw, 230px) !important; height: auto; margin: 0 !important; border: 3px solid var(--gold); box-shadow: 0 0 0 2px #2f6bff, 0 10px 26px rgba(0,0,0,0.45); border-radius: 18px; }
+.why-dan-side { margin: 0; color: rgba(255,255,255,0.85); font-size: clamp(0.8rem, 2.6vw, 1.02rem); line-height: 1.5; }
+.why-dan-split .why-dan-side:first-child { text-align: right; }
+.why-dan-split .why-dan-side:last-child { text-align: left; }
+.why-dan-side strong { color: var(--gold); }
 </style>
+  <link rel="stylesheet" href="/css/frame.css?v=1" />
 </head>
 <body>
 
@@ -2223,12 +2231,11 @@ footer { border-top: 3px solid var(--gold); }
 <section id="why-dan">
   <div class="container">
     <div class="why-dan-inner fade-up">
-      <div class="why-dan-header">
+      <h2 class="gold why-dan-title">Why Work With Dan?</h2>
+      <div class="why-dan-split">
+        <p class="why-dan-side">This isn't a big company or a content farm. <strong>I'm Dan,</strong> and every project receives my personal attention before it's delivered.</p>
         <img loading="lazy" decoding="async" class="why-dan-photo" src="/img/dan-portrait.webp" alt="Dan, founder of CustomSongMe, also known as Dan the Song Man" width="640" height="853" />
-        <div class="why-dan-intro">
-          <h2 class="gold">Why Work With Dan?</h2>
-          <p class="why-dan-lead">This isn't a big company or a content farm.<br><strong>I'm Dan,</strong> and every project receives personal attention before it's delivered. Every song starts with your story. I personally review your details, guide the creative direction, oversee the production process, and make sure the final song reflects the message and emotion you want to share.</p>
-        </div>
+        <p class="why-dan-side">Every song starts with your story. I review your details, guide the creative direction and make sure the final song carries the message you want to share.</p>
       </div>
       <div class="why-grid">
         <div class="why-card">
