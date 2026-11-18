@@ -62,6 +62,7 @@
       submitting: 'Submitting your request…',
       needEmail: 'Please add your email so Dan can reach you.',
       noPaySubject: '⚠️ Has questions, not paid yet: ',
+      detailsSubject: '📝 Song details saved, not paid yet: ',
       noPayPage: 'https://www.customsongme.com/got-your-info',
       alertMsg: 'Something went wrong submitting your request. Please try again, or text Dan directly at (661) 714-0903.'
     },
@@ -80,6 +81,7 @@
       submitting: 'Enviando tu solicitud…',
       needEmail: 'Por favor agrega tu correo para que Dan pueda contactarte.',
       noPaySubject: '⚠️ Tiene preguntas, aún no paga: ',
+      detailsSubject: '📝 Detalles guardados, aún no paga: ',
       noPayPage: 'https://www.customsongme.com/es/recibimos-tu-info',
       alertMsg: 'Algo salió mal al enviar tu solicitud. Por favor intenta de nuevo, o envíale un mensaje de texto a Dan directamente al (661) 714-0903.'
     }
@@ -414,28 +416,30 @@
   var submitBtnOriginalText = submitBtn.textContent;
   // "Send my info without paying": only an email is needed. Dan gets the details and reaches out; no checkout.
   var noPayBtn = $('nopay-btn');
+  var detailsBtn = $('details-btn');
   var noPaySubject = $('nopay-subject');
   var paymentMethodField = $('payment-method');
-  if (noPayBtn) noPayBtn.addEventListener('click', function (e) {
+  [noPayBtn, detailsBtn].forEach(function (b) { if (b) b.addEventListener('click', function (e) {
     if (!emailField || !emailField.value.trim() || !emailField.checkValidity()) {
       e.preventDefault();
       emailField.setCustomValidity(L.needEmail);
       emailField.reportValidity();
       emailField.addEventListener('input', function clear() { emailField.setCustomValidity(''); emailField.removeEventListener('input', clear); });
     }
-  });
+  }); });
   orderFormEl.addEventListener('submit', function (e) {
     e.preventDefault();
-    var noPay = !!(noPayBtn && e.submitter === noPayBtn);
-    if (paymentMethodField) paymentMethodField.value = noPay ? 'NOT PAID YET (has questions)' : 'Card (Stripe)';
+    var isDetails = !!(detailsBtn && e.submitter === detailsBtn);
+    var noPay = isDetails || !!(noPayBtn && e.submitter === noPayBtn);
+    if (paymentMethodField) paymentMethodField.value = isDetails ? 'NOT PAID YET (saved song details)' : noPay ? 'NOT PAID YET (has questions)' : 'Card (Stripe)';
     if (noPaySubject) {
       noPaySubject.disabled = !noPay;
-      noPaySubject.value = noPay ? L.noPaySubject + ($('name').value.trim() || emailField.value.trim()) : '';
+      noPaySubject.value = noPay ? (isDetails ? L.detailsSubject : L.noPaySubject) + ($('name').value.trim() || emailField.value.trim()) : '';
     }
     if (noPay) nextRedirectField.value = L.noPayPage; else syncPaymentRedirect();
-    var btn = noPay ? noPayBtn : submitBtn;
+    var btn = isDetails ? detailsBtn : noPay ? noPayBtn : submitBtn;
     var btnText = btn.textContent;
-    submitBtn.disabled = true; if (noPayBtn) noPayBtn.disabled = true;
+    [submitBtn, noPayBtn, detailsBtn].forEach(function (b) { if (b) b.disabled = true; });
     btn.textContent = L.submitting;
     if (formErrorMsg) formErrorMsg.style.display = 'none';
 
@@ -453,7 +457,7 @@
       }
     })
     .catch(function () {
-      submitBtn.disabled = false; if (noPayBtn) noPayBtn.disabled = false;
+      [submitBtn, noPayBtn, detailsBtn].forEach(function (b) { if (b) b.disabled = false; });
       btn.textContent = btnText;
       if (formErrorMsg) {
         formErrorMsg.style.display = 'block';

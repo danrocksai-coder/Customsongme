@@ -1667,7 +1667,7 @@
       .nav-brand { font-size: 0.82rem; }
     }
   </style>
-  <link rel="stylesheet" href="/css/builder.css?v=20261128" />
+  <link rel="stylesheet" href="/css/builder.css?v=20261129" />
 </head>
 <body>
 
@@ -1957,15 +1957,30 @@
           </div>
 
           <div class="form-group full">
-            <label for="phone">Teléfono <span class="opt">(opcional, pero recomendado para actualizaciones por texto)</span></label>
+            <label for="phone">Teléfono <span class="opt">(opcional, recomendado para actualizaciones por texto. Responde STOP en cualquier momento.)</span></label>
             <input type="tel" id="phone" name="phone" placeholder="(805) 555-0123" autocomplete="tel" inputmode="tel" />
           </div>
 
-          <div class="form-tip">Usaré tu información de contacto para tu orden y, de vez en cuando, para compartirte una oferta o una canción especial. <strong>Responde STOP en cualquier momento y dejaré de escribirte.</strong></div>
+          <div class="form-group full details-save">
+            <button type="submit" class="btn-details" id="details-btn" formnovalidate>Enviar los detalles de la canción</button>
+            <small class="field-hint">Guarda los detalles de tu canción con Dan. Sin pago todavía. Se necesita el correo.</small>
+          </div>
 
           <input type="hidden" name="payment-method" id="payment-method" value="Card (Stripe)" />
           <input type="hidden" name="_subject" id="nopay-subject" value="" disabled />
           </div>
+          <div class="unsure-block">
+            <h4>¿Todavía no estás listo para pagar?</h4>
+            <p>Sin presión. Envíame tu información sin pagar y te contactaré personalmente para responder tus preguntas.</p>
+            <label class="unsure-q">¿Qué te detiene?</label>
+            <div class="pick-chips" role="group" aria-label="¿Qué te detiene?"><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="El precio" /><span>💲 El precio</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="Cómo va a sonar" /><span>🎧 Cómo va a sonar</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="Quiero escuchar un ejemplo" /><span>👂 Quiero escuchar un ejemplo</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="El tiempo" /><span>⏰ El tiempo</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="Otra cosa" /><span>💭 Otra cosa</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="No sé qué escribir" /><span>✍️ No sé qué escribir</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="Quiero hablar con Dan primero" /><span>💬 Quiero hablar con Dan primero</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="Una pregunta sobre el pago" /><span>💳 Una pregunta sobre el pago</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="Privacidad" /><span>🔒 Privacidad</span></label></div>
+            <label class="unsure-q">¿Cómo prefieres que te contacte?</label>
+            <div class="pick-chips" role="group" aria-label="¿Cómo prefieres que te contacte?"><label class="pick-chip"><input type="radio" class="sr-radio" name="reach-by" value="Llamada" /><span>📞 Llamada</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="reach-by" value="Texto" /><span>💬 Texto</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="reach-by" value="Correo" /><span>📧 Correo</span></label></div>
+            <label class="unsure-q" for="feel-sure">¿Qué te ayudaría a sentirte seguro?</label>
+            <textarea id="feel-sure" name="feel-sure" class="textarea-sm" placeholder="ej. ¿Puede ser más alegre? ¿Puede estar lista para el viernes?"></textarea>
+            <button type="submit" class="btn-nopay" id="nopay-btn" formnovalidate>Enviar mi información sin pagar</button>
+          </div>
+          <div class="ready-banner" role="note"><strong>¿Listo para pagar?</strong> Un poco más abajo revisas tu orden. ¡Ya casi! ⬇️</div>
 
           <div class="addons">
             <h4>Extras</h4>
@@ -2008,17 +2023,6 @@
           <div class="form-security">🔒 Checkout seguro · Pago único · Sin suscripciones</div>
           <div class="form-error-msg" id="form-error-msg" style="display:none;">⚠️ Algo salió mal al enviar tu solicitud. Por favor intenta de nuevo, o envíale un mensaje de texto a Dan directamente al <a href="sms:+16617140903">(661) 714-0903</a>.</div>
         </div>
-          <div class="unsure-block">
-            <h4>¿Todavía no estás listo para pagar?</h4>
-            <p>Sin presión. Envíame tu información sin pagar y te contactaré personalmente para responder tus preguntas.</p>
-            <label class="unsure-q">¿Qué te detiene?</label>
-            <div class="pick-chips" role="group" aria-label="¿Qué te detiene?"><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="El precio" /><span>💲 El precio</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="Cómo va a sonar" /><span>🎧 Cómo va a sonar</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="Quiero escuchar un ejemplo" /><span>👂 Quiero escuchar un ejemplo</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="El tiempo" /><span>⏰ El tiempo</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="Otra cosa" /><span>💭 Otra cosa</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="No sé qué escribir" /><span>✍️ No sé qué escribir</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="Quiero hablar con Dan primero" /><span>💬 Quiero hablar con Dan primero</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="Una pregunta sobre el pago" /><span>💳 Una pregunta sobre el pago</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="Privacidad" /><span>🔒 Privacidad</span></label></div>
-            <label class="unsure-q">¿Cómo prefieres que te contacte?</label>
-            <div class="pick-chips" role="group" aria-label="¿Cómo prefieres que te contacte?"><label class="pick-chip"><input type="radio" class="sr-radio" name="reach-by" value="Llamada" /><span>📞 Llamada</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="reach-by" value="Texto" /><span>💬 Texto</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="reach-by" value="Correo" /><span>📧 Correo</span></label></div>
-            <label class="unsure-q" for="feel-sure">¿Qué te ayudaría a sentirte seguro?</label>
-            <textarea id="feel-sure" name="feel-sure" class="textarea-sm" placeholder="ej. ¿Puede ser más alegre? ¿Puede estar lista para el viernes?"></textarea>
-            <button type="submit" class="btn-nopay" id="nopay-btn" formnovalidate>Enviar mi información sin pagar</button>
-          </div>
         </div>
 
         <div class="form-contact">
@@ -2395,7 +2399,7 @@
     });
   });
 </script>
-<script src="/js/builder.js?v=20261128"></script>
+<script src="/js/builder.js?v=20261129"></script>
 
 </body>
 </html>
