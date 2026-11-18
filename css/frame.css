@@ -1,0 +1,3 @@
+/* Gold frame around the whole site, with a hair of blue on the inside */
+html::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 2147483000; box-shadow: inset 0 0 0 6px #fcd42a, inset 0 0 0 8px #2f6bff; }
+@media (max-width: 520px) { html::after { box-shadow: inset 0 0 0 4px #fcd42a, inset 0 0 0 6px #2f6bff; } }
