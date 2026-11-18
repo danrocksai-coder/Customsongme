@@ -58,6 +58,9 @@
       pkgWord: 'Package',
       mePh: 'Me! (Your name, so I can write it from your point of view)',
       submitting: 'Submitting your request…',
+      needEmail: 'Please add your email so Dan can reach you.',
+      noPaySubject: '⚠️ Has questions, not paid yet: ',
+      noPayPage: 'https://www.customsongme.com/got-your-info',
       alertMsg: 'Something went wrong submitting your request. Please try again, or text Dan directly at (661) 714-0903.'
     },
     es: {
@@ -73,6 +76,9 @@
       pkgWord: 'Paquete',
       mePh: '¡Yo! (Tu nombre, para que la escriba desde tu punto de vista)',
       submitting: 'Enviando tu solicitud…',
+      needEmail: 'Por favor agrega tu correo para que Dan pueda contactarte.',
+      noPaySubject: '⚠️ Tiene preguntas, aún no paga: ',
+      noPayPage: 'https://www.customsongme.com/es/recibimos-tu-info',
       alertMsg: 'Algo salió mal al enviar tu solicitud. Por favor intenta de nuevo, o envíale un mensaje de texto a Dan directamente al (661) 714-0903.'
     }
   };
@@ -404,10 +410,31 @@
   var submitBtn = submitButton;
   var formErrorMsg = $('form-error-msg');
   var submitBtnOriginalText = submitBtn.textContent;
+  // "Send my info without paying": only an email is needed. Dan gets the details and reaches out; no checkout.
+  var noPayBtn = $('nopay-btn');
+  var noPaySubject = $('nopay-subject');
+  var paymentMethodField = $('payment-method');
+  if (noPayBtn) noPayBtn.addEventListener('click', function (e) {
+    if (!emailField || !emailField.value.trim() || !emailField.checkValidity()) {
+      e.preventDefault();
+      emailField.setCustomValidity(L.needEmail);
+      emailField.reportValidity();
+      emailField.addEventListener('input', function clear() { emailField.setCustomValidity(''); emailField.removeEventListener('input', clear); });
+    }
+  });
   orderFormEl.addEventListener('submit', function (e) {
     e.preventDefault();
-    submitBtn.disabled = true;
-    submitBtn.textContent = L.submitting;
+    var noPay = !!(noPayBtn && e.submitter === noPayBtn);
+    if (paymentMethodField) paymentMethodField.value = noPay ? 'NOT PAID YET (has questions)' : 'Card (Stripe)';
+    if (noPaySubject) {
+      noPaySubject.disabled = !noPay;
+      noPaySubject.value = noPay ? L.noPaySubject + ($('name').value.trim() || emailField.value.trim()) : '';
+    }
+    if (noPay) nextRedirectField.value = L.noPayPage; else syncPaymentRedirect();
+    var btn = noPay ? noPayBtn : submitBtn;
+    var btnText = btn.textContent;
+    submitBtn.disabled = true; if (noPayBtn) noPayBtn.disabled = true;
+    btn.textContent = L.submitting;
     if (formErrorMsg) formErrorMsg.style.display = 'none';
 
     var formData = new FormData(orderFormEl);
@@ -424,8 +451,8 @@
       }
     })
     .catch(function () {
-      submitBtn.disabled = false;
-      submitBtn.textContent = submitBtnOriginalText;
+      submitBtn.disabled = false; if (noPayBtn) noPayBtn.disabled = false;
+      btn.textContent = btnText;
       if (formErrorMsg) {
         formErrorMsg.style.display = 'block';
         formErrorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });

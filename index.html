@@ -1724,6 +1724,11 @@
     @font-face{font-family:'HeroSans';font-weight:600;font-style:normal;font-display:swap;src:url(/fonts/hero-sans-600.woff2) format('woff2')}
     #hero { padding: 0 0 20px; background: #061b77; }
     #hero .hero-sub { margin-bottom: 0; }
+    .hero-trust { max-width: 520px; margin: 4px auto 0; text-align: center; }
+    .hero-trust-title { font-family: var(--font-display); font-weight: 900; font-size: 1.45rem; color: var(--gold); margin: 0 0 10px; }
+    .hero-trust ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+    .hero-trust li { color: rgba(255,255,255,0.88); font-size: 0.98rem; line-height: 1.4; }
+    .hero-trust li strong { color: var(--white); }
     #video-section { padding-top: 44px; }
     #hero::before { display: none; }
     .hx { position: relative; max-width: 640px; margin: 0 auto; aspect-ratio: 1125 / 1498; container-type: inline-size; background: #061b77; overflow: hidden; color: #fff; font-family: 'HeroSans', 'DM Sans', system-ui, sans-serif; font-weight: 600; }
@@ -1746,10 +1751,10 @@
     .hx-card figcaption { margin-top: 1.2cqw; font-size: 2.65cqw; font-weight: 600; color: rgba(255,255,255,.92); }
     .hx-h1 { left: 0; right: 0; top: 87.1%; text-align: center; font-family: 'HeroSerif', Georgia, serif; font-weight: 700; color: #fff; font-size: 5.95cqw; line-height: 1.17; white-space: nowrap; animation: none; }
     .hx-h1 em { color: #fcd42a; font-style: italic; }
-    #hero .hero-inner { padding: 36px 24px 0; }
+    #hero .hero-inner { padding: 14px 24px 0; }
     @media (prefers-reduced-motion: no-preference) { .hx-pill, .hx-lt { transition: background .2s, color .2s, text-shadow .2s; } }
   </style>
-  <link rel="stylesheet" href="/css/builder.css?v=20261124" />
+  <link rel="stylesheet" href="/css/builder.css?v=20261126" />
 </head>
 <body>
 
@@ -1775,7 +1780,14 @@
     <h1 class="hx-h1">Personalized Custom Songs,<br><em>Delivered in 24 Hours</em></h1>
   </div>
   <div class="hero-inner">
-    <p class="hero-sub">A personalized song built from your stories, moments, and message — created by Dan the Song Man and delivered within 24 hours of payment.</p>
+    <div class="hero-trust">
+      <p class="hero-trust-title">Simple, Safe &amp; Secure</p>
+      <ul>
+        <li><strong>Simple:</strong> an easy, step-by-step order form.</li>
+        <li><strong>Safe:</strong> your story is only used for your song, and I never sell your information.</li>
+        <li><strong>Secure:</strong> checkout runs through Stripe. Card, Apple Pay and more.</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -1828,9 +1840,9 @@
         </div>
         <p class="sound-note" id="gift-note" role="alert">First, choose: your story, or a gift?</p>
         <div class="color-pick">
-          <p class="color-pick-label"><span data-me="And your two favorite colors" data-other="And their two favorite colors">And their two favorite colors</span> <span class="opt">(optional)</span></p>
+          <p class="color-pick-label">Two favorite colors <span class="opt">(optional)</span></p>
           <div class="color-pick-row"><select name="favorite-color-1" id="favorite-color-1" aria-label="Color 1"><option value="">Color 1</option><option value="Red">🔴 Red</option><option value="Orange">🟠 Orange</option><option value="Yellow">🟡 Yellow</option><option value="Gold">✨ Gold</option><option value="Green">🟢 Green</option><option value="Teal">🩵 Teal</option><option value="Blue">🔵 Blue</option><option value="Navy">🌌 Navy</option><option value="Purple">🟣 Purple</option><option value="Pink">🩷 Pink</option><option value="Black">⚫ Black</option><option value="White">⚪ White</option><option value="Silver">🩶 Silver</option><option value="Brown">🟤 Brown</option><option value="Surprise me">🎲 Surprise me</option></select><select name="favorite-color-2" id="favorite-color-2" aria-label="Color 2"><option value="">Color 2</option><option value="Red">🔴 Red</option><option value="Orange">🟠 Orange</option><option value="Yellow">🟡 Yellow</option><option value="Gold">✨ Gold</option><option value="Green">🟢 Green</option><option value="Teal">🩵 Teal</option><option value="Blue">🔵 Blue</option><option value="Navy">🌌 Navy</option><option value="Purple">🟣 Purple</option><option value="Pink">🩷 Pink</option><option value="Black">⚫ Black</option><option value="White">⚪ White</option><option value="Silver">🩶 Silver</option><option value="Brown">🟤 Brown</option><option value="Surprise me">🎲 Surprise me</option></select></div>
-          <small class="field-hint">I use them in your keepsake card design.</small>
+          <small class="field-hint">Theirs, or yours if the song is about you. I use them in your keepsake card design.</small>
         </div>
         
         <div class="builder-step" id="step-1" data-step="1">
@@ -1878,7 +1890,7 @@
           <label class="pkg-card">
             <input type="radio" class="sr-radio" name="package-tier" value="2" checked required id="pkg-2" />
             <div class="pkg-card-inner">
-              <span class="pkg-tag">Most popular</span><span class="pkg-check" aria-hidden="true">✓</span>
+              <span class="pkg-check" aria-hidden="true">✓</span>
               <div class="pkg-disc"><strong>Music Video Release</strong><em>$50</em></div>
               <div class="pkg-preview"><img src="/img/package-2-complete-thumb.webp" alt="CustomSongMe Package 2, Music Video Release, $50: keepsake card with a music video QR code and personal message" width="420" height="543" loading="lazy" decoding="async" /><button type="button" class="pkg-example pkg-zoom" data-full="/img/package-2-complete.webp" data-alt="CustomSongMe Package 2, Music Video Release, $50: keepsake card with a music video QR code and personal message" aria-haspopup="dialog" aria-label="See it bigger">🔍</button></div>
               <div class="pkg-colors" role="group" aria-label="Sample colors"><button type="button" class="pkg-color is-on" style="--c1:#0d2a8a;--c2:#d4af37" data-thumb="/img/package-2-complete-thumb.webp" data-full="/img/package-2-complete.webp" aria-pressed="true" aria-label="Blue and gold sample"></button><button type="button" class="pkg-color" style="--c1:#f26b1d;--c2:#5b2a86" data-thumb="/img/package-2-complete-sunset-thumb.webp" data-full="/img/package-2-complete-sunset.webp" aria-pressed="false" aria-label="Sunset sample"></button><span>Same keepsake, your colors</span></div>
@@ -1912,7 +1924,7 @@
 
         <div class="builder-step" id="step-3" data-step="3">
           <div class="step-head"><span class="step-kicker">Step 3 of 6</span><h3>Pick the sound, then make it yours</h3></div>
-          <div class="step-part-label"><span class="req-tag">Required</span> Music style</div>
+          <div class="step-part-label"><span class="req-tag">Pick one</span> Music style</div>
           <div class="occ-grid" id="style-grid">
             <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Pop" required /><span class="occ-face"><span class="em" aria-hidden="true">🎤</span>Pop</span></label>
             <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Country" required /><span class="occ-face"><span class="em" aria-hidden="true">🤠</span>Country</span></label>
@@ -1923,7 +1935,7 @@
             <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Gospel" required /><span class="occ-face"><span class="em" aria-hidden="true">🙌</span>Gospel</span></label>
             <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Latin / Reggaeton" required /><span class="occ-face"><span class="em" aria-hidden="true">💃</span>Latin</span></label>
             <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Dance / EDM" required /><span class="occ-face"><span class="em" aria-hidden="true">🪩</span>Dance</span></label>
-            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Surprise me" data-surprise="1" required /><span class="occ-face"><span class="em" aria-hidden="true">🎲</span>Not sure, you pick</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Surprise me" data-surprise="1" required /><span class="occ-face"><span class="em" aria-hidden="true">🎲</span>You pick</span></label>
           </div>
           <div class="other-wrap" id="style-notes-wrap">
             <div class="form-group full">
@@ -1931,7 +1943,7 @@
               <input type="text" id="style-notes" name="style-notes" placeholder="e.g. like Luke Combs, or upbeat like Uptown Funk" disabled />
             </div>
           </div>
-          <div class="step-part-label"><span class="req-tag">Required</span> Vocals</div>
+          <div class="step-part-label"><span class="req-tag">Pick one</span> Vocals</div>
           <div class="occ-grid three" id="vocals-grid">
             <label class="occ-tile"><input type="radio" class="sr-radio" name="vocalist" value="Male vocalist" required /><span class="occ-face"><span class="em" aria-hidden="true">👨‍🎤</span>Male</span></label>
             <label class="occ-tile"><input type="radio" class="sr-radio" name="vocalist" value="Both (duet)" required /><span class="occ-face"><span class="em" aria-hidden="true">🎶</span>Duet</span></label>
@@ -1944,6 +1956,7 @@
             <label for="msg1" id="msg1-label"><span id="msg1-label-text">Your message on the card</span> <span class="opt">(optional, but recommended)</span></label>
             <textarea id="msg1" name="personal-message-1" rows="2" maxlength="60" placeholder="e.g. Happy birthday! Love you always."></textarea>
             <span class="char-count" id="msg1-count"></span>
+            <small class="field-hint msg-hint">Leave it blank and I’ll write a sweet one for you.</small>
           </div>
           </div>
 
@@ -1963,7 +1976,7 @@
           </div>
 
           <div class="form-group full hint-chips" role="group" aria-label="Add a starter to your story">
-            <span class="hint-chips-label">Need ideas? Tap to add a starter:</span><button type="button" class="hint-chip" data-add="How you met: ">How you met</button><button type="button" class="hint-chip" data-add="Inside jokes: ">Inside jokes</button><button type="button" class="hint-chip" data-add="Favorite story: ">Favorite story</button><button type="button" class="hint-chip" data-add="What you want them to feel: ">What you want them to feel</button>
+            <span class="hint-chips-label">Need ideas? Tap to add a starter:</span><div class="hint-chip-grid"><button type="button" class="hint-chip" data-add="How you met: ">How you met</button><button type="button" class="hint-chip" data-add="Inside jokes: ">Inside jokes</button><button type="button" class="hint-chip" data-add="Favorite story: ">Favorite story</button><button type="button" class="hint-chip" data-add="Hard times you got through: ">Hard times you got through</button><button type="button" class="hint-chip" data-add="What they mean to you: ">What they mean to you</button><button type="button" class="hint-chip" data-add="What you want them to feel: ">How you want them to feel</button></div>
           </div>
 
           <div class="form-group full">
@@ -2088,6 +2101,7 @@
 
         <div class="builder-step" id="step-6" data-step="6">
           <div class="step-head"><span class="step-kicker">Step 6 of 6</span><h3>Your details and pay</h3></div>
+          <div class="keep-note">💛 <strong>Don’t lose what you just wrote.</strong> Everything you typed disappears if you leave this page, so add your email at the very least. That way I can reach you.</div>
           <div class="form-grid">
           <div class="form-group">
             <label for="name">Your Name</label>
@@ -2100,30 +2114,33 @@
           </div>
 
           <div class="form-group full">
-            <label for="phone">Phone number <span class="opt">(optional — for text updates)</span></label>
+            <label for="phone">Phone number <span class="opt">(optional, but recommended for text updates)</span></label>
             <input type="tel" id="phone" name="phone" placeholder="(805) 555-0123" autocomplete="tel" inputmode="tel" />
           </div>
 
           <div class="form-tip">I'll use your contact info for your order, and occasionally to share a deal or a new song special. <strong>Reply STOP any time and I'll stop.</strong></div>
 
-          <div class="form-group full">
-            <label>How you'll pay</label>
-            <div class="contact-pref-options payment-method-options">
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="Card (Stripe)" checked required />
-                <span>💳 Card, Apple Pay, Cash App Pay &amp; more (secure Stripe checkout)</span>
-              </label>
-            </div>
+          <input type="hidden" name="payment-method" id="payment-method" value="Card (Stripe)" />
+          <input type="hidden" name="_subject" id="nopay-subject" value="" disabled />
+          <div class="form-group full unsure-block">
+            <h4>Not ready to pay yet?</h4>
+            <p>No pressure. Send me your info without paying, and I’ll reach out personally to answer your questions.</p>
+            <label class="unsure-q">What’s holding you back?</label>
+            <div class="pick-chips" role="group" aria-label="What’s holding you back?"><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="The price" /><span>💲 The price</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="How it will sound" /><span>🎧 How it will sound</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="I want to hear a sample" /><span>👂 I want to hear a sample</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="Timing" /><span>⏰ Timing</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="Something else" /><span>💭 Something else</span></label></div>
+            <label class="unsure-q">Best way to reach you?</label>
+            <div class="pick-chips" role="group" aria-label="Best way to reach you?"><label class="pick-chip"><input type="radio" class="sr-radio" name="reach-by" value="Call" /><span>📞 Call</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="reach-by" value="Text" /><span>💬 Text</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="reach-by" value="Email" /><span>📧 Email</span></label></div>
+            <label class="unsure-q" for="feel-sure">What would help you feel sure?</label>
+            <textarea id="feel-sure" name="feel-sure" class="textarea-sm" placeholder="e.g. Can you make it more upbeat? Can it be ready by Friday?"></textarea>
+            <button type="submit" class="btn-nopay" id="nopay-btn" formnovalidate>Send my info without paying</button>
           </div>
           </div>
 
           <div class="what-next">
-          <h3>🎵 What Happens Next?</h3>
+          <h3>🎵 What happens next</h3>
           <ol>
-            <li>Submit your song request — you'll be taken straight to secure checkout for your chosen package.</li>
-            <li>At checkout, use the same email you ordered with — that's how your payment matches your song.</li>
-            <li>Once payment is confirmed, Dan personally reviews your story during studio hours and gets to work.</li>
-            <li>Your song is delivered within 24 hours of confirmed payment — backed by the Personal Happiness Guarantee.</li>
+            <li>Submit, then pay securely with Stripe. Use the same email.</li>
+            <li>I personally write and produce your song.</li>
+            <li>It arrives within 24 hours, backed by my Happiness Guarantee.</li>
           </ol>
           <div class="lock-note">🔒 <strong>Production does not begin until your payment is received and matched to your order.</strong></div>
         </div>
@@ -2549,7 +2566,7 @@
     });
   });
 </script>
-<script src="/js/builder.js?v=20261123"></script>
+<script src="/js/builder.js?v=20261125"></script>
 
 <script>
 (function(){var b=document.getElementById('yt-lite');if(!b)return;b.addEventListener('click',function(){var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+b.dataset.id+'?autoplay=1&rel=0';f.title=b.getAttribute('aria-label');f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';f.allowFullscreen=true;b.replaceWith(f);});})();
