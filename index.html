@@ -97,7 +97,7 @@
       "name": "CustomSongMe Packages",
       "itemListElement": [{
         "@type": "Offer",
-        "name": "Package 1: MP3 Only",
+        "name": "Package 1: Custom Single",
         "price": "25.00",
         "priceCurrency": "USD",
         "description": "Full-length downloadable MP3, a keepsake card with the full lyrics, and a QR code that links directly to your MP3. Delivered within 24 hours of confirmed payment.",
@@ -105,7 +105,7 @@
       },
       {
         "@type": "Offer",
-        "name": "Package 2: Complete",
+        "name": "Package 2: Music Video Release",
         "price": "50.00",
         "priceCurrency": "USD",
         "description": "Everything in Package 1, plus a public YouTube video link and your personal message on the card.",
@@ -113,7 +113,7 @@
       },
       {
         "@type": "Offer",
-        "name": "Package 3: Story",
+        "name": "Package 3: Keepsake Set",
         "price": "75.00",
         "priceCurrency": "USD",
         "description": "Everything in Package 2, plus a backstory built from the details you share, up to 5 photos, and 1 personal message on the card.",
@@ -121,7 +121,7 @@
       },
       {
         "@type": "Offer",
-        "name": "Package 4: Ultimate",
+        "name": "Package 4: Collector's Edition",
         "price": "100.00",
         "priceCurrency": "USD",
         "description": "Everything in Package 3, plus up to 15 photos, a shared party photo album, and a four-corner keepsake design.",
@@ -181,15 +181,15 @@
       "name": "What is included in each package?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Package 1, MP3 Only ($25): a full-length downloadable MP3, a keepsake card with your full lyrics, and a QR code that links directly to your MP3. Package 2, Complete ($50): everything in Package 1, plus a public YouTube video link and your message on the card. Package 3, Story ($75): everything in Package 2, plus a backstory built from the details you share, up to 5 photos, and 1 personal message on the card. Package 4, Ultimate ($100): everything in Package 3, plus up to 15 photos, a shared party photo album, and a four-corner keepsake design. Every order is backed by the Personal Happiness Guarantee and delivered within 24 hours of confirmed payment."
+        "text": "Package 1, Custom Single ($25): a full-length downloadable MP3, a keepsake card with your full lyrics, and a QR code that links directly to your MP3. Package 2, Music Video Release ($50): everything in Package 1, plus a public YouTube video link and your message on the card. Package 3, Keepsake Set ($75): everything in Package 2, plus a backstory built from the details you share, up to 5 photos, and 1 personal message on the card. Package 4, Collector's Edition ($100): everything in Package 3, plus up to 15 photos, a shared party photo album, and a four-corner keepsake design. Every order is backed by the Personal Happiness Guarantee and delivered within 24 hours of confirmed payment."
       }
     },
     {
       "@type": "Question",
-      "name": "Is there a cheaper option than the Complete package?",
+      "name": "Is there a cheaper option than the Music Video Release?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Package 1, MP3 Only, is $25 and includes a full-length downloadable MP3, a keepsake card with your full lyrics, and a QR code that links directly to your MP3. It has no video. Package 2, Complete, is $50 and adds a public YouTube video link and your message on the card."
+        "text": "Yes. Package 1, Custom Single, is $25 and includes a full-length downloadable MP3, a keepsake card with your full lyrics, and a QR code that links directly to your MP3. It has no video. Package 2, Music Video Release, is $50 and adds a public YouTube video link and your message on the card."
       }
     },
     {
@@ -253,7 +253,7 @@
       "name": "Do you create songs for businesses?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. CustomSongMe creates custom business jingles for brands, companies, and entrepreneurs. A business jingle follows the same process as a personal song — you share your brand story, message, and style, and Dan produces an original jingle built around your business. A business jingle is $100 one-time, with the same deliverables as the Complete package, delivered within 24 hours. See the Business Jingles page for details."
+        "text": "Yes. CustomSongMe creates custom business jingles for brands, companies, and entrepreneurs. A business jingle follows the same process as a personal song — you share your brand story, message, and style, and Dan produces an original jingle built around your business. A business jingle is $100 one-time, with the same deliverables as the Music Video Release, delivered within 24 hours. See the Business Jingles page for details."
       }
     },
     {
@@ -557,6 +557,10 @@
       overflow: hidden;
       border: 1px solid rgba(252,212,42,0.2);
     }
+    .yt-lite { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: #000; cursor: pointer; }
+    .yt-lite img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .yt-play { position: absolute; left: 50%; top: 50%; width: 72px; height: 50px; transform: translate(-50%,-50%); background: #e00; border-radius: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.5); }
+    .yt-play::after { content: ""; position: absolute; left: 29px; top: 14px; border-style: solid; border-width: 11px 0 11px 19px; border-color: transparent transparent transparent #fff; }
     .video-wrapper iframe {
       position: absolute;
       inset: 0;
@@ -1743,7 +1747,7 @@
     #hero .hero-inner { padding: 36px 24px 0; }
     @media (prefers-reduced-motion: no-preference) { .hx-pill, .hx-lt { transition: background .2s, color .2s, text-shadow .2s; } }
   </style>
-  <link rel="stylesheet" href="/css/builder.css?v=20261120" />
+  <link rel="stylesheet" href="/css/builder.css?v=20261122" />
 </head>
 <body>
 
@@ -1770,12 +1774,16 @@
   </div>
   <div class="hero-inner">
     <p class="hero-sub">A personalized song built from your stories, moments, and message — created by Dan the Song Man and delivered within 24 hours of payment.</p>
-    <div class="hero-price-anchor">
-      <div class="price-label">Custom Song Packages</div>
-      <div class="price-main">Starting at $25</div>
-      <div class="price-pills" aria-hidden="false"><span class="price-pill">🎁 Give it as a gift</span><span class="price-pill">🎤 Make it about you</span></div>
-      <div class="price-includes">Written from the stories you share. Delivered within 24 hours.</div>
-      <div class="price-alt">Most popular: Complete · Song + music video · $50</div>
+  </div>
+</section>
+
+<!-- ═══════ SECTION 3 — VIDEO ═══════ -->
+<section id="video-section">
+  <div class="video-inner fade-up">
+    <h2>👇 Press Play — <em>This Explains Everything</em></h2>
+    <p>See exactly how CustomSongMe works.</p>
+    <div class="video-wrapper">
+      <button type="button" class="yt-lite" id="yt-lite" data-id="wqjlcfAUczQ" aria-label="Play video: Turn Your Story Into a Custom Song"><img src="https://i.ytimg.com/vi/wqjlcfAUczQ/hqdefault.jpg" alt="Turn Your Story Into a Custom Song | CustomSongMe" width="480" height="360" loading="lazy" decoding="async" /><span class="yt-play" aria-hidden="true"></span></button>
     </div>
   </div>
 </section>
@@ -1788,17 +1796,6 @@
     <div class="trust-item"><span class="check">✓</span> Delivered Within 24 Hours of Confirmed Payment</div>
     <div class="trust-item"><span class="check">✓</span> Personal Happiness Guarantee</div>
     <div class="trust-item"><span class="check">✓</span> Secure Checkout Right After Submission</div>
-  </div>
-</section>
-
-<!-- ═══════ SECTION 3 — VIDEO ═══════ -->
-<section id="video-section">
-  <div class="video-inner fade-up">
-    <h2>👇 Press Play — <em>This Explains Everything</em></h2>
-    <p>See exactly how CustomSongMe works.</p>
-    <div class="video-wrapper">
-      <iframe src="https://www.youtube-nocookie.com/embed/wqjlcfAUczQ" title="Turn Your Story Into a Custom Song | CustomSongMe" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
   </div>
 </section>
 
@@ -1817,7 +1814,7 @@
       <form name="customsong-request" method="POST" action="https://formspree.io/f/xwpqlypv">
         <input type="hidden" name="_next" id="next-redirect" value="https://www.customsongme.com/pay/3cIaEWcLKb09cS7fcy9Ve0f" />
         <input type="hidden" name="contact-pref" value="Both" />
-        <input type="hidden" name="package" id="package-hidden-field" value="Package 2 — Complete — $50" />
+        <input type="hidden" name="package" id="package-hidden-field" value="Package 2 — Music Video Release — $50" />
         <input type="hidden" name="total" id="total-hidden-field" value="$50" />
         <p class="hp-field" aria-hidden="true">
           <label>Don't fill this out if you're human: <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
@@ -1864,8 +1861,9 @@
             <input type="radio" class="sr-radio" name="package-tier" value="1" required id="pkg-1" />
             <div class="pkg-card-inner">
               <span class="pkg-check" aria-hidden="true">✓</span>
-              <div class="pkg-disc"><small>Package 1</small><strong>MP3 Only</strong><em>$25</em></div>
-              <div class="pkg-preview"><img src="/img/package-1-mp3-only-thumb.webp" alt="CustomSongMe Package 1, MP3 Only, $25: keepsake card with lyrics and a QR code" width="420" height="543" loading="lazy" decoding="async" /><button type="button" class="pkg-example pkg-zoom" data-full="/img/package-1-mp3-only.webp" data-alt="CustomSongMe Package 1, MP3 Only, $25: keepsake card with lyrics and a QR code" aria-haspopup="dialog" aria-label="See it bigger">🔍</button></div>
+              <div class="pkg-disc"><strong>Custom Single</strong><em>$25</em></div>
+              <div class="pkg-preview"><img src="/img/package-1-mp3-only-thumb.webp" alt="CustomSongMe Package 1, Custom Single, $25: keepsake card with lyrics and a QR code" width="420" height="543" loading="lazy" decoding="async" /><button type="button" class="pkg-example pkg-zoom" data-full="/img/package-1-mp3-only.webp" data-alt="CustomSongMe Package 1, Custom Single, $25: keepsake card with lyrics and a QR code" aria-haspopup="dialog" aria-label="See it bigger">🔍</button></div>
+              <div class="pkg-colors" role="group" aria-label="Sample colors"><button type="button" class="pkg-color is-on" style="--c1:#0d2a8a;--c2:#d4af37" data-thumb="/img/package-1-mp3-only-thumb.webp" data-full="/img/package-1-mp3-only.webp" aria-pressed="true" aria-label="Blue and gold sample"></button><button type="button" class="pkg-color" style="--c1:#f26b1d;--c2:#5b2a86" data-thumb="/img/package-1-mp3-only-sunset-thumb.webp" data-full="/img/package-1-mp3-only-sunset.webp" aria-pressed="false" aria-label="Sunset sample"></button><span>Same keepsake, your colors</span></div>
               <p class="pkg-get">Your song as an MP3, plus a lyrics card with a QR code.</p>
             </div>
           </label>
@@ -1873,8 +1871,9 @@
             <input type="radio" class="sr-radio" name="package-tier" value="2" checked required id="pkg-2" />
             <div class="pkg-card-inner">
               <span class="pkg-tag">Most popular</span><span class="pkg-check" aria-hidden="true">✓</span>
-              <div class="pkg-disc"><small>Package 2</small><strong>Complete</strong><em>$50</em></div>
-              <div class="pkg-preview"><img src="/img/package-2-complete-thumb.webp" alt="CustomSongMe Package 2, Complete, $50: keepsake card with a music video QR code and personal message" width="420" height="543" loading="lazy" decoding="async" /><button type="button" class="pkg-example pkg-zoom" data-full="/img/package-2-complete.webp" data-alt="CustomSongMe Package 2, Complete, $50: keepsake card with a music video QR code and personal message" aria-haspopup="dialog" aria-label="See it bigger">🔍</button></div>
+              <div class="pkg-disc"><strong>Music Video Release</strong><em>$50</em></div>
+              <div class="pkg-preview"><img src="/img/package-2-complete-thumb.webp" alt="CustomSongMe Package 2, Music Video Release, $50: keepsake card with a music video QR code and personal message" width="420" height="543" loading="lazy" decoding="async" /><button type="button" class="pkg-example pkg-zoom" data-full="/img/package-2-complete.webp" data-alt="CustomSongMe Package 2, Music Video Release, $50: keepsake card with a music video QR code and personal message" aria-haspopup="dialog" aria-label="See it bigger">🔍</button></div>
+              <div class="pkg-colors" role="group" aria-label="Sample colors"><button type="button" class="pkg-color is-on" style="--c1:#0d2a8a;--c2:#d4af37" data-thumb="/img/package-2-complete-thumb.webp" data-full="/img/package-2-complete.webp" aria-pressed="true" aria-label="Blue and gold sample"></button><button type="button" class="pkg-color" style="--c1:#f26b1d;--c2:#5b2a86" data-thumb="/img/package-2-complete-sunset-thumb.webp" data-full="/img/package-2-complete-sunset.webp" aria-pressed="false" aria-label="Sunset sample"></button><span>Same keepsake, your colors</span></div>
               <p class="pkg-get">Your MP3, a music video on YouTube, and your message on the card.</p>
             </div>
           </label>
@@ -1882,9 +1881,10 @@
             <input type="radio" class="sr-radio" name="package-tier" value="3" required id="pkg-3" />
             <div class="pkg-card-inner">
               <span class="pkg-check" aria-hidden="true">✓</span>
-              <div class="pkg-disc"><small>Package 3</small><strong>Story</strong><em>$75</em></div>
-              <div class="pkg-preview"><img src="/img/package-3-story-thumb.webp" alt="CustomSongMe Package 3, Story, $75: keepsake card with song, video and story QR codes" width="420" height="543" loading="lazy" decoding="async" /><button type="button" class="pkg-example pkg-zoom" data-full="/img/package-3-story.webp" data-alt="CustomSongMe Package 3, Story, $75: keepsake card with song, video and story QR codes" aria-haspopup="dialog" aria-label="See it bigger">🔍</button></div>
-              <p class="pkg-get">Everything in Complete, plus your story told with up to 5 photos.</p>
+              <div class="pkg-disc"><strong>Keepsake Set</strong><em>$75</em></div>
+              <div class="pkg-preview"><img src="/img/package-3-story-thumb.webp" alt="CustomSongMe Package 3, Keepsake Set, $75: keepsake card with song, video and story QR codes" width="420" height="543" loading="lazy" decoding="async" /><button type="button" class="pkg-example pkg-zoom" data-full="/img/package-3-story.webp" data-alt="CustomSongMe Package 3, Keepsake Set, $75: keepsake card with song, video and story QR codes" aria-haspopup="dialog" aria-label="See it bigger">🔍</button></div>
+              <div class="pkg-colors" role="group" aria-label="Sample colors"><button type="button" class="pkg-color is-on" style="--c1:#0d2a8a;--c2:#d4af37" data-thumb="/img/package-3-story-thumb.webp" data-full="/img/package-3-story.webp" aria-pressed="true" aria-label="Blue and gold sample"></button><button type="button" class="pkg-color" style="--c1:#f26b1d;--c2:#5b2a86" data-thumb="/img/package-3-story-sunset-thumb.webp" data-full="/img/package-3-story-sunset.webp" aria-pressed="false" aria-label="Sunset sample"></button><span>Same keepsake, your colors</span></div>
+              <p class="pkg-get">Everything in Music Video Release, plus your story told with up to 5 photos.</p>
               <p class="pkg-photos">📸 After you order, you’ll get a private Google Drive link for your photos.</p>
             </div>
           </label>
@@ -1892,9 +1892,10 @@
             <input type="radio" class="sr-radio" name="package-tier" value="4" required id="pkg-4" />
             <div class="pkg-card-inner">
               <span class="pkg-check" aria-hidden="true">✓</span>
-              <div class="pkg-disc"><small>Package 4</small><strong>Ultimate</strong><em>$100</em></div>
-              <div class="pkg-preview"><img src="/img/package-4-ultimate-thumb.webp" alt="CustomSongMe Package 4, Ultimate, $100: four-corner keepsake with four QR codes" width="420" height="543" loading="lazy" decoding="async" /><button type="button" class="pkg-example pkg-zoom" data-full="/img/package-4-ultimate.webp" data-alt="CustomSongMe Package 4, Ultimate, $100: four-corner keepsake with four QR codes" aria-haspopup="dialog" aria-label="See it bigger">🔍</button></div>
-              <p class="pkg-get">Everything in Story, plus 15 photos, a party photo album and a four-corner card.</p>
+              <div class="pkg-disc"><strong>Collector's Edition</strong><em>$100</em></div>
+              <div class="pkg-preview"><img src="/img/package-4-ultimate-thumb.webp" alt="CustomSongMe Package 4, Collector's Edition, $100: four-corner keepsake with four QR codes" width="420" height="543" loading="lazy" decoding="async" /><button type="button" class="pkg-example pkg-zoom" data-full="/img/package-4-ultimate.webp" data-alt="CustomSongMe Package 4, Collector's Edition, $100: four-corner keepsake with four QR codes" aria-haspopup="dialog" aria-label="See it bigger">🔍</button></div>
+              <div class="pkg-colors" role="group" aria-label="Sample colors"><button type="button" class="pkg-color is-on" style="--c1:#0d2a8a;--c2:#d4af37" data-thumb="/img/package-4-ultimate-thumb.webp" data-full="/img/package-4-ultimate.webp" aria-pressed="true" aria-label="Blue and gold sample"></button><button type="button" class="pkg-color" style="--c1:#f26b1d;--c2:#5b2a86" data-thumb="/img/package-4-ultimate-sunset-thumb.webp" data-full="/img/package-4-ultimate-sunset.webp" aria-pressed="false" aria-label="Sunset sample"></button><span>Same keepsake, your colors</span></div>
+              <p class="pkg-get">Everything in Keepsake Set, plus 15 photos, a party photo album and a four-corner card.</p>
               <p class="pkg-photos">📸 After you order, you’ll get a private Google Drive link for your photos.</p>
             </div>
           </label>
@@ -1916,6 +1917,11 @@
           <div class="form-group full">
             <label for="story">Main story for the song</label>
             <textarea id="story" name="story" placeholder="We met at a taco truck in 2009. She laughed at my terrible joke, and we've been laughing ever since..." required></textarea>
+          </div>
+          <div class="form-group full">
+            <label for="favorite-colors"><span data-me="Your two favorite colors" data-other="Their two favorite colors">Their two favorite colors</span> <span class="opt">(optional)</span></label>
+            <input type="text" id="favorite-colors" name="favorite-colors" placeholder="e.g. navy and gold. Leave it blank and I’ll pick." maxlength="80" />
+            <small class="field-hint">I use them in your keepsake card design.</small>
           </div>
           </div>
         </div>
@@ -2240,12 +2246,12 @@
 
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">What is included in each package? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Package 1, MP3 Only ($25): a full-length downloadable MP3, a keepsake card with your full lyrics, and a QR code that links directly to your MP3. Package 2, Complete ($50): everything in Package 1, plus a public YouTube video link and your message on the card. Package 3, Story ($75): everything in Package 2, plus a backstory built from the details you share, up to 5 photos, and 1 personal message on the card. Package 4, Ultimate ($100): everything in Package 3, plus up to 15 photos, a shared party photo album, and a four-corner keepsake design. Every order is backed by the Personal Happiness Guarantee and delivered within 24 hours of confirmed payment.</div>
+        <div class="faq-a">Package 1, Custom Single ($25): a full-length downloadable MP3, a keepsake card with your full lyrics, and a QR code that links directly to your MP3. Package 2, Music Video Release ($50): everything in Package 1, plus a public YouTube video link and your message on the card. Package 3, Keepsake Set ($75): everything in Package 2, plus a backstory built from the details you share, up to 5 photos, and 1 personal message on the card. Package 4, Collector's Edition ($100): everything in Package 3, plus up to 15 photos, a shared party photo album, and a four-corner keepsake design. Every order is backed by the Personal Happiness Guarantee and delivered within 24 hours of confirmed payment.</div>
       </div>
 
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Is there a cheaper option than the Complete package? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Yes. Package 1, MP3 Only, is $25 and includes a full-length downloadable MP3, a keepsake card with your full lyrics, and a QR code that links directly to your MP3. It has no video. Package 2, Complete, is $50 and adds a public YouTube video link and your message on the card.</div>
+        <button class="faq-q" aria-expanded="false">Is there a cheaper option than the Music Video Release? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes. Package 1, Custom Single, is $25 and includes a full-length downloadable MP3, a keepsake card with your full lyrics, and a QR code that links directly to your MP3. It has no video. Package 2, Music Video Release, is $50 and adds a public YouTube video link and your message on the card.</div>
       </div>
 
       <div class="faq-item">
@@ -2285,7 +2291,7 @@
 
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Do you create songs for businesses? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Yes. CustomSongMe creates custom business jingles for brands, companies, and entrepreneurs. A business jingle follows the same process as a personal song — you share your brand story, message, and style, and Dan produces an original jingle built around your business. A business jingle is $100 one-time, with the same deliverables as the Complete package, delivered within 24 hours. See the Business Jingles page for details.</div>
+        <div class="faq-a">Yes. CustomSongMe creates custom business jingles for brands, companies, and entrepreneurs. A business jingle follows the same process as a personal song — you share your brand story, message, and style, and Dan produces an original jingle built around your business. A business jingle is $100 one-time, with the same deliverables as the Music Video Release, delivered within 24 hours. See the Business Jingles page for details.</div>
       </div>
 
       <div class="faq-item">
@@ -2447,7 +2453,10 @@
     });
   });
 </script>
-<script src="/js/builder.js?v=20261119"></script>
+<script src="/js/builder.js?v=20261121"></script>
 
+<script>
+(function(){var b=document.getElementById('yt-lite');if(!b)return;b.addEventListener('click',function(){var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+b.dataset.id+'?autoplay=1&rel=0';f.title=b.getAttribute('aria-label');f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';f.allowFullscreen=true;b.replaceWith(f);});})();
+</script>
 </body>
 </html>
