@@ -103,3 +103,23 @@
 .occ-chosen { display: flex; align-items: center; gap: 12px; margin-top: 14px; padding: 12px 16px; background: rgba(252,212,42,0.14); border: 2px solid var(--gold); border-radius: var(--radius-lg); color: var(--gold); font-weight: 700; font-size: 1.05rem; }
 .occ-change { margin-left: auto; background: none; border: 0; color: var(--white); text-decoration: underline; font-size: 0.9rem; font-weight: 600; cursor: pointer; font-family: inherit; padding: 6px 4px; }
 .occ-only-fields { margin: 0; }
+
+/* ── Nov 17: centered step headings, "your story / gift" choice up top, simpler package cards ── */
+.step-head, .step-hint { text-align: center; }
+.step-head .step-kicker { margin-left: auto; margin-right: auto; }
+.who-pick { flex-direction: column; align-items: stretch; gap: 12px; max-width: 460px; margin: 4px auto 22px; padding: 0; border: 0; }
+.who-pick.flash { background: none; }
+.who-pick.flash .who-card { border-color: var(--gold); background: rgba(252,212,42,0.14); }
+.who-card { display: flex; align-items: center; gap: 14px; padding: 14px 18px; border: 2px solid rgba(252,212,42,0.35); border-radius: var(--radius-lg); background: rgba(255,255,255,0.06); transition: border-color 0.15s, background 0.15s; }
+.who-card:hover { border-color: rgba(252,212,42,0.7); }
+.who-card:has(input:checked) { border-color: var(--gold); background: rgba(252,212,42,0.13); }
+.who-text { display: flex; flex-direction: column; text-align: left; line-height: 1.25; }
+.who-text strong { font-size: 1.08rem; color: var(--white); }
+.who-text small { font-size: 0.85rem; font-weight: 400; color: rgba(255,255,255,0.72); }
+#gift-note { max-width: 460px; margin: -8px auto 18px; text-align: center; }
+.pkg-preview { position: relative; width: 100%; max-width: 190px; margin: 0 auto 10px; }
+.pkg-preview img { display: block; width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.35); }
+.pkg-zoom { margin: 0; position: absolute; right: 6px; bottom: 6px; width: 34px; height: 34px; padding: 0; border: 0; border-radius: 50%; background: rgba(4,9,30,0.82); color: var(--white); font-size: 1rem; line-height: 34px; text-decoration: none; cursor: pointer; }
+.pkg-get { margin: 0; font-size: 0.8rem; color: rgba(255,255,255,0.9); line-height: 1.4; }
+.pkg-photos { margin: 8px 0 0; font-size: 0.72rem; color: var(--gold); line-height: 1.35; }
+@media (max-width: 520px) { .who-pick { flex-direction: column; align-items: stretch; } }
