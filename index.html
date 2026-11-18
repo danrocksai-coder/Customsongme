@@ -274,6 +274,8 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
+  <link rel="preload" href="/fonts/hero-serif-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/img/dan-the-song-man-custom-song-customsongme-hero-640.webp" as="image" type="image/webp" media="(max-width: 639px)" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -1711,6 +1713,35 @@
     @media (max-width: 360px) {
       .nav-brand { font-size: 0.82rem; }
     }
+
+    /* HERO — Dan photo with live text (positions are % of the 1125x1498 artwork; fonts scale with cqw) */
+    @font-face{font-family:'HeroSerif';font-weight:700;font-style:normal;font-display:swap;src:url(/fonts/hero-serif-700.woff2) format('woff2')}
+    @font-face{font-family:'HeroSerif';font-weight:700;font-style:italic;font-display:swap;src:url(/fonts/hero-serif-700i.woff2) format('woff2')}
+    @font-face{font-family:'HeroSans';font-weight:600;font-style:normal;font-display:swap;src:url(/fonts/hero-sans-600.woff2) format('woff2')}
+    #hero { padding: 0 0 56px; background: #061b77; }
+    #hero::before { display: none; }
+    .hx { position: relative; max-width: 640px; margin: 0 auto; aspect-ratio: 1125 / 1498; container-type: inline-size; background: #061b77; overflow: hidden; color: #fff; font-family: 'HeroSans', 'DM Sans', system-ui, sans-serif; font-weight: 600; }
+    .hx-photo { position: absolute; inset: 0; width: 100%; height: 100%; display: block; -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent); }
+    .hx > * { position: absolute; margin: 0; }
+    .hx-pill { top: 2.07%; height: 7.2%; width: 27.4%; display: flex; align-items: center; gap: 2%; padding-left: 2.2%; box-sizing: border-box; background: #05144c; border: 0.36cqw solid #f3c534; border-radius: 99px; color: #fff; text-decoration: none; font-size: 3.5cqw; line-height: 1; letter-spacing: .01em; }
+    .hx-pill img { height: 64%; width: auto; display: block; margin-right: 1.2%; }
+    .hx-pill-l { left: 3.5%; } .hx-pill-r { left: 68.5%; width: 28%; }
+    .hx-pill:hover { background: #0a1f6e; }
+    .hx-tag { left: 0; right: 0; top: 12.55%; text-align: center; font-family: 'HeroSerif', Georgia, serif; font-weight: 700; color: #fcd42a; font-size: 5.6cqw; line-height: 1.1; white-space: nowrap; padding-left: 2%; }
+    .hx-sub { left: 0; right: 0; top: 18.1%; text-align: center; font-size: 3.35cqw; line-height: 1.33; padding-left: 2%; text-shadow: 0 1px 6px rgba(0,10,80,.35); }
+    .hx-lens { left: 17.3%; top: 28%; width: 64.4%; height: 14.2%; display: block; text-decoration: none; border-radius: 4cqw; }
+    .hx-lt { position: absolute; top: 50%; transform: translateY(-50%); font-family: 'HeroSerif', Georgia, serif; font-weight: 700; font-style: italic; color: #fcd42a; font-size: 5.6cqw; line-height: 1; white-space: nowrap; text-shadow: 0 0 14px rgba(252,212,42,.25), 0 2px 4px rgba(0,0,40,.5); transition: color .2s, text-shadow .2s; }
+    .hx-lt-l { left: 4.8%; } .hx-lt-r { left: 69%; }
+    .hx-lens:hover .hx-lt, .hx-lens:focus-visible .hx-lt { color: #ffe468; text-shadow: 0 0 22px rgba(255,228,104,.65), 0 2px 4px rgba(0,0,40,.5); }
+    .hx-lens:focus-visible { outline: 3px solid #ffe468; outline-offset: 4px; }
+    .hx-card { left: 10.9%; right: 10.9%; top: 70.3%; height: 17.2%; box-sizing: border-box; background: #041450; border: 0.36cqw solid #f3c534; border-radius: 5.4cqw; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0 3%; margin: 0; }
+    .hx-stars { color: #fcd42a; font-size: 4.6cqw; letter-spacing: .5cqw; line-height: 1; margin-bottom: 1.1cqw; }
+    .hx-card blockquote { margin: 0; font-size: 3.2cqw; line-height: 1.37; font-weight: 600; }
+    .hx-card figcaption { margin-top: 1.2cqw; font-size: 2.65cqw; font-weight: 600; color: rgba(255,255,255,.92); }
+    .hx-h1 { left: 0; right: 0; top: 87.1%; text-align: center; font-family: 'HeroSerif', Georgia, serif; font-weight: 700; color: #fff; font-size: 5.95cqw; line-height: 1.17; white-space: nowrap; animation: none; }
+    .hx-h1 em { color: #fcd42a; font-style: italic; }
+    #hero .hero-inner { padding: 36px 24px 0; }
+    @media (prefers-reduced-motion: no-preference) { .hx-pill, .hx-lt { transition: background .2s, color .2s, text-shadow .2s; } }
   </style>
   <link rel="stylesheet" href="/css/builder.css?v=20261117" />
 </head>
@@ -1719,36 +1750,25 @@
 <!-- SCROLL PROGRESS -->
 <div id="scroll-progress"></div>
 
-<!-- ═══════ NAV ═══════ -->
-<nav aria-label="Main navigation">
-  <div class="nav-inner">
-    <a href="/" class="nav-language" lang="en" aria-current="page">
-      <span class="nav-brand">CustomSongMe.com</span>
-      <span class="nav-language-label">English</span>
-    </a>
-    <span class="nav-cta nav-cta--logo"><img src="/img/customsongme-icon-144.png" alt="" class="nav-logo-icon" width="44" height="44" /></span>
-    <a href="/es/" class="nav-language" lang="es">
-      <span class="nav-brand">CustomSongMe.com</span>
-      <span class="nav-language-label">Español</span>
-    </a>
-  </div>
-</nav>
-
 <main>
 
 <!-- ═══════ SECTION 1 — HERO ═══════ -->
 <section id="hero">
+  <div class="hx" aria-label="Dan the Song Man, custom songs at CustomSongMe.com">
+    <img class="hx-photo" src="/img/dan-the-song-man-custom-song-customsongme-hero-640.webp" srcset="/img/dan-the-song-man-custom-song-customsongme-hero-640.webp 640w, /img/dan-the-song-man-custom-song-customsongme-hero.webp 1125w" sizes="(min-width: 640px) 640px, 100vw" width="1125" height="1498" alt="Dan the Song Man smiling in square sunglasses, creator of personalized custom songs at CustomSongMe.com" fetchpriority="high" decoding="async" />
+    <a href="/" class="hx-pill hx-pill-l" lang="en" aria-current="page"><img src="/img/hero-pill-icon.webp" alt="" width="71" height="65" />English</a>
+    <a href="/es/" class="hx-pill hx-pill-r" lang="es"><img src="/img/hero-pill-icon.webp" alt="" width="71" height="65" />Español</a>
+    <p class="hx-tag">Your Story. Your Song.</p>
+    <p class="hx-sub">Real stories from real people,<br>made by Dan the Song Man.</p>
+    <a href="#order-form" class="hx-lens" aria-label="Start my song"><span class="hx-lt hx-lt-l">Start My</span><span class="hx-lt hx-lt-r">Song</span></a>
+    <figure class="hx-card">
+      <div class="hx-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <blockquote>“My husband cried like a baby!! What a wonderful anniversary gift!!”</blockquote>
+      <figcaption>S.H., Verified Google Review</figcaption>
+    </figure>
+    <h1 class="hx-h1">Personalized Custom Songs,<br><em>Delivered in 24 Hours</em></h1>
+  </div>
   <div class="hero-inner">
-    <div class="hero-tagline">
-      <span class="tagline-main">Your Story. Your Song.</span>
-      <span class="tagline-sub">Tell me the stories. I'll turn them into a song they'll never forget.</span>
-      <span class="tagline-rule" aria-hidden="true"></span>
-    </div>
-    <div class="hero-review">
-      <span class="stars">★★★★★</span>
-      <span>"My husband cried like a baby!! What a wonderful anniversary gift!!" — S.H., Verified Google Review</span>
-    </div>
-    <h1>Personalized Custom Songs,<br><em>Delivered in 24 Hours</em></h1>
     <p class="hero-sub">A personalized song built from your stories, moments, and message — created by Dan the Song Man and delivered within 24 hours of payment.</p>
     <div class="hero-price-anchor">
       <div class="price-label">Custom Song Packages</div>
