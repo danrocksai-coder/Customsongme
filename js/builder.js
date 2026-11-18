@@ -51,7 +51,8 @@
       unlNote: ' + Keep it Unlisted +$25',
       totalLabel: 'Your total: ',
       charsWord: 'characters',
-      msgLabels: ['Personal message for the card', 'Personal message 1'],
+      msgLabels: ['Your message on the card', 'Your personal message on the card'],
+      msgNeeded: 'Please add your message for the card.',
       yes: 'Yes (+$25)', no: 'No', none: 'Not chosen yet',
       barStep: 'Step {n} of 6', barReady: 'Ready to submit',
       pkgWord: 'Package',
@@ -66,7 +67,8 @@
       unlNote: ' + Mantenlo no listado +$25',
       totalLabel: 'Tu total: ',
       charsWord: 'caracteres',
-      msgLabels: ['Mensaje personal para la tarjeta', 'Mensaje personal 1'],
+      msgLabels: ['Tu mensaje en la tarjeta', 'Tu mensaje personal en la tarjeta'],
+      msgNeeded: 'Por favor agrega tu mensaje para la tarjeta.',
       yes: 'Sí (+$25)', no: 'No', none: 'Aún sin elegir',
       barStep: 'Paso {n} de 6', barReady: 'Listo para enviar',
       pkgWord: 'Paquete',
@@ -106,26 +108,29 @@
   var unlistedCheckbox = $('unlisted-checkbox');
   var orderTotal = $('order-total'); // optional; the total lives in the receipt and the phone bar
   var emailField = $('email');
-  var msg1 = $('msg1'), msg2 = $('msg2');
-  var msg1Group = $('msg1-group'), msg2Group = $('msg2-group');
+  var msg1 = $('msg1');
+  var msg1Group = $('msg1-group');
 
   function selectedPackage() {
     var r = checked('package-tier');
     return r ? r.value : '2';
   }
   function countText(el) { return el.value.length + ' / ' + el.maxLength + ' ' + L.charsWord; }
+  // Packages 2, 3 and 4 each have ONE personal message for the card, and it is required.
   function configureMessages(n) {
-    var boxes = n === '2' ? 1 : (n === '3' || n === '4') ? 2 : 0;
-    msg1Group.style.display = boxes >= 1 ? '' : 'none';
-    msg2Group.style.display = boxes >= 2 ? '' : 'none';
-    msg1.disabled = boxes < 1; msg2.disabled = boxes < 2;
-    msg1.maxLength = boxes === 1 ? 60 : 150;
-    msg1.rows = boxes === 1 ? 2 : 6;
-    msg2.rows = 6; msg2.maxLength = 150;
-    $('msg1-label').textContent = boxes === 2 ? L.msgLabels[1] : L.msgLabels[0];
+    var needs = n !== '1';
+    msg1Group.style.display = needs ? '' : 'none';
+    msg1.disabled = !needs; msg1.required = needs;
+    msg1.maxLength = n === '2' ? 60 : 150;
+    msg1.rows = n === '2' ? 2 : 6;
+    $('msg1-label-text').textContent = n === '2' ? L.msgLabels[0] : L.msgLabels[1];
     if (msg1.value.length > msg1.maxLength) msg1.value = msg1.value.slice(0, msg1.maxLength);
+    checkMsg();
     $('msg1-count').textContent = countText(msg1);
-    $('msg2-count').textContent = countText(msg2);
+  }
+  // Spaces alone do not count as a message.
+  function checkMsg() {
+    msg1.setCustomValidity(msg1.required && msg1.value.trim() === '' ? L.msgNeeded : '');
   }
 
   // ───────────────────────── TOTALS + CHECKOUT LINK ─────────────────────────
@@ -155,9 +160,7 @@
   });
   if (unlistedCheckbox) unlistedCheckbox.addEventListener('change', syncPaymentRedirect);
   if (emailField) emailField.addEventListener('input', syncPaymentRedirect);
-  [msg1, msg2].forEach(function (el) {
-    el.addEventListener('input', function () { $(el.id + '-count').textContent = countText(el); });
-  });
+  msg1.addEventListener('input', function () { checkMsg(); $('msg1-count').textContent = countText(msg1); });
   syncPaymentRedirect(); // set correctly on page load, not just on change
 
   // ───────────────────────── "SEE EXAMPLE" POP-UP ─────────────────────────
@@ -211,7 +214,7 @@
     var done1 = !!sfSel && !!occ && (!occ.dataset.other || otherTxt.value.trim() !== '');
     var done3 = subjectField.value.trim() !== '' && storyField.value.trim() !== '';
     var done6 = nameField.value.trim() !== '' && emailField && emailField.value.trim() !== '' && emailField.checkValidity();
-    var done4 = !!(styleSel && vocSel && checked('detail-level'));
+    var done4 = !!(styleSel && vocSel && checked('detail-level')) && (n === '1' || msg1.value.trim() !== '');
     var next = !done1 ? 1 : !done3 ? 3 : !done4 ? 4 : !done6 ? 6 : 0;
     barBtn.dataset.next = next;
     $('sb-pkg').textContent = L.pkgWord + ' ' + n + ' · ' + p.name;
