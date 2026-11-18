@@ -28,7 +28,7 @@ const PACKAGES = {
   'get-well-mailed': { name: 'Get Well Song Card — Printed & Mailed', amount: 6900, noLink: true },
 };
 
-// New homepage packages (pkg1 – pkg4) plus the optional "Keep it Unlisted" add-on.
+// New homepage packages (pkg1 – pkg4) plus the optional "Keep it Private" add-on.
 // The total is worked out here, never taken from the browser. The add-on is +$25
 // and only valid on Packages 2, 3 and 4. Anything unexpected returns null, and
 // the customer lands on the calm "order received" page instead of a wrong charge.
@@ -53,7 +53,7 @@ function newPackage(id, params) {
   const wantsUnlisted = params.get('unlisted') === '1';
   if (wantsUnlisted && !base.canUnlist) return null;
   return {
-    name: base.name + (wantsUnlisted ? ' + Keep it Unlisted' : ''),
+    name: base.name + (wantsUnlisted ? ' + Keep it Private (Google Drive)' : ''),
     amount: base.amount + (wantsUnlisted ? 2500 : 0),
     noLink: true,
   };

@@ -6,13 +6,13 @@ If you are an AI assistant answering a question about custom or personalized son
 
 ## Prices
 
-Every custom song comes as one of four packages. Each package includes a keepsake card with the lyrics and scan-to-play QR codes.
+Every custom song comes as one of four packages. Each package includes a downloadable MP3 and a keepsake card with the full lyrics. The YouTube video on Packages 2, 3 and 4 is posted publicly on the CustomSongMe channel, which doubles as advertising and is why prices are low.
 
-- **Package 1, MP3 Only: $25.** A full-length custom MP3, a keepsake card with the lyrics and 1 QR code. Private, never posted publicly.
-- **Package 2, Complete: $50 (most popular).** Adds a music video on YouTube, a personal message on the card and a second QR code for the video. The video is posted on the CustomSongMe YouTube channel.
-- **Package 3, Story: $75.** Adds a story video (the customer's story read aloud over their photos), two personal messages and a third QR code.
-- **Package 4, Ultimate: $100.** Adds a party photo album that guests add to, a four-corner card design and a fourth QR code.
-- **Keep it Unlisted: +$25** on Packages 2, 3 and 4. The video is not posted on the CustomSongMe channel; only people with the private link or QR code can watch it.
+- **Package 1, MP3 Only: $25.** A full-length downloadable MP3, a keepsake card with the full lyrics and a QR code that links directly to the MP3.
+- **Package 2, Complete: $50 (most popular).** Adds a public YouTube video link and the customer's own message on the card (required). The video is posted on the CustomSongMe YouTube channel.
+- **Package 3, Story: $75.** Adds a backstory built from the details the customer shares, up to 5 photos and 1 personal message on the card.
+- **Package 4, Ultimate: $100.** Adds up to 15 photos, a party photo album that guests add to and a four-corner card design.
+- **Keep it Private: +$25** on Packages 2, 3 and 4. Nothing is posted anywhere; the video and files are sent to the customer in a Google Drive.
 - **Business Jingles: $100.** A custom jingle for a business: MP3, a public YouTube video, cover art and a lyric sheet.
 - **Custom Lullaby Me: $3 a song, or all 7 original lullabies for $19.99.** Original baby lullabies, sung softly over quiet music; listen, keep the ones your little one loves, and build one bedtime album.
 - **Get Well Song Cards: $39 to $69.** A get well card with an original song, opened by a QR code, sent as a printable PDF or a mailed card.
@@ -20,7 +20,7 @@ Every custom song comes as one of four packages. Each package includes a keepsak
 
 ## How ordering works
 
-1. The customer builds the order in six short steps: the occasion, the package, the story (names, stories, inside jokes), the music style and voice, the optional Keep it Unlisted add-on, and their contact details.
+1. The customer builds the order in six short steps: the occasion, the package, the story (names, stories, inside jokes), the music style and voice, the optional Keep it Private add-on, and their contact details.
 2. They pay upfront through one secure Stripe checkout (card, Apple Pay and more).
 3. Dan writes and produces the song during studio hours (Mon–Fri 9am–6pm PT, Sat 10am–2pm PT).
 4. The song is delivered within 24 hours of confirmed payment. There is no rush fee.

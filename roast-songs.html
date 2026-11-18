@@ -31,7 +31,7 @@
     "@type": "Product",
     "name": "Custom Roast Song",
     "image": "https://www.customsongme.com/img/dan-portrait.webp",
-    "description": "A hilarious personalized roast song built from your jokes and stories, delivered as a full-length custom MP3 with a keepsake card with lyrics, with options for a music video on YouTube, a narrated story video and a shared photo album — delivered within 24 hours of confirmed payment.",
+    "description": "A hilarious personalized roast song built from your jokes and stories, delivered as a full-length custom MP3 with a keepsake card with lyrics, with options for a public YouTube video link, a backstory with your photos and a shared photo album — delivered within 24 hours of confirmed payment.",
     "brand": { "@type": "Brand", "name": "CustomSongMe" },
     "offers": [
       {
@@ -68,7 +68,7 @@
       },
       {
         "@type": "Offer",
-        "name": "Add-on: Keep it Unlisted",
+        "name": "Add-on: Keep it Private (Google Drive delivery)",
         "price": "25.00",
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock",
@@ -85,8 +85,8 @@
     "mainEntity": [
       {"@type":"Question","name":"How savage can a roast song get?","acceptedAnswer":{"@type":"Answer","text":"That's your call. On the request form, you set the spice level — playful and light, medium heat, or no holds barred. Dan matches the tone to whatever you're comfortable with."}},
       {"@type":"Question","name":"How does the order process work?","acceptedAnswer":{"@type":"Answer","text":"Fill out the request form with the jokes, stories, and roastable habits, choose your package, and complete secure checkout through Stripe (card, Apple Pay, Cash App Pay and more). Once payment is confirmed, Dan personally reviews the details during studio hours and writes and produces the song. It's delivered within 24 hours of confirmed payment."}},
-      {"@type":"Question","name":"Is there a cheaper option than Complete?","acceptedAnswer":{"@type":"Answer","text":"Yes. Package 1, MP3 Only, is $25 and includes a full-length custom MP3, a keepsake card with the lyrics and 1 QR code for the song. It has no video, and it is private, never posted publicly. Package 2, Complete, is $50 and adds a music video on YouTube, a personal message on the card and a second QR code for the video. Package 3, Story ($75), and Package 4, Ultimate ($100), add even more."}},
-      {"@type":"Question","name":"Why is Complete $50, and what does Keep it Unlisted add?","acceptedAnswer":{"@type":"Answer","text":"Complete is $50 because the music video is posted on the CustomSongMe YouTube channel, which is part of how I keep prices affordable. If you would rather keep the video off my channel, Keep it Unlisted is +$25 on Packages 2, 3 and 4, so Complete with Keep it Unlisted comes to $75. Unlisted means I do not post it on my channel, and only people with your private link or QR code can watch it. You can check the box in Step 5 of the order builder."}}
+      {"@type":"Question","name":"Is there a cheaper option than Complete?","acceptedAnswer":{"@type":"Answer","text":"Yes. Package 1, MP3 Only, is $25 and includes a full-length downloadable MP3, a keepsake card with the full lyrics, and a QR code that links directly to your MP3. It has no video. Package 2, Complete, is $50 and adds a public YouTube video link and your message on the card. Package 3, Story ($75), and Package 4, Ultimate ($100), add even more."}},
+      {"@type":"Question","name":"Why is Complete $50, and what does keeping it private add?","acceptedAnswer":{"@type":"Answer","text":"Complete is $50 because the music video is posted publicly on the CustomSongMe YouTube channel, and that public listing is partly my advertising, which is how I keep prices affordable. If you would rather keep your song private, I understand: it is +$25 on Packages 2, 3 and 4, so Complete comes to $75. In that case I do not post it anywhere, and I send your video and files to you in a Google Drive. You can check the box in Step 5 of the order builder."}}
     ]
   }
   </script>
@@ -430,7 +430,7 @@
       .nav-brand { font-size: 0.82rem; }
     }
   </style>
-  <link rel="stylesheet" href="/css/builder.css?v=20261117" />
+  <link rel="stylesheet" href="/css/builder.css?v=20261118" />
 </head>
 <body>
 
@@ -476,7 +476,7 @@
 <section id="quick-answer" style="padding:48px 24px 8px;text-align:center">
   <div style="max-width:760px;margin:0 auto;">
     <h2 style="margin-bottom:12px;">What is a custom roast song?</h2>
-    <p style="font-size:1.05rem;line-height:1.7;margin:0;text-align:left;">A custom roast song is an original, funny song that teases someone with their own stories and inside jokes, from playful to savage, whichever you choose. At CustomSongMe, Dan the Song Man writes and produces it from the material you share, delivered within 24 hours of confirmed payment. It costs $25 for the MP3 only, $50 for Complete (adds a music video on YouTube), $75 for Story or $100 for Ultimate, and Keep it Unlisted is +$25 on Packages 2, 3 and 4.</p>
+    <p style="font-size:1.05rem;line-height:1.7;margin:0;text-align:left;">A custom roast song is an original, funny song that teases someone with their own stories and inside jokes, from playful to savage, whichever you choose. At CustomSongMe, Dan the Song Man writes and produces it from the material you share, delivered within 24 hours of confirmed payment. It costs $25 for the MP3 only, $50 for Complete (adds a music video on YouTube), $75 for Story or $100 for Ultimate, and keeping it private (a Google Drive instead of a public post) is +$25 on Packages 2, 3 and 4.</p>
   </div>
 </section>
 
@@ -581,8 +581,8 @@
             <div class="pkg-card-inner">
               <span class="pkg-check" aria-hidden="true">✓</span>
               <div class="pkg-disc"><small>Package 1</small><strong>MP3 Only</strong><em>$25</em></div>
-              <div class="pkg-best"><b>Best for:</b> A private gift</div>
-              <ul class="pkg-inc"><li>MP3 song</li><li>Lyrics card</li><li>1 QR code (scan to play)</li><li>Private, never posted</li></ul>
+              <div class="pkg-best"><b>Best for:</b> A simple gift</div>
+              <ul class="pkg-inc"><li>Downloadable MP3<ul class="pkg-sub"><li>Full set of lyrics (lyrics card)</li><li>QR code links directly to your MP3</li></ul></li></ul>
               <button type="button" class="pkg-example" data-full="/img/package-1-mp3-only.webp" data-alt="CustomSongMe Package 1, MP3 Only, $25: keepsake card with lyrics and a QR code" aria-haspopup="dialog">See example</button>
             </div>
           </label>
@@ -592,7 +592,7 @@
               <span class="pkg-tag">Most popular</span><span class="pkg-check" aria-hidden="true">✓</span>
               <div class="pkg-disc"><small>Package 2</small><strong>Complete</strong><em>$50</em></div>
               <div class="pkg-best"><b>Best for:</b> Sharing with family</div>
-              <ul class="pkg-inc"><li>MP3 song</li><li>Lyrics card</li><li class="new">+ Music video</li><li class="new">+ Your message on the card</li><li class="new">+ 2 QR codes (scan to play)</li></ul>
+              <ul class="pkg-inc"><li>Downloadable MP3<ul class="pkg-sub"><li>Full set of lyrics (lyrics card)</li></ul></li><li class="new">Public YouTube video link</li><li class="new">Your message on the card</li></ul>
               <button type="button" class="pkg-example" data-full="/img/package-2-complete.webp" data-alt="CustomSongMe Package 2, Complete, $50: keepsake card with a music video QR code and personal message" aria-haspopup="dialog">See example</button>
             </div>
           </label>
@@ -602,7 +602,7 @@
               <span class="pkg-check" aria-hidden="true">✓</span>
               <div class="pkg-disc"><small>Package 3</small><strong>Story</strong><em>$75</em></div>
               <div class="pkg-best"><b>Best for:</b> Big milestones</div>
-              <ul class="pkg-inc"><li>MP3 song</li><li>Lyrics card</li><li>Music video</li><li class="new">+ Story video: your story read aloud over your photos</li><li class="new">+ 2 personal messages</li><li class="new">+ 3 QR codes (scan to play)</li></ul>
+              <ul class="pkg-inc"><li>Downloadable MP3<ul class="pkg-sub"><li>Full set of lyrics (lyrics card)</li></ul></li><li>Public YouTube video link</li><li class="new">Backstory<ul class="pkg-sub"><li>The details you share, told with your photos</li><li>Up to 5 photos</li></ul></li><li class="new">1 personal message on the card</li></ul>
               <button type="button" class="pkg-example" data-full="/img/package-3-story.webp" data-alt="CustomSongMe Package 3, Story, $75: keepsake card with song, video and story QR codes" aria-haspopup="dialog">See example</button>
             </div>
           </label>
@@ -612,7 +612,7 @@
               <span class="pkg-check" aria-hidden="true">✓</span>
               <div class="pkg-disc"><small>Package 4</small><strong>Ultimate</strong><em>$100</em></div>
               <div class="pkg-best"><b>Best for:</b> Parties and events</div>
-              <ul class="pkg-inc"><li>MP3 song</li><li>Lyrics card</li><li>Music video</li><li>Story video</li><li>2 personal messages</li><li class="new">+ Party photo album guests add to</li><li class="new">+ Four-corner card design</li><li class="new">+ 4 QR codes (scan to play)</li></ul>
+              <ul class="pkg-inc"><li>Downloadable MP3<ul class="pkg-sub"><li>Full set of lyrics (lyrics card)</li></ul></li><li>Public YouTube video link</li><li>Backstory<ul class="pkg-sub"><li>The details you share, told with your photos</li></ul></li><li>1 personal message on the card</li><li class="new">Up to 15 photos</li><li class="new">Party photo album guests add to</li><li class="new">Four-corner card design</li></ul>
               <button type="button" class="pkg-example" data-full="/img/package-4-ultimate.webp" data-alt="CustomSongMe Package 4, Ultimate, $100: four-corner keepsake with four QR codes" aria-haspopup="dialog">See example</button>
             </div>
           </label>
@@ -690,19 +690,16 @@
           </div>
           <p class="sound-note" id="sound-note" role="alert">Pick a music style and a voice so I know how your song should sound.</p>
 
-          <div class="optional-banner"><strong>OPTIONAL</strong><span>You can skip all of this and I'll still make your song great.</span></div>
-          <div class="form-grid">
-          <div class="form-group full" id="msg1-group">
-            <label for="msg1" id="msg1-label">Personal message for the card</label>
-            <textarea id="msg1" name="personal-message-1" rows="2" maxlength="60" placeholder="Happy 40th, Mom! Love you more than tacos. – Jake"></textarea>
+          <div class="form-grid msg-required" id="msg1-group" style="display:none;">
+          <div class="form-group full">
+            <label for="msg1" id="msg1-label"><span class="req-tag">Required</span> <span id="msg1-label-text">Your message on the card</span></label>
+            <textarea id="msg1" name="personal-message-1" rows="2" maxlength="60" placeholder="Happy 40th, Mom! Love you more than tacos. – Jake" required></textarea>
             <span class="char-count" id="msg1-count"></span>
           </div>
-
-          <div class="form-group full" id="msg2-group" style="display:none;">
-            <label for="msg2">Personal message 2</label>
-            <textarea id="msg2" name="personal-message-2" rows="6" maxlength="150" placeholder="Twenty-five years, three kids, one dog, and I'd do it all again. Happy anniversary, my love. – Daniel" disabled></textarea>
-            <span class="char-count" id="msg2-count"></span>
           </div>
+
+          <div class="optional-banner"><strong>OPTIONAL</strong><span>You can skip all of this and I'll still make your song great.</span></div>
+          <div class="form-grid">
 
           <div class="form-group full">
             <label for="pronunciation">Name pronunciation <span class="opt">(optional — if any name isn't said the way it's spelled)</span></label>
@@ -718,14 +715,14 @@
 
         <div class="builder-step" id="step-5" data-step="5">
           <div class="step-head"><span class="step-kicker">Step 5 of 6</span><h3>Add-on</h3></div>
-          <p class="addon-p1" id="addon-p1">Package 1 is already private, so there is nothing to add here.</p>
+          <p class="addon-p1" id="addon-p1">Package 1 has no video, so there is nothing to keep private here.</p>
 <div class="unlisted-block">
           <div class="public-note" id="public-note">
             <label class="unlisted-toggle">
               <input type="checkbox" id="unlisted-checkbox" name="unlisted-addon" value="Yes" />
-              <span>Keep it Unlisted +$25</span>
+              <span>Keep it private +$25 (sent to you in a Google Drive, never posted)</span>
             </label>
-            <p><strong>Keep it Unlisted is +$25, and it is only for Packages 2, 3 and 4.</strong> By default, your video is posted on my public CustomSongMe YouTube channel. With Keep it Unlisted, I do not post it on my channel, and only people with your private link or QR code can watch it. Package 1 has no video and is already private.</p>
+            <p><strong>Why my prices are this low:</strong> the YouTube video that comes with Packages 2, 3 and 4 is posted publicly on my CustomSongMe channel, and that public listing doubles as my advertising. That is how I keep these packages so affordable. <strong>If you would rather keep your song private, I completely understand. It is +$25.</strong> In that case I do not post it anywhere. I send your video and files straight to you in a Google Drive, so you are the only one who has them. Package 1 has no video, so there is nothing to post.</p>
           </div>        </div>
         </div>
 
@@ -779,7 +776,7 @@
               <div class="rc-row"><dt>Package</dt><dd id="rc-package">—</dd></div>
               <div class="rc-row"><dt>Music style</dt><dd id="rc-style">—</dd></div>
               <div class="rc-row"><dt>Vocals</dt><dd id="rc-vocals">—</dd></div>
-              <div class="rc-row"><dt>Keep it Unlisted</dt><dd id="rc-unlisted">—</dd></div>
+              <div class="rc-row"><dt>Keep it private (Google Drive)</dt><dd id="rc-unlisted">—</dd></div>
               <div class="rc-row rc-total"><dt>Total</dt><dd id="rc-total">—</dd></div>
             </dl>
           </div>
@@ -860,12 +857,12 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Is there a cheaper option than Complete? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Yes. Package 1, MP3 Only, is $25 and includes a full-length custom MP3, a keepsake card with the lyrics and 1 QR code for the song. It has no video, and it is private, never posted publicly. Package 2, Complete, is $50 and adds a music video on YouTube, a personal message on the card and a second QR code for the video. Package 3, Story ($75), and Package 4, Ultimate ($100), add even more.</div>
+        <div class="faq-a">Yes. Package 1, MP3 Only, is $25 and includes a full-length downloadable MP3, a keepsake card with the full lyrics, and a QR code that links directly to your MP3. It has no video. Package 2, Complete, is $50 and adds a public YouTube video link and your message on the card. Package 3, Story ($75), and Package 4, Ultimate ($100), add even more.</div>
       </div>
 
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Why is Complete $50, and what does Keep it Unlisted add? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Complete is $50 because the music video is posted on the CustomSongMe YouTube channel, which is part of how I keep prices affordable. If you would rather keep the video off my channel, Keep it Unlisted is +$25 on Packages 2, 3 and 4, so Complete with Keep it Unlisted comes to $75. Unlisted means I do not post it on my channel, and only people with your private link or QR code can watch it. You can check the box in Step 5 of the order builder.</div>
+        <button class="faq-q" aria-expanded="false">Why is Complete $50, and what does keeping it private add? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Complete is $50 because the music video is posted publicly on the CustomSongMe YouTube channel, and that public listing is partly my advertising, which is how I keep prices affordable. If you would rather keep your song private, I understand: it is +$25 on Packages 2, 3 and 4, so Complete comes to $75. In that case I do not post it anywhere, and I send your video and files to you in a Google Drive. You can check the box in Step 5 of the order builder.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Is the song guaranteed? <span class="faq-icon">+</span></button>
@@ -956,7 +953,7 @@
 
 </script>
 
-<script src="/js/builder.js?v=20261117"></script>
+<script src="/js/builder.js?v=20261119"></script>
 
 </body>
 </html>

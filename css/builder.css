@@ -45,6 +45,12 @@
 .pkg-best b { color: var(--gold); }
 .pkg-inc { list-style: none; padding: 0; margin: 0 0 12px; text-align: left; width: 100%; display: grid; gap: 6px; font-size: 0.82rem; color: rgba(255,255,255,0.88); line-height: 1.35; }
 .pkg-inc li.new { color: var(--gold); font-weight: 700; }
+.pkg-inc > li::before { content: "• "; }
+.pkg-sub { list-style: none; margin: 4px 0 0; padding: 0 0 0 6px; display: grid; gap: 3px; }
+.pkg-sub li { color: rgba(255,255,255,0.8); font-weight: 400; font-size: 0.78rem; }
+.pkg-sub li::before { content: "– "; }
+.msg-required { margin: 6px 0 0; }
+.msg-required label { display: flex; align-items: center; gap: 10px; margin-top: 18px; color: var(--white); font-weight: 700; font-size: 1rem; text-transform: none; letter-spacing: 0; }
 .pkg-example { margin-top: auto; background: none; border: 0; color: var(--gold); text-decoration: underline; font-weight: 700; font-size: 0.88rem; cursor: pointer; padding: 10px 8px; font-family: inherit; }
 .hint-chips { display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 8px; }
 .hint-chips-label { width: 100%; font-size: 0.8rem; color: rgba(255,255,255,0.7); }
