@@ -34,9 +34,15 @@
       pet: '/pet-songs',
       roast: '/roast-songs',
       celebration: '/memorial-songs',
-      quince: '/es/canciones-de-quinceanera'
+      quince: '/quinceanera-songs'
     },
-    es: { quince: '/es/canciones-de-quinceanera' }
+    es: {
+      quince: '/es/canciones-de-quinceanera',
+      birthday: '/es/canciones-de-cumpleanos',
+      'mothers-day': '/es/canciones-dia-de-las-madres',
+      anniversary: '/es/canciones-de-aniversario',
+      wedding: '/es/canciones-de-boda'
+    }
   };
   // Occasions that always jump straight to their own page and pricing, even with nothing checked.
   var OWN_PAGES = {

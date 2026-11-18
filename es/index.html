@@ -1914,6 +1914,34 @@
             <input type="text" id="padrinos" name="padrinos" placeholder="ej. nombres de padrinos/madrinas, el color o tema de la fiesta, o cualquier tradición familiar importante" />
           </div>
           </div>
+          <div class="form-group full" data-occ-only="birthday">
+            <label for="bday-age"><span data-me="Edad que cumples" data-other="Edad que cumple">Edad que cumple</span> <span class="opt">(opcional)</span></label>
+            <input type="text" id="bday-age" name="bday-age" placeholder="ej. 40" inputmode="numeric" />
+          </div>
+          <div class="form-group full" data-occ-only="birthday">
+            <label for="bday-nicknames"><span data-me="Tus apodos" data-other="Sus apodos">Sus apodos</span> <span class="opt">(opcional)</span></label>
+            <input type="text" id="bday-nicknames" name="bday-nicknames" placeholder="ej. Chiquis, Güero, Abuelita" />
+          </div>
+          <div class="form-group full" data-occ-only="birthday">
+            <label for="bday-loves"><span data-me="¿Qué te encanta? (pasatiempos, deportes, comida, series)" data-other="¿Qué le encanta? (pasatiempos, deportes, comida, series)">¿Qué le encanta? (pasatiempos, deportes, comida, series)</span> <span class="opt">(opcional)</span></label>
+            <textarea id="bday-loves" name="bday-loves" class="textarea-sm" placeholder="ej. los Dodgers, la pesca, los tacos de la calle, las novelas"></textarea>
+          </div>
+          <div class="form-group full" data-occ-only="anniversary">
+            <label for="years">¿Cuántos años juntos? <span class="opt">(opcional)</span></label>
+            <input type="text" id="years" name="years" placeholder="ej. 1er, 10.º, 25.º aniversario" />
+          </div>
+          <div class="form-group full" data-occ-only="wedding">
+            <label for="use-case-wedding">¿Cómo la van a usar? <span class="opt">(opcional)</span></label>
+            <select id="use-case-wedding" name="use-case">
+              <option value="" disabled selected>Elige una</option>
+              <option>Primer baile</option>
+              <option>Entrada a la ceremonia</option>
+              <option>Regalo sorpresa</option>
+              <option>Video de la boda</option>
+              <option>Renovación de votos</option>
+              <option>Otro</option>
+            </select>
+          </div>
           <div class="heart-block">
             <div class="heart-head"><strong>Que llegue al corazón</strong><span>Cinco preguntas rápidas, todas opcionales. Entre más compartas, más personal será tu canción.</span></div>
             <div class="form-group full">
@@ -2083,7 +2111,7 @@
         <p class="story-context">Ella anotó fragmentos de su historia sin pensarlo mucho, planeando guardar la canción para su próximo aniversario — pero no pudo esperar, y se la dio a su esposo antes de tiempo.</p>
         <p class="story-quote">"Dan me hizo rápidamente una canción increíble... primero solo sonrió y luego, de repente, le empezó a temblar el labio."</p>
         <div class="story-attribution">— donna ramey, reseña verificada de Google (traducida del inglés)</div>
-        <a href="/anniversary-songs" class="story-link">Canciones de aniversario personalizadas →</a>
+        <a href="/es/canciones-de-aniversario/" class="story-link">Canciones de aniversario personalizadas →</a>
       </div>
 
       <div class="story-card fade-up">
@@ -2099,7 +2127,7 @@
         <p class="story-context">La canción era para su mamá, construida alrededor de lo que quería que su mamá supiera pero no había encontrado las palabras para decirlo.</p>
         <p class="story-quote">"¡Lo que creó superó por mucho mis expectativas! ...Nos hizo reír y llorar."</p>
         <div class="story-attribution">— Vanessa Smith, reseña verificada de Google (traducida del inglés)</div>
-        <a href="/mothers-day-songs" class="story-link">Canciones del Día de las Madres personalizadas →</a>
+        <a href="/es/canciones-dia-de-las-madres/" class="story-link">Canciones del Día de las Madres personalizadas →</a>
       </div>
 
     </div>
@@ -2264,11 +2292,11 @@
     <p class="sub">Cada canción es escrita personalmente por Dan — hecha con tu historia, entregada a tu correo en menos de 24 horas después del pago confirmado.</p>
     <div class="occasions-grid">
       <a href="/es/canciones-de-quinceanera/" class="occasion-link"><span class="em">👑</span>Canciones de quinceañera</a>
-      <a href="/birthday-songs" class="occasion-link"><span class="em">🎂</span>Canciones de cumpleaños</a>
-      <a href="/wedding-songs" class="occasion-link"><span class="em">💍</span>Canciones de boda</a>
-      <a href="/anniversary-songs" class="occasion-link"><span class="em">❤️</span>Canciones de aniversario</a>
+      <a href="/es/canciones-de-cumpleanos/" class="occasion-link"><span class="em">🎂</span>Canciones de cumpleaños</a>
+      <a href="/es/canciones-de-boda/" class="occasion-link"><span class="em">💍</span>Canciones de boda</a>
+      <a href="/es/canciones-de-aniversario/" class="occasion-link"><span class="em">❤️</span>Canciones de aniversario</a>
       <a href="/love-songs" class="occasion-link"><span class="em">🎵</span>Canciones de amor</a>
-      <a href="/mothers-day-songs" class="occasion-link"><span class="em">🌸</span>Canciones del Día de las Madres</a>
+      <a href="/es/canciones-dia-de-las-madres/" class="occasion-link"><span class="em">🌸</span>Canciones del Día de las Madres</a>
       <a href="/fathers-day-songs" class="occasion-link"><span class="em">👔</span>Canciones del Día del Padre</a>
       <a href="/pet-songs" class="occasion-link"><span class="em">🐶</span>Canciones para mascotas</a>
       <a href="/roast-songs" class="occasion-link"><span class="em">🔥</span>Canciones de burla</a>
@@ -2315,11 +2343,11 @@
     <nav class="footer-nav" aria-label="Footer navigation">
       <a href="/es/">Inicio</a>
       <a href="/es/canciones-de-quinceanera/">Canciones de quinceañera</a>
-      <a href="/birthday-songs">Canciones de cumpleaños</a>
-      <a href="/wedding-songs">Canciones de boda</a>
-      <a href="/anniversary-songs">Canciones de aniversario</a>
+      <a href="/es/canciones-de-cumpleanos/">Canciones de cumpleaños</a>
+      <a href="/es/canciones-de-boda/">Canciones de boda</a>
+      <a href="/es/canciones-de-aniversario/">Canciones de aniversario</a>
       <a href="/love-songs">Canciones de amor</a>
-      <a href="/mothers-day-songs">Día de las Madres</a>
+      <a href="/es/canciones-dia-de-las-madres/">Día de las Madres</a>
       <a href="/fathers-day-songs">Día del Padre</a>
       <a href="/pet-songs">Canciones para mascotas</a>
       <a href="/adopt-a-rescue-dog">Adopta un perro rescatado</a>
@@ -2400,7 +2428,7 @@
     });
   });
 </script>
-<script src="/js/builder.js?v=20261129"></script>
+<script src="/js/builder.js?v=20261130"></script>
 
 </body>
 </html>
