@@ -33,7 +33,8 @@
       'fathers-day': '/fathers-day-songs',
       pet: '/pet-songs',
       roast: '/roast-songs',
-      celebration: '/memorial-songs'
+      celebration: '/memorial-songs',
+      quince: '/es/canciones-de-quinceanera'
     },
     es: { quince: '/es/canciones-de-quinceanera' }
   };
@@ -41,7 +42,8 @@
   var OWN_PAGES = {
     jingle: '/business-jingles',
     getwell: '/get-well-song-cards',
-    lullaby: '/custom-lullaby-me'
+    lullaby: '/custom-lullaby-me',
+    holiday: '/holiday-songs'
   };
 
   var I18N = {
