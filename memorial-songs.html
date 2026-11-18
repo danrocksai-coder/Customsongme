@@ -429,7 +429,7 @@
       .nav-brand { font-size: 0.82rem; }
     }
   </style>
-  <link rel="stylesheet" href="/css/builder.css?v=20261122" />
+  <link rel="stylesheet" href="/css/builder.css?v=20261124" />
 </head>
 <body>
 
@@ -542,11 +542,16 @@
           <label class="sf-check who-card"><input type="radio" class="sr-radio" name="song-for" value="A gift for someone" data-gift="1" data-short="Someone else" required /><span class="sf-box" aria-hidden="true"></span><span class="who-text"><strong>Gift a song</strong><small>For someone special</small></span></label>
         </div>
         <p class="sound-note" id="gift-note" role="alert">First, choose: your story, or a gift?</p>
+        <div class="color-pick">
+          <p class="color-pick-label"><span data-me="And your two favorite colors" data-other="And their two favorite colors">And their two favorite colors</span> <span class="opt">(optional)</span></p>
+          <div class="color-pick-row"><select name="favorite-color-1" id="favorite-color-1" aria-label="Color 1"><option value="">Color 1</option><option value="Red">🔴 Red</option><option value="Orange">🟠 Orange</option><option value="Yellow">🟡 Yellow</option><option value="Gold">✨ Gold</option><option value="Green">🟢 Green</option><option value="Teal">🩵 Teal</option><option value="Blue">🔵 Blue</option><option value="Navy">🌌 Navy</option><option value="Purple">🟣 Purple</option><option value="Pink">🩷 Pink</option><option value="Black">⚫ Black</option><option value="White">⚪ White</option><option value="Silver">🩶 Silver</option><option value="Brown">🟤 Brown</option><option value="Surprise me">🎲 Surprise me</option></select><select name="favorite-color-2" id="favorite-color-2" aria-label="Color 2"><option value="">Color 2</option><option value="Red">🔴 Red</option><option value="Orange">🟠 Orange</option><option value="Yellow">🟡 Yellow</option><option value="Gold">✨ Gold</option><option value="Green">🟢 Green</option><option value="Teal">🩵 Teal</option><option value="Blue">🔵 Blue</option><option value="Navy">🌌 Navy</option><option value="Purple">🟣 Purple</option><option value="Pink">🩷 Pink</option><option value="Black">⚫ Black</option><option value="White">⚪ White</option><option value="Silver">🩶 Silver</option><option value="Brown">🟤 Brown</option><option value="Surprise me">🎲 Surprise me</option></select></div>
+          <small class="field-hint">I use them in your keepsake card design.</small>
+        </div>
         
         <div class="builder-step" id="step-1" data-step="1">
           <div class="step-head"><span class="step-kicker">Step 1 of 6</span><h3>What's the occasion?</h3></div>
           <div class="occ-chosen" id="occ-chosen" hidden><span id="occ-chosen-label">🕊️ Celebration of Life</span><button type="button" class="occ-change" id="occ-change">change</button></div>
-          <div class="occ-grid">
+          <div class="occ-grid occ-occasions">
           <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Birthday" data-key="birthday" required /><span class="occ-face"><span class="em" aria-hidden="true">🎂</span>Birthday</span></label>
           <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Wedding" data-key="wedding" required /><span class="occ-face"><span class="em" aria-hidden="true">💍</span>Wedding</span></label>
           <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Anniversary" data-key="anniversary" required /><span class="occ-face"><span class="em" aria-hidden="true">💑</span>Anniversary</span></label>
@@ -561,6 +566,7 @@
           <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Get Well" data-key="getwell" required /><span class="occ-face"><span class="em" aria-hidden="true">💐</span>Get Well</span></label>
           <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Baby Lullaby" data-key="lullaby" required /><span class="occ-face"><span class="em" aria-hidden="true">🍼</span>Baby Lullaby</span></label>
           <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Quinceañera" data-key="quince" required /><span class="occ-face"><span class="em" aria-hidden="true">👗</span>Quinceañera</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Graduation" data-key="graduation" required /><span class="occ-face"><span class="em" aria-hidden="true">🎓</span>Graduation</span></label>
           <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Other" data-key="other" data-other="1" required /><span class="occ-face"><span class="em" aria-hidden="true">✨</span>Other</span></label>
           </div>
           <div class="other-wrap" id="other-wrap">
@@ -632,43 +638,31 @@
             <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Folk / Acoustic" required /><span class="occ-face"><span class="em" aria-hidden="true">🪕</span>Acoustic</span></label>
             <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Gospel" required /><span class="occ-face"><span class="em" aria-hidden="true">🙌</span>Gospel</span></label>
             <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Latin / Reggaeton" required /><span class="occ-face"><span class="em" aria-hidden="true">💃</span>Latin</span></label>
-            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Surprise me" required /><span class="occ-face"><span class="em" aria-hidden="true">🎲</span>Not sure, you pick</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Dance / EDM" required /><span class="occ-face"><span class="em" aria-hidden="true">🪩</span>Dance</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Surprise me" data-surprise="1" required /><span class="occ-face"><span class="em" aria-hidden="true">🎲</span>Not sure, you pick</span></label>
+          </div>
+          <div class="other-wrap" id="style-notes-wrap">
+            <div class="form-group full">
+              <label for="style-notes">Any song or artist it should sound like? <span class="opt">(optional)</span></label>
+              <input type="text" id="style-notes" name="style-notes" placeholder="e.g. like Luke Combs, or upbeat like Uptown Funk" disabled />
+            </div>
           </div>
           <div class="step-part-label"><span class="req-tag">Required</span> Vocals</div>
           <div class="occ-grid three" id="vocals-grid">
-            <label class="occ-tile"><input type="radio" class="sr-radio" name="vocalist" value="Female vocalist" required /><span class="occ-face"><span class="em" aria-hidden="true">👩‍🎤</span>Female</span></label>
             <label class="occ-tile"><input type="radio" class="sr-radio" name="vocalist" value="Male vocalist" required /><span class="occ-face"><span class="em" aria-hidden="true">👨‍🎤</span>Male</span></label>
-            <label class="occ-tile"><input type="radio" class="sr-radio" name="vocalist" value="Both (duet)" required /><span class="occ-face"><span class="em" aria-hidden="true">🎶</span>Both (duet)</span></label>
-          </div>
-          <div class="step-part-label"><span class="req-tag">Required</span> How closely should I use your details?</div>
-          <div class="occ-grid three" id="detail-grid">
-            <label class="occ-tile"><input type="radio" class="sr-radio" name="detail-level" value="Use my details as closely as possible" required /><span class="occ-face"><span class="em" aria-hidden="true">🎯</span>As close as possible</span></label>
-            <label class="occ-tile"><input type="radio" class="sr-radio" name="detail-level" value="Use my details as inspiration — take creative liberty" required /><span class="occ-face"><span class="em" aria-hidden="true">✨</span>Use as inspiration</span></label>
-            <label class="occ-tile"><input type="radio" class="sr-radio" name="detail-level" value="Somewhere in between" required /><span class="occ-face"><span class="em" aria-hidden="true">⚖️</span>Somewhere in between</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="vocalist" value="Both (duet)" required /><span class="occ-face"><span class="em" aria-hidden="true">🎶</span>Duet</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="vocalist" value="Female vocalist" required /><span class="occ-face"><span class="em" aria-hidden="true">👩‍🎤</span>Female</span></label>
           </div>
           <p class="sound-note" id="sound-note" role="alert">Pick a music style and a voice so I know how your song should sound.</p>
 
-          <div class="form-grid msg-required" id="msg1-group" style="display:none;">
+          <div class="form-grid msg-group" id="msg1-group" style="display:none;">
           <div class="form-group full">
-            <label for="msg1" id="msg1-label"><span class="req-tag">Required</span> <span id="msg1-label-text">Your message on the card</span></label>
-            <textarea id="msg1" name="personal-message-1" rows="2" maxlength="60" placeholder="Happy 40th, Mom! Love you more than tacos. – Jake" required></textarea>
+            <label for="msg1" id="msg1-label"><span id="msg1-label-text">Your message on the card</span> <span class="opt">(optional, but recommended)</span></label>
+            <textarea id="msg1" name="personal-message-1" rows="2" maxlength="60" placeholder="e.g. Happy birthday! Love you always."></textarea>
             <span class="char-count" id="msg1-count"></span>
           </div>
           </div>
 
-          <div class="optional-banner"><strong>OPTIONAL</strong><span>You can skip all of this and I'll still make your song great.</span></div>
-          <div class="form-grid">
-
-          <div class="form-group full">
-            <label for="pronunciation">Name pronunciation <span class="opt">(optional — if any name isn't said the way it's spelled)</span></label>
-            <input type="text" id="pronunciation" name="pronunciation" placeholder="Sound it out by syllable — e.g. Siobhan = shi-VAWN, Aaliyah = ah-LEE-yah" />
-          </div>
-
-          <div class="form-group full">
-            <label for="extra-details">Anything else Dan should know? <span class="opt">(optional)</span></label>
-            <textarea id="extra-details" name="extra-details" placeholder="Please mention her nickname 'Bubbles' and our song, Brown Eyed Girl" class="textarea-sm"></textarea>
-          </div>
-          </div>
         </div>
 
         <div class="builder-step" id="step-4" data-step="4">
@@ -679,6 +673,11 @@
             <input type="text" id="subject" name="subject" placeholder="My wife, Maria (we've been married 25 years)" required />
           </div>
 
+          <div class="form-group full">
+            <label for="pronunciation">Name pronunciation <span class="opt">(only if a name isn’t said the way it’s spelled)</span></label>
+            <input type="text" id="pronunciation" name="pronunciation" placeholder="Sound it out by syllable — e.g. Siobhan = shi-VAWN, Aaliyah = ah-LEE-yah" />
+          </div>
+
           <div class="form-group full hint-chips" role="group" aria-label="Add a starter to your story">
             <span class="hint-chips-label">Need ideas? Tap to add a starter:</span><button type="button" class="hint-chip" data-add="How you met: ">How you met</button><button type="button" class="hint-chip" data-add="Inside jokes: ">Inside jokes</button><button type="button" class="hint-chip" data-add="Favorite story: ">Favorite story</button><button type="button" class="hint-chip" data-add="What you want them to feel: ">What you want them to feel</button>
           </div>
@@ -687,18 +686,107 @@
             <label for="story">Main story for the song</label>
             <textarea id="story" name="story" placeholder="We met at a taco truck in 2009. She laughed at my terrible joke, and we've been laughing ever since..." required></textarea>
           </div>
-          <div class="form-group full">
-            <label for="favorite-colors"><span data-me="Your two favorite colors" data-other="Their two favorite colors">Their two favorite colors</span> <span class="opt">(optional)</span></label>
-            <input type="text" id="favorite-colors" name="favorite-colors" placeholder="e.g. navy and gold. Leave it blank and I’ll pick." maxlength="80" />
-            <small class="field-hint">I use them in your keepsake card design.</small>
+
+          <div class="form-group full" data-occ-only="birthday">
+            <label for="bday-age"><span data-me="Age you're turning" data-other="Age they're turning">Age they're turning</span> <span class="opt">(optional)</span></label>
+            <input type="text" id="bday-age" name="bday-age" placeholder="e.g. 40" inputmode="numeric" />
           </div>
-
-          <div class="form-group full" data-occ-only="celebration">
-            <label for="feeling">What should the song feel like? <span class="opt">(optional)</span></label>
-            <input type="text" id="feeling" name="feeling" placeholder="e.g. soulful and emotional, uplifting and celebratory, gentle and peaceful..." />
+          <div class="form-group full" data-occ-only="birthday">
+            <label for="bday-nicknames"><span data-me="Your nicknames" data-other="Nicknames">Nicknames</span> <span class="opt">(optional)</span></label>
+            <input type="text" id="bday-nicknames" name="bday-nicknames" placeholder="e.g. Bubbles, Sarge, Abuela" />
           </div>
-
-
+          <div class="form-group full" data-occ-only="birthday">
+            <label for="bday-loves"><span data-me="What do you love? (hobbies, sports, food, shows)" data-other="What do they love? (hobbies, sports, food, shows)">What do they love? (hobbies, sports, food, shows)</span> <span class="opt">(optional)</span></label>
+            <textarea id="bday-loves" name="bday-loves" class="textarea-sm" placeholder="e.g. Dodgers baseball, fishing, street tacos, true crime shows"></textarea>
+          </div>
+          <div class="form-group full" data-occ-only="anniversary">
+            <label for="years">How many years together? <span class="opt">(optional)</span></label>
+            <input type="text" id="years" name="years" placeholder="e.g. 1st, 10th, 25th anniversary" />
+          </div>
+          <div class="form-group full" data-occ-only="wedding">
+            <label for="use-case-wedding">How will you use it? <span class="opt">(optional)</span></label>
+            <select id="use-case-wedding" name="use-case">
+              <option value="" disabled selected>Select one</option>
+              <option>First dance</option>
+              <option>Ceremony entrance / aisle walk</option>
+              <option>Surprise gift</option>
+              <option>Wedding video / highlight reel</option>
+              <option>Vow renewal</option>
+              <option>Anniversary gift</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group full" data-occ-only="love">
+            <label for="use-case-love">What's the occasion? <span class="opt">(optional)</span></label>
+            <select id="use-case-love" name="use-case">
+              <option value="" disabled selected>Select one</option>
+              <option>Anniversary</option>
+              <option>Proposal</option>
+              <option>Long-distance surprise</option>
+              <option>Just because</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group full" data-occ-only="pet">
+            <label for="pet-type">Type of pet</label>
+            <select id="pet-type" name="pet-type">
+              <option value="" disabled selected>Select one</option>
+              <option>Dog</option>
+              <option>Cat</option>
+              <option>Bird</option>
+              <option>Rabbit</option>
+              <option>Horse</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group full" data-occ-only="roast">
+            <label>How spicy should it get?</label>
+            <div class="contact-pref-options spice-options">
+              <label class="contact-pref-option">
+                <input type="radio" name="spice-level" value="Playful & Light" checked />
+                <span>😄 Playful</span>
+              </label>
+              <label class="contact-pref-option">
+                <input type="radio" name="spice-level" value="Medium Heat" />
+                <span>🌶️ Medium</span>
+              </label>
+              <label class="contact-pref-option">
+                <input type="radio" name="spice-level" value="No Holds Barred" />
+                <span>🔥 Full Send</span>
+              </label>
+            </div>
+          </div>
+          <div class="form-group full" data-occ-only="roast">
+            <label for="off-limits">Anything off-limits? <span class="opt">(optional)</span></label>
+            <input type="text" id="off-limits" name="off-limits" placeholder="Topics to steer clear of — sensitive stuff, no-go zones" />
+          </div>
+          </div>
+          <div class="heart-block">
+            <div class="heart-head"><strong>Make it hit the heart</strong><span>Five quick questions, all optional. The more you share, the more personal your song gets.</span></div>
+            <div class="form-group full">
+              <label>How should the song feel?</label>
+              <div class="pick-chips" role="radiogroup" aria-label="How should the song feel?"><label class="pick-chip"><input type="radio" class="sr-radio" name="feeling" value="Tearjerker" /><span>😢 Tearjerker</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="feeling" value="Happy and upbeat" /><span>🎉 Happy and upbeat</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="feeling" value="Romantic" /><span>❤️ Romantic</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="feeling" value="Funny" /><span>😂 Funny</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="feeling" value="Proud and uplifting" /><span>🙌 Proud and uplifting</span></label></div>
+            </div>
+            <div class="form-group full">
+              <label><span data-me="What do you most want to hear in it?" data-other="What do you most want them to hear?">What do you most want them to hear?</span></label>
+              <div class="pick-chips" role="radiogroup" aria-label="What do you most want them to hear?"><label class="pick-chip"><input type="radio" class="sr-radio" name="core-message" value="I love you" /><span>💛 I love you</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="core-message" value="Thank you" /><span>🙏 Thank you</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="core-message" value="I'm proud of you" /><span>🏆 I'm proud of you</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="core-message" value="You're my everything" /><span>🌎 You're my everything</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="core-message" value="We made it through" /><span>💪 We made it through</span></label></div>
+            </div>
+            <div class="form-group full">
+              <label for="favorite-memory"><span data-me="Your favorite memory" data-other="Your favorite memory together">Your favorite memory together</span></label>
+              <textarea id="favorite-memory" name="favorite-memory" class="textarea-sm" placeholder="e.g. Dancing in the kitchen at 2 a.m. the night we brought the baby home"></textarea>
+            </div>
+            <div class="form-group full">
+              <label for="proud-moment"><span data-me="A moment you're proud of" data-other="A moment you're proud of them for">A moment you're proud of them for</span></label>
+              <input type="text" id="proud-moment" name="proud-moment" placeholder="e.g. Going back to school at 40 and graduating" />
+            </div>
+            <div class="form-group full">
+              <label for="one-of-a-kind"><span data-me="What makes you one of a kind? (a saying, habit or quirk)" data-other="What makes them one of a kind? (a saying, habit or quirk)">What makes them one of a kind? (a saying, habit or quirk)</span></label>
+              <input type="text" id="one-of-a-kind" name="one-of-a-kind" placeholder="e.g. Sings off-key to every song on the radio" />
+            </div>
+            <div class="form-group full">
+              <label for="extra-details">Anything else I should know?</label>
+              <textarea id="extra-details" name="extra-details" placeholder="Please mention her nickname 'Bubbles' and our song, Brown Eyed Girl" class="textarea-sm"></textarea>
+            </div>
           </div>
         </div>
 
@@ -950,7 +1038,7 @@
 
 </script>
 
-<script src="/js/builder.js?v=20261122"></script>
+<script src="/js/builder.js?v=20261123"></script>
 
 </body>
 </html>

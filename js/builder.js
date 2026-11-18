@@ -56,7 +56,6 @@
       yes: 'Yes (+$25)', no: 'No', none: 'Not chosen yet',
       barStep: 'Step {n} of 6', barReady: 'Ready to submit',
       pkgWord: 'Package',
-      detailNote: 'Pick how closely I should use your details so I know how to write your song.',
       mePh: 'Me! (Your name, so I can write it from your point of view)',
       submitting: 'Submitting your request…',
       alertMsg: 'Something went wrong submitting your request. Please try again, or text Dan directly at (661) 714-0903.'
@@ -72,7 +71,6 @@
       yes: 'Sí (+$25)', no: 'No', none: 'Aún sin elegir',
       barStep: 'Paso {n} de 6', barReady: 'Listo para enviar',
       pkgWord: 'Paquete',
-      detailNote: 'Elige qué tan fielmente debo usar tus detalles para saber cómo escribir tu canción.',
       mePh: '¡Yo! (Tu nombre, para que la escriba desde tu punto de vista)',
       submitting: 'Enviando tu solicitud…',
       alertMsg: 'Algo salió mal al enviar tu solicitud. Por favor intenta de nuevo, o envíale un mensaje de texto a Dan directamente al (661) 714-0903.'
@@ -116,11 +114,11 @@
     return r ? r.value : '2';
   }
   function countText(el) { return el.value.length + ' / ' + el.maxLength + ' ' + L.charsWord; }
-  // Packages 2, 3 and 4 each have ONE personal message for the card, and it is required.
+  // Packages 2, 3 and 4 each have ONE personal message for the card. It is optional (recommended).
   function configureMessages(n) {
     var needs = n !== '1';
     msg1Group.style.display = needs ? '' : 'none';
-    msg1.disabled = !needs; msg1.required = needs;
+    msg1.disabled = !needs; msg1.required = false;
     msg1.maxLength = n === '2' ? 60 : 150;
     msg1.rows = n === '2' ? 2 : 6;
     $('msg1-label-text').textContent = n === '2' ? L.msgLabels[0] : L.msgLabels[1];
@@ -234,7 +232,7 @@
     var done1 = !!sfSel && !!occ && (!occ.dataset.other || otherTxt.value.trim() !== '');
     var done3 = subjectField.value.trim() !== '' && storyField.value.trim() !== '';
     var done6 = nameField.value.trim() !== '' && emailField && emailField.value.trim() !== '' && emailField.checkValidity();
-    var done4 = !!(styleSel && vocSel && checked('detail-level')) && (n === '1' || msg1.value.trim() !== '');
+    var done4 = !!(styleSel && vocSel);
     var next = !done1 ? 1 : !done4 ? 3 : !done3 ? 4 : !done6 ? 6 : 0; // sound (step 3) now comes before the story (step 4)
     barBtn.dataset.next = next;
     $('sb-pkg').textContent = L.pkgWord + ' ' + n + ' · ' + p.name;
@@ -325,14 +323,13 @@
   }
 
   // ───────────────────────── SUBMIT GATE ─────────────────────────
-  // "Who is it for", style, vocals and detail level are required. If one is missing (and nothing else blocks the form),
+  // "Who is it for", style and vocals are required. If one is missing (and nothing else blocks the form),
   // send them back to the right step with a friendly note.
   submitButton.addEventListener('click', function (e) {
     var hasFor = checked('song-for');
     var hasSound = checked('genre') && checked('vocalist');
-    var hasDetail = checked('detail-level');
-    if (hasFor && hasSound && hasDetail) return;
-    var gated = ['song-for', 'genre', 'vocalist', 'detail-level'];
+    if (hasFor && hasSound) return;
+    var gated = ['song-for', 'genre', 'vocalist'];
     var otherInvalid = Array.prototype.some.call(orderFormEl.elements, function (el) {
       return el.required && !el.disabled && gated.indexOf(el.name) === -1 && !el.checkValidity();
     });
@@ -343,7 +340,7 @@
       $('step-1').scrollIntoView({ behavior: 'smooth', block: 'start' });
       return;
     }
-    soundNote.textContent = hasSound ? L.detailNote : SOUND_NOTE;
+    soundNote.textContent = SOUND_NOTE;
     soundNote.style.display = 'block';
     $('step-3').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
@@ -357,6 +354,13 @@
     var isOther = !!(occ && occ.dataset.other);
     otherWrap.style.display = isOther ? 'block' : 'none';
     otherInput.disabled = !isOther; otherInput.required = isOther;
+    // "Not sure, you pick" music style opens an optional box for a song or artist to sound like
+    var genreSel = checked('genre'), styleWrap = $('style-notes-wrap');
+    if (styleWrap) {
+      var wantsNote = !!(genreSel && genreSel.dataset.surprise);
+      styleWrap.style.display = wantsNote ? 'block' : 'none';
+      $('style-notes').disabled = !wantsNote;
+    }
 
     var sf = checked('song-for');
     if (sf) { giftNote.style.display = 'none'; songForRow.classList.remove('flash'); }
@@ -379,7 +383,7 @@
   }
   orderFormEl.addEventListener('change', applyOccasionAndAudience);
   orderFormEl.addEventListener('change', function () {
-    if (checked('genre') && checked('vocalist') && checked('detail-level')) soundNote.style.display = 'none';
+    if (checked('genre') && checked('vocalist')) soundNote.style.display = 'none';
   });
   applyOccasionAndAudience();
 
