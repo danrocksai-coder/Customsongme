@@ -622,50 +622,7 @@
         </div>
 
         <div class="builder-step" id="step-3" data-step="3">
-          <div class="step-head"><span class="step-kicker">Step 3 of 6</span><h3>Who's it for, and what's the story?</h3></div>
-          <div class="form-grid">
-          <div class="form-group full">
-            <label for="subject">Who is the song about?</label>
-            <input type="text" id="subject" name="subject" placeholder="My wife, Maria (we've been married 25 years)" required />
-          </div>
-
-          <div class="form-group full hint-chips" role="group" aria-label="Add a starter to your story">
-            <span class="hint-chips-label">Need ideas? Tap to add a starter:</span><button type="button" class="hint-chip" data-add="How you met: ">How you met</button><button type="button" class="hint-chip" data-add="Inside jokes: ">Inside jokes</button><button type="button" class="hint-chip" data-add="Favorite story: ">Favorite story</button><button type="button" class="hint-chip" data-add="What you want them to feel: ">What you want them to feel</button>
-          </div>
-
-          <div class="form-group full">
-            <label for="story">Main story for the song</label>
-            <textarea id="story" name="story" placeholder="We met at a taco truck in 2009. She laughed at my terrible joke, and we've been laughing ever since..." required></textarea>
-          </div>
-          <div class="form-group full">
-            <label for="favorite-colors"><span data-me="Your two favorite colors" data-other="Their two favorite colors">Their two favorite colors</span> <span class="opt">(optional)</span></label>
-            <input type="text" id="favorite-colors" name="favorite-colors" placeholder="e.g. navy and gold. Leave it blank and I’ll pick." maxlength="80" />
-            <small class="field-hint">I use them in your keepsake card design.</small>
-          </div>
-          <div class="form-group full" data-occ-only="love">
-            <label for="use-case">What's the occasion? <span class="opt">(optional)</span></label>
-            <select id="use-case" name="use-case">
-              <option value="" disabled selected>Select one</option>
-              <option>Anniversary</option>
-              <option>Proposal</option>
-              <option>Long-distance surprise</option>
-              <option>Just because</option>
-              <option>Other</option>
-            </select>
-          </div>
-
-
-          <div class="form-group full" data-occ-only="love">
-            <label for="feeling">What should the song make them feel? <span class="opt">(optional)</span></label>
-            <input type="text" id="feeling" name="feeling" placeholder="e.g. romantic and heartfelt, swept off their feet, deeply seen..." />
-          </div>
-
-
-          </div>
-        </div>
-
-        <div class="builder-step" id="step-4" data-step="4">
-          <div class="step-head"><span class="step-kicker">Step 4 of 6</span><h3>Pick the sound, then make it yours</h3></div>
+          <div class="step-head"><span class="step-kicker">Step 3 of 6</span><h3>Pick the sound, then make it yours</h3></div>
           <div class="step-part-label"><span class="req-tag">Required</span> Music style</div>
           <div class="occ-grid" id="style-grid">
             <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Pop" required /><span class="occ-face"><span class="em" aria-hidden="true">🎤</span>Pop</span></label>
@@ -712,6 +669,49 @@
             <label for="extra-details">Anything else Dan should know? <span class="opt">(optional)</span></label>
             <textarea id="extra-details" name="extra-details" placeholder="Please mention her nickname 'Bubbles' and our song, Brown Eyed Girl" class="textarea-sm"></textarea>
           </div>
+          </div>
+        </div>
+
+        <div class="builder-step" id="step-4" data-step="4">
+          <div class="step-head"><span class="step-kicker">Step 4 of 6</span><h3>Who's it for, and what's the story?</h3></div>
+          <div class="form-grid">
+          <div class="form-group full">
+            <label for="subject">Who is the song about?</label>
+            <input type="text" id="subject" name="subject" placeholder="My wife, Maria (we've been married 25 years)" required />
+          </div>
+
+          <div class="form-group full hint-chips" role="group" aria-label="Add a starter to your story">
+            <span class="hint-chips-label">Need ideas? Tap to add a starter:</span><button type="button" class="hint-chip" data-add="How you met: ">How you met</button><button type="button" class="hint-chip" data-add="Inside jokes: ">Inside jokes</button><button type="button" class="hint-chip" data-add="Favorite story: ">Favorite story</button><button type="button" class="hint-chip" data-add="What you want them to feel: ">What you want them to feel</button>
+          </div>
+
+          <div class="form-group full">
+            <label for="story">Main story for the song</label>
+            <textarea id="story" name="story" placeholder="We met at a taco truck in 2009. She laughed at my terrible joke, and we've been laughing ever since..." required></textarea>
+          </div>
+          <div class="form-group full">
+            <label for="favorite-colors"><span data-me="Your two favorite colors" data-other="Their two favorite colors">Their two favorite colors</span> <span class="opt">(optional)</span></label>
+            <input type="text" id="favorite-colors" name="favorite-colors" placeholder="e.g. navy and gold. Leave it blank and I’ll pick." maxlength="80" />
+            <small class="field-hint">I use them in your keepsake card design.</small>
+          </div>
+          <div class="form-group full" data-occ-only="love">
+            <label for="use-case">What's the occasion? <span class="opt">(optional)</span></label>
+            <select id="use-case" name="use-case">
+              <option value="" disabled selected>Select one</option>
+              <option>Anniversary</option>
+              <option>Proposal</option>
+              <option>Long-distance surprise</option>
+              <option>Just because</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+
+          <div class="form-group full" data-occ-only="love">
+            <label for="feeling">What should the song make them feel? <span class="opt">(optional)</span></label>
+            <input type="text" id="feeling" name="feeling" placeholder="e.g. romantic and heartfelt, swept off their feet, deeply seen..." />
+          </div>
+
+
           </div>
         </div>
 
@@ -955,7 +955,7 @@
 
 </script>
 
-<script src="/js/builder.js?v=20261121"></script>
+<script src="/js/builder.js?v=20261122"></script>
 
 </body>
 </html>

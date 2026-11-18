@@ -235,7 +235,7 @@
     var done3 = subjectField.value.trim() !== '' && storyField.value.trim() !== '';
     var done6 = nameField.value.trim() !== '' && emailField && emailField.value.trim() !== '' && emailField.checkValidity();
     var done4 = !!(styleSel && vocSel && checked('detail-level')) && (n === '1' || msg1.value.trim() !== '');
-    var next = !done1 ? 1 : !done3 ? 3 : !done4 ? 4 : !done6 ? 6 : 0;
+    var next = !done1 ? 1 : !done4 ? 3 : !done3 ? 4 : !done6 ? 6 : 0; // sound (step 3) now comes before the story (step 4)
     barBtn.dataset.next = next;
     $('sb-pkg').textContent = L.pkgWord + ' ' + n + ' · ' + p.name;
     $('sb-total').textContent = '$' + total;
@@ -345,7 +345,7 @@
     }
     soundNote.textContent = hasSound ? L.detailNote : SOUND_NOTE;
     soundNote.style.display = 'block';
-    $('step-4').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    $('step-3').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
   // ───────────────────────── OCCASION-DEPENDENT BITS ─────────────────────────
@@ -363,7 +363,7 @@
     var forMe = !!(sf && sf.dataset.me);
     subjectField.placeholder = forMe ? L.mePh : SUBJECT_PH;
 
-    // Occasion-only questions (e.g. the Birthday questions in Step 3)
+    // Occasion-only questions (e.g. the Birthday questions in Step 4)
     document.querySelectorAll('[data-occ-only]').forEach(function (box) {
       var on = box.dataset.occOnly === key;
       box.style.display = on ? '' : 'none';
