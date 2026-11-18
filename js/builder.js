@@ -48,7 +48,7 @@
     en: {
       pkgNames: { 1: 'MP3 Only', 2: 'Complete', 3: 'Story', 4: 'Ultimate' },
       pkgNameTpl: 'Package {n} — {name} — ${price}',
-      unlNote: ' + Keep it Unlisted +$25',
+      unlNote: ' + Keep it Private (Google Drive) +$25',
       totalLabel: 'Your total: ',
       charsWord: 'characters',
       msgLabels: ['Your message on the card', 'Your personal message on the card'],
@@ -64,7 +64,7 @@
     es: {
       pkgNames: { 1: 'Solo MP3', 2: 'Completo', 3: 'Historia', 4: 'Definitivo' },
       pkgNameTpl: 'Paquete {n} — {name} — ${price}',
-      unlNote: ' + Mantenlo no listado +$25',
+      unlNote: ' + Mantenlo privado (Google Drive) +$25',
       totalLabel: 'Tu total: ',
       charsWord: 'caracteres',
       msgLabels: ['Tu mensaje en la tarjeta', 'Tu mensaje personal en la tarjeta'],

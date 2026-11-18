@@ -68,7 +68,7 @@
       },
       {
         "@type": "Offer",
-        "name": "Add-on: Keep it Unlisted",
+        "name": "Add-on: Keep it Private (Google Drive delivery)",
         "price": "25.00",
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock",
@@ -87,7 +87,7 @@
       {"@type":"Question","name":"How does the order process work?","acceptedAnswer":{"@type":"Answer","text":"Fill out the request form with your story, choose your package, and complete secure checkout through Stripe (card, Apple Pay, Cash App Pay and more). Once payment is confirmed, Dan personally reviews the story during studio hours and writes and produces the song. It's delivered within 24 hours of confirmed payment."}},
       {"@type":"Question","name":"Does it work for any anniversary milestone?","acceptedAnswer":{"@type":"Answer","text":"Yes — personalized anniversary songs work for every milestone and every relationship. Each song is shaped entirely around the couple being celebrated, whether it's year one or year fifty."}},
       {"@type":"Question","name":"Is there a cheaper option than Complete?","acceptedAnswer":{"@type":"Answer","text":"Yes. Package 1, MP3 Only, is $25 and includes a full-length downloadable MP3, a keepsake card with the full lyrics, and a QR code that links directly to your MP3. It has no video. Package 2, Complete, is $50 and adds a public YouTube video link and your message on the card. Package 3, Story ($75), and Package 4, Ultimate ($100), add even more."}},
-      {"@type":"Question","name":"Why is Complete $50, and what does Keep it Unlisted add?","acceptedAnswer":{"@type":"Answer","text":"Complete is $50 because the music video is posted on the CustomSongMe YouTube channel, which is part of how I keep prices affordable. If you would rather keep the video off my channel, Keep it Unlisted is +$25 on Packages 2, 3 and 4, so Complete with Keep it Unlisted comes to $75. Unlisted means I do not post it on my channel, and only people with your private link or QR code can watch it. You can check the box in Step 5 of the order builder."}}
+      {"@type":"Question","name":"Why is Complete $50, and what does keeping it private add?","acceptedAnswer":{"@type":"Answer","text":"Complete is $50 because the music video is posted publicly on the CustomSongMe YouTube channel, and that public listing is partly my advertising, which is how I keep prices affordable. If you would rather keep your song private, I understand: it is +$25 on Packages 2, 3 and 4, so Complete comes to $75. In that case I do not post it anywhere, and I send your video and files to you in a Google Drive. You can check the box in Step 5 of the order builder."}}
     ]
   }
   </script>
@@ -481,7 +481,7 @@
 <section id="quick-answer" style="padding:48px 24px 8px;text-align:center">
   <div style="max-width:760px;margin:0 auto;">
     <h2 style="margin-bottom:12px;">What is a custom anniversary song?</h2>
-    <p style="font-size:1.05rem;line-height:1.7;margin:0;text-align:left;">A custom anniversary song is an original song that tells the story of your relationship: how you met, the moments that mattered, and the little things only the two of you know. At CustomSongMe, Dan the Song Man writes and produces it from the stories you share, delivered within 24 hours of confirmed payment. It costs $25 for the MP3 only, $50 for Complete (adds a music video on YouTube), $75 for Story or $100 for Ultimate, and Keep it Unlisted is +$25 on Packages 2, 3 and 4.</p>
+    <p style="font-size:1.05rem;line-height:1.7;margin:0;text-align:left;">A custom anniversary song is an original song that tells the story of your relationship: how you met, the moments that mattered, and the little things only the two of you know. At CustomSongMe, Dan the Song Man writes and produces it from the stories you share, delivered within 24 hours of confirmed payment. It costs $25 for the MP3 only, $50 for Complete (adds a music video on YouTube), $75 for Story or $100 for Ultimate, and keeping it private (a Google Drive instead of a public post) is +$25 on Packages 2, 3 and 4.</p>
   </div>
 </section>
 
@@ -708,14 +708,14 @@
 
         <div class="builder-step" id="step-5" data-step="5">
           <div class="step-head"><span class="step-kicker">Step 5 of 6</span><h3>Add-on</h3></div>
-          <p class="addon-p1" id="addon-p1">Package 1 has no video, so there is nothing to keep unlisted here.</p>
+          <p class="addon-p1" id="addon-p1">Package 1 has no video, so there is nothing to keep private here.</p>
 <div class="unlisted-block">
           <div class="public-note" id="public-note">
             <label class="unlisted-toggle">
               <input type="checkbox" id="unlisted-checkbox" name="unlisted-addon" value="Yes" />
-              <span>Keep it Unlisted +$25</span>
+              <span>Keep it private +$25 (sent to you in a Google Drive, never posted)</span>
             </label>
-            <p><strong>Keep it Unlisted is +$25, and it is only for Packages 2, 3 and 4.</strong> By default, your video is posted on my public CustomSongMe YouTube channel. With Keep it Unlisted, I do not post it on my channel, and only people with your private link or QR code can watch it. Package 1 has no video, so there is nothing to keep unlisted.</p>
+            <p><strong>Why my prices are this low:</strong> the YouTube video that comes with Packages 2, 3 and 4 is posted publicly on my CustomSongMe channel, and that public listing doubles as my advertising. That is how I keep these packages so affordable. <strong>If you would rather keep your song private, I completely understand. It is +$25.</strong> In that case I do not post it anywhere. I send your video and files straight to you in a Google Drive, so you are the only one who has them. Package 1 has no video, so there is nothing to post.</p>
           </div>        </div>
         </div>
 
@@ -769,7 +769,7 @@
               <div class="rc-row"><dt>Package</dt><dd id="rc-package">—</dd></div>
               <div class="rc-row"><dt>Music style</dt><dd id="rc-style">—</dd></div>
               <div class="rc-row"><dt>Vocals</dt><dd id="rc-vocals">—</dd></div>
-              <div class="rc-row"><dt>Keep it Unlisted</dt><dd id="rc-unlisted">—</dd></div>
+              <div class="rc-row"><dt>Keep it private (Google Drive)</dt><dd id="rc-unlisted">—</dd></div>
               <div class="rc-row rc-total"><dt>Total</dt><dd id="rc-total">—</dd></div>
             </dl>
           </div>
@@ -862,8 +862,8 @@
       </div>
 
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Why is Complete $50, and what does Keep it Unlisted add? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Complete is $50 because the music video is posted on the CustomSongMe YouTube channel, which is part of how I keep prices affordable. If you would rather keep the video off my channel, Keep it Unlisted is +$25 on Packages 2, 3 and 4, so Complete with Keep it Unlisted comes to $75. Unlisted means I do not post it on my channel, and only people with your private link or QR code can watch it. You can check the box in Step 5 of the order builder.</div>
+        <button class="faq-q" aria-expanded="false">Why is Complete $50, and what does keeping it private add? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Complete is $50 because the music video is posted publicly on the CustomSongMe YouTube channel, and that public listing is partly my advertising, which is how I keep prices affordable. If you would rather keep your song private, I understand: it is +$25 on Packages 2, 3 and 4, so Complete comes to $75. In that case I do not post it anywhere, and I send your video and files to you in a Google Drive. You can check the box in Step 5 of the order builder.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Is the song guaranteed? <span class="faq-icon">+</span></button>
@@ -954,7 +954,7 @@
 
 </script>
 
-<script src="/js/builder.js?v=20261118"></script>
+<script src="/js/builder.js?v=20261119"></script>
 
 </body>
 </html>
