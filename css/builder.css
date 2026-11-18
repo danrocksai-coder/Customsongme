@@ -195,3 +195,10 @@ html[lang^="es"] .pkg-disc strong { font-size: 0.8rem; line-height: 1.15; }
 .unsure-block { margin-top: 22px; }
 .unsure-block textarea { width: 100%; min-height: 80px; padding: 12px 14px; border-radius: var(--radius-lg); border: 2px solid rgba(252,212,42,0.4); background: rgba(255,255,255,0.06); color: var(--white); font: inherit; font-size: 0.95rem; resize: vertical; box-sizing: border-box; }
 .unsure-block textarea::placeholder { color: rgba(255,255,255,0.45); }
+/* Step 5: save-details button and the "Ready to pay?" banner */
+.details-save { text-align: center; margin-top: 6px; }
+.btn-details { width: 100%; padding: 15px 18px; border-radius: 50px; border: 0; background: var(--gold); color: #061b77; font: inherit; font-weight: 800; font-size: 1.02rem; cursor: pointer; box-shadow: 0 0 0 3px #2f6bff, 0 8px 20px rgba(0,0,0,0.35); }
+.btn-details:disabled { opacity: 0.6; cursor: default; }
+.details-save .field-hint { text-align: center; }
+.ready-banner { margin: 22px 0 6px; padding: 14px 16px; border-radius: 50px; background: rgba(252,212,42,0.16); border: 2px solid var(--gold); color: var(--white); text-align: center; font-size: 0.95rem; }
+.ready-banner strong { color: var(--gold); }
