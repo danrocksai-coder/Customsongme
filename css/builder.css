@@ -157,3 +157,26 @@ html[lang^="es"] .pkg-disc strong { font-size: 0.8rem; line-height: 1.15; }
 #style-notes-wrap { display: none; margin-top: 10px; }
 .heart-block .form-group { margin-bottom: 18px; }
 .heart-block .form-group > label { display: block; text-align: center; margin-bottom: 8px; }
+
+/* ── Nov 17 round 4: gold depth, even tiles, keep-your-work note, "not ready to pay" ── */
+.builder-step { border: 3px solid var(--gold); box-shadow: 0 0 0 1px rgba(252,212,42,0.25), 0 10px 28px rgba(0,0,0,0.45), inset 0 0 24px rgba(252,212,42,0.07); }
+.pkg-card-inner { border: 2px solid var(--gold); box-shadow: 0 6px 18px rgba(0,0,0,0.35); }
+.pkg-card input:checked + .pkg-card-inner { border-width: 3px; box-shadow: 0 0 0 3px rgba(252,212,42,0.35), 0 8px 22px rgba(0,0,0,0.45); }
+.occ-tile .occ-face { height: 100%; }
+.step-part-label { justify-content: center; }
+.msg-hint { text-align: left; }
+.hint-chips { flex-direction: column; align-items: stretch; }
+.hint-chips-label { text-align: center; }
+.hint-chip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.hint-chip-grid .hint-chip { width: 100%; border-radius: 14px; line-height: 1.25; }
+.keep-note { margin: 4px 0 18px; padding: 12px 14px; border: 2px solid var(--gold); border-radius: var(--radius-lg); background: rgba(252,212,42,0.1); color: var(--white); font-size: 0.92rem; line-height: 1.45; text-align: center; }
+.keep-note strong { color: var(--gold); }
+.unsure-block { margin-top: 18px; padding: 16px 14px; border: 2px dashed rgba(252,212,42,0.6); border-radius: var(--radius-lg); text-align: center; }
+.unsure-block h4 { margin: 0 0 4px; color: var(--gold); font-family: var(--font-display); font-size: 1.2rem; }
+.unsure-block > p { margin: 0 0 12px; color: rgba(255,255,255,0.8); font-size: 0.88rem; }
+.unsure-block .unsure-q { display: block; margin: 12px 0 2px; text-align: center; }
+.unsure-block textarea { margin-top: 6px; }
+.btn-nopay { margin-top: 14px; width: 100%; padding: 14px 18px; border-radius: 50px; border: 2px solid var(--gold); background: transparent; color: var(--gold); font: inherit; font-weight: 800; font-size: 1rem; cursor: pointer; }
+.btn-nopay:hover { background: rgba(252,212,42,0.12); }
+.btn-nopay:disabled { opacity: 0.6; cursor: default; }
+.msg-group label, .msg-hint, .msg-group .char-count { text-align: center; }
