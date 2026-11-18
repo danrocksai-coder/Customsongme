@@ -54,7 +54,7 @@
       msgLabels: ['Your message on the card', 'Your personal message on the card'],
       msgNeeded: 'Please add your message for the card.',
       yes: 'Yes (+$25)', no: 'No', none: 'Not chosen yet',
-      barStep: 'Step {n} of 6', barReady: 'Ready to submit',
+      barStep: 'Step {n} of 5', barReady: 'Ready to submit',
       pkgWord: 'Package',
       mePh: 'Me! (Your name, so I can write it from your point of view)',
       submitting: 'Submitting your request…',
@@ -72,7 +72,7 @@
       msgLabels: ['Tu mensaje en la tarjeta', 'Tu mensaje personal en la tarjeta'],
       msgNeeded: 'Por favor agrega tu mensaje para la tarjeta.',
       yes: 'Sí (+$25)', no: 'No', none: 'Aún sin elegir',
-      barStep: 'Paso {n} de 6', barReady: 'Listo para enviar',
+      barStep: 'Paso {n} de 5', barReady: 'Listo para enviar',
       pkgWord: 'Paquete',
       mePh: '¡Yo! (Tu nombre, para que la escriba desde tu punto de vista)',
       submitting: 'Enviando tu solicitud…',
@@ -239,7 +239,7 @@
     var done3 = subjectField.value.trim() !== '' && storyField.value.trim() !== '';
     var done6 = nameField.value.trim() !== '' && emailField && emailField.value.trim() !== '' && emailField.checkValidity();
     var done4 = !!(styleSel && vocSel);
-    var next = !done1 ? 1 : !done4 ? 3 : !done3 ? 4 : !done6 ? 6 : 0; // sound (step 3) now comes before the story (step 4)
+    var next = !done1 ? 1 : !done4 ? 3 : !done3 ? 4 : !done6 ? 5 : 0; // sound (step 3) now comes before the story (step 4)
     barBtn.dataset.next = next;
     $('sb-pkg').textContent = L.pkgWord + ' ' + n + ' · ' + p.name;
     $('sb-total').textContent = '$' + total;

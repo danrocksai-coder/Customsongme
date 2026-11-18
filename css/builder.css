@@ -180,3 +180,18 @@ html[lang^="es"] .pkg-disc strong { font-size: 0.8rem; line-height: 1.15; }
 .btn-nopay:hover { background: rgba(252,212,42,0.12); }
 .btn-nopay:disabled { opacity: 0.6; cursor: default; }
 .msg-group label, .msg-hint, .msg-group .char-count { text-align: center; }
+
+/* ── round 5: blue edge outside the gold, gold-edged tiles, package grid fix ── */
+.builder-step { box-shadow: 0 0 0 3px #2f6bff, 0 12px 30px rgba(0,0,0,0.45), inset 0 0 24px rgba(252,212,42,0.07); }
+.occ-face, .who-card, .color-pick select { border-color: rgba(252,212,42,0.55); }
+.pkg-pick { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pkg-card, .pkg-card-inner { min-width: 0; }
+.pkg-disc { width: min(124px, 100%); height: auto; aspect-ratio: 1; }
+@media (max-width: 420px) { .pkg-disc { width: min(108px, 100%); } .pkg-card-inner { padding-left: 6px; padding-right: 6px; } }
+@media (max-width: 520px) { #order-form .container { padding-left: 14px; padding-right: 14px; } }
+@media (min-width: 900px) { .pkg-pick { grid-template-columns: repeat(4, minmax(0, 1fr)); } .pkg-disc { width: min(136px, 100%); } }
+.addons { margin: 20px 0 6px; padding: 14px; border: 2px solid rgba(252,212,42,0.55); border-radius: var(--radius-lg); }
+.addons h4 { margin: 0 0 8px; text-align: center; color: var(--gold); font-family: var(--font-display); font-size: 1.15rem; }
+.unsure-block { margin-top: 22px; }
+.unsure-block textarea { width: 100%; min-height: 80px; padding: 12px 14px; border-radius: var(--radius-lg); border: 2px solid rgba(252,212,42,0.4); background: rgba(255,255,255,0.06); color: var(--white); font: inherit; font-size: 0.95rem; resize: vertical; box-sizing: border-box; }
+.unsure-block textarea::placeholder { color: rgba(255,255,255,0.45); }

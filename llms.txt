@@ -20,7 +20,7 @@ Every custom song comes as one of four packages. Each package includes a downloa
 
 ## How ordering works
 
-1. The customer builds the order in six short steps: the occasion, the package, the story (names, stories, inside jokes), the music style and voice, the optional Keep it Private add-on, and their contact details.
+1. The customer builds the order in five short steps: who the song is for and two favorite colors, then the occasion, the package, the music style and voice (plus an optional card message), the story (names, memories, a few heartfelt questions), and finally their contact details with the optional Keep it Private add-on. Customers who aren't ready to pay can send their details and questions without paying, and Dan follows up personally.
 2. They pay upfront through one secure Stripe checkout (card, Apple Pay and more).
 3. Dan writes and produces the song during studio hours (Mon–Fri 9am–6pm PT, Sat 10am–2pm PT).
 4. The song is delivered within 24 hours of confirmed payment. There is no rush fee.
