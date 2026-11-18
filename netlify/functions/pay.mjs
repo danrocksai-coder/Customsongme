@@ -33,10 +33,10 @@ const PACKAGES = {
 // and only valid on Packages 2, 3 and 4. Anything unexpected returns null, and
 // the customer lands on the calm "order received" page instead of a wrong charge.
 const NEW_PACKAGES = {
-  pkg1: { name: 'Package 1 — MP3 Only', amount: 2500, canUnlist: false },
-  pkg2: { name: 'Package 2 — Complete', amount: 5000, canUnlist: true },
-  pkg3: { name: 'Package 3 — Story', amount: 7500, canUnlist: true },
-  pkg4: { name: 'Package 4 — Ultimate', amount: 10000, canUnlist: true },
+  pkg1: { name: 'Package 1 — Custom Single', amount: 2500, canUnlist: false },
+  pkg2: { name: 'Package 2 — Music Video Release', amount: 5000, canUnlist: true },
+  pkg3: { name: 'Package 3 — Keepsake Set', amount: 7500, canUnlist: true },
+  pkg4: { name: "Package 4 — Collector's Edition", amount: 10000, canUnlist: true },
 };
 // Family Memory Magnets — prices live here on the server, never in the browser.
 const FMM_PACKAGES = {

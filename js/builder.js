@@ -46,7 +46,7 @@
 
   var I18N = {
     en: {
-      pkgNames: { 1: 'MP3 Only', 2: 'Complete', 3: 'Story', 4: 'Ultimate' },
+      pkgNames: { 1: "Custom Single", 2: "Music Video Release", 3: "Keepsake Set", 4: "Collector's Edition" },
       pkgNameTpl: 'Package {n} — {name} — ${price}',
       unlNote: ' + Keep it Private (Google Drive) +$25',
       totalLabel: 'Your total: ',
@@ -62,7 +62,7 @@
       alertMsg: 'Something went wrong submitting your request. Please try again, or text Dan directly at (661) 714-0903.'
     },
     es: {
-      pkgNames: { 1: 'Solo MP3', 2: 'Completo', 3: 'Historia', 4: 'Definitivo' },
+      pkgNames: { 1: "Sencillo Personalizado", 2: "Lanzamiento con Video Musical", 3: "Set de Recuerdo", 4: "Edición de Colección" },
       pkgNameTpl: 'Paquete {n} — {name} — ${price}',
       unlNote: ' + Mantenlo privado (Google Drive) +$25',
       totalLabel: 'Tu total: ',
@@ -162,6 +162,26 @@
   if (emailField) emailField.addEventListener('input', syncPaymentRedirect);
   msg1.addEventListener('input', function () { checkMsg(); $('msg1-count').textContent = countText(msg1); });
   syncPaymentRedirect(); // set correctly on page load, not just on change
+
+  // ───────────────────────── SAMPLE COLOR SWITCH (blue / sunset) ─────────────────────────
+  // Swaps the sample picture on a package card; never selects the package itself.
+  document.querySelectorAll('.pkg-colors').forEach(function (group) {
+    var card = group.closest('.pkg-card-inner');
+    var img = card.querySelector('.pkg-preview img');
+    var zoom = card.querySelector('.pkg-zoom');
+    group.querySelectorAll('.pkg-color').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault(); e.stopPropagation();
+        img.src = btn.dataset.thumb;
+        zoom.dataset.full = btn.dataset.full;
+        group.querySelectorAll('.pkg-color').forEach(function (b) {
+          var on = b === btn;
+          b.classList.toggle('is-on', on);
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+      });
+    });
+  });
 
   // ───────────────────────── "SEE EXAMPLE" POP-UP ─────────────────────────
   var pkgDialog = $('pkg-dialog');

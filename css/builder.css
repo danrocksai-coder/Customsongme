@@ -123,3 +123,12 @@
 .pkg-get { margin: 0; font-size: 0.8rem; color: rgba(255,255,255,0.9); line-height: 1.4; }
 .pkg-photos { margin: 8px 0 0; font-size: 0.72rem; color: var(--gold); line-height: 1.35; }
 @media (max-width: 520px) { .who-pick { flex-direction: column; align-items: stretch; } }
+/* package names inside the disc, and the blue / sunset sample switch */
+.pkg-disc strong { padding: 0 8px; }
+.pkg-preview img { aspect-ratio: 420 / 543; object-fit: contain; background: #0a0f2a; }
+.pkg-colors { display: flex; align-items: center; justify-content: center; gap: 8px; margin: -2px 0 10px; font-size: 0.72rem; color: rgba(255,255,255,0.75); flex-wrap: wrap; }
+.pkg-color { width: 22px; height: 22px; padding: 0; border-radius: 50%; border: 2px solid rgba(255,255,255,0.45); background: linear-gradient(135deg, var(--c1) 50%, var(--c2) 50%); cursor: pointer; }
+.pkg-color.is-on { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(252,212,42,0.4); }
+.pkg-colors span { flex-basis: 100%; text-align: center; }
+.field-hint { display: block; margin-top: 6px; color: rgba(255,255,255,0.6); font-size: 0.8rem; }
+html[lang^="es"] .pkg-disc strong { font-size: 0.8rem; line-height: 1.15; }
