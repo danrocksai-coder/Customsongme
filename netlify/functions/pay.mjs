@@ -54,6 +54,7 @@ function newPackage(id, params) {
   if (wantsUnlisted && !base.canUnlist) return null;
   const wantsRush = params.get('rush') === '1'; // Rush delivery (4 hours): +$10 on any package
   return {
+    rush: wantsRush,
     name: base.name + (wantsUnlisted ? ' + Keep it Private (Google Drive)' : '') + (wantsRush ? ' + Rush Delivery (4 hours)' : ''),
     amount: base.amount + (wantsUnlisted ? 2500 : 0) + (wantsRush ? 1000 : 0),
     noLink: true,
@@ -130,7 +131,7 @@ export default async (req, context) => {
     'line_items[0][price_data][product_data][name]': pkg.name,
     success_url: FMM_PACKAGES[id]
       ? SITE + '/family-memory-magnets/thanks/?session_id={CHECKOUT_SESSION_ID}'
-      : SITE + '/thanks?session_id={CHECKOUT_SESSION_ID}',
+      : SITE + '/thanks?session_id={CHECKOUT_SESSION_ID}' + (pkg.rush ? '&rush=1' : ''),
     cancel_url: cancelUrl,
     'metadata[package]': pkg.name,
     'metadata[link_id]': id,
