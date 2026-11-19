@@ -42,7 +42,7 @@ export async function writePoem(prompt, opts = {}) {
   }
   if (!r.ok && (r.status === 400 || r.status === 404 || r.status === 0 || r.status >= 500) && model !== FALLBACK_MODEL) {
     console.log('poems ai: falling back', r.status, r.error);
-    r = await callOnce(FALLBACK_MODEL, prompt, { ...opts, timeoutMs: 15000 });
+    r = await callOnce(FALLBACK_MODEL, prompt, { ...opts, timeoutMs: 15000, thinking: THINKING_OFF.has(FALLBACK_MODEL) ? THINKING_OFF.get(FALLBACK_MODEL) : 'disabled' });
   }
   if (!r.ok) return { ok: false, error: r.error, status: r.status };
   const poem = P.parsePoem(r.text);
