@@ -17,7 +17,7 @@ async function callOnce(model, prompt, { fetchImpl = fetch, timeoutMs = 24000, n
       method: 'POST', signal: ctl.signal,
       headers: { 'content-type': 'application/json', 'x-api-key': process.env.ANTHROPIC_API_KEY || '', 'anthropic-version': '2023-06-01' },
       // Poems don't need extended thinking; with it on, the model can spend its whole budget thinking and return no poem.
-      body: JSON.stringify({ model, max_tokens: noThinkingParam ? 6000 : 1500, ...(noThinkingParam ? {} : { thinking: { type: 'disabled' } }), system: P.SYSTEM_PROMPT, messages: [{ role: 'user', content: prompt }] }),
+      body: JSON.stringify({ model, max_tokens: noThinkingParam ? 6000 : 1500, ...(noThinkingParam ? {} : { thinking: { type: 'between_tools' } }), system: P.SYSTEM_PROMPT, messages: [{ role: 'user', content: prompt }] }),
     });
     const j = await r.json().catch(() => ({}));
     if (!r.ok) return { ok: false, status: r.status, error: j?.error?.message || `HTTP ${r.status}` };
