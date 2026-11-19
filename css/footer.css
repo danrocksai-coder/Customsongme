@@ -1,0 +1,25 @@
+/* One footer for every CustomSongMe page. Built by tools/build-footer.mjs; edit that script, not each page. */
+footer.site-footer { display: block; background: #001a66; border-top: 3px solid #fcd42a; padding: 44px 24px 28px; text-align: left; color: rgba(255,255,255,0.75); font-family: 'DM Sans', system-ui, sans-serif; font-size: 0.9rem; line-height: 1.5; }
+footer.site-footer * { box-sizing: border-box; }
+footer.site-footer .sf-inner { max-width: 1100px; margin: 0 auto; }
+footer.site-footer .sf-top { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 32px 28px; }
+footer.site-footer .sf-top.sf-three { grid-template-columns: 1.4fr repeat(3, 1fr); }
+footer.site-footer .sf-brand-name { font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #fcd42a; margin: 0 0 6px; }
+footer.site-footer .sf-tag { margin: 0 0 14px; color: rgba(255,255,255,0.8); }
+footer.site-footer .sf-contact { margin: 0 0 16px; }
+footer.site-footer .sf-contact a { color: #fcd42a; font-weight: 700; text-decoration: none; }
+footer.site-footer .sf-social { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+footer.site-footer .sf-social a { display: inline-flex; align-items: center; min-height: 36px; padding: 6px 14px; border: 1.5px solid #fcd42a; border-radius: 999px; color: #fff; font-weight: 600; font-size: 0.82rem; text-decoration: none; transition: background .2s, color .2s; }
+footer.site-footer .sf-social a:hover { background: #fcd42a; color: #001a66; }
+footer.site-footer .sf-review { display: inline-block; color: #fcd42a; font-weight: 700; text-decoration: none; }
+footer.site-footer .sf-col h3 { margin: 0 0 12px; font-family: 'DM Sans', system-ui, sans-serif; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: #fcd42a; }
+footer.site-footer .sf-col ul { list-style: none; margin: 0; padding: 0; }
+footer.site-footer .sf-col li { margin: 0 0 8px; }
+footer.site-footer .sf-col a { display: inline-block; padding: 2px 0; color: rgba(255,255,255,0.82); text-decoration: none; }
+footer.site-footer .sf-col a:hover, footer.site-footer .sf-review:hover, footer.site-footer .sf-contact a:hover { color: #fcd42a; text-decoration: underline; }
+footer.site-footer .sf-bottom { margin-top: 36px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.14); text-align: center; }
+footer.site-footer .sf-fine { max-width: 780px; margin: 0 auto 12px; font-size: 0.78rem; line-height: 1.55; color: rgba(255,255,255,0.65); }
+footer.site-footer .sf-fine a, footer.site-footer .sf-copy a { color: #fcd42a; }
+footer.site-footer .sf-copy { margin: 0; font-size: 0.78rem; color: rgba(255,255,255,0.65); }
+@media (max-width: 900px) { footer.site-footer .sf-top, footer.site-footer .sf-top.sf-three { grid-template-columns: 1fr 1fr; } footer.site-footer .sf-brand { grid-column: 1 / -1; } }
+@media (max-width: 480px) { footer.site-footer { padding: 36px 16px 24px; } footer.site-footer .sf-top, footer.site-footer .sf-top.sf-three { grid-template-columns: 1fr; } }
