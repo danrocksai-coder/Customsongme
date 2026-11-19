@@ -41,7 +41,11 @@
       birthday: '/es/canciones-de-cumpleanos',
       'mothers-day': '/es/canciones-dia-de-las-madres',
       anniversary: '/es/canciones-de-aniversario',
-      wedding: '/es/canciones-de-boda'
+      wedding: '/es/canciones-de-boda',
+      love: '/es/canciones-de-amor',
+      'fathers-day': '/es/canciones-dia-del-padre',
+      pet: '/es/canciones-para-mascotas',
+      celebration: '/es/canciones-en-memoria'
     }
   };
   // Occasions that always jump straight to their own page and pricing, even with nothing checked.
@@ -51,6 +55,8 @@
     lullaby: '/custom-lullaby-me',
     holiday: '/holiday-songs'
   };
+  // Spanish versions of the own-pricing pages (Get Well and lullabies are English only for now)
+  if (LANG === 'es') { OWN_PAGES.jingle = '/es/jingles-para-negocios/'; OWN_PAGES.holiday = '/es/canciones-de-navidad/'; }
 
   var I18N = {
     en: {
