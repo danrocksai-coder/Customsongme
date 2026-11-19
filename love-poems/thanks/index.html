@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Thank you | CustomSongMe Love Poems</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/love-poems.css?v=1" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HGQ54E69BZ"></script>
+  <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag("js", new Date()); gtag("config", "G-HGQ54E69BZ");</script>
+</head>
+<body>
+<nav aria-label="Main navigation"><div class="nav-inner"><a href="/" class="nav-brand">CustomSongMe.com</a><a href="/love-poems" class="nav-link">Love Poems</a></div></nav>
+<main class="wrap">
+  <div class="card center" id="box">
+    <div class="writing"><div class="quill">💌</div></div>
+    <h1>Thank you!</h1>
+    <p id="status">Confirming your payment with Stripe…</p>
+    <div id="actions"></div>
+  </div>
+</main>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search), order = q.get('order') || '', sid = q.get('session_id') || '';
+  var status = document.getElementById('status'), actions = document.getElementById('actions'), tries = 0;
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function done(url) {
+    try { localStorage.removeItem('lp-draft-v1'); } catch (e) {}
+    try { if (window.gtag) gtag('event', 'purchase', { currency: 'USD', items: [{ item_name: 'Love Poem' }] }); } catch (e) {}
+    status.innerHTML = '<b>Payment confirmed.</b> Your poem is ready, and a copy is on its way to your email (check spam if you do not see it in a few minutes).';
+    actions.innerHTML = '<a class="btn btn-gold" href="' + esc(url) + '">Open my gift</a>'
+      + '<p class="hint" style="margin-top:14px">Bookmark your gift page: it is your private link to download the PDF again' + '</p>';
+  }
+  function check() {
+    tries += 1;
+    fetch('/api/poems/confirm?order=' + encodeURIComponent(order) + '&session_id=' + encodeURIComponent(sid), { cache: 'no-store' })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (x) {
+        if (x.ok && x.j.paid && x.j.giftUrl) return done(x.j.giftUrl);
+        if (!x.ok && x.j.error && tries > 2) { status.textContent = x.j.error; }
+        if (tries < 20) setTimeout(check, 2500);
+        else status.innerHTML = 'Your payment is still being confirmed. Your poem will arrive by email as soon as it is. Questions? Text me at <a href="sms:+16617140903">(661) 714-0903</a>.';
+      })
+      .catch(function () { if (tries < 20) setTimeout(check, 3000); });
+  }
+  if (!order || !sid) { status.innerHTML = 'If you just paid, your poem is on its way to your email. Questions? Text me at <a href="sms:+16617140903">(661) 714-0903</a>.'; return; }
+  check();
+})();
+</script>
+</body>
+</html>

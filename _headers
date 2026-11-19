@@ -116,3 +116,24 @@
   Cache-Control: no-store
 /family-memory-magnets/consent-form/*
   X-Robots-Tag: noindex, nofollow
+
+# Love Poems: thank-you, private gift pages and QR listening pages are never indexed or cached,
+# and never pass their private link on to other sites.
+/love-poems/thanks/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+  Referrer-Policy: no-referrer
+/love-poems/gift/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+  Cache-Control: no-store
+  Referrer-Policy: no-referrer
+/love-poems/listen/*
+  X-Robots-Tag: noindex, nofollow
+  Referrer-Policy: no-referrer
+/lp/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+  Referrer-Policy: no-referrer
+/api/poems/*
+  X-Robots-Tag: noindex
+  Cache-Control: no-store
