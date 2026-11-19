@@ -290,6 +290,9 @@ async function admin(route, req, url, store, secret, origin) {
     stories.sort((a, b) => b.createdAt - a.createdAt); orders.sort((a, b) => b.createdAt - a.createdAt); waitlist.sort((a, b) => b.createdAt - a.createdAt);
     return json({ stories, orders, waitlist });
   }
+  if (route === 'export-clips' && req.method === 'GET') { // read-only list of a story's clips, for the browser-built ZIP
+    return json(await C.exportClips(store, url.searchParams.get('id') || ''));
+  }
   if (route === 'qr' && req.method === 'GET') { // printable QR image; encodes the public URL only
     const code = url.searchParams.get('code') || '';
     if (!(await store.getJSON(`qr/${code}`))) return json({ error: 'Unknown code.' }, 404);
