@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="referrer" content="no-referrer" />
+  <title>A love poem, read aloud</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/love-poems.css?v=1" />
+  <style>body { background: radial-gradient(ellipse at top, #123a9e 0%, #001a66 70%); min-height: 100vh; color: #fff; } .card { color: var(--ink); }</style>
+</head>
+<body>
+<main class="wrap" style="padding-top:40px">
+  <div class="card center" id="box"><p>Opening…</p></div>
+  <p class="center" style="font-size:.8rem;opacity:.7"><a href="https://www.customsongme.com/love-poems" style="color:#ffd629">Made with CustomSongMe Love Poems</a></p>
+</main>
+<script>
+(function () {
+  var parts = location.pathname.split('/').filter(Boolean);
+  var id = parts[0] === 'lp' ? parts[1] : new URLSearchParams(location.search).get('id');
+  var box = document.getElementById('box');
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  fetch('/api/poems/listen?id=' + encodeURIComponent(id || ''), { cache: 'no-store' }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); }).then(function (x) {
+    if (!x.ok) { box.innerHTML = '<h1>Not found</h1><p>This QR code is not active.</p>'; return; }
+    var g = x.j;
+    var h = '<p style="color:var(--muted);letter-spacing:.12em;font-size:.8rem;text-transform:uppercase;font-weight:700">' + esc(g.recipientName ? 'For ' + g.recipientName : 'A love poem') + '</p>'
+      + '<h1>' + esc(g.title) + '</h1>' + (g.yourName ? '<p>Read by ' + esc(g.yourName) + '</p>' : '');
+    if (g.hasAudio) {
+      h += '<button class="big-play" id="play" aria-label="Play">▶</button><audio id="a" preload="metadata" src="/api/poems/listen-audio?id=' + encodeURIComponent(id) + '&v=' + g.v + '"></audio><p class="hint" style="margin-top:14px">Tap to listen</p>';
+    } else {
+      h += '<p>The recording for this poem is coming soon. Please scan again a little later.</p>';
+    }
+    box.innerHTML = h;
+    var b = document.getElementById('play'), a = document.getElementById('a');
+    if (b) {
+      b.addEventListener('click', function () { if (a.paused) a.play(); else a.pause(); });
+      a.addEventListener('play', function () { b.textContent = '❚❚'; });
+      a.addEventListener('pause', function () { b.textContent = '▶'; });
+      a.addEventListener('ended', function () { b.textContent = '▶'; });
+    }
+  }).catch(function () { box.innerHTML = '<p>Could not load. Please check your connection and try again.</p>'; });
+})();
+</script>
+</body>
+</html>

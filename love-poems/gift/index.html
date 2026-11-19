@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Your love poem | CustomSongMe</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/love-poems.css?v=1" />
+</head>
+<body>
+<nav aria-label="Main navigation"><div class="nav-inner"><a href="/" class="nav-brand">CustomSongMe.com</a><a href="/love-poems" class="nav-link">Love Poems</a></div></nav>
+<div id="test"></div>
+<main class="wrap">
+  <div class="card" id="box"><p class="center">Opening your gift…</p></div>
+</main>
+<script src="/js/love-poems-recorder.js?v=1"></script>
+<script>
+(function () {
+  var t = new URLSearchParams(location.search).get('t') || '';
+  var box = document.getElementById('box');
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  fetch('/api/poems/gift?t=' + encodeURIComponent(t), { cache: 'no-store' }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); }).then(function (x) {
+    if (!x.ok) { box.innerHTML = '<h1>Gift not found</h1><p>This link may be incomplete. Please open it again from your email, or text me at <a href="sms:+16617140903">(661) 714-0903</a>.</p>'; return; }
+    var g = x.j;
+    if (g.test) document.getElementById('test').innerHTML = '<div class="test-banner">TEST ORDER: no real payment was taken</div>';
+    var listenId = g.listenUrl ? g.listenUrl.split('/lp/')[1] : '';
+    var h = '<p class="center" style="color:var(--muted);letter-spacing:.12em;font-size:.8rem;text-transform:uppercase;font-weight:700">' + esc(g.recipientName ? 'A love poem for ' + g.recipientName : 'Your love poem') + '</p>'
+      + '<h1 class="center">' + esc(g.title) + '</h1>'
+      + '<div class="row" style="justify-content:center;margin:10px 0 20px"><a class="btn btn-gold" href="/api/poems/pdf?t=' + encodeURIComponent(t) + '">⬇ Download the PDF</a></div>'
+      + '<div class="poem-text" style="text-align:center">' + esc(g.text) + '</div>';
+    if (g.voice) {
+      h += '<hr style="border:0;border-top:1px solid var(--border);margin:24px 0"><h2>Your voice</h2>'
+        + '<p>The QR code on your printed page opens <a href="' + esc(g.listenUrl) + '" target="_blank" rel="noopener">this listening page</a>. '
+        + (g.hasAudio ? 'It is playing your current recording. Record a new version below any time: the same QR code will play the new one.' : 'Record yourself reading the poem below. As soon as you save it, the QR code plays it.') + '</p>'
+        + '<div id="rec"></div>';
+    }
+    h += '<p class="hint" style="margin-top:24px">This page is private: anyone with this link can download your poem, so only share it with people you trust. Questions? Text me at <a href="sms:+16617140903">(661) 714-0903</a>.</p>';
+    box.innerHTML = h;
+    if (g.voice) {
+      var v = g.audioVersion || 0;
+      window.LPRecorder.mount(document.getElementById('rec'), {
+        maxSec: 180, script: g.title + '\n\n' + g.text, saved: g.hasAudio,
+        playUrl: function () { return '/api/poems/listen-audio?id=' + encodeURIComponent(listenId) + '&v=' + v; },
+        save: function (blob) {
+          return fetch('/api/poems/gift-audio?t=' + encodeURIComponent(t), { method: 'PUT', headers: { 'Content-Type': blob.type || 'application/octet-stream' }, body: blob })
+            .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || 'Saving failed. Please try again.'); v = j.audio.v; }); });
+        },
+      });
+    }
+  }).catch(function () { box.innerHTML = '<p>Could not load your gift. Please check your connection and refresh.</p>'; });
+})();
+</script>
+</body>
+</html>

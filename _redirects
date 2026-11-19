@@ -74,6 +74,13 @@ http://www.customsongme.com/* https://www.customsongme.com/:splat    301!
 # One shared template serves every parent's QR page: /reverse-gift/p/<id>
 /reverse-gift/p/*        /reverse-gift/p/index.html    200
 
+# Love Poems: product page, plus the permanent QR address printed on voice poems (/lp/<id>).
+# /lp/ links are printed on paper: never change or remove this line.
+/love-poems.html         /love-poems                   301!
+/love-poems              /love-poems.html              200!
+/love-poems/             /love-poems.html              200!
+/lp/*                    /love-poems/listen/index.html 200
+
 # ==========================================
 # 4. SONG MERCH QR CODES (mugs, shirts)
 # One line per customer: /play/<slug>  <their YouTube link>  302
