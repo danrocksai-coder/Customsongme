@@ -9,14 +9,15 @@ const FALLBACK_MODEL = 'claude-haiku-5-5';
 
 export const aiConfigured = () => !!(process.env.ANTHROPIC_BASE_URL || process.env.ANTHROPIC_API_KEY);
 
-async function callOnce(model, prompt, { fetchImpl = fetch, timeoutMs = 24000 } = {}) {
+async function callOnce(model, prompt, { fetchImpl = fetch, timeoutMs = 24000, noThinkingParam = false } = {}) {
   const base = (process.env.ANTHROPIC_BASE_URL || 'https://api.anthropic.com').replace(/\/+$/, '');
   const ctl = new AbortController(); const timer = setTimeout(() => ctl.abort(), timeoutMs);
   try {
     const r = await fetchImpl(`${base}/v1/messages`, {
       method: 'POST', signal: ctl.signal,
       headers: { 'content-type': 'application/json', 'x-api-key': process.env.ANTHROPIC_API_KEY || '', 'anthropic-version': '2023-06-01' },
-      body: JSON.stringify({ model, max_tokens: 1500, system: P.SYSTEM_PROMPT, messages: [{ role: 'user', content: prompt }] }),
+      // Poems don't need extended thinking; with it on, the model can spend its whole budget thinking and return no poem.
+      body: JSON.stringify({ model, max_tokens: noThinkingParam ? 6000 : 1500, ...(noThinkingParam ? {} : { thinking: { type: 'disabled' } }), system: P.SYSTEM_PROMPT, messages: [{ role: 'user', content: prompt }] }),
     });
     const j = await r.json().catch(() => ({}));
     if (!r.ok) return { ok: false, status: r.status, error: j?.error?.message || `HTTP ${r.status}` };
@@ -31,6 +32,7 @@ async function callOnce(model, prompt, { fetchImpl = fetch, timeoutMs = 24000 } 
 export async function writePoem(prompt, opts = {}) {
   const model = process.env.POEMS_AI_MODEL || DEFAULT_MODEL;
   let r = await callOnce(model, prompt, opts);
+  if (!r.ok && r.status === 400 && /thinking/i.test(r.error || '')) r = await callOnce(model, prompt, { ...opts, noThinkingParam: true });
   if (!r.ok && (r.status === 400 || r.status === 404 || r.status === 0 || r.status >= 500) && model !== FALLBACK_MODEL) {
     console.log('poems ai: falling back', r.status, r.error);
     r = await callOnce(FALLBACK_MODEL, prompt, { ...opts, timeoutMs: 15000 });
