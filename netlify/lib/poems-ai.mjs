@@ -30,9 +30,9 @@ async function callOnce(model, prompt, { fetchImpl = fetch, timeoutMs = 24000, n
 
 // One poem. Tries the chosen model, then a faster fallback if the model is unavailable or slow.
 export async function writePoem(prompt, opts = {}) {
-  const model = process.env.POEMS_AI_MODEL || DEFAULT_MODEL;
-  let r = await callOnce(model, prompt, opts);
-  if (!r.ok && r.status === 400 && /thinking/i.test(r.error || '')) r = await callOnce(model, prompt, { ...opts, noThinkingParam: true });
+  const model = process.env.POEMS_AI_MODEL || DEFAULT_MODEL; const t0 = Date.now(); const path = [];
+  let r = await callOnce(model, prompt, opts); path.push(`${model}:${r.ok ? 'ok' : r.status}`);
+  if (!r.ok && r.status === 400 && /thinking/i.test(r.error || '')) { path.push('thinking-param-refused: ' + r.error); r = await callOnce(model, prompt, { ...opts, noThinkingParam: true }); }
   if (!r.ok && (r.status === 400 || r.status === 404 || r.status === 0 || r.status >= 500) && model !== FALLBACK_MODEL) {
     console.log('poems ai: falling back', r.status, r.error);
     r = await callOnce(FALLBACK_MODEL, prompt, { ...opts, timeoutMs: 15000 });
@@ -40,5 +40,5 @@ export async function writePoem(prompt, opts = {}) {
   if (!r.ok) return { ok: false, error: r.error, status: r.status };
   const poem = P.parsePoem(r.text);
   if (!poem) return { ok: false, error: `unreadable reply (${r.model}, stop=${r.stop}, blocks=${r.types}, out=${r.usage?.output_tokens}): ` + String(r.text || '').slice(0, 160), usage: r.usage };
-  return { ok: true, poem, usage: r.usage, model: r.model };
+  return { ok: true, poem, usage: r.usage, model: r.model, ms: Date.now() - t0, path: path.join(' > ') };
 }

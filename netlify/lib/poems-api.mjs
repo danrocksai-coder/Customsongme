@@ -185,7 +185,7 @@ export async function handle(req, d) {
         o.poems = poems;
         if (!fill) { o.gens = (o.gens || 0) + 1; o.chosen = null; o.final = null; o.approvedAt = null; }
         o.status = 'generated'; await save(d, o);
-        return json(view(o));
+        return json({ ...view(o), ...(d.isLive ? {} : { debug: results.map((r) => `${r.ms}ms ${r.path || r.error}`) }) });
       }
 
       if (route === 'revise' && m === 'POST') {
