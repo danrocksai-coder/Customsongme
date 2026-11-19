@@ -26,7 +26,7 @@ async function aiAllowed(d) {
   const day = today(d.now());
   if (!(await bump(d.store, `rl/ai-h/${d.ipHash}`, 12, HOUR, d.now()))) return 'You have written a lot of poems in the last hour. Please try again a little later.';
   if (!(await bump(d.store, `rl/ai-d/${d.ipHash}`, 30, DAY, d.now()))) return 'You have reached today\'s limit for writing poems. Please come back tomorrow.';
-  const cap = Number(d.env.POEMS_AI_DAILY_CAP || 250);
+  const cap = Number(d.env.POEMS_AI_DAILY_CAP || 30);
   if (!(await bump(d.store, `rl/ai-g/${day}`, cap, DAY, d.now()))) return 'The poem writer is very busy today. Please try again tomorrow, or text Dan at (661) 714-0903.';
   return null;
 }
