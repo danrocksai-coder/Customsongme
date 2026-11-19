@@ -20,6 +20,8 @@ const PACKAGES = {
   '8x2fZgh20fgp8BRc0m9Ve0h': { name: 'Custom Song — Complete (Unlisted)', amount: 7500 },
   'cNieVc2767NX3hxd4q9Ve06': { name: 'Custom Song — MP3 Only', amount: 2500 },
   'fZu4gy4fe2tDcS70hE9Ve01': { name: 'Business Jingle', amount: 10000 },
+  // Business Jingle at $150 (Dan, Nov 12 2026). No buy.stripe.com backup at this price.
+  'jingle': { name: 'Business Jingle', amount: 15000, noLink: true },
   '3cI8wOcLK6JT05l9Se9Ve0l': { name: 'Family Gratitude MP3 (Thanksgiving)', amount: 2500 },
   'cNiaEW3ba5FP19pe8u9Ve0k': { name: 'Ultimate Family (Thanksgiving, Public)', amount: 7500 },
   'aFadR8132c4d6tJ6G29Ve0j': { name: 'Ultimate Family (Thanksgiving, Unlisted)', amount: 10000 },

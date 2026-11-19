@@ -31,36 +31,16 @@
   "@type": "Product",
   "name": "Custom Christmas & Holiday Song",
   "image": "https://www.customsongme.com/img/dan-portrait.webp",
-  "description": "A personalized Christmas, Thanksgiving, Hanukkah, New Year's or any-holiday song, written around the names, traditions and inside jokes you share, delivered as a downloadable MP3 audio file, a public YouTube video with shareable link, cover art image, and lyric sheet image within 24 hours of confirmed payment.",
+  "description": "A personalized Christmas, Thanksgiving, Hanukkah, New Year's or any-holiday song, written around the names, traditions and inside jokes you share, delivered as a downloadable MP3 with a keepsake lyric card, with a music video, story and photo album on the higher packages.",
   "brand": {
     "@type": "Brand",
     "name": "CustomSongMe"
   },
   "offers": [
-    {
-      "@type": "Offer",
-      "name": "The Complete Custom Song Experience (Public)",
-      "price": "50.00",
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock",
-      "url": "https://www.customsongme.com/holiday-songs"
-    },
-    {
-      "@type": "Offer",
-      "name": "The Complete Custom Song Experience (Unlisted)",
-      "price": "75.00",
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock",
-      "url": "https://www.customsongme.com/holiday-songs"
-    },
-    {
-      "@type": "Offer",
-      "name": "MP3 Only",
-      "price": "25.00",
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock",
-      "url": "https://www.customsongme.com/holiday-songs"
-    }
+    { "@type": "Offer", "name": "Package 1 — Custom Single", "price": "25.00", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://www.customsongme.com/holiday-songs" },
+    { "@type": "Offer", "name": "Package 2 — Music Video Release", "price": "50.00", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://www.customsongme.com/holiday-songs" },
+    { "@type": "Offer", "name": "Package 3 — Keepsake Set", "price": "75.00", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://www.customsongme.com/holiday-songs" },
+    { "@type": "Offer", "name": "Package 4 — Collector's Edition", "price": "100.00", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://www.customsongme.com/holiday-songs" }
   ]
 }
   </script>
@@ -139,15 +119,15 @@
       "name": "Is there a cheaper option than the Complete Custom Song Experience?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. The MP3 Only package is $25 and includes the song as a downloadable MP3 audio file, with no video, cover art, or lyric sheet. The Complete Custom Song Experience is $50 and includes all four."
+        "text": "Yes. Package 1, the Custom Single, is $25: your song as a downloadable MP3 plus a keepsake card with your lyrics and a QR code. Package 2, the Music Video Release, is $50 and adds a music video on YouTube and your message on the card. Package 3, the Keepsake Set, is $75 and adds your story told with up to 5 photos. Package 4, the Collector's Edition, is $100 and adds up to 15 photos and a party photo album."
       }
     },
     {
       "@type": "Question",
-      "name": "Why is the Complete Experience $50 instead of $75?",
+      "name": "Why is the Music Video Release $50?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The $50 price includes your video being shared publicly on the CustomSongMe YouTube channel. That public posting is part of how I keep prices affordable. If you'd rather keep your video unlisted (not published to my channel, only viewable by anyone with the direct link), that option is $75. You can switch to it right on the request form."
+        "text": "The Music Video Release is $50 because the music video is posted publicly on the CustomSongMe YouTube channel, and that public listing is partly my advertising, which is how I keep prices affordable. If you would rather keep your song private, it is +$25 on Packages 2, 3 and 4. In that case I do not post it anywhere, and I send your video and files to you in a Google Drive. You can check the box in Step 5 of the order builder."
       }
     },
     {
@@ -172,6 +152,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
+  <link rel="stylesheet" href="/css/builder.css?v=20261129" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -684,10 +665,10 @@
     </div>
     <p class="hero-sub">Christmas, Thanksgiving, Hanukkah, New Year's, and every holiday in between. Tell me the names, the traditions, and the inside jokes, and you'll get a one-of-a-kind song, personally reviewed by me and delivered within 24 hours.</p>
     <div class="hero-price-anchor">
-      <div class="price-label">Most Popular · Everything Included</div>
-      <div class="price-main">$50</div>
-      <div class="price-includes">MP3 Audio · Public YouTube Video · Cover Art · Lyric Sheet</div>
-      <div class="price-alt">Just want the song? MP3 Only is $25</div>
+      <div class="price-label">Four Packages · Keepsake Card Included</div>
+      <div class="price-main">From $25</div>
+      <div class="price-includes">Custom Single $25 · Music Video Release $50 · Keepsake Set $75 · Collector's Edition $100</div>
+      <div class="price-alt">Every package includes a keepsake card with your lyrics and a QR code</div>
     </div>
   </div>
 </section>
@@ -704,7 +685,7 @@
 <section id="quick-answer" style="padding:48px 24px 8px;text-align:center">
   <div style="max-width:760px;margin:0 auto;">
     <h2 style="margin-bottom:12px;">What is a custom holiday song?</h2>
-    <p style="font-size:1.05rem;line-height:1.7;margin:0;text-align:left;">A custom holiday song is an original song written about your people for Christmas, Thanksgiving or any holiday, using their names, your traditions and your family's inside jokes. At CustomSongMe, it's created with AI-assisted songwriting and music tools from what you share and personally reviewed by Dan the Song Man, delivered within 24 hours of confirmed payment. This Thanksgiving, the Family Gratitude Song names everyone at your table: $25 for the MP3, $50 with a public YouTube video, $75 for the Ultimate package with up to 10 of your family photos, or $100 with the video unlisted. Other holiday songs cost $25 for the MP3, $50 for the complete package (MP3, public YouTube video, cover art and lyric sheet), or $75 with an unlisted video.</p>
+    <p style="font-size:1.05rem;line-height:1.7;margin:0;text-align:left;">A custom holiday song is an original song written about your people for Christmas, Thanksgiving or any holiday, using their names, your traditions and your family's inside jokes. At CustomSongMe, it's created with AI-assisted songwriting and music tools from what you share and personally reviewed by Dan the Song Man, delivered within 24 hours of confirmed payment. Holiday songs come in the same four packages as every CustomSongMe song: $25 for the Custom Single (MP3 and keepsake lyric card), $50 for the Music Video Release, $75 for the Keepsake Set with your story and up to 5 photos, or $100 for the Collector's Edition with up to 15 photos and a party photo album. For Thanksgiving, every package can name everyone at your table.</p>
   </div>
 </section>
 
@@ -780,44 +761,45 @@
         </div>
         <div class="tg-tiers">
           <div class="tg-tier">
-            <h4>MP3 Only</h4>
+            <h4>Custom Single</h4>
             <div class="tg-tier-price">$25</div>
             <ul>
               <li>Every family member named (up to 15), each with their gratitude line</li>
-              <li>Host, location, and shout-outs in the song</li>
-              <li>One downloadable MP3</li>
+              <li>Your song as a downloadable MP3</li>
+              <li>Keepsake card with your lyrics and a QR code</li>
             </ul>
           </div>
           <div class="tg-tier">
-            <h4>Family Gratitude Song</h4>
+            <h4>Music Video Release</h4>
             <div class="tg-tier-price">$50</div>
             <ul>
-              <li>Everything in the $25 song</li>
-              <li>Public YouTube video with AI-generated artwork (not your photos)</li>
-              <li>Cover art and lyric sheet</li>
+              <li>Everything in the Custom Single</li>
+              <li>A music video on YouTube</li>
+              <li>Your message on the card</li>
             </ul>
           </div>
           <div class="tg-tier ultimate">
-            <div class="tg-tier-badge">🌟 Ultimate</div>
-            <h4>Ultimate Family Package</h4>
+            <div class="tg-tier-badge">📸 Photos</div>
+            <h4>Keepsake Set</h4>
             <div class="tg-tier-price">$75</div>
             <ul>
-              <li>Everything in the $25 song</li>
-              <li><strong>Up to 10 of your real family photos</strong> in the video</li>
-              <li>Public YouTube video, plus the MP4 to download</li>
-              <li>PDF of the lyrics with artwork</li>
+              <li>Everything in the Music Video Release</li>
+              <li>Your story told with up to 5 family photos</li>
             </ul>
           </div>
           <div class="tg-tier ultimate">
-            <div class="tg-tier-badge">🔒 Unlisted</div>
-            <h4>Ultimate Family, Unlisted</h4>
+            <div class="tg-tier-badge">🌟 Best</div>
+            <h4>Collector's Edition</h4>
             <div class="tg-tier-price">$100</div>
             <ul>
-              <li>Everything in the $75 Ultimate package</li>
-              <li>Your YouTube video is <strong>unlisted</strong>: only people with the link can see it</li>
+              <li>Everything in the Keepsake Set</li>
+              <li>Up to 15 family photos and a party photo album</li>
+              <li>Four-corner keepsake card</li>
             </ul>
           </div>
         </div>
+        <p class="tg-keepsake">🔒 Want the video kept private? It's +$25 on the $50, $75 and $100 packages.</p>
+        <p style="text-align:center;margin-top:18px;"><a href="#order-form" class="btn-primary">Build My Thanksgiving Song</a></p>
         <div class="tg-deadline">Order by Sunday, Nov 22 to have it ready for the table on Thanksgiving Day.</div>
       </div>
     </template>
@@ -838,60 +820,6 @@
         </div>
         <div class="ea-msg" id="ea-msg" role="status"></div>
       </form>
-    </div>
-  </div>
-</section>
-
-<section id="pricing-intro">
-  <div class="container fade-up">
-    <h2>Three Ways to Order. <span class="gold">Starting at $25.</span></h2>
-    <p>Keep it simple with just the song, or go all in with the full experience.<br>Either way, tell me your story and I'll take care of the rest.</p>
-  </div>
-</section>
-
-<section id="package">
-  <div class="container fade-up">
-    <div class="package-grid">
-      <div class="package-card featured">
-        <div class="package-header">
-          <div class="package-badge">⭐ Most Popular</div>
-          <h2>🎁 The Complete Custom Song Experience</h2>
-          <div class="package-price"><span>$</span>50</div>
-          <div class="package-price-note">One-time payment · No subscriptions · No hidden fees</div>
-        </div>
-        <div class="package-body">
-          <ul class="feature-list">
-            <li><span class="icon">✓</span> Your song as a downloadable MP3 audio file</li>
-            <li><span class="icon">✓</span> Public YouTube video with a shareable link</li>
-            <li><span class="icon">✓</span> Custom cover art image</li>
-            <li><span class="icon">✓</span> Lyric sheet image with the full lyrics</li>
-            <li><span class="icon">✓</span> Delivered within 24 hours of confirmed payment</li>
-            <li><span class="icon">✓</span> Personal Happiness Guarantee</li>
-          </ul>
-          <div class="value-anchor">
-            💡 The video makes it easy to play for the whole room: the party, the dinner table, or the family group chat.
-          </div>
-        </div>
-      </div>
-
-      <div class="package-card budget">
-        <div class="package-header">
-          <div class="package-badge alt">Budget Option</div>
-          <h2>🎵 MP3 Only</h2>
-          <div class="package-price"><span>$</span>30</div>
-          <div class="package-price-note">One-time payment · Just the song</div>
-        </div>
-        <div class="package-body">
-          <ul class="feature-list single-col">
-            <li><span class="icon">✓</span> Your song as a downloadable MP3 audio file</li>
-            <li><span class="icon">✓</span> Delivered within 24 hours of confirmed payment</li>
-            <li><span class="icon">✓</span> Personal Happiness Guarantee</li>
-          </ul>
-          <div class="value-anchor alt">
-            💡 Want the video, cover art, and lyric sheet too? For $25 more, Complete includes everything.
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -933,58 +861,195 @@
   </div>
 </section>
 
-<section id="order-form">
+<dialog class="pkg-dialog" id="pkg-dialog" aria-label="Package">
+  <img id="pkg-dialog-img" src="" alt="" />
+  <button type="button" class="pkg-dialog-close" id="pkg-dialog-close">Close</button>
+</dialog>
+
+<!-- ═══════ SECTION 8 — ORDER FORM ═══════ -->
+<section id="order-form" data-occasion-key="holiday">
   <div class="container">
     <div class="form-wrap">
-      <h2 class="fade-up">Request Your Holiday Song</h2>
-      <p class="form-sub fade-up">Fill out the form below. The more detail you share, the more personal the song becomes.</p>
+      <h2 class="fade-up">Build Your Holiday Song</h2>
+      <p class="form-sub fade-up">Five quick steps. The more detail you share, the more personal the song becomes.</p>
 
-      <form name="holiday-song-request" method="POST" action="https://formspree.io/f/xwpqlypv">
+      <form name="customsong-request" method="POST" action="https://formspree.io/f/xwpqlypv">
         <input type="hidden" name="_next" id="next-redirect" value="https://www.customsongme.com/pay/3cIaEWcLKb09cS7fcy9Ve0f" />
-        <input type="hidden" name="package" id="package-hidden-field" value="Complete (Public) — $50" />
-        <input type="hidden" name="occasion" value="Holiday" />
+        <input type="hidden" name="contact-pref" value="Both" />
+        <input type="hidden" name="package" id="package-hidden-field" value="Package 2 — Music Video Release — $50" />
+        <input type="hidden" name="total" id="total-hidden-field" value="$50" />
         <input type="hidden" name="holiday-special" id="special-field" value="" />
-        <input type="hidden" name="source-page" value="Holiday SongMe (/holiday-songs)" />
+        <input type="hidden" name="holiday-special-style" id="special-style-field" value="" />
         <p class="hp-field" aria-hidden="true">
           <label>Don't fill this out if you're human: <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
         </p>
-        <div class="form-grid">
 
-          <div class="form-group full">
-            <label>Which package?</label>
-            <div class="contact-pref-options">
-              <label class="contact-pref-option">
-                <input type="radio" name="package-tier" value="complete" checked required id="pkg-complete" />
-                <span id="pkg-complete-label">🎁 Complete — $50</span>
-              </label>
-              <label class="contact-pref-option">
-                <input type="radio" name="package-tier" value="mp3" required id="pkg-mp3" />
-                <span id="pkg-mp3-label">🎵 MP3 Only — $25</span>
-              </label>
-              <label class="contact-pref-option" id="tier-ultimate-wrap" hidden>
-                <input type="radio" name="package-tier" value="ultimate" required id="pkg-ultimate" />
-                <span>🌟 Ultimate Family — $75</span>
-              </label>
-              <label class="contact-pref-option" id="tier-ultimate-unlisted-wrap" hidden>
-                <input type="radio" name="package-tier" value="ultimate-unlisted" required id="pkg-ultimate-unlisted" />
-                <span>🔒 Ultimate Unlisted — $100</span>
-              </label>
-            </div>
-            <div class="public-note" id="ultimate-note" style="display:none;">
-              <p id="ultimate-note-text">🌟 Your video uses up to 10 of your real family photos and goes on my public YouTube channel. You also get the MP4 and a PDF of the lyrics with artwork. Want the video unlisted instead? Choose Ultimate Unlisted ($100).</p>
-            </div>
-            <div class="public-note" id="public-note">
-              <p>💡 I keep the Complete Experience at $50 because your video gets shared publicly on my YouTube channel. That's part of how I keep prices this low. Prefer to keep your video unlisted instead?</p>
-              <label class="unlisted-toggle">
-                <input type="checkbox" id="unlisted-checkbox" />
-                <span>Switch to Unlisted — $75</span>
-              </label>
+        <div class="songfor-row who-pick" id="songfor-row" role="radiogroup" aria-label="Who is this song for?">
+          <label class="sf-check who-card"><input type="radio" class="sr-radio" name="song-for" value="About me" data-me="1" data-short="Me" required /><span class="sf-box" aria-hidden="true"></span><span class="who-text"><strong>Your story, your song</strong><small>A song about you</small></span></label>
+          <label class="sf-check who-card"><input type="radio" class="sr-radio" name="song-for" value="A gift for someone" data-gift="1" data-short="Someone else" required /><span class="sf-box" aria-hidden="true"></span><span class="who-text"><strong>Gift a song</strong><small>For someone special</small></span></label>
+        </div>
+        <p class="sound-note" id="gift-note" role="alert">First, choose: your story, or a gift?</p>
+        <div class="color-pick">
+          <p class="color-pick-label">Two favorite colors <span class="opt">(optional)</span></p>
+          <div class="color-pick-row"><select name="favorite-color-1" id="favorite-color-1" aria-label="Color 1"><option value="">Color 1</option><option value="Red">🔴 Red</option><option value="Orange">🟠 Orange</option><option value="Yellow">🟡 Yellow</option><option value="Gold">✨ Gold</option><option value="Green">🟢 Green</option><option value="Teal">🩵 Teal</option><option value="Blue">🔵 Blue</option><option value="Navy">🌌 Navy</option><option value="Purple">🟣 Purple</option><option value="Pink">🩷 Pink</option><option value="Black">⚫ Black</option><option value="White">⚪ White</option><option value="Silver">🩶 Silver</option><option value="Brown">🟤 Brown</option><option value="Surprise me">🎲 Surprise me</option></select><select name="favorite-color-2" id="favorite-color-2" aria-label="Color 2"><option value="">Color 2</option><option value="Red">🔴 Red</option><option value="Orange">🟠 Orange</option><option value="Yellow">🟡 Yellow</option><option value="Gold">✨ Gold</option><option value="Green">🟢 Green</option><option value="Teal">🩵 Teal</option><option value="Blue">🔵 Blue</option><option value="Navy">🌌 Navy</option><option value="Purple">🟣 Purple</option><option value="Pink">🩷 Pink</option><option value="Black">⚫ Black</option><option value="White">⚪ White</option><option value="Silver">🩶 Silver</option><option value="Brown">🟤 Brown</option><option value="Surprise me">🎲 Surprise me</option></select></div>
+          <small class="field-hint">Theirs, or yours if the song is about you. I use them in your keepsake card design.</small>
+        </div>
+        
+        <div class="builder-step" id="step-1" data-step="1">
+          <div class="step-head"><span class="step-kicker">Step 1 of 5</span><h3>What's the occasion?</h3></div>
+          <div class="occ-chosen" id="occ-chosen" hidden><span id="occ-chosen-label">🎄 Holiday</span><button type="button" class="occ-change" id="occ-change">change</button></div>
+          <div class="occ-grid occ-occasions">
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Birthday" data-key="birthday" required /><span class="occ-face"><span class="em" aria-hidden="true">🎂</span>Birthday</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Wedding" data-key="wedding" required /><span class="occ-face"><span class="em" aria-hidden="true">💍</span>Wedding</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Anniversary" data-key="anniversary" required /><span class="occ-face"><span class="em" aria-hidden="true">💑</span>Anniversary</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Love Song" data-key="love" required /><span class="occ-face"><span class="em" aria-hidden="true">❤️</span>Love Song</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Mother's Day" data-key="mothers-day" required /><span class="occ-face"><span class="em" aria-hidden="true">🌸</span>Mother's Day</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Father's Day" data-key="fathers-day" required /><span class="occ-face"><span class="em" aria-hidden="true">👔</span>Father's Day</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Pet Song" data-key="pet" required /><span class="occ-face"><span class="em" aria-hidden="true">🐶</span>Pet Song</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Roast" data-key="roast" required /><span class="occ-face"><span class="em" aria-hidden="true">🔥</span>Roast</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Celebration of Life" data-key="celebration" required /><span class="occ-face"><span class="em" aria-hidden="true">🕊️</span>Celebration of Life</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Business Jingle" data-key="jingle" required /><span class="occ-face"><span class="em" aria-hidden="true">🏢</span>Business Jingle</span></label>
+                    <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Holiday" data-key="holiday" required /><span class="occ-face"><span class="em" aria-hidden="true">🎄</span>Holiday</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Get Well" data-key="getwell" required /><span class="occ-face"><span class="em" aria-hidden="true">💐</span>Get Well</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Baby Lullaby" data-key="lullaby" required /><span class="occ-face"><span class="em" aria-hidden="true">🍼</span>Baby Lullaby</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Quinceañera" data-key="quince" required /><span class="occ-face"><span class="em" aria-hidden="true">👗</span>Quinceañera</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Graduation" data-key="graduation" required /><span class="occ-face"><span class="em" aria-hidden="true">🎓</span>Graduation</span></label>
+          <label class="occ-tile"><input type="radio" class="sr-radio" name="occasion" value="Other" data-key="other" data-other="1" required /><span class="occ-face"><span class="em" aria-hidden="true">✨</span>Other</span></label>
+          </div>
+          <div class="other-wrap" id="other-wrap">
+            <div class="form-group full">
+              <label for="occasion-other">What's the occasion? <span class="req-tag">Required</span></label>
+              <input type="text" id="occasion-other" name="occasion-other" placeholder="e.g. Retirement party, graduation, new home" disabled />
             </div>
           </div>
+        </div>
 
-          <div class="form-group">
+        <div class="builder-step wide" id="step-2" data-step="2">
+          <div class="step-head"><span class="step-kicker">Step 2 of 5</span><h3>Pick your package</h3></div>
+        <p class="step-hint">Tap a card to choose it. Everything arrives by email, and by text if you opt in.</p>
+          <div class="pkg-pick">
+          <label class="pkg-card">
+            <input type="radio" class="sr-radio" name="package-tier" value="1" required id="pkg-1" />
+            <div class="pkg-card-inner">
+              <span class="pkg-check" aria-hidden="true">✓</span>
+              <div class="pkg-disc"><strong>Custom Single</strong><em>$25</em></div>
+              <div class="pkg-preview"><img src="/img/package-1-mp3-only-thumb.webp" alt="CustomSongMe Package 1, Custom Single, $25: keepsake card with lyrics and a QR code" width="420" height="543" loading="lazy" decoding="async" /><button type="button" class="pkg-example pkg-zoom" data-full="/img/package-1-mp3-only.webp" data-alt="CustomSongMe Package 1, Custom Single, $25: keepsake card with lyrics and a QR code" aria-haspopup="dialog" aria-label="See it bigger">🔍</button></div>
+              <div class="pkg-colors" role="group" aria-label="Sample colors"><button type="button" class="pkg-color is-on" style="--c1:#0d2a8a;--c2:#d4af37" data-thumb="/img/package-1-mp3-only-thumb.webp" data-full="/img/package-1-mp3-only.webp" aria-pressed="true" aria-label="Blue and gold sample"></button><button type="button" class="pkg-color" style="--c1:#f26b1d;--c2:#5b2a86" data-thumb="/img/package-1-mp3-only-sunset-thumb.webp" data-full="/img/package-1-mp3-only-sunset.webp" aria-pressed="false" aria-label="Sunset sample"></button><span>Same keepsake, your colors</span></div>
+              <p class="pkg-get">Your song as an MP3, plus a lyrics card with a QR code.</p>
+            </div>
+          </label>
+          <label class="pkg-card">
+            <input type="radio" class="sr-radio" name="package-tier" value="2" checked required id="pkg-2" />
+            <div class="pkg-card-inner">
+              <span class="pkg-check" aria-hidden="true">✓</span>
+              <div class="pkg-disc"><strong>Music Video Release</strong><em>$50</em></div>
+              <div class="pkg-preview"><img src="/img/package-2-complete-thumb.webp" alt="CustomSongMe Package 2, Music Video Release, $50: keepsake card with a music video QR code and personal message" width="420" height="543" loading="lazy" decoding="async" /><button type="button" class="pkg-example pkg-zoom" data-full="/img/package-2-complete.webp" data-alt="CustomSongMe Package 2, Music Video Release, $50: keepsake card with a music video QR code and personal message" aria-haspopup="dialog" aria-label="See it bigger">🔍</button></div>
+              <div class="pkg-colors" role="group" aria-label="Sample colors"><button type="button" class="pkg-color is-on" style="--c1:#0d2a8a;--c2:#d4af37" data-thumb="/img/package-2-complete-thumb.webp" data-full="/img/package-2-complete.webp" aria-pressed="true" aria-label="Blue and gold sample"></button><button type="button" class="pkg-color" style="--c1:#f26b1d;--c2:#5b2a86" data-thumb="/img/package-2-complete-sunset-thumb.webp" data-full="/img/package-2-complete-sunset.webp" aria-pressed="false" aria-label="Sunset sample"></button><span>Same keepsake, your colors</span></div>
+              <p class="pkg-get">Your MP3, a music video on YouTube, and your message on the card.</p>
+            </div>
+          </label>
+          <label class="pkg-card">
+            <input type="radio" class="sr-radio" name="package-tier" value="3" required id="pkg-3" />
+            <div class="pkg-card-inner">
+              <span class="pkg-check" aria-hidden="true">✓</span>
+              <div class="pkg-disc"><strong>Keepsake Set</strong><em>$75</em></div>
+              <div class="pkg-preview"><img src="/img/package-3-story-thumb.webp" alt="CustomSongMe Package 3, Keepsake Set, $75: keepsake card with song, video and story QR codes" width="420" height="543" loading="lazy" decoding="async" /><button type="button" class="pkg-example pkg-zoom" data-full="/img/package-3-story.webp" data-alt="CustomSongMe Package 3, Keepsake Set, $75: keepsake card with song, video and story QR codes" aria-haspopup="dialog" aria-label="See it bigger">🔍</button></div>
+              <div class="pkg-colors" role="group" aria-label="Sample colors"><button type="button" class="pkg-color is-on" style="--c1:#0d2a8a;--c2:#d4af37" data-thumb="/img/package-3-story-thumb.webp" data-full="/img/package-3-story.webp" aria-pressed="true" aria-label="Blue and gold sample"></button><button type="button" class="pkg-color" style="--c1:#f26b1d;--c2:#5b2a86" data-thumb="/img/package-3-story-sunset-thumb.webp" data-full="/img/package-3-story-sunset.webp" aria-pressed="false" aria-label="Sunset sample"></button><span>Same keepsake, your colors</span></div>
+              <p class="pkg-get">Everything in Music Video Release, plus your story told with up to 5 photos.</p>
+              <p class="pkg-photos">📸 After you order, you’ll get a private Google Drive link for your photos.</p>
+            </div>
+          </label>
+          <label class="pkg-card">
+            <input type="radio" class="sr-radio" name="package-tier" value="4" required id="pkg-4" />
+            <div class="pkg-card-inner">
+              <span class="pkg-check" aria-hidden="true">✓</span>
+              <div class="pkg-disc"><strong>Collector's Edition</strong><em>$100</em></div>
+              <div class="pkg-preview"><img src="/img/package-4-ultimate-thumb.webp" alt="CustomSongMe Package 4, Collector's Edition, $100: four-corner keepsake with four QR codes" width="420" height="543" loading="lazy" decoding="async" /><button type="button" class="pkg-example pkg-zoom" data-full="/img/package-4-ultimate.webp" data-alt="CustomSongMe Package 4, Collector's Edition, $100: four-corner keepsake with four QR codes" aria-haspopup="dialog" aria-label="See it bigger">🔍</button></div>
+              <div class="pkg-colors" role="group" aria-label="Sample colors"><button type="button" class="pkg-color is-on" style="--c1:#0d2a8a;--c2:#d4af37" data-thumb="/img/package-4-ultimate-thumb.webp" data-full="/img/package-4-ultimate.webp" aria-pressed="true" aria-label="Blue and gold sample"></button><button type="button" class="pkg-color" style="--c1:#f26b1d;--c2:#5b2a86" data-thumb="/img/package-4-ultimate-sunset-thumb.webp" data-full="/img/package-4-ultimate-sunset.webp" aria-pressed="false" aria-label="Sunset sample"></button><span>Same keepsake, your colors</span></div>
+              <p class="pkg-get">Everything in Keepsake Set, plus 15 photos, a party photo album and a four-corner card.</p>
+              <p class="pkg-photos">📸 After you order, you’ll get a private Google Drive link for your photos.</p>
+            </div>
+          </label>
+          </div>
+        </div>
+
+        <div class="builder-step" id="step-3" data-step="3">
+          <div class="step-head"><span class="step-kicker">Step 3 of 5</span><h3>Pick the sound, then make it yours</h3></div>
+          <div class="step-part-label"><span class="req-tag">Pick one</span> Music style</div>
+          <div class="occ-grid" id="style-grid">
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Pop" required /><span class="occ-face"><span class="em" aria-hidden="true">🎤</span>Pop</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Country" required /><span class="occ-face"><span class="em" aria-hidden="true">🤠</span>Country</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="R&amp;B / Soul" required /><span class="occ-face"><span class="em" aria-hidden="true">🎶</span>R&amp;B</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Hip-Hop" required /><span class="occ-face"><span class="em" aria-hidden="true">🎧</span>Hip-Hop</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Rock" required /><span class="occ-face"><span class="em" aria-hidden="true">🎸</span>Rock</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Folk / Acoustic" required /><span class="occ-face"><span class="em" aria-hidden="true">🪕</span>Acoustic</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Gospel" required /><span class="occ-face"><span class="em" aria-hidden="true">🙌</span>Gospel</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Latin / Reggaeton" required /><span class="occ-face"><span class="em" aria-hidden="true">💃</span>Latin</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Dance / EDM" required /><span class="occ-face"><span class="em" aria-hidden="true">🪩</span>Dance</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="genre" value="Surprise me" data-surprise="1" required /><span class="occ-face"><span class="em" aria-hidden="true">🎲</span>You pick</span></label>
+          </div>
+          <div class="other-wrap" id="style-notes-wrap">
+            <div class="form-group full">
+              <label for="style-notes">Any song or artist it should sound like? <span class="opt">(optional)</span></label>
+              <input type="text" id="style-notes" name="style-notes" placeholder="e.g. like Luke Combs, or upbeat like Uptown Funk" disabled />
+            </div>
+          </div>
+          <div class="step-part-label"><span class="req-tag">Pick one</span> Vocals</div>
+          <div class="occ-grid three" id="vocals-grid">
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="vocalist" value="Male vocalist" required /><span class="occ-face"><span class="em" aria-hidden="true">👨‍🎤</span>Male</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="vocalist" value="Both (duet)" required /><span class="occ-face"><span class="em" aria-hidden="true">🎶</span>Duet</span></label>
+            <label class="occ-tile"><input type="radio" class="sr-radio" name="vocalist" value="Female vocalist" required /><span class="occ-face"><span class="em" aria-hidden="true">👩‍🎤</span>Female</span></label>
+          </div>
+          <p class="sound-note" id="sound-note" role="alert">Pick a music style and a voice so I know how your song should sound.</p>
+
+          <div class="form-grid msg-group" id="msg1-group" style="display:none;">
+          <div class="form-group full">
+            <label for="msg1" id="msg1-label"><span id="msg1-label-text">Your message on the card</span> <span class="opt">(optional, but recommended)</span></label>
+            <textarea id="msg1" name="personal-message-1" rows="2" maxlength="60" placeholder="e.g. Happy birthday! Love you always."></textarea>
+            <span class="char-count" id="msg1-count"></span>
+            <small class="field-hint msg-hint">Leave it blank and a sweet one will be added for you.</small>
+          </div>
+          </div>
+
+        </div>
+
+        <div class="builder-step" id="step-4" data-step="4">
+          <div class="step-head"><span class="step-kicker">Step 4 of 5</span><h3>Who's it for, and what's the story?</h3></div>
+          <div class="form-grid">
+          <div class="form-group full">
+            <label for="subject">Who is the song about?</label>
+            <input type="text" id="subject" name="subject" placeholder="e.g. The whole Garcia family, or my parents, Rose and Ray" required />
+          </div>
+
+          <div class="form-group full">
+            <label for="pronunciation">Name pronunciation <span class="opt">(only if a name isn’t said the way it’s spelled)</span></label>
+            <input type="text" id="pronunciation" name="pronunciation" placeholder="Sound it out by syllable — e.g. Siobhan = shi-VAWN, Aaliyah = ah-LEE-yah" />
+          </div>
+
+          <div class="form-group full hint-chips" role="group" aria-label="Add a starter to your story">
+            <span class="hint-chips-label">Need ideas? Tap to add a starter:</span><div class="hint-chip-grid"><button type="button" class="hint-chip" data-add="How you met: ">How you met</button><button type="button" class="hint-chip" data-add="Inside jokes: ">Inside jokes</button><button type="button" class="hint-chip" data-add="Favorite story: ">Favorite story</button><button type="button" class="hint-chip" data-add="Hard times you got through: ">Hard times you got through</button><button type="button" class="hint-chip" data-add="What they mean to you: ">What they mean to you</button><button type="button" class="hint-chip" data-add="What you want them to feel: ">How you want them to feel</button></div>
+          </div>
+
+          <div class="form-group full">
+            <label for="story">Main story for the song</label>
+            <textarea id="story" name="story" placeholder="Your traditions, the dish everyone fights over, inside jokes, and someone you're missing this year." required></textarea>
+          </div>
+
+          <div class="form-group full" data-occ-only="birthday">
+            <label for="bday-age"><span data-me="Age you're turning" data-other="Age they're turning">Age they're turning</span> <span class="opt">(optional)</span></label>
+            <input type="text" id="bday-age" name="bday-age" placeholder="e.g. 40" inputmode="numeric" />
+          </div>
+          <div class="form-group full" data-occ-only="birthday">
+            <label for="bday-nicknames"><span data-me="Your nicknames" data-other="Nicknames">Nicknames</span> <span class="opt">(optional)</span></label>
+            <input type="text" id="bday-nicknames" name="bday-nicknames" placeholder="e.g. Bubbles, Sarge, Abuela" />
+          </div>
+          <div class="form-group full" data-occ-only="birthday">
+            <label for="bday-loves"><span data-me="What do you love? (hobbies, sports, food, shows)" data-other="What do they love? (hobbies, sports, food, shows)">What do they love? (hobbies, sports, food, shows)</span> <span class="opt">(optional)</span></label>
+            <textarea id="bday-loves" name="bday-loves" class="textarea-sm" placeholder="e.g. Dodgers baseball, fishing, street tacos, true crime shows"></textarea>
+          </div>
+          <div class="form-group full" data-occ-only="holiday">
             <label for="holiday">Which holiday?</label>
-            <select id="holiday" name="holiday" required>
+            <select id="holiday" name="holiday">
               <option value="" disabled>Pick a holiday</option>
               <option>Halloween</option>
               <option>Día de los Muertos</option>
@@ -1006,16 +1071,11 @@
               <option>Other (tell me below)</option>
             </select>
           </div>
-
-          <div class="form-group" id="subject-group">
-            <label for="subject">Who is this song for?</label>
-            <input type="text" id="subject" name="subject" placeholder="Names, spelled exactly right" required />
-          </div>
-
-          <div class="form-group full" id="tg-fields" hidden>
+          <div class="form-group full" data-occ-only="holiday">
+            <div class="form-group full" id="tg-fields" hidden>
             <div class="form-grid tg-inner">
               <div class="form-group full tg-block">
-                <div class="tg-step">Step 1 of 4 · The table</div>
+                <div class="tg-step">Thanksgiving 1 of 3 · The table</div>
                 <div class="form-grid tg-inner">
                   <div class="form-group">
                     <label for="tg-host">Who's hosting?</label>
@@ -1033,7 +1093,7 @@
               </div>
 
               <div class="form-group full tg-block">
-                <div class="tg-step">Step 2 of 4 · Everyone at the table</div>
+                <div class="tg-step">Thanksgiving 2 of 3 · Everyone at the table</div>
                 <p class="tg-help">Add each person and one sentence about why you're thankful for them. This becomes their line in the song, so a real detail works best ("always saves me the crispy edge of the mac and cheese"). Spell names exactly how you want them sung.</p>
                 <div class="tg-people" id="tg-people">
                 <div class="tg-person">
@@ -1121,7 +1181,7 @@
               </div>
 
               <div class="form-group full tg-block">
-                <div class="tg-step">Step 3 of 4 · Special thanks &amp; shout-outs <span class="opt">(optional)</span></div>
+                <div class="tg-step">Thanksgiving 3 of 3 · Special thanks &amp; shout-outs <span class="opt">(optional)</span></div>
                 <p class="tg-help">Someone who isn't at the table but deserves a thank-you: a friend, a neighbor, a coach, or a family business.</p>
                 <div class="tg-people" id="tg-shouts">
                 <div class="tg-person">
@@ -1143,113 +1203,201 @@
                 <button type="button" class="tg-add" id="tg-add-shout">+ Add another shout-out</button>
               </div>
 
-              <div class="form-group full tg-block tg-photos">
-                <div class="tg-step">Step 4 of 4 · Your video</div>
-                <p id="tg-photo-note"></p>
-              </div>
             </div>
           </div>
-
-          <div class="form-group full">
-            <label for="story" id="story-label">Your story</label>
-            <textarea id="story" name="story" placeholder="Who they are, your traditions, the funny moments, the inside jokes, what this holiday means to your family or friends." required></textarea>
           </div>
-
-          <details class="form-group full more-details">
-            <summary>+ Add style &amp; extra details <span class="opt">(optional)</span></summary>
-            <div class="form-grid more-details-grid">
-          <div class="form-group full">
-            <label for="feeling">What should the song feel like? <span class="opt">(optional)</span></label>
-            <input type="text" id="feeling" name="feeling" placeholder="e.g. spooky and fun, warm and grateful, cozy and nostalgic, a total roast..." />
+          <div class="form-group full" data-occ-only="anniversary">
+            <label for="years">How many years together? <span class="opt">(optional)</span></label>
+            <input type="text" id="years" name="years" placeholder="e.g. 1st, 10th, 25th anniversary" />
           </div>
-
-          <div class="form-group">
-            <label for="genre">Style <span class="opt">(optional)</span></label>
-            <select id="genre" name="genre">
-              <option value="" disabled selected>Any style is fine</option>
-              <option>Classic Holiday Feel</option>
-              <option>Spooky &amp; Fun</option>
-              <option>Funny / Roast</option>
-              <option>Heartfelt Ballad</option>
-              <option>Country</option>
-              <option>Pop</option>
-              <option>R&amp;B / Soul</option>
-              <option>Rock</option>
-              <option>Kids' Sing-Along</option>
-              <option>Surprise me</option>
+          <div class="form-group full" data-occ-only="wedding">
+            <label for="use-case-wedding">How will you use it? <span class="opt">(optional)</span></label>
+            <select id="use-case-wedding" name="use-case">
+              <option value="" disabled selected>Select one</option>
+              <option>First dance</option>
+              <option>Ceremony entrance / aisle walk</option>
+              <option>Surprise gift</option>
+              <option>Wedding video / highlight reel</option>
+              <option>Vow renewal</option>
+              <option>Anniversary gift</option>
+              <option>Other</option>
             </select>
           </div>
-
-          <div class="form-group">
-            <label for="vocalist">Vocalist Preference <span class="opt">(optional)</span></label>
-            <select id="vocalist" name="vocalist">
-              <option value="" disabled selected>No strong preference</option>
-              <option>Male vocalist</option>
-              <option>Female vocalist</option>
-              <option>Both / either works</option>
+          <div class="form-group full" data-occ-only="love">
+            <label for="use-case-love">What's the occasion? <span class="opt">(optional)</span></label>
+            <select id="use-case-love" name="use-case">
+              <option value="" disabled selected>Select one</option>
+              <option>Anniversary</option>
+              <option>Proposal</option>
+              <option>Long-distance surprise</option>
+              <option>Just because</option>
+              <option>Other</option>
             </select>
           </div>
-
+          <div class="form-group full" data-occ-only="pet">
+            <label for="pet-type">Type of pet</label>
+            <select id="pet-type" name="pet-type">
+              <option value="" disabled selected>Select one</option>
+              <option>Dog</option>
+              <option>Cat</option>
+              <option>Bird</option>
+              <option>Rabbit</option>
+              <option>Horse</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group full" data-occ-only="roast">
+            <label>How spicy should it get?</label>
+            <div class="contact-pref-options spice-options">
+              <label class="contact-pref-option">
+                <input type="radio" name="spice-level" value="Playful & Light" checked />
+                <span>😄 Playful</span>
+              </label>
+              <label class="contact-pref-option">
+                <input type="radio" name="spice-level" value="Medium Heat" />
+                <span>🌶️ Medium</span>
+              </label>
+              <label class="contact-pref-option">
+                <input type="radio" name="spice-level" value="No Holds Barred" />
+                <span>🔥 Full Send</span>
+              </label>
             </div>
-          </details>
-
-          <hr class="form-divider" />
-
-          <div class="form-group full">
-            <div class="form-tip">I'll use your contact info for your order, and occasionally to share a deal or a new song special. <strong>Reply STOP any time and I'll stop.</strong></div>
           </div>
+          <div class="form-group full" data-occ-only="roast">
+            <label for="off-limits">Anything off-limits? <span class="opt">(optional)</span></label>
+            <input type="text" id="off-limits" name="off-limits" placeholder="Topics to steer clear of — sensitive stuff, no-go zones" />
+          </div>
+          </div>
+          <div class="form-group full" data-occ-only="quince">
+            <label for="padrinos">Padrinos, madrinas or party theme <span class="opt">(optional)</span></label>
+            <input type="text" id="padrinos" name="padrinos" placeholder="e.g. names of her padrinos and madrinas, the party colors or theme, or a family tradition" />
+          </div>
+          <div class="heart-block">
+            <div class="heart-head"><strong>Make it hit the heart</strong><span>Five quick questions, all optional. The more you share, the more personal your song gets.</span></div>
+            <div class="form-group full">
+              <label>How should the song feel?</label>
+              <div class="pick-chips" role="radiogroup" aria-label="How should the song feel?"><label class="pick-chip"><input type="radio" class="sr-radio" name="feeling" value="Tearjerker" /><span>😢 Tearjerker</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="feeling" value="Happy and upbeat" /><span>🎉 Happy and upbeat</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="feeling" value="Romantic" /><span>❤️ Romantic</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="feeling" value="Funny" /><span>😂 Funny</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="feeling" value="Proud and uplifting" /><span>🙌 Proud and uplifting</span></label></div>
+            </div>
+            <div class="form-group full">
+              <label><span data-me="What do you most want to hear in it?" data-other="What do you most want them to hear?">What do you most want them to hear?</span></label>
+              <div class="pick-chips" role="radiogroup" aria-label="What do you most want them to hear?"><label class="pick-chip"><input type="radio" class="sr-radio" name="core-message" value="I love you" /><span>💛 I love you</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="core-message" value="Thank you" /><span>🙏 Thank you</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="core-message" value="I'm proud of you" /><span>🏆 I'm proud of you</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="core-message" value="You're my everything" /><span>🌎 You're my everything</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="core-message" value="We made it through" /><span>💪 We made it through</span></label></div>
+            </div>
+            <div class="form-group full">
+              <label for="favorite-memory"><span data-me="Your favorite story" data-other="Your favorite story together">Your favorite story together</span></label>
+              <textarea id="favorite-memory" name="favorite-memory" class="textarea-sm" placeholder="e.g. Dancing in the kitchen at 2 a.m. the night we brought the baby home"></textarea>
+            </div>
+            <div class="form-group full">
+              <label for="proud-moment"><span data-me="A moment you're proud of" data-other="A moment you're proud of them for">A moment you're proud of them for</span></label>
+              <input type="text" id="proud-moment" name="proud-moment" placeholder="e.g. Going back to school at 40 and graduating" />
+            </div>
+            <div class="form-group full">
+              <label for="one-of-a-kind"><span data-me="What makes you one of a kind? (a saying, habit or quirk)" data-other="What makes them one of a kind? (a saying, habit or quirk)">What makes them one of a kind? (a saying, habit or quirk)</span></label>
+              <input type="text" id="one-of-a-kind" name="one-of-a-kind" placeholder="e.g. Sings off-key to every song on the radio" />
+            </div>
+            <div class="form-group full">
+              <label for="extra-details">Anything else I should know?</label>
+              <textarea id="extra-details" name="extra-details" placeholder="Please mention her nickname 'Bubbles' and our song, Brown Eyed Girl" class="textarea-sm"></textarea>
+            </div>
+          </div>
+        </div>
 
+        <div class="builder-step" id="step-5" data-step="5">
+          <div class="step-head"><span class="step-kicker">Step 5 of 5</span><h3>Your details and pay</h3></div>
+          <div class="keep-note">💛 <strong>Don’t lose what you just wrote.</strong> Everything you typed disappears if you leave this page, so add your email at the very least. That way I can reach you.</div>
+          <div class="form-grid">
           <div class="form-group">
             <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" placeholder="First and last name" autocomplete="name" required />
+            <input type="text" id="name" name="name" placeholder="Jane Smith" autocomplete="name" required />
           </div>
 
           <div class="form-group">
             <label for="email">Your Email</label>
-            <input type="email" id="email" name="email" placeholder="you@email.com" autocomplete="email" inputmode="email" required />
+            <input type="email" id="email" name="email" placeholder="jane@email.com" autocomplete="email" inputmode="email" required />
           </div>
 
           <div class="form-group full">
-            <label for="phone">Phone number <span class="opt">(optional — for text updates)</span></label>
-            <input type="tel" id="phone" name="phone" placeholder="Best number to reach you" autocomplete="tel" inputmode="tel" />
+            <label for="phone">Phone number <span class="opt">(optional, recommended for text updates. Reply STOP any time.)</span></label>
+            <input type="tel" id="phone" name="phone" placeholder="(805) 555-0123" autocomplete="tel" inputmode="tel" />
           </div>
 
-
-          <div class="form-group full">
-            <label>How you'll pay</label>
-            <div class="contact-pref-options payment-method-options">
-              <label class="contact-pref-option">
-                <input type="radio" name="payment-method" value="Card (Stripe)" checked required />
-                <span>💳 Stripe secure checkout · All major credit cards</span>
-              </label>
-            </div>
+          <div class="form-group full details-save">
+            <button type="submit" class="btn-details" id="details-btn" formnovalidate>Submit song details</button>
+            <small class="field-hint">Saves your song details with Dan. No payment yet. Email required.</small>
           </div>
-        </div>
 
-        <div class="what-next">
-          <h3>🎁 What Happens Next?</h3>
+          <input type="hidden" name="payment-method" id="payment-method" value="Card (Stripe)" />
+          <input type="hidden" name="_subject" id="nopay-subject" value="" disabled />
+          </div>
+          <div class="unsure-block">
+            <h4>Not ready to pay yet?</h4>
+            <p>No pressure. Send me your info without paying, and I’ll reach out personally to answer your questions.</p>
+            <label class="unsure-q">What’s holding you back?</label>
+            <div class="pick-chips" role="group" aria-label="What’s holding you back?"><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="The price" /><span>💲 The price</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="How it will sound" /><span>🎧 How it will sound</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="I want to hear a sample" /><span>👂 I want to hear a sample</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="Timing" /><span>⏰ Timing</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="Something else" /><span>💭 Something else</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="Not sure what to write" /><span>✍️ Not sure what to write</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="I want to talk to Dan first" /><span>💬 I want to talk to Dan first</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="A payment question" /><span>💳 A payment question</span></label><label class="pick-chip"><input type="checkbox" class="sr-radio" name="holding-back" value="Privacy" /><span>🔒 Privacy</span></label></div>
+            <label class="unsure-q">Best way to reach you?</label>
+            <div class="pick-chips" role="group" aria-label="Best way to reach you?"><label class="pick-chip"><input type="radio" class="sr-radio" name="reach-by" value="Call" /><span>📞 Call</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="reach-by" value="Text" /><span>💬 Text</span></label><label class="pick-chip"><input type="radio" class="sr-radio" name="reach-by" value="Email" /><span>📧 Email</span></label></div>
+            <label class="unsure-q" for="feel-sure">What would help you feel sure?</label>
+            <textarea id="feel-sure" name="feel-sure" class="textarea-sm" placeholder="e.g. Can you make it more upbeat? Can it be ready by Friday?"></textarea>
+            <button type="submit" class="btn-nopay" id="nopay-btn" formnovalidate>Send my info without paying</button>
+          </div>
+          <div class="ready-banner" role="note"><strong>Ready to pay?</strong> One more scroll to review your order. Almost done! ⬇️</div>
+
+          <div class="addons">
+            <h4>Add-ons</h4>
+          <p class="addon-p1" id="addon-p1">Package 1 has no video, so there is nothing to keep private here.</p>
+<div class="unlisted-block">
+          <div class="public-note" id="public-note">
+            <label class="unlisted-toggle">
+              <input type="checkbox" id="unlisted-checkbox" name="unlisted-addon" value="Yes" />
+              <span>Keep it private +$25 (sent to you in a Google Drive, never posted)</span>
+            </label>
+            <p><strong>Why my prices are this low:</strong> the YouTube video that comes with Packages 2, 3 and 4 is posted publicly on my CustomSongMe channel, and that public listing doubles as my advertising. That is how I keep these packages so affordable. <strong>If you would rather keep your song private, I completely understand. It is +$25.</strong> In that case I do not post it anywhere. I send your video and files straight to you in a Google Drive, so you are the only one who has them. Package 1 has no video, so there is nothing to post.</p>
+          </div>        </div>
+          </div>
+
+          <div class="what-next">
+          <h3>🎵 What happens next</h3>
           <ol>
-            <li>Submit your request and you'll go straight to secure checkout for your chosen package.</li>
-            <li>At checkout, use the same email you ordered with. That's how your payment matches your song.</li>
-            <li>Once payment is confirmed, I personally review your story during studio hours and get to work.</li>
-            <li>Your song is delivered within 24 hours of confirmed payment, backed by my Personal Happiness Guarantee.</li>
+            <li>Submit, then pay securely with Stripe. Use the same email.</li>
+            <li>Your song is created, and I personally read, review, and revise it to match your request.</li>
+            <li>It arrives within 24 hours, backed by my Happiness Guarantee.</li>
           </ol>
           <div class="lock-note">🔒 <strong>Production does not begin until your payment is received and matched to your order.</strong></div>
         </div>
 
-        <div class="form-submit-area">
+          <div class="receipt" id="receipt" aria-live="polite">
+            <h3>Your order summary</h3>
+            <dl>
+              <div class="rc-row"><dt>Occasion</dt><dd id="rc-occasion">—</dd></div>
+              <div class="rc-row"><dt>Song is for</dt><dd id="rc-songfor">—</dd></div>
+              <div class="rc-row"><dt>Package</dt><dd id="rc-package">—</dd></div>
+              <div class="rc-row"><dt>Music style</dt><dd id="rc-style">—</dd></div>
+              <div class="rc-row"><dt>Vocals</dt><dd id="rc-vocals">—</dd></div>
+              <div class="rc-row"><dt>Keep it private (Google Drive)</dt><dd id="rc-unlisted">—</dd></div>
+              <div class="rc-row rc-total"><dt>Total</dt><dd id="rc-total">—</dd></div>
+            </dl>
+          </div>
+
+          <div class="form-submit-area">
           <button type="submit" class="btn-primary">Submit &amp; Continue to Payment →</button>
           <div class="form-security">🔒 Secure checkout · One-time payment · No subscriptions</div>
-          <div class="form-error-msg" id="form-error-msg" style="display:none;">⚠️ Something went wrong submitting your request. Please try again, or text me directly at <a href="sms:+16617140903">(661) 714-0903</a>.</div>
+          <div class="form-error-msg" id="form-error-msg" style="display:none;">⚠️ Something went wrong submitting your request. Please try again, or text Dan directly at <a href="sms:+16617140903">(661) 714-0903</a>.</div>
+        </div>
         </div>
 
         <div class="form-contact">
-          Questions? Text me directly at <a href="sms:+16617140903">+1 (661) 714-0903</a>
+          Questions? Text Dan directly at <a href="sms:+16617140903">+1 (661) 714-0903</a>
         </div>
+
       </form>
     </div>
   </div>
 </section>
+
+<button type="button" class="step-bar" id="step-bar" aria-label="Step  of 6">
+  <span class="sb-pkg" id="sb-pkg">—</span>
+  <span class="sb-total" id="sb-total">$50</span>
+  <span class="sb-step" id="sb-step">Step 1 of 5 ›</span>
+</button>
 
 <section id="guarantee">
   <div class="container fade-up">
@@ -1311,7 +1459,7 @@
           <tr><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">Carols with a name dropped in</td><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">A familiar Christmas tune with their name swapped into a template</td><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">Free to a few dollars, instant</td></tr>
           <tr><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">AI song generators</td><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">An original song from the details you type in. The result depends on what you write</td><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">Free to about $20, minutes</td></tr>
           <tr><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">Made-to-order studios</td><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">A song written or performed for you, often at a higher price</td><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">Often $100 or more, a few days to a week or longer</td></tr>
-          <tr style="font-weight:600;background:#f7f9ff;"><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">CustomSongMe</td><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">Created from your details with AI-assisted songwriting and music tools, then I read, review, and revise every song to match your request. Changes and a guarantee are included</td><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">$25 to $75, within 24 hours</td></tr>
+          <tr style="font-weight:600;background:#f7f9ff;"><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">CustomSongMe</td><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">Created from your details with AI-assisted songwriting and music tools, then I read, review, and revise every song to match your request. Changes and a guarantee are included</td><td style="padding:10px 12px;border-top:1px solid #d5ddf3;">$25 to $100, within 24 hours</td></tr>
         </tbody>
       </table>
     </div>
@@ -1364,11 +1512,11 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Is there a cheaper option than the Complete Custom Song Experience? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Yes. The MP3 Only package is $25 and includes the song as a downloadable MP3 audio file, with no video, cover art, or lyric sheet. The Complete Custom Song Experience is $50 and includes all four.</div>
+        <div class="faq-a">Yes. Package 1, the Custom Single, is $25: your song as a downloadable MP3 plus a keepsake card with your lyrics and a QR code. Package 2, the Music Video Release, is $50 and adds a music video on YouTube and your message on the card. Package 3, the Keepsake Set, is $75 and adds your story told with up to 5 photos. Package 4, the Collector's Edition, is $100 and adds up to 15 photos and a party photo album.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Why is the Complete Experience $50 instead of $75? <span class="faq-icon">+</span></button>
-        <div class="faq-a">The $50 price includes your video being shared publicly on the CustomSongMe YouTube channel. That public posting is part of how I keep prices affordable. If you'd rather keep your video unlisted (not published to my channel, only viewable by anyone with the direct link), that option is $75. You can switch to it right on the request form.</div>
+        <button class="faq-q" aria-expanded="false">Why is the Music Video Release $50? <span class="faq-icon">+</span></button>
+        <div class="faq-a">The Music Video Release is $50 because the music video is posted publicly on the CustomSongMe YouTube channel, and that public listing is partly my advertising, which is how I keep prices affordable. If you would rather keep your song private, it is +$25 on Packages 2, 3 and 4. In that case I do not post it anywhere, and I send your video and files to you in a Google Drive. You can check the box in Step 5 of the order builder.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Is the song guaranteed? <span class="faq-icon">+</span></button>
@@ -1500,6 +1648,7 @@
   </div>
 </footer>
 
+<script src="/js/builder.js?v=20261130"></script>
 <script>
   const bar = document.getElementById('scroll-progress');
   window.addEventListener('scroll', () => {
@@ -1595,13 +1744,6 @@
       const sph = document.querySelector('#specials h2'); if (sph) sph.innerHTML = 'This Year\'s <span class="gold">Thanksgiving Special</span>';
       const sps = document.getElementById('sp-sub');
       if (sps) sps.textContent = 'One song for the whole table, delivered within 24 hours. Play it before the toast.';
-      // Hero price box: show the Thanksgiving prices while Thanksgiving is the featured holiday
-      const hp = document.querySelector('.hero-price-anchor');
-      if (hp) {
-        hp.querySelector('.price-label').textContent = 'Thanksgiving Family Gratitude Song';
-        hp.querySelector('.price-includes').textContent = 'Every Name at Your Table · Public YouTube Video · Cover Art · Lyric Sheet';
-        hp.querySelector('.price-alt').textContent = 'Just want the song? MP3 Only is $25 · Order by Sunday, Nov 22';
-      }
       // Thanksgiving hero (Dan's Nov 4 design): kicker, headline, toast line, one button, small price line
       const heroIn = document.querySelector('#hero .hero-inner');
       const h1 = heroIn && heroIn.querySelector('h1');
@@ -1621,36 +1763,12 @@
         if (cta) {
           cta.href = '#specials';
           cta.textContent = 'Create My Thanksgiving Song';
-          cta.insertAdjacentHTML('afterend', '<p class="tg-fine">From $25 · Printable keepsake included</p>');
+          cta.insertAdjacentHTML('afterend', '<p class="tg-fine">From $25 · Keepsake card included</p>');
         } else { // no jump button any more: keep the price line visible under the intro
           const lede = heroIn.querySelector('.tg-lede');
-          if (lede) lede.insertAdjacentHTML('afterend', '<p class="tg-fine">From $25 · Printable keepsake included</p>');
+          if (lede) lede.insertAdjacentHTML('afterend', '<p class="tg-fine">From $25 · Keepsake card included</p>');
         }
       }
-      // Package cards and FAQ further down: Thanksgiving prices ($25 MP3), buttons start the matching Thanksgiving package
-      const pih = document.querySelector('#pricing-intro h2');
-      if (pih) pih.innerHTML = 'Simple Pricing. <span class="gold">Starting at $25.</span>';
-      const budget = document.querySelector('#package .package-card.budget');
-      if (budget) {
-        budget.querySelector('.package-price').innerHTML = '<span>$</span>25';
-        budget.querySelector('.package-price-note').textContent = 'One-time payment · Just the song · Thanksgiving price';
-        const va = budget.querySelector('.value-anchor');
-        if (va) va.textContent = '💡 Want the video, cover art, and lyric sheet too? For $25 more, the Family Gratitude Song includes everything.';
-        const b = budget.querySelector('.package-cta a');
-        if (b) { b.classList.add('tg-start'); b.dataset.tier = 'mp3'; }
-      }
-      const featured = document.querySelector('#package .package-card.featured .package-cta a');
-      if (featured) { featured.classList.add('tg-start'); featured.dataset.tier = 'complete'; }
-      document.querySelectorAll('#christmas-songs td, #christmas-songs ~ section td, td').forEach(td => {
-        if (td.textContent.trim() === '$25 to $75, within 24 hours') td.textContent = '$25 to $100, within 24 hours';
-      });
-      const qa = document.querySelector('#quick-answer p');
-      if (qa) qa.innerHTML = qa.innerHTML.replace(/ Other holiday songs cost \$25 for the MP3[^.]*\./, '');
-      document.querySelectorAll('.faq-a').forEach(a => {
-        if (a.textContent.indexOf('MP3 Only package is $25') !== -1) {
-          a.textContent = 'Yes. For Thanksgiving, the MP3 Only package is $25 and includes the song as a downloadable MP3 audio file, with no video, cover art, or lyric sheet. The Family Gratitude Song is $50 and adds the YouTube video, cover art and lyric sheet.';
-        }
-      });
     } else if (spGrid && spot.key === 'Halloween' && hwTpl) {
       spGrid.replaceWith(hwTpl.content.cloneNode(true));
       const sps = document.getElementById('sp-sub');
@@ -1675,17 +1793,16 @@
     if (sel) Array.from(sel.options).forEach(o => { o.selected = (o.text === spot.key); });
   })();
 
-  // ===== HOLIDAY SPECIALS: tap a card to pre-fill the order form =====
-  document.querySelectorAll('a.sp-card').forEach(function (c) {
-    c.addEventListener('click', function () {
-      const sf = document.getElementById('special-field'); if (sf) sf.value = c.dataset.special;
-      const g = document.getElementById('genre');
-      if (g) Array.from(g.options).forEach(function (o) { if (o.value === c.dataset.genre || o.text === c.dataset.genre) g.value = o.value; });
-      const st = document.getElementById('story');
-      const hol = (document.querySelector('.js-holiday') || {}).textContent || 'Holiday';
-      if (st && !st.value) st.placeholder = hol + ' idea: ' + c.dataset.special + '. Tell me the names, the traditions, and the funny details.';
-      if (window.gtag) gtag('event', 'halloween_special_click', { special: c.dataset.special, holiday: hol });
-    });
+  // ===== HOLIDAY SPECIALS: tap a card to pre-fill the order builder =====
+  document.addEventListener('click', function (e) {
+    const c = e.target.closest('a.sp-card');
+    if (!c) return;
+    const sf = document.getElementById('special-field'); if (sf) sf.value = c.dataset.special;
+    const ss = document.getElementById('special-style-field'); if (ss) ss.value = c.dataset.genre || '';
+    const st = document.getElementById('story');
+    const hol = (document.querySelector('.js-holiday') || {}).textContent || 'Holiday';
+    if (st && !st.value) st.placeholder = hol + ' idea: ' + c.dataset.special + '. Tell me the names, the traditions, and the funny details.';
+    if (window.gtag) gtag('event', 'holiday_special_click', { special: c.dataset.special, holiday: hol });
   });
 
   // ===== SPECIALS EARLY-ACCESS SIGNUP =====
@@ -1705,222 +1822,36 @@
     });
   })();
 
-  // PACKAGE + PAYMENT METHOD → PAYMENT LINK ROUTING
-  // Regular: MP3 $25 / Complete Public $50 / Complete Unlisted $75
-  // Thanksgiving Family Gratitude: MP3 $25 / Song $50 / Ultimate Public $75 / Ultimate Unlisted $100
-  const STRIPE_TG_MP3_25 = 'https://www.customsongme.com/pay/3cI8wOcLK6JT05l9Se9Ve0l';
-  const STRIPE_TG_ULTIMATE_75 = 'https://www.customsongme.com/pay/cNiaEW3ba5FP19pe8u9Ve0k';
-  const PAYMENT_LINKS = {
-    'Complete (Public) — $50': {
-      'Card (Stripe)': 'https://www.customsongme.com/pay/3cIaEWcLKb09cS7fcy9Ve0f',
-    },
-    'Complete (Unlisted) — $75': {
-      'Card (Stripe)': 'https://www.customsongme.com/pay/8x2fZgh20fgp8BRc0m9Ve0h',
-    },
-    'MP3 Only — $25': {
-      'Card (Stripe)': 'https://www.customsongme.com/pay/cNieVc2767NX3hxd4q9Ve06',
-    },
-    'Family Gratitude MP3 (Thanksgiving) — $25': {
-      'Card (Stripe)': STRIPE_TG_MP3_25,
-    },
-    'Family Gratitude Song (Thanksgiving) — $50': {
-      'Card (Stripe)': 'https://www.customsongme.com/pay/3cIaEWcLKb09cS7fcy9Ve0f',
-    },
-    'Ultimate Family (Thanksgiving, Public) — $75': {
-      'Card (Stripe)': STRIPE_TG_ULTIMATE_75,
-    },
-    'Ultimate Family (Thanksgiving, Unlisted) — $100': {
-      'Card (Stripe)': 'https://www.customsongme.com/pay/aFadR8132c4d6tJ6G29Ve0j',
-    }
-  };
-  const nextRedirectField = document.getElementById('next-redirect');
-  const packageHiddenField = document.getElementById('package-hidden-field');
-  const paymentMethodNote = document.getElementById('payment-method-note');
-  const publicNote = document.getElementById('public-note');
-  const unlistedCheckbox = document.getElementById('unlisted-checkbox');
-  const emailField = document.getElementById('email');
-
-  function getEffectivePackage() {
-    const tier = document.querySelector('input[name="package-tier"]:checked');
-    if (!tier) return 'Complete (Public) — $50';
-    const holidaySel = document.getElementById('holiday');
-    const tg = holidaySel && holidaySel.value === 'Thanksgiving';
-    if (tg) {
-      if (tier.value === 'mp3') return 'Family Gratitude MP3 (Thanksgiving) — $25';
-      if (tier.value === 'ultimate') return 'Ultimate Family (Thanksgiving, Public) — $75';
-      if (tier.value === 'ultimate-unlisted') return 'Ultimate Family (Thanksgiving, Unlisted) — $100';
-      return 'Family Gratitude Song (Thanksgiving) — $50';
-    }
-    if (tier.value === 'mp3') return 'MP3 Only — $25';
-    return (unlistedCheckbox && unlistedCheckbox.checked) ? 'Complete (Unlisted) — $75' : 'Complete (Public) — $50';
-  }
-
-  function syncPaymentRedirect() {
-    const pkgName = getEffectivePackage();
-    const method = document.querySelector('input[name="payment-method"]:checked');
-    if (!method) return;
-
-    if (packageHiddenField) packageHiddenField.value = pkgName;
-
-    const tier = document.querySelector('input[name="package-tier"]:checked');
-    const tgMode = pkgName.indexOf('(Thanksgiving') !== -1;
-    if (publicNote) publicNote.style.display = (!tgMode && tier && tier.value === 'complete') ? 'block' : 'none';
-    const ultimateNote = document.getElementById('ultimate-note');
-    if (ultimateNote) ultimateNote.style.display = (tier && tier.value === 'ultimate') ? 'block' : 'none';
-
-    const pkgLinks = PAYMENT_LINKS[pkgName];
-    if (pkgLinks && pkgLinks[method.value]) {
-      let url = pkgLinks[method.value];
-      if (method.value === 'Card (Stripe)' && emailField && emailField.value) {
-        const separator = url.includes('?') ? '&' : '?';
-        url += separator + 'prefilled_email=' + encodeURIComponent(emailField.value);
-      }
-      nextRedirectField.value = url;
-    }
-    if (paymentMethodNote) {
-      paymentMethodNote.style.display = (method.value === 'Card (Stripe)') ? 'none' : 'block';
-    }
-  }
-  document.querySelectorAll('input[name="package-tier"], input[name="payment-method"]').forEach(radio => {
-    radio.addEventListener('change', syncPaymentRedirect);
-  });
-  if (unlistedCheckbox) unlistedCheckbox.addEventListener('change', syncPaymentRedirect);
-  const holidaySelForPay = document.getElementById('holiday');
-  if (holidaySelForPay) holidaySelForPay.addEventListener('change', syncPaymentRedirect);
-  if (emailField) emailField.addEventListener('input', syncPaymentRedirect);
-  syncPaymentRedirect();
-
-  // ===== THANKSGIVING FAMILY SPECIAL: step-by-step fields and the four price tiers ($25/$50/$75/$100) =====
+  // ===== THANKSGIVING TABLE FIELDS (inside the shared order builder) =====
   (function () {
     const sel = document.getElementById('holiday');
     const box = document.getElementById('tg-fields');
     if (!sel || !box) return;
-    const ultWrap = document.getElementById('tier-ultimate-wrap');
-    const ult = document.getElementById('pkg-ultimate');
-    const ultUWrap = document.getElementById('tier-ultimate-unlisted-wrap');
-    const ultU = document.getElementById('pkg-ultimate-unlisted');
-    const mp3 = document.getElementById('pkg-mp3');
-    const mp3Label = document.getElementById('pkg-mp3-label');
-    const completeLabel = document.getElementById('pkg-complete-label');
-    const unlistedBox = document.getElementById('unlisted-checkbox');
-    const complete = document.getElementById('pkg-complete');
-    const subjGroup = document.getElementById('subject-group');
-    const subj = document.getElementById('subject');
-    const story = document.getElementById('story');
-    const storyLabel = document.getElementById('story-label');
-    const special = document.getElementById('special-field');
     const people = Array.from(document.querySelectorAll('#tg-people .tg-person'));
     const shouts = Array.from(document.querySelectorAll('#tg-shouts .tg-person'));
     const addPerson = document.getElementById('tg-add-person');
     const addShout = document.getElementById('tg-add-shout');
     const count = document.getElementById('tg-count');
-    const photoNote = document.getElementById('tg-photo-note');
-    const SPECIAL = 'Thanksgiving Family Gratitude Song';
-    const storyDefault = { label: storyLabel.innerHTML, ph: story.placeholder };
     let peopleShown = 4, shoutsShown = 2;
-
     const isOn = () => sel.value === 'Thanksgiving';
-    const tierValue = () => { const t = document.querySelector('input[name="package-tier"]:checked'); return t ? t.value : 'complete'; };
-    const peopleLimit = () => people.length;
-
-    function showRows(rows, n) {
-      rows.forEach((r, i) => {
-        r.hidden = i >= n;
-        r.querySelectorAll('input').forEach(inp => { inp.disabled = !isOn() || i >= n; });
-      });
-    }
-
     function render() {
       const on = isOn();
       box.hidden = !on;
-      box.querySelectorAll('input').forEach(inp => { inp.disabled = !on; });
       box.querySelectorAll('[data-tg-required]').forEach(inp => { inp.required = on; });
-      ultWrap.hidden = !on;
-      ultUWrap.hidden = !on;
-      mp3Label.textContent = on ? '🎵 MP3 Only — $25' : '🎵 MP3 Only — $25';
-      completeLabel.textContent = on ? '🎁 Family Gratitude — $50' : '🎁 Complete — $50';
-      if (on && unlistedBox && unlistedBox.checked) { unlistedBox.checked = false; }
-      if (!on && (ult.checked || ultU.checked)) { complete.checked = true; complete.dispatchEvent(new Event('change')); }
-
-      subjGroup.hidden = on;
-      subj.required = !on; subj.disabled = on;
-      story.required = !on;
-      storyLabel.innerHTML = on ? 'Anything else I should know? <span class="opt">(optional)</span>' : storyDefault.label;
-      story.placeholder = on ? 'Traditions, the dish everyone fights over, inside jokes, someone you\'re missing this year.' : storyDefault.ph;
-      if (on) special.value = SPECIAL; else if (special.value === SPECIAL) special.value = '';
-
-      const limit = peopleLimit();
-      const n = Math.min(peopleShown, limit);
-      showRows(people, n);
-      showRows(shouts, shoutsShown);
-      addPerson.hidden = n >= limit;
+      people.forEach((r, i) => { r.hidden = i >= peopleShown; });
+      shouts.forEach((r, i) => { r.hidden = i >= shoutsShown; });
+      addPerson.hidden = peopleShown >= people.length;
       addShout.hidden = shoutsShown >= shouts.length;
-      count.textContent = n + ' of up to ' + limit + ' people';
-
-      const t = tierValue();
-      photoNote.innerHTML = (t === 'ultimate' || t === 'ultimate-unlisted')
-        ? '📸 <strong>Up to 10 of your real family photos go in your video.</strong> No need to upload them now. After you order, I\'ll text you simple directions for sending them.'
-        : t === 'mp3'
-          ? '🎵 <strong>MP3 only:</strong> you\'ll get one downloadable MP3, with no video.'
-          : '🎨 <strong>Your video uses AI-generated artwork</strong>, not your own photos. Want your real family photos (up to 10) in the video? Choose the Ultimate Family package ($75).';
+      count.textContent = peopleShown + ' of up to ' + people.length + ' people';
+      const sf = document.getElementById('special-field');
+      if (sf) { if (on && !sf.value) sf.value = 'Thanksgiving Family Gratitude Song'; else if (!on && sf.value === 'Thanksgiving Family Gratitude Song') sf.value = ''; }
     }
-
-    addPerson.addEventListener('click', () => { peopleShown = Math.min(peopleShown + 1, people.length); render(); people[Math.min(peopleShown, peopleLimit()) - 1].querySelector('input').focus(); });
+    addPerson.addEventListener('click', () => { peopleShown = Math.min(peopleShown + 1, people.length); render(); people[peopleShown - 1].querySelector('input').focus(); });
     addShout.addEventListener('click', () => { shoutsShown = Math.min(shoutsShown + 1, shouts.length); render(); shouts[shoutsShown - 1].querySelector('input').focus(); });
     sel.addEventListener('change', render);
-    document.querySelectorAll('input[name="package-tier"]').forEach(r => r.addEventListener('change', render));
-
-    // The two buttons on the Thanksgiving special card pick the holiday and the package
-    document.addEventListener('click', e => {
-      const btn = e.target.closest('.tg-start');
-      if (!btn) return;
-      sel.value = 'Thanksgiving';
-      const pick = { ultimate: ult, 'ultimate-unlisted': ultU, mp3: mp3 }[btn.dataset.tier] || complete;
-      render();
-      pick.checked = true;
-      pick.dispatchEvent(new Event('change'));
-      if (window.gtag) gtag('event', 'thanksgiving_special_click', { tier: btn.dataset.tier });
-    });
-
+    document.querySelector('#order-form form').addEventListener('change', render);
     render();
   })();
-
-  const orderForm = document.querySelector('.form-wrap form');
-  const submitBtn = orderForm ? orderForm.querySelector('button[type="submit"]') : null;
-  const formErrorMsg = document.getElementById('form-error-msg');
-  const submitBtnOriginalText = submitBtn ? submitBtn.textContent : '';
-  if (orderForm && submitBtn) {
-    orderForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Submitting your request…';
-      if (formErrorMsg) formErrorMsg.style.display = 'none';
-
-      const formData = new FormData(orderForm);
-      fetch(orderForm.action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(response => {
-        if (response.ok) {
-          window.location.href = nextRedirectField.value;
-        } else {
-          throw new Error('Submission failed');
-        }
-      })
-      .catch(() => {
-        submitBtn.disabled = false;
-        submitBtn.textContent = submitBtnOriginalText;
-        if (formErrorMsg) {
-          formErrorMsg.style.display = 'block';
-          formErrorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-          alert('Something went wrong submitting your request. Please try again, or text Dan directly at (661) 714-0903.');
-        }
-      });
-    });
-  }
 </script>
 
 </body>
