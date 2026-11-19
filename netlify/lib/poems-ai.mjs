@@ -21,7 +21,7 @@ async function callOnce(model, prompt, { fetchImpl = fetch, timeoutMs = 24000 } 
     const j = await r.json().catch(() => ({}));
     if (!r.ok) return { ok: false, status: r.status, error: j?.error?.message || `HTTP ${r.status}` };
     const text = (j.content || []).filter((b) => b.type === 'text').map((b) => b.text).join('');
-    return { ok: true, text, usage: j.usage || null, model, stop: j.stop_reason };
+    return { ok: true, text, usage: j.usage || null, model, stop: j.stop_reason, types: (j.content || []).map((b) => b.type).join(',') };
   } catch (e) {
     return { ok: false, status: 0, error: e?.name === 'AbortError' ? 'timeout' : String(e?.message || e) };
   } finally { clearTimeout(timer); }
@@ -37,6 +37,6 @@ export async function writePoem(prompt, opts = {}) {
   }
   if (!r.ok) return { ok: false, error: r.error, status: r.status };
   const poem = P.parsePoem(r.text);
-  if (!poem) return { ok: false, error: 'unreadable reply: ' + String(r.text || '').slice(0, 160), usage: r.usage, stop: r.stop };
+  if (!poem) return { ok: false, error: `unreadable reply (${r.model}, stop=${r.stop}, blocks=${r.types}, out=${r.usage?.output_tokens}): ` + String(r.text || '').slice(0, 160), usage: r.usage };
   return { ok: true, poem, usage: r.usage, model: r.model };
 }
