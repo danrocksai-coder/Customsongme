@@ -441,7 +441,7 @@ footer a{color:var(--muted);margin:0 6px}
       <div class="actions">
         <button type="submit" class="btn btn-p" id="submitBtn">Place My Order &amp; Pay</button>
         <div class="err" id="sendErr">Something went wrong sending your order. Please try again, or text me at <a href="sms:+16617140903">661-714-0903</a>.</div>
-        <p class="sub">I write your song after payment. Covered by my Personal Happiness Guarantee.</p>
+        <p class="sub">Your song is made after payment and personally reviewed by me. Covered by my Personal Happiness Guarantee.</p>
         <div class="note" style="text-align:center">Questions, or need something for any reason? Text me at <a href="sms:+16617140903"><b>661-714-0903</b></a> for the fastest reply, or email <a href="mailto:danrocksai@gmail.com">danrocksai@gmail.com</a> anytime.</div>
         <p class="sub" style="font-size:12px">I may send occasional offers. Reply STOP anytime to opt out.</p>
         <button type="button" class="btn btn-b" data-back>Back</button>
@@ -478,7 +478,7 @@ footer a{color:var(--muted);margin:0 6px}
     <div class="sf-top">
       <div class="sf-brand">
         <p class="sf-brand-name">CustomSongMe</p>
-        <p class="sf-tag">Songs written from your story by Dan the Song Man. Delivered within 24 hours.</p>
+        <p class="sf-tag">Songs built from your story and personally reviewed by Dan the Song Man. Delivered within 24 hours.</p>
         <p class="sf-contact">Text or call Dan: <a href="tel:+16617140903">+1 (661) 714-0903</a></p>
         <div class="sf-social" aria-label="Follow us"><a href="https://www.facebook.com/customsongme" target="_blank" rel="noopener me">Facebook</a><a href="https://www.instagram.com/customsongme" target="_blank" rel="noopener me">Instagram</a><a href="https://www.tiktok.com/@customsongme" target="_blank" rel="noopener me">TikTok</a><a href="https://www.youtube.com/@customsongme" target="_blank" rel="noopener me">YouTube</a></div>
         <a class="sf-review" href="https://g.page/r/CUJZcUwU_iIFEAE/review" target="_blank" rel="noopener">⭐ Leave a Google Review</a>
@@ -680,7 +680,7 @@ form.addEventListener("submit",function(e){e.preventDefault();if(sending)return;
  fd.append("page","/get-well-song-cards");
  fetch(FORMSPREE,{method:"POST",body:fd,headers:{Accept:"application/json"}}).then(function(r){if(!r.ok)throw 0;
   try{gtag("event","getwell_order",{value:price,currency:"USD",package:p,payment:S.pay});}catch(x){}
-  if(!payUrl){var sec=document.querySelector('section[data-step="5"]');sec.innerHTML='<h2>Your order is in!</h2><p class="lead">Thank you, '+esc(val("sender_name"))+'. I\'ll email your secure Stripe card link to <b>'+esc(email)+'</b> shortly. Once payment comes through, I start writing '+esc(S.name)+'\'s song.</p><div class="note">Need anything? Text me at <a href="sms:+16617140903"><b>661-714-0903</b></a> for the fastest reply, or email <a href="mailto:danrocksai@gmail.com">danrocksai@gmail.com</a> anytime.</div>';sec.scrollIntoView({behavior:"smooth"});return;}
+  if(!payUrl){var sec=document.querySelector('section[data-step="5"]');sec.innerHTML='<h2>Your order is in!</h2><p class="lead">Thank you, '+esc(val("sender_name"))+'. I\'ll email your secure Stripe card link to <b>'+esc(email)+'</b> shortly. Once payment comes through, I get started on '+esc(S.name)+'\'s song.</p><div class="note">Need anything? Text me at <a href="sms:+16617140903"><b>661-714-0903</b></a> for the fastest reply, or email <a href="mailto:danrocksai@gmail.com">danrocksai@gmail.com</a> anytime.</div>';sec.scrollIntoView({behavior:"smooth"});return;}
   btn.textContent="Taking you to payment…";window.location.href=payUrl;
  }).catch(function(){sending=false;btn.disabled=false;btn.textContent="Place My Order & Pay";document.getElementById("sendErr").classList.add("show");});
 });
