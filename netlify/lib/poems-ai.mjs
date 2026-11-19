@@ -30,7 +30,7 @@ async function callOnce(model, prompt, { fetchImpl = fetch, timeoutMs = 24000, n
 
 // One poem. Tries the chosen model, then a faster fallback if the model is unavailable or slow.
 export async function writePoem(prompt, opts = {}) {
-  const model = process.env.POEMS_AI_MODEL || DEFAULT_MODEL; const t0 = Date.now(); const path = [];
+  const model = opts.model || process.env.POEMS_AI_MODEL || DEFAULT_MODEL; const t0 = Date.now(); const path = [];
   let r = await callOnce(model, prompt, opts); path.push(`${model}:${r.ok ? 'ok' : r.status}`);
   if (!r.ok && r.status === 400 && /thinking/i.test(r.error || '')) { path.push('thinking-param-refused: ' + r.error); r = await callOnce(model, prompt, { ...opts, noThinkingParam: true }); }
   if (!r.ok && (r.status === 400 || r.status === 404 || r.status === 0 || r.status >= 500) && model !== FALLBACK_MODEL) {

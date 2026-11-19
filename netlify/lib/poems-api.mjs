@@ -177,7 +177,9 @@ export async function handle(req, d) {
         if (!AI.aiConfigured()) return fail(503, 'The poem writer is not switched on yet. Please text Dan at (661) 714-0903.');
         const limited = await aiAllowed(d); if (limited) return fail(429, limited);
         const want = fill ? o.poems.map((x, i) => (x ? null : i)).filter((i) => i !== null) : [0, 1, 2, 3];
-        const results = await Promise.all(want.map((i) => d.ai.writePoem(P.generatePrompt(o, i))));
+        // preview copies only: allow comparing models side by side
+        const model = !d.isLive && ['claude-haiku-5-5', 'claude-sonnet-5-5'].includes(b.model) ? b.model : undefined;
+        const results = await Promise.all(want.map((i) => d.ai.writePoem(P.generatePrompt(o, i), model ? { model } : {})));
         await logAi(d, 'generate', results);
         if (!results.some((r) => r.ok)) return fail(502, 'The poem writer did not answer. Nothing was used up; please tap "Write my poems" again.', d.isLive ? null : { detail: results.map((r) => `${r.status || ''} ${r.error || ''}`.trim()) });
         const poems = fill ? [...o.poems] : [null, null, null, null];
