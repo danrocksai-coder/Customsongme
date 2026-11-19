@@ -278,7 +278,8 @@
   <link rel="preload" href="/img/dan-the-song-man-custom-song-customsongme-hero-640.webp" as="image" type="image/webp" media="(max-width: 639px)" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" /></noscript>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -994,7 +995,7 @@
     }
     .form-group > label .opt {
       font-weight: 400;
-      color: rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.75);
       text-transform: none;
       letter-spacing: 0;
       font-size: 0.75rem;
@@ -1518,7 +1519,7 @@
       justify-content: center;
       gap: 12px;
     }
-    .social-label { color: rgba(255,255,255,0.4); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-right: 4px; }
+    .social-label { color: rgba(255,255,255,0.75); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-right: 4px; }
     .social-link {
       display: flex;
       align-items: center;
@@ -1819,7 +1820,7 @@ footer { border-top: 3px solid var(--gold); }
     <a href="/es/" class="hx-pill hx-pill-r" lang="es"><img src="/img/hero-pill-icon.webp" alt="" width="71" height="65" />Español</a>
     <p class="hx-tag">Your Story. Your Song.</p>
     <p class="hx-sub">Real stories from real people,<br>made by Dan the Song Man.</p>
-    <a href="#order-form" class="hx-lens" aria-label="Start my song"><span class="hx-lt hx-lt-l">Start My</span><span class="hx-lt hx-lt-r">Song</span></a>
+    <a href="#order-form" class="hx-lens" aria-label="Start My Song"><span class="hx-lt hx-lt-l">Start My</span> <span class="hx-lt hx-lt-r">Song</span></a>
     <figure class="hx-card">
       <div class="hx-stars" aria-label="5 out of 5 stars">★★★★★</div>
       <blockquote>“My husband cried like a baby!! What a wonderful anniversary gift!!”</blockquote>
