@@ -179,7 +179,7 @@ export async function handle(req, d) {
         const want = fill ? o.poems.map((x, i) => (x ? null : i)).filter((i) => i !== null) : [0, 1, 2, 3];
         const results = await Promise.all(want.map((i) => d.ai.writePoem(P.generatePrompt(o, i))));
         await logAi(d, 'generate', results);
-        if (!results.some((r) => r.ok)) return fail(502, 'The poem writer did not answer. Nothing was used up; please tap "Write my poems" again.');
+        if (!results.some((r) => r.ok)) return fail(502, 'The poem writer did not answer. Nothing was used up; please tap "Write my poems" again.', d.isLive ? null : { detail: results.map((r) => `${r.status || ''} ${r.error || ''}`.trim()) });
         const poems = fill ? [...o.poems] : [null, null, null, null];
         want.forEach((i, k) => { poems[i] = results[k].ok ? results[k].poem : null; });
         o.poems = poems;
@@ -199,7 +199,7 @@ export async function handle(req, d) {
         const limited = await aiAllowed(d); if (limited) return fail(429, limited);
         const r = await d.ai.writePoem(P.revisePrompt(o, current, instruction));
         await logAi(d, 'revise', [r]);
-        if (!r.ok) return fail(502, 'The revision did not come through. Nothing was used up; please try again.');
+        if (!r.ok) return fail(502, 'The revision did not come through. Nothing was used up; please try again.', d.isLive ? null : { detail: `${r.status || ''} ${r.error || ''}` });
         o.history = [...(o.history || []), { at: d.now(), ...current }].slice(-6);
         o.final = r.poem; o.revisions = (o.revisions || 0) + 1; o.approvedAt = null;
         await save(d, o); return json(view(o));
