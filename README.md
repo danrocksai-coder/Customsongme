@@ -6,14 +6,14 @@ https://www.customsongme.com
 CustomSongMe turns real stories into one-of-a-kind personalized songs. Whether it’s a birthday, wedding, anniversary, love song, memorial tribute, roast, pet anthem, or business jingle — you share the details and Dan the Song Man transforms them into music.
 
 - **Standard Delivery:** Within 24 hours of payment
-- **Rush Delivery:** 4-hour rush option available
+- **Packages:** $25 / $50 / $75 / $100. Add-ons: Rush Delivery (+$10, any package, delivered in 4 hours, phone number required) and Keep it Private (+$25, Packages 2-4 only).
 - **Deliverables:** High-fidelity MP3 + Custom Digital Cover Art + Full Lyrics
 - **Features:** Includes *Capture the Moment™* mobile reaction recording directly on customer delivery pages
 - **Guarantee:** Personal Happiness Guarantee
 ---
 ## 🚀 How It Works
 1. **Tell Your Story** Add names, memories, inside jokes, important moments, or your business message.
-2. **Complete Payment** Pay securely using Stripe, PayPal, Cash App, Venmo, or Zelle.
+2. **Complete Payment** Pay securely through Stripe checkout (all major credit cards).
 3. **Receive Your Song** Your personalized song is delivered via a dedicated, unindexed mobile-friendly page containing the MP3 player, lyrics, custom cover art, and the *Capture the Moment™* interactive video recorder.
 ---
 ## 🛠️ Tech Stack & Architecture

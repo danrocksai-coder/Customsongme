@@ -57,11 +57,16 @@
       pkgNames: { 1: "Custom Single", 2: "Music Video Release", 3: "Keepsake Set", 4: "Collector's Edition" },
       pkgNameTpl: 'Package {n} — {name} — ${price}',
       unlNote: ' + Keep it Private (Google Drive) +$25',
+      rushNote: ' + Rush delivery (4 hours) +$10',
+      rushLabel: 'Rush delivery +$10 (your song in 4 hours instead of 24)',
+      rushHelp: 'Rush only starts after payment. Your phone number is required so Dan can reach you, and you will get his number too. After you pay, text Dan that you placed a rush order.',
+      rushRow: 'Rush delivery (4 hours)',
+      rushPhone: 'Phone number (required for rush delivery. Reply STOP any time.)',
       totalLabel: 'Your total: ',
       charsWord: 'characters',
       msgLabels: ['Your message on the card', 'Your personal message on the card'],
       msgNeeded: 'Please add your message for the card.',
-      yes: 'Yes (+$25)', no: 'No', none: 'Not chosen yet',
+      yes: 'Yes (+$25)', rushYes: 'Yes (+$10)', no: 'No', none: 'Not chosen yet',
       barStep: 'Step {n} of 5', barReady: 'Ready to submit',
       pkgWord: 'Package',
       mePh: 'Me! (Your name, so I can write it from your point of view)',
@@ -76,11 +81,16 @@
       pkgNames: { 1: "Sencillo Personalizado", 2: "Lanzamiento con Video Musical", 3: "Set de Recuerdo", 4: "Edición de Colección" },
       pkgNameTpl: 'Paquete {n} — {name} — ${price}',
       unlNote: ' + Mantenlo privado (Google Drive) +$25',
+      rushNote: ' + Entrega urgente (4 horas) +$10',
+      rushLabel: 'Entrega urgente +$10 (tu canción en 4 horas en vez de 24)',
+      rushHelp: 'La entrega urgente empieza solo después del pago. El teléfono es obligatorio para que Dan pueda contactarte, y recibirás su número. Después de pagar, envíale un mensaje de texto a Dan diciendo que hiciste un pedido urgente.',
+      rushRow: 'Entrega urgente (4 horas)',
+      rushPhone: 'Teléfono (obligatorio para entrega urgente. Responde STOP en cualquier momento.)',
       totalLabel: 'Tu total: ',
       charsWord: 'caracteres',
       msgLabels: ['Tu mensaje en la tarjeta', 'Tu mensaje personal en la tarjeta'],
       msgNeeded: 'Por favor agrega tu mensaje para la tarjeta.',
-      yes: 'Sí (+$25)', no: 'No', none: 'Aún sin elegir',
+      yes: 'Sí (+$25)', rushYes: 'Sí (+$10)', no: 'No', none: 'Aún sin elegir',
       barStep: 'Paso {n} de 5', barReady: 'Listo para enviar',
       pkgWord: 'Paquete',
       mePh: '¡Yo! (Tu nombre, para que la escriba desde tu punto de vista)',
@@ -108,6 +118,7 @@
     '4': { name: L.pkgNames[4], price: 100 }
   };
   var UNLISTED_PRICE = 25;
+  var RUSH_PRICE = 10; // works on every package; the real amount is checked again in netlify/functions/pay.mjs
 
   var $ = function (id) { return document.getElementById(id); };
   var $q = function (sel) { return document.querySelector(sel); };
@@ -120,6 +131,30 @@
   var paymentMethodNote = $('payment-method-note');
   var publicNote = $('public-note');
   var unlistedCheckbox = $('unlisted-checkbox');
+  // Rush delivery add-on: built here so every order page (English and Spanish) gets the same box.
+  var rushCheckbox = null, phoneField = $('phone');
+  (function addRush() {
+    var addons = $q('.addons h4');
+    if (!addons) return;
+    var box = document.createElement('div');
+    box.className = 'rush-block';
+    box.style.cssText = 'margin:0 0 14px';
+    box.innerHTML = '<label class="unlisted-toggle"><input type="checkbox" id="rush-checkbox" name="rush-addon" value="Yes" /><span></span></label><p class="rush-help"></p>';
+    box.querySelector('span').textContent = L.rushLabel;
+    box.querySelector('.rush-help').textContent = L.rushHelp;
+    addons.parentNode.insertBefore(box, addons.nextSibling);
+    rushCheckbox = box.querySelector('input');
+    var dl = $q('#receipt dl'), total = dl && dl.querySelector('.rc-total');
+    if (total) {
+      var row = document.createElement('div');
+      row.className = 'rc-row';
+      row.innerHTML = '<dt></dt><dd id="rc-rush">—</dd>';
+      row.querySelector('dt').textContent = L.rushRow;
+      dl.insertBefore(row, total);
+    }
+  })();
+  var phoneLabel = phoneField && phoneField.parentNode.querySelector('label');
+  var phoneLabelDefault = phoneLabel ? phoneLabel.innerHTML : '';
   var orderTotal = $('order-total'); // optional; the total lives in the receipt and the phone bar
   var emailField = $('email');
   var msg1 = $('msg1');
@@ -155,16 +190,22 @@
     if (!canUnlist && unlistedCheckbox) unlistedCheckbox.checked = false;
     if (publicNote) publicNote.style.display = canUnlist ? 'block' : 'none';
     var unlisted = canUnlist && unlistedCheckbox && unlistedCheckbox.checked;
-    var total = p.price + (unlisted ? UNLISTED_PRICE : 0);
+    var rush = !!(rushCheckbox && rushCheckbox.checked);
+    var total = p.price + (unlisted ? UNLISTED_PRICE : 0) + (rush ? RUSH_PRICE : 0);
     configureMessages(n);
+    if (phoneField) {
+      phoneField.required = rush;
+      if (phoneLabel) { if (rush) phoneLabel.textContent = L.rushPhone; else phoneLabel.innerHTML = phoneLabelDefault; }
+    }
 
     var pkgName = L.pkgNameTpl.replace('{n}', n).replace('{name}', p.name).replace('{price}', p.price);
-    if (packageHiddenField) packageHiddenField.value = pkgName + (unlisted ? L.unlNote : '') + ' = $' + total;
+    if (packageHiddenField) packageHiddenField.value = pkgName + (unlisted ? L.unlNote : '') + (rush ? L.rushNote : '') + ' = $' + total;
     if (totalHiddenField) totalHiddenField.value = '$' + total;
     if (orderTotal) orderTotal.textContent = L.totalLabel + '$' + total;
 
     var params = [];
     if (unlisted) params.push('unlisted=1');
+    if (rush) params.push('rush=1');
     if (emailField && emailField.value) params.push('prefilled_email=' + encodeURIComponent(emailField.value));
     nextRedirectField.value = 'https://www.customsongme.com/pay/pkg' + n + (params.length ? '?' + params.join('&') : '');
     if (paymentMethodNote) paymentMethodNote.style.display = 'none';
@@ -173,6 +214,7 @@
     radio.addEventListener('change', syncPaymentRedirect);
   });
   if (unlistedCheckbox) unlistedCheckbox.addEventListener('change', syncPaymentRedirect);
+  if (rushCheckbox) rushCheckbox.addEventListener('change', syncPaymentRedirect);
   if (emailField) emailField.addEventListener('input', syncPaymentRedirect);
   msg1.addEventListener('input', function () { checkMsg(); $('msg1-count').textContent = countText(msg1); });
   syncPaymentRedirect(); // set correctly on page load, not just on change
@@ -232,7 +274,8 @@
   function refreshBuilder() {
     var n = selectedPackage(), p = PKGS[n];
     var unlisted = n !== '1' && unlistedCheckbox && unlistedCheckbox.checked;
-    var total = p.price + (unlisted ? UNLISTED_PRICE : 0);
+    var rush = !!(rushCheckbox && rushCheckbox.checked);
+    var total = p.price + (unlisted ? UNLISTED_PRICE : 0) + (rush ? RUSH_PRICE : 0);
     var occ = checked('occasion');
     var otherTxt = $('occasion-other');
     $('rc-occasion').textContent = occ ? (occ.dataset.other && otherTxt.value.trim() ? occ.value + ' — ' + otherTxt.value.trim() : occ.value) : L.none;
@@ -240,6 +283,7 @@
     $('rc-songfor').textContent = sfSel ? sfSel.dataset.short : L.none;
     $('rc-package').textContent = L.pkgWord + ' ' + n + ' · ' + p.name + ' ($' + p.price + ')';
     $('rc-unlisted').textContent = unlisted ? L.yes : L.no;
+    if ($('rc-rush')) $('rc-rush').textContent = rush ? L.rushYes : L.no;
     var styleSel = checked('genre'), vocSel = checked('vocalist');
     $('rc-style').textContent = styleSel ? styleSel.nextElementSibling.lastChild.textContent.trim() : L.none;
     $('rc-vocals').textContent = vocSel ? vocSel.nextElementSibling.lastChild.textContent.trim() : L.none;

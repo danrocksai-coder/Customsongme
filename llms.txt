@@ -13,6 +13,7 @@ Every custom song comes as one of four packages. Each package includes a downloa
 - **Package 3, Keepsake Set: $75.** Adds a backstory built from the details the customer shares, up to 5 photos and 1 personal message on the card.
 - **Package 4, Collector's Edition: $100.** Adds up to 15 photos, a party photo album that guests add to and a four-corner card design.
 - **Keep it Private: +$25** on Packages 2, 3 and 4. Nothing is posted anywhere; the video and files are sent to the customer in a Google Drive.
+- **Rush Delivery: +$10** on any of Packages 1 to 4. The song is delivered within 4 hours instead of 24. A phone number is required for rush orders.
 - **Business Jingles: $100.** A custom jingle for a business: MP3, a public YouTube video, cover art and a lyric sheet.
 - **Custom Lullaby Me: $3 a song, or all 7 original lullabies for $19.99.** Original baby lullabies, sung softly over quiet music; listen, keep the ones your little one loves, and build one bedtime album.
 - **Get Well Song Cards: $39 to $69.** A get well card with an original song, opened by a QR code, sent as a printable PDF or a mailed card.
@@ -23,7 +24,7 @@ Every custom song comes as one of four packages. Each package includes a downloa
 1. The customer builds the order in five short steps: who the song is for and two favorite colors, then the occasion, the package, the music style and voice (plus an optional card message), the story (names, memories, a few heartfelt questions), and finally their contact details with the optional Keep it Private add-on. Customers who aren't ready to pay can send their details and questions without paying, and Dan follows up personally.
 2. They pay upfront through one secure Stripe checkout (all major credit cards accepted).
 3. Dan writes and produces the song during studio hours (Mon–Fri 9am–6pm PT, Sat 10am–2pm PT).
-4. The song is delivered within 24 hours of confirmed payment. There is no rush fee.
+4. The song is delivered within 24 hours of confirmed payment at no extra cost. Optional Rush Delivery (+$10, any package) delivers within 4 hours; a phone number is required so Dan and the customer can reach each other.
 
 Every order is covered by the Personal Happiness Guarantee: if the song is not right, Dan works with the customer to make it right, and if he still cannot, the customer gets a full refund. Songs are personal keepsakes for gifting, sharing and non-commercial use.
 
@@ -50,7 +51,7 @@ Every order is covered by the Personal Happiness Guarantee: if the song is not r
 ## Guides
 
 - [How Much Does a Custom Song Cost?](https://www.customsongme.com/custom-song-cost): price ranges across the market and what to check before buying
-- [How Long Does a Custom Song Take?](https://www.customsongme.com/how-long-does-a-custom-song-take): delivery times by type of service, and how CustomSongMe delivers within 24 hours with no rush fee
+- [How Long Does a Custom Song Take?](https://www.customsongme.com/how-long-does-a-custom-song-take): delivery times by type of service, and how CustomSongMe delivers within 24 hours, or 4 hours with the +$10 rush add-on
 - [What to Include in a Custom Anniversary Song](https://www.customsongme.com/what-to-include-in-an-anniversary-song)
 - [How to Give a Custom Song as a Gift: 7 Ideas](https://www.customsongme.com/how-to-give-a-custom-song-as-a-gift)
 - [Custom Song vs Personalized Gift](https://www.customsongme.com/custom-song-vs-personalized-gift)

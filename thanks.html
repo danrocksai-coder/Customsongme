@@ -28,6 +28,10 @@
       padding: 40px 20px; line-height: 1.65; -webkit-font-smoothing: antialiased;
       background-image: radial-gradient(ellipse 80% 60% at 60% 30%, rgba(252,212,42,0.12) 0%, transparent 70%);
     }
+    .rush-box { background: var(--gold-pale); color: #001a66; border: 2px solid var(--gold); border-radius: var(--radius-lg); padding: 16px 18px; margin: 18px 0; text-align: center; }
+    .rush-box[hidden] { display: none; }
+    .rush-box h2 { margin: 0 0 8px; font-size: 1.15rem; }
+    .rush-box p { margin: 0 0 12px; color: #001a66; }
     .card {
       max-width: 560px; width: 100%; background-color: var(--charcoal);
       border: 1px solid rgba(252,212,42,0.4); border-radius: var(--radius-lg);
@@ -83,6 +87,15 @@
     <div class="icon">🎵</div>
     <h1>Payment Confirmed —<br><em>Thank You!</em></h1>
     <p>Your order is locked in. Dan personally reviews every story before he starts, and your song will be in your inbox within 24 hours of this payment.</p>
+
+    <div class="rush-box" id="rush-box" hidden>
+      <h2>⚡ Rush order: one quick step</h2>
+      <p><strong>Please text Dan right now</strong> so he knows to start your 4-hour rush: tell him you just paid and placed a rush order.</p>
+      <a class="btn" id="rush-text" href="sms:+16617140903?&body=Hi%20Dan%2C%20I%20just%20paid%20and%20placed%20a%20RUSH%20order.">Text Dan: (661) 714-0903</a>
+    </div>
+    <script>
+      try { if (new URLSearchParams(location.search).get('rush') === '1') document.getElementById('rush-box').hidden = false; } catch (e) {}
+    </script>
 
     <div class="next-box">
       <h2>What Happens Next</h2>
