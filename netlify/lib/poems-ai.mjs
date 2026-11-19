@@ -7,9 +7,10 @@ import * as P from './poems-core.mjs';
 const DEFAULT_MODEL = 'claude-sonnet-5-5';
 const FALLBACK_MODEL = 'claude-haiku-5-5';
 
+const THINKING_OFF = new Map();
 export const aiConfigured = () => !!(process.env.ANTHROPIC_BASE_URL || process.env.ANTHROPIC_API_KEY);
 
-async function callOnce(model, prompt, { fetchImpl = fetch, timeoutMs = 24000, noThinkingParam = false } = {}) {
+async function callOnce(model, prompt, { fetchImpl = fetch, timeoutMs = 24000, thinking = 'between_tools' } = {}) {
   const base = (process.env.ANTHROPIC_BASE_URL || 'https://api.anthropic.com').replace(/\/+$/, '');
   const ctl = new AbortController(); const timer = setTimeout(() => ctl.abort(), timeoutMs);
   try {
@@ -17,7 +18,7 @@ async function callOnce(model, prompt, { fetchImpl = fetch, timeoutMs = 24000, n
       method: 'POST', signal: ctl.signal,
       headers: { 'content-type': 'application/json', 'x-api-key': process.env.ANTHROPIC_API_KEY || '', 'anthropic-version': '2023-06-01' },
       // Poems don't need extended thinking; with it on, the model can spend its whole budget thinking and return no poem.
-      body: JSON.stringify({ model, max_tokens: noThinkingParam ? 6000 : 1500, ...(noThinkingParam ? {} : { thinking: { type: 'between_tools' } }), system: P.SYSTEM_PROMPT, messages: [{ role: 'user', content: prompt }] }),
+      body: JSON.stringify({ model, max_tokens: thinking ? 1500 : 6000, ...(thinking ? { thinking: { type: thinking } } : {}), system: P.SYSTEM_PROMPT, messages: [{ role: 'user', content: prompt }] }),
     });
     const j = await r.json().catch(() => ({}));
     if (!r.ok) return { ok: false, status: r.status, error: j?.error?.message || `HTTP ${r.status}` };
@@ -31,8 +32,14 @@ async function callOnce(model, prompt, { fetchImpl = fetch, timeoutMs = 24000, n
 // One poem. Tries the chosen model, then a faster fallback if the model is unavailable or slow.
 export async function writePoem(prompt, opts = {}) {
   const model = opts.model || process.env.POEMS_AI_MODEL || DEFAULT_MODEL; const t0 = Date.now(); const path = [];
-  let r = await callOnce(model, prompt, opts); path.push(`${model}:${r.ok ? 'ok' : r.status}`);
-  if (!r.ok && r.status === 400 && /thinking/i.test(r.error || '')) { path.push('thinking-param-refused: ' + r.error); r = await callOnce(model, prompt, { ...opts, noThinkingParam: true }); }
+  // Different models switch thinking off in different ways; remember what worked for each model.
+  const order = [THINKING_OFF.get(model), 'between_tools', 'disabled', null].filter((x, i, a) => x !== undefined && a.indexOf(x) === i);
+  let r;
+  for (const mode of order) {
+    r = await callOnce(model, prompt, { ...opts, thinking: mode }); path.push(`${model}/${mode || 'default'}:${r.ok ? 'ok' : r.status}`);
+    if (r.ok) { THINKING_OFF.set(model, mode); break; }
+    if (!(r.status === 400 && /thinking/i.test(r.error || ''))) break;
+  }
   if (!r.ok && (r.status === 400 || r.status === 404 || r.status === 0 || r.status >= 500) && model !== FALLBACK_MODEL) {
     console.log('poems ai: falling back', r.status, r.error);
     r = await callOnce(FALLBACK_MODEL, prompt, { ...opts, timeoutMs: 15000 });
