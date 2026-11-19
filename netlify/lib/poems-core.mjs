@@ -209,13 +209,21 @@ export function revisePrompt(o, poem, instruction) {
   ].join('\n');
 }
 
-// Pulls {"title","poem"} out of the model's reply, even with stray text around it.
+// Pulls {"title","poem"} out of the model's reply, even with stray text, code fences,
+// or real line breaks inside the JSON strings.
 export function parsePoem(raw) {
   const s = String(raw || '');
   const start = s.indexOf('{'); const end = s.lastIndexOf('}');
   if (start < 0 || end <= start) return null;
-  let j; try { j = JSON.parse(s.slice(start, end + 1)); } catch { return null; }
-  const p = cleanPoem({ title: j.title, text: j.poem ?? j.text });
+  const body = s.slice(start, end + 1);
+  let title, text;
+  try { const j = JSON.parse(body); title = j.title; text = j.poem ?? j.text; } catch {
+    const m = /"title"\s*:\s*"([\s\S]*?)"\s*,\s*"(?:poem|text)"\s*:\s*"([\s\S]*)"\s*}\s*$/.exec(body);
+    if (!m) return null;
+    const un = (x) => x.replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+    title = un(m[1]); text = un(m[2]);
+  }
+  const p = cleanPoem({ title, text });
   if (!p.title || p.text.replace(/\s/g, '').length < 40) return null;
   return p;
 }

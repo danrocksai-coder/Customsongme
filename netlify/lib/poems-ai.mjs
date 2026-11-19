@@ -16,12 +16,12 @@ async function callOnce(model, prompt, { fetchImpl = fetch, timeoutMs = 24000 } 
     const r = await fetchImpl(`${base}/v1/messages`, {
       method: 'POST', signal: ctl.signal,
       headers: { 'content-type': 'application/json', 'x-api-key': process.env.ANTHROPIC_API_KEY || '', 'anthropic-version': '2023-06-01' },
-      body: JSON.stringify({ model, max_tokens: 900, system: P.SYSTEM_PROMPT, messages: [{ role: 'user', content: prompt }] }),
+      body: JSON.stringify({ model, max_tokens: 1500, system: P.SYSTEM_PROMPT, messages: [{ role: 'user', content: prompt }] }),
     });
     const j = await r.json().catch(() => ({}));
     if (!r.ok) return { ok: false, status: r.status, error: j?.error?.message || `HTTP ${r.status}` };
     const text = (j.content || []).filter((b) => b.type === 'text').map((b) => b.text).join('');
-    return { ok: true, text, usage: j.usage || null, model };
+    return { ok: true, text, usage: j.usage || null, model, stop: j.stop_reason };
   } catch (e) {
     return { ok: false, status: 0, error: e?.name === 'AbortError' ? 'timeout' : String(e?.message || e) };
   } finally { clearTimeout(timer); }
@@ -37,6 +37,6 @@ export async function writePoem(prompt, opts = {}) {
   }
   if (!r.ok) return { ok: false, error: r.error, status: r.status };
   const poem = P.parsePoem(r.text);
-  if (!poem) return { ok: false, error: 'unreadable reply', usage: r.usage };
+  if (!poem) return { ok: false, error: 'unreadable reply: ' + String(r.text || '').slice(0, 160), usage: r.usage, stop: r.stop };
   return { ok: true, poem, usage: r.usage, model: r.model };
 }
