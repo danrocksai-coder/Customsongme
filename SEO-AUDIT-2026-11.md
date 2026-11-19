@@ -1,5 +1,7 @@
 # CustomSongMe Search & AI Visibility Audit (Nov 3, 2026)
 
+> Updated Nov 19, 2026: the starting price is now $25 (there is no $30 price). Titles below reflect that.
+
 Scope: all 31 HTML pages in this repo (21 public pages, 10 private or utility pages). Covers Google search, plus how easy it is for ChatGPT, Perplexity and Google AI Overviews to understand and cite the site.
 Branch: `seo-aeo-improvements` (not committed yet).
 
@@ -23,12 +25,12 @@ Branch: `seo-aeo-improvements` (not committed yet).
 | 7 | Titles were thin ("Custom Pet Songs") or too long (the Holiday title was 81 characters) | Rewrote 13 titles to name the gift and the benefit (see below) |
 | 8 | The homepage and Holiday meta descriptions were 190+ characters, so Google cuts them off | Shortened both to under 160 characters |
 | 9 | Search engines and AI didn't clearly know who made the site or who Dan is | Added WebSite and Person (Dan Rock, "Dan the Song Man") data, and gave the business a logo, founder, area served (US) and languages (English, Spanish) |
-| 10 | The price range in the structured data was $30–$75, but jingles are $100 | Changed it to $30–$100 |
+| 10 | The price range in the structured data was $30–$75, but jingles are $100 | Changed it to $30–$100 (later updated to $25–$125 when pricing changed to $25 / $50 / $75 / $100 plus add-ons) |
 | 11 | llms.txt listed only 13 pages and was missing the guides, holiday, get well and Spanish pages | Rewrote it with every public page, all prices, how ordering works, and the guarantee |
 | 12 | The sitemap had no `lastmod` dates | Added dates, plus a comment pointing to llms.txt (robots.txt has the same pointer) |
 
 ### New titles
-- Home: Personalized Custom Songs in 24 Hours, From $30
+- Home: Personalized Custom Songs in 24 Hours, From $25
 - Birthday: Custom Birthday Song Gift, Made in 24 Hours
 - Anniversary: Custom Anniversary Song From Your Story
 - Wedding: Custom Wedding Song for Your First Dance
@@ -38,7 +40,7 @@ Branch: `seo-aeo-improvements` (not committed yet).
 - Roast: Funny Custom Roast Song for Birthdays & More
 - Memorial: Memorial & Celebration of Life Songs
 - Jingles: Custom Business Jingle, $100 in 24 Hours
-- Holiday: Custom Christmas & Thanksgiving Songs From $30 *(change this after the season)*
+- Holiday: Custom Christmas & Thanksgiving Songs From $25 *(change this after the season)*
 - Anniversary guide: What to Include in a Custom Anniversary Song
 
 All of these end in "| CustomSongMe".
