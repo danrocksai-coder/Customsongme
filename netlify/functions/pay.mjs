@@ -30,7 +30,7 @@ const PACKAGES = {
 
 // New homepage packages (pkg1 – pkg4) plus the optional "Keep it Private" add-on.
 // The total is worked out here, never taken from the browser. The add-on is +$25
-// and only valid on Packages 2, 3 and 4. Anything unexpected returns null, and
+// and only valid on Packages 2, 3 and 4. Rush delivery is +$10 on any package. Anything unexpected returns null, and
 // the customer lands on the calm "order received" page instead of a wrong charge.
 const NEW_PACKAGES = {
   pkg1: { name: 'Package 1 — Custom Single', amount: 2500, canUnlist: false },
@@ -52,9 +52,10 @@ function newPackage(id, params) {
   if (!base) return null;
   const wantsUnlisted = params.get('unlisted') === '1';
   if (wantsUnlisted && !base.canUnlist) return null;
+  const wantsRush = params.get('rush') === '1'; // Rush delivery (4 hours): +$10 on any package
   return {
-    name: base.name + (wantsUnlisted ? ' + Keep it Private (Google Drive)' : ''),
-    amount: base.amount + (wantsUnlisted ? 2500 : 0),
+    name: base.name + (wantsUnlisted ? ' + Keep it Private (Google Drive)' : '') + (wantsRush ? ' + Rush Delivery (4 hours)' : ''),
+    amount: base.amount + (wantsUnlisted ? 2500 : 0) + (wantsRush ? 1000 : 0),
     noLink: true,
   };
 }
