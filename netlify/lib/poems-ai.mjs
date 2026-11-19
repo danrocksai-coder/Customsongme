@@ -16,7 +16,7 @@ async function callOnce(model, prompt, { fetchImpl = fetch, timeoutMs = 24000 } 
     const r = await fetchImpl(`${base}/v1/messages`, {
       method: 'POST', signal: ctl.signal,
       headers: { 'content-type': 'application/json', 'x-api-key': process.env.ANTHROPIC_API_KEY || '', 'anthropic-version': '2023-06-01' },
-      body: JSON.stringify({ model, max_tokens: 900, temperature: 0.9, system: P.SYSTEM_PROMPT, messages: [{ role: 'user', content: prompt }] }),
+      body: JSON.stringify({ model, max_tokens: 900, system: P.SYSTEM_PROMPT, messages: [{ role: 'user', content: prompt }] }),
     });
     const j = await r.json().catch(() => ({}));
     if (!r.ok) return { ok: false, status: r.status, error: j?.error?.message || `HTTP ${r.status}` };
