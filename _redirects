@@ -11,32 +11,6 @@ http://www.customsongme.com/* https://www.customsongme.com/:splat    301!
 /free-custom-song-guide    https://www.customsongme.com/    301
 /thank-you                 https://www.customsongme.com/thanks    301
 /payment                   https://www.customsongme.com/payment-links    301
-# Family Memory Magnets short link for YouTube descriptions and videos (302 so it can be repointed later)
-/magnets                   /family-memory-magnets/?utm_source=youtube&utm_medium=video    302
-/magnets/                  /family-memory-magnets/?utm_source=youtube&utm_medium=video    302
-
-# ==========================================
-# 2b. .html DUPLICATES -> CLEAN URLS (301)
-# Keeps Google from indexing both /page and /page.html
-# ==========================================
-/birthday-songs.html  /birthday-songs  301!
-/wedding-songs.html  /wedding-songs  301!
-/anniversary-songs.html  /anniversary-songs  301!
-/holiday-songs.html  /holiday-songs  301!
-/custom-song-cost.html  /custom-song-cost  301!
-/how-long-does-a-custom-song-take.html  /how-long-does-a-custom-song-take  301!
-/what-to-include-in-an-anniversary-song.html  /what-to-include-in-an-anniversary-song  301!
-/how-to-give-a-custom-song-as-a-gift.html  /how-to-give-a-custom-song-as-a-gift  301!
-/custom-song-vs-personalized-gift.html  /custom-song-vs-personalized-gift  301!
-/love-songs.html  /love-songs  301!
-/mothers-day-songs.html  /mothers-day-songs  301!
-/fathers-day-songs.html  /fathers-day-songs  301!
-/pet-songs.html  /pet-songs  301!
-/roast-songs.html  /roast-songs  301!
-/memorial-songs.html  /memorial-songs  301!
-/business-jingles.html  /business-jingles  301!
-/get-well-song-cards.html  /get-well-song-cards  301!
-/adopt-a-rescue-dog.html  /pet-songs  301!
 
 # ==========================================
 # 3. CLEAN SUBPAGE URL MAPS (INTERNAL 200 REWRITES)
@@ -60,14 +34,25 @@ http://www.customsongme.com/* https://www.customsongme.com/:splat    301!
 /get-well-song-cards     /get-well-song-cards.html     200
 /payment-links           /payment-links.html           200
 /thanks                  /thanks.html                  200
-/adopt-a-rescue-dog      /pet-songs      301!
-/adopt-a-rescue-dog/     /pet-songs      301!
-/thanks-rescue           /pet-songs      301!
-/thanks-rescue.html      /pet-songs      301!
+/adopt-a-rescue-dog      /adopt-a-rescue-dog.html      200
+/thanks-rescue           /thanks-rescue.html           200
 /privacy /privacy-terms 301
 /privacy-terms           /privacy-terms.html           200
 /oxnard/93030            /oxnard/93030.html            200
 /oxnard/93030/intake     /oxnard/intake.html           200
+/q                       /q/index.html                 200
+/q/anniversary           /q/anniversary.html           200
+/q/birthday              /q/birthday.html              200
+/q/holiday               /q/holiday.html               200
+/q/love-song             /q/love-song.html             200
+/q/wedding               /q/wedding.html               200
+/q/mothers-day           /q/mothers-day.html           200
+/q/fathers-day           /q/fathers-day.html           200
+/q/pet                   /q/pet.html                   200
+/q/roast                 /q/roast.html                 200
+/q/get-well              /q/get-well.html              200
+/q/memorial              /q/memorial.html              200
+/q/jingle                /q/jingle.html                200
 /oxnard/93030/advertise   /oxnard/93030/advertise.html  200
 /landscapers             /landscapers.html             200
 /songs/*  /songs/:splat/index.html  200

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color:#001a66;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#001a66" />
+  <title>Your Birthday Song | CustomSongMe</title>
+  <meta name="description" content="Tap through a few quick questions and Dan will write a one-of-a-kind birthday song about someone you love." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:title" content="🎂 Let's make a birthday song" />
+  <meta property="og:description" content="About 2 minutes, mostly tapping. No card needed: hear a free sample first, pay only if you love it." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.customsongme.com/q/birthday" />
+  <meta property="og:image" content="https://www.customsongme.com/img/customsongme-share.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/q/quick.css" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HGQ54E69BZ"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-HGQ54E69BZ");</script>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <a class="logo" href="/"><img src="/android-chrome-192x192.png" alt="" width="28" height="28" />CustomSongMe</a>
+      <div class="emoji">🎂</div>
+      <h1>Let's make a <em>birthday song</em></h1>
+      <p>For a friend, family, coworker, even your own birthday. Tap your answers, tell the story in one box, and Dan sends you a free sample before you pay a thing.</p>
+      <span class="time">⏱ 2 minutes · No card needed</span>
+    </header>
+
+    <div id="quick-form">
+      <noscript><p style="color:#fff;text-align:center">This form needs JavaScript. You can also <a style="color:#fcd42a" href="sms:+16617140903">text Dan at (661) 714-0903</a>.</p></noscript>
+    </div>
+
+    <div class="done" id="done">
+      <div class="emoji">🎶</div>
+      <h2>Got it<span class="who"></span>. <em>Thank you!</em></h2>
+      <p>Your birthday story is on its way to Dan.</p>
+      <div class="card">
+        <strong>What happens next</strong>
+        <ol>
+          <li>Dan writes and records your song from your story.</li>
+          <li>He texts you a short sample, along with a payment link.</li>
+          <li>Love it? Pay and the full song is yours. Not feeling it? No biggie, no hard feelings.</li>
+        </ol>
+      </div>
+      <p class="small" style="margin-top:20px">Questions? <a href="sms:+16617140903">Text Dan at (661) 714-0903</a></p>
+    </div>
+  </div>
+
+  <script>
+    window.QUICK_FORM = {
+      slug: 'birthday',
+      occasion: 'Birthday',
+      subjectField: 'birthday_name',
+      questions: [
+        { type: 'text', title: 'Whose birthday is it?', required: true, fields: [
+          { name: 'birthday_name', label: 'Their name (or nickname)', placeholder: 'e.g. Grandma Rose' }
+        ]},
+        { type: 'chips', name: 'relationship', title: 'They are your…', required: true,
+          options: ['Partner / Spouse', 'Mom', 'Dad', 'Son', 'Daughter', 'Grandma', 'Grandpa', 'Sister', 'Brother', 'Best friend', 'Friend', 'Coworker / Boss', 'Me!', 'Someone else'] },
+        { type: 'chips', name: 'age', title: 'They\'re turning…',
+          options: ['1', '5', '10', '13', 'Sweet 16', '18', '21', '25', '30', '40', '50', '60', '65', '70', '75', '80', '90', '100', 'Better not say 🤫'], hint: 'Different age? Tap Other and type it in.' },
+        { type: 'chips', name: 'personality', title: 'Their personality', multi: true,
+          options: ['Funny', 'Sweet', 'Sassy', 'Loud & proud', 'Chill', 'Adventurous', 'Hard-working', 'Life of the party', 'Kind-hearted', 'Creative', 'Nerdy', 'Sporty', 'Total goofball', 'Wise'] },
+        { type: 'chips', name: 'loves', title: 'Things they love', multi: true,
+          options: ['Family', 'Their kids', 'Grandkids', 'Pets', 'Music', 'Dancing', 'Sports', 'Gaming', 'Cooking / Food', 'Coffee', 'Travel', 'Beach', 'Outdoors / Camping', 'Fishing / Hunting', 'Cars', 'Movies / TV', 'Reading', 'Fashion', 'Faith', 'Their job'] },
+        { type: 'chips', name: 'mood', title: 'What kind of song?', required: true,
+          options: ['Party anthem 🎉', 'Heartfelt & sweet', 'Happy tears', 'Funny / light roast', 'Kid sing-along'] },
+        { type: 'story' }
+      ]
+    };
+    window.QUICK_FORM.story = {
+      title: 'Tell the story',
+      hint: 'The only real typing on this page. A few sentences or bullet points is perfect.',
+      prompts: ['What makes them who they are', 'A favorite memory or funny moment', 'Nicknames, sayings, or inside jokes', 'What you want them to hear on their birthday'],
+      placeholder: 'She always says… The funniest thing he ever did… We love her because…'
+    };
+  </script>
+  <script src="/q/quick.js"></script>
+</body>
+</html>
