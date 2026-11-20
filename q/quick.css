@@ -91,3 +91,12 @@ textarea { min-height: 150px; resize: vertical; }
 .done p { color: rgba(255,255,255,0.85); margin-bottom: 14px; }
 .done .card { background: var(--navy-2); border: 1px solid rgba(252,212,42,0.4); border-radius: 14px; padding: 18px; text-align: left; margin-top: 18px; }
 .done .card li { margin: 6px 0 6px 18px; color: rgba(255,255,255,0.9); }
+
+/* "Other" typing box */
+.other-input { margin-top: 10px; }
+
+/* Text Dan nudge on the thank-you screen */
+.nudge { background: rgba(252,212,42,0.12); border: 1px solid rgba(252,212,42,0.5); border-radius: 14px; padding: 16px; margin-top: 8px; }
+.nudge p { margin-bottom: 12px; }
+.nudge strong { color: var(--gold); }
+.text-btn { display: block; text-decoration: none; text-align: center; }

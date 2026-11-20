@@ -13,13 +13,13 @@
 
   var SHARED_STYLE = [
     { type: 'chips', name: 'genre', title: 'Pick a music style', hint: 'Choose up to 2.', multi: true, max: 2, options: GENRES },
-    { type: 'chips', name: 'vocalist', title: 'Who should sing it?', options: ['Male vocals', 'Female vocals', 'Duet (both)', 'No preference'] },
-    { type: 'chips', name: 'tempo', title: 'Tempo', options: ['Slow', 'Medium', 'Upbeat', 'Dan decides'] }
+    { type: 'chips', name: 'vocalist', title: 'Who should sing it?', options: ['Male vocals', 'Female vocals', 'Duet (both)', 'No preference'], noOther: true },
+    { type: 'chips', name: 'tempo', title: 'Tempo', options: ['Slow', 'Medium', 'Upbeat', 'Dan decides'], noOther: true }
   ];
 
   var SHARED_END = [
     { type: 'chips', name: 'detail_level', title: 'How closely should Dan use your details?',
-      options: ['As close as possible', 'Somewhere in between', 'Use them as inspiration'] },
+      options: ['As close as possible', 'Somewhere in between', 'Use them as inspiration'], noOther: true },
     { type: 'chips', name: 'needed_by', title: 'When do you need it?',
       options: ['ASAP (24 hrs)', 'This week', 'In a couple weeks', 'No rush'] },
     { type: 'contact' }
@@ -35,6 +35,14 @@
   if (!hasStory) questions.push({ type: 'story' });
   questions = questions.concat(SHARED_STYLE, SHARED_END);
 
+  // Every choice question ends with an "Other" chip that opens a short typing box,
+  // replacing any page-specific catch-alls like "Someone else" or "Another age".
+  var OTHERISH = /^(other( \(in story\))?|another age|someone else)$/i;
+  questions.forEach(function (q) {
+    if (q.type !== 'chips' || q.noOther) return;
+    q.options = q.options.filter(function (o) { return !OTHERISH.test(o); }).concat(['Other']);
+  });
+
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
@@ -48,7 +56,9 @@
       var id = 'c' + (uid++);
       return '<label class="chip" for="' + id + '"><input type="' + type + '" id="' + id + '" name="' + esc(q.name) +
         '" value="' + esc(opt) + '"><span>' + esc(opt) + '</span></label>';
-    }).join('') + '</div>';
+    }).join('') + '</div>' +
+    (q.options.indexOf('Other') > -1 ? '<input type="text" class="other-input" name="' + esc(q.name) +
+      '__other" maxlength="100" placeholder="Type your answer (up to 100 characters)" hidden disabled>' : '');
   }
 
   function titleHtml(q) {
@@ -138,6 +148,13 @@
   }
   form.addEventListener('input', updateProgress);
   form.addEventListener('change', function (e) {
+    var chipSec = e.target.type === 'radio' || e.target.type === 'checkbox' ? e.target.closest('.q') : null;
+    var other = chipSec && chipSec.querySelector('.other-input');
+    if (other) {
+      var on = chipSec.querySelector('input[value="Other"]').checked;
+      other.hidden = !on; other.disabled = !on;
+      if (on && e.target.value === 'Other') other.focus();
+    }
     updateProgress();
     var sec = e.target.closest('.q');
     if (sec && answered(sec)) sec.classList.remove('error');
@@ -147,11 +164,17 @@
   function collect() {
     var data = {};
     Array.prototype.forEach.call(form.elements, function (el) {
-      if (!el.name || el.type === 'submit') return;
+      if (!el.name || el.type === 'submit' || el.disabled) return;
       if ((el.type === 'checkbox' || el.type === 'radio') && !el.checked) return;
       var v = el.value.trim();
       if (!v) return;
       data[el.name] = data[el.name] ? data[el.name] + ', ' + v : v;
+    });
+    Object.keys(data).forEach(function (k) {
+      if (!/__other$/.test(k)) return;
+      var base = k.replace(/__other$/, '');
+      if (data[base]) data[base] = data[base].replace(/(^|, )Other(?=,|$)/, '$1Other: ' + data[k]);
+      delete data[k];
     });
     return data;
   }
@@ -192,6 +215,18 @@
       var done = document.getElementById('done');
       var first = (data.name || '').split(' ')[0];
       done.querySelector('.who').textContent = first ? ', ' + first : '';
+      var about = data[cfg.subjectField];
+      var body = 'Hi Dan! I just sent you a ' + cfg.occasion.toLowerCase() + ' song request' +
+        (about ? ' for ' + about : '') + '. Check your email! - ' + (data.name || '');
+      var nudge = document.createElement('div');
+      nudge.className = 'nudge';
+      nudge.innerHTML = '<p><strong>Want Dan to see it sooner?</strong> Tap below. Your text is already written, just hit send.</p>' +
+        '<a class="btn text-btn" href="' + DAN_SMS + '?&body=' + encodeURIComponent(body) + '">💬 Text Dan now</a>';
+      var card = done.querySelector('.card');
+      card.parentNode.insertBefore(nudge, card);
+      nudge.querySelector('a').addEventListener('click', function () {
+        if (window.gtag) gtag('event', 'text_dan_click', { form: 'quick_' + cfg.slug });
+      });
       done.style.display = 'block';
       window.scrollTo(0, 0);
     }).catch(function () {
